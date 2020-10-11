@@ -16,9 +16,9 @@
                 z-index:-1;
             }
             
-            #spine{
-                border:solid black 1px;
-                width:100px;
+            #spine-wrapper{
+                /*border:solid black 1px;*/
+                width:200px;
                 height:100%;
                 margin-left:65%;
                 position:absolute;
@@ -27,32 +27,38 @@
                 z-index:-1;
             }
             
-            .expanded-nav{
+            #spine{
                 border:solid black 1px;
-                width:50px;
-                height:125px;
-                margin-left:57%;
-                margin-top:5%;
-                position:relative;
+                width:100px;
+                height:100%;
+                margin-left:50px;
+                position:absolute;
+                top:0px;
             }
             
-            .unexpanded-nav{
+            .nav{
                 border:solid black 1px;
                 width:50px;
                 height:125px;
-                margin-left:79%;
-                margin-top:5%;
-                position:relative;
+                margin-top:50px;
+                clear:both;
             }
+            
+            .unexpanded{
+                float:right;
+            }
+            
         </style>
     </head>
     
     <body>
         <div id='wrapper'> 
-            <div class='expanded-nav'></div>
-            <div class='unexpanded-nav'></div>
-            <div id='spine'>
-        
+            <div id='spine-wrapper'>
+                <div class='nav expanded'></div>
+                <div class='nav unexpanded'></div>
+                <div class='nav unexpanded'></div>
+                <div class='nav unexpanded'></div>
+            <div id='spine'></div>
             </div>
         </div>
         
