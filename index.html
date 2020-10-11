@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel='stylesheet' href='normalize.css'>
+        <style>
+            html, body{
+                margin:0;
+                height:100%;
+            }
+            
+            #wrapper{
+                border:solid black 1px;
+                height:100%;
+                width:70%;
+                margin:auto;
+                z-index:-1;
+            }
+            
+            #spine{
+                border:solid black 1px;
+                width:100px;
+                height:100%;
+                margin-left:65%;
+                position:absolute;
+                top:0px;
+                margin-left:45%;
+                z-index:-1;
+            }
+            
+            .expanded-nav{
+                border:solid black 1px;
+                width:50px;
+                height:125px;
+                margin-left:57%;
+                margin-top:5%;
+                position:relative;
+            }
+            
+            .unexpanded-nav{
+                border:solid black 1px;
+                width:50px;
+                height:125px;
+                margin-left:79%;
+                margin-top:5%;
+                position:relative;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div id='wrapper'> 
+            <div class='expanded-nav'></div>
+            <div class='unexpanded-nav'></div>
+            <div id='spine'>
+        
+            </div>
+        </div>
+        
+    </body>
+
+</html>
