@@ -5,60 +5,88 @@
         <style>
             html, body{
                 margin:0;
-                height:100%;
+/*                 height:100%; */
             }
             
             #wrapper{
                 border:solid black 1px;
-                height:100%;
-                width:70%;
+/*                 height:100%; */
+                width:1024px;
                 margin:auto;
-                z-index:-1;
             }
             
-            #spine-wrapper{
-                /*border:solid black 1px;*/
-                width:200px;
-                height:100%;
-                margin-left:65%;
-                position:absolute;
-                top:0px;
-                margin-left:45%;
-                z-index:-1;
+            .container{
+                width:100%;
+                border:solid black 1px;
+                height:250px;
             }
             
-            #spine{
+            .spine{
                 border:solid black 1px;
                 width:100px;
                 height:100%;
-                margin-left:50px;
-                position:absolute;
-                top:0px;
+                display:inline-block;
+                float:left;
             }
             
-            .nav{
+            .information{
+                border:solid black 1px;
+                width:700px;
+                height:100%;
+                display:inline-block;
+                float:left;
+            }
+            
+            .vertical-center{
+                position:relative;
+                top:50%;
+                -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
+            }
+            
+            .information section{
+                border:solid black 1px;
+                height:75%;
+            }
+            
+            .button{
                 border:solid black 1px;
                 width:50px;
                 height:125px;
-                margin-top:50px;
-                clear:both;
             }
             
             .unexpanded{
                 float:right;
             }
             
+            .expanded{
+                float:left;
+            }
         </style>
     </head>
     
     <body>
-        <div id='wrapper'> 
-            <div id='spine-wrapper'>
-                <div class='nav expanded'></div>
-                <div class='nav unexpanded'></div>
-                <div class='nav unexpanded'></div>
-                <div class='nav unexpanded'></div>
-            <div id='spine'></div>
+        <div id='wrapper'>
+            <div class='container'>
+                <div class='information'>
+                    <section class='vertical-center'>
+                        <div class='button vertical-center unexpanded'></div>
+                    </section>
+                </div><div class='spine'></div><div class='button vertical-center expanded'></div>
+            </div><div class='container'>
+                <div class='information'>
+                    <section class='vertical-center'>
+                        <div class='button vertical-center unexpanded'></div>
+                    </section>
+                </div><div class='spine'></div><div class='button vertical-center expanded'></div>
+            </div><div class='container'>
+                <div class='information'>
+                    <section class='vertical-center'>
+                        <div class='button vertical-center unexpanded'></div>
+                    </section>
+                </div><div class='spine'></div><div class='button vertical-center expanded'></div>
+            </div>
+            
             </div>
         </div>
         
