@@ -61,8 +61,14 @@
                 float:right;
             }
             
-            .expanded{
+            /*.expanded{
                 float:left;
+            }*/
+            
+            .expanded{
+                float:right;
+                position:relative;
+                left:150px;
             }
             
             .spine-track{
@@ -77,11 +83,11 @@
                 width:0%;
                 float:right;
                 position:relative;
-                left:125px;
+                left:165px;
                 display:none;
             }
             
-            #header{
+            #header-wrapper{
                 height:150px
             }
         </style>
@@ -89,16 +95,17 @@
     
     <body>
         <div id='wrapper'>
-            <div id='header' class='container'>
+            <div id='header-wrapper' class='container'>
                 <div class='information'>
                     <div class='vertical-center section-wrapper'>
-                        <div class='button vertical-center unexpanded'></div>
-                        <section></section>
+                        <div onclick="toggleInfo('header')" id='header-button' 
+class='button vertical-center unexpanded header-info'></div>
+                        <section id='header-section'></section>
                     </div>
                 </div><div class='spine'>
                 <!--<div class='spine-track vertical-center'></div>-->
                 </div>
-                <div class='button vertical-center expanded'></div>
+<!--                 <div class='button vertical-center expanded'></div> -->
             </div><div class='container'>
                 <div class='information'>
                     <div class='vertical-center section-wrapper'>
@@ -116,6 +123,22 @@
             </div>
         </div>
         
+    <script>
+        function toggleInfo(id){
+            console.log('yes');
+            button = document.getElementById(id+'-button');
+            section = document.getElementById(id+'-section');
+            if(button.classList.contains('unexpanded')){
+                button.classList.remove('unexpanded');
+                button.classList.add('expanded');
+                section.style.display = 'initial';
+            }else{
+                button.classList.remove('expanded');
+                button.classList.add('unexpanded');
+                section.style.display = 'none';
+            }
+        }
+    </script>
     </body>
 
 </html>
