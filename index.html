@@ -10,29 +10,35 @@
             }
             
             #wrapper{
-                border:solid black 1px;
+/*                 border:solid black 1px; */
                 height:100%;
-                width:100%;
+                width:99%;
                 max-width:1024px;
                 margin:auto;
+                margin-top:30px;
             }
             
             .container{
                 width:100%;
-                border:solid black 1px;
-                height:300px;
+/*                  border:solid black 1px; */
+                height:250px;
             }
             
             .spine{
-                border:solid black 1px;
-                width:100px;
+/*                 border-width:2px; */
+/*                 border-style: none solid none solid; */
+/*                 background: linear-gradient(to right, rgb(0, 88, 90), rgb(0, 152, 155)); */
+/*                 background-color: rgb(0,152,155); */
+                border-left: solid rgb(225, 225, 208) 5px;
+                border-right: solid rgb(225, 225, 208) 5px;
+                background-color: rgb(235, 235, 224);
+                width:96px;
                 height:100%;
                 display:inline-block;
                 float:left;
             }
             
             .information{
-                border:solid black 1px;
                 width:70%;
                 height:100%;
                 display:inline-block;
@@ -47,18 +53,23 @@
             }
             
             .section-wrapper{
-                border:solid black 1px;
+/*                  border:solid black 1px; */
                 height:75%;
             }
             
             .button{
-                border:solid black 1px;
+/*                 border:solid black 1px; */
                 width:50px;
                 height:125px;
+                position:relative;
+                left:5px;
             }
             
             .unexpanded{
                 float:right;
+                border-left: solid rgb(225, 225, 208) 5px;
+                border-bottom: solid rgb(225, 225, 208) 5px;
+                border-top: solid rgb(225, 225, 208) 5px;
             }
             
             /*.expanded{
@@ -68,19 +79,21 @@
             .expanded{
                 float:right;
                 position:relative;
-                left:150px;
+                left:156px;
+                border-right: solid rgb(225, 225, 208) 5px;
+                border-bottom: solid rgb(225, 225, 208) 5px;
+                border-top: solid rgb(225, 225, 208) 5px;
             }
             
-            .spine-track{
-                border:solid black 1px;
-                height:125px;
-            }
             
             section{
-                border:solid black 1px;
+/*                 border:solid black 1px; */
+                border-left: solid rgb(225, 225, 208) 5px;
+                border-bottom: solid rgb(225, 225, 208) 5px;
+                border-top: solid rgb(225, 225, 208) 5px;
                 height:100%;
-/*                 width:75%; */
-                width:0%;
+                width:90%;
+/*                 width:0%; */
                 float:right;
                 position:relative;
                 left:165px;
@@ -88,37 +101,52 @@
             }
             
             #header-wrapper{
-                height:150px
+                height:150px;
+            }
+            
+            #header-button{
+                height:90%
             }
         </style>
     </head>
     
     <body>
         <div id='wrapper'>
+        
             <div id='header-wrapper' class='container'>
                 <div class='information'>
                     <div class='vertical-center section-wrapper'>
-                        <div onclick="toggleInfo('header')" id='header-button' 
-class='button vertical-center unexpanded header-info'></div>
+                        <div onclick="toggleInfo('header')" id='header-button' class='button 
+vertical-center unexpanded header-info'></div>
                         <section id='header-section'></section>
                     </div>
-                </div><div class='spine'>
-                <!--<div class='spine-track vertical-center'></div>-->
-                </div>
+                </div><div class='spine'></div>
 <!--                 <div class='button vertical-center expanded'></div> -->
-            </div><div class='container'>
-                <div class='information'>
-                    <div class='vertical-center section-wrapper'>
-                        <div class='button vertical-center unexpanded'></div>
-                    </div>
-                </div><div class='spine'></div><div class='button vertical-center expanded'></div>
-            </div><div class='container'>
-                <div class='information'>
-                    <div class='vertical-center section-wrapper'>
-                        <div class='button vertical-center unexpanded'></div>
-                    </div>
-                </div><div class='spine'></div><div class='button vertical-center expanded'></div>
             </div>
+            
+        <div class='container'>
+                <div class='information'>
+                    <div class='vertical-center section-wrapper'>
+                        <div onclick="toggleInfo('s1')" id='s1-button' class='button 
+vertical-center unexpanded'></div>
+                        <section id='s1-section'></section>
+                    </div>
+                </div><div class='spine'></div>
+<!--                 <div class='button vertical-center expanded'></div> -->
+            </div>
+            
+            <div class='container'>
+                <div class='information'>
+                    <div class='vertical-center section-wrapper'>
+                        <div onclick="toggleInfo('s2')" id='s2-button' class='button 
+vertical-center unexpanded'></div>
+                        <section id='s2-section'></section>
+                    </div>
+                </div><div class='spine'></div>
+<!--                 <div class='button vertical-center expanded'></div> -->
+            </div>
+            
+            
             
             </div>
         </div>
