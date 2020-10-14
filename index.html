@@ -63,6 +63,7 @@
                 height:125px;
                 position:relative;
                 left:5px;
+                transition: left 1s;
             }
             
             .unexpanded{
@@ -87,17 +88,17 @@
             
             
             section{
-/*                 border:solid black 1px; */
                 border-left: solid rgb(225, 225, 208) 5px;
                 border-bottom: solid rgb(225, 225, 208) 5px;
                 border-top: solid rgb(225, 225, 208) 5px;
+                border-right: solid rgb(225, 225, 208) 0px;
                 height:100%;
-                width:85%;
-/*                 width:0%; */
+/*                 width:85%; */
+                width:0%;
                 float:right;
                 position:relative;
                 left:55px;
-                display:none;
+                transition: width 1s, border 1s;
             }
             
             #header-wrapper{
@@ -152,6 +153,7 @@ vertical-center unexpanded'></div>
         </div>
         
     <script>
+//         var borderStyle = "solid rgb(225, 225, 208) 5px";
         function toggleInfo(id){
             console.log('yes');
             button = document.getElementById(id+'-button');
@@ -159,11 +161,15 @@ vertical-center unexpanded'></div>
             if(button.classList.contains('unexpanded')){
                 button.classList.remove('unexpanded');
                 button.classList.add('expanded');
-                section.style.display = 'initial';
+//                 section.style.display = 'initial';
+                section.style.width = '85%';
+                section.style.borderRight = "solid rgb(225, 225, 208) 5px";
             }else{
                 button.classList.remove('expanded');
                 button.classList.add('unexpanded');
-                section.style.display = 'none';
+                section.style.width = '0%';
+                section.style.borderRight = "solid rgb(225, 225, 208) 0px";
+//                 section.style.border = "none";
             }
         }
     </script>
