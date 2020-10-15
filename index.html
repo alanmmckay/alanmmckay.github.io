@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset='UTF-8' />
         <link rel='stylesheet' href='normalize.css'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
         <style>
@@ -62,12 +63,13 @@
                 width:50px;
                 height:125px;
                 position:relative;
-                left:5px;
-                transition: left 1s;
+                transition: width 1s;
             }
             
             .unexpanded{
                 float:right;
+                position:relative;
+                left:5px;
                 border-left: solid rgb(225, 225, 208) 5px;
                 border-bottom: solid rgb(225, 225, 208) 5px;
                 border-top: solid rgb(225, 225, 208) 5px;
@@ -78,12 +80,13 @@
             }*/
             
             .expanded{
-                float:right;
+                float:left;
                 position:relative;
-                left:156px;
                 border-right: solid rgb(225, 225, 208) 5px;
                 border-bottom: solid rgb(225, 225, 208) 5px;
                 border-top: solid rgb(225, 225, 208) 5px;
+                border-left: solid rgb(225, 225, 208) 0px;
+                width:0px;
             }
             
             
@@ -98,15 +101,16 @@
                 float:right;
                 position:relative;
                 left:55px;
-                transition: width 1s, border 1s;
+                transition: width 1s, left 1s;
+                background-color:white;
             }
             
             #header-wrapper{
                 height:150px;
             }
             
-            #header-button{
-                height:90%
+            .header-button{
+                height:110px;
             }
         </style>
     </head>
@@ -117,34 +121,33 @@
             <div id='header-wrapper' class='container'>
                 <div class='information'>
                     <div class='vertical-center section-wrapper'>
-                        <div onclick="toggleInfo('header')" id='header-button' class='button 
-vertical-center unexpanded header-info'></div>
+                        <div onclick="toggleInfo('header')" id='header-buttonu' class='button header-button vertical-center unexpanded header-info'></div>
                         <section id='header-section' class='vertical-center'></section>
                     </div>
                 </div><div class='spine'></div>
-<!--                 <div class='button vertical-center expanded'></div> -->
+                <div onclick="toggleInfo('header')" id='header-buttone' class='button header-button vertical-center expanded'></div>
             </div>
             
         <div class='container'>
                 <div class='information'>
                     <div class='vertical-center section-wrapper'>
-                        <div onclick="toggleInfo('s1')" id='s1-button' class='button 
+                        <div onclick="toggleInfo('s1')" id='s1-buttonu' class='button 
 vertical-center unexpanded'></div>
                         <section id='s1-section' class='vertical-center'></section>
                     </div>
                 </div><div class='spine'></div>
-<!--                 <div class='button vertical-center expanded'></div> -->
+                <div onclick="toggleInfo('s1')" id='s1-buttone' class='button vertical-center expanded'></div>
             </div>
             
             <div class='container'>
                 <div class='information'>
                     <div class='vertical-center section-wrapper'>
-                        <div onclick="toggleInfo('s2')" id='s2-button' class='button 
+                        <div onclick="toggleInfo('s2')" id='s2-buttonu' class='button 
 vertical-center unexpanded'></div>
                         <section id='s2-section'></section>
                     </div>
                 </div><div class='spine'></div>
-<!--                 <div class='button vertical-center expanded'></div> -->
+                <div onclick="toggleInfo('s2')" id='s2-buttone' class='button vertical-center expanded'></div>
             </div>
             
             
@@ -155,23 +158,25 @@ vertical-center unexpanded'></div>
     <script>
 //         var borderStyle = "solid rgb(225, 225, 208) 5px";
         function toggleInfo(id){
-            console.log('yes');
-            button = document.getElementById(id+'-button');
+            buttone = document.getElementById(id+'-buttone');
+            buttonu = document.getElementById(id+'-buttonu');
             section = document.getElementById(id+'-section');
-            if(button.classList.contains('unexpanded')){
-                button.classList.remove('unexpanded');
-                button.classList.add('expanded');
+            console.log(buttonu.style.width);
+            if(buttonu.style.width == '0px'){
+                section.style.width = '0%';
+                section.style.left = '55px';
+                buttonu.style.width = '50px';
+                buttone.style.width = '0px';
+//                 section.style.border = "none";console.log('open');
+            }else{
 //                 section.style.display = 'initial';
                 section.style.width = '85%';
-                section.style.borderRight = "solid rgb(225, 225, 208) 5px";
-            }else{
-                button.classList.remove('expanded');
-                button.classList.add('unexpanded');
-                section.style.width = '0%';
-                section.style.borderRight = "solid rgb(225, 225, 208) 0px";
-//                 section.style.border = "none";
+                section.style.left = "5px";
+                buttone.style.width = '50px';
+                buttonu.style.width = '0px';
             }
         }
+        toggleInfo('s1');
     </script>
     </body>
 
