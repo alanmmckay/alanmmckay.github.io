@@ -112,6 +112,11 @@
             .header-button{
                 height:110px;
             }
+            
+            .button p{
+                /*writing-mode:sideways-lr;
+                writing-mode:vertical-lr;*/
+            }
         </style>
     </head>
     
@@ -161,22 +166,29 @@ vertical-center unexpanded'></div>
             buttone = document.getElementById(id+'-buttone');
             buttonu = document.getElementById(id+'-buttonu');
             section = document.getElementById(id+'-section');
-            console.log(buttonu.style.width);
             if(buttonu.style.width == '0px'){
-                section.style.width = '0%';
-                section.style.left = '55px';
-                buttonu.style.width = '50px';
                 buttone.style.width = '0px';
+                setTimeout(function(){
+                section.style.width = '0%';
+                    section.style.left = '5px';
+                    setTimeout(function(){
+                        buttonu.style.width = '50px';
+                        section.style.left = '55px';
+                    },1000);
+                },1000);
 //                 section.style.border = "none";console.log('open');
             }else{
 //                 section.style.display = 'initial';
-                section.style.width = '85%';
-                section.style.left = "5px";
-                buttone.style.width = '50px';
                 buttonu.style.width = '0px';
+                    section.style.width = '85%';
+                    section.style.left = "5px";
+                setTimeout(function(){
+                    buttone.style.width = '50px';
+                },1000);
             }
         }
         toggleInfo('s1');
+//         setTimeout(myFunction, 3000)
     </script>
     </body>
 
