@@ -26,10 +26,6 @@
             }
             
             .spine{
-/*                 border-width:2px; */
-/*                 border-style: none solid none solid; */
-/*                 background: linear-gradient(to right, rgb(0, 88, 90), rgb(0, 152, 155)); */
-/*                 background-color: rgb(0,152,155); */
                 border-left: solid rgb(225, 225, 208) 5px;
                 border-right: solid rgb(225, 225, 208) 5px;
                 background-color: rgb(235, 235, 224);
@@ -74,10 +70,6 @@
                 border-bottom: solid rgb(225, 225, 208) 5px;
                 border-top: solid rgb(225, 225, 208) 5px;
             }
-            
-            /*.expanded{
-                float:left;
-            }*/
             
             .expanded{
                 float:left;
@@ -163,9 +155,9 @@ vertical-center unexpanded'></div>
     <script>
 //         var borderStyle = "solid rgb(225, 225, 208) 5px";
         function toggleInfo(id){
-            buttone = document.getElementById(id+'-buttone');
-            buttonu = document.getElementById(id+'-buttonu');
-            section = document.getElementById(id+'-section');
+            var buttone = document.getElementById(id+'-buttone');
+            var buttonu = document.getElementById(id+'-buttonu');
+            var section = document.getElementById(id+'-section');
             if(buttonu.style.width == '0px'){
                 buttone.style.width = '0px';
                 setTimeout(function(){
@@ -188,7 +180,6 @@ vertical-center unexpanded'></div>
             }
         }
         toggleInfo('s1');
-//         setTimeout(myFunction, 3000)
     </script>
     </body>
 
