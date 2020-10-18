@@ -17,6 +17,8 @@
                 max-width:1024px;
                 margin:auto;
                 margin-top:30px;
+/*                 border-top:solid #f5f5ef 3px; */
+/*                 border-top: solid #ebebe0 5px; */
             }
             
             .container{
@@ -109,8 +111,17 @@
                 left:55px;
                 transition: width 1s, left 1s;
                 background-color:white;
+                overflow:hidden;
             }
             
+            section img{
+                width:50px;
+                margin:5%;
+            }
+            
+            .img-container{
+                width:500px;
+            }
             #header-wrapper{
                 height:150px;
             }
@@ -153,11 +164,18 @@
             <div id='header-wrapper' class='container'>
                 <div class='information'>
                     <div class='vertical-center section-wrapper'>
-                        <header class='background'><h1 style="color:rgb(205, 205, 177);">Header Section</h1></header>
+                        <header class='background'><h1 style="color:rgb(205, 205, 177);"><div>Alan McKay | Portfolio</div></header>
                         <div onclick="toggleInfo('header')" id='header-buttonu' class='button header-button vertical-center unexpanded'>
                             <p>info</p>
                         </div>
-                        <section id='header-section' class='vertical-center'></section>
+                        <section id='header-section' class='vertical-center'>
+                        <div class='img-container'>
+                        <img src='instagram-logo-grey.png'></img>
+                        <img src='vsco-logo-grey.png'></img>
+                        <img src='github-logo-grey.png'></img>
+                        <img src='linkedin-logo-grey.png'></img>
+                        </div>
+                        </section>
                     </div>
                 </div>
                 <div class='spine'></div>
@@ -193,6 +211,21 @@ vertical-center unexpanded'>
                 </div><div class='spine'></div>
                 <div onclick="toggleInfo('s2')" id='s2-buttone' class='button vertical-center expanded'>
                     <p>project</p>
+                </div>
+            </div> 
+            
+            <div class='container'>
+                <div class='information'>
+                    <div class='vertical-center section-wrapper'>
+                        <div onclick="toggleInfo('s3')" id='s3-buttonu' class='button 
+vertical-center unexpanded'>
+                            <p>photos</p>
+                        </div>
+                        <section id='s3-section'></section>
+                    </div>
+                </div><div class='spine'></div>
+                <div onclick="toggleInfo('s3')" id='s3-buttone' class='button vertical-center expanded'>
+                    <p>photos</p>
                 </div>
             </div>
             
