@@ -63,6 +63,7 @@
                 position:relative;
                 z-index:1;
                 transition: width 1s;
+
             }
             
             .unexpanded{
@@ -82,6 +83,15 @@
                 border-top: solid rgb(225, 225, 208) 5px;
                 border-left: solid rgb(225, 225, 208) 0px;
                 width:0px;
+            }
+            
+            .expanded p{
+                float:right;
+                margin-right:20px;
+            }
+            
+            .unexpanded p{
+                float:left;
             }
             
             
@@ -110,20 +120,15 @@
             }
             
             .button p{
-                /*writing-mode:sideways-lr;
-                writing-mode:vertical-lr;*/
                 writing-mode:vertical-lr;
                 text-orientation:upright;
                 height:100%;
                 text-align:center;
-                /* --- */
-                /*position:relative;
-                z-index:1;*/
-                /* --- */
                 font-family: courier, monospace;
                 color:rgb(195, 195, 162);
-                font-size:18px;
+                font-size:16px;
                 margin-left:10px;
+                font-weight:bold;
             }
             
             .background{
@@ -149,35 +154,46 @@
                 <div class='information'>
                     <div class='vertical-center section-wrapper'>
                         <header class='background'><h1 style="color:rgb(205, 205, 177);">Header Section</h1></header>
-                        <div onclick="toggleInfo('header')" id='header-buttonu' class='button header-button vertical-center unexpanded header-info'>
-                        <p>Home</p>
+                        <div onclick="toggleInfo('header')" id='header-buttonu' class='button header-button vertical-center unexpanded'>
+                            <p>info</p>
                         </div>
                         <section id='header-section' class='vertical-center'></section>
                     </div>
-                </div><div class='spine'></div>
-                <div onclick="toggleInfo('header')" id='header-buttone' class='button header-button vertical-center expanded'><p>Home</p></div>
+                </div>
+                <div class='spine'></div>
+                <div onclick="toggleInfo('header')" id='header-buttone' class='button header-button vertical-center expanded'>
+                    <p>info</p>
+                </div>
             </div>
             
         <div class='container'>
                 <div class='information'>
                     <div class='vertical-center section-wrapper'>
                         <div onclick="toggleInfo('s1')" id='s1-buttonu' class='button 
-vertical-center unexpanded'></div>
+vertical-center unexpanded'>
+                    <p>about</p>
+                    </div>
                         <section id='s1-section' class='vertical-center'></section>
                     </div>
                 </div><div class='spine'></div>
-                <div onclick="toggleInfo('s1')" id='s1-buttone' class='button vertical-center expanded'></div>
+                <div onclick="toggleInfo('s1')" id='s1-buttone' class='button vertical-center expanded'>
+                <p>about</p>
+                </div>
             </div>
             
             <div class='container'>
                 <div class='information'>
                     <div class='vertical-center section-wrapper'>
                         <div onclick="toggleInfo('s2')" id='s2-buttonu' class='button 
-vertical-center unexpanded'></div>
+vertical-center unexpanded'>
+                            <p>project</p>
+                        </div>
                         <section id='s2-section'></section>
                     </div>
                 </div><div class='spine'></div>
-                <div onclick="toggleInfo('s2')" id='s2-buttone' class='button vertical-center expanded'></div>
+                <div onclick="toggleInfo('s2')" id='s2-buttone' class='button vertical-center expanded'>
+                    <p>project</p>
+                </div>
             </div>
             
             
@@ -212,7 +228,7 @@ vertical-center unexpanded'></div>
                 },1000);
             }
         }
-//         setTimeout(function(){toggleInfo('s1')},300);
+        setTimeout(function(){toggleInfo('s1')},300);
     </script>
     </body>
 
