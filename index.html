@@ -28,9 +28,9 @@
             }
             
             .spine{
-                border-left: solid rgb(225, 225, 208) 5px;
-                border-right: solid rgb(225, 225, 208) 5px;
-                background-color: rgb(235, 235, 224);
+                border-left: solid #d7d7c1 5px;
+                border-right: solid #d7d7c1 5px;
+                background-color: #e1e1d0;
                 width:96px;
                 height:100%;
                 display:inline-block;
@@ -72,18 +72,18 @@
                 float:right;
                 position:relative;
                 left:5px;
-                border-left: solid rgb(225, 225, 208) 5px;
-                border-bottom: solid rgb(225, 225, 208) 5px;
-                border-top: solid rgb(225, 225, 208) 5px;
+                border-left: solid #d7d7c1 5px;
+                border-bottom: solid #d7d7c1 5px;
+                border-top: solid #d7d7c1 5px;
             }
             
             .expanded{
                 float:left;
                 position:relative;
-                border-right: solid rgb(225, 225, 208) 5px;
-                border-bottom: solid rgb(225, 225, 208) 5px;
-                border-top: solid rgb(225, 225, 208) 5px;
-                border-left: solid rgb(225, 225, 208) 0px;
+                border-right: solid #d7d7c1 5px;
+                border-bottom: solid #d7d7c1 5px;
+                border-top: solid #d7d7c1 5px;
+                border-left: solid #d7d7c1 0px;
                 width:0px;
             }
             
@@ -97,18 +97,18 @@
             }
             
             
-            section{
-                border-left: solid rgb(225, 225, 208) 5px;
-                border-bottom: solid rgb(225, 225, 208) 5px;
-                border-top: solid rgb(225, 225, 208) 5px;
-                border-right: solid rgb(225, 225, 208) 0px;
+            .section-content{
+                border-left: solid #d7d7c1 5px;
+                border-bottom: solid #d7d7c1 5px;
+                border-top: solid #d7d7c1 5px;
+                border-right: solid #d7d7c1 0px;
                 height:100%;
 /*                 width:85%; */
                 width:0%;
                 float:right;
                 position:relative;
                 z-index:2;
-                left:55px;
+                left:56px;
                 transition: width 1s, left 1s;
                 background-color:white;
                 overflow:hidden;
@@ -119,9 +119,21 @@
                 margin:5%;
             }
             
-            .img-container{
-                width:500px;
+            section{
+                width:475px;
+                height:100%;
+                padding-left: 25px;
+                padding-top: 10px;
+                float:left;
+                /*border-right: solid #e1e1d0 10px;*/
             }
+            
+            section p{
+                font-family: courier, monospace;
+                color: #afaf83;
+                font-weight:bold;
+            }
+            
             #header-wrapper{
                 height:150px;
             }
@@ -136,10 +148,17 @@
                 height:100%;
                 text-align:center;
                 font-family: courier, monospace;
-                color:rgb(195, 195, 162);
-                font-size:16px;
+                color:#c3c3a2;
+                font-size:14px;
                 margin-left:10px;
                 font-weight:bold;
+                cursor:default;
+                transition: color 1s, font-size .5s;
+            }
+            
+            .button:hover p{
+                color: #afaf83;
+                font-size:15px;
             }
             
             .background{
@@ -155,6 +174,57 @@
                 color:rgb(205, 205, 177);
             }
             
+            @media only screen and (max-width:850px){
+                section{
+                    width:440px;
+                }
+            }
+            
+            @media only screen and (max-width:800px){
+                section{
+                    padding-top:0px;
+                    width:400px;
+                }
+                
+                .container{
+                    height: 300px;
+                }
+                
+                header h1{
+                    font-size:30px;
+                }
+            }
+            
+            @media only screen and (max-width:700px){
+                section{
+                    width:300px;
+                }
+                
+                header h1{
+                    margin-top: 35px;
+                    font-size:24px;
+                }
+                
+                section img{
+                    width:40px;
+                    margin-top:30px;
+                }
+                
+                #wrapper{
+                    margin-top:0px;
+                }
+            }
+            
+            @media only screen and (max-width:600px){
+                .spine{
+                    width:75px;
+                }
+                
+                .information{
+                    width:75%;
+                }
+                
+            }
         </style>
     </head>
     
@@ -164,18 +234,18 @@
             <div id='header-wrapper' class='container'>
                 <div class='information'>
                     <div class='vertical-center section-wrapper'>
-                        <header class='background'><h1 style="color:rgb(205, 205, 177);"><div>Alan McKay | Portfolio</div></header>
+                        <header class='background'><h1 style="color:#afaf83;"><div>Alan McKay | Portfolio</div></header>
                         <div onclick="toggleInfo('header')" id='header-buttonu' class='button header-button vertical-center unexpanded'>
                             <p>info</p>
                         </div>
-                        <section id='header-section' class='vertical-center'>
-                        <div class='img-container'>
-                        <img src='instagram-logo-grey.png'></img>
-                        <img src='vsco-logo-grey.png'></img>
-                        <img src='github-logo-grey.png'></img>
-                        <img src='linkedin-logo-grey.png'></img>
+                        <div id='header-section' class='section-content vertical-center'>
+                            <section class='img-container'>
+                                <img src='instagram-logo-grey.png'></img>
+                                <img src='vsco-logo-grey.png'></img>
+                                <img src='github-logo-grey.png'></img>
+                                <img src='linkedin-logo-grey.png'></img>
+                            </section>
                         </div>
-                        </section>
                     </div>
                 </div>
                 <div class='spine'></div>
@@ -191,7 +261,12 @@
 vertical-center unexpanded'>
                     <p>about</p>
                     </div>
-                        <section id='s1-section' class='vertical-center'></section>
+                        <div id='s1-section' class='section-content vertical-center'>
+                        <section>
+                            <p>Bachelor of Science in Computer Science. Associate of Applied Science in Web Development and Programming.</p>
+                            <p>Welcome to my portfolio. Feel free to browse my projects and photography. To view my social profiles, select the info tab.</p>
+                        </section>
+                        </div>
                     </div>
                 </div><div class='spine'></div>
                 <div onclick="toggleInfo('s1')" id='s1-buttone' class='button vertical-center expanded'>
@@ -206,7 +281,11 @@ vertical-center unexpanded'>
 vertical-center unexpanded'>
                             <p>project</p>
                         </div>
-                        <section id='s2-section'></section>
+                        <div id='s2-section' class='section-content vertical-center'>
+                            <section>
+                                <p>Coming Soon...</p>
+                            </section>
+                        </div>
                     </div>
                 </div><div class='spine'></div>
                 <div onclick="toggleInfo('s2')" id='s2-buttone' class='button vertical-center expanded'>
@@ -221,7 +300,11 @@ vertical-center unexpanded'>
 vertical-center unexpanded'>
                             <p>photos</p>
                         </div>
-                        <section id='s3-section'></section>
+                        <div id='s3-section' class='section-content vertical-center'>
+                            <section>
+                                <p>Coming Soon...</p>
+                            </section>
+                        </div>
                     </div>
                 </div><div class='spine'></div>
                 <div onclick="toggleInfo('s3')" id='s3-buttone' class='button vertical-center expanded'>
@@ -235,7 +318,7 @@ vertical-center unexpanded'>
         </div>
         
     <script>
-//         var borderStyle = "solid rgb(225, 225, 208) 5px";
+//         var borderStyle = "solid #d7d7c1 5px";
         function toggleInfo(id){
             var buttone = document.getElementById(id+'-buttone');
             var buttonu = document.getElementById(id+'-buttonu');
@@ -247,7 +330,7 @@ vertical-center unexpanded'>
                     section.style.left = '5px';
                     setTimeout(function(){
                         buttonu.style.width = '50px';
-                        section.style.left = '55px';
+                        section.style.left = '56px';
                     },1000);
                 },1000);
 //                 section.style.border = "none";console.log('open');
