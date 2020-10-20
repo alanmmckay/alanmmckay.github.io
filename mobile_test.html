@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='UTF-8' />
+        <link rel='stylesheet' href='normalize.css'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+        <style>
+            #wrapper{
+                border:solid black 1px;
+                height:100%;
+                width:99%;
+                margin:auto;
+                margin-top:30px;
+            }
+            
+            .vertical-center{
+                position:relative;
+                top:50%;
+                -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
+            }
+            
+            .container{
+                border:solid black 1px;
+                height:250px;
+                width:100%;
+                display:inline-block;
+            }
+            
+            .information{
+                border:solid black 1px;
+                height:75%;
+                width:85%;
+                display:inline-block;
+                margin-left:5%;
+            }
+            
+            .spine-container{
+                border:solid black 1px;
+                height:250px;
+                width:85px;
+                display:inline-block;
+                position:absolute;
+                right:10%;
+            }
+            
+            .spine{
+                /*border:solid black 1px;*/
+                border-left:solid black 1px;
+                border-right:solid black 1px;
+                height:100%;
+                width:50px;
+                float:right;
+            }
+            
+            .button{
+                border:solid black 1px;
+                float:right;
+                width:25px;
+                height:115px;
+            }
+            
+            @media only screen and (min-width:600px){
+                .information{
+                    
+                }
+                
+                .spine-container{
+                
+                }
+                
+                .spine{
+                
+                }
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div id='wrapper'>
+            <div class='container'>
+                <div class='information vertical-center'>
+                </div>
+                <div class='spine-container'>
+                    <div class='spine'></div>
+                    <div class='button vertical-center'></div>
+                </div>
+            </div>
+            <div class='container'>
+                <div class='information vertical-center'>
+                </div>
+                <div class='spine-container'>
+                    <div class='spine'></div>
+                    <div class='button vertical-center'></div>
+                </div>
+            </div>
+            <div class='container'>
+                <div class='information vertical-center'>
+                </div>
+                <div class='spine-container'>
+                    <div class='spine'></div>
+                    <div class='button vertical-center'></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
