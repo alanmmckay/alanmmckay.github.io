@@ -5,45 +5,100 @@
         <link rel='stylesheet' href='normalize.css' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
         <style>
-            #wrapper{
-                width:50%;
+            #homeWrapper{
+                width:100%;
                 margin:auto;
-                display:flex;
-                justify-content:space-around
+                color:#c3c3a2;
+                max-width:800px;
+                min-width:225px;
             }
+
+            #homeWrapper header{
+                width:75%;
+                margin:auto;
+                text-align:right;
+            }
+
+            header h1{
+                margin-bottom:0px;
+                font-size:22px;
+                border-bottom: solid 3px;
+            }
+
             nav{
-                margin-top:35px;
-                display:flex;
-                justify-content:center;
-                flex-flow:row;
-                flex-wrap:wrap;
+                width:75%;
+                margin:auto;
             }
 
             nav a{
                 margin:3%;
+                display:inline-block;
+                width:25%;
             }
 
             nav a img{
-                width:125px;
-                height:125px;
+                width:50px;
+                height:50px;
+            }
+
+            #primary-link{
+                margin:3%;
+                display:flex;
+                align-items: center;
+                font-size:28px;
+                text-decoration:none;
+                margin-botto:15px;
+                color:#c3c3a2;
+            }
+
+            @media screen and (min-width:300px){
+                #homeWrapper{
+                    width:85%;
+                }
+            }
+
+            @media screen and (min-width:525px){
+                nav a img{
+                    width: 75px;
+                    height:75px;
+                }
+
+                #primary-link{
+                    font-size:36px;
+                }
+            }
+
+            @media screen and (min-width:800px){
+                nav a img{
+                    width: 100px;
+                    height: 100px;
+                }
+
+                #primary-link{
+                    font-size:48px;
+                }
             }
 
         </style>
     </head>
     <body>
-        <div id='wrapper'>
+        <div id='homeWrapper'>
+            <header>
+                <h1>Alan McKay</h1>
+            </header>
             <nav>
-                <a href='https://vsco.co/alanmckay/gallery'>
-                    <img src='vsco-logo-grey.png'>
+                <a href='_target' id='primary-link' style='width:100%;' target="_blank" rel="noopener noreferrer">
+                    <img src='text-rtf.png' alt='Icon for blog link'>
+                    Writings
                 </a>
-                <a href='https://github.com/alanmmckay'>
-                    <img src='github-logo-grey.png'>
+                <a href='https://vsco.co/alanmckay/gallery' target="_blank" rel="noopener noreferrer">
+                    <img src='vsco-logo-grey.png' alt='Icon for VSCO link'>
                 </a>
-                <a href='https://www.linkedin.com/in/alan-mckay-701b4a1b8/'>
-                    <img src='linkedin-logo-grey.png'>
+                <a href='https://github.com/alanmmckay' target="_blank" rel="noopener noreferrer">
+                    <img src='github-logo-grey.png' alt='Icon for Github Link'>
                 </a>
-                <a href='_target'>
-                    <img src='text-rtf.png'>
+                <a href='https://www.linkedin.com/in/alan-mckay-701b4a1b8/' target="_blank" rel="noopener noreferrer">
+                    <img src='linkedin-logo-grey.png' alt='Icon for linked-in Link'>
                 </a>
             </nav>
         </div>
