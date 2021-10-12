@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='UTF-8' />
+        <link rel='stylesheet' href='normalize.css' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+        <style>
+            #homeWrapper{
+                width:100%;
+                margin:auto;
+                max-width:800px;
+                min-width:260px;
+            }
+
+            #homeWrapper header{
+                width:75%;
+                margin:auto;
+                text-align:right;
+            }
+
+            #homeWrapper header h1{
+                margin-bottom:0px;
+                font-size:22px;
+                border-bottom: solid 3px;
+                font-weight:600;
+                letter-spacing:1px;
+                color:#778088;
+            }
+
+            #homeWrapper header h1 a{
+                color:#778088;
+                text-decoration:none;
+                border:0px solid white;
+                transition: border-right 1s;
+            }
+
+            #homeWrapper header h1 a:hover{
+                border-right:20px solid white;
+            }
+            #homeWrapper nav{
+                width:75%;
+                margin:auto;
+            }
+
+            #homeWrapper nav a{
+                display:flex;
+                align-items: center;
+                width:97%;
+                margin:5%;
+                margin-bottom:15px;
+                font-size:28px;
+                font-family:sans-serif;
+                letter-spacing:2px;
+                text-decoration:none;
+                color:#778088;
+                border:solid white 0px;
+                transition: border-left 1s;
+            }
+
+            #homeWrapper nav a.writing{
+                font-size:24px;
+                padding-left:10px;
+                border-left: solid #778088 1px;
+            }
+
+            #homeWrapper nav a:hover{
+                border-left:solid 25px white;
+            }
+
+            #homeWrapper nav a img{
+                width:50px;
+                height:50px;
+                margin-right:2%;
+                background-size:50px,50px;
+            }
+
+
+            @media screen and (min-width:300px){
+                #homeWrapper{
+                    width:85%;
+                }
+            }
+
+            @media screen and (min-width:525px){
+                #homeWrapper nav a img{
+                    width: 75px;
+                    height:75px;
+                }
+
+                #homeWrapper nav a{
+                    font-size:36px;
+                    letter-spacing:5px;
+                }
+
+                #homeWrapper nav a.writing{
+                    font-size:32px;
+                }
+            }
+
+            @media screen and (min-width:800px){
+                #homeWrapper nav a img{
+                    width: 100px;
+                    height: 100px;
+                }
+
+                #homeWrapper nav a{
+                    font-size:42px;
+                    letter-spacing:7px;
+                }
+
+                #homeWrapper nav a.writing{
+                    font-size:38px;
+                }
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id='homeWrapper'>
+            <header>
+                <h1><a href='index.html'>Alan McKay</a></h1>
+            </header>
+            <nav>
+                <a href='writings.html'>
+                    <img src='images/text-logo-grey.png' alt='Icon for blog link'>
+                    Writings
+                </a>
+                <a href='social.html' class='writing'> Social Media</a>
+                <a href='flow.html' class='writing'> Flow</a>
+                <a href='leaf.html' class='writing'> Leaves</a>
+                <a href='sound.html' class='writing'> The Connectivity of Sound</a>
+                <a href='statement_of_purpose.html' class='writing'> Statement of Purpose</a>
+            </nav>
+        </div>
+    </body>
+</html>
