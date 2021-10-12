@@ -8,7 +8,6 @@
             #homeWrapper{
                 width:100%;
                 margin:auto;
-                color:#c3c3a2;
                 max-width:800px;
                 min-width:260px;
             }
@@ -19,41 +18,56 @@
                 text-align:right;
             }
 
-            header h1{
+            #homeWrapper header h1{
                 margin-bottom:0px;
                 font-size:22px;
                 border-bottom: solid 3px;
                 font-weight:600;
                 letter-spacing:1px;
+                color:#778088;
             }
 
-            nav{
+            #homeWrapper header h1 a{
+                color:#778088;
+                text-decoration:none;
+                border:0px solid white;
+                transition: border-right 1s;
+            }
+
+            #homeWrapper header h1 a:hover{
+                border-right:20px solid white;
+            }
+            #homeWrapper nav{
                 width:75%;
                 margin:auto;
             }
 
-            nav a{
-                margin:3%;
-                display:inline-block;
-            }
-
-            nav a img{
-                width:50px;
-                height:50px;
-            }
-
-            #primary-link{
-                width:97%;
-                margin:3%;
+            #homeWrapper nav a{
                 display:flex;
                 align-items: center;
+                width:97%;
+                margin:5%;
+                margin-bottom:15px;
                 font-size:28px;
-                text-decoration:none;
-                margin-botto:15px;
-                color:#c3c3a2;
                 font-family:sans-serif;
                 letter-spacing:2px;
+                text-decoration:none;
+                color:#778088;
+                border:solid white 0px;
+                transition: border-left 1s;
             }
+
+            #homeWrapper nav a:hover{
+                border-left:solid 25px white;
+            }
+
+            #homeWrapper nav a img{
+                width:50px;
+                height:50px;
+                margin-right:2%;
+                background-size:50px,50px;
+            }
+
 
             @media screen and (min-width:300px){
                 #homeWrapper{
@@ -62,25 +76,25 @@
             }
 
             @media screen and (min-width:525px){
-                nav a img{
+                #homeWrapper nav a img{
                     width: 75px;
                     height:75px;
                 }
 
-                #primary-link{
+                #homeWrapper nav a{
                     font-size:36px;
                     letter-spacing:5px;
                 }
             }
 
             @media screen and (min-width:800px){
-                nav a img{
+                #homeWrapper nav a img{
                     width: 100px;
                     height: 100px;
                 }
 
-                #primary-link{
-                    font-size:48px;
+                #homeWrapper nav a{
+                    font-size:42px;
                     letter-spacing:7px;
                 }
             }
@@ -90,21 +104,24 @@
     <body>
         <div id='homeWrapper'>
             <header>
-                <h1>Alan McKay</h1>
+                <h1><a href=index.html'>Alan McKay</a></h1>
             </header>
             <nav>
-                <a href='_target' id='primary-link' target="_blank" rel="noopener noreferrer">
-                    <img src='text-rtf.png' alt='Icon for blog link'>
+                <a href='_target'  target="_blank" rel="noopener noreferrer">
+                    <img src='images/text-logo-grey.png' alt='Icon for blog link'>
                     Writings
                 </a>
-                <a href='https://vsco.co/alanmckay/gallery' target="_blank" rel="noopener noreferrer">
-                    <img src='vsco-logo-grey.png' alt='Icon for VSCO link'>
+                <a href='https://vsco.co/alanmckay/gallery'  target="_blank" rel="noopener noreferrer">
+                    <img src='images/vsco-logo-grey.png' alt='Icon for VSCO link'>
+                    VSCO
                 </a>
-                <a href='https://github.com/alanmmckay' target="_blank" rel="noopener noreferrer">
-                    <img src='github-logo-grey.png' alt='Icon for Github Link'>
+                <a href='https://github.com/alanmmckay'  target="_blank" rel="noopener noreferrer">
+                    <img src='images/github-logo-grey.png' alt='Icon for Github Link'>
+                    GitHub
                 </a>
-                <a href='https://www.linkedin.com/in/alan-mckay-701b4a1b8/' target="_blank" rel="noopener noreferrer">
-                    <img src='linkedin-logo-grey.png' alt='Icon for linked-in Link'>
+                <a href='https://www.linkedin.com/in/alan-mckay-701b4a1b8/'  target="_blank" rel="noopener noreferrer">
+                    <img src='images/linkedin-logo-grey.png' alt='Icon for linked-in Link'>
+                    Linked-In
                 </a>
             </nav>
         </div>
