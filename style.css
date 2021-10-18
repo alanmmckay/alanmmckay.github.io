@@ -145,6 +145,11 @@
     line-height:1.55;
     font-size:17px;
 }
+
+#writingsWrapper header{
+    text-align: left;
+}
+
 #writingsWrapper figure{
     width:95%;
     margin:auto;
