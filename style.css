@@ -9,14 +9,16 @@
     width:75%;
     margin:auto;
     text-align:right;
+    border-bottom: solid 3px;
+    color:#778088;
 }
 
 #homeWrapper header h1{
     margin-bottom:0px;
-    font-size:22px;
-    border-bottom: solid 3px;
+    font-size:18px;
     font-weight:600;
     letter-spacing:1px;
+    /*border-bottom: solid 3px;*/
     color:#778088;
 }
 
@@ -83,6 +85,10 @@
     #homeWrapper nav a{
         font-size:36px;
         letter-spacing:5px;
+    }
+
+    #homeWrapper header h1{
+        font-size:22px;
     }
 }
 
