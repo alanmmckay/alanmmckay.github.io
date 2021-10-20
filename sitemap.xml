@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xlmns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>
+            http://alanmckay.blog/
+        </loc>
+
+        <lastmod>
+            2021-10-19
+        </lastmod>
+
+        <priority>
+            1.0
+        </priority>
+    </url>
+
+    <url>
+        <loc>
+            http://alanmckay.blog/writings.html
+        </loc>
+
+        <lastmod>
+            2021-10-19
+        </lastmod>
+    </url>
+
+    <url>
+        <loc>
+            http://alanmckay.blog/flow.html
+        </loc>
+
+        <lastmod>
+            2021-10-19
+        </lastmod>
+    </url>
+    <url>
+        <loc>
+            http://alanmckay.blog/leaf.html
+        </loc>
+
+        <lastmod>
+            2021-10-19
+        </lastmod>
+    </url>
+    <url>
+        <loc>
+            http://alanmckay.blog/social.html
+        </loc>
+
+        <lastmod>
+            2021-10-19
+        </lastmod>
+    </url>
+    <url>
+        <loc>
+            http://alanmckay.blog/sound.html
+        </loc>
+
+        <lastmod>
+            2021-10-19
+        </lastmod>
+    </url>
+
+    <url>
+        <loc>
+            http://alanmckay.blog/statement_of_purpose.html
+        </loc>
+
+        <lastmod>
+            2021-10-19
+        </lastmod>
+    </url>
+</urlset>
+
