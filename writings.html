@@ -33,7 +33,53 @@
                 <a href='social.html' class='writing'> Social Media</a>
                 <a href='leaf.html' class='writing'> Leaves</a>
                 <a href='statement_of_purpose.html' class='writing'> Statement of Purpose</a>
+                <a href='#' class='writing'>Test</a>
+                <a href='#' class='writing'>Test</a>
+                <a href='#' class='writing'>Test</a>
+                <a href='#' class='writing'>Test</a>
+                <a href='#' class='writing'>Test</a>
+                <a href='#' class='writing'>Test</a>
             </nav>
         </div>
     </body>
+    <script>
+        var isMobile = window.matchMedia || window.msMatchMedia
+        //console.log(isMobile("(pointer:coarse)").matches);
+        function primeBorders(){
+            writings = document.getElementsByClassName("writing");
+            for (i = 0; i < writings.length; i++){
+                writing = writings[i];
+                writing.style['transition'] = 'border-left .30s';
+                bound = writing.getBoundingClientRect();
+                if (bound.y > screen.height){
+                    writing.style['border-left'] = 'solid 0px';
+                }
+            }
+        }
+        function scrollEffect() {
+            if (isMobile("(pointer:coarse)").matches){
+                threshold = screen.height - 0;
+                writings = document.getElementsByClassName("writing");
+                for (i = 0; i < writings.length; i++){
+                    writing = writings[i];
+                    bound = writing.getBoundingClientRect();
+                    if (bound.y < threshold){
+                        writing.style['border-left'] = 'solid 3px';
+                    }
+                    if ((bound.y < 0) || (bound.y > threshold)){
+                        writing.style['border-left'] = 'solid 0px';
+                    }
+
+                }
+            }
+        }
+        //scrollEffect();
+        primeBorders();
+        window.onscroll = function(ev){
+            scrollEffect();
+        }
+        window.ontouchmove = function(ev){
+            scrollEffect();
+        }
+    </script>
 </html>
