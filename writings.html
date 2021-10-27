@@ -44,41 +44,48 @@
     </body>
     <script>
         var isMobile = window.matchMedia || window.msMatchMedia
-        //console.log(isMobile("(pointer:coarse)").matches);
+
         function primeBorders(){
             writings = document.getElementsByClassName("writing");
             for (i = 0; i < writings.length; i++){
                 writing = writings[i];
-                writing.style['transition'] = 'border-left .30s';
+                writing.style['transition'] = 'border-left .20s';
                 bound = writing.getBoundingClientRect();
-                if (bound.y > screen.height){
+                //if (bound.y > screen.height){
                     writing.style['border-left'] = 'solid 0px';
-                }
+                //}
             }
         }
+
+        /* Exercise: Need to abstract the styles being changed */
         function scrollEffect() {
             if (isMobile("(pointer:coarse)").matches){
-                threshold = screen.height - 0;
+                height = screen.height;
+                threshold = 35;
                 writings = document.getElementsByClassName("writing");
                 for (i = 0; i < writings.length; i++){
                     writing = writings[i];
                     bound = writing.getBoundingClientRect();
-                    if (bound.y < threshold){
+                    if (bound.y < height - threshold){
                         writing.style['border-left'] = 'solid 3px';
                     }
-                    if ((bound.y < 0) || (bound.y > threshold)){
+                    if ((bound.y < 0) || (bound.y > height - threshold)){
                         writing.style['border-left'] = 'solid 0px';
                     }
-
                 }
             }
         }
-        //scrollEffect();
+
         primeBorders();
         window.onscroll = function(ev){
             scrollEffect();
         }
+
         window.ontouchmove = function(ev){
+            scrollEffect();
+        }
+
+        window.ontouchstart = function(ev){
             scrollEffect();
         }
     </script>
