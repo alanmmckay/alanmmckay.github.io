@@ -45,19 +45,26 @@
     <script>
         var isMobile = window.matchMedia || window.msMatchMedia
 
-        function primeBorders(){
+        /* Exercise: Need to abstract the styles being changed */
+
+        function primeBorders(transition){
+            if (isMobile("(pointer:coarse)").matches){
             writings = document.getElementsByClassName("writing");
-            for (i = 0; i < writings.length; i++){
-                writing = writings[i];
-                writing.style['transition'] = 'border-left .20s';
-                bound = writing.getBoundingClientRect();
-                //if (bound.y > screen.height){
-                    writing.style['border-left'] = 'solid 0px';
-                //}
+                for (i = 0; i < writings.length; i++){
+                    writing = writings[i];
+                    if (transition == true){
+                        writing.style['transition'] = 'border-left .20s';
+                    }else{
+                        writing.style['transition'] = 'border-left 0s';
+                    }
+                    bound = writing.getBoundingClientRect();
+                    //if (bound.y > screen.height){
+                        writing.style['border-left'] = 'solid 1px';
+                    //}
+                }
             }
         }
 
-        /* Exercise: Need to abstract the styles being changed */
         function scrollEffect() {
             if (isMobile("(pointer:coarse)").matches){
                 height = screen.height;
@@ -65,6 +72,7 @@
                 writings = document.getElementsByClassName("writing");
                 for (i = 0; i < writings.length; i++){
                     writing = writings[i];
+                    writing.style['transition'] = 'border-left .20s';
                     bound = writing.getBoundingClientRect();
                     if (bound.y < height - threshold){
                         writing.style['border-left'] = 'solid 3px';
@@ -76,10 +84,11 @@
             }
         }
 
-        primeBorders();
-        window.onscroll = function(ev){
+        primeBorders(false);
+
+        /*window.onscroll = function(ev){
             scrollEffect();
-        }
+        }*/
 
         window.ontouchmove = function(ev){
             scrollEffect();
@@ -87,6 +96,10 @@
 
         window.ontouchstart = function(ev){
             scrollEffect();
+        }
+
+        window.ontouchend = function(ev){
+            primeBorders(true);
         }
     </script>
 </html>
