@@ -28,6 +28,7 @@
                     <img src='images/text-logo-grey.png' alt='Icon for blog link'>
                     Writings
                 </a>
+                <a href='bench.html' class='writing'> The Bench</a>
                 <a href='flow.html' class='writing'> Flow</a>
                 <a href='sound.html' class='writing'> The Connectivity of Sound</a>
                 <a href='social.html' class='writing'> Social Media</a>
@@ -37,10 +38,8 @@
         </div>
     </body>
     <script>
-        var isMobile = window.matchMedia || window.msMatchMedia
-
+        var isMobile = window.matchMedia || window.msMatchMedia;
         /* Exercise: Need to abstract the styles being changed */
-
         function primeBorders(transition){
             if (isMobile("(pointer:coarse)").matches){
             writings = document.getElementsByClassName("writing");
@@ -53,7 +52,7 @@
                     }
                     bound = writing.getBoundingClientRect();
                     //if (bound.y > screen.height){
-                        writing.style['border-left'] = 'solid 1px';
+                        writing.style['border-left'] = 'solid 2px';
                     //}
                 }
             }
@@ -72,7 +71,7 @@
                         writing.style['border-left'] = 'solid 3px';
                     }
                     if ((bound.y < 0) || (bound.y > height - threshold)){
-                        writing.style['border-left'] = 'solid 0px';
+                        writing.style['border-left'] = 'solid 2px';
                     }
                 }
             }
