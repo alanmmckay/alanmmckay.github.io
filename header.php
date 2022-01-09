@@ -16,7 +16,7 @@ if(!isset($title)){
     $title = 'Alan McKay';
 }
 
-$meta = [];
+// $meta = [];
 
 if(!isset($meta['title'])){
     $meta['title'] = 'Alan McKay | Blog';
