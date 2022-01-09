@@ -12,6 +12,8 @@ $meta['title'] = 'Alan McKay | Social Media';
 
 $meta['description'] = 'It is common knowledge to skirt any mention of personal social media accounts when it comes to interacting with an employer - or even further, a potential em...';
 
+$meta['image'] = 'https://image-aws-us-west-2.vsco.co/5ac5d6/146300964/5f41289e6bd09b5ab9000003/1600x900/vsco5f4128a0276b5.jpg';
+
 $meta['url'] = 'http://alanmckay.blog/writings/social/';
 
 include('../../header.php');
