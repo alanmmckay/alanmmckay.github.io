@@ -12,7 +12,7 @@ $meta['title'] = 'Alan McKay | Connectivity of Sound';
 
 $meta['description'] = 'Seven years ago, I woke up looking at a moving hospital ceiling. I was being carted in, voices sounding off around me; all informing each other information...';
 
-$meta['url'] = 'http://alanmckay.blog/writings/flow/';
+$meta['url'] = 'http://alanmckay.blog/writings/sound/';
 
 include('../../header.php');
 

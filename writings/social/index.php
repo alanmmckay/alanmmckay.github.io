@@ -12,7 +12,7 @@ $meta['title'] = 'Alan McKay | Social Media';
 
 $meta['description'] = 'It is common knowledge to skirt any mention of personal social media accounts when it comes to interacting with an employer - or even further, a potential em...';
 
-$meta['url'] = 'http://alanmckay.blog/writings/social';
+$meta['url'] = 'http://alanmckay.blog/writings/social/';
 
 include('../../header.php');
 
