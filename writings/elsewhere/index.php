@@ -10,7 +10,7 @@ $title = 'Alan McKay | Writing | Experiencing Elsewhere';
 
 $meta['title'] = 'Alan McKay | Experiencing Elsewhere';
 
-$meta['description'] = '...';
+$meta['description'] = 'A wintery haze shrouded the top of the Black Hills as the car wound the roads towards our stepping off point. There always has been a distaste for a commute...';
 
 $meta['url'] = 'http://alanmckay.blog/writings/elsewhere/';
 
