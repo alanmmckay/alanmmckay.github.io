@@ -39,7 +39,7 @@ include('../../header.php');
                     <hr>
                     <a href='../../images/black-hills-silhouette.jpg' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/black-hills-silhouette.jpg' id='black-hills-silhouette' alt="A silhouetted man stepping to peer through winter forest foliage." style='transition:object-position 4s;width:100%;height:400px;object-fit:cover;object-position:0 20%;' />
+                            <img src='../../images/black-hills-silhouette.jpg' id='black-hills-silhouette' class='animate' alt="A silhouetted man stepping to peer through winter forest foliage." style='transition:object-position 4s;object-position:0 20%;' />
                             <figcaption>
                                 Clayton stepping up to peer out of the forest line.
                             </figcaption>
@@ -54,7 +54,7 @@ include('../../header.php');
                     <hr>
                     <a href='../../images/black-hills-trees.jpg' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/black-hills-trees.jpg' id='black-hills-trees' alt="Frosted pine along the contour of a hill" style='transition:object-position 9s;width:100%;height:400px;object-fit:cover;object-position:0 0%;'/>
+                            <img src='../../images/black-hills-trees.jpg' id='black-hills-trees' class='animate' alt="Frosted pine along the contour of a hill" style='transition:object-position 9s;object-position:0 0%;'/>
                             <figcaption>
                                 The frosted pine following the ridgelines of the Black Hills.
                             </figcaption>
@@ -88,7 +88,7 @@ include('../../header.php');
                     <hr>
                     <a href='../../images/black-hills-peak.jpg' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/black-hills-peak.jpg' id='black-hills-peak' alt="Two men face away, overlooking a summit. A sea of frosted pine flow down into the valley adjacent." style='transition:object-position 4s;width:100%;height:400px;object-fit:cover;object-position:55%;'>
+                            <img src='../../images/black-hills-peak.jpg' id='black-hills-peak' class='animate' alt="Two men face away, overlooking a summit. A sea of frosted pine flow down into the valley adjacent." style='transition:object-position 4s;object-position:0 55%;'>
                             <figcaption>
                                 Clayton and Michael overlooking the peak of the day's hike.
                             </figcaption>
@@ -106,7 +106,7 @@ include('../../header.php');
                     <hr>
                     <a href='../../images/black-hills-path.jpg' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/black-hills-path.jpg' id='black-hills-path' alt="The silhouette of a man traversing through a pine forest." style='width:100%;height:400px;object-fit:cover;'/>
+                            <img src='../../images/black-hills-path.jpg' id='black-hills-path' class='animate' alt="The silhouette of a man traversing through a pine forest." style='transition:object-position 9s;object-position:0 0%;'/>
                             <figcaption>
                                 The sharp sunlight of a setting sun emphasizes the ordinary pine in the lower altitude of the descent.
                             </figcaption>
@@ -160,11 +160,12 @@ include('../../header.php');
             inViewRange('black-hills-peak','0 20%','0 55%');
             inViewRange('black-hills-silhouette','0 0%','0 20%');
             inViewRange('black-hills-trees','0 75%','0 0%');
-
+            inViewRange('black-hills-path', '0 85%', '0 0%');
         }
 
         inViewRange('black-hills-peak','0 20%','0 55%');
         inViewRange('black-hills-silhouette','0 0%','0 20%');
         inViewRange('black-hills-trees','0 75%','0 0%');
+        inViewRange('black-hills-path', '0 85%', '0 0%');
     </script>
 </html>
