@@ -186,3 +186,9 @@
         height:400px
     }
 }
+
+@media screen and (max-height:500px) and (min-width:480px){
+    #writingsWrapper article img.animate{
+        height:250px;
+    }
+}
