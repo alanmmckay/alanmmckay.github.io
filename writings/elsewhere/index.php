@@ -27,13 +27,16 @@ include('../../header.php');
                     </h1>
                     </header>
                    <p>
-                        A wintery haze shrouded the top of the Black Hills as the car wound the roads towards our stepping off point. There always has been a distaste for a commute by car; let alone one which is necessary for the adventure of the day. The automobiles' cabin serves to isolate the occupants from both the world and the occupants of other cabins; those who are also on their own predetermined paths. These paths once represented adventure but are now made trivial by the ease and isolation of modern travel. With this context, it is natural to think that the shrouded mountain tops provide another means of isolation that leaves the local world feeling even smaller.
+                        A wintery haze shrouded the top of the Black Hills as the car wound the roads towards our stepping off point. There always has been a distaste for a commute by car; let alone one which is necessary for the adventure of the day. The automobiles' cabin serves to isolate the occupants from both the world and the occupants of other cabins; those who are also on their own predetermined paths. These paths once represented adventure but are now made trivial by the ease and isolation of modern travel. Within this context, it is natural to think that the shrouded mountain tops provide another means of isolation that leaves the local world feeling even smaller.
                     </p>
                     <p>
-                        Luckily, the goal was to peer into this veil and reestablish a true sense of scale; to nullify the triviality of the initial commute. Stepping away from the now settling car started to instill this real sense of scale and the sense of being within the world. This is in spite of the fact that we entered the dense pine forest as the encasing clouds started to part. The canopy of the forest now obscures our vision. Our existence outside of the cabin enables our other senses to make up for this deficiency by helping us feel a part of something greater.
+                        Luckily, the goal was to peer into this veil and reestablish a true sense of scale; to nullify the triviality of the initial commute. Stepping away from the now settling car started to instill this sense of scale and the sense of being within the world. This is in spite of the fact that we entered the dense pine forest as the encasing clouds started to part.
                     </p>
                     <p>
-                        The steady gain of altitude into the forested hills was representative of the steady increase in conversation and hiking banter as the aforementioned senses lost their sleepiness. Trudging on the ground and through the occasional pockets of snow, one individual decides to veer off the marked path towards a raised bluff. The other two follow.
+                        Now the canopy of the forest now obscures our vision. Our existence outside of the car's cabin enables our other senses to make up for this deficiency by helping us feel a part of something greater. The steady gain of altitude into the forested hills was representative of the steady increase in hiking banter as the aforementioned senses lost their sleepiness.
+                    </p>
+                    <p>
+                        Trudging on the ground and through the occasional pockets of snow, one individual decides to veer off the marked path towards a raised bluff. The other two follow.
                     </p>
                     <br>
                     <hr>
@@ -48,7 +51,7 @@ include('../../header.php');
                     <hr>
                     <br>
                     <p>
-                        Conversation ceased once the bluff was crested. The forest dipped down into the contour of the valley before them, which then raised back up onto the hills adjacent. The now less obscured sense of vision witnessing that the once lingering clouds had deposited moisture onto the needles which have frozen and  been lightly dusted with a minor flurry.
+                        Conversation ceased once the bluff was crested. The forest dipped down into the contour of the valley before them, which then raised back up onto the hills adjacent. The now less obscured sense of vision allowed the observation that a once lingering cloud had deposited moisture onto the needles which have since frozen and been lightly dusted with a minor flurry.
                     </p>
                     <br>
                     <hr>
@@ -82,7 +85,7 @@ include('../../header.php');
                         The three eventually reach the peak of the hike. Displayed before them a sea of pine dusted white moving along the hills toward the horizon.
                     </p>
                     <p>
-                        Despite the cold, they linger. The choir of the crisp pop produced by opening canned beverages briefly fills the air. These sounds exist in order to continue the tradition of enjoying a can of Hamm's on every peak that is summited. At this time, travel is no longer happening as a true sense of scale is being fully appreciated.
+                        Despite the cold, they linger. The choir of a crisp pop produced by opening canned beverages briefly fills the air. These sounds exist in order to continue the tradition of enjoying a can of Hamm's on every peak that is summited. At this time, travel is no longer happening as a true sense of scale is being fully appreciated.
                     </p>
                     <br>
                     <hr>
@@ -100,7 +103,7 @@ include('../../header.php');
                         In the moment, the height of the hike has been obtained; the adventure has been completed. An alternate route is to be taken to the exit vehicle. The three descend the summit through winding paths that snake around the hills in a similar manner of the roads that took them to this experience.
                     </p>
                     <p>
-                        The relationship of conversation and altitude stays true. Conversation hushes as the group descends towards the finish. Nothing needs to be said.
+                        The relationship of conversation and altitude stays true. Chatter hushes as the group descends towards the finish. Nothing needs to be said.
                     </p>
                     <br>
                     <hr>
@@ -118,10 +121,10 @@ include('../../header.php');
                         The pine no longer glistens in the sun. The white is now back to the default green. The sharp angle of the winter sunlight is now being blocked by the hills as the sun nears the horizon. This induces a melancholy that harshens conversation further.
                     </p>
                     <p>
-                        The last jog of the exit hike winds down into a valley between two dominant hills. The car is waiting at a lot for a county park which sits next to a frozen lake. The two hills at the side of the lake are hidden in the shadow of the hill behind us. A third hill on the far side of the lake is illuminated by the sharp sunlight.
+                        The last jog of the exit hike winds down into a valley between two dominant hills. The car is waiting at a lot in a county park which sits next to a frozen lake. Two hills at the side of the lake are hidden in the shadow of the hill behind us. A third hill on the far side of the lake is illuminated by the sharp sunlight.
                     </p>
                     <p>
-                        It is clear we had not previously reached the apex moment of the hike. In the distance, at the base of the illuminated hill, sits a tent. Silhouettes dance around a net close by. The sound of skates scraping against the ice, the wooden clashing of hockey sticks, and the sound of the sliding puck reaches the ears of the three hikers. These sounds echo through the valley and are accented by the playful murmur of the small group across the ice. The two ice fishers associated with the tent are idle. Their attention is on the spectacle of the scene before us all.
+                        It is clear we had not previously reached the apex moment of the hike. In the distance, at the base of the illuminated hill, sits a tent. Silhouettes dance around a net close by. The sound of skates scraping against the ice, the wooden clashing of hockey sticks, and the sound of the sliding puck reaches the ears of the three hikers. These sounds echo through the valley and are accented by the playful murmur of the small group across the ice. Two ice fishers associated with the tent are idle. Their attention is on the spectacle of the scene before us all.
                     </p>
                     <br>
                     <hr>
