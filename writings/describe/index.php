@@ -11,7 +11,7 @@ $title = 'Alan McKay | Writing | Describing Elsewhere';
 
 $meta['title'] = 'Alan McKay | Describing Elsewhere';
 
-#$meta['description'] = 'A wintery haze shrouded the top of the Black Hills as the car wound the roads towards our stepping off point. There always has been a distaste for a commute...';
+$meta['description'] = 'A conversation once had a friend observing that too many people are reliant on showing the detail of a story being told. That is, instead of..."';
 
 $meta['url'] = 'http://alanmckay.blog/writings/describe/';
 
