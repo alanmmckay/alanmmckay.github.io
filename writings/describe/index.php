@@ -179,14 +179,18 @@ window.onscroll = function(){
             elements = document.getElementsByClassName('code');
             for(i=0;i<elements.length;i++){
                 element = elements[i];
-                element.style.width = window.outerWidth*.90 + "px";
+                width = window.outerWidth;
+                if (width > 800){
+                    width = 800;
+                }
+                element.style.width = width*.90 + "px";
             }
         }
 
         window.onresize = function(){
             setCodeContainerSize();
         }
-
+        console.log('yes');
         window.onscroll = function(){
             inViewRange('mike-black-elk', '0 20%', '0 45%');
             inViewRange('connor-grimes', '0 20%', '0 70%');
