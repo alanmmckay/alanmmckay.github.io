@@ -89,8 +89,8 @@ include('../../header.php');
                     <p>
                         In terms of technical detail, a CSS class was set for all the affected elements. Here, the width is set to 100%, the height to some fixed pixel value, and the object-fit attribute set to cover. Inline styling is then applied to each of these image tags where the object-position attribute is set to define the position in which an image will be centered with respect to the cropped container. Then, also within the inline styling, the transition property of the object-position attribute is set to define how long it will take for an image to scan to a position.
                     </p>
-                    <code id='code'>
-<pre>
+                    <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
 img.animate{
     width:100%;
     height:300px;
@@ -102,8 +102,8 @@ img.animate{
                         When and where the image scans is determined by JavaScript. A function was made to detect how far along an element has scrolled into the viewport. Should this threshold be met, the object-position CSS property changes; a new position is centered with respect to the cropped container and the previously set transition attribute enacts which causes the smooth scrolling effect.
                     </p>
                     <!--- JAVASCRIPT EXAMPLE! --->
-                    <!--code>
-
+                    <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
 function inViewRange(elementID,inPosition,outPosition){
     element = document.getElementById(elementID);
     bounding = element.getBoundingClientRect();
@@ -114,12 +114,20 @@ function inViewRange(elementID,inPosition,outPosition){
         element.style['object-position'] = outPosition;
     }
 }
+</pre>
 
-                    </code-->
+                    </code>
                     <p>
                         The logic described above is called upon by some event handler that detects when the window is scrolled.
                     </p>
                     <!--- JAVASCRIPT EXAMPLE! --->
+                    <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+window.onscroll = function(){
+    inViewRange('image-tag-ID', '0 20%', '0 45%');
+}
+</pre>
+                    </code>
                     <p>
                         The images can still be viewed in their entirety by clicking or tapping their containers. This is done by wrapping the figure tag up on an anchor tag which directs to the associated image.
                     </p>
@@ -166,9 +174,17 @@ function inViewRange(elementID,inPosition,outPosition){
                 element.style['object-position'] = outPosition;
             }
         }
-        console.log('yes');
-        window.onResize = function(){
-            console.log('resize');
+
+        function setCodeContainerSize(){
+            elements = document.getElementsByClassName('code');
+            for(i=0;i<elements.length;i++){
+                element = elements[i];
+                element.style.width = window.outerWidth*.90 + "px";
+            }
+        }
+
+        window.onresize = function(){
+            setCodeContainerSize();
         }
 
         window.onscroll = function(){
@@ -182,5 +198,6 @@ function inViewRange(elementID,inPosition,outPosition){
         inViewRange('connor-grimes', '0 20%', '0 70%');
         inViewRange('anon-sidecar', '0 60%', '0 20%');
         inViewRange('clayton-bear-butte', '0 80%', '0 0%');
+        setCodeContainerSize();
     </script>
 </html>
