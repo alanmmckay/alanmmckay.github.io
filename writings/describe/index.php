@@ -1,4 +1,3 @@
- 
 <?php
 
 $normalize = '../../normalize.css';
@@ -11,7 +10,7 @@ $title = 'Alan McKay | Writing | Describing Elsewhere';
 
 $meta['title'] = 'Alan McKay | Describing Elsewhere';
 
-$meta['description'] = 'A conversation once had a friend observing that too many people are reliant on showing the detail of a story being told. That is, instead of..."';
+$meta['description'] = 'A conversation once had a friend observing that too many people are reliant on showing the detail of a story being told. That is, instead of...';
 
 $meta['url'] = 'http://alanmckay.blog/writings/describe/';
 
@@ -19,7 +18,7 @@ include('../../header.php');
 
 ?>
 
-<section id='writingsWrapper'>
+        <section id='writingsWrapper'>
             <section>
                 <article>
                     <header>
@@ -90,29 +89,33 @@ include('../../header.php');
                     <p>
                         In terms of technical detail, a CSS class was set for all the affected elements. Here, the width is set to 100%, the height to some fixed pixel value, and the object-fit attribute set to cover. Inline styling is then applied to each of these image tags where the object-position attribute is set to define the position in which an image will be centered with respect to the cropped container. Then, also within the inline styling, the transition property of the object-position attribute is set to define how long it will take for an image to scan to a position.
                     </p>
-                    <code>
-                    img.animate{
-                        width:100%;
-                        height:300px;
-                        object-fit:cover;
-                    }
+                    <code id='code'>
+<pre>
+img.animate{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+}
+</pre>
                     </code>
                     <p>
                         When and where the image scans is determined by JavaScript. A function was made to detect how far along an element has scrolled into the viewport. Should this threshold be met, the object-position CSS property changes; a new position is centered with respect to the cropped container and the previously set transition attribute enacts which causes the smooth scrolling effect.
                     </p>
                     <!--- JAVASCRIPT EXAMPLE! --->
-                    <code>
-                    function inViewRange(elementID,inPosition,outPosition){
-                        element = document.getElementById(elementID);
-                        bounding = element.getBoundingClientRect();
-                        if ( ((window.innerHeight/2) - bounding.top > 0) && (bounding.top > 0) )
-                        {
-                            element.style['object-position'] = inPosition;
-                        } else{
-                            element.style['object-position'] = outPosition;
-                        }
-                    }
-                    </code>
+                    <!--code>
+
+function inViewRange(elementID,inPosition,outPosition){
+    element = document.getElementById(elementID);
+    bounding = element.getBoundingClientRect();
+    if ( ((window.innerHeight/2) - bounding.top > 0) && (bounding.top > 0) )
+    {
+        element.style['object-position'] = inPosition;
+    } else{
+        element.style['object-position'] = outPosition;
+    }
+}
+
+                    </code-->
                     <p>
                         The logic described above is called upon by some event handler that detects when the window is scrolled.
                     </p>
@@ -162,6 +165,10 @@ include('../../header.php');
             } else{
                 element.style['object-position'] = outPosition;
             }
+        }
+        console.log('yes');
+        window.onResize = function(){
+            console.log('resize');
         }
 
         window.onscroll = function(){
