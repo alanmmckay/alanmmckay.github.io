@@ -45,7 +45,7 @@ include('../../header.php');
                     <hr>
                     <a href='../../images/mike-black-elk.jpg' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/mike-black-elk.jpg' id='mike-black-elk' class='animate' alt="" style='transition:object-position 4s;object-position:0 45%;' />
+                            <img src='../../images/mike-black-elk.jpg' id='mike-black-elk' class='animate' alt="A man climbing the stone steps leading to a tower on top of Black Elk Peak" style='transition:object-position 4s;object-position:0 45%;' />
                             <figcaption>
                                 Michael reaching the summit of Black Elk Peak.
                             </figcaption>
@@ -63,7 +63,7 @@ include('../../header.php');
                     <hr>
                     <a href='../../images/connor-grimes.jpg' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/connor-grimes.jpg' id='connor-grimes' class='animate' alt="" style='transition:object-position 4s;object-position:0 70%;' />
+                            <img src='../../images/connor-grimes.jpg' id='connor-grimes' class='animate' alt="A man scaling an interior rock climbing wall contained within a gymnasium." style='transition:object-position 4s;object-position:0 70%;' />
                             <figcaption>
                                 Connor working on a project at Climb Iowa.
                             </figcaption>
@@ -78,7 +78,7 @@ include('../../header.php');
                     <hr>
                     <a href='../../images/anon-sidecar.jpg' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/anon-sidecar.jpg' id='anon-sidecar' class='animate' alt="" style='transition:object-position 4s;object-position:0 20%;' />
+                            <img src='../../images/anon-sidecar.jpg' id='anon-sidecar' class='animate' alt="A silhouette of a man working on a laptop sits before a wall which sunlight is casting the shadow of the window's logo which says Side Car." style='transition:object-position 4s;object-position:0 20%;' />
                             <figcaption>
                                 A stranger doing some work at Sidecar Coffee.
                             </figcaption>
@@ -136,7 +136,7 @@ window.onscroll = function(){
                     <hr>
                     <a href='../../images/clayton-bear-butte.jpg' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/clayton-bear-butte.jpg' id='clayton-bear-butte' class='animate' alt="" style='transition:object-position 8s;object-position:0 0%;' />
+                            <img src='../../images/clayton-bear-butte.jpg' id='clayton-bear-butte' class='animate' alt="A man climbs a path up Bear Butte. This path is dominated by a single tree." style='transition:object-position 8s;object-position:0 0%;' />
                             <figcaption>
                                 Clayton hiking up Bear Butte.
                             </figcaption>
@@ -182,8 +182,10 @@ window.onscroll = function(){
                 width = window.outerWidth;
                 if (width > 800){
                     width = 800;
+                }else{
+                    width = width*.9;
                 }
-                element.style.width = width*.90 + "px";
+                element.style.width = width + "px";
             }
         }
 
