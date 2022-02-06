@@ -33,7 +33,7 @@ include('../../header.php');
                         Luckily, the goal was to peer into this veil and reestablish a true sense of scale; to nullify the triviality of the initial commute. Stepping away from the now settling car started to instill this sense of scale and the sense of being within the world. This is in spite of the fact that we entered the dense pine forest as the encasing clouds started to part.
                     </p>
                     <p>
-                        Now the canopy of the forest now obscures our vision. Our existence outside of the car's cabin enables our other senses to make up for this deficiency by helping us feel a part of something greater. The steady gain of altitude into the forested hills was representative of the steady increase in hiking banter as the aforementioned senses lost their sleepiness.
+                        The canopy of the forest now obscures our vision. Our existence outside of the car's cabin enables our other senses to make up for this deficiency by helping us feel a part of something greater. The steady gain of altitude into the forested hills was representative of the steady increase in hiking banter as the aforementioned senses lost their sleepiness.
                     </p>
                     <p>
                         Trudging on the ground and through the occasional pockets of snow, one individual decides to veer off the marked path towards a raised bluff. The other two follow.
@@ -159,6 +159,7 @@ include('../../header.php');
                 element.style['object-position'] = outPosition;
             }
         }
+
         window.onscroll = function(){
             inViewRange('black-hills-peak','0 20%','0 55%');
             inViewRange('black-hills-silhouette','0 0%','0 20%');
