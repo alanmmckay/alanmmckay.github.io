@@ -107,9 +107,9 @@ include('../../header.php');
                     </p>
                     <br>
                     <hr>
-                    <a href='../../images/black-hills-path.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='../../images/black-hills-path-cropped.jpg' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/black-hills-path.jpg' id='black-hills-path' class='animate' alt="The silhouette of a man traversing through a pine forest." style='transition:object-position 9s;object-position:0 0%;'/>
+                            <img src='../../images/black-hills-path-cropped.jpg' id='black-hills-path' class='animate' alt="The silhouette of a man traversing through a pine forest." style='transition:object-position 9s;object-position:0 0%;'/>
                             <figcaption>
                                 The sharp sunlight of a setting sun emphasizes the ordinary pine in the lower altitude of the descent.
                             </figcaption>
