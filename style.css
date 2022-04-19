@@ -208,4 +208,7 @@
     #writingsWrapper article img.animate{
         height:250px;
     }
+    #writingsWrapper article img#black-hills-path{
+        height:250px;
+    }
 }
