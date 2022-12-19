@@ -374,6 +374,214 @@ SELECT staging.activity_id,
                             </figcaption>
                         </figure>
                     </a>
+                    <p>
+                        The traffic volume table can be described as:
+                    </p>
+                    <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+CREATE TABLE cycling.traffic_vol
+(
+    gid INT,
+    route_id varchar,
+    aadt BIGINT,
+    aadt_year SMALLINT,
+    effective_start_date date,
+    effective_end_date date,
+    geom geometry(multilinestring,4326),
+    PRIMARY KEY(gid)
+);
+</pre>
+                    </code>
+                    <p>
+                        This contains the information that's required, and no more. There are two obstacles in terms of
+                        migrating the relevant data from its staging table and the production table:
+                    </p>
+                    <ul>
+                        <li>
+                            The Spatial reference system differs with this datum. The SRID is 3857, contrary to 4326.
+                            Conversion here is initially trivial, until it's realized that the measurements contain z-values.
+                            Thus, the data needs to be flattened to a two-dimensional plane.
+                        </li>
+                        <li>
+                            The data gathered from AADT contains reports from a wide range of years. It could be the case
+                            that a certain road has information associated with the years 2015, 2016, and 2020. Whereas
+                            another road may only have information associated with the year 2021. The most recent year
+                            needs to be considered.
+                        </li>
+                    </ul>
+                    <p>
+                        The following insertion query addresses these two obstacles:
+                    </p>
+                    <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+INSERT INTO cycling.traffic_vol (gid,route_id, aadt, aadt_year, effective_start_date,
+effective_end_date,geom)
+    SELECT distinct gid,route_id, aadt, aadt_year, effective_, effectiv_1,
+    <mark>ST_Force2D(ST_Transform(geom,4326))</mark> FROM cycling.traffic_vol_staging WHERE <mark>effective_ is
+    not null ORDER BY effective_ DESC;</mark>
+</pre>
+                    </code>
+                    <p>
+                        (Note that the shapefiles have poorly named attributes; "effective_" is the column name for the
+                        attribute describing the effective start date.)
+                    </p>
+                    <p>
+                        Migration from the SOR staging table to populate vehicle crashes within the crashes table was much
+                        simpler. An application of the ST_Force2D function, along with the ST_Transform, were leveraged and
+                        the range of years was restricted to any crash after 2017. (This restriction can easily be levied for
+                        production deployment).
+                    </p>
+                    <h3>Visualizing the Data</h3>
+                    <p>
+                        The data can now start being used. The following figure shows the grouping of activities gathered via
+                        Strava being displayed:
+                    </p>
+                    <a>
+                        <figure>
+                            <img />
+                            <figcaption>
+
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <p>
+                        The following shows these activities overlaying the traffic network. Keep in mind that each road segment has an associated AADT value:
+                    </p>
+                    <a>
+                        <figure>
+                            <img />
+                            <figcaption>
+
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <p>
+                        And then traffic crash reporting can be overlayed:
+                    </p>
+                    <a>
+                        <figure>
+                            <img />
+                            <figcaption>
+
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <p>
+                        Queries gauging proximity safety can start being employed. I.e.,
+                    </p>
+                    <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+SELECT crash.geom FROM cycling.crashes as crash, cycling.activities as activity
+WHERE ST_DWithin(crash.geom,activity.route,0.01);
+</pre>
+                    </code>
+                    <h2>Segmentation</h2>
+                    <p>
+                        One facet of the database has yet to be discussed. The entity that is a Cycling Segment. The intention for
+                        this table is to provide a space to house individual segments that constitute a multiline. Each segment,
+                        (a single/mono-line as far as the database is concerned; not to be confused with a Strava segment), is to
+                        have some quantifier which tracks the amount of activities that share it. This will allow the viewing of
+                        some metric which can help determine the amount of cyclists that commute the segment which can
+                        help hone safety measures. (The more cyclist that travel on a segment may be a positive indicator for
+                        safety). It may also be easier to isolate which Strava activities cross a motorized roadway and help
+                        measure the safety of a particular route.
+                    </p>
+                    <p>
+                        First step of this process is to find the individual points that constitute a multiline. ST_DumpPoints is a
+                        good start in this effort. It produces an index for each point being produced along with the geometry.
+                        Consider the following query:
+                    </p>
+                    <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+SELECT route_id, <mark>(dp).path[1]</mark> As path_index, ST_AsTEXT(<mark>(dp).geom</mark>) AS node
+FROM (SELECT route_id, <mark>ST_DumpPoints(route) AS dp</mark> FROM cycling.activities) as segments;
+</pre>
+                    </code>
+                    <p>
+                        This query produces a set of results in which the route_id is associated with a set of points which are
+                        also given an index. Let's assign this to a view called list_points. The task is now to wrap these points up
+                        into individual lines. This can be accomplished with the following query:
+                    </p>
+                    <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+SELECT lp1.route_id, <mark>st_makeline(lp1.node, lp2.node)</mark> as line FROM <mark>list_points as lp1,
+list_points as lp2</mark> WHERE lp2.path_index - lp1.path_index = 1 AND lp1.route_id = lp2.route_id;
+</pre>
+                    </code>
+                    <p>
+                        What makes the above query work is the logic in the where clause. The statement "<code>lp2.path_index
+                        - lp1.path_index = 1</code>" ensures that points are contiguous form a line. Performing basic algebraic
+                        manipulation to the statement can help highlight this. The statement “<code>lp1.route_id =
+                        lp2.route_id</code>” ensures that the points selected for the st_makeline function are only from the same
+                        activity.
+                    </p>
+                    <p>
+                        The latest selection query segments each activity into a set of mono-lines. There is one remaining
+                        problem though - overlap is not factored! If these lines are to be stored in the segments table, there
+                        would be a lot of redundant information stored. Consider the following figures:
+                    </p>
+                    <a>
+                        <figure>
+                            <img />
+                            <figcaption>
+
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <p>
+                        The scale of the above image is 1:20929. The query used was <code>SELECT * FROM list_points</code>
+                    </p>
+                    <a>
+                        <figure>
+                            <img />
+                            <figcaption>
+
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <p>
+                        The scale of the above image is 1:5232. Same query.
+                    </p>
+                    <p>
+                        Now consider the following image, where these points have been converted to mono-lines:
+                    </p>
+                    <a>
+                        <figure>
+                            <img />
+                            <figcaption>
+
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <p>
+                        The scale of the above image is 1:654
+                    </p>
+                    <p>
+                        This exposes a problem in terms of storage. It should not be necessary to store all these lines. The
+                question is what geometric threshold should be used to consider one line segment as equivalent as
+                another. Intuitively, this threshold should either be geometric scale or distance.
+                    </p>
+                    <h2>Current status and the future of this project</h2>
+                    <p>
+                        The problem exposed in the previous section is a problem yet to be solved. It is uncertain if there exists
+                        a geometric function, (or set of functions), within postgres to quickly help solve this issue. Alternatively,
+                        a threshold of proximity needs to be discussed with someone who is close to the field of Geography.
+                    </p>
+                    <p>
+                        Once this problem is solved, queries can be employed to show which activities include a segment that
+                        either cross a motorized roadway and/or run within a certain distance of. The number of intersections
+                        and distance running in proximity can be used in tandem with traffic volume measurement and crash
+                        counts to present some safety measure for a region within the activity. This data can also be used in a
+                        regional scope to give an idea of which regions/territories are safer for cycling.
+                    </p>
+                    <p>
+                        The scope of this project has been from the perspective as a computer scientist instead of a geographer.
+                        The primary motivation is to help a cyclist make informed decisions. Some often take the term "help" to
+                        be a means to dictate through result of research and analysis. My goal has been to develop a tool others
+                        may use. This goal is close to being accomplished in terms of providing a solid foundation. Once
+                        achieved, the foundation may be built upon as a web application or be proposed to a group such as
+                        those who maintain and develop bikemaps.org
+                    </p>
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
