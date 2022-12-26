@@ -88,11 +88,11 @@ include('../../header.php');
                     <p>
                         The following is a UML diagram describing such a database:
                     </p>
-                    <a>
+                    <a href='../../images/erd-gis.png' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img />
+                            <img src='../../images/erd-gis.png' alt='A UML diagram describing the database discussed in this report.'/>
                             <figcaption>
-
+                                Preliminary UML diagram
                             </figcaption>
                         </figure>
                     </a>
@@ -366,14 +366,15 @@ SELECT staging.activity_id,
                         information, sparse data on account of the 40+ attributes for each source, and the storage required to
                         house all this. Trimming this fat will hope the project maintain scope and performance.
                     </p>
-                    <a>
-                        <figure>
-                            <img />
+                    <a href='../../images/01-gis.png' target="_blank" rel="noopener noreferrer">
+                        <figure style='border-bottom:1px solid #7b869d;border-top:1px solid #7b869d'>
+                            <img src='../../images/01-gis.png' alt='A screenshot showing the significant differences in sizes between data tables.'/>
                             <figcaption>
-
+                                Note the contrast of storage between the production tables and their staging counterparts.
                             </figcaption>
                         </figure>
                     </a>
+                    <br>
                     <p>
                         The traffic volume table can be described as:
                     </p>
@@ -436,36 +437,39 @@ effective_end_date,geom)
                         The data can now start being used. The following figure shows the grouping of activities gathered via
                         Strava being displayed:
                     </p>
-                    <a>
-                        <figure>
-                            <img />
+                    <a href='../../images/02-gis.png' target="_blank" rel="noopener noreferrer">
+                        <figure style='border-bottom:1px solid #7b869d;border-top:1px solid #7b869d'>
+                            <img src='../../images/02-gis.png' alt='A map showing a set of lines that chart cycling routes taken from Strava.'/>
                             <figcaption>
-
+                                Mapping of Strava activities
                             </figcaption>
                         </figure>
                     </a>
+                    <br>
                     <p>
                         The following shows these activities overlaying the traffic network. Keep in mind that each road segment has an associated AADT value:
                     </p>
-                    <a>
-                        <figure>
-                            <img />
+                    <a href='../../images/03-gis.png' target="_blank" rel="noopener noreferrer">
+                        <figure style='border-bottom:1px solid #7b869d;border-top:1px solid #7b869d'>
+                            <img src='../../images/03-gis.png' alt='A map showing the previous strava mappings that are overlaying a set of lines describing public roads.'/>
                             <figcaption>
-
+                                Strava activities overlaying AADT mapping
                             </figcaption>
                         </figure>
                     </a>
+                    <br>
                     <p>
                         And then traffic crash reporting can be overlayed:
                     </p>
-                    <a>
-                        <figure>
-                            <img />
+                    <a href='../../images/04-gis.png' target="_blank" rel="noopener noreferrer">
+                        <figure style='border-bottom:1px solid #7b869d;border-top:1px solid #7b869d'>
+                            <img src='../../images/04-gis.png' alt='A map showing the previous strava and public road mappings that are overlayed by a set of points describing locations of motorized crashes.'/>
                             <figcaption>
-
+                                Strava activity and AADT mappings in overlayed by SOR crash plottings.
                             </figcaption>
                         </figure>
                     </a>
+                    <br>
                     <p>
                         Queries gauging proximity safety can start being employed. I.e.,
                     </p>
@@ -520,42 +524,32 @@ list_points as lp2</mark> WHERE lp2.path_index - lp1.path_index = 1 AND lp1.rout
                         problem though - overlap is not factored! If these lines are to be stored in the segments table, there
                         would be a lot of redundant information stored. Consider the following figures:
                     </p>
-                    <a>
-                        <figure>
-                            <img />
+                    <a href='../../images/05-gis.png' target="_blank" rel="noopener noreferrer">
+                        <figure style='border-top:1px solid #7b869d'>
+                            <img src='../../images/05-gis.png' alt='A map showing the initial Strava activity mappings where the lines are now represented by their vertices.'/>
                             <figcaption>
-
+                                Individual plotting of vertices for each activity polyline. Scale of 1:20929. Query used was <code>SELECT * FROM list_points</code>
                             </figcaption>
                         </figure>
                     </a>
-                    <p>
-                        The scale of the above image is 1:20929. The query used was <code>SELECT * FROM list_points</code>
-                    </p>
-                    <a>
-                        <figure>
-                            <img />
+                    <br>
+                    <a href='../../images/06-gis.png' target="_blank" rel="noopener noreferrer">
+                        <figure style='border-top:1px solid #7b869d;'>
+                            <img src='../../images/06-gis.png' alt='A map showing the vertices of the initial Strava activity mappings with a more precise scale.'/>
                             <figcaption>
-
+                                Same plotting of vertices for activity polylines. Scale is now 1:5232; Same query as previous figure.
                             </figcaption>
                         </figure>
                     </a>
-                    <p>
-                        The scale of the above image is 1:5232. Same query.
-                    </p>
-                    <p>
-                        Now consider the following image, where these points have been converted to mono-lines:
-                    </p>
-                    <a>
-                        <figure>
-                            <img />
+                    <br>
+                    <a href='../../images/07-gis.png' target="_blank" rel="noopener noreferrer">
+                        <figure style='border-bottom:1px solid #7b869d;border-top:1px solid #7b869d'>
+                            <img src='../../images/07-gis.png' alt='A zoomed in scale of the initial Strava activities exposing many redundant lines.'/>
                             <figcaption>
-
+                                Conversion of polyline vertex plotting to contiguous monolines. Scale is now 1:654.
                             </figcaption>
                         </figure>
                     </a>
-                    <p>
-                        The scale of the above image is 1:654
-                    </p>
                     <p>
                         This exposes a problem in terms of storage. It should not be necessary to store all these lines. The
                 question is what geometric threshold should be used to consider one line segment as equivalent as
