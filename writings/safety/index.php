@@ -108,7 +108,7 @@ include('../../header.php');
                             Iowa Authoritative Annual Daily Traffic (AADT) volume
                             <ul>
                                 <li>
-                                    <a href='https://data.iowadot.gov/datasets/IowaDOT::traffic-information/about'>https://data.iowadot.gov/datasets/IowaDOT::traffic-information/about</a>
+                                    <a href='https://data.iowadot.gov/datasets/IowaDOT::traffic-information/about' target="_blank" rel="noopener noreferrer">https://data.iowadot.gov/datasets/IowaDOT::traffic-information/about</a>
                                 </li>
                                 <li>
                                     Data attributes and types are given in the weblink above. The important/relevant
@@ -131,7 +131,7 @@ include('../../header.php');
                             Iowa Crash Vehicle Data (SOR)
                             <ul>
                                 <li>
-                                    <a href='https://data.iowadot.gov/datasets/IowaDOT::crash-vehicle-data-sor/about'>https://data.iowadot.gov/datasets/IowaDOT::crash-vehicle-data-sor/about</a>
+                                    <a href='https://data.iowadot.gov/datasets/IowaDOT::crash-vehicle-data-sor/about' target="_blank" rel="noopener noreferrer">https://data.iowadot.gov/datasets/IowaDOT::crash-vehicle-data-sor/about</a>
                                 </li>
                                 <li>
                                     Data attributes and types are given in the weblink above. The important/relevant
@@ -167,7 +167,7 @@ include('../../header.php');
                     </ul>
                     <p>
                         For the scope of this project, the activity data is gathered from a personal Strava set of activities via the
-                        public developer API, (<a href='https://developers.strava.com/docs/reference/'>https://developers.strava.com/docs/reference/</a>).
+                        public developer API, (<a href='https://developers.strava.com/docs/reference/' target="_blank" rel="noopener noreferrer">https://developers.strava.com/docs/reference/</a>).
                     </p>
                     <h3>Data Prep</h3>
                     <h4>Using the Strava API</h4>
@@ -224,7 +224,7 @@ http GET "https://www.strava.com/api/v3/athlete/activities" "Authorization: Bear
                     <p>
                         The above http GET query returns, by default, 100 activities. Let's say this information is piped into a
                         json file called morerides.json. A look through the file will expose a lot more attributes and their values
-                        than what's required of this database. The attributes are listed here: <a href='https://developers.strava.com/docs/reference/#api-Activities-getLoggedInAthleteActivities'>https://developers.strava.com/docs/reference/#api-Activities-getLoggedInAthleteActivities</a>
+                        than what's required of this database. The attributes are listed here: <a href='https://developers.strava.com/docs/reference/#api-Activities-getLoggedInAthleteActivities' target="_blank" rel="noopener noreferrer">https://developers.strava.com/docs/reference/#api-Activities-getLoggedInAthleteActivities</a>
                     </p>
                     <p>
                         This data needs to be sanitized. A script was developed to gather this information and generate a csv file
