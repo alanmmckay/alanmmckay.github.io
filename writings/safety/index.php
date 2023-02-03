@@ -6,11 +6,11 @@ $style = '../../style.css';
 
 $canonical = 'http://alanmckay.blog/writings/safety/';
 
-$title = 'Alan McKay | Writing | Database Extension Gauging Cycling Safety';
+$title = 'Alan McKay | Writing | Geography and Safety';
 
-$meta['title'] = 'Alan McKay | Database Extension Gauging Cycling Safety';
+$meta['title'] = 'Alan McKay | Geography and Safety';
 
-$meta['description'] = "";
+$meta['description'] = "A primary facet to continuing my education through graduate school is to hone my ability to effectively communicate with people of other disciplines. Iowa...";
 
 $meta['url'] = 'http://alanmckay.blog/writings/safety/';
 
