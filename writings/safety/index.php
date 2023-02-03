@@ -18,7 +18,7 @@ include('../../header.php');
 
 ?>
         <section id='writingsWrapper'>
-            <section>
+            <section style='width:99%;'>
                 <article>
                     <section class='info'>
                         <header>

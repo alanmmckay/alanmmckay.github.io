@@ -189,12 +189,15 @@
     #writingsWrapper article img#black-hills-path{
         height:350px;
     }
-}
 
+}
 
 @media screen and (max-width: 480px){
     #writingsWrapper article img#black-hills-path{
         height:200px;
+    }
+    #writingsWrapper .info{
+        width:100%;
     }
 }
 
