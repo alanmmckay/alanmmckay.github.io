@@ -25,7 +25,34 @@ include('../../header.php');
                             <h2>Preface</h2>
                         </header>
                         <p>
-
+                            A primary facet to continuing my education through graduate school is to hone my ability to effectively
+                            communicate with people of other disciplines. Iowa city has done a good job facilitating this. It is here
+                            that people seem to be more receptive to general discourse. Being an instructor at the university has also
+                            exposed me to interactions with people of different majors and has given insight to how one of a particular
+                            study may tend to think in terms of solving a problem.
+                        </p>
+                        <p>
+                            Ultimately, a computer scientist is tasked with building a logical model to solve some real world problem.
+                            The study of the algorithm is a means to generalize problem solving; it is a means to be exclusive from some
+                            domain. Having a firm grasp on this should allow one to step into any domain and solve the problems specific
+                            to that domain. They may not be as up to speed as one who has been immersed, but it does not take long for a
+                            good computer scientist to get there.
+                        </p>
+                        <p>
+                            When I first started my studies, one of the classes during the first semester at community college was a
+                            database design course. This was necessary to understand how a website may store information. I learned a
+                            structured query language before any markup language and before any scripting language.
+                        </p>
+                        <p>
+                            I’ve learned a lot since then. During the fall semester of 2022 I decided to circle back to the study of
+                            databases. This time in a new domain - Geography. I took the upper-level Introduction to Geographic Databases
+                            course to get a good feel of the functionality of a database management system such as PostGIS.
+                        </p>
+                        <p>
+                            The following is a report pertaining to a project started within this course. Work is still being done here;
+                            it is incomplete. I believe these efforts are worthwhile beyond the coursework. The section describing the
+                            motivation of the project should make this apparent. It is hopeful that the general idea can be integrated
+                            into any applicable service, if not implemented as a service others may use.
                         </p>
                     <hr>
                     </section>
@@ -576,14 +603,14 @@ list_points as lp2</mark> WHERE lp2.path_index - lp1.path_index = 1 AND lp1.rout
                         achieved, the foundation may be built upon as a web application or be proposed to a group such as
                         those who maintain and develop bikemaps.org
                     </p>
-                    <section class='info'>
+                    <!--section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
                         <p>
 
                         </p>
                         <hr>
-                    </section>
+                    </section-->
                 </article>
                 <nav>
                     <a href='../'>Back</a>
