@@ -17,8 +17,8 @@ $meta['url'] = 'http://alanmckay.blog/writings/safety/';
 include('../../header.php');
 
 ?>
-        <section id='writingsWrapper'>
-            <section style='width:99%;'>
+        <section id='writingsWrapper' style='min-width:400px;'>
+            <section style='margin:10px'>
                 <article>
                     <section class='info'>
                         <header>
@@ -135,7 +135,7 @@ include('../../header.php');
                             Iowa Authoritative Annual Daily Traffic (AADT) volume
                             <ul>
                                 <li>
-                                    <a href='https://data.iowadot.gov/datasets/IowaDOT::traffic-information/about' target="_blank" rel="noopener noreferrer">https://data.iowadot.gov/datasets/IowaDOT::traffic-information/about</a>
+                                    <a href='https://data.iowadot.gov/datasets/IowaDOT::traffic-information/about' target="_blank" rel="noopener noreferrer">Data Source: DOT Traffic Information</a>
                                 </li>
                                 <li>
                                     Data attributes and types are given in the weblink above. The important/relevant
@@ -158,7 +158,7 @@ include('../../header.php');
                             Iowa Crash Vehicle Data (SOR)
                             <ul>
                                 <li>
-                                    <a href='https://data.iowadot.gov/datasets/IowaDOT::crash-vehicle-data-sor/about' target="_blank" rel="noopener noreferrer">https://data.iowadot.gov/datasets/IowaDOT::crash-vehicle-data-sor/about</a>
+                                    <a href='https://data.iowadot.gov/datasets/IowaDOT::crash-vehicle-data-sor/about' target="_blank" rel="noopener noreferrer">Data Source: DOT Crash Vehicle Information</a>
                                 </li>
                                 <li>
                                     Data attributes and types are given in the weblink above. The important/relevant
