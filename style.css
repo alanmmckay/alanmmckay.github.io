@@ -124,7 +124,7 @@
     text-decoration-color:#c4c9d4;
 }
 
-#writingsWrapper a figure figcaption{
+#writingsWrapper a:has(> figure){
     text-decoration-line:none;
 }
 
