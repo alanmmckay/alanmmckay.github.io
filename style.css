@@ -121,7 +121,11 @@
 
 #writingsWrapper nav a, a{
     color:#7b869d;
-    text-decoration:none;
+    text-decoration-color:#c4c9d4;
+}
+
+#writingsWrapper a figure figcaption{
+    text-decoration-line:none;
 }
 
 #writingsWrapper nav a:visited, a:visited{
@@ -213,5 +217,21 @@
     }
     #writingsWrapper article img#black-hills-path{
         height:250px;
+    }
+}
+
+@media screen and (max-width:800px){
+    #writingsWrapper article ul{
+        padding-left:5%;
+    }
+    #writingsWrapper article li{
+        margin-bottom:10px;
+    }
+}
+
+@media screen and (max-width:300px){
+    #writingsWrapper article ul li{
+        /*list-style-type:none;*/
+        margin-left:20px;
     }
 }
