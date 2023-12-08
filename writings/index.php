@@ -26,7 +26,6 @@ include('../header.php');
                     <img src='../images/text-logo-grey.png' alt='Icon for blog link'>
                     Writings
                 </a>
-                <a href='safety/' class='writing'> Geography and Safety</a>
                 <a href='describe/' class='writing'> Describing Elsewhere</a>
                 <a href='elsewhere/' class='writing'> Experiencing Elsewhere</a>
                 <a href='bench/' class='writing'> The Bench</a>
