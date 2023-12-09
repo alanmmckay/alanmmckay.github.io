@@ -1,7 +1,7 @@
 
 grid_producer = function(){
     hexV = [];//this array holds all the variables and values associated with this script.
-//*** Putting everything in the above hex array allows helps prevent any other script variables from having conflict with this script. This also makes it easy to include multiples of this file within a web page to house multiple hexagonal grids. All that's required is to use a search and replace function in a text editor to replace the string "hexV." with whatever arbitrary name you want to use for the object ***//
+    //*** Putting everything in the above hex array allows helps prevent any other script variables from having conflict with this script. This also makes it easy to include multiples of this file within a web page to house multiple hexagonal grids. All that's required is to use a search and replace function in a text editor to replace the string "hexV." with whatever arbitrary name you want to use for the object ***//
 
     hexV.canvas = document.getElementById("myCanvas");
     hexV.context = hexV.canvas.getContext('2d');
@@ -38,6 +38,7 @@ grid_producer = function(){
     hexV.grid = [];//This global array will be populated by objects representing the coordinates of each hexegon
     hexV.origin = [];
 
+    /* ---- Event listeners ---- */
     hexV.canvas.addEventListener('mousemove', function(evt){
         hexV.mousePos = getMousePos(hexV.canvas,evt,hexV);
         hexV.x = 0;
@@ -84,8 +85,6 @@ grid_producer = function(){
 
 
 
-
-
 //*** grid_handler is used to handle the offest of every other hexagon. This also handles shifting the required hexegon to the next row. ***//
 grid_handler = function(hexV){
 	if(hexV.counter <= hexV.cols){//it's not time to start a new row of hexegons
@@ -121,6 +120,8 @@ grid_handler = function(hexV){
 	hexV.rowswitch = !hexV.rowswitch;
 }
 
+
+
 //*** hex_handler uses the grid_handler function to calculate the set of vertices associated with each hexegon. It then returns these values back to the hexegon object ***//
 hex_handler = function(hexV){
 	grid_handler(hexV);
@@ -147,14 +148,14 @@ hex_handler = function(hexV){
 	hexV.y = hexV.y - hexV.r;
 	this.v7 = {x: hexV.x, y: hexV.y};//this is redundant, can trace back to v1
 	hexV.y = hexV.y - hexV.r;
-        
-        
 	return{
             center: this.center,
             sideVertices: this.sideVertices
         }
-        
+
 }
+
+
 
 //*** This is the hexagon data collection hub. Data is gathered from the above functions to be stored in array to be used by the functions used bellow ***//
 hex = function(hexV, name, type){
@@ -170,19 +171,18 @@ hex = function(hexV, name, type){
 }
 
 
+
 function calculateAdjacentOrigins(hexV){
     hexV.rows = Math.ceil(hexV.hexCount / hexV.cols);
     hexV.endHex = hexV.cols;
     //*** This function calculates and stores any center coordinates of any imaginary AND null hexegons that will be used in the grid's selection logic. Imaginary hexegons can be defined as adjacent hexegons to hexegons that exist on the border of the grid. Null hexegons are hexegons with the type of null; hexegons that a user may choose not to display. ***//
-    
+
     //The coordinates are generated and stored in the origin array.
     //As of now, this function is only run once: When the first javascript event occurs. This is determined outside of the function so any implementation can redraw these values at their own discretion.
-    
-//*** The following if/else if statements factor three contingencies:
-    
 
-    
-//*** ONLY ONE HEXEGON EXISTS ***//
+    //*** The following if/else if statements factor three contingencies:
+
+    //*** ONLY ONE HEXEGON EXISTS ***//
     if(hexV.hexCount === 1){
         if(hexV.origin[0].type !== null){
             this.center = hexV.origin[0];
@@ -193,9 +193,8 @@ function calculateAdjacentOrigins(hexV){
             hexV.origin.push({x: center.x + 2.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom right
             hexV.origin.push({x: center.x - 0.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom left
         }
-        
-        
-//*** ONLY ONE ROW OF HEXEGONS EXIST --- ***//
+
+    //*** ONLY ONE ROW OF HEXEGONS EXIST --- ***//
     }else if (hexV.rows === 1){
         for(i = 0; i < hexV.hexCount; i++){
             if(hexV.origin[i].type !== null){
@@ -214,16 +213,16 @@ function calculateAdjacentOrigins(hexV){
                     if(hexV.origin[i-1].type === null){
                         if(hexV.origin[i-2].type === null){
                             if(i % 2 === 0){
-                                hexV.origin.push({x: center.x - 0.5*hexV.s - hexV.s, y: center.y - hexV.r});//hex top left 
+                                hexV.origin.push({x: center.x - 0.5*hexV.s - hexV.s, y: center.y - hexV.r});//hex top left
                             }
                             if(i % 2 !== 0){
                                 hexV.origin.push({x: center.x - 0.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom left
                             }
                         }
-                    }   
+                    }
                 }
-            
-                
+
+
                 if(i === 0){
                     hexV.origin.push({x: center.x - 0.5*hexV.s - hexV.s, y: center.y - hexV.r});//hex top left
                     hexV.origin.push({x: center.x - 0.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom left
@@ -234,14 +233,13 @@ function calculateAdjacentOrigins(hexV){
                 }
             }
         }
-        
-        
-//*** MULTIPLE ROWS OF HEXEGONS EXISTS ***//
+
+    //*** MULTIPLE ROWS OF HEXEGONS EXISTS ***//
     }else{
         for(i = 0; i < hexV.hexCount; i++){
             if(hexV.origin[i].type !== null){
                 this.center = hexV.origin[i];
-                
+
                 //*** FIRST ROW CONDITION ***//
                 if(hexV.currentRow === 1){
                     hexV.origin.push({x: center.x, y: center.y - hexV.a});//generate the top origin - applies to every hexagon in this row
@@ -254,12 +252,12 @@ function calculateAdjacentOrigins(hexV){
                         if(hexV.origin[i-1].type === null){
                             if(hexV.origin[i-2].type === null){
                                 if(i % 2 === 0){
-                                    hexV.origin.push({x: center.x - 0.5*hexV.s - hexV.s, y: center.y - hexV.r});//hex top left 
+                                    hexV.origin.push({x: center.x - 0.5*hexV.s - hexV.s, y: center.y - hexV.r});//hex top left
                                 }
                             }
                         }
                     }
-                
+
                     if(i === 0){
                         hexV.origin.push({x: center.x - 0.5*hexV.s - hexV.s, y: center.y - hexV.r});//hex top left
                         if(hexV.origin[i+hexV.cols].type === null){
@@ -267,12 +265,12 @@ function calculateAdjacentOrigins(hexV){
                         }
                     }
                     if(i === hexV.cols-1){
-                        hexV.origin.push({x: center.x + 2.5*hexV.s - hexV.s, y: center.y - hexV.r});//hex top right 
+                        hexV.origin.push({x: center.x + 2.5*hexV.s - hexV.s, y: center.y - hexV.r});//hex top right
                         if(hexV.origin[i+hexV.cols].type === null){
-                          hexV.origin.push({x: center.x + 2.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom right  
+                          hexV.origin.push({x: center.x + 2.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom right
                         }
                     }
-                   
+
                     if(typeof hexV.origin[i+hexV.cols].type === "undefined" && i !== 0){
                         hexV.origin.push({x: center.x, y: center.y + hexV.a});//hex bottom
                         if(i === hexV.cols-1){
@@ -282,13 +280,13 @@ function calculateAdjacentOrigins(hexV){
                             hexV.origin.push({x: center.x - 0.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom left
                         }
                     }
-                    
+
                     if( hexV.rows === 2){
                         if(typeof hexV.origin[i+hexV.cols].type === "undefined" && hexV.origin[i+1].type === null){
                             hexV.origin.push({x: center.x + 2.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom right
                         }
                     }
-                
+
                 //*** MIDDLE ROW CONDITION ***//
                 }else if((hexV.currentRow > 1 && hexV.currentRow < hexV.rows) || (hexV.rows === 2 && hexV.currentRow === 1)){
                     if(hexV.newHex === true){
@@ -297,14 +295,14 @@ function calculateAdjacentOrigins(hexV){
                             hexV.origin.push({x: center.x - 0.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom left
                         }
                     }
-                    
+
                     if(i === hexV.endHex-1){
-                        hexV.origin.push({x: center.x + 2.5*hexV.s - hexV.s, y: center.y - hexV.r});//hex top right 
+                        hexV.origin.push({x: center.x + 2.5*hexV.s - hexV.s, y: center.y - hexV.r});//hex top right
                         if(hexV.origin[i+hexV.cols].type === null){
-                           hexV.origin.push({x: center.x + 2.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom right  
+                           hexV.origin.push({x: center.x + 2.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom right
                         }
                     }
-                    
+
                     if(hexV.currentRow === hexV.rows - 1){
                         if(hexV.newHex !== true){
                             if(typeof hexV.origin[i+hexV.cols].type === "undefined"){
@@ -319,11 +317,11 @@ function calculateAdjacentOrigins(hexV){
                                 }
                             }
                             if(typeof hexV.origin[i+1+hexV.cols].type === "undefined" && hexV.subHex % 2 === 0 && hexV.origin[i+1].type === null){
-                               hexV.origin.push({x: center.x + 2.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom right  
+                               hexV.origin.push({x: center.x + 2.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom right
                             }
                         }
                     }
-                    
+
                 //*** LAST ROW CONDITION ***/
                 }else if(hexV.currentRow === hexV.rows){
                     hexV.origin.push({x: center.x, y: center.y + hexV.a});//hex bottom
@@ -331,38 +329,37 @@ function calculateAdjacentOrigins(hexV){
                         hexV.origin.push({x: center.x - 0.5*hexV.s - hexV.s, y: center.y - hexV.r});//hex top left
                         hexV.origin.push({x: center.x - 0.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom left
                     }
-                    
+
                     if(i === hexV.hexCount - 1){
                         hexV.origin.push({x: center.x + 2.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom right
                         if(i === hexV.endHex-1 || hexV.origin[i+1-hexV.cols].type === null){
                             hexV.origin.push({x: center.x + 2.5*hexV.s - hexV.s, y: center.y - hexV.r});//hex top right
-                        }                
+                        }
                     }
-                    
+
                     if(hexV.origin[i-1].type === null){
                         if(hexV.subHex % 2 === 0){
                             hexV.origin.push({x: center.x - 0.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom left
                         }
                     }
-                    
+
                     if(hexV.origin[i+1].type === null){
                         if(hexV.subHex % 2 === 0){
-                            hexV.origin.push({x: center.x + 2.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom right  
+                            hexV.origin.push({x: center.x + 2.5*hexV.s - hexV.s, y: center.y + hexV.r});//hex bottom right
                         }
                     }
 
-                
                    // 1-1blank-2-5blank-3-3blank-2
-                   //6cols - 7 - 2blank - 4 
+                   //6cols - 7 - 2blank - 4
                 }//end if
             }//end if
-            
+
             if(hexV.newHex === true){
                 hexV.newHex = false;
             }
-            
+
             hexV.subHex++;
-            
+
             if(i === hexV.endHex-1){
                 hexV.newHex = true;
                 hexV.subHex = 1;
@@ -375,12 +372,13 @@ function calculateAdjacentOrigins(hexV){
 }
 
 
+
 function getselectedHex(hexV){
     if(hexV.adjacencyInit === false){
         calculateAdjacentOrigins(hexV);
     }
-    
-//*** This function starts by calculating the points of origin for adjacent hexagons that have yet to be factored. It then runs through the origin array and applies the distance formula between each set of coordinates and the current mouse position. The shortest length is considered the 'selection', as noted in the logic below ***//
+
+    //*** This function starts by calculating the points of origin for adjacent hexagons that have yet to be factored. It then runs through the origin array and applies the distance formula between each set of coordinates and the current mouse position. The shortest length is considered the 'selection', as noted in the logic below ***//
 
     for(n = 0; n < hexV.origin.length; n++){
         this.original = hexV.origin[n];
@@ -406,20 +404,17 @@ function getselectedHex(hexV){
 
 //drawHexes is the function that uses canvas-based methods to draw the hexagon
 function drawHexes(evtinit, hexV){
-    console.log('here');
-    console.log(evtinit);
-    console.log(hexV)
     //*** This function grabs all the data that has been stored in both the grid and origin arrays and draws the hexagon on the canvas element. ***//
     //The evtinit parameter is used to decide whether or not certain elements should be drawn. This is relevant when a user may choose to move their cursor off the canvas element.
-    
-        if(evtinit === 1){
-            this.selectedHex = getselectedHex(hexV);
-        }
+
+    if(evtinit === 1){
+        this.selectedHex = getselectedHex(hexV);
+    }
+
 	for (i = 0; i < hexV.grid.length; i++){//loop through each set of side vertices stored in the grid array
             if(hexV.origin[i].type !== null){//check to see if the corresponding hexagon type hasn't been declared a null by the user
                 this.vertices = hexV.grid[i];
-            
-                
+
                hexV.context.beginPath(vertices.v1.x, vertices.v1.y);
                hexV.context.moveTo(vertices.v2.x, vertices.v2.y);
                hexV.context.lineTo(vertices.v3.x, vertices.v3.y);
@@ -443,8 +438,7 @@ function drawHexes(evtinit, hexV){
                hexV.context.fillStyle='#ebebe0';
                hexV.context.fill();
                hexV.context.stroke();
-               
-               
+
                 /*if(evtinit === 1){
                     hexV.context.fillStyle = "black";
                     hexV.context.font = "18px arial";
@@ -477,44 +471,43 @@ function drawHexes(evtinit, hexV){
            hexV.context.lineTo(vertices.v6.x, vertices.v6.y);
            hexV.context.lineTo(vertices.v1.x, vertices.v1.y);
            hexV.context.closePath();
-           hexV.context.lineWidth = 1;	
+           hexV.context.lineWidth = 1;
            hexV.context.strokeStyle='black';
            hexV.context.stroke();
 	}
-        if(hexV.drawOrigins === true){
-            for(n = 0; n < hexV.origin.length;n++){
+    if(hexV.drawOrigins === true){
+        for(n = 0; n < hexV.origin.length;n++){
+            hexV.context.beginPath();
+            hexV.context.arc(hexV.origin[n].x, hexV.origin[n].y, 1, 0, 2*Math.PI, false);
+            hexV.context.fillStyle = 'black';
+            hexV.context.fill();
+            hexV.context.strokeStyle = 'black';
+            hexV.context.stroke();
+        }
+    }
+	if(evtinit === 1){
+        for(j = 0; j < hexV.origin.length; j++){
+            if(hexV.hexLines === true && j < hexV.hexCount){
                 hexV.context.beginPath();
-                hexV.context.arc(hexV.origin[n].x, hexV.origin[n].y, 1, 0, 2*Math.PI, false);
-                hexV.context.fillStyle = 'black';
-                hexV.context.fill();
+                hexV.context.moveTo(hexV.origin[j].x, hexV.origin[j].y);
+                hexV.context.lineTo(hexV.mousePos.x, hexV.mousePos.y);
+                hexV.context.closePath();
+                hexV.context.lineWidth = 1;
+                hexV.context.strokeStyle = 'black';
+                hexV.context.stroke();
+            }
+            if(hexV.adjLines === true && j >= hexV.hexCount){
+                hexV.context.beginPath();
+                hexV.context.moveTo(hexV.origin[j].x, hexV.origin[j].y);
+                hexV.context.lineTo(hexV.mousePos.x, hexV.mousePos.y);
+                hexV.context.closePath();
+                hexV.context.lineWidth = 1;
                 hexV.context.strokeStyle = 'black';
                 hexV.context.stroke();
             }
         }
-	if(evtinit === 1){
-            for(j = 0; j < hexV.origin.length; j++){
-                if(hexV.hexLines === true && j < hexV.hexCount){
-                    hexV.context.beginPath();
-                    hexV.context.moveTo(hexV.origin[j].x, hexV.origin[j].y);
-                    hexV.context.lineTo(hexV.mousePos.x, hexV.mousePos.y);
-                    hexV.context.closePath();
-                    hexV.context.lineWidth = 1;
-                    hexV.context.strokeStyle = 'black';
-                    hexV.context.stroke();
-                }
-                if(hexV.adjLines === true && j >= hexV.hexCount){
-                    hexV.context.beginPath();
-                    hexV.context.moveTo(hexV.origin[j].x, hexV.origin[j].y);
-                    hexV.context.lineTo(hexV.mousePos.x, hexV.mousePos.y);
-                    hexV.context.closePath();
-                    hexV.context.lineWidth = 1;
-                    hexV.context.strokeStyle = 'black';
-                    hexV.context.stroke();
-                }
-            }
-        }
+    }
 	hexV.grid['hover'] = null;
-        
 }
 
 
@@ -528,37 +521,38 @@ function getMousePos(canvas, evt, hexV) {
 }
 
 
+
 //** Page specific functions **//
-sliderfunction = function(hexV){
+slider_function = function(hexV){
     hexContainer = [];
     hexV.s = parseInt(document.getElementById("sizeslider").value);
     hexV.h = (Math.sin((30*(Math.PI/180))) * hexV.s);
     hexV.r = (Math.cos((30*(Math.PI/180))) * hexV.s);
     hexV.a = 2*hexV.r;
     hexV.hexCount2 = hexV.hexCount;
-    
+
     hexV.origin2 = [];
-    
+
     hexV.hexCount = 0;
     hexV.newHex = true;
     hexV.currentRow = 1;
     hexV.adjacencyInit = false;
-    
+
     hexV.x = hexV.actualx;
     hexV.y = hexV.actualy;
     hexV.counter = 1;
     hexV.rowswitch = false;
     hexV.rowinit = false;
     hexV.init = false;
-    
+
     for(c = 0; c < hexV.hexCount2; c++){
         hexV.origin2[c] = hexV.origin[c];
     }
-    
+
     hexV.mousePos;
     hexV.grid = [];
     hexV.origin = [];
-    
+
     for(c = 0; c < hexV.hexCount2; c++)
     {
         if(hexV.origin2[c].type !== null){
@@ -574,7 +568,9 @@ sliderfunction = function(hexV){
     drawHexes(0,hexV);
 }
 
-traceAdj = function(hexV){
+
+
+trace_Adj = function(hexV){
     if(hexV.adjLines === false){
         hexV.adjLines = true;
         document.getElementById("traceAdjOrig").value = "Disable Adjacency Trace";
@@ -584,7 +580,7 @@ traceAdj = function(hexV){
     }
 }
 
-traceOrig1 = function(hexV){
+trace_Orig = function(hexV){
     if(hexV.hexLines === false){
         hexV.hexLines = true;
         document.getElementById("traceOrig").value = 'Disable Origin Trace';
@@ -594,7 +590,9 @@ traceOrig1 = function(hexV){
     }
 }
 
-addHex1 = function(hexV, type){
+
+
+add_Hex = function(hexV, type){
     hexV.origin2 = [];
 
     for(c = 0; c < hexV.hexCount;c++){
@@ -640,7 +638,9 @@ addHex1 = function(hexV, type){
     drawHexes(0, hexV);
 }
 
-removeHex1 = function(hexV){
+
+
+remove_Hex = function(hexV){
     if(hexV.hexCount > 1){
     hexV.origin2 = [];
 
@@ -654,18 +654,18 @@ removeHex1 = function(hexV){
     hexV.newHex = true;
     hexV.currentRow = 1;
     hexV.adjacencyInit = false;
-    
+
     hexV.x = hexV.actualx;
     hexV.y = hexV.actualy;
     hexV.counter = 1;
     hexV.rowswitch = false;
     hexV.rowinit = false;
     hexV.init = false;
-    
+
     hexV.mousePos;
     hexV.grid = [];
     hexV.origin = [];
-    
+
     for(c = 0; c < hexV.hexCount2;c++){
         if(hexV.origin2[c].type === null){
             hexContainer[c] = new hex(hexV, c, null);
@@ -680,43 +680,47 @@ removeHex1 = function(hexV){
     }
 }
 
-drawOrigin = function(hexV){
+
+
+draw_Origin = function(hexV){
     if(hexV.drawOrigins === false){
         hexV.drawOrigins = true;
         document.getElementById("originDisplay").value = 'Hide Points of Origin';
     }else{
         hexV.drawOrigins = false;
         document.getElementById("originDisplay").value = 'Show Points of Origin';
-    }  
+    }
     hexV.context.clearRect(0, 0, hexV.canvas.width, hexV.canvas.height);
     drawHexes(0, hexV);
 }
 
-addColumn1 = function(hexV){
+
+
+add_Column = function(hexV){
     hexV.hexCount2 = hexV.hexCount;
     hexV.origin2 = [];
-    
+
     hexV.hexCount = 0;
     hexV.newHex = true;
     hexV.cols = hexV.cols + 1;
     hexV.currentRow = 1;
     hexV.adjacencyInit = false;
-    
+
     hexV.x = hexV.actualx;
     hexV.y = hexV.actualy;
     hexV.counter = 1;
     hexV.rowswitch = false;
     hexV.rowinit = false;
     hexV.init = false;
-    
+
     for(c = 0; c < hexV.hexCount2; c++){
         hexV.origin2[c] = hexV.origin[c];
     }
-    
+
     hexV.mousePos;
     hexV.grid = [];
     hexV.origin = [];
-    
+
     for(c = 0; c < hexV.hexCount2; c++)
     {
         if(hexV.origin2[c].type !== null){
@@ -732,32 +736,34 @@ addColumn1 = function(hexV){
     drawHexes(0, hexV);
 }
 
-removeColumn1 = function(hexV){
+
+
+remove_Column = function(hexV){
     if(hexV.cols > 1){
     hexV.hexCount2 = hexV.hexCount;
     hexV.origin2 = [];
-    
+
     hexV.hexCount = 0;
     hexV.newHex = true;
     hexV.cols = hexV.cols - 1;
     hexV.currentRow = 1;
     hexV.adjacencyInit = false;
-    
+
     hexV.x = hexV.actualx;
     hexV.y = hexV.actualy;
     hexV.counter = 1;
     hexV.rowswitch = false;
     hexV.rowinit = false;
     hexV.init = false;
-    
+
     for(c = 0; c < hexV.hexCount2; c++){
         hexV.origin2[c] = hexV.origin[c];
     }
-    
+
     hexV.mousePos;
     hexV.grid = [];
     hexV.origin = [];
-    
+
     for(c = 0; c < hexV.hexCount2; c++)
     {
         if(hexV.origin2[c].type !== null){
@@ -772,4 +778,4 @@ removeColumn1 = function(hexV){
     hexV.context.clearRect(0, 0, hexV.canvas.width, hexV.canvas.height);
     drawHexes(0, hexV);
     }
-} 
+}
