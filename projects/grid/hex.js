@@ -1,12 +1,12 @@
 
-grid_producer = function(){
+grid_producer = function(canvas_id, s, cols, x_margin, y_margin){
     hexV = [];//this array holds all the variables and values associated with this script.
     //*** Putting everything in the above hex array allows helps prevent any other script variables from having conflict with this script. This also makes it easy to include multiples of this file within a web page to house multiple hexagonal grids. All that's required is to use a search and replace function in a text editor to replace the string "hexV." with whatever arbitrary name you want to use for the object ***//
 
-    hexV.canvas = document.getElementById("myCanvas");
+    hexV.canvas = document.getElementById(canvas_id);
     hexV.context = hexV.canvas.getContext('2d');
 
-    hexV.s = 25;//This is the circumradius and the length of each hexegonal side
+    hexV.s = s;//This is the circumradius and the length of each hexegonal side
     hexV.h = (Math.sin((30*(Math.PI/180))) * hexV.s);
     hexV.r = (Math.cos((30*(Math.PI/180))) * hexV.s);//this is the inradius
     hexV.a = 2*hexV.r;
@@ -16,13 +16,13 @@ grid_producer = function(){
     hexV.subHex = 1;
     hexV.endHex = 0;
     hexV.rows = 0;
-    hexV.cols = 3;
+    hexV.cols = cols;
     hexV.currentRow = 1;
     hexV.adjacencyInit = false;
 
     //** These variables are used in the grid_handler function. The help determine where each vertex should be positioned **//
-    hexV.actualx = 25;
-    hexV.actualy = 25;
+    hexV.actualx = x_margin;
+    hexV.actualy = y_margin;
     hexV.x = hexV.actualx;
     hexV.y = hexV.actualy;
     hexV.counter = 1;
