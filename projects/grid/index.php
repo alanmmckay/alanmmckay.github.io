@@ -56,7 +56,49 @@ include('../../header.php');
                     <header>
                         <h1>Implementation of a Hexagon Grid</h1>
                     </header>
+                    <figure style='border:solid black 1px;overflow:auto;clear:both'>
+                        <canvas id='myCanvas' width='500' height='275' style='width:100%;float:left;clear:right;'></canvas>
+                    </figure>
+                    <form style='width:85%'>
+                        <label for='sizeslider'>Size of Hexagon:</label><br>
+                        <input type='range' id='sizeslider' min='10' max='50' value='25' oninput='slider_function(hexV)'><br>
 
+                        <!--label for='addHex'>Add a hexagon to the grid</label><br-->
+                        <input type='button' id='addHex' value='Add hex' onclick='add_Hex(hexV)'>
+
+                        <!--label for='addNullHex'>Add a Null hex to the grid</label><br-->
+                        <input type='button' id='addNullHex' value='Add Null hex' onclick='add_Hex(hexV,null)'>
+
+                        <!--label for='removeHex'>Remove a hexagon from the grid</label><br-->
+                        <input type='button' id='removeHex' value='Remove hex' onclick='remove_Hex(hexV)'><br>
+
+                        <!--label for='addColumn'>Add a column to the Hex-grid</label><br-->
+                        <input type='button' id='addColumn' value='Add Column' onclick='add_Column(hexV)'>
+
+                        <!--label for='removeColumn'>Remove a column from the Hex-grid</label><br-->
+                        <input type='button' id='removeColumn' value='Remove Column' onclick='remove_Column(hexV)'><br>
+
+                        <!--br><label for='originDisplay'>Display/Hide all points of origin</label><br-->
+                        <input type='button' id='originDisplay' value='Show Points of Origin' onclick='draw_Origin(hexV)'>
+
+                        <!--label for='traceOrig'>Toggle trace lines from any 'Real' hexagon's point of origin to the mouse cursor</label><br-->
+                        <input type='button' id='traceOrig' value='Trace Origin lines' onclick='trace_Orig(hexV)'>
+
+                        <!--label for='traceAdjOrig'>Toggle trace lines from any 'Imaginary' hexagon's point of origin to the mouse cursor</label-->
+                        <input type='button' id='traceAdjOrig' value='Trace Adjacency lines' onclick='trace_Adj(hexV)'>
+
+                </form>
+                <script src='hex.js'></script>
+                <script>
+                    var hexV = grid_producer("myCanvas",25,3,25,25);
+
+                    var hexContainer = [];
+                        hexContainer[0] = new hex(hexV,"tile1");
+                        hexContainer[1] = new hex(hexV,"tile1");
+                        hexContainer[2] = new hex(hexV,"tile1");
+                        drawHexes(0,hexV);
+
+                </script>
                 </article>
                 <nav>
                     <a href='../'>Back</a>
