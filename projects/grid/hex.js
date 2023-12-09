@@ -1,47 +1,93 @@
-var hexV = [];//this array holds all the variables and values associated with this script.
 
+grid_producer = function(){
+    hexV = [];//this array holds all the variables and values associated with this script.
 //*** Putting everything in the above hex array allows helps prevent any other script variables from having conflict with this script. This also makes it easy to include multiples of this file within a web page to house multiple hexagonal grids. All that's required is to use a search and replace function in a text editor to replace the string "hexV." with whatever arbitrary name you want to use for the object ***//
 
-hexV.canvas = document.getElementById("myCanvas");
-hexV.context = hexV.canvas.getContext('2d');
+    hexV.canvas = document.getElementById("myCanvas");
+    hexV.context = hexV.canvas.getContext('2d');
 
-hexV.s = 25;//This is the circumradius and the length of each hexegonal side
-hexV.h = (Math.sin((30*(Math.PI/180))) * hexV.s);
-hexV.r = (Math.cos((30*(Math.PI/180))) * hexV.s);//this is the inradius
-hexV.a = 2*hexV.r;
-    
-hexV.hexCount = 0;
-hexV.newHex = true;
-hexV.subHex = 1;
-hexV.endHex = 0;
-hexV.rows = 0;
-hexV.cols = 3;
-hexV.currentRow = 1;
-hexV.adjacencyInit = false;
-    
-//** These variables are used in the grid_handler function. The help determine where each vertex should be positioned **//
-hexV.actualx = 25;
-hexV.actualy = 25;
-hexV.x = hexV.actualx;
-hexV.y = hexV.actualy;
-hexV.counter = 1;
-hexV.rowswitch = false;
-hexV.rowinit = false;
-hexV.init = false;
+    hexV.s = 25;//This is the circumradius and the length of each hexegonal side
+    hexV.h = (Math.sin((30*(Math.PI/180))) * hexV.s);
+    hexV.r = (Math.cos((30*(Math.PI/180))) * hexV.s);//this is the inradius
+    hexV.a = 2*hexV.r;
 
-hexV.adjLines = false;
-hexV.hexLines = false;
-hexV.drawOrigins = false;
+    hexV.hexCount = 0;
+    hexV.newHex = true;
+    hexV.subHex = 1;
+    hexV.endHex = 0;
+    hexV.rows = 0;
+    hexV.cols = 3;
+    hexV.currentRow = 1;
+    hexV.adjacencyInit = false;
 
-hexV.mousePos;
-hexV.grid = [];//This global array will be populated by objects representing the coordinates of each hexegon
-hexV.origin = [];
+    //** These variables are used in the grid_handler function. The help determine where each vertex should be positioned **//
+    hexV.actualx = 25;
+    hexV.actualy = 25;
+    hexV.x = hexV.actualx;
+    hexV.y = hexV.actualy;
+    hexV.counter = 1;
+    hexV.rowswitch = false;
+    hexV.rowinit = false;
+    hexV.init = false;
+
+    hexV.adjLines = false;
+    hexV.hexLines = false;
+    hexV.drawOrigins = false;
+
+    hexV.mousePos;
+    hexV.grid = [];//This global array will be populated by objects representing the coordinates of each hexegon
+    hexV.origin = [];
+
+    hexV.canvas.addEventListener('mousemove', function(evt){
+        hexV.mousePos = getMousePos(hexV.canvas,evt,hexV);
+        hexV.x = 0;
+        hexV.y = 0;
+        hexV.counter = 1;
+        hexV.rowswitch = false;
+        hexV.rowinit = false;
+        hexV.init = false;
+    hexV.context.clearRect(0, 0, hexV.canvas.width, hexV.canvas.height);
+        drawHexes(1,hexV);
+    }, false);
+
+    hexV.canvas.addEventListener('mouseout', function(evt){
+        hexV.mousePos = getMousePos(hexV.canvas,evt,hexV);
+        hexV.x = 0;
+        hexV.y = 0;
+        hexV.counter = 1;
+        hexV.rowswitch = false;
+        hexV.rowinit = false;
+        hexV.init = false;
+    hexV.context.clearRect(0, 0, hexV.canvas.width, hexV.canvas.height);
+        drawHexes(0,hexV);
+    }, false);
+
+    hexV.canvas.addEventListener('mousedown', function(evt){
+        for (i = 0; i < hexV.grid.length; i++){
+            this.vertices = hexV.grid[i];//resume
+            this.selectedHex = getselectedHex(hexV);
+            if(hexV.origin[i] === this.selectedHex.selected && hexV.origin[i].type !== null){
+                if(hexV.grid['selected'] === this.vertices){
+                    //document.getElementById("output").innerHTML = '<br>';
+                    hexV.grid['selected'] = null;
+                }else{
+                    //document.getElementById("output").innerHTML = hexV.origin[i].name;
+                    hexV.grid['selected'] = this.vertices;
+                }
+                drawHexes(1,hexV);
+            }
+        }
+    }, false);
+
+    return hexV;
+}
+
 
 
 
 
 //*** grid_handler is used to handle the offest of every other hexagon. This also handles shifting the required hexegon to the next row. ***//
-grid_handler = function(){
+grid_handler = function(hexV){
 	if(hexV.counter <= hexV.cols){//it's not time to start a new row of hexegons
 		if(hexV.rowinit === true){
 			if(hexV.rowswitch === true){//a hexegon with an even designation in regards to how many hexegons have been generated in it's row
@@ -76,8 +122,8 @@ grid_handler = function(){
 }
 
 //*** hex_handler uses the grid_handler function to calculate the set of vertices associated with each hexegon. It then returns these values back to the hexegon object ***//
-hex_handler = function(){
-	grid_handler();
+hex_handler = function(hexV){
+	grid_handler(hexV);
         hexV.hexCount++;
 	hexV.y = hexV.y + hexV.r;//priming the initial vertex.
 	this.center = {x: hexV.x + hexV.s, y: hexV.y};
@@ -111,8 +157,8 @@ hex_handler = function(){
 }
 
 //*** This is the hexagon data collection hub. Data is gathered from the above functions to be stored in array to be used by the functions used bellow ***//
-hex = function(name, type){
-	this.vertices = hex_handler();
+hex = function(hexV, name, type){
+	this.vertices = hex_handler(hexV);
         this.vertices.center.name = name;
         if(type === null){
             this.vertices.center.type = type;
@@ -124,7 +170,7 @@ hex = function(name, type){
 }
 
 
-function calculateAdjacentOrigins(){
+function calculateAdjacentOrigins(hexV){
     hexV.rows = Math.ceil(hexV.hexCount / hexV.cols);
     hexV.endHex = hexV.cols;
     //*** This function calculates and stores any center coordinates of any imaginary AND null hexegons that will be used in the grid's selection logic. Imaginary hexegons can be defined as adjacent hexegons to hexegons that exist on the border of the grid. Null hexegons are hexegons with the type of null; hexegons that a user may choose not to display. ***//
@@ -329,9 +375,9 @@ function calculateAdjacentOrigins(){
 }
 
 
-function getselectedHex(){
+function getselectedHex(hexV){
     if(hexV.adjacencyInit === false){
-        calculateAdjacentOrigins();
+        calculateAdjacentOrigins(hexV);
     }
     
 //*** This function starts by calculating the points of origin for adjacent hexagons that have yet to be factored. It then runs through the origin array and applies the distance formula between each set of coordinates and the current mouse position. The shortest length is considered the 'selection', as noted in the logic below ***//
@@ -359,13 +405,15 @@ function getselectedHex(){
 
 
 //drawHexes is the function that uses canvas-based methods to draw the hexagon
-function drawHexes(evtinit){
-    
+function drawHexes(evtinit, hexV){
+    console.log('here');
+    console.log(evtinit);
+    console.log(hexV)
     //*** This function grabs all the data that has been stored in both the grid and origin arrays and draws the hexagon on the canvas element. ***//
     //The evtinit parameter is used to decide whether or not certain elements should be drawn. This is relevant when a user may choose to move their cursor off the canvas element.
     
         if(evtinit === 1){
-            this.selectedHex = getselectedHex();
+            this.selectedHex = getselectedHex(hexV);
         }
 	for (i = 0; i < hexV.grid.length; i++){//loop through each set of side vertices stored in the grid array
             if(hexV.origin[i].type !== null){//check to see if the corresponding hexagon type hasn't been declared a null by the user
@@ -471,7 +519,7 @@ function drawHexes(evtinit){
 
 
 
-function getMousePos(canvas, evt) {
+function getMousePos(canvas, evt, hexV) {
     hexV.rect = hexV.canvas.getBoundingClientRect();
     return {
             x: Math.floor((evt.clientX-hexV.rect.left)/(hexV.rect.right-hexV.rect.left)*hexV.canvas.width),
@@ -479,50 +527,9 @@ function getMousePos(canvas, evt) {
     };
 }
 
-hexV.canvas.addEventListener('mousemove', function(evt){
-    hexV.mousePos = getMousePos(hexV.canvas,evt);
-    hexV.x = 0;
-    hexV.y = 0;
-    hexV.counter = 1;
-    hexV.rowswitch = false;
-    hexV.rowinit = false;
-    hexV.init = false;
-   hexV.context.clearRect(0, 0, hexV.canvas.width, hexV.canvas.height);
-    drawHexes(1);
-}, false);
-
-hexV.canvas.addEventListener('mouseout', function(evt){
-    hexV.mousePos = getMousePos(hexV.canvas,evt);
-    hexV.x = 0;
-    hexV.y = 0;
-    hexV.counter = 1;
-    hexV.rowswitch = false;
-    hexV.rowinit = false;
-    hexV.init = false;
-   hexV.context.clearRect(0, 0, hexV.canvas.width, hexV.canvas.height);
-    drawHexes(0);
-}, false);
-
-hexV.canvas.addEventListener('mousedown', function(evt){
-    for (i = 0; i < hexV.grid.length; i++){
-        this.vertices = hexV.grid[i];//resume
-        this.selectedHex = getselectedHex();
-        if(hexV.origin[i] === this.selectedHex.selected && hexV.origin[i].type !== null){
-            if(hexV.grid['selected'] === this.vertices){
-                //document.getElementById("output").innerHTML = '<br>';
-                hexV.grid['selected'] = null;
-            }else{
-                //document.getElementById("output").innerHTML = hexV.origin[i].name;
-                hexV.grid['selected'] = this.vertices;
-            }
-            drawHexes(1);
-        }
-    }
-}, false);
-
 
 //** Page specific functions **//
-sliderfunction = function(){
+sliderfunction = function(hexV){
     hexContainer = [];
     hexV.s = parseInt(document.getElementById("sizeslider").value);
     hexV.h = (Math.sin((30*(Math.PI/180))) * hexV.s);
@@ -555,19 +562,19 @@ sliderfunction = function(){
     for(c = 0; c < hexV.hexCount2; c++)
     {
         if(hexV.origin2[c].type !== null){
-            hexContainer[c] = new hex("tile"+c);
+            hexContainer[c] = new hex(hexV, "tile"+c);
         }else{
-            hexContainer[c] = new hex("tile"+c, null);
+            hexContainer[c] = new hex(hexV, "tile"+c, null);
         }
         //console.log(hexV.hexCount);
     }
     hexV.origin2 = [];
-    calculateAdjacentOrigins();
+    calculateAdjacentOrigins(hexV);
     hexV.context.clearRect(0, 0, hexV.canvas.width, hexV.canvas.height);
-    drawHexes(0);
+    drawHexes(0,hexV);
 }
 
-traceAdj = function(){
+traceAdj = function(hexV){
     if(hexV.adjLines === false){
         hexV.adjLines = true;
         document.getElementById("traceAdjOrig").value = "Disable Adjacency Trace";
@@ -577,7 +584,7 @@ traceAdj = function(){
     }
 }
 
-traceOrig1 = function(){
+traceOrig1 = function(hexV){
     if(hexV.hexLines === false){
         hexV.hexLines = true;
         document.getElementById("traceOrig").value = 'Disable Origin Trace';
@@ -587,53 +594,53 @@ traceOrig1 = function(){
     }
 }
 
-addHex1 = function(type){
-hexV.origin2 = [];
+addHex1 = function(hexV, type){
+    hexV.origin2 = [];
 
-for(c = 0; c < hexV.hexCount;c++){
-    hexV.origin2[c] = hexV.origin[c];
-}
-
-hexContainer = [];
-hexV.hexCount2 = hexV.hexCount;
-hexV.hexCount = 0;
-hexV.newHex = true;
-hexV.currentRow = 1;
-hexV.adjacencyInit = false;
-
-hexV.x = hexV.actualx;
-hexV.y = hexV.actualy;
-hexV.counter = 1;
-hexV.rowswitch = false;
-hexV.rowinit = false;
-hexV.init = false;
-
-hexV.mousePos;
-hexV.grid = [];
-hexV.origin = [];
-
-for(c = 0; c < hexV.hexCount2;c++){
-    if(hexV.origin2[c].type === null){
-        hexContainer[c] = new hex(c, null);
-    }else{
-        hexContainer[c] = new hex("tile"+c);
+    for(c = 0; c < hexV.hexCount;c++){
+        hexV.origin2[c] = hexV.origin[c];
     }
+
+    hexContainer = [];
+    hexV.hexCount2 = hexV.hexCount;
+    hexV.hexCount = 0;
+    hexV.newHex = true;
+    hexV.currentRow = 1;
+    hexV.adjacencyInit = false;
+
+    hexV.x = hexV.actualx;
+    hexV.y = hexV.actualy;
+    hexV.counter = 1;
+    hexV.rowswitch = false;
+    hexV.rowinit = false;
+    hexV.init = false;
+
+    hexV.mousePos;
+    hexV.grid = [];
+    hexV.origin = [];
+
+    for(c = 0; c < hexV.hexCount2;c++){
+        if(hexV.origin2[c].type === null){
+            hexContainer[c] = new hex(hexV, c, null);
+        }else{
+            hexContainer[c] = new hex(hexV, "tile"+c);
+        }
+    }
+
+    if(type === null){
+        hexContainer[hexV.hexCount+1] = new hex(hexV, "tile"+(hexV.hexCount+1), null);
+    }else{
+        hexContainer[hexV.hexCount+1] = new hex(hexV, "tile"+(hexV.hexCount+1));
+    }
+
+    hexV.origin2 = [];
+
+    calculateAdjacentOrigins(hexV);
+    hexV.context.clearRect(0, 0, hexV.canvas.width, hexV.canvas.height);
+    drawHexes(0, hexV);
 }
 
-if(type === null){
-    hexContainer[hexV.hexCount+1] = new hex("tile"+(hexV.hexCount+1), null);
-}else{
-    hexContainer[hexV.hexCount+1] = new hex("tile"+(hexV.hexCount+1));
-}
-
-hexV.origin2 = [];
-
-calculateAdjacentOrigins();
-hexV.context.clearRect(0, 0, hexV.canvas.width, hexV.canvas.height);
-drawHexes(0);
-}
-
-removeHex1 = function(){
+removeHex1 = function(hexV){
     if(hexV.hexCount > 1){
     hexV.origin2 = [];
 
@@ -661,19 +668,19 @@ removeHex1 = function(){
     
     for(c = 0; c < hexV.hexCount2;c++){
         if(hexV.origin2[c].type === null){
-            hexContainer[c] = new hex(c, null);
+            hexContainer[c] = new hex(hexV, c, null);
         }else{
-            hexContainer[c] = new hex("tile"+c);
+            hexContainer[c] = new hex(hexV, "tile"+c);
         }
     }
     hexV.origin2 = [];
-    calculateAdjacentOrigins();
+    calculateAdjacentOrigins(hexV);
     hexV.context.clearRect(0, 0, hexV.canvas.width, hexV.canvas.height);
-    drawHexes(0);
+    drawHexes(0, hexV);
     }
 }
 
-drawOrigin = function(){
+drawOrigin = function(hexV){
     if(hexV.drawOrigins === false){
         hexV.drawOrigins = true;
         document.getElementById("originDisplay").value = 'Hide Points of Origin';
@@ -682,10 +689,10 @@ drawOrigin = function(){
         document.getElementById("originDisplay").value = 'Show Points of Origin';
     }  
     hexV.context.clearRect(0, 0, hexV.canvas.width, hexV.canvas.height);
-    drawHexes(0);
+    drawHexes(0, hexV);
 }
 
-addColumn1 = function(){
+addColumn1 = function(hexV){
     hexV.hexCount2 = hexV.hexCount;
     hexV.origin2 = [];
     
@@ -713,19 +720,19 @@ addColumn1 = function(){
     for(c = 0; c < hexV.hexCount2; c++)
     {
         if(hexV.origin2[c].type !== null){
-            hexContainer[c] = new hex("tile"+c);
+            hexContainer[c] = new hex(hexV, "tile"+c);
         }else{
-            hexContainer[c] = new hex("tile"+c, null);
+            hexContainer[c] = new hex(hexV, "tile"+c, null);
         }
         //console.log(hexV.hexCount);
     }
     hexV.origin2 = [];
-    calculateAdjacentOrigins();
+    calculateAdjacentOrigins(hexV);
     hexV.context.clearRect(0, 0, hexV.canvas.width, hexV.canvas.height);
-    drawHexes(0);
+    drawHexes(0, hexV);
 }
 
-removeColumn1 = function(){
+removeColumn1 = function(hexV){
     if(hexV.cols > 1){
     hexV.hexCount2 = hexV.hexCount;
     hexV.origin2 = [];
@@ -754,15 +761,15 @@ removeColumn1 = function(){
     for(c = 0; c < hexV.hexCount2; c++)
     {
         if(hexV.origin2[c].type !== null){
-            hexContainer[c] = new hex("tile"+c);
+            hexContainer[c] = new hex(hexV, "tile"+c);
         }else{
-            hexContainer[c] = new hex("tile"+c, null);
+            hexContainer[c] = new hex(hexV, "tile"+c, null);
         }
         //console.log(hexV.hexCount);
     }
     hexV.origin2 = [];
-    calculateAdjacentOrigins();
+    calculateAdjacentOrigins(hexV);
     hexV.context.clearRect(0, 0, hexV.canvas.width, hexV.canvas.height);
-    drawHexes(0);
+    drawHexes(0, hexV);
     }
 } 
