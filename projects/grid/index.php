@@ -59,15 +59,16 @@ include('../../header.php');
                     <figure style='border:solid #5F666D 1px;overflow:auto;clear:both'>
                         <canvas id='myCanvas' width='500' height='275' style='width:100%;float:left;clear:right;'></canvas>
                     </figure>
-                    <form>
+                    <form id='grid-control'>
                         <h4> Grid Controls: </h4>
                         <div style='clear:both;overflow:auto'>
-                            <ul style='width:40%;float:left;'>
+                            <ul style='margin-bottom:0px;'>
                                 <li>
                                     <label for='sizeslider'>Size of Hexagon:</label><br>
-                                    <input type='range' id='sizeslider' min='10' max='50' value='35' oninput='slider_function(hexV)'><br>
+                                    <input type='range' id='sizeslider' min='10' max='50' value='35' oninput='slider_function(hexV)' style='width:95%;'><br>
                                 </li>
-
+                            </ul>
+                            <ul class='horizontal'>
                                 <li>
                                     <label for='addHex'>Add a hexagon to the grid</label><br>
                                     <input type='button' id='addHex' value='Add hex' onclick='add_Hex(hexV)'>
@@ -84,7 +85,7 @@ include('../../header.php');
                                 </li>
                             </ul>
 
-                            <ul style='width:40%;float:right;margin-top:50px;'>
+                            <ul class='horizontal'>
                                 <li>
                                     <label for='addColumn'>Increase amount of columns</label><br>
                                     <input type='button' id='addColumn' value='Add Column' onclick='add_Column(hexV)'>
@@ -108,7 +109,7 @@ include('../../header.php');
                                 </li>
 
                                 <li>
-                                    <label for='traceAdjOrig'>Toggle trace lines from any non-visible hexagons point of origin to the mouse cursor</label>
+                                    <label for='traceAdjOrig'>Toggle trace lines from any non-visible hexagons point of origin to the mouse cursor</label><br>
                                     <input type='button' id='traceAdjOrig' value='Trace Adjacency lines' onclick='trace_Adj(hexV)'>
                                 </li>
                             </ul>

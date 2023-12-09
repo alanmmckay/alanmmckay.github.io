@@ -179,6 +179,28 @@
     object-fit:cover;
 }
 
+#grid-control h4{
+    margin-bottom:0px;
+}
+
+#grid-control ul{
+    text-align: left;
+    margin-top:10px;
+}
+
+#grid-control ul li{
+    margin:1%;
+}
+
+#grid-control ul li input{
+    margin:1%;
+}
+
+#grid-control ul.horizontal{
+    width:42%;
+    float:left;
+}
+
 @media screen and (min-width: 1100px){
     #writingsWrapper{
         width:50%;
@@ -226,6 +248,36 @@
     }
     #writingsWrapper article li{
         margin-bottom:10px;
+    }
+    #grid-control ul.horizontal{
+        width:45%;
+    }
+    #grid-control ul li{
+        font-size:14px;
+    }
+    #grid-control ul li input{
+        font-size:12px;
+    }
+}
+
+@media screen and (max-width:600px){
+    #grid-control ul.horizontal{
+        margin-top:10px;
+        margin-bottom:5px;
+        display:inline-block;
+        width:90%;
+    }
+    #grid-control ul.horizontal li{
+        display:inline-block;
+    }
+    #grid-control ul.horizontal li label{
+        display:none;
+    }
+    #grid-control ul.horizontal li input{
+
+    }
+    #grid-control ul li br{
+        display:none;
     }
 }
 
