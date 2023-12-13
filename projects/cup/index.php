@@ -38,6 +38,12 @@ include('../../header.php');
                     <p>
                         In terms of layout, there were two different types of pages that the Cup of Joe website contained. The main page had a unique layout in the sense that the majority of the display emphasized on a slideshow of images from the shop. The other pages consisted of textual content with an image banner and occasionally information placed as an aside. The responsive redesign would determine both the sizes of these pieces of each page, but also where and if they would be drawn.
                     </p>
+                    <figure>
+
+                        <figcaption>
+
+                        </figcaption>
+                    </figure>
                     <p>
                         Once implementing the redesign for the main page and the story page, I showed them to Dawn, the proprietor of Cup of Joe. She was impressed! More importantly, I had good timing. This was due to the fact that her website was built upon a framework that was about to have its support revoked; if I recall correctly, it involved Microsoft's Silverlight. The host of her website did not have the time to redesign and re-implement the website using some other framework.
                     </p>
@@ -54,7 +60,7 @@ include('../../header.php');
                         It's worth reflecting on the work done here. While looking through the archive of this website, I'm drawn to the difference between what was then called the music page and what is currently called the event page. This was a place where I decided to introduce new styling in an attempt to make the website more coherent in style. The new styling bore similarity to how the aside blurbs were displayed within the various pages, providing a more cohesive experience with respect to the aesthetic.
                     </p>
                     <p>
-                        The result of my efforts can be viewed on Dawn's domain: cupofjoe-cedarfalls.com. It seems that events are no longer being hosted at the location, thus the events page has been removed altogether. My personal domain is hosting a live demo of the website as well. It can be viewed here. A demo control page can also be viewed here.
+                        The result of my efforts can be viewed on Dawn's domain: <a href='https://www.cupofjoe-cedarfalls.com/'>www.cupofjoe-cedarfalls.com</a>. It seems that events are no longer being hosted at the location, thus the events page has been removed altogether. My personal domain is hosting a live demo of the website as well. It can be viewed <a href='demo/index.php'>here</a>. A demo control page can also be viewed <a href='demo.php'>here</a>.
                     </p>
                     <!-- https://web.archive.org/web/20181119220446/http://www.cupofjoe-cedarfalls.com/music -->
                 </article>
