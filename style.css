@@ -235,6 +235,15 @@ figure.slide-deck figcaption ul li a{
     cursor:pointer;
 }
 
+figure.slide-deck figcaption ul li a:hover{
+    color:black;
+}
+
+
+figure.slide-deck figcaption ul li:hover{
+    color:black;
+}
+
 @media screen and (min-width: 1100px){
     #writingsWrapper{
         width:50%;
@@ -313,6 +322,16 @@ figure.slide-deck figcaption ul li a{
     #grid-control ul li br{
         display:none;
     }
+
+    figure.slide-deck figcaption ul li{
+        font-size:16px;
+    }
+
+    figure.slide-deck figcaption ul li a{
+        padding:10px;
+        font-size:18px;
+    }
+
 }
 
 @media screen and (max-width:300px){

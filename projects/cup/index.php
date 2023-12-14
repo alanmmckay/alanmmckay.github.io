@@ -237,6 +237,7 @@ include('../../header.php');
             window.onresize = function(){
                 currentSlide(slideIndex);
             }
+
         </script>
     </body>
 </html>
