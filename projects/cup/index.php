@@ -180,6 +180,7 @@ include('../../header.php');
                 let i;
                 let slides = document.getElementsByClassName("slide");
                 let max = 0;
+                let caption_max = 0;
                 let figure;
                 let image;
                 let height;
@@ -199,6 +200,12 @@ include('../../header.php');
                         if(height > max){
                             max = height;
                         }
+                        caption = figure.getElementsByTagName('figcaption')[0];
+                        caption.style['padding-bottom'] = '0px';
+                        height = caption.getBoundingClientRect()['height'];
+                        if(height > caption_max){
+                            caption_max = height;
+                        }
                     }
 
                     // Setting pad based on maximum height:
@@ -208,6 +215,10 @@ include('../../header.php');
                         height = image.getBoundingClientRect()['height'];
                         pad = max - height;
                         image.style["padding-bottom"] = pad + 'px';
+                        caption = figure.getElementsByTagName('figcaption')[0];
+                        height = caption.getBoundingClientRect()['height'];
+                        pad = caption_max - height;
+                        caption.style['padding-bottom'] = pad + 'px';
                     }
 
                     //Disabling flag to discover pad size

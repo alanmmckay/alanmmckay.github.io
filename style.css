@@ -224,6 +224,8 @@ figure.slide-deck ul li{
 
 figure.slide-deck ul li figure img{
     border: solid #E9ECEF 3px;
+    /*padding-left:5px;
+    padding-right:5px;*/
 }
 
 figure.slide-deck figcaption ul li a{
