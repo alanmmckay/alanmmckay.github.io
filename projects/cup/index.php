@@ -29,8 +29,8 @@ include('../../header.php');
                     <p>
                         A local coffee shop, Cup of Joe, was a frequent spot of study; this fact helped contribute to my successful grades. So what better way to give back by doing a redesign of the current website making it mobile friendly?
                     </p>
-                    <div style='clear:both;'>
-                    <figure style='float:right;width:25%;margin-left:5%;margin-right:1%;margin-top:1%;margin-bottom:2%'>
+                    <div class='aside'>
+                    <figure>
                         <img src='../../images/cup_story_mobile.png' alt='' />
                         <figcaption>
                             Mobile variant of the Story page.
@@ -43,13 +43,20 @@ include('../../header.php');
                     <p>
                         The foundation of this implementation was built upon a mobile-first design. Here, media queries would kick a certain layout into view dependent on window size where the initial template being considered was designed for mobile devices. This involved careful consideration to maintaining the website's aesthetic, which does a good job adhering to the aesthetic of the shop proper. One key facet in accomplishing this was the decision to maintain the site's identity with the navigation bar. Instead of leveraging a hamburger button to splay navigational options, the navigation bar is fixed to the left where the size of its selections maintain a good compromise between easy interaction while not obscuring too much of the view, (regardless of view-screen size). This further differs from prior implementation as the navigation bar now stays in view as a user scrolls through a given page.
                     </p>
+                    <figure class='responsive_aside'>
+                        <img src='../../images/cup_story_mobile.png' alt='' />
+                        <figcaption>
+                            Mobile variant of the Story page.
+                        </figcaption>
+                    <hr>
+                    </figure>
                     <p>
                         In terms of layout, there were two different types of pages that the Cup of Joe website contained. The main page had a unique layout in the sense that the majority of the display emphasized on a slideshow of images from the shop. The other pages consisted of textual content with an image banner and occasionally information placed as an aside. The responsive redesign would determine both the sizes of these pieces of each page, but also where and if they would be drawn.
                     </p>
                     </div>
                     <hr>
-                    <figure>
-                        <ul class='image-collage'>
+                    <figure class='image-collage'>
+                        <ul>
 
                             <li style='width:60%;'>
                                 <img src='../../images/cup_story_desktop.png' alt='' />
@@ -189,7 +196,6 @@ include('../../header.php');
                 if (n < 1) {slideIndex = slides.length}
 
                 if (init == true){
-
                     // Finding maximum height for images:
                     for (i = 0; i < slides.length; i++){
                         slides[i].style.display = "block";
