@@ -201,6 +201,38 @@
     float:left;
 }
 
+ul.image-collage{
+
+}
+
+ul.image-collage li{
+    display:inline-block;
+}
+
+figure.slide-deck figcaption ul{
+    margin:auto;
+    text-align:center;
+}
+
+figure.slide-deck figcaption ul li{
+    display:inline-block;
+}
+
+figure.slide-deck ul li{
+    list-style-type:none;
+}
+
+figure.slide-deck ul li figure img{
+    border: solid #E9ECEF 3px;
+}
+
+figure.slide-deck figcaption ul li a{
+    font-size:24px;
+    padding-left:30px;
+    padding-right:30px;
+    cursor:pointer;
+}
+
 @media screen and (min-width: 1100px){
     #writingsWrapper{
         width:50%;
