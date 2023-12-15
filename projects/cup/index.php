@@ -91,73 +91,75 @@ include('../../header.php');
                     <p>
                         Implementation of the content management system would be through a PHP back-end interacting with a MySQL database. Here, user accounts could be created, events could be posted and edited, and a new set of control was provided as shop integration where Dawn could post products being sold via an online retail service. All this control was provided through a set of control pages that she could access using any browser. These control pages would leverage a simple bootstrap theme to allow mobile access for her and her employees; I was not shy to use the hamburger button in the context of using these control pages.
                     </p>
+                    <div class='slide-deck'>
                     <hr>
-                    <figure class='slide-deck'>
-                        <ul>
-
-                            <li class='control_slide'>
-                                <figure>
-                                    <img src='../../images/cup_control_01.png' />
-                                    <figcaption>
-                                        Slide 1/5: Selecting a menu item.
-                                    </figcaption>
-                                </figure>
-                            </li>
-
-                            <li class='control_slide'>
-                                <figure>
-                                    <img src='../../images/cup_control_02.png' />
-                                    <figcaption>
-                                        Slide 2/5: Filling out an event creation form.
-                                    </figcaption>
-                                </figure>
-                            </li>
-
-                            <li class='control_slide'>
-                                <figure>
-                                    <img src='../../images/cup_control_03.png' />
-                                    <figcaption>
-                                        Slide 3/5: Receiving feedback for event created. Selecting an event to edit.
-                                    </figcaption>
-                                </figure>
-                            </li>
-
-                            <li class='control_slide'>
-                                <figure>
-                                    <img src='../../images/cup_control_04.png' />
-                                    <figcaption>
-                                        Slide 4/5: Viewing event edit form; Selecting a new Date of event.
-                                    </figcaption>
-                                </figure>
-                            </li>
-
-                            <li class='control_slide'>
-                                <figure>
-                                    <img src='../../images/cup_control_05.png' />
-                                    <figcaption>
-                                        Slide 5/5: Receiving feedback for event edited.
-                                    </figcaption>
-                                </figure>
-                            </li>
-
-                        </ul>
-
-                        <figcaption>
+                        <figure>
                             <ul>
-                                <li>
-                                    <a class='prev' onclick="plusSlides(-1)"> ❮ </a>
-                                </li>
-                                <li>
-                                    Slideshow Control
+
+                                <li class='control_slide'>
+                                    <figure>
+                                        <img src='../../images/cup_control_01.png' />
+                                        <figcaption>
+                                            Slide 1/5: Selecting a menu item.
+                                        </figcaption>
+                                    </figure>
                                 </li>
 
-                                <li>
-                                    <a class='next' onclick='plusSlides(1)'> ❯ </a>
+                                <li class='control_slide'>
+                                    <figure>
+                                        <img src='../../images/cup_control_02.png' />
+                                        <figcaption>
+                                            Slide 2/5: Filling out an event creation form.
+                                        </figcaption>
+                                    </figure>
                                 </li>
+
+                                <li class='control_slide'>
+                                    <figure>
+                                        <img src='../../images/cup_control_03.png' />
+                                        <figcaption>
+                                            Slide 3/5: Receiving feedback for event created. Selecting an event to edit.
+                                        </figcaption>
+                                    </figure>
+                                </li>
+
+                                <li class='control_slide'>
+                                    <figure>
+                                        <img src='../../images/cup_control_04.png' />
+                                        <figcaption>
+                                            Slide 4/5: Viewing event edit form; Selecting a new Date of event.
+                                        </figcaption>
+                                    </figure>
+                                </li>
+
+                                <li class='control_slide'>
+                                    <figure>
+                                        <img src='../../images/cup_control_05.png' />
+                                        <figcaption>
+                                            Slide 5/5: Receiving feedback for event edited.
+                                        </figcaption>
+                                    </figure>
+                                </li>
+
                             </ul>
-                        </figcaption>
-                    </figure>
-                    <hr>
+
+                            <figcaption>
+                                <ul>
+                                    <li>
+                                        <a class='prev' onclick="plusSlides(-1)"> ❮ </a>
+                                    </li>
+                                    <li>
+                                        Slideshow Control
+                                    </li>
+
+                                    <li>
+                                        <a class='next' onclick='plusSlides(1)'> ❯ </a>
+                                    </li>
+                                </ul>
+                            </figcaption>
+                        </figure>
+                        <hr>
+                    </div>
                     <p>
                         The public-facing pages of the Cup of Joe website were then templated using PHP and thus integrated access to the database to allow the display of events and shop links. The mobile redesign was made easier through the modularity provided through this template.
                     </p>

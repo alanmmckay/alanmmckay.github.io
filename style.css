@@ -247,38 +247,38 @@ figure.image-collage ul li{
     display:none;
 }
 
-figure.slide-deck figcaption ul{
+div.slide-deck figure figcaption ul{
     margin:auto;
     text-align:center;
 }
 
-figure.slide-deck figcaption ul li{
+div.slide-deck figure figcaption ul li{
     display:inline-block;
 }
 
-figure.slide-deck ul li{
+div.slide-deck figure ul li{
     list-style-type:none;
 }
 
-figure.slide-deck ul li figure img{
+div.slide-deck figure ul li figure img{
     border: solid #E9ECEF 3px;
     /*padding-left:5px;
     padding-right:5px;*/
 }
 
-figure.slide-deck figcaption ul li a{
+div.slide-deck figure figcaption ul li a{
     font-size:24px;
     padding-left:30px;
     padding-right:30px;
     cursor:pointer;
 }
 
-figure.slide-deck figcaption ul li a:hover{
+div.slide-deck figure figcaption ul li a:hover{
     color:black;
 }
 
 
-figure.slide-deck figcaption ul li:hover{
+div.slide-deck figure figcaption ul li:hover{
     color:black;
 }
 
@@ -389,11 +389,15 @@ figure.slide-deck figcaption ul li:hover{
         display:none
     }
 
-    figure.slide-deck figcaption ul li{
+    #writingsWrapper div.slide-deck figure ul{
+        padding-left:0%;
+    }
+
+    div.slide-deck figure figcaption ul li{
         font-size:16px;
     }
 
-    figure.slide-deck figcaption ul li a{
+    div.slide-deck figure figcaption ul li a{
         padding:10px;
         font-size:18px;
     }
@@ -419,6 +423,12 @@ figure.slide-deck figcaption ul li:hover{
         margin-left:5%;
     }
 
+}
+
+@media screen and (max-width:400px){
+    div.slide-deck{
+        display:none;
+    }
 }
 
 @media screen and (max-width:300px){
