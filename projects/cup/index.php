@@ -154,6 +154,7 @@ include('../../header.php');
                                 <li>
                                     <a class='next' onclick='plusSlides(1)'> ❯ </a>
                                 </li>
+                            </ul>
                         </figcaption>
                     </figure>
                     <hr>
