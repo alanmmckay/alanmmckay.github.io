@@ -231,6 +231,22 @@ figure.image-collage ul li{
     display:inline-block;
 }
 
+#writingsWrapper figure.image-collage ul li{
+    width:49%;
+}
+
+#writingsWrapper figure.image-collage ul li#sixty{
+    width: 60%;
+}
+
+#writingsWrapper figure.image-collage ul li#thirty{
+    width: 35%;
+}
+
+#writingsWrapper figure.image-collage ul li figure figcaption{
+    display:none;
+}
+
 figure.slide-deck figcaption ul{
     margin:auto;
     text-align:center;
@@ -287,6 +303,7 @@ figure.slide-deck figcaption ul li:hover{
     #writingsWrapper article img#black-hills-path{
         height:200px;
     }
+
     #writingsWrapper .info{
         width:100%;
     }
@@ -302,6 +319,7 @@ figure.slide-deck figcaption ul li:hover{
     #writingsWrapper article img.animate{
         height:250px;
     }
+
     #writingsWrapper article img#black-hills-path{
         height:250px;
     }
@@ -311,18 +329,31 @@ figure.slide-deck figcaption ul li:hover{
     #writingsWrapper article ul{
         padding-left:5%;
     }
+
     #writingsWrapper article li{
         margin-bottom:10px;
     }
+
+    #writingsWrapper div.aside figure{
+        width:35%;
+    }
+
+    #writingsWrapper figure.image-collage ul li figure{
+        width:100%;
+    }
+
     #grid-control ul.horizontal{
         width:45%;
     }
+
     #grid-control ul li{
         font-size:14px;
     }
+
     #grid-control ul li input{
         font-size:12px;
     }
+
 }
 
 @media screen and (max-width:600px){
@@ -332,21 +363,26 @@ figure.slide-deck figcaption ul li:hover{
         display:inline-block;
         width:90%;
     }
+
     #grid-control ul.horizontal li{
         display:inline-block;
     }
+
     #grid-control ul.horizontal li label{
         display:none;
     }
+
     #grid-control ul.horizontal li input{
 
     }
+
     #grid-control ul li br{
         display:none;
     }
 
     #writingsWrapper div.aside figure.responsive_aside{
         display:block;
+        width:60%;
     }
 
     #writingsWrapper div.aside figure{
@@ -362,11 +398,36 @@ figure.slide-deck figcaption ul li:hover{
         font-size:18px;
     }
 
+    #writingsWrapper figure.image-collage ul li{
+        width:100%;
+    }
+
+    #writingsWrapper figure.image-collage ul li figure figcaption{
+        display:block;
+    }
+
+    #writingsWrapper figure.image-collage figcaption{
+        display:none;
+    }
+
+    #writingsWrapper figure.image-collage ul li#sixty{
+        width: 100%;
+    }
+
+    #writingsWrapper figure.image-collage ul li#thirty{
+        width: 85%;
+        margin-left:5%;
+    }
+
 }
 
 @media screen and (max-width:300px){
     #writingsWrapper article ul li{
         /*list-style-type:none;*/
         margin-left:20px;
+    }
+
+    #writingsWrapper div.aside figure.responsive_aside{
+        width:80%;
     }
 }

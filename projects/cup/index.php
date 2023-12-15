@@ -58,12 +58,22 @@ include('../../header.php');
                     <figure class='image-collage'>
                         <ul>
 
-                            <li style='width:60%;'>
-                                <img src='../../images/cup_story_desktop.png' alt='' />
+                            <li id='sixty'>
+                                <figure>
+                                    <img src='../../images/cup_story_desktop.png' alt='' />
+                                    <figcaption>
+                                        The desktop variant of the Cup of Joe website. Not much was changed here; Things look mostly the same.
+                                    </figcaption>
+                                </figure>
                             </li>
 
-                            <li style='width:35%'>
-                                <img src='../../images/cup_story_tablet.png' alt='' />
+                            <li id='thirty'>
+                                <figure>
+                                    <img src='../../images/cup_story_tablet.png' alt='' />
+                                    <figcaption>
+                                        The tablet layout of the Cup of Joe website. Note the repositioning and resizing of elements which lend well to the browsing context.
+                                    </figcaption>
+                                </figure>
                             </li>
 
                         </ul>
@@ -85,7 +95,7 @@ include('../../header.php');
                     <figure class='slide-deck'>
                         <ul>
 
-                            <li class='slide'>
+                            <li class='control_slide'>
                                 <figure>
                                     <img src='../../images/cup_control_01.png' />
                                     <figcaption>
@@ -94,7 +104,7 @@ include('../../header.php');
                                 </figure>
                             </li>
 
-                            <li class='slide'>
+                            <li class='control_slide'>
                                 <figure>
                                     <img src='../../images/cup_control_02.png' />
                                     <figcaption>
@@ -103,7 +113,7 @@ include('../../header.php');
                                 </figure>
                             </li>
 
-                            <li class='slide'>
+                            <li class='control_slide'>
                                 <figure>
                                     <img src='../../images/cup_control_03.png' />
                                     <figcaption>
@@ -112,7 +122,7 @@ include('../../header.php');
                                 </figure>
                             </li>
 
-                            <li class='slide'>
+                            <li class='control_slide'>
                                 <figure>
                                     <img src='../../images/cup_control_04.png' />
                                     <figcaption>
@@ -121,7 +131,7 @@ include('../../header.php');
                                 </figure>
                             </li>
 
-                            <li class='slide'>
+                            <li class='control_slide'>
                                 <figure>
                                     <img src='../../images/cup_control_05.png' />
                                     <figcaption>
@@ -138,7 +148,7 @@ include('../../header.php');
                                     <a class='prev' onclick="plusSlides(-1)"> ❮ </a>
                                 </li>
                                 <li>
-                                    Slides: Typical use-case of controls.
+                                    Slideshow Control
                                 </li>
 
                                 <li>
@@ -154,15 +164,35 @@ include('../../header.php');
                         It's worth reflecting on the work done here. While looking through the archive of this website, I'm drawn to the difference between what was then called the music page and what is currently called the event page. This was a place where I decided to introduce new styling in an attempt to make the website more coherent in style. The new styling bore similarity to how the aside blurbs were displayed within the various pages, providing a more cohesive experience with respect to the aesthetic.
                     </p>
                     <hr>
-                    <figure>
+                    <figure class='image-collage'>
+                        <ul>
 
+                            <li>
+                                <figure>
+                                    <img src='../../images/cup_events_red.png' alt='' />
+                                    <figcaption>
+                                        The events page as it currently exists.
+                                    </figcaption>
+                                </figure>
+                            </li>
+
+                            <li>
+                                <figure>
+                                    <img src='../../images/cup_music.png' alt='' />
+                                    <figcaption>
+                                        The variant of the events page as it existed prior to the overhaul.
+                                    </figcaption>
+                                </figure>
+                            </li>
+
+                        </ul>
                         <figcaption>
-
+                            Comparison between the new layout of the events page (left) and the old layout from what was called the music page (right).
                         </figcaption>
                     </figure>
                     <hr>
                     <p>
-                        The result of my efforts can be viewed on Dawn's domain: <a href='https://www.cupofjoe-cedarfalls.com/'>www.cupofjoe-cedarfalls.com</a>. It seems that events are no longer being hosted at the location, thus the events page has been removed altogether. My personal domain is hosting a live demo of the website as well. It can be viewed <a href='demo/index.php'>here</a>. A demo control page can also be viewed <a href='demo.php'>here</a>.
+                        The result of my efforts can be viewed on Dawn's domain: <a href='https://www.cupofjoe-cedarfalls.com/'>www.cupofjoe-cedarfalls.com</a>. It seems that events are no longer being hosted at the location, thus the events page has been removed altogether. My personal domain is hosting a live demo of the website as well. It can be viewed <a href='demo/index.php'>here</a>. <!--A demo control page can also be viewed <a href='demo.php'>here</a>.-->
                     </p>
                     <!-- https://web.archive.org/web/20181119220446/http://www.cupofjoe-cedarfalls.com/music -->
                 </article>
@@ -172,9 +202,8 @@ include('../../header.php');
             </section>
         </section>
         <script>
-            let slideIndex = 1;
-            showSlides(slideIndex,true);
 
+            let slideIndex = 1;
             function plusSlides(n){
                 showSlides(slideIndex += n,false);
             }
@@ -185,7 +214,7 @@ include('../../header.php');
 
             function showSlides(n,init){
                 let i;
-                let slides = document.getElementsByClassName("slide");
+                let slides = document.getElementsByClassName("control_slide");
                 let max = 0;
                 let caption_max = 0;
                 let figure;
@@ -196,6 +225,7 @@ include('../../header.php');
                 if (n < 1) {slideIndex = slides.length}
 
                 if (init == true){
+
                     // Finding maximum height for images:
                     for (i = 0; i < slides.length; i++){
                         slides[i].style.display = "block";
@@ -213,7 +243,6 @@ include('../../header.php');
                             caption_max = height;
                         }
                     }
-
                     // Setting pad based on maximum height:
                     for (i = 0; i < slides.length; i++){
                         figure = slides[i].getElementsByTagName('figure')[0];
@@ -240,6 +269,9 @@ include('../../header.php');
                 slides[slideIndex-1].style.display = "block";
             }
 
+            window.onload = function(){
+                showSlides(slideIndex,true);
+            }
             window.onresize = function(){
                 currentSlide(slideIndex);
             }
