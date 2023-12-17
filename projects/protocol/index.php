@@ -25,7 +25,10 @@ include('../../header.php');
                             <h2>Preface</h2>
                         </header>
                         <p>
-
+                            The following is a summary of research conducted to help earn my Bachelor's of Science in Computer Science. The research was an exploration of a model of computation called the Population Protoocol. Those who have studied Theory of Computer Science should find it intuitive.
+                        </p>
+                        <p>
+                            A presentation was given discussing the particulars of this research and can be viewed via <a href='https://youtu.be/Gcv3333bIZE'>YouTube</a>. General administrative information pertaining to the research and the presentation can be viewed via the University of Northern Iowa's <a href='https://scholarworks.uni.edu/surp/2020/all/10/'>SURP 2020 Symposium</a> website. Finally, a repository of the work done can be viewed via my personal <a href='https://github.com/alanmmckay/population_protocol_simulator'>GitHub</a> page.
                         </p>
                     <hr>
                     </section>
@@ -42,7 +45,7 @@ include('../../header.php');
                     </p>
 
                     <p>
-                        A new model has recently emerged: The Population Protocol. This new model was conceived by Angluin et al. [1][2] in the mid 2000’s, the primary motivator being distributed computing. Theory has since been established, proving that the set of problems the model can solve is a subset of the previously discussed models. This subset is still powerful. Research has been done since exploring possible ways of expanding the model to afford more computational power and to find ways to make the model more reliable.
+                        A new model has recently emerged: The Population Protocol. This new model was conceived by Angluin et al. <a href='#references1'>[1]</a><a href='#references2'>[2]</a> in the mid 2000’s, the primary motivator being distributed computing. Theory has since been established, proving that the set of problems the model can solve is a subset of the previously discussed models. This subset is still powerful. Research has been done since exploring possible ways of expanding the model to afford more computational power and to find ways to make the model more reliable.
                     </p>
 
                     <h2>The Model</h2>
@@ -130,7 +133,7 @@ Q = {L -/-, H -/-, 0 n/m, 1 x/y} where n,m,x, y are Integers
 </pre>
                             </code>
                             <p>
-                                This Algorithm can be used in conjunction with leader election and epidemics[3][4] to ensure data is ready to be collected.  Once it is, the collector simply has to check the given ratio.
+                                This Algorithm can be used in conjunction with leader election and epidemics<a href='#references3'>[3]</a><a href='#references4'>[4]</a> to ensure data is ready to be collected.  Once it is, the collector simply has to check the given ratio.
                             </p>
                         <!--/div-->
                         <hr>
@@ -159,14 +162,14 @@ Q = {L -/-, H -/-, 0 n/m, 1 x/y} where n,m,x, y are Integers
                     </p>
                     </div>
                     <h2>References</h2>
-                    <ul>
-                        <li>[1] Angluin, Dana ; Aspnes, James ; Diamadi, Zoë ; Fischer, Michael ; Peralta, René. Computation in networks of passively mobile finite-state sensors. Distributed Computing, 2006, Vol.18(4), pp.235-253</li>
+                    <ul style='list-style-type:none;'>
+                        <li id='references1'>[1] Angluin, Dana ; Aspnes, James ; Diamadi, Zoë ; Fischer, Michael ; Peralta, René. Computation in networks of passively mobile finite-state sensors. Distributed Computing, 2006, Vol.18(4), pp.235-253</li>
 
-                        <li>[2]  Aspnes, James &amp; Ruppert, Eric. 2009. An Introduction to Population Protocols. Bulletin of The European Association for Theoretical Computer Science - EATCS. 93</li>
+                        <li id='references2'>[2]  Aspnes, James &amp; Ruppert, Eric. 2009. An Introduction to Population Protocols. Bulletin of The European Association for Theoretical Computer Science - EATCS. 93</li>
 
-                        <li>[3]  Angluin, Dana ; Aspnes, James ; Eisenstat, David. Fast computation by population protocols with a leader. Distributed Computing, 2008, Vol.21(3), pp.183-199</li>
+                        <li id='references3'>[3]  Angluin, Dana ; Aspnes, James ; Eisenstat, David. Fast computation by population protocols with a leader. Distributed Computing, 2008, Vol.21(3), pp.183-199</li>
 
-                        <li>[4] Alistarh, Dan &amp; Gelashvili, Rati. (2018). Recent Algorithmic Advances in Population Protocols. ACM SIGACT News. 49. 63-73.</li>
+                        <li id='references4'>[4] Alistarh, Dan &amp; Gelashvili, Rati. (2018). Recent Algorithmic Advances in Population Protocols. ACM SIGACT News. 49. 63-73.</li>
                     </ul>
                 </article>
                 <nav>
