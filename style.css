@@ -181,6 +181,7 @@
 
 #writingsWrapper div.aside{
     clear:both;
+    overflow:auto;
 }
 
 #writingsWrapper div.aside figure{
@@ -387,6 +388,13 @@ div.slide-deck figure figcaption ul li:hover{
 
     #writingsWrapper div.aside figure{
         display:none
+    }
+
+    #writingsWrapper div.aside figure.narrow{
+        display:block;
+        width:95%;
+        border-bottom:solid #9A9A9A 1px;
+        border-top: solid #9A9A9A 1px;
     }
 
     #writingsWrapper div.slide-deck figure ul{
