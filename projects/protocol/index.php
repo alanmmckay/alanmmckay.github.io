@@ -67,19 +67,21 @@ include('../../header.php');
                     </p>
                     <p>
                         Consider the following protocol:
-                        <ul>
-                            <li>Q = {L,H}</li>
-                            <li>Σ = {L,H}</li>
-                            <li>ι(x) = x</li>
-                            <li>ω(x) = x</li>
-                            <li>δ = { <ul>
-                                <li>(L,L) -> (L,L), </li>
-                                <li>(L,H) -> (H,H), </li>
-                                <li>(H,L) -> (H,H), </li>
-                                <li>(H, H) -> (H,H) </li> </ul>
-                                    } </li>
-                        </ul>
                     </p>
+                        <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:35em;padding-left:10px'>
+Q = {L,H}
+Σ = {L,H}
+ι(x) = x
+ω(x) = x
+δ = {
+    (L,L) -> (L,L),
+    (L,H) -> (H,H),
+    (H,L) -> (H,H),
+    (H, H) -> (H,H)
+    }
+</pre>
+                        </code>
                     <p>
                         The above protocol is equivalent to running an AND boolean operation on a population where L=1 and H=0.
                     </p>
@@ -90,7 +92,7 @@ include('../../header.php');
                         <img src="../../images/pp_A.png" style="max-width:400px;"/>
                         <figcaption style='max-width:450px;margin:auto;margin-top:1%;'>
                             Figure A.
-                        </figure>
+                        </figcaption>
                     </figure>
                     <p>
                         Note the above set of interactions is a subset of a set of potential interactions. Within this superset exists an infinite amount of sets which may contain an infinite amount of interactions. The fifth step highlights this reason by showing two agents have interacted with each other redundantly. That is, the interaction has no bearing on progressing the state of the population to convergence. It is by the convergence of a solution enforced by a loose fairness condition that these algorithms are evaluated and developed.
@@ -104,42 +106,45 @@ include('../../header.php');
                         <p>
                             What if a population wants to report if a certain percentage meets a threshold? One approach is to allow each agent access to 3 finite state machines. One to track a numerator, another to track a denominator, and the third as a boolean value to determine if an agent has already been evaluated for computation.
                         </p>
-                        <div class='aside'>
+                        <!--div class='aside'>
                             <figure class='narrow'>
                                 <img src='../../images/pp_B.png' style='width:95%;max-width:150px'/>
                                 <figcaption>
                                     Figure B.
-                                </figure>
-                            </figure>
-                            <ul>
-                                <li>Q = {L -/-, H -/-, 0 n/m, 1 x/y}  where n,m,x, y are Integers. </li>
-                                <li>Σ = {L, H}</li>
-                                <li>ι(x) = x</li>
-                                <li>ω(0 n/m) = ω(1 n/m) = n/m</li>
-                                <li>δ = { <ul>
-                                    <li>(H -/-,H -/-) -> (2/2, 2/2),</li>
-                                    <li>(L -/-, H -/-) -> (1/2, 1/2),</li>
-                                    <li>(H -/-, L -/-) -> (1/2, 1/2),</li>
-                                    <li>(L -/-, L -/-) -> (0/2, 0/2),</li>
-                                    <li>(0 n/m, 0 x/y) -> (0 (n+x)/(m+y),  (1 (n+x)/(m+y)),</li>
-                                    <li>(0 n/m, 1 x/y) -> (0 n/m, 1 n/m)</li> </ul>
-                                            } </li>
-                            </ul>
+                                </figcaption>
+                            </figure-->
+                            <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:40em;padding-left:10px'>
+Q = {L -/-, H -/-, 0 n/m, 1 x/y} where n,m,x, y are Integers
+Σ = {L, H}
+ι(x) = x
+ω(0 n/m) = ω(1 n/m) = n/m
+δ = {
+    (H -/-,H -/-) -> (2/2, 2/2),
+    (L -/-, H -/-) -> (1/2, 1/2),
+    (H -/-, L -/-) -> (1/2, 1/2),
+    (L -/-, L -/-) -> (0/2, 0/2),
+    (0 n/m, 0 x/y) -> (0 (n+x)/(m+y), (1 (n+x)/(m+y)),
+    (0 n/m, 1 x/y) -> (0 n/m, 1 n/m)
+    }
+</pre>
+                            </code>
                             <p>
                                 This Algorithm can be used in conjunction with leader election and epidemics[3][4] to ensure data is ready to be collected.  Once it is, the collector simply has to check the given ratio.
                             </p>
-                        </div>
+                        <!--/div-->
                         <hr>
                     </section>
                     <p>
-                        To help better understand the concept as a whole, we have built a simulator which keeps track of the iterations of a protocol’s execution while monitoring relevant data such as redundant interactions that may contribute to developing more complex algorithms for this model. Figures B and C represent a heatmap of redundant interactions between agents of populations of 5 agents and 15 agents, respectively. Figures A, B, and C are all graphs output by the simulator we have constructed.
+                        To help better understand the concept as a whole, we have built a simulator which keeps track of the iterations of a protocol’s execution while monitoring relevant data such as redundant interactions that may contribute to developing more complex algorithms for this model. Figures B and C represent a heatmap of redundant interactions between agents of populations of 5 agents and 15 agents, respectively. Figures A, and B both include graphs output by the simulator we have constructed.
                     </p>
+                    <hr>
                     <h2> Future and Application </h2>
                     <div class='aside'>
                     <figure class='narrow'>
                         <img src="../../images/pp_C.png" style='max-width:200px;'/>
                         <figcaption>
-                            Figure C.
+                            Figure B.
                         </figcaption>
                     </figure>
                     <p>
@@ -147,7 +152,7 @@ include('../../header.php');
                     </p>
 
                     <p>
-                        This specific heat map (Figure C) shows the set of agents and each potential path of interaction.  Higher intensity of color between a pair of agents indicates a greater amount of redundant interactions between the two. This emphasizes the fact that an agent’s failure may cause problems in terms of the execution of the protocol as it’s information may be critical for convergence.
+                        This specific heat map (Figure B) shows the set of agents and each potential path of interaction.  Higher intensity of color between a pair of agents indicates a greater amount of redundant interactions between the two. This emphasizes the fact that an agent’s failure may cause problems in terms of the execution of the protocol as it’s information may be critical for convergence.
                     </p>
                     <p>
                         Exploration of this computational model will allow us to make the most of the primitive computational power afforded by simple hardware. This can be extended to automated drone communication. Beyond development of the simulator, we would like to develop and test practical application with the usage of drones and drones communicating with sensory networks.
