@@ -139,7 +139,7 @@ Q = {L -/-, H -/-, 0 n/m, 1 x/y} where n,m,x, y are Integers
                         <hr>
                     </section>
                     <p>
-                        To help better understand the concept as a whole, we have built a simulator which keeps track of the iterations of a protocol’s execution while monitoring relevant data such as redundant interactions that may contribute to developing more complex algorithms for this model. Figures B and C represent a heatmap of redundant interactions between agents of populations of 5 agents and 15 agents, respectively. Figures A, and B both include graphs output by the simulator we have constructed.
+                        To help better understand the concept as a whole, we have built a simulator which keeps track of the iterations of a protocol’s execution while monitoring relevant data such as redundant interactions that may contribute to developing more complex algorithms for this model. Figure B represents a heatmap of redundant interactions between agents of a population of 15. Figures A, and B both include graphs output by the simulator we have constructed.
                     </p>
                     <hr>
                     <h2> Future and Application </h2>
