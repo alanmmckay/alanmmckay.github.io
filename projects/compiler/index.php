@@ -25,7 +25,16 @@ include('../../header.php');
                             <h2>Preface</h2>
                         </header>
                         <p>
-
+                            Deciding to go to university was motivated by a want to understand how to program at the hardware-level. This was accomplished early in the curriculum by means of taking Computer Organization.  The course satisfied my curiosity in this regard, but it opened up a new avenue of curiosity that would continue to inspire me to succeed. Computer Organization showed me a mapping of two different languages. The mathematics of propositional logic were used to scaffold assembly.
+                        </p>
+                        <p>
+                            My time learning to program up to that point had an undercurrent of realizing that given a single problem, there are many, (if not infinite), solutions. The scaffolding shown through Computer Organization confirmed this intuition and highlighted the fact that this sentiment also applies to how a given problem can be represented as well. The Algorithms course I took the following semester generalized the concept of an algorithm and made it programming-language agnostic. This would serve as a prerequisite for the course that would synthesize these concepts.
+                        </p>
+                        <p>
+                            I took Translation of Programming Languages during the fall semester of 2019. Students of the course were tasked with building a compiler that Translates a high-level functional language to a low-level assembly language. Lectures consisted of covering the various components and steps in the process of translation. Despite the effort required to succeed, I look back on this course as a favorite. It helped me understand programming languages as an abstraction and thus helped trivialize the notion of learning a new programming language or framework.
+                        </p>
+                        <p>
+                            Detailed below is documentation of the project. A repository for the compiler can be found via GitHub.
                         </p>
                         <hr>
                     </section>
