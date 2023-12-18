@@ -52,8 +52,8 @@ include('../../header.php');
                         <p>
 
                         </p>
-                        <h3 id='k_spec_header' onclick='reveal("k_spec")'> [ + ] Klein Language Specification</h3>
-                        <article id='k_spec' style='display:none;'>
+                        <h3 id='k_spec_header' onclick='reveal("k_spec")'> [ - ] Klein Language Specification</h3>
+                        <article id='k_spec'>
                             <p>Klein is a small, mostly functional language that is designed specifically to be used as a manageable source language in a course on compiler design and implementation. Though small and simple, the language is Turing-complete.</p>
 
                             <h4>Grammar</h4>
@@ -320,8 +320,8 @@ include('../../header.php');
                             </ul>
                         </article>
 
-                        <h3 id='tm_spec_header' onclick='reveal("tm_spec")'>[ + ] TM Machine Specification</h3>
-                        <article id='tm_spec' style='display:none;'>
+                        <h3 id='tm_spec_header' onclick='reveal("tm_spec")'>[ - ] TM Machine Specification</h3>
+                        <article id='tm_spec'>
                         <p>
                             TM is a simple target machine that has an architecture and instruction set complex enough to illustrate the important issues faced when writing a compiler, yet simple enough to not distract with unnecessary details.
                         </p>
@@ -455,7 +455,7 @@ include('../../header.php');
             </section>
         </section>
         <script>
-            let status = {"k_spec":false,"tm_spec":false};
+            let status = {"k_spec":true,"tm_spec":true};
             let status_map = {false:"none",true:"block"};
             let inner_html_map = {"k_spec":{false:"[ + ] Klein Language Specification",true:"[ - ] Klein Language Specification"}, "tm_spec":{false:"[ + ] TM Machine Specification", true:"[ - ] TM Machine Specification"}}
             function reveal(id){
@@ -463,6 +463,9 @@ include('../../header.php');
                 document.getElementById(id).style.display = status_map[status[id]];
                 document.getElementById(id+"_header").innerHTML = inner_html_map[id][status[id]];
             }
+
+            reveal("k_spec");
+            reveal("tm_spec");
         </script>
     </body>
 </html>
