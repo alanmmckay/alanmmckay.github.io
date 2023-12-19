@@ -480,7 +480,16 @@ V :                   :
                         <hr>
                         <h3 id='conclusion'>Concluding notes</h3>
                         <p>
+                            The Klein language specification was written by <a href='https://www.cs.uni.edu/~wallingf/'>Professor Eugene Wallingford</a> of the University of Northern Iowa.
 
+                        <blockquote>
+                            I chose the name to indicate the size of the language. klein is the German word for "small" or "little". It is one of the first German words I learned back in the eighth grade.
+                            <cite> - Eugene Wallingford</cite>
+                        </blockquote>
+                            My looking back favorably on this course has a lot to do with having Dr. Wallingford as a professor. He was well equipped to teach the course and I always felt that he was very engaging with my level of curiosity.
+                        </p>
+                        <p>
+                            Tiny Machine (TM) is an assembly language written by <a href='https://www.cs.sjsu.edu/faculty/louden/'>Kenneth Louden</a>. The specifications for both languages are in the following expandable sections.
                         </p>
                         <h3 id='k_spec_header' onclick='reveal("k_spec")' class='expandable'> [ - ] Klein Language Specification</h3>
                         <article id='k_spec'>
@@ -874,8 +883,7 @@ V :                   :
                             </li>
                         </ul>
                         </article>
-                        <hr>
-
+                    <hr>
                     </section>
                 </article>
 
