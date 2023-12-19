@@ -76,7 +76,7 @@ include('../../header.php');
                                         </ul>
                                         To run each script run the following command:
                                         <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:35em;padding-left:10px;margin-top:5px;margin-left:5px;'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:35em;padding-left:10px;margin-top:5px;margin-left:5px;'>
     sh &lt;script name&gt; &lt;program to be tested&gt;
 </pre>
                                         </code>
@@ -284,6 +284,190 @@ include('../../header.php');
                     </ul>
                     </section>
 
+                    <h3 id='phase_5_header' onclick='reveal("phase_5")'>[ - ] Phase 5: Code Generator (A)</h3>
+                    <section id='phase_5'>
+                    <ul>
+                        <li>Associated files of implementation:
+                            <ul>
+                                <li>kleinc</li>
+                                <li>AST_node.py</li>
+                                <li>code-generator.py</li>
+                            </ul>
+                        </li>
+                        <li>Code Generator Description:
+                            <p>The first phase of implementing the code generator involves priming behavior. What's meant by this is that the current state of the generator is that the environment is setup such that the address space for a main function is added to the runtime stack and relevant information is saved to the relevant registers. The body of the main is executed and registers are restored as per the TM specification. Lastly, functionality is in place with respect to evaluating literals and print statements.</p>
+                        </li>
+                        <li>Schema of environment:
+                            <ul>
+                                <li>The Stack Frame:
+                                    <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:40em;padding-left:10px'>
+:----------------------:
+:     return addr      : 0
+:----------------------:
+:     return value     : 1
+:----------------------:
+:     arg  0           :
+:----------------------:
+:     args             :
+:----------------------:
+: register values(0-6) : - can update to only save whats modified
+:----------------------:
+:     temp space       :
+:----------------------:
+</pre>
+                                    </code>
+                                </li>
+                                <li>Registers:
+                                    <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:40em;padding-left:10px'>
+   :------------------:
+r0 :                  :
+   :------------------:
+ 1 :                  :
+   :------------------:
+ 2 :                  :
+   :------------------:
+ 3 :                  :
+   :------------------:
+ 4 :                  :
+   :------------------:
+ 5 :                  :
+   :------------------:
+ 6 :   top  (stack)   :
+   :------------------:
+ 7 :    PC            :
+   :------------------:
+</pre>
+                                    </code>
+                                </li>
+                                <li>DMEM:
+                                    <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:40em;padding-left:10px'>
+0 :-------------------:
+| :                   :
+| :-------------------:
+V :                   :
+. :-------------------:
+. :                   :
+  :-------------------: Top (R6)
+  :        |          :
+  :        |          :
+  :        |          :
+  :        |  Grows   :
+  :        V          :
+  :                   :
+  :                   :
+  :-------------------:
+</pre>
+                                    </code>
+                                </li>
+                                <li>IMEM:
+                                    <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:40em;padding-left:10px'>
+0 :---------------------:
+  : LDA 7 , &lt;main addr&gt; :
+  :---------------------:
+  :         .           :
+  :         .           :
+  :         .           :
+  :         .           :
+  :         .           :
+  :---------------------: main
+  : / / / / / / / / / / :
+  : / / / / / / / / / / :
+  :---------------------:
+</pre>
+                                    </code>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>What is not finished:
+                            <ul>
+                                <li>Better register management is still under consideration.</li>
+                                <li>Setting up three-address-code templates for each node.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    </section>
+
+
+                    <h3 id='phase_6_header' onclick='reveal("phase_6")'>[ - ] Phase 6: Code Generator (B)</h3>
+                    <section id='phase_6'>
+                    <ul>
+                        <li>Associated files of implementation:
+                            <ul>
+                                <li>AST_node.py</li>
+                                <li>code-generator.py</li>
+                                <li>kleinc</li>
+                            </ul>
+                        </li>
+                        <li>Phase 6 expands on the functionality of phase 5. The goal was to complete what wasn't finished. The following has been implemented:
+                            <ul>
+                                <li>Function Calls</li>
+                                <li>Arithmetic Operations
+                                    <ul>
+                                        <li>Addition Operation</li>
+                                        <li>Subtraction Operation</li>
+                                        <li>Division Operation</li>
+                                        <li>Multiplication Operation</li>
+                                    </ul>
+                                <li>Boolean Connective Operations
+                                    <ul>
+                                        <li>And Operation</li>
+                                        <li>Or Operation</li>
+                                    </ul>
+                                </li>
+                                <li>Boolean Comparison Operations
+                                    <ul>
+                                        <li>Less-Than Operation</li>
+                                        <li>Equal-To Operation</li>
+                                    </ul>
+                                </li>
+                                <li>Unary Operations
+                                    <ul>
+                                        <li>Not Operation</li>
+                                        <li>Negation Operation</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>What needs to be implemented:
+                            <ul>
+                                <li>Grabbing arguments from the initial TM execution
+                                    <ul>
+                                        <li>The compiler does have logic that places the initial DMEM arguments into the control stack.</li>
+                                    </ul>
+                                </li>
+                                <li>There currently exists a logical error that allows klein programs to have arguments with the same name.</li>
+                                <li>Some more clear error handling</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    </section>
+
+
+                    <h3 id='phase_7_header' onclick='reveal("phase_7")'>[ - ] Phase 7: Project Conclusion</h3>
+                    <section id='phase_7'>
+                    <ul>
+                        <li> What was completed:
+                            <ul>
+                                <li>TM programs now allow arguments to be fed in through the command line.
+                                    <ul>
+                                        <li>The DMEM allocated to the initial main function call now factors the arguments that may exist when the TM machine runs.</li>
+                                        <li>Function declaration output no longer saves and restores register values for temporary register usage.</li>
+                                        <li>Negation and Not operation TM output is fixed.</li>
+                                        <li>Type checking error messages have been refined and are more informative.</li>
+                                        <li>A whole slew of klein programs have been created for testing purposes.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    </section>
+
+
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
@@ -296,7 +480,7 @@ include('../../header.php');
 
                             <h4>Grammar</h4>
                             <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:45em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:45em;padding-left:10px'>
         &lt;PROGRAM&gt; ::= &lt;DEFINITIONS&gt;
 
         &lt;DEFINITIONS&gt; ::= ε
@@ -358,7 +542,7 @@ include('../../header.php');
                                 <li>
                                     These are the reserved words of Klein:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:35em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:35em;padding-left:10px'>
     integer     boolean
     true        false
     if          then       else
@@ -382,7 +566,7 @@ include('../../header.php');
                                 <li>
                                     The following are the primitive operators and punctuation marks of Klein:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:35em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:35em;padding-left:10px'>
     +           -          *        /
     &lt;           =          (        )
     ,           :          (*       *)
@@ -437,7 +621,7 @@ include('../../header.php');
                                     <h5>Arithmetic</h5>
                                     Adds, subtracts, multiplies, or divides two integers.
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:15em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:15em;padding-left:10px'>
      x + y
      x - y
      x * y
@@ -448,7 +632,7 @@ include('../../header.php');
                                 <li>
                                     <h5>Boolean Comparisons</h5>
                                     Compares two integers, yielding one of the boolean values <code>true</code> or <code>false</code>. <code>&lt;</code> yields <code>true</code> if its left operand is less than its right operand, and <code>false</code> otherwise. <code>=</code> yields true if its left operand has the same value as its right operand, and <code>false</code> otherwise.                                    <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:15em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:15em;padding-left:10px'>
      x &lt; y
      x = y
 </pre>
@@ -457,7 +641,7 @@ include('../../header.php');
                                 <li>
                                     <h5>Boolean Connectives</h5>
                                     Negates a single boolean value, or computes the disjunction or conjunction of two boolean values. The unary <code>not</code> yields <code>true</code> if its operand is <code>false</code>, and <code>false</code> otherwise. <code>or</code> yields <code>true</code> if either its left operand or its right operand yields <code>true</code>, and <code>false</code> otherwise. <code>and</code> yields <code>true</code> if both its left operand and its right operand yield <code>true</code>, and <code>false</code> otherwise.                                    <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:15em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:15em;padding-left:10px'>
      not x
      x or y
      x and y
@@ -470,7 +654,7 @@ include('../../header.php');
                                     Evaluates a test expression, and uses its value to select one of two expressions to evaluate. Yields the value of the first of these expressions if the test expression produces a true value, and the value of the second if the test expression yields a false value. The <code>else</code> clause is required.<br>
                                     For example:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:15em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:15em;padding-left:10px'>
      if flag &lt; 0 then
         x + y
      else
@@ -484,7 +668,7 @@ include('../../header.php');
                                     Applies a function to zero or more arguments, and yields the value of the expression in the body of the function. All functions return an integer value or a boolean value; Klein has no notion of a "void" function.<br>
                                     For example:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:15em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:15em;padding-left:10px'>
      f( x+y, 1 )
 </pre>
                                     </code>
@@ -518,7 +702,7 @@ include('../../header.php');
                                 <li>
                                     For the purposes of user interaction, Klein provides the primitive function <code>print(expression)</code>. For example:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:15em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:15em;padding-left:10px'>
      print( x+y )
 </pre>
                                     </code>
@@ -540,7 +724,7 @@ include('../../header.php');
                                 <li>
                                     For example, here is a complete Klein program that computes the absolute value of its argument:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:35em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:35em;padding-left:10px'>
      function main( n : integer ) : integer
         if n &lt; 0
            then -n
@@ -549,7 +733,7 @@ include('../../header.php');
                                     </code>
                                     If this program were compiled into an executable file named <code>abs</code>, then running it under Unix might look something like this:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:35em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:35em;padding-left:10px'>
     mac os x > abs -3
     3
 </pre>
@@ -608,7 +792,7 @@ include('../../header.php');
                             <li>
                                 Register-only (RO) instructions are of the form
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:25em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:25em;padding-left:10px'>
     opcode r1,r2,r3
 </pre>
                                     </code>
@@ -617,7 +801,7 @@ include('../../header.php');
                             <li>
                                 These are the RO opcodes:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:45em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:45em;padding-left:10px'>
 <b>IN</b>      read an integer from stdin and place result in <b>r1</b>; ignore operands <b>r2</b> and <b>r3</b>
 <b>OUT</b>     write contents of <b>r1</b> to stdout; ignore operands <b>r2</b> and <b>r3</b>
 <b>ADD</b>     add contents of <b>r2</b> and <b>r3</b> and place result in <b>r1</b>
@@ -631,13 +815,13 @@ include('../../header.php');
                             <li>
                                 Register-memory (RM) instructions are of the form
                                 <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:25em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:25em;padding-left:10px'>
     opcode r1,offset(r2)
 </pre>
                                 </code>
                                 Where the <code>ri</code> are legal registers and <code>offset</code> is an integer offset. <code>offset</code> may be negative. With the exception of the <code>LDC</code> instruction, the expression <code>offset(r2)</code> is used to compute the address of a memory at location:
                                 <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:25em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:25em;padding-left:10px'>
     address = (contents of r2) + offset
 </pre>
                                 </code>
@@ -645,7 +829,7 @@ include('../../header.php');
                             <li>
                                 There are four RM opcodes for memory manipulation:
                                 <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:45em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:45em;padding-left:10px'>
 <b>LDC</b>    place the constant <b>offset</b> in <b>r1</b>; ignore <b>r2</b>
 <b>LDA</b>    place the address <b>address</b> in <b>r1</b>
 <b>LD</b>     place the contents of data memory location <b>address</b> in <b>r1</b>
@@ -656,7 +840,7 @@ include('../../header.php');
                             <li>
                                 There are six RM opcodes for branching. If the value of <code>r1</code> satisfies the opcode's condition, then branch to the instruction at memory location <code>address</code>.
                                 <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:45em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:45em;padding-left:10px'>
 <b>JEQ</b>    equal to 0
 <b>JNE</b>    not equal to 0
 <b>JLT</b>    less than 0
@@ -693,9 +877,10 @@ include('../../header.php');
             </section>
         </section>
         <script>
-            let status = {"k_spec":true,"tm_spec":true,"phase_1":true,"phase_2":true,"phase_3":true,"phase_4":true};
+            //Here's some code-smells for 'ya!
+            let status = {"k_spec":true,"tm_spec":true,"phase_1":true,"phase_2":true,"phase_3":true,"phase_4":true,"phase_5":true,"phase_6":true,"phase_7":true};
             let status_map = {false:"none",true:"block"};
-            let inner_html_map = {"k_spec":{false:"[ + ] Klein Language Specification",true:"[ - ] Klein Language Specification"}, "tm_spec":{false:"[ + ] TM Machine Specification", true:"[ - ] TM Machine Specification"}, "phase_1":{false:"[ + ] Phase 1: Scanner", true:"[ - ] Phase 1: Scanner"}, "phase_2":{false:"[ + ] Phase 2: Parser (A)", true:"[ - ] Phase 2: Parser (A)"}, "phase_3":{false:"[ + ] Phase 3: Parser (B)", true:"[ - ] Phase 3: Parser (B)"}, "phase_4":{false:"[ + ] Phase 4: Type Checker", true:"[ - ] Phase 4: Type Checker"}}
+            let inner_html_map = {"k_spec":{false:"[ + ] Klein Language Specification",true:"[ - ] Klein Language Specification"}, "tm_spec":{false:"[ + ] TM Machine Specification", true:"[ - ] TM Machine Specification"}, "phase_1":{false:"[ + ] Phase 1: Scanner", true:"[ - ] Phase 1: Scanner"}, "phase_2":{false:"[ + ] Phase 2: Parser (A)", true:"[ - ] Phase 2: Parser (A)"}, "phase_3":{false:"[ + ] Phase 3: Parser (B)", true:"[ - ] Phase 3: Parser (B)"}, "phase_4":{false:"[ + ] Phase 4: Type Checker", true:"[ - ] Phase 4: Type Checker"}, "phase_5":{false:"[ + ] Phase 5: Code Generator (A)", true:"[ - ] Phase 5: Code Generator (A)"}, "phase_6":{false:"[ + ] Phase 6: Code Generator (B)", true:"[ - ] Phase 6: Code Generator (B)"}, "phase_7":{false:"[ + ] Phase 7: Project Conclusion", true:"[ - ] Phase 7: Project Conclusion"}}
             function reveal(id){
                 status[id] = !status[id];
                 document.getElementById(id).style.display = status_map[status[id]];
@@ -708,6 +893,9 @@ include('../../header.php');
             reveal("phase_2");
             reveal("phase_3");
             reveal("phase_4");
+            reveal("phase_5");
+            reveal("phase_6");
+            reveal("phase_7");
         </script>
     </body>
 </html>
