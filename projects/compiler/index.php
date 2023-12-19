@@ -116,7 +116,7 @@ include('../../header.php');
                     </ul>
                     <h2>Implementation of Compiler: Progress Checks</h2>
 
-                    <h3 id='phase_1_header' onclick='reveal("phase_1")'>[ - ] Phase 1: Scanner</h3>
+                    <h3 id='phase_1_header' onclick='reveal("phase_1")' class='expandable'>[ - ] Phase 1: Scanner</h3>
                     <section id='phase_1'>
                     <ul>
                         <li>Associated files of implementation:
@@ -147,7 +147,7 @@ include('../../header.php');
                     </ul>
                     </section>
 
-                    <h3 id='phase_2_header' onclick='reveal("phase_2")'>[ - ] Phase 2: Parser (A)</h3>
+                    <h3 id='phase_2_header' onclick='reveal("phase_2")' class='expandable'>[ - ] Phase 2: Parser (A)</h3>
                     <section id='phase_2'>
                     <ul>
                         <li>
@@ -187,7 +187,7 @@ include('../../header.php');
                     </ul>
                     </section>
 
-                    <h3 id='phase_3_header' onclick='reveal("phase_3")'>[ - ] Phase 3: Parser (B)</h3>
+                    <h3 id='phase_3_header' onclick='reveal("phase_3")' class='expandable'>[ - ] Phase 3: Parser (B)</h3>
                     <section id='phase_3'>
                     <ul>
                         <li>
@@ -246,7 +246,7 @@ include('../../header.php');
                     </ul>
                     </section>
 
-                    <h3 id='phase_4_header' onclick='reveal("phase_4")'>[ - ]Phase 4: Type Checker</h3>
+                    <h3 id='phase_4_header' onclick='reveal("phase_4")' class='expandable'>[ - ]Phase 4: Type Checker</h3>
                     <section id='phase_4'>
                     <ul>
                         <li>Associated files of implementation:
@@ -284,7 +284,7 @@ include('../../header.php');
                     </ul>
                     </section>
 
-                    <h3 id='phase_5_header' onclick='reveal("phase_5")'>[ - ] Phase 5: Code Generator (A)</h3>
+                    <h3 id='phase_5_header' onclick='reveal("phase_5")' class='expandable'>[ - ] Phase 5: Code Generator (A)</h3>
                     <section id='phase_5'>
                     <ul>
                         <li>Associated files of implementation:
@@ -392,7 +392,7 @@ V :                   :
                     </section>
 
 
-                    <h3 id='phase_6_header' onclick='reveal("phase_6")'>[ - ] Phase 6: Code Generator (B)</h3>
+                    <h3 id='phase_6_header' onclick='reveal("phase_6")' class='expandable'>[ - ] Phase 6: Code Generator (B)</h3>
                     <section id='phase_6'>
                     <ul>
                         <li>Associated files of implementation:
@@ -448,7 +448,7 @@ V :                   :
                     </section>
 
 
-                    <h3 id='phase_7_header' onclick='reveal("phase_7")'>[ - ] Phase 7: Project Conclusion</h3>
+                    <h3 id='phase_7_header' onclick='reveal("phase_7")' class='expandable'>[ - ] Phase 7: Project Conclusion</h3>
                     <section id='phase_7'>
                     <ul>
                         <li> What was completed:
@@ -474,7 +474,7 @@ V :                   :
                         <p>
 
                         </p>
-                        <h3 id='k_spec_header' onclick='reveal("k_spec")'> [ - ] Klein Language Specification</h3>
+                        <h3 id='k_spec_header' onclick='reveal("k_spec")' class='expandable'> [ - ] Klein Language Specification</h3>
                         <article id='k_spec'>
                             <p>Klein is a small, mostly functional language that is designed specifically to be used as a manageable source language in a course on compiler design and implementation. Though small and simple, the language is Turing-complete.</p>
 
@@ -742,7 +742,7 @@ V :                   :
                             </ul>
                         </article>
 
-                        <h3 id='tm_spec_header' onclick='reveal("tm_spec")'>[ - ] TM Machine Specification</h3>
+                        <h3 id='tm_spec_header' onclick='reveal("tm_spec")' class='expandable'>[ - ] TM Machine Specification</h3>
                         <article id='tm_spec'>
                         <p>
                             TM is a simple target machine that has an architecture and instruction set complex enough to illustrate the important issues faced when writing a compiler, yet simple enough to not distract with unnecessary details.

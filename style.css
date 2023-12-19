@@ -155,6 +155,10 @@
     font-size:17px;
 }
 
+#writingsWrapper article h1, #writingsWrapper article h2, #writingsWrapper article h3, #writingsWrapper article h4, #writingsWrapper article h5, #writingsWrapper article h6{
+    text-align:left;
+}
+
 #writingsWrapper header{
     text-align: left;
 }
@@ -251,6 +255,11 @@ figure.image-collage ul li{
 
 #writingsWrapper figure.image-collage ul li figure figcaption{
     display:none;
+}
+
+.expandable:hover{
+    cursor:pointer;
+    color:black;
 }
 
 div.slide-deck figure figcaption ul{
