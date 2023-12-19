@@ -61,12 +61,12 @@
 #homeWrapper nav a:hover{
     border-left:solid 25px white;
 }
-
+/*
 #homeWrapper nav a:first-child:hover{
     border-left:inherit;
     cursor:default;
 }
-
+*/
 #homeWrapper nav a img{
     width:50px;
     height:50px;
