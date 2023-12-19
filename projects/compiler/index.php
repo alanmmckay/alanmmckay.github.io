@@ -34,7 +34,7 @@ include('../../header.php');
                             I took Translation of Programming Languages during the fall semester of 2019. Students of the course were tasked with building a compiler that Translates a high-level functional language to a low-level assembly language. Lectures consisted of covering the various components and steps in the process of translation. Despite the effort required to succeed, I look back on this course as a favorite. It helped me understand programming languages as an abstraction and thus helped trivialize the notion of learning a new programming language or framework.
                         </p>
                         <p>
-                            Detailed below is documentation of the project. A repository for the compiler can be found via GitHub.
+                            Detailed below is documentation of the project. A repository for the compiler can be found via <a href='https://github.com/alanmmckay/KLEINcompiler'>GitHub</a>.
                         </p>
                         <hr>
                     </section>
@@ -43,8 +43,246 @@ include('../../header.php');
                     </header>
 
                     <p>
-
+                        The following acts both as documentation and a progress journal for a compiler written in Python. This compiler's input language is a language called Klein which operates in the functional paradigm. The target language is an assembly language called Tiny Machine. Specifications of these two languages can be found in the concluding notes section of this page.
                     </p>
+                    <p>
+                        The compiler includes all features described in the language specification except:
+                        <ul>
+                            <li>Arithmetic operations operate from right to left when stringed with operations within their respective set: <code>({+,-},{*,/})</code>.
+                                <ul>
+                                    <li>This likely stems from a flaw in the evaluation of a resultant abstract syntax tree</li>
+                                    <li>This can be prevented by taking full advantage of parenthesis to group respective operands.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    <p>
+                    <h4>The Repository</h4>
+                    <p>
+                        It's worth noting the structure of the repository for the compiler. The key directories are as follows:
+                        <ul>
+                            <li>
+                                The home directory is <code>KLEINcompiler/</code>
+                                <ul>
+                                    <li>
+                                        Error logs are output at this level</li>
+                                    <li>
+                                        Various shell scripts are housed here to test the stages of the compiler. Each represents running the compiler for each implementation stage of the project:
+                                        <ul>
+                                            <li><code>./kleins</code> : scanner; creation of a set of tokens</li>
+                                            <li><code>./kleinf</code> : parse table lookups</li>
+                                            <li><code>./kleinp</code> : abstract syntax tree creation</li>
+                                            <li><code>./kleinv</code> : type checker</li>
+                                            <li><code>./kleinc</code> : code generation; the completed compiler</li>
+                                        </ul>
+                                        To run each script run the following command:
+                                        <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:35em;padding-left:10px;margin-top:5px;margin-left:5px;'>
+    sh &lt;script name&gt; &lt;program to be tested&gt;
+</pre>
+                                        </code>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                The <code>doc</code> directory houses various forms of documentation, housed in folders with respect to which component of the compiler they belong.
+                            </li>
+                            <li>
+                                The <code>programs</code> directory houses a small handful of Klein programs we've created for use of the compiler. It also houses a set of programs provided by Dr. Wallingford within the class-programs folder.
+                            </li>
+                            <li>
+                                The <code>tests</code> directory houses various Klein programs used for testing the various stages of our complier.
+                            </li>
+                            <li>
+                                The <code>src</code> directory houses all files used for implementation of the compiler.
+                                <ul>
+                                    <li><code>src/drivers</code> houses files used to run the shell scripts, noted above.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </p>
+                    <h4>Flaws in implementation</h4>
+                    <p>It's worth noting flaws of implementation. These illuminate steps that should be taken to fine-tune the compiler as a future project. They ultimately are a reflection of the result of the project and mark lessons learned.</p>
+                    <ul>
+                        <li>
+                            A lot of the logic is loaded into AST_node.py. This is the file which houses the class information for the abstract syntax tree. The layout itself is quite clever, but type check and code generation methods are added to them. This poses a problem in terms of separation of responsibility. The logic in AST_node.code_gen() is specific to outputting code in TM. Provided more time, exploration should occur as a means to refactor theser methods into some exterior mechanism beside the abstract syntax tree.
+                        </li>
+                        <li>
+                            The TM code being output is not efficient, ignoring th elack of any optimizer implementation. Most instructions that are output have the value stored in some memory position. This produces a lot of redundant instructions to <code>IMEM</code> and a lot of redundant data to <code>DMEM</code>. The most egregious lack of optimization comes from the IdentifierNode outputing a load instruction. This was an adhoc fix to print statements having no means to access an argument.
+                        </li>
+                        <li>
+                            The error handling needs to be expanded upon. Effort was strong in the beginning of the project, but stalled out when time started becoming more of a premium and workload was shifted away from this effort. Error returns pertaining to parse errors do not help the user of a compiler as they are more geared for compiler debugging.
+                        </li>
+                    </ul>
+                    <h2>Implementation of Compiler: Progress Checks</h2>
+
+                    <h3 id='phase_1_header' onclick='reveal("phase_1")'>[ - ] Phase 1: Scanner</h3>
+                    <section id='phase_1'>
+                    <ul>
+                        <li>Associated files of implementation:
+                            <ul>
+                                <li>kleins</li>
+                                <li>src/k_token.py</li>
+                                <li>src/scanner.py</li>
+                            </ul>
+                        </li>
+
+                        <li>Scanner Description:
+                            <p>
+                                The scanner is the portion of the compiler which takes as input a Klein program as a single string and splits the string into a set of tokens. The token class is described in k_token.py. The scanner steps through each character of the program string and uses a set of conditions to determine if a resultant character or string is a valid token. These conditions are based on the possible terminals present in the language specification. These may either be a single character, such as the case of the unary and binary operators, or can be a string, such as any identifier or number. Thus, the conditions are based on a set of regular expressions, noted in the scanner portion of the documents folder. These regular expressions are used to build the conditions in place, represented by the FSA diagram which is also housed in the same folder.
+                            </p>
+                        </li>
+
+                        <li>Associated files of documentation:
+                            <ul>
+                                <li>doc/scanner/regex.txt</li>
+                                <li>doc/scanner/regex_FSA.jpg
+                                    <ul>
+                                        <li>doc/regex_FSA.jff is the jflapfile used to create the above jpeg</li>
+                                    </ul>
+                                </li>
+                                <li>doc/scanner/scanner_status_check.txt</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    </section>
+
+                    <h3 id='phase_2_header' onclick='reveal("phase_2")'>[ - ] Phase 2: Parser (A)</h3>
+                    <section id='phase_2'>
+                    <ul>
+                        <li>
+                            Associated files of implementation:
+                            <ul>
+                                <li>kleinf</li>
+                                <li>src/parser.py</li>
+                                <li>src/parse_table.py</li>
+                            </ul>
+                        </li>
+
+                        <li>Syntactic Analyzer Description:
+                            <p>
+                                The first phase of the parser is the implementation of the component which decides if a program is syntactically correct. That is, the component makes sure that any given combination of tokens are in valid order. This is determined by the grammar of the Klein language, which has been refactored to eliminate the need for the parser to have to read-in more than one token from the scanner at a time to decide whether or not a combination of tokens is valid.
+                            </p>
+
+                            <p>
+                                The validity is determined by a parse table, which is determined by the first and follow sets of every declaration statement within the refactored grammar. These first and follow sets help us know every possible token which leads a nonterminal and every possible token that ends a terminal. With this information we can surmise all possible combinations while considering nonterminal composition (including nonterminals composed of other nonterminals). This is then mapped to a table using a specific algorithm which considers whether or not a grammar statement has an empty character in its first set.
+                            </p>
+
+                            <p>
+                                Thus, the parser has a parse stack which assumes an end of file token exists in addition to a nonterminal which represents the program as a whole. It takes a look at the top element of the stack and uses it to look up the valid combination of preceding tokens while considering the current token that is being read by the scanner. The parser walks the table using this logic, pushing terminals and nonterminals onto the parse stack based on the result of the current index of the parse table until either an invalid combination of tokens is discovered or the end-of-file token is reached.
+                            </p>
+                        </li>
+
+                        <li>Associated files of documentation:
+                            <ul>
+                                <li>doc/parser/extended_grammar.txt</li>
+                                <li>doc/parser/first_and_follow_sets.txt</li>
+                                <li>doc/parser/parse_table.pdf
+                                    <ul>
+                                        <li>doc/parser/parse_table.ods</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    </section>
+
+                    <h3 id='phase_3_header' onclick='reveal("phase_3")'>[ - ] Phase 3: Parser (B)</h3>
+                    <section id='phase_3'>
+                    <ul>
+                        <li>
+                            Associated files of implementation:
+                            <ul>
+                                <li>kleinp</li>
+                                <li>src/parser.py</li>
+                                <li>src/parse_table.py</li>
+                                <li>src/AST_node.py</li>
+                            </ul>
+                        </li>
+
+                        <li>Semantic Analyzer Description:
+                            <p>
+                                The second phase of the parser is to build an abstract syntax tree which represents the various expressions and operations of the input program in the most general sense. These expressions and operations thereof are put into data structures which will later be used to convert the statements into their equivalents during code generation.
+                            </p>
+                        </li>
+
+                        <li>What was finished:
+                            <ul>
+                                <li>The inclusion of the semantic stack and the implementation of the parse algorithm to communicate between the parse stack and the semantic stack.</li>
+                                <li>The inclusion of semantic actions within the parse table.</li>
+                                <li>We currently have an enumeration class in the parse table which is used to evaluate the semantic actions returned on the parse table.</li>
+                                <li>When the semantic action is evaluated with respect to the parse algorithm, it is used to index into a dictionary called object_factory:
+                                    <ul>
+                                        <li>The object factory returns the relevant AST_node class which is used to construct the relevant node object within the parse algorithm.</li>
+                                        <li>The resultant node is then pushed onto the semantic stack. The resultant node is also passed the semantic stack upon construction. Logic will exist within the node's constructor to know what to do with the stack and the various nodes and relevant tokens that reside in it.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>What is not finished:
+                            <ul>
+                                <li>The AST nodes themselves are not done. We've finished a couple of easy ones, those that only really need to house a value - such as an identifier.</li>
+                                <li>We don't have any error handling in place once the AST nodes are ready for testing.</li>
+                            </ul>
+                        </li>
+
+                        <li>What else has been accomplished:
+                            <ul>
+                                <li>Errors regarding the previous phase with the parse table have been fixed.</li>
+                                <li>Error classes have been expanded. Each error writes to a relevant text file the initial program and the associated stdout error message.
+                                    <ul>
+                                        <li>Lexical error appends the remaining program string to its error log.</li>
+                                        <li>Parse errors append the parse stack trace to its error log.</li>
+                                    </ul>
+                                </li>
+                                <li>The scanner returning a none value when evaluating comments has been fixed.
+                                    <ul>
+                                        <li>Logic was extended to accomplish this. This has resulted in some messy code that needs to be refactored.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    </section>
+
+                    <h3 id='phase_4_header' onclick='reveal("phase_4")'>[ - ]Phase 4: Type Checker</h3>
+                    <section id='phase_4'>
+                    <ul>
+                        <li>Associated files of implementation:
+                            <ul>
+                                <li>kleinp
+                                    <ul>
+                                        <li>To run, feed a program through <code>kleinp</code>. It will print back node information as the AST is being built. If there is a type error, a Semantic Error will be thrown.</li>
+                                    </ul>
+                                </li>
+                                <li>src/parser.py</li>
+                                <li>src/AST_node.py</li>
+                            </ul>
+                        </li>
+
+                        <li>Type Checker Description:
+                            <p>
+                                The next phase of the project is to augment the abstract syntax tree with type information. This is used to make sure a user is inputting the correct type of data for a program to execute. We handled this by adding type checking methods to the ASTnode class within AST_node.py and made changes to a subclass' method where applicable. The type check occurs after the parser builds the abstract syntax tree, where the parser grabs the outer node off the semantic stack and calls process_node() which recursively descends into the composition of nodes, calling typeCheck() when applicable.
+                            </p>
+                            <p>
+                                When a type error is found, the recursive function starts to back-track, sending the error information as an error object back to the parser. If the error object exists on the semantic stack when the parser tries to call process_node(), it will instead raise an exception, feeding extra information about the program to it.
+                            </p>
+                        </li>
+
+                        <li>What is not finished:
+                            <ul>
+                                <li>Error handling needs to be expanded upon. As of now, the error messages are pretty slim.</li>
+                                <li>
+                                    Some code cleanup would be nice. This includes implementing correct OOP design such as making sure accessors are correctly called, as opposed to directly referring to an object's property. Some of the lines of code also need to be line-wrapped/escaped to allow easier viewing on smaller screen resolutions.
+                                    <ul>
+                                        <li>There exists some duplicate code within AST_node.py. Note the inclusion of the list functions. There is also some ad-hoc code duplication wihtin process_node(). This is in place to allow the recursive function to back-track once an error is found. The flag which causes this is the inclusion of 'errob' (an object class which needs to be renamed...) on the function_record list.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    </section>
 
                     <section class='info'>
                         <hr>
@@ -455,9 +693,9 @@ include('../../header.php');
             </section>
         </section>
         <script>
-            let status = {"k_spec":true,"tm_spec":true};
+            let status = {"k_spec":true,"tm_spec":true,"phase_1":true,"phase_2":true,"phase_3":true,"phase_4":true};
             let status_map = {false:"none",true:"block"};
-            let inner_html_map = {"k_spec":{false:"[ + ] Klein Language Specification",true:"[ - ] Klein Language Specification"}, "tm_spec":{false:"[ + ] TM Machine Specification", true:"[ - ] TM Machine Specification"}}
+            let inner_html_map = {"k_spec":{false:"[ + ] Klein Language Specification",true:"[ - ] Klein Language Specification"}, "tm_spec":{false:"[ + ] TM Machine Specification", true:"[ - ] TM Machine Specification"}, "phase_1":{false:"[ + ] Phase 1: Scanner", true:"[ - ] Phase 1: Scanner"}, "phase_2":{false:"[ + ] Phase 2: Parser (A)", true:"[ - ] Phase 2: Parser (A)"}, "phase_3":{false:"[ + ] Phase 3: Parser (B)", true:"[ - ] Phase 3: Parser (B)"}, "phase_4":{false:"[ + ] Phase 4: Type Checker", true:"[ - ] Phase 4: Type Checker"}}
             function reveal(id){
                 status[id] = !status[id];
                 document.getElementById(id).style.display = status_map[status[id]];
@@ -466,6 +704,10 @@ include('../../header.php');
 
             reveal("k_spec");
             reveal("tm_spec");
+            reveal("phase_1");
+            reveal("phase_2");
+            reveal("phase_3");
+            reveal("phase_4");
         </script>
     </body>
 </html>
