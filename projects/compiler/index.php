@@ -152,6 +152,7 @@ include('../../header.php');
                                 <li><code>doc/scanner/scanner_status_check.txt</code></li>
                             </ul>
                         </li>
+                        <li>Date of completion: 09-20-2019</li>
                     </ul>
                     </section>
 
@@ -192,6 +193,7 @@ include('../../header.php');
                                 </li>
                             </ul>
                         </li>
+                        <li>Date of completion: 10-04-2019</li>
                     </ul>
                     </section>
 
@@ -251,6 +253,7 @@ include('../../header.php');
                                 </li>
                             </ul>
                         </li>
+                        <li>Date of completion: 10-18-2019</li>
                     </ul>
                     </section>
 
@@ -289,6 +292,7 @@ include('../../header.php');
                                 </li>
                             </ul>
                         </li>
+                        <li>Date of completion: 11-01-2019</li>
                     </ul>
                     </section>
 
@@ -396,6 +400,7 @@ V :                   :
                                 <li>Setting up three-address-code templates for each node.</li>
                             </ul>
                         </li>
+                        <li>Date of completion: 11-15-2019</li>
                     </ul>
                     </section>
 
@@ -452,6 +457,7 @@ V :                   :
                                 <li>Some more clear error handling</li>
                             </ul>
                         </li>
+                        <li>Date of completion: 12-06-2019</li>
                     </ul>
                     </section>
 
@@ -472,6 +478,7 @@ V :                   :
                                 </li>
                             </ul>
                         </li>
+                        <li>Date of completion: 12-13-2019</li>
                     </ul>
                     </section>
 
