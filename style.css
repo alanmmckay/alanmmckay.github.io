@@ -170,6 +170,12 @@
     padding-bottom:0%;
 }
 
+#writingsWrapper blockquote{
+    border-left: solid 3px #778088;
+    padding-left:10px;
+    color:#6b747b
+}
+
 #writingsWrapper figcaption{
     color:#7b869d;
     font-size:15px;

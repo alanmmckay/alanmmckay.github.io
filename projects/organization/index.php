@@ -114,7 +114,7 @@ include('../../header.php');
                         </p>
 
                         <p>
-                            What is it that a <b>paying</b> student seeks to learn by taking Computer Organization? Any student who is paying to be in the class is likely a Computer Science major. Many would describe it as a weed-out course that teaches a programming paradigm that is antiquated. They may not be able to justify why it has this perception, but those who have a genuine interest will tell you that it's due to a combination of Moore's law and compiler optimization techniques.
+                            What is it that a <b>paying student</b> seeks to learn by taking Computer Organization? Any student who is paying to be in the class is likely a Computer Science major. Many would describe it as a weed-out course that teaches a programming paradigm that is antiquated. They may not be able to justify why it has this perception, but those who have a genuine interest will tell you that it's due to a combination of Moore's law and compiler optimization techniques.
                         </p>
 
                         <p>
