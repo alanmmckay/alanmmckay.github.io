@@ -101,8 +101,8 @@ include('../../header.php');
                             Once examples are given, I've always been keen to sharing alternatives to a given implementation of a loop. A for-loop absolutely should be taught in tandem with a while loop along with a sprinkling of recursion. Various conditions of execution should be here as well. Analog is not only given through context of every day living but also with respect to evaluating the loops themselves!
                         </p>
 
-                        <p>
-                            The usage of analogous example shows that the same problem can have many solutions. This allows a student to view solutions through different perspectives. This abstracts the study to what it is - how to abstract the algorithm. It also encourages a student to think outside of the box and to be creative in their own solutions. This helps foster one of the most crucial traits of being <b>successful</b> at this study - being curious with critical thought.*
+                        <p id='second-note-origin'>
+                            The usage of analogous example shows that the same problem can have many solutions. This allows a student to view solutions through different perspectives. This abstracts the study to what it is - how to abstract the algorithm. It also encourages a student to think outside of the box and to be creative in their own solutions. This helps foster one of the most crucial traits of being <b>successful</b> at this study - being curious with critical thought.<a href='#second-note'>**</a>
                         </p>
 
                         <p>
@@ -110,7 +110,7 @@ include('../../header.php');
                         </p>
 
                         <p>
-                            At the end of day, regardless of which category a student belongs, they are paying good money for the education. They are taking a class to learn the subject involved. The goal of an educator should be to engage with the student's expectations and maximize the value of the experience. "Value of the experience" is subjective to each individual, but given the context of school being a <b>place to learn</b>, my efforts are focused on providing the value of knowing the subject. In the example above, I take extra effort in providing the value of knowing what a loop is and does by inviting a student to be a better critical thinker.**
+                            At the end of day, regardless of which category a student belongs, they are paying good money for the education. They are taking a class to learn the subject involved. The goal of an educator should be to engage with the student's expectations and maximize the value of the experience. "Value of the experience" is subjective to each individual, but given the context of school being a <b>place to learn</b>, my efforts are focused on providing the value of knowing the subject. In the example above, I take extra effort in providing the value of knowing what a loop is and does by inviting a student to be a better critical thinker.
                         </p>
 
                         <p>
@@ -149,8 +149,8 @@ include('../../header.php');
                         Personally, it was Computer Organization that cemented the idea that learning a new programming language need not be daunting. The data and functions described throughout this course ultimately represent the same functions and data described in the higher-level languages of courses prior. Knowing this, the primary focus while teaching this course was to emphasize this fact. The means of describing the data in machine language in addition to the propositional logic used to manipulate that data serve as the model of computation in which the higher-level languages are built. This theme was highlighted quite often. Hopefully this made the course less gritty as concepts were built up from propositional logic to logical gates, logical circuits, control units, and assembly.
                     </p>
 
-                    <p>
-                        Recognizing this scaffolding does require familiarity with some higher-level language. To fully appreciate it, it also requires being comfortable* with some higher-level language. This is based on my experience as an undergraduate student. Stepping into university, my context was being comfortable with a handful of high-level scripting languages for web development. One key observation during the onset of my university experience was noticing that, within various courses that followed the introductory programming course, a lot of students were still gripping with the core concept of learning how to program. This tended to prevent them from understanding and appreciating the primary concepts being taught in said courses. This is especially true in data structures.
+                    <p id='first-note-origin'>
+                        Recognizing this scaffolding does require familiarity with some higher-level language. To fully appreciate it, it also requires being comfortable<a href='#first-note'>*</a> with some higher-level language. This is based on my experience as an undergraduate student. Stepping into university, my context was being comfortable with a handful of high-level scripting languages for web development. One key observation during the onset of my university experience was noticing that, within various courses that followed the introductory programming course, a lot of students were still gripping with the core concept of learning how to program. This tended to prevent them from understanding and appreciating the primary concepts being taught in said courses. This is especially true in data structures.
                     </p>
 
                     <p>
@@ -195,17 +195,54 @@ include('../../header.php');
 
                     <hr>
 
-                    <p>
-                        * What it means to be comfortable with a programming language deserves its own essay. I will leave it to your own judgement to decide what this means, or I will leave an open invitation to personal conversation on the matter.
+                    <p id='first-note' style='padding-left:3%;'>
+                        <a href='#first-note-origin' style=''>*</a> What it means to be comfortable with a programming language deserves its own essay. I will leave it to your own judgement to decide what this means, or I will leave an open invitation to personal conversation on the matter.
                     </p>
 
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
                         <p>
-
+                            There is hesitation releasing the assignments as described in the concluding paragraph of the above report. This is in part due to the ambiguity of the University's copyright policy as it is currently written: The University will not claim pedagogical related materials but any production expected of a given position can still be claimed. Their literature doesn't discuss the contradiction this poses.
                         </p>
 
+                        <p>
+                            As such, time will be needed to generalize these assignments. Once finished, they will be posted within this concluding section.
+                        </p>
+
+                        <hr>
+
+                        <div  style='padding-left:3%;'>
+                            <p id='second-note'>
+                                <a href='#second-note-origin'>**</a> Engaging material isn't the sole component of fostering the development and application of critical thought. An engaging instructor is also an important aspect. Effective communication requires feedback from all parties involved. As an instructor, I would seek input and feedback from students as individuals. This is difficult in the lecture setting, needing to be general enough to adhere to the class as a whole. This focus on individuality manifests whilst hosting labs or while engaging with the students who themselves engage with the instructor.
+                            </p>
+
+                            <p>
+                                I had no experience programming in MIPS prior to being assigned this course as an instructor. The last time I implemented any involving algorithm in assembly was when I initially took this course three years prior. My studying of MIPs occurred one or two days prior to giving the lecture. Was it laziness that caused me to take this approach?
+                            </p>
+
+                            <p>
+                                The answer to the above question is partially yes. This laziness was a convenience afforded by my comfort in learning something new within this domain. This comfort is on account of my ability to critically think. Learning a new language is made trivial by this critical thought and through my experience abstracting other languages. This 'laziness' affords the following benefits to the students:
+                                <ul>
+                                    <li>
+                                        Having a fresh take on a language highlights some non-intuitive concepts someone who is more experienced may take for granted. This allowed me to know to take the time to elaborate on something that another instructor may have glossed over.
+                                    </li>
+
+                                    <li>
+                                        Being inexperienced in the nuances of a language provided opportunities for me to make an unexpected mistake! This provides opportunity for students to witness how *I* think critically by showing them how I walk through an unknown problem and apply my own problem-solving skills.
+                                    </li>
+                                </ul>
+                            </p>
+
+                            <p>
+                                The second bullet point is so god-damn important it warrants appalling language in a professional writing. As a student, there is nothing more frustrating than seeing an instructor blow through some coding problem like they are a higher-being. In reality, the instructor probably has the solution key written off to the side or just memorized. This usually isn't revealed to the student, which implicitly sets an unreasonable expectation of performance. I will make a conjecture that this facade contributes to barrier of entry that many find daunting.
+                            </p>
+
+                            <p>
+                                My lack of experience with MIPS made the course more engaging in a way that creates a sincere connection between myself and the class in general. Any act of engagement to address an individual would usually involve addressing the questions/concerns by the use of analog and nudging the individual towards the conclusion they seek. This was done by asking them a set of questions to help them make the correct conclusion on their own! I believe this helps an individual feel personal agency by abstractly exposing them to how to think critically. One of my favorite pieces of feedback through student evaluation has been, "He makes you think."
+                            </p>
+
+                        </div>
                         <hr>
                     </section>
                 </article>
