@@ -26,11 +26,11 @@ include('../../header.php');
                         </header>
                         <h3>Pedagogy: College Education and Computer Science</h3>
                         <p>
-                            Upon the conclusion of my first semester of grad-school, I was asked to take on a sole-responsibility role to teach Computer Organization during the summer semester. I took pride that they offered the position to someone who had only been in grad-school for 5 months; I must have impressed as a TA. I've had prior life experience, being a non-traditional student, which contributed to my confidence as both an individual and an instructor. My diverse background experience also lent well to being able to communicate what was being taught in a multitude of different approaches.
+                            Upon the conclusion of the first semester of grad-school, I was asked to take on a sole-responsibility role to teach Computer Organization during the summer semester. As someone who had only been in grad-school for five months, I took pride that I was offered the position. I must have impressed as a TA. Being a non-traditional student afforded me valuable life experience which contributed to confidence as both an individual and an instructor. My diverse background experience also lent well to being able to communicate and teach using a multitude of different approaches.
                         </p>
 
                         <p>
-                            My brief stint as a PhD student has shown me that the fact the university is an R1 school likely also played a role into my selection - no tenured faculty member wanted to take on the task and a fresh grad student is low in the rung of production for what the school ultimately values - research.
+                            My brief stint as a PhD student has shown me that the fact the university is an R1 school likely also played a role in my selection - no tenured faculty member wanted to take on the task and a fresh grad student is low in the rung of production for what the school ultimately values - research.
                         </p>
 
                         <p>
@@ -38,11 +38,11 @@ include('../../header.php');
                         </p>
 
                         <p>
-                            Computer Science is a hard discipline to learn. I pose that most have difficulty teaching the discipline. Frustratingly, most <b>professors</b> have difficulty teaching the discipline - Experts of the field! Why is this? I pose that most professors are post-doc researchers who are obligated to teach. As alluded above, their motives don't often align with superb instruction. To teach a subject is an annoyance that comes with the job. Anyone who has gone to college, regardless of discipline, will likely agree with this assertion whilst mentally (re)evaluating majority of their professors. Doubly so for those that are tenured.
+                            Computer Science is a hard discipline to learn. I pose that most have difficulty teaching the discipline. Frustratingly, most <b>professors</b> have difficulty teaching the discipline - Experts of the field! Why is this? Intuition built by my experiences has shown that most professors are post-doc researchers who are obligated to teach. As alluded above, their motives don't often align with quality instruction. To teach a subject is an annoyance that comes with the job. Anyone who has gone to college, regardless of discipline, will likely agree with this assertion whilst mentally (re)evaluating majority of their professors. Doubly so for those that are tenured.
                         </p>
 
                         <p>
-                            The question needs to be asked of who is at a disadvantage through this environment? What type of student is at risk here? These questions are too general for the focus of this writing, but I invite the reader to linger and muse on them. I will make the following assertions based on my experiences which I believe should also be considered:
+                            The question needs to be asked of who is at a disadvantage through this environment? What type of student is at risk here? These questions are too general for the focus of this writing, but I invite the reader to linger and muse on them. I will make the following assertions based on my experiences which should also be considered:
                             <ul>
                                 <li>
                                     In the domain of computer science, there are three different types of students:
@@ -51,15 +51,15 @@ include('../../header.php');
                                             There are those who are studying a different discipline who are required to take a CS course as a prerequisite.
                                         </li>
                                         <li>
-                                            There are those who have heard jobs related to the field pay well, and thus are studying on the prospect of the paycheck.
+                                            There are those who have heard jobs related to the field pay well, and thus are studying on the prospect of future paycheck.
                                         </li>
                                         <li>
-                                            And then there are the individuals who are genuinely curious of the subject.
+                                            Finally, there are the individuals who are genuinely curious of the subject.
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    An individual can initially be one of the former two and eventually be molded to fit the later of the three.
+                                    An individual can initially be one of the former two and eventually be molded to fit the later of the three categories.
                                 </li>
                                 <li>
                                     Students who are genuinely curious of the subject will succeed. The definition of success is that they will get a degree and they will have a solid and flexible intuition of the mechinations of discipline.
@@ -70,7 +70,7 @@ include('../../header.php');
                                     </ul>
                                 </li>
                                 <li>
-                                    Students applying for a a job related to the field of computer science will have a technical quiz during an interview. This is rare; I know of no other disciplines that exhibit this. A doctor who is applying for work at a practice does not have to recite information and procedure they learned as a pre-med student. A computer science student needs to memorize what they've learned in data structures, regardless of the fact that as a software developer you have access to a wide range of resources to help solve problems.
+                                    Students applying for a a job related to the field of computer science will have a technical quiz during an interview. This is rare; I know of no other disciplines that exhibit this. A doctor who is applying for work at a practice does not have to recite information and procedure they learned as a pre-med student. A computer science student needs to memorize what they've learned in data structures, despite of the fact that as a software developer you have access to a wide range of resources to help solve problems.
                                     <ul>
                                         <li>
                                             The fact this is how things exist must be due to the fact that students of the above mentioned second category exist and need to be filtered.
@@ -90,57 +90,62 @@ include('../../header.php');
                         <hr>
 
                         <p>
-                            Loops are easy. They're a concept taught early in the stage of programming. They are also super frustrating as a beginner; an esoteric construct that goes against the grain of normal human experience with respect to the level of granularity required to convey that some <b>thing</b> needs to be repeated. I almost dropped out of community college because of loops. My instructor simply told me the surface facts of a loop and did not encourage any form of reflection. I was given a loop of a specific problem, the pieces that describe the condition of execution were pointed out to me, and it was noted that the body acted as the logic that needed to be repeated. There was no exploration of how to determine what belongs in the body and what doesn't; or how to fine-tune the condition of execution.
+                            Loops are easy. They're a concept taught early in the stage of programming. They are also super frustrating as a beginner; an esoteric construct that goes against the grain of normal human experience. This is said emphasizing the level of granularity required to convey that some <b>thing</b> needs to be <b>repeated</b>. I almost dropped out of community college because of loops. My instructor simply told me the surface facts of a loop and did not encourage any form of reflection. I was given a loop of a specific problem, the pieces that describe the condition of execution were highlighted, and it was noted that the body acted as the logic that needed to be repeated. There was no exploration of how to determine what belongs in the body and what doesn't; or how to fine-tune the condition of execution.
                         </p>
 
                         <p>
-                            Due to the fact a loop is easy, it becomes intuitive for someone who has enough experience to be able to teach. It's difficult to teach something that is intuitive to someone who does not have that intuit. My approach has always been through analog. This begins with discussion of the various iterative happenings that may occur through life and then discussion of how to encode them. After this discussion, examples are given.
+                            Loops are easy in the context of studying Computer Science. Due to the fact a loop is relatively easy, it becomes intuitive for anyone who has enough experience to be able to teach. It's difficult to teach an intuitive concept to someone who does not have that intuit. My approach has always been through analog. This begins with discussion of the various iterative happenings that may occur through life and then discussion of how to encode them. After this discussion, examples are given.
                         </p>
 
                         <p>
-                            Once examples are given, I've always been keen to sharing alternatives to a given implementation of a loop. A for-loop absolutely should be taught in tandem with a while loop along with a sprinkling of recursion. Various conditions of execution should be here as well. Analog is not only given through context of every day living but also with respect to evaluating the loops themselves!
+                            Once examples are given, I've always been keen to sharing alternatives to a given implementation of a loop. A for-loop absolutely should be taught in tandem with a while loop. This should occur with a light exposure to recursion. Various conditions of execution should be discussed here as well. Analog is not only given through context of every day living but also with respect to evaluating the loops themselves!
                         </p>
+
+                        <code>
+
+                        </code>
 
                         <p id='second-note-origin'>
-                            The usage of analogous example shows that the same problem can have many solutions. This allows a student to view solutions through different perspectives. This abstracts the study to what it is - how to abstract the algorithm. It also encourages a student to think outside of the box and to be creative in their own solutions. This helps foster one of the most crucial traits of being <b>successful</b> at this study - being curious with critical thought.<a href='#second-note'>**</a>
+                            The usage of analogous example shows that the same problem can have many solutions. This allows a student to view solutions through different perspectives. This abstracts the study to what it is - how to abstract the algorithm. It also encourages a student to think outside of the box and to be creative in their own solutions. This helps foster one of the most crucial traits of being <b>successful</b> within this study - being curious while thinking critically.<a href='#second-note'>**</a>
                         </p>
 
                         <p>
-                            A student who isn't genuinely interested in the study is less likely to apply critical thought. They may have been boxed into a narrow view of the study to which no interest is curated. This type of student is the type most likely to find solutions on stack overflow and not learn from them. This student is the type most likely to learn what little they need to from generative tools like Chat GPT.
+                            A student who isn't genuinely interested in the study is less likely to apply critical thought. They may have been boxed into a narrow view of the study where no interest is curated. This type of student is more likely to find solutions on stack overflow and not learn from them. This type of student is more likely to learn what little they need to from generative tools like Chat GPT.
                         </p>
 
                         <p>
-                            At the end of day, regardless of which category a student belongs, they are paying good money for the education. They are taking a class to learn the subject involved. The goal of an educator should be to engage with the student's expectations and maximize the value of the experience. "Value of the experience" is subjective to each individual, but given the context of school being a <b>place to learn</b>, my efforts are focused on providing the value of knowing the subject. In the example above, I take extra effort in providing the value of knowing what a loop is and does by inviting a student to be a better critical thinker.
+                            At the end of day, regardless of which category a student belongs, they are paying good money for the education. They are taking a class to learn the subject involved. The goal of an educator should be to engage with the students' expectations and maximize the value of the experience. <i>Value of the experience</i> is subjective to each individual, but given the context of school being a <b>place to learn</b>, my efforts are focused on providing the value of knowing the subject. With respect to teaching loops, I take extra effort in providing the value of knowing what a loop is and does by inviting a student to be a better critical thinker.
                         </p>
 
                         <p>
-                            What is it that a <b>paying student</b> seeks to learn by taking Computer Organization? Any student who is paying to be in the class is likely a Computer Science major. Many would describe it as a weed-out course that teaches a programming paradigm that is antiquated. They may not be able to justify why it has this perception, but those who have a genuine interest will tell you that it's due to a combination of Moore's law and compiler optimization techniques.
+                            What is it that a <b>paying student</b> seeks to learn by taking Computer Organization? Any student who is paying to be in the class is likely a Computer Science major. Many would describe it as a weed-out course that teaches a programming paradigm that is antiquated. A generic student may not be able to justify why it has this perception, but those who have a genuine interest will tell you that it's due to a combination of Moore's law and compiler optimization techniques.
                         </p>
 
                         <p>
-                            A post-doc researcher teaching the course will rattle off a set of objectives set in place by the institution, likely falling upon the course description provided by the university. They may say:
+                            To answer this question, post-doc researcher teaching the course will rattle off a set of objectives set in place by the institution, likely falling upon the course description provided by the university. They may say:
                             <blockquote>
                                 By the end of the course, you will be able to explain how a computer works, from “bottom to top”: transistors to digital logic to assembly language (e.g., x86, MIPS) to the programming language (e.g., Javascript, Java, Python). To do so, you will uncover how data is represented and stored in digital computers. You will learn how to write programs in an assembly language made up of basic instructions (e.g., multiply two numbers, write a number to memory) that a computer can understand. You will learn how to construct and use the basic blocks of a computer processor: arithmetic, memories, I/O, and gates built using digital logic (circuits whose wires hold 1’s and 0’s). You will use design tools to build a CPU that runs assembly programs. Finally, you will analyze computer systems with respect to engineering metrics like cost and performance and discuss factors, such as data locality and parallelism, that affect these metrics. <cite> - UIowa.edu</cite>
                             </blockquote>
-                            This course description was indeed the ultimate appeal for continuing my education from community college to university. Having learned how to program at a higher-level, I was interested in knowing what occurs close to the circuit; I wanted to learn the "1's and 0's," as it were.
+                            This course description was indeed the ultimate appeal for continuing my education from community college into university. Having learned how to program at a higher-level, I was interested in knowing what occurs close to the circuit; I wanted to learn the "1's and 0's," as it is said.
                         </p>
 
                         <p>
-                            I do not believe the above course description does the class justice. This course brings together and synthesizes Data and Discrete Structures. Data Structures formally introduces the concept of data representation by exploring alternative implementations of algorithms that are commonly abstracted by higher-level programming languages. Discrete Structures provides the mathematical background to describe the actual representation of data as it exists within the logical circuitry. This synthesis is more than the sum of its parts. The propositional logic used to describe the circuitry is represented as a certain set of symbols which is then translated to the symbolic diagrams which compose the logical circuitry. The assembly languages translated to this circuitry alludes to one that there may exist any amount of layers to translate a problem represented in one language to another. This course implicitly informs any curious student that the algorithm is programming-language agnostic. Wholly understanding this course trivializes studying Theory of Computation; this course teaches a student a model of computation!
+                            I do not believe the above course description does the class justice. This course brings together and synthesizes Data and Discrete Structures. Data Structures formally introduces the concept of data representation by exploring alternative implementations of algorithms that are commonly abstracted by higher-level programming languages. Discrete Structures provides the mathematical background to describe the actual representation of data as it exists within the logical circuitry. This synthesis is more than the sum of its parts. The propositional logic used to describe the circuitry is represented as a certain set of symbols which is then translated to the symbolic diagrams which compose the logical circuitry. The assembly languages translated to this circuitry alludes that there may exist any amount of layers to translate a problem represented in one language to another. This course implicitly informs any curious student that the algorithm is programming-language agnostic. Wholly understanding this course trivializes studying Theory of Computation; this course teaches a student a model of computation!
                         </p>
 
                         <p>
-                            The context provided by this preface is exempt from the post-course report I've written for the university. The context provided by this preface hopefully conveys to the reader that I tried to maximize the value of of learning the subject to my students. The extra value was explicitly relayed to my students with an emphasis on the fact that what we are studying and building is a model of computation. This gives extra context to the student by pushing the course beyond the study of some antiquated paradigm.
+                            The context provided by this preface is exempt from the post-course report I've written for the university. The context provided by this preface hopefully conveys to the reader that I tried to maximize the value of of learning the subject to my students. The extra value was explicitly relayed to my students with an emphasis that what we are building a model of computation. This gives extra context to the student by pushing the course beyond the study of some antiquated paradigm.
                         </p>
 
-                        <p>
-                            The following is the report I submitted to the university.
-                        </p>
                     <hr>
                     </section>
                     <header>
-                        <h1>CS:2630 - Context and Methodology</h1>
+                        <h1>Teaching: Computer Organization</h1>
                     </header>
+                    <p>
+                        The following is the report I submitted to the university upon the conclusion of hosting Computer Organization as a sole-responsibility instructor.
+                    </p>
+                    <h2>CS:2630 - Context and Methodology</h2>
                     <p>
                         People tend to have the perception of Computer Organization being a difficult class involving a lot of grit. This perception typically dominates discussion about the topic. Emphasis on key concepts can help alleviate these points. Specifically, directly correlating concepts of this course to concepts of previous courses.
                     </p>
@@ -203,7 +208,7 @@ include('../../header.php');
                         <hr>
                         <h3>Concluding notes</h3>
                         <p>
-                            There is hesitation releasing the assignments as described in the concluding paragraph of the above report. This is in part due to the ambiguity of the University's copyright policy as it is currently written: The University will not claim pedagogical related materials but any production expected of a given position can still be claimed. Their literature doesn't discuss the contradiction this poses.
+                            There is hesitation releasing the assignments as described in the concluding paragraph the report. This is in part due to the ambiguity of the University's copyright policy as it is currently written: The University will not claim pedagogical related materials but any production expected of a given position can still be claimed. Their literature doesn't discuss the contradiction this poses.
                         </p>
 
                         <p>
@@ -212,30 +217,30 @@ include('../../header.php');
 
                         <hr>
 
-                        <div  style='padding-left:3%;'>
+                        <div style='padding-left:3%;'>
                             <p id='second-note'>
                                 <a href='#second-note-origin'>**</a> Engaging material isn't the sole component of fostering the development and application of critical thought. An engaging instructor is also an important aspect. Effective communication requires feedback from all parties involved. As an instructor, I would seek input and feedback from students as individuals. This is difficult in the lecture setting, needing to be general enough to adhere to the class as a whole. This focus on individuality manifests whilst hosting labs or while engaging with the students who themselves engage with the instructor.
                             </p>
 
                             <p>
-                                I had no experience programming in MIPS prior to being assigned this course as an instructor. The last time I implemented any involving algorithm in assembly was when I initially took this course three years prior. My studying of MIPs occurred one or two days prior to giving the lecture. Was it laziness that caused me to take this approach?
+                                I had no experience programming in MIPS prior to this teaching assignment. The last time I implemented any involving algorithm in assembly was when I initially took this course three years prior. My studying of MIPs occurred one or two days prior to giving the lecture. Was it laziness that caused me to take this approach?
                             </p>
 
                             <p>
-                                The answer to the above question is partially yes. This laziness was a convenience afforded by my comfort in learning something new within this domain. This comfort is on account of my ability to critically think. Learning a new language is made trivial by this critical thought and through my experience abstracting other languages. This 'laziness' affords the following benefits to the students:
+                                The answer to the above question is partially yes. This laziness was a convenience afforded by my comfort in learning something new within this domain. This comfort is on account of my ability to critically think. Learning a new language is made trivial by this critical thought and through my experiences abstracting other languages. This 'laziness' affords the following benefits to the students:
                                 <ul>
                                     <li>
                                         Having a fresh take on a language highlights some non-intuitive concepts someone who is more experienced may take for granted. This allowed me to know to take the time to elaborate on something that another instructor may have glossed over.
                                     </li>
 
                                     <li>
-                                        Being inexperienced in the nuances of a language provided opportunities for me to make an unexpected mistake! This provides opportunity for students to witness how *I* think critically by showing them how I walk through an unknown problem and apply my own problem-solving skills.
+                                        Being inexperienced in the nuances of a language provided opportunities for me to make an unexpected mistake! This provides opportunity for students to witness how <b>I</b> think critically by showing them how I walk through an unknown problem and apply my own problem-solving skills.
                                     </li>
                                 </ul>
                             </p>
 
                             <p>
-                                The second bullet point is so god-damn important it warrants appalling language in a professional writing. As a student, there is nothing more frustrating than seeing an instructor blow through some coding problem like they are a higher-being. In reality, the instructor probably has the solution key written off to the side or just memorized. This usually isn't revealed to the student, which implicitly sets an unreasonable expectation of performance. I will make a conjecture that this facade contributes to barrier of entry that many find daunting.
+                                The second bullet point is so god-damn important that it warrants appalling language in a professional writing. As a student, there is nothing more frustrating than seeing an instructor blow through some coding problem like they are a higher-being. In reality, the instructor probably has the solution key written off to the side or just memorized. This usually isn't revealed to the student, which implicitly sets an unreasonable expectation of performance. I will make a conjecture that this facade contributes to a barrier of entry that many find daunting.
                             </p>
 
                             <p>
