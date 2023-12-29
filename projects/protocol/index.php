@@ -28,7 +28,7 @@ include('../../header.php');
                             The following is a summary of research conducted to help earn my Bachelor's of Science in Computer Science. The research was an exploration of a model of computation called the Population Protoocol. Those who have studied Theory of Computer Science should find it intuitive.
                         </p>
                         <p>
-                            A presentation was given discussing the particulars of this research and can be viewed via <a href='https://youtu.be/Gcv3333bIZE'>YouTube</a>. General administrative information pertaining to the research and the presentation can be viewed via the University of Northern Iowa's <a href='https://scholarworks.uni.edu/surp/2020/all/10/'>SURP 2020 Symposium</a> website. Finally, a repository of the work done can be viewed via my personal <a href='https://github.com/alanmmckay/population_protocol_simulator'>GitHub</a> page.
+                            A presentation was given discussing the particulars of this research and can be viewed via <a href='https://youtu.be/Gcv3333bIZE' target="_blank" rel="noopener noreferrer">YouTube</a>. General administrative information pertaining to the research and the presentation can be viewed via the University of Northern Iowa's <a href='https://scholarworks.uni.edu/surp/2020/all/10/' target="_blank" rel="noopener noreferrer">SURP 2020 Symposium</a> website. Finally, a repository of the work done can be viewed via my personal <a href='https://github.com/alanmmckay/population_protocol_simulator' target="_blank" rel="noopener noreferrer">GitHub</a> page.
                         </p>
                     <hr>
                     </section>
