@@ -26,7 +26,7 @@ include('../../header.php');
                         </header>
                         <h3>Pedagogy: College Education and Computer Science</h3>
                         <p>
-                            Upon the conclusion of the first semester of grad-school, I was asked to take on a sole-responsibility role to teach Computer Organization during the summer semester. As someone who had only been in grad-school for five months, I took pride that I was offered the position. I must have impressed as a TA. Being a non-traditional student afforded me valuable life experience which contributed to confidence as both an individual and an instructor. My diverse background experience also lent well to being able to communicate and teach using a multitude of different approaches.
+                            Upon the concluding the first semester of grad-school, I was asked to take on a sole-responsibility role to teach Computer Organization during the summer semester. As someone who had only been in grad-school for five months, I took pride that I was offered the position. I must have impressed as a TA. Being a non-traditional student afforded me valuable life experience which contributed to confidence as both an individual and an instructor. My diverse background experience also lent well to being able to communicate and teach using a multitude of different approaches.
                         </p>
 
                         <p>
@@ -101,9 +101,119 @@ include('../../header.php');
                             Once examples are given, I've always been keen to sharing alternatives to a given implementation of a loop. A for-loop absolutely should be taught in tandem with a while loop. This should occur with a light exposure to recursion. Various conditions of execution should be discussed here as well. Analog is not only given through context of every day living but also with respect to evaluating the loops themselves!
                         </p>
 
-                        <code>
+                        <figure>
+                            <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:35em;padding-left:10px;max-height:250px'>
+def sum_a(aList):
+    total = 0
+    for value in aList:
+        total += value
+    return total
 
-                        </code>
+def sum_b(aList):
+    total = 0
+    length = len(aList)
+    for index in range(0,length):
+        value = aList[index]
+        total += value
+    return total
+
+def sum_c(aList):
+    total = 0
+    index = 0
+    length = len(aList)
+    while index &lt; length:
+        value = aList[index]
+        total = total + value
+        index = index + 1
+    return total
+
+def sum_d(aList):
+    total = 0
+    length = len(aList)
+    while length &gt;= 0:
+        value = aList.pop()
+        total = total + value
+        length = len(aList)
+    return total
+
+def sum_e(aList):
+    total = 0
+    while len(alist) &gt;= 0:
+        value = aList.pop()
+        total = total + value
+    return total
+
+def sum_f(aList):
+    total = sum(aList) #python's built-in sum function
+    return total
+</pre>
+                            </code>
+                            <figcaption>
+                                A set of functions which take a list as an input and sums their values. Each function accomplishes the same task. This illustrates that there are many different approaches to solving a given problem - a notion that is not intuitive to one first experiencing the rigidity of programming.
+                            </figcaption>
+                        </figure>
+
+                        <figure>
+                            <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:35em;padding-left:10px;max-height:250px'>
+def sum_g(aList):
+    return sum(alist)
+
+def sum_h_helper(aList,index):
+    length = len(aList)
+    if index &gt;= length:
+        return 0
+    else:
+        value = aList[index]
+        return value + sum_h_helper(aList,index + 1)
+
+def sum_h(aList):
+    return sum_h_helper(aList,0)
+
+def sum_i_helper(aList,index):
+    length = len(aList)
+    value = aList[index]
+    if index &gt;= (length - 1):
+        return value
+    else:
+        return value + sum_i_helper(aList,index + 1)
+
+def sum_i(aList):
+    return sum_i_helper(aList,0)
+
+def sum_j_helper(aList,value):
+    length = len(aList)
+    if length &lt;= 0:
+        return value
+    else:
+        new_value = aList.pop()
+        return value + sum_j_helper(aList)
+
+def sum_j(aList):
+    value = aList.pop()
+    return value = sum_j_helper(aList,value)
+
+def sum_k(aList):
+    value = aList[0]
+    if len(aList) &lt;= 1:
+        return value
+    else:
+        other_values = aList[1:]
+        return value + sum_k(other_values)
+
+def sum_l(aList):
+    if len(aList) &lt;= 1:
+        return aList[0]
+    else:
+        return aList[0] + sum_l(aList[1:])
+
+</pre>
+                            </code>
+                            <figcaption>
+                                Even more functions which take a list as an input and sums their values. This time leveraging the function paradigm of programming.
+                            </figcaption>
+                        </figure>
 
                         <p id='second-note-origin'>
                             The usage of analogous example shows that the same problem can have many solutions. This allows a student to view solutions through different perspectives. This abstracts the study to what it is - how to abstract the algorithm. It also encourages a student to think outside of the box and to be creative in their own solutions. This helps foster one of the most crucial traits of being <b>successful</b> within this study - being curious while thinking critically.<a href='#second-note'>**</a>
@@ -114,7 +224,7 @@ include('../../header.php');
                         </p>
 
                         <p>
-                            At the end of day, regardless of which category a student belongs, they are paying good money for the education. They are taking a class to learn the subject involved. The goal of an educator should be to engage with the students' expectations and maximize the value of the experience. <i>Value of the experience</i> is subjective to each individual, but given the context of school being a <b>place to learn</b>, my efforts are focused on providing the value of knowing the subject. With respect to teaching loops, I take extra effort in providing the value of knowing what a loop is and does by inviting a student to be a better critical thinker.
+                            At the end of day, regardless of which category a student belongs, they are paying good money for the education. They are taking a class to learn the subject involved. The goal of an educator should be to engage with the students' expectations and maximize the value of the experience. <i>Value of the experience</i> is subjective to each individual, but given the context of school being a <b>place to learn</b>, my efforts are focused on providing the value of knowing the subject. Within the example of teaching loops, I take extra effort in providing the value of knowing what a loop is and does by inviting a student to be a critical thinker.
                         </p>
 
                         <p>
