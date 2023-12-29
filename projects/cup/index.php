@@ -164,7 +164,7 @@ include('../../header.php');
                         The public-facing pages of the Cup of Joe website were then templated using PHP and thus integrated access to the database to allow the display of events and shop links. The mobile redesign was made easier through the modularity provided through this template.
                     </p>
                     <p>
-                        It's worth reflecting on the work done here. While looking through the archive of this website, I'm drawn to the difference between what was then called the music page and what is currently called the event page. This was a place where I decided to introduce new styling in an attempt to make the website more coherent in style. The new styling bore similarity to how the aside blurbs were displayed within the various pages, providing a more cohesive experience with respect to the aesthetic.
+                        It's worth reflecting on the work done here. While looking through the <a href='https://web.archive.org/web/20181119220446/http://www.cupofjoe-cedarfalls.com/music' target="_blank" rel="noopener noreferrer">archive</a> of this website, I'm drawn to the difference between what was then called the music page and what is currently called the event page. This was a place where I decided to introduce new styling in an attempt to make the website more coherent in style. The new styling bore similarity to how the aside blurbs were displayed within the various pages, providing a more cohesive experience with respect to the aesthetic.
                     </p>
                     <hr>
                     <figure class='image-collage'>
@@ -195,7 +195,7 @@ include('../../header.php');
                     </figure>
                     <hr>
                     <p>
-                        The result of my efforts can be viewed on the company's domain: <a href='https://www.cupofjoe-cedarfalls.com/' target="_blank" rel="noopener noreferrer">www.cupofjoe-cedarfalls.com</a>. It seems that events are no longer being hosted at the location, thus the events page has been removed altogether. My personal domain is hosting a live demo of the website as well. It can be viewed <a href='demo/index.php' target="_blank" rel="noopener noreferrer">here</a>. <!--A demo control page can also be viewed <a href='demo.php'>here</a>.-->
+                        The result of my efforts can be viewed on the company's domain: <a href='https://www.cupofjoe-cedarfalls.com/' target="_blank" rel="noopener noreferrer">www.cupofjoe-cedarfalls.com</a>. It seems that events are no longer being hosted at the location, thus the events page has been removed altogether. My personal domain is hosting a live demo of the website as well. It can be viewed <a href='demo/index.php' target="_blank" rel="noopener noreferrer"s>here</a>. <!--A demo control page can also be viewed <a href='demo.php'>here</a>.-->
                     </p>
                     <!-- https://web.archive.org/web/20181119220446/http://www.cupofjoe-cedarfalls.com/music -->
                 </article>
