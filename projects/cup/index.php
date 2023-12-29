@@ -24,10 +24,10 @@ include('../../header.php');
                         <h1>Web Development: Cup of Joe</h1>
                     </header>
                     <p>
-                        Having concluded a semester involving both Intermediate Computing and Design &amp; Analysis of Algorithms, time was spent going back to my roots as a web developer during the winter transition from the Fall 2018 semester.
+                        Having concluded a semester involving both Intermediate Computing and Design &amp; Analysis of Algorithms, my time was spent going back to my roots as a web developer. This occurred during the winter transition from the semester of Fall 2018.
                     </p>
                     <p>
-                        A local coffee shop, Cup of Joe, was a frequent spot of study; this fact helped contribute to my successful grades. So what better way to give back by doing a redesign of the current website making it mobile friendly?
+                        A local coffee shop, Cup of Joe, was a frequent spot of study; this fact helped contribute to successful grades. So what better way to give back by doing a redesign of the current website? A redesign which would make it mobile friendly.
                     </p>
                     <div class='aside'>
                     <figure>
@@ -38,10 +38,10 @@ include('../../header.php');
                     <hr>
                     </figure>
                     <p>
-                        This entailed a rebuild of the HTML and CSS - motivated specifically to rid the site of the usage and nesting of rigid table tags and their various elements. More modern semantic tags were used instead of the table tags: an aside to note tangential information, lists to designate groupings of links, article to note groupings of paragraphs, sections to differentiate these major components, etc.
+                        The redesign entailed a rebuild of the HTML and CSS - motivated specifically to rid the site of the usage and elaborate nesting of table tags. More modern semantic tags were used instead of the table tags: an aside to note tangential information, lists to designate groupings of links, article to note groupings of paragraphs, sections to differentiate these major components, etc.
                     </p>
                     <p>
-                        The foundation of this implementation was built upon a mobile-first design. Here, media queries would kick a certain layout into view dependent on window size where the initial template being considered was designed for mobile devices. This involved careful consideration to maintaining the website's aesthetic, which does a good job adhering to the aesthetic of the shop proper. One key facet in accomplishing this was the decision to maintain the site's identity with the navigation bar. Instead of leveraging a hamburger button to splay navigational options, the navigation bar is fixed to the left where the size of its selections maintain a good compromise between easy interaction while not obscuring too much of the view, (regardless of view-screen size). This further differs from prior implementation as the navigation bar now stays in view as a user scrolls through a given page.
+                        The foundation of this implementation was built upon a mobile-first design. Here, media queries would kick a certain layout into view based on window size where the initial template being considered was designed for mobile devices. This involved careful consideration towards maintaining the website's aesthetic - an aesthetic which does a good job adhering to the aesthetic of the shop proper. One key facet in accomplishing this was the decision to maintain the site's identity with the navigation bar. Instead of leveraging a hamburger button to splay navigational options, the navigation bar is fixed to the left where the size of its selections maintain a good compromise between easy interaction while not obscuring too much of the view, (regardless of view-screen size). The redesign differentiated further by fixing the navigation bar into view as a user scrolls through a given page.
                     </p>
                     <figure class='responsive_aside'>
                         <img src='../../images/cup_story_mobile.png' alt='' />
@@ -51,7 +51,7 @@ include('../../header.php');
                     <hr>
                     </figure>
                     <p>
-                        In terms of layout, there were two different types of pages that the Cup of Joe website contained. The main page had a unique layout in the sense that the majority of the display emphasized on a slideshow of images from the shop. The other pages consisted of textual content with an image banner and occasionally information placed as an aside. The responsive redesign would determine both the sizes of these pieces of each page, but also where and if they would be drawn.
+                        In terms of layout, there were two different types of pages that the Cup of Joe website contained. The main page had a unique layout in the sense that the majority of the display emphasized on a slideshow of images from the coffee shop. The other pages consisted of textual content with an image banner and occasionally information placed as an aside. The responsive redesign would not only determine the sizes of these elements, but the location they would be drawn.
                     </p>
                     </div>
                     <hr>
@@ -83,13 +83,13 @@ include('../../header.php');
                     </figure>
                     <hr>
                     <p>
-                        Once implementing the redesign for the main page and the story page, I showed them to Dawn, the proprietor of Cup of Joe. She was impressed! More importantly, I had good timing. This was due to the fact that her website was built upon a framework that was about to have its support revoked; if I recall correctly, it involved Microsoft's Silverlight. The host of her website did not have the time to redesign and re-implement the website using some other framework.
+                        Once implementing the redesign for the main page and the story page, I shared them with the proprietor of Cup of Joe. She was impressed! More importantly, I had good timing. This was due to the fact that her website was built upon a framework that was about to have its support revoked - (if I recall correctly, it involved Microsoft's Silverlight). The host of her website did not have the time to redesign and re-implement the website using some other framework.
                     </p>
                     <p>
-                        What's been shown thus far has been static in nature. There indeed was a non-static element in place, though. There was a music page where Dawn could post announcements of music events that would happen in her store. This had its own set of controls that she had access to. My initial intention of mobile redesign would balloon into including the development of a simple content management system where she could post information about events to her pages.
+                        What's been shown thus far has been static in nature. There indeed was a non-static feature in place. There was a music page which allowed the posting of related events. This had its own set of controls that the owner had access to. Thus, my initial intention of a straight-foward mobile redesign would balloon into the inclusion and implementation of a simple content management system.
                     </p>
                     <p>
-                        Implementation of the content management system would be through a PHP back-end interacting with a MySQL database. Here, user accounts could be created, events could be posted and edited, and a new set of control was provided as shop integration where Dawn could post products being sold via an online retail service. All this control was provided through a set of control pages that she could access using any browser. These control pages would leverage a simple bootstrap theme to allow mobile access for her and her employees; I was not shy to use the hamburger button in the context of using these control pages.
+                        Implementation of the content management system would be through a PHP back-end interacting with a MySQL database. Here, user accounts could be created, events could be posted and edited, and a new feature was provided with shop integration where products being sold could also be posted. All this control was provided through a set of pages that could be accessed using any browser. These control pages would leverage a simple bootstrap theme to allow mobile access; I was not shy to use the hamburger button in the context of using these control pages.
                     </p>
                     <div class='slide-deck'>
                     <hr>
@@ -195,7 +195,7 @@ include('../../header.php');
                     </figure>
                     <hr>
                     <p>
-                        The result of my efforts can be viewed on Dawn's domain: <a href='https://www.cupofjoe-cedarfalls.com/'>www.cupofjoe-cedarfalls.com</a>. It seems that events are no longer being hosted at the location, thus the events page has been removed altogether. My personal domain is hosting a live demo of the website as well. It can be viewed <a href='demo/index.php'>here</a>. <!--A demo control page can also be viewed <a href='demo.php'>here</a>.-->
+                        The result of my efforts can be viewed on the company's domain: <a href='https://www.cupofjoe-cedarfalls.com/' target="_blank" rel="noopener noreferrer">www.cupofjoe-cedarfalls.com</a>. It seems that events are no longer being hosted at the location, thus the events page has been removed altogether. My personal domain is hosting a live demo of the website as well. It can be viewed <a href='demo/index.php' target="_blank" rel="noopener noreferrer">here</a>. <!--A demo control page can also be viewed <a href='demo.php'>here</a>.-->
                     </p>
                     <!-- https://web.archive.org/web/20181119220446/http://www.cupofjoe-cedarfalls.com/music -->
                 </article>
