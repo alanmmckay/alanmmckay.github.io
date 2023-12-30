@@ -83,28 +83,37 @@ include('../../header.php');
                         How are the various degrees distributed? The following figures are indicative of distribution:
                     </p>
 
-                    <figure>
-                        <img src='../../images/dist-outdeg.png' style='max-width:550px;'>
-                        <figcaption style='text-align:center'>
-                            Figure 1: Distribution plotting of node out-degrees.
-                        </figcaption>
-                    </figure>
+                    <div class='fig-col'>
+                        <a href='../../images/dist-outdeg.png' target="_blank" rel="noopener noreferrer">
+                            <figure class='graph'>
+                                <img src='../../images/dist-outdeg.png'>
+                                <figcaption>
+                                    Figure 1: Distribution plotting of node out-degrees.
+                                </figcaption>
+                            </figure>
+                        </a>
 
-                    <figure>
-                        <img src='../../images/dist-indeg.png' style='max-width:550px;'>
-                        <figcaption style='text-align:center'>
-                            Figure 2: Distribution plotting of node-indegrees.
-                        </figcaption>
-                    </figure>
 
-                    <figure>
-                        <img src='../../images/dist-degree.png' style='max-width:550px;'>
-                        <figcaption style='text-align:center'>
-                            Figure 3: Distribution plotting of node degrees (inbound and outbound)
-                        </figcaption>
-                    </figure>
+                        <a href='../../images/dist-indeg.png' target="_blank" rel="noopener noreferrer">
+                            <figure class='graph'>
+                                <img src='../../images/dist-indeg.png'>
+                                <figcaption>
+                                    Figure 2: Distribution plotting of node-indegrees.
+                                </figcaption>
+                            </figure>
+                        </a>
 
-                    <p>
+                        <a href='../../images/dist-degree.png' target="_blank" rel="noopener noreferrer">
+                            <figure class='graph' style='float:none'>
+                                <img src='../../images/dist-degree.png'>
+                                <figcaption>
+                                    Figure 3: Distribution plotting of node degrees (inbound and outbound)
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+
+                    <p style='clear:both;'>
                         The associated distribution function seems to be exponential in shape. What is this function? The proportion of some node having degree k must be k raised to a negative power: k<sup>-γ</sup>, with some constant factor, c. Discovering the value of this power can be made on the observation that kmax ≈ kmin * N<sup>(1/γ-1)</sup>, where N is the total number of nodes in the network.
                         <ul>
                             <li>
@@ -159,107 +168,142 @@ include('../../header.php');
                     <p>
                         To confirm a power-law distribution, these distributions can be plotted in a log-log scale. The following figures show that a power-law distribution is indeed in play. The light blue points represent the distribution plot. The dotted blue line overlayed by the red line is a plotting of the power-law distribution function (C*k<sup>-γ</sup>).
                     </p>
+                    <div class='fig-col'>
 
-                    <figure>
-                        <img src='../../images/pldist-outdeg.png'>
-                        <figcaption>
-                            Figure 4: Power Law Distribution plotting of node-out degrees
-                        </figcaption>
-                    </figure>
+                        <a href='../../images/pldist-outdeg.png' target="_blank" rel="noopener noreferrer">
+                            <figure class='graph'>
+                                <img src='../../images/pldist-outdeg.png'>
+                                <figcaption>
+                                    Figure 4: Power Law Distribution plotting of node-out degrees
+                                </figcaption>
+                            </figure>
+                        </a>
 
-                    <figure>
-                        <img src='../../images/pldist-indeg.png'>
-                        <figcaption>
-                            Figure 5: Power Law Distribution plotting of node-in degrees
-                        </figcaption>
-                    </figure>
+                        <a href='../../images/pldist-indeg.png' target="_blank" rel="noopener noreferrer">
+                            <figure class='graph'>
+                                <img src='../../images/pldist-indeg.png'>
+                                <figcaption>
+                                    Figure 5: Power Law Distribution plotting of node-in degrees
+                                </figcaption>
+                            </figure>
+                        </a>
 
-                    <figure>
-                        <img src='../../images/pldist-degree.png'>
-                        <figcaption>
-                            Figure 6: Power Law Distribution plotting of node degrees (inbound and outbound)
-                        </figcaption>
+                        <a href='../../images/pldist-degree.png' target="_blank" rel="noopener noreferrer">
+                            <figure class='graph' style='float:none'>
+                                <img src='../../images/pldist-degree.png'>
+                                <figcaption>
+                                    Figure 6: Power Law Distribution plotting of node degrees (inbound and outbound)
+                                </figcaption>
+                            </figure>
+                        </a>
                         <hr>
-                    </figure>
 
-                    <p>
+                    </div>
+
+                    <p style='clear:both;'>
                         Random networks were generated to contrast this data. The algorithm that created these networks ensured the same node count and edge count. It also ensured there exists no node that does not have an edge – as is the case for the reddit data set. The distribution of these networks differ. Consider the following figures:
                     </p>
 
-                    <figure>
-                        <img src='../../images/rdist-indeg.png'>
-                        <figcaption>
-                            Figure 7: Distribution plotting of node out-degrees
-                        </figcaption>
-                    </figure>
+                    <div class='fig-col'>
+                        <a href='../../images/rdist-outdeg.png' target="_blank" rel="noopener noreferrer">
+                            <figure class='graph'>
+                                <img src='../../images/rdist-outdeg.png'>
+                                <figcaption>
+                                    Figure 7: Distribution plotting of node out-degrees
+                                </figcaption>
+                            </figure>
+                        </a>
 
-                    <figure>
-                        <img src='../../images/rdist-outdeg.png'>
-                        <figcaption>
-                            Figure 8: Distribution plotting of node in-degrees of Randomized Network
-                        </figcaption>
-                    </figure>
+                        <a href='../../images/rdist-indeg.png' target="_blank" rel="noopener noreferrer">
+                            <figure class='graph'>
+                                <img src='../../images/rdist-indeg.png'>
+                                <figcaption>
+                                    Figure 8: Distribution plotting of node in-degrees of Randomized Network
+                                </figcaption>
+                            </figure>
+                        </a>
 
-                    <figure>
-                        <img src='../../images/rdist-degree.png'>
-                        <figcaption>
-                            Figure 9: Distribution plotting of node degrees (outbound and inbound) of Randomized Network
-                        </figcaption>
-                    </figure>
+                        <a href='../../images/rdist-degree.png' target="_blank" rel="noopener noreferrer">
+                            <figure class='graph' style='float:none;'>
+                                <img src='../../images/rdist-degree.png'>
+                                <figcaption>
+                                    Figure 9: Distribution plotting of node degrees (outbound and inbound) of Randomized Network
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
 
-                    <p>
+                    <p style='clear:both;'>
                         The distribution figures are similar for the other four randomized networks. This similarity holds true for the log-log scale plotting of the same data:
                     </p>
 
-                    <figure>
-                        <img src='../../images/plrdist-degree.png'>
-                        <figcaption>
-                            Figure 10: Power Law Distribution plotting of node degrees (inbound and outbound) of Randomized Network
-                        </figcaption>
-                    </figure>
+                    <a href='../../images/plrdist-degree.png' target="_blank" rel="noopener noreferrer">
+                        <figure class='graph'>
+                            <img src='../../images/plrdist-degree.png'>
+                            <figcaption>
+                                Figure 10: Power Law Distribution plotting of node degrees (inbound and outbound) of Randomized Network
+                            </figcaption>
+                        </figure>
+                    </a>
 
                     <p>
                         The following table of figures are the log-log scale plotting of four other randomized networks, with respect to evaluating out-bound degree:
                     </p>
 
-                    <figure>
-                        <img src='../../images/rdist2-outdeg.png'>
-                        <img src='../../images/rdist3-outdeg.png'>
-                        <img src='../../images/rdist4-outdeg.png'>
-                        <img src='../../images/rdist5-outdeg.png'>
+                    <figure class='col-fig'>
 
-                        <figcaption>
+                        <a href='../../images/rdist2-outdeg.png' target="_blank" rel="noopener noreferrer">
+                            <img src='../../images/rdist2-outdeg.png'>
+                        </a>
+                        <a href='../../images/rdist3-outdeg.png' target="_blank" rel="noopener noreferrer">
+                            <img src='../../images/rdist3-outdeg.png'>
+                        </a>
+                        <a href='../../images/rdist4-outdeg.png' target="_blank" rel="noopener noreferrer">
+                            <img src='../../images/rdist4-outdeg.png'>
+                        </a>
+                        <a href='../../images/rdist5-outdeg.png' target="_blank" rel="noopener noreferrer">
+                            <img src='../../images/rdist5-outdeg.png'>
+                        </a>
 
+                        <figcaption style='clear:both;padding-top:25px'>
+                            Figure 12: Power Law distribution plotting of outbound node degrees for four other randomized networks.
                         </figcaption>
+
                     </figure>
 
                     <p>
                         These distributions are Poisson/binomial. They do not allow for the reasonable probability of having nodes with large degrees, (degrees that approach kmax). This is emphasized by the values given in the x-axis. The maximum node degree here is anywhere from 7 to 9; much smaller than the maximum node degrees of the Reddit dataset. There seems to be a higher occurrence nodes with degree quantities close to the maximum as well. This is shown in the network representation of the involved data, shown in the following figures:
                     </p>
 
-                    <figure>
+                    <a href='../../images/rnet-vis.png' target="_blank" rel="noopener noreferrer">
+                    <figure class='graph'>
                         <img src='../../images/rnet-vis.png'>
                         <figcaption>
-                            Figure 12: Full visualization of randomized network indicates a lack of any hubs. The network seems to have reached a transition where there exists only one component.
+                            Figure 13: Full visualization of randomized network indicates a lack of any hubs. The network seems to have reached a transition where there exists only one component.
                         </figcaption>
                     </figure>
+                    </a>
 
-                    <figure>
+                    <a href='../../images/sfnet-vis.png' target="_blank" rel="noopener noreferrer">
+                    <figure class='graph'>
                         <img src='../../images/sfnet-vis.png'>
                         <figcaption>
-                            Figure 13: Partial visualization of network representative of the Reddit dataset. Notice the significant hubs which are indicative of a higher degree.
+                            Figure 14: Partial visualization of network representative of the Reddit dataset. Notice the significant hubs which are indicative of a higher degree.
                         </figcaption>
                     </figure>
+                    </a>
 
-                    <figure>
+                    <a href='../../images/sf-outliers.png' target="_blank" rel="noopener noreferrer">
+                    <figure class='graph'>
                         <img src='../../images/sf-outliers.png'>
                         <figcaption>
-                            Figure 14: Partial visualization of the network representative of the Reddit dataset; structures like these exist in the orbit of the larger connected component of the prior figure. This is a property not observed in the generated randomized networks.
+                            Figure 15: Partial visualization of the network representative of the Reddit dataset; structures like these exist in the orbit of the larger connected component of the prior figure. This is a property not observed in the generated randomized networks.
                         </figcaption>
                     </figure>
+                    </a>
 
                     <p>
-                        The connectivity of Figure 12 tracks once consideration of average node degree is taken. The average degree measured by Gephi is 2.141. This tracks considering the expected node degree of |E|/|V| which is 17406/8129 =  2.141. Once the average node degree surpasses 1, a randomized graph is in the super critical regime where there exists some gigantic component. This component is not fully connected, though; the average node degree has not reached a point to exceed ln(|V|).
+                        The connectivity of Figure 13 tracks once consideration of average node degree is taken. The average degree measured by Gephi is 2.141. This tracks considering the expected node degree of |E|/|V| which is 17406/8129 =  2.141. Once the average node degree surpasses 1, a randomized graph is in the super critical regime where there exists some gigantic component. This component is not fully connected, though; the average node degree has not reached a point to exceed ln(|V|).
                     </p>
 
                     <p>

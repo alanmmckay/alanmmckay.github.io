@@ -303,6 +303,35 @@ div.slide-deck figure figcaption ul li:hover{
     color:black;
 }
 
+figure.graph img{
+    max-width:550px;
+}
+
+figure.graph figcaption{
+    text-align:center;
+}
+
+@media screen and (min-width:800px){
+    #writingsWrapper .fig-col{
+        overflow:auto;
+    }
+
+    #writingsWrapper .fig-col figure{
+        width:45%;
+        float:left;
+        margin:auto;
+    }
+
+    #writingsWrapper figure.col-fig{
+        overflow:auto;
+    }
+
+    #writingsWrapper figure.col-fig img{
+        width:45%;
+        float:left;
+        margin:auto;
+    }
+}
 @media screen and (min-width: 1100px){
     #writingsWrapper{
         width:50%;
