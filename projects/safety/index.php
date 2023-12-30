@@ -203,7 +203,7 @@ include('../../header.php');
                         application has a unique client ID. Said application should direct a user to the following URL:
                     </p>
                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:50em;padding-left:10px'>
 https://www.strava.com/oauth/authorize?client_id=&lt;CLIENT_ID&gt;response_type=code&amp;redirect_uri=&lt;APPLICATION_LOCATION&gt;/exchange_token&amp;approval_prompt=force&amp;scope=activity:&lt;SCOPE&gt;
 </pre>
                     </code>
@@ -228,7 +228,7 @@ https://www.strava.com/oauth/authorize?client_id=&lt;CLIENT_ID&gt;response_type=
                         response with an access code to use to query the API. I.e.,
                     </p>
                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:50em;padding-left:10px'>
 curl -X POST https://www.strava.com/oauth/token \
 -F client_id=&lt;CLIENT_ID&gt; \
 -F client_secret=&lt;CLIENT_SECRET&gt; \
@@ -240,7 +240,7 @@ curl -X POST https://www.strava.com/oauth/token \
                         Responds with a user access token to be used via:
                     </p>
                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:50em;padding-left:10px'>
 http GET "https://www.strava.com/api/v3/athlete/activities" "Authorization: Bearer &lt;access token&gt;"
 </pre>
                     </code>
@@ -260,7 +260,7 @@ http GET "https://www.strava.com/api/v3/athlete/activities" "Authorization: Bear
                         The python script developed for this project is as follows:
                     </p>
                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:50em;padding-left:10px'>
 with open('morerides.json','r') as rides_file:
     rides_data = json.load(rides_file)
 
@@ -298,7 +298,7 @@ with open('rides.csv','w') as rides_file:
                         table definition can be described as:
                     </p>
                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:50em;padding-left:10px'>
 CREATE TABLE cycling.activities_staging
 (
     activity_id BIGINT,
@@ -326,7 +326,7 @@ CREATE TABLE cycling.activities_staging
                         The activities table is created via:
                     </p>
                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:50em;padding-left:10px'>
 CREATE TABLE cycling.activities
 (
     activity_id BIGINT,
@@ -351,7 +351,7 @@ CREATE TABLE cycling.activities
                         And the data insertion query is as follows:
                     </p>
                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:50em;padding-left:10px'>
 INSERT INTO cycling.activities(
     activity_id,
     athlete_id,
@@ -405,7 +405,7 @@ SELECT staging.activity_id,
                         The traffic volume table can be described as:
                     </p>
                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:50em;padding-left:10px'>
 CREATE TABLE cycling.traffic_vol
 (
     gid INT,
@@ -440,7 +440,7 @@ CREATE TABLE cycling.traffic_vol
                         The following insertion query addresses these two obstacles:
                     </p>
                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:50em;padding-left:10px'>
 INSERT INTO cycling.traffic_vol (gid,route_id, aadt, aadt_year, effective_start_date,
 effective_end_date,geom)
     SELECT distinct gid,route_id, aadt, aadt_year, effective_, effectiv_1,
@@ -500,7 +500,7 @@ effective_end_date,geom)
                         Queries gauging proximity safety can start being employed. I.e.,
                     </p>
                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:50em;padding-left:10px'>
 SELECT crash.geom FROM cycling.crashes as crash, cycling.activities as activity
 WHERE ST_DWithin(crash.geom,activity.route,0.01);
 </pre>
@@ -522,7 +522,7 @@ WHERE ST_DWithin(crash.geom,activity.route,0.01);
                         Consider the following query:
                     </p>
                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:50em;padding-left:10px'>
 SELECT route_id, <mark>(dp).path[1]</mark> As path_index, ST_AsTEXT(<mark>(dp).geom</mark>) AS node
 FROM (SELECT route_id, <mark>ST_DumpPoints(route) AS dp</mark> FROM cycling.activities) as segments;
 </pre>
@@ -533,7 +533,7 @@ FROM (SELECT route_id, <mark>ST_DumpPoints(route) AS dp</mark> FROM cycling.acti
                         into individual lines. This can be accomplished with the following query:
                     </p>
                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:50em;padding-left:10px'>
 SELECT lp1.route_id, <mark>st_makeline(lp1.node, lp2.node)</mark> as line FROM <mark>list_points as lp1,
 list_points as lp2</mark> WHERE lp2.path_index - lp1.path_index = 1 AND lp1.route_id = lp2.route_id;
 </pre>
@@ -616,26 +616,5 @@ list_points as lp2</mark> WHERE lp2.path_index - lp1.path_index = 1 AND lp1.rout
                 </nav>
             </section>
         </section>
-        <script>
-            function setCodeContainerSize(){
-                elements = document.getElementsByClassName('code');
-                for(i=0;i<elements.length;i++){
-                    element = elements[i];
-                    width = window.outerWidth;
-                    if (width > 800){
-                        width = 800;
-                    }else{
-                        width = width*.9;
-                    }
-                    element.style.width = width + "px";
-                }
-            }
-
-            window.onresize = function(){
-                setCodeContainerSize();
-            }
-
-            setCodeContainerSize();
-        </script>
     </body>
 </html>
