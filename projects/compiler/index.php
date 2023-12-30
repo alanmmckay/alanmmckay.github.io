@@ -34,7 +34,7 @@ include('../../header.php');
                             I took Translation of Programming Languages during the fall semester of 2019. Students of the course were tasked with building a compiler that Translates a high-level functional language to a low-level assembly language. Lectures consisted of covering the various components and steps in the process of translation. Despite the effort required to succeed, I look back on this course as a favorite. It helped me understand programming languages as an abstraction and thus helped trivialize the notion of learning a new programming language or framework.
                         </p>
                         <p>
-                            Detailed below is documentation of the project. A repository for the compiler can be found via <a href='https://github.com/alanmmckay/KLEINcompiler'>GitHub</a>.
+                            Detailed below is documentation of the project. A repository for the compiler can be found via <a href='https://github.com/alanmmckay/KLEINcompiler' target="_blank" rel="noopener noreferrer">GitHub</a>.
                         </p>
                         <hr>
                     </section>
@@ -487,7 +487,7 @@ V :                   :
                         <hr>
                         <h3 id='conclusion'>Concluding notes</h3>
                         <p>
-                            The Klein language specification was written by <a href='https://www.cs.uni.edu/~wallingf/'>Professor Eugene Wallingford</a> of the University of Northern Iowa.
+                            The Klein language specification was written by <a href='https://www.cs.uni.edu/~wallingf/' target="_blank" rel="noopener noreferrer">Professor Eugene Wallingford</a> of the University of Northern Iowa.
 
                         <blockquote>
                             I chose the name to indicate the size of the language. klein is the German word for "small" or "little". It is one of the first German words I learned back in the eighth grade.
@@ -496,7 +496,7 @@ V :                   :
                             My looking back favorably on this course has a lot to do with having Dr. Wallingford as a professor. He was well equipped to teach the course and I always felt that he was very engaging with my level of curiosity.
                         </p>
                         <p>
-                            Tiny Machine (TM) is an assembly language written by <a href='https://www.cs.sjsu.edu/faculty/louden/'>Kenneth Louden</a>. The specifications for both languages are in the following expandable sections.
+                            Tiny Machine (TM) is an assembly language written by <a href='https://www.cs.sjsu.edu/faculty/louden/' target="_blank" rel="noopener noreferrer">Kenneth Louden</a>. The specifications for both languages are in the following expandable sections.
                         </p>
                         <h3 id='k_spec_header' onclick='reveal("k_spec")' class='expandable'> [ - ] Klein Language Specification</h3>
                         <article id='k_spec'>
