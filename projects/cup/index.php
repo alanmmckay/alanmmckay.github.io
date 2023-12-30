@@ -30,6 +30,7 @@ include('../../header.php');
                         A local coffee shop, Cup of Joe, was a frequent spot of study; this fact helped contribute to successful grades. So what better way to give back by doing a redesign of the current website? A redesign which would make it mobile friendly.
                     </p>
                     <div class='aside'>
+                    <a href='../../images/cup_story_mobile.png' target="_blank" rel="noopener noreferrer">
                     <figure>
                         <img src='../../images/cup_story_mobile.png' alt='' />
                         <figcaption>
@@ -37,12 +38,14 @@ include('../../header.php');
                         </figcaption>
                     <hr>
                     </figure>
+                    </a>
                     <p>
                         The redesign entailed a rebuild of the HTML and CSS - motivated specifically to rid the site of the usage and elaborate nesting of table tags. More modern semantic tags were used instead of the table tags: an aside to note tangential information, lists to designate groupings of links, article to note groupings of paragraphs, sections to differentiate these major components, etc.
                     </p>
                     <p>
                         The foundation of this implementation was built upon a mobile-first design. Here, media queries would kick a certain layout into view based on window size where the initial template being considered was designed for mobile devices. This involved careful consideration towards maintaining the website's aesthetic - an aesthetic which does a good job adhering to the aesthetic of the shop proper. One key facet in accomplishing this was the decision to maintain the site's identity with the navigation bar. Instead of leveraging a hamburger button to splay navigational options, the navigation bar is fixed to the left where the size of its selections maintain a good compromise between easy interaction while not obscuring too much of the view, (regardless of view-screen size). The redesign differentiated further by fixing the navigation bar into view as a user scrolls through a given page.
                     </p>
+                    <a href='../../images/cup_story_mobile.png' target="_blank" rel="noopener noreferrer">
                     <figure class='responsive_aside'>
                         <img src='../../images/cup_story_mobile.png' alt='' />
                         <figcaption>
@@ -50,6 +53,7 @@ include('../../header.php');
                         </figcaption>
                     <hr>
                     </figure>
+                    </a>
                     <p>
                         In terms of layout, there were two different types of pages that the Cup of Joe website contained. The main page had a unique layout in the sense that the majority of the display emphasized on a slideshow of images from the coffee shop. The other pages consisted of textual content with an image banner and occasionally information placed as an aside. The responsive redesign would not only determine the sizes of these elements, but the location they would be drawn.
                     </p>
@@ -59,21 +63,25 @@ include('../../header.php');
                         <ul>
 
                             <li id='sixty'>
+                                <a href='../../images/cup_story_desktop.png' target="_blank" rel="noopener noreferrer">
                                 <figure>
                                     <img src='../../images/cup_story_desktop.png' alt='' />
                                     <figcaption>
                                         The desktop variant of the Cup of Joe website. Not much was changed here; Things look mostly the same.
                                     </figcaption>
                                 </figure>
+                                </a>
                             </li>
 
                             <li id='thirty'>
+                                <a href='../../images/cup_story_tablet.png' target="_blank" rel="noopener noreferrer">
                                 <figure>
                                     <img src='../../images/cup_story_tablet.png' alt='' />
                                     <figcaption>
                                         The tablet layout of the Cup of Joe website. Note the repositioning and resizing of elements which lend well to the browsing context.
                                     </figcaption>
                                 </figure>
+                                </a>
                             </li>
 
                         </ul>
@@ -97,53 +105,63 @@ include('../../header.php');
                             <ul>
 
                                 <li class='control_slide'>
-                                    <figure>
-                                        <img src='../../images/cup_control_01.png' />
-                                        <figcaption>
-                                            Slide 1/5: Selecting a menu item.
-                                        </figcaption>
-                                    </figure>
+                                    <a href='../../images/cup_control_01.png' target="_blank" rel="noopener noreferrer">
+                                        <figure>
+                                            <img src='../../images/cup_control_01.png' />
+                                            <figcaption>
+                                                Slide 1/5: Selecting a menu item.
+                                            </figcaption>
+                                        </figure>
+                                    </a>
                                 </li>
 
                                 <li class='control_slide'>
-                                    <figure>
-                                        <img src='../../images/cup_control_02.png' />
-                                        <figcaption>
-                                            Slide 2/5: Filling out an event creation form.
-                                        </figcaption>
-                                    </figure>
+                                    <a href='../../images/cup_control_02.png' target="_blank" rel="noopener noreferrer">
+                                        <figure>
+                                            <img src='../../images/cup_control_02.png' />
+                                            <figcaption>
+                                                Slide 2/5: Filling out an event creation form.
+                                            </figcaption>
+                                        </figure>
+                                    </a>
                                 </li>
 
                                 <li class='control_slide'>
-                                    <figure>
-                                        <img src='../../images/cup_control_03.png' />
-                                        <figcaption>
-                                            Slide 3/5: Receiving feedback for event created. Selecting an event to edit.
-                                        </figcaption>
-                                    </figure>
+                                    <a href='../../images/cup_control_03.png' target="_blank" rel="noopener noreferrer">
+                                        <figure>
+                                            <img src='../../images/cup_control_03.png' />
+                                            <figcaption>
+                                                Slide 3/5: Receiving feedback for event created. Selecting an event to edit.
+                                            </figcaption>
+                                        </figure>
+                                    </a>
                                 </li>
 
                                 <li class='control_slide'>
-                                    <figure>
-                                        <img src='../../images/cup_control_04.png' />
-                                        <figcaption>
-                                            Slide 4/5: Viewing event edit form; Selecting a new Date of event.
-                                        </figcaption>
-                                    </figure>
+                                    <a href='../../images/cup_control_04.png' target="_blank" rel="noopener noreferrer">
+                                        <figure>
+                                            <img src='../../images/cup_control_04.png' />
+                                            <figcaption>
+                                                Slide 4/5: Viewing event edit form; Selecting a new Date of event.
+                                            </figcaption>
+                                        </figure>
+                                    </a>
                                 </li>
 
                                 <li class='control_slide'>
-                                    <figure>
-                                        <img src='../../images/cup_control_05.png' />
-                                        <figcaption>
-                                            Slide 5/5: Receiving feedback for event edited.
-                                        </figcaption>
-                                    </figure>
+                                    <a href='../../images/cup_control_05.png' target="_blank" rel="noopener noreferrer">
+                                        <figure>
+                                            <img src='../../images/cup_control_05.png' />
+                                            <figcaption>
+                                                Slide 5/5: Receiving feedback for event edited.
+                                            </figcaption>
+                                        </figure>
+                                    </a>
                                 </li>
 
                             </ul>
 
-                            <figcaption>
+                            <figcaption id='slideshow-control' style='display:none;'>
                                 <ul>
                                     <li>
                                         <a class='prev' onclick="plusSlides(-1)"> ❮ </a>
@@ -171,21 +189,25 @@ include('../../header.php');
                         <ul>
 
                             <li>
-                                <figure>
-                                    <img src='../../images/cup_events_red.png' alt='' />
-                                    <figcaption>
-                                        The events page as it currently exists.
-                                    </figcaption>
-                                </figure>
+                                <a href='../../images/cup_events_red.png' target="_blank" rel="noopener noreferrer">
+                                    <figure>
+                                        <img src='../../images/cup_events_red.png' alt='' />
+                                        <figcaption>
+                                            The events page as it currently exists.
+                                        </figcaption>
+                                    </figure>
+                                </a>
                             </li>
 
                             <li>
-                                <figure>
-                                    <img src='../../images/cup_music.png' alt='' />
-                                    <figcaption>
-                                        The variant of the events page as it existed prior to the overhaul.
-                                    </figcaption>
-                                </figure>
+                                <a href='../../images/cup_music.png' target="_blank" rel="noopener noreferrer">
+                                    <figure>
+                                        <img src='../../images/cup_music.png' alt='' />
+                                        <figcaption>
+                                            The variant of the events page as it existed prior to the overhaul.
+                                        </figcaption>
+                                    </figure>
+                                </a>
                             </li>
 
                         </ul>
@@ -195,7 +217,7 @@ include('../../header.php');
                     </figure>
                     <hr>
                     <p>
-                        The result of my efforts can be viewed on the company's domain: <a href='https://www.cupofjoe-cedarfalls.com/' target="_blank" rel="noopener noreferrer">www.cupofjoe-cedarfalls.com</a>. It seems that events are no longer being hosted at the location, thus the events page has been removed altogether. My personal domain is hosting a live demo of the website as well. It can be viewed <a href='demo/index.php' target="_blank" rel="noopener noreferrer"s>here</a>. <!--A demo control page can also be viewed <a href='demo.php'>here</a>.-->
+                        The result of my efforts can be viewed on the company's domain: <a href='https://www.cupofjoe-cedarfalls.com/' target="_blank" rel="noopener noreferrer">www.cupofjoe-cedarfalls.com</a>. It seems that events are no longer being hosted at the location, thus the events page has been removed altogether. My personal domain is hosting a live demo of the website as well. It can be viewed <a href='demo/index.php' target="_blank" rel="noopener noreferrer">here</a>. <!--A demo control page can also be viewed <a href='demo.php'>here</a>.-->
                     </p>
                     <!-- https://web.archive.org/web/20181119220446/http://www.cupofjoe-cedarfalls.com/music -->
                 </article>
@@ -274,6 +296,7 @@ include('../../header.php');
 
             window.onload = function(){
                 showSlides(slideIndex,true);
+                document.getElementById('slideshow-control').style.display = 'block';
             }
             window.onresize = function(){
                 currentSlide(slideIndex);
