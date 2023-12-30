@@ -311,6 +311,11 @@ figure.graph figcaption{
     text-align:center;
 }
 
+ul.filelist{
+}
+ul.filelist li{
+}
+
 @media screen and (min-width:800px){
     #writingsWrapper .fig-col{
         overflow:auto;
@@ -357,6 +362,15 @@ figure.graph figcaption{
     #writingsWrapper .info{
         width:100%;
     }
+
+    #writingsWrapper ul.filelist li{
+        margin-bottom:0px;
+    }
+
+    ul.filelist li code{
+        font-size:65%
+    }
+
 }
 
 @media screen and (max-width:600px) and (min-width: 481px){

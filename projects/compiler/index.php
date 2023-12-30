@@ -55,7 +55,7 @@ include('../../header.php');
                                 </ul>
                             </li>
                         </ul>
-                    <p>
+                    </p>
                     <h4>The Repository</h4>
                     <p>
                         It's worth noting the structure of the repository for this implementation of the compiler. The key directories are as follows:
@@ -76,13 +76,13 @@ include('../../header.php');
                                         </ul>
                                         To run each script run the following command:
                                         <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:35em;padding-left:10px;margin-top:5px;margin-left:5px;'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:35em;padding-left:10px;margin-top:5px;margin-left:5px;'>
     sh &lt;script name&gt; &lt;program to be tested&gt;
 </pre>
                                         </code>
                                         For example:
                                         <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:35em;padding-left:10px;margin-top:5px;margin-left:5px;'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:35em;padding-left:10px;margin-top:5px;margin-left:5px;'>
     sh kleinc programs/exclusive_or.kln
 </pre>
                                         </code>
@@ -128,7 +128,7 @@ include('../../header.php');
                     <section id='phase_1'>
                     <ul>
                         <li>Associated files of implementation:
-                            <ul>
+                            <ul class=filelist>
                                 <li><code>kleins</code></li>
                                 <li><code>src/k_token.py</code></li>
                                 <li><code>src/scanner.py</code></li>
@@ -142,13 +142,14 @@ include('../../header.php');
                         </li>
 
                         <li>Associated files of documentation:
-                            <ul>
+                            <ul class='filelist'>
                                 <li><code>doc/scanner/regex.txt</code></li>
                                 <li><code>doc/scanner/regex_FSA.jpg</code>
                                     <ul>
                                         <li><code>doc/regex_FSA.jff</code> is the jflapfile used to create the above jpeg</li>
                                     </ul>
                                 </li>
+                                <!--right here-->
                                 <li><code>doc/scanner/scanner_status_check.txt</code></li>
                             </ul>
                         </li>
@@ -161,7 +162,7 @@ include('../../header.php');
                     <ul>
                         <li>
                             Associated files of implementation:
-                            <ul>
+                            <ul class='filelist'>
                                 <li><code>kleinf</code></li>
                                 <li><code>src/parser.py</code></li>
                                 <li><code>src/parse_table.py</code></li>
@@ -183,7 +184,7 @@ include('../../header.php');
                         </li>
 
                         <li>Associated files of documentation:
-                            <ul>
+                            <ul class='filelist'>
                                 <li><code>doc/parser/extended_grammar.txt</code></li>
                                 <li><code>doc/parser/first_and_follow_sets.txt</code></li>
                                 <li><code>doc/parser/parse_table.pdf</code>
@@ -202,7 +203,7 @@ include('../../header.php');
                     <ul>
                         <li>
                             Associated files of implementation:
-                            <ul>
+                            <ul class='filelist'>
                                 <li><code>kleinp</code></li>
                                 <li><code>src/parser.py</code></li>
                                 <li><code>src/parse_table.py</code></li>
@@ -261,7 +262,7 @@ include('../../header.php');
                     <section id='phase_4'>
                     <ul>
                         <li>Associated files of implementation:
-                            <ul>
+                            <ul class='filelist'>
                                 <li><code>kleinp</code>
                                     <ul>
                                         <li>To run, feed a program through <code>kleinp</code>. It will print back node information as the AST is being built. If there is a type error, a Semantic Error will be thrown.</li>
@@ -300,7 +301,7 @@ include('../../header.php');
                     <section id='phase_5'>
                     <ul>
                         <li>Associated files of implementation:
-                            <ul>
+                            <ul class='filelist'>
                                 <li><code>kleinc</code></li>
                                 <li><code>AST_node.py</code></li>
                                 <li><code>code-generator.py</code></li>
@@ -313,7 +314,7 @@ include('../../header.php');
                             <ul>
                                 <li>The Stack Frame:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:40em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
 :----------------------:
 :     return addr      : 0
 :----------------------:
@@ -332,7 +333,7 @@ include('../../header.php');
                                 </li>
                                 <li>Registers:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:40em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
    :------------------:
 r0 :                  :
    :------------------:
@@ -355,7 +356,7 @@ r0 :                  :
                                 </li>
                                 <li>DMEM:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:40em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
 0 :-------------------:
 | :                   :
 | :-------------------:
@@ -376,7 +377,7 @@ V :                   :
                                 </li>
                                 <li>IMEM:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:40em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
 0 :---------------------:
   : LDA 7 , &lt;main addr&gt; :
   :---------------------:
@@ -409,7 +410,7 @@ V :                   :
                     <section id='phase_6'>
                     <ul>
                         <li>Associated files of implementation:
-                            <ul>
+                            <ul class='filelist'>
                                 <li><code>AST_node.py</code></li>
                                 <li><code>code-generator.py</code></li>
                                 <li><code>kleinc</code></li>
@@ -504,7 +505,7 @@ V :                   :
 
                             <h4>Grammar</h4>
                             <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:45em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:45em;padding-left:10px'>
         &lt;PROGRAM&gt; ::= &lt;DEFINITIONS&gt;
 
         &lt;DEFINITIONS&gt; ::= ε
@@ -566,7 +567,7 @@ V :                   :
                                 <li>
                                     These are the reserved words of Klein:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:35em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:35em;padding-left:10px'>
     integer     boolean
     true        false
     if          then       else
@@ -590,7 +591,7 @@ V :                   :
                                 <li>
                                     The following are the primitive operators and punctuation marks of Klein:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:35em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:35em;padding-left:10px'>
     +           -          *        /
     &lt;           =          (        )
     ,           :          (*       *)
@@ -645,7 +646,7 @@ V :                   :
                                     <h5>Arithmetic</h5>
                                     Adds, subtracts, multiplies, or divides two integers.
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:15em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:15em;padding-left:10px'>
      x + y
      x - y
      x * y
@@ -655,8 +656,9 @@ V :                   :
                                 </li>
                                 <li>
                                     <h5>Boolean Comparisons</h5>
-                                    Compares two integers, yielding one of the boolean values <code>true</code> or <code>false</code>. <code>&lt;</code> yields <code>true</code> if its left operand is less than its right operand, and <code>false</code> otherwise. <code>=</code> yields true if its left operand has the same value as its right operand, and <code>false</code> otherwise.                                    <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:15em;padding-left:10px'>
+                                    Compares two integers, yielding one of the boolean values <code>true</code> or <code>false</code>. <code>&lt;</code> yields <code>true</code> if its left operand is less than its right operand, and <code>false</code> otherwise. <code>=</code> yields true if its left operand has the same value as its right operand, and <code>false</code> otherwise.
+                                    <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:15em;padding-left:10px'>
      x &lt; y
      x = y
 </pre>
@@ -665,7 +667,7 @@ V :                   :
                                 <li>
                                     <h5>Boolean Connectives</h5>
                                     Negates a single boolean value, or computes the disjunction or conjunction of two boolean values. The unary <code>not</code> yields <code>true</code> if its operand is <code>false</code>, and <code>false</code> otherwise. <code>or</code> yields <code>true</code> if either its left operand or its right operand yields <code>true</code>, and <code>false</code> otherwise. <code>and</code> yields <code>true</code> if both its left operand and its right operand yield <code>true</code>, and <code>false</code> otherwise.                                    <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:15em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:15em;padding-left:10px'>
      not x
      x or y
      x and y
@@ -678,7 +680,7 @@ V :                   :
                                     Evaluates a test expression, and uses its value to select one of two expressions to evaluate. Yields the value of the first of these expressions if the test expression produces a true value, and the value of the second if the test expression yields a false value. The <code>else</code> clause is required.<br>
                                     For example:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:15em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:15em;padding-left:10px'>
      if flag &lt; 0 then
         x + y
      else
@@ -692,7 +694,7 @@ V :                   :
                                     Applies a function to zero or more arguments, and yields the value of the expression in the body of the function. All functions return an integer value or a boolean value; Klein has no notion of a "void" function.<br>
                                     For example:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:15em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:15em;padding-left:10px'>
      f( x+y, 1 )
 </pre>
                                     </code>
@@ -726,7 +728,7 @@ V :                   :
                                 <li>
                                     For the purposes of user interaction, Klein provides the primitive function <code>print(expression)</code>. For example:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:15em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:15em;padding-left:10px'>
      print( x+y )
 </pre>
                                     </code>
@@ -748,7 +750,7 @@ V :                   :
                                 <li>
                                     For example, here is a complete Klein program that computes the absolute value of its argument:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:35em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:35em;padding-left:10px'>
      function main( n : integer ) : integer
         if n &lt; 0
            then -n
@@ -757,7 +759,7 @@ V :                   :
                                     </code>
                                     If this program were compiled into an executable file named <code>abs</code>, then running it under Unix might look something like this:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:35em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:35em;padding-left:10px'>
     mac os x > abs -3
     3
 </pre>
@@ -816,7 +818,7 @@ V :                   :
                             <li>
                                 Register-only (RO) instructions are of the form
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:25em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:25em;padding-left:10px'>
     opcode r1,r2,r3
 </pre>
                                     </code>
@@ -825,7 +827,7 @@ V :                   :
                             <li>
                                 These are the RO opcodes:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:45em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:45em;padding-left:10px'>
 <b>IN</b>      read an integer from stdin and place result in <b>r1</b>; ignore operands <b>r2</b> and <b>r3</b>
 <b>OUT</b>     write contents of <b>r1</b> to stdout; ignore operands <b>r2</b> and <b>r3</b>
 <b>ADD</b>     add contents of <b>r2</b> and <b>r3</b> and place result in <b>r1</b>
@@ -839,13 +841,13 @@ V :                   :
                             <li>
                                 Register-memory (RM) instructions are of the form
                                 <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:25em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:25em;padding-left:10px'>
     opcode r1,offset(r2)
 </pre>
                                 </code>
                                 Where the <code>ri</code> are legal registers and <code>offset</code> is an integer offset. <code>offset</code> may be negative. With the exception of the <code>LDC</code> instruction, the expression <code>offset(r2)</code> is used to compute the address of a memory at location:
                                 <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:25em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:25em;padding-left:10px'>
     address = (contents of r2) + offset
 </pre>
                                 </code>
@@ -853,7 +855,7 @@ V :                   :
                             <li>
                                 There are four RM opcodes for memory manipulation:
                                 <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:45em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:45em;padding-left:10px'>
 <b>LDC</b>    place the constant <b>offset</b> in <b>r1</b>; ignore <b>r2</b>
 <b>LDA</b>    place the address <b>address</b> in <b>r1</b>
 <b>LD</b>     place the contents of data memory location <b>address</b> in <b>r1</b>
@@ -864,7 +866,7 @@ V :                   :
                             <li>
                                 There are six RM opcodes for branching. If the value of <code>r1</code> satisfies the opcode's condition, then branch to the instruction at memory location <code>address</code>.
                                 <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:75vw;max-width:45em;padding-left:10px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:45em;padding-left:10px'>
 <b>JEQ</b>    equal to 0
 <b>JNE</b>    not equal to 0
 <b>JLT</b>    less than 0
