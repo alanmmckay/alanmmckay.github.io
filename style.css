@@ -313,7 +313,16 @@ figure.graph figcaption{
 
 ul.filelist{
 }
+
 ul.filelist li{
+}
+
+.tech code{
+    font-size:90%;
+}
+
+.formulas{
+    text-align:left;
 }
 
 @media screen and (min-width:800px){

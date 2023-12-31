@@ -19,7 +19,7 @@ include('../../header.php');
 ?>
         <section id='writingsWrapper'>
             <section>
-                <article>
+                <article class='tech'>
                     <section class='info'>
                         <header>
                             <h2>Preface</h2>
@@ -121,7 +121,7 @@ include('../../header.php');
                             </li>
                         </ul>
                         The powerlaw python library makes use of statistical binning to generate these values with respect to a continuous power-law distribution function:
-                        <ul>
+                        <ul class='formulas'>
                             <li>
                                 γ-out: 2.931904108581441; c-in: 1.931904108581441
                             </li>
@@ -138,13 +138,13 @@ include('../../header.php');
 
                     <p>
                         With gamma values in hand, average expected degrees can be calculated, dependent on statistical moment. This occurs when gamma is in [2,3]. The formula used here is &lt;k&gt; = (γ-1)/(γ-2)*kmin
-                        <ul>
+                        <ul class='formulas'>
                             <li>
                                 &lt;kout&gt; ≈ 2.0730717793724676  ≈ &lt;kin&gt; ≈ &lt;k&gt;
                             </li>
                         </ul>
                         Average expected distance can also be computed:
-                        <ul>
+                        <ul class='formulas'>
                             <li>
                                 &lt;d&gt; ≈ lnlnN ≈ lnln(8129) ≈ 2.1975793137150044
                             </li>

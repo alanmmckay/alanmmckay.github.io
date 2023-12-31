@@ -103,7 +103,7 @@ include('../../header.php');
 
                         <figure>
                             <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:35em;padding-left:10px;max-height:250px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:32em;padding-left:10px;max-height:250px'>
 def sum_a(aList):
     total = 0
     for value in aList:
@@ -156,7 +156,7 @@ def sum_f(aList):
 
                         <figure>
                             <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:35em;padding-left:10px;max-height:250px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:32em;padding-left:10px;max-height:250px'>
 def sum_g(aList):
     return sum(alist)
 
