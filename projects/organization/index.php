@@ -103,7 +103,7 @@ include('../../header.php');
 
                         <figure>
                             <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:32em;padding-left:10px;max-height:250px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:70vw;max-width:32em;padding-left:10px;max-height:250px'>
 def sum_a(aList):
     total = 0
     for value in aList:
@@ -156,7 +156,7 @@ def sum_f(aList):
 
                         <figure>
                             <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:32em;padding-left:10px;max-height:250px'>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:70vw;max-width:32em;padding-left:10px;max-height:250px'>
 def sum_g(aList):
     return sum(alist)
 
@@ -356,7 +356,93 @@ def sum_l(aList):
                             <p>
                                 My lack of experience with MIPS made the course more engaging in a way that creates a sincere connection between myself and the class in general. Any act of engagement to address an individual would usually involve addressing the questions/concerns by the use of analog and nudging the individual towards the conclusion they seek. This was done by asking them a set of questions to help them make the correct conclusion on their own! I believe this helps an individual feel personal agency by abstractly exposing them to how to think critically. One of my favorite pieces of feedback through student evaluation has been, "He makes you think."
                             </p>
-
+                            <hr>
+                                <figure>
+                                    <code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:70vw;max-width:50em;padding-left:10px;'>
+01    # --- --- --- --- --- --- #
+02    sum:
+03    # Two arguments $a0 (memory address of list) and $a1 (length value of list)
+04
+05    li $s0  0         #total &lt;- 0
+06    li $s1  0         #index &lt;- 0
+07    li $s2  $a0       #point to the base address of the array
+08
+09    # ---
+10    sum_loop_condition:
+11
+12    bge $s1 $a1 end_loop
+13
+14    mult $s2 $s1 4    #adjust index offset
+15    add  $s2 $s2 $a0  #point to the next value of the array
+16
+17    lw $s2 0($s2)     #access the value within array
+18
+19    add $s0 $s0 $s2   #add value to the total
+20
+21    addi $s1 $s1 1    #increment index
+22
+23    j sum_loop_condition
+24
+25    # ---
+26    end_loop:
+27    move $v0 $s0      #place total into return register
+28    jr $ra            #return to caller
+29    # --- --- --- --- --- --- #
+</pre>
+                                </code>
+                                <!--code>
+<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:70vw;max-width:32em;padding-left:10px;max-height:250px'>
+01    CLEAR
+02    LOAD LST_LOC
+03    STORE I /store the above list location at the pointer i
+04    INPUT_LOOP, INPUT /input is now in the AC
+05    SKIPCOND 400
+06    JUMP INPUT_LOOP_BODY
+07    JUMP ADD_LOOP
+08    INPUT_LOOP_BODY, STOREI I /placing what exists in the AC at the pointer labeled i
+09    LOAD I
+10    ADD ONE /moving the pointer forward by 1
+11    STORE I
+12    LOAD LEN
+13    ADD ONE /incrementing the length of the list
+14    STORE LEN
+15    JUMP INPUT_LOOP /going back to top of input_loop
+16    ADD_LOOP, CLEAR
+17    LOAD LST_LOC /hex value of location of the list
+18    STORE I /the current pointer into the list
+19    LOAD LEN
+20    SUBT ONE
+21    STORE CTR /the control variable used to exit the loop
+22    LOOP, LOAD CTR
+23    SKIPCOND 000 /checking to see if contents of the AC is negative**!
+24    JUMP BODY
+25    JUMP END
+26    BODY, LOAD SUM
+27    ADDI I /add the list item the pointer is currently looking at
+28    STORE SUM
+29    LOAD I
+30    ADD ONE /moving the pointer forward by one
+31    STORE I
+32    LOAD CTR
+33    SUBT ONE /decreasing the control variable
+34    STORE CTR
+35    JUMP LOOP
+36    END, LOAD SUM
+37    OUTPUT
+38    HALT
+39    LST_LOC, HEX 02C
+40    I, HEX 0 /pointer labeled i
+41    LEN, DEC 0
+42    CTR, DEC 1
+43    SUM, DEC 0
+44    ONE, DEC 1
+</pre>
+                                </code-->
+                                <figcaption>
+                                    Just another way to sum up an array of values.
+                                </figcaption>
+                            </figure>
                         </div>
                         <hr>
                     </section>
