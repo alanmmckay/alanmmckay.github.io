@@ -26,7 +26,7 @@ include('../../header.php');
                         </header>
                         <h3>Pedagogy: College Education and Computer Science</h3>
                         <p>
-                            Upon the concluding the first semester of grad-school, I was asked to take on a sole-responsibility role to teach Computer Organization during the summer semester. As someone who had only been in grad-school for five months, I took pride that I was offered the position. I must have impressed as a TA. Being a non-traditional student afforded me valuable life experience which contributed to confidence as both an individual and an instructor. My diverse background experience also lent well to being able to communicate and teach using a multitude of different approaches.
+                            Upon concluding the first semester of grad-school, I was asked to take on a sole-responsibility role to teach Computer Organization during the summer semester. As someone who had only been in grad-school for five months, I took pride that I was offered the position. I must have impressed as a TA. Being a non-traditional student afforded me valuable life experience which contributed to confidence as both an individual and an instructor. My diverse background experience also lent well to being able to communicate and teach using a multitude of different approaches.
                         </p>
 
                         <p>
@@ -100,7 +100,7 @@ include('../../header.php');
                         <p>
                             Once examples are given, I've always been keen to sharing alternatives to a given implementation of a loop. A for-loop absolutely should be taught in tandem with a while loop. This should occur with a light exposure to recursion. Various conditions of execution should be discussed here as well. Analog is not only given through context of every day living but also with respect to evaluating the loops themselves!
                         </p>
-
+                        <hr>
                         <figure>
                             <code>
 <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:70vw;max-width:32em;padding-left:10px;max-height:250px'>
@@ -211,10 +211,10 @@ def sum_l(aList):
 </pre>
                             </code>
                             <figcaption>
-                                Even more functions which take a list as an input and sums their values. This time leveraging the function paradigm of programming.
+                                Even more functions which take a list as an input and sums their values. This time leveraging the functional paradigm of programming.
                             </figcaption>
                         </figure>
-
+                        <hr>
                         <p id='second-note-origin'>
                             The usage of analogous example shows that the same problem can have many solutions. This allows a student to view solutions through different perspectives. This abstracts the study to what it is - how to abstract the algorithm. It also encourages a student to think outside of the box and to be creative in their own solutions. This helps foster one of the most crucial traits of being <b>successful</b> within this study - being curious while thinking critically.<a href='#second-note'>**</a>
                         </p>
