@@ -62,7 +62,7 @@ include('../../header.php');
                                     An individual can initially be one of the former two and eventually be molded to fit the later of the three categories.
                                 </li>
                                 <li>
-                                    Students who are genuinely curious of the subject will succeed. The definition of success is that they will get a degree and they will have a solid and flexible intuition of the mechinations of discipline.
+                                    Students who are genuinely curious of the subject will succeed. The definition of success is that they will get a degree and they will have a solid and flexible intuition of the machinations of the discipline.
                                     <ul>
                                         <li>
                                             The students in the other categories will get just a degree.
