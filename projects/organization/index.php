@@ -129,18 +129,20 @@ def sum_c(aList):
     return total
 
 def sum_d(aList):
+    listCopy = list(aList)
     total = 0
-    length = len(aList)
-    while length &gt;= 0:
-        value = aList.pop()
+    length = len(listCopy)
+    while length &gt; 0:
+        value = listCopy.pop()
         total = total + value
-        length = len(aList)
+        length = len(listCopy)
     return total
 
 def sum_e(aList):
+    listCopy = list(aList)
     total = 0
-    while len(alist) &gt;= 0:
-        value = aList.pop()
+    while len(listCopy) &gt; 0:
+        value = listCopy.pop()
         total = total + value
     return total
 
@@ -180,7 +182,10 @@ def sum_i_helper(aList,index):
         return value + sum_i_helper(aList,index + 1)
 
 def sum_i(aList):
-    return sum_i_helper(aList,0)
+    if len(aList) &gt; 0:
+        return sum_i_helper(aList,0)
+    else:
+        return 0
 
 def sum_j_helper(aList,value):
     length = len(aList)
@@ -188,26 +193,34 @@ def sum_j_helper(aList,value):
         return value
     else:
         new_value = aList.pop()
-        return value + sum_j_helper(aList)
+        return value + sum_j_helper(aList,new_value)
 
 def sum_j(aList):
-    value = aList.pop()
-    return value = sum_j_helper(aList,value)
+    listCopy = list(aList)
+    if len(listCopy) &gt; 0:
+        value = listCopy.pop()
+        return sum_j_helper(listCopy,value)
+    else:
+        return 0
 
 def sum_k(aList):
-    value = aList[0]
-    if len(aList) &lt;= 1:
-        return value
+    if len(aList) &lt;= 0:
+        return 0
     else:
-        other_values = aList[1:]
-        return value + sum_k(other_values)
+        value = aList[0]
+        if len(aList) &lt;= 1:
+            return value
+        else:
+            other_values = aList[1:]
+            return value + sum_k(other_values)
 
 def sum_l(aList):
-    if len(aList) &lt;= 1:
+    if len(aList) &lt;= 0:
+        return 0
+    elif len(aList) &lt;= 1:
         return aList[0]
     else:
         return aList[0] + sum_l(aList[1:])
-
 </pre>
                             </code>
                             <figcaption>
