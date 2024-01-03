@@ -29,7 +29,7 @@ include('../../header.php');
                         </p>
 
                         <p>
-                            ISR covered document representation and how to provide query mechanisms for groupings of texts. Typical search engine fodder involving scoring and term weighting which would then culminate into discussions of the vector space model. The course project was to build a crawler to collect and represent texts taken from MIT's collection of Shakespeare writings. (http://shakespeare.mit.edu/)
+                            ISR covered document representation and how to provide query mechanisms for groupings of texts. Typical search engine fodder involving scoring and term weighting which would then culminate into discussions of the vector space model. The course project was to build a crawler to collect and represent texts taken from <a href='http://shakespeare.mit.edu/' target="_blank" rel="noopener noreferrer">MIT's collection of Shakespeare writings</a>.
                         </p>
 
                         <blockquote>
@@ -37,7 +37,7 @@ include('../../header.php');
                         </blockquote>
 
                         <p>
-                            ISR was fascinating as it gave insight to how complex data search can work. One invaluable resource to helping build an intuition for the subject was supplementary lecture provided by Victor Lavrenko through his Youtube Channel (https://www.youtube.com/user/victorlavrenko). Specifically, his lecture series labeled ISR3 Vector Space Model ([https://www.youtube.com/playlist?list=PLBv09BD7ez\_77rla9ZYx-OAdgo2r9USm4](https://www.youtube.com/playlist?list=PLBv09BD7ez%5C_77rla9ZYx-OAdgo2r9USm4)). This supplement also complemented thorough reading from "Introduction to Information Retrieval" authored by Manning, Raghavan, and Schütze. The textbook would also be a required reading within Web Mining, where a good chunk of time was also spent discussing language models and how to represent texts.
+                            ISR was fascinating as it gave insight to how complex data search can work. One invaluable resource to helping build an intuition for the subject was supplementary lecture provided by Victor Lavrenko through <a href='https://www.youtube.com/user/victorlavrenko' target="_blank" rel="noopener noreferrer">ahis Youtube Channel</a>. Specifically, his lecture series labeled <a href='https://www.youtube.com/playlist?list=PLBv09BD7ez%5C_77rla9ZYx-OAdgo2r9USm4' target="_blank" rel="noopener noreferrer">ISR3 Vector Space Model</a>. This supplement also complemented thorough reading from "<a href='https://nlp.stanford.edu/IR-book/' target="_blank" rel="noopener noreferrer">Introduction to Information Retrieval</a>" authored by Manning, Raghavan, and Schütze. The textbook would also be a required reading within Web Mining, where a good chunk of time was also spent discussing language models and how to represent texts.
                         </p>
 
                         <p>
@@ -53,7 +53,7 @@ include('../../header.php');
                         </p>
 
                         <p>
-                            To provide a basic understanding, "Network Science" authored by Albert-László Barabási was used. (http://www.networksciencebook.com/) The chapters on graph theory, random networks, and the scale-free property provide a great resource in terms of understanding complex social networks. Additionally, Leonid Zhukov's (http://www.leonidzhukov.net/hse/2020/datascience/) lecture series on YouTube discussing Network Science was another invaluable resource. (https://www.youtube.com/playlist?list=PLriUvS7IljvkGesFRuYjqRz4lKgodJgh2)
+                            To provide a basic understanding, "<a href='http://www.networksciencebook.com/' target="_blank" rel="noopener noreferrer">Network Science</a>" authored by <a href='https://barabasi.com/' target="_blank" rel="noopener noreferrer">Albert-László Barabási</a> was used. The chapters on graph theory, random networks, and the scale-free property provide a great resource in terms of understanding complex social networks. Additionally, <a href='http://www.leonidzhukov.net/hse/2020/datascience/' target="_blank" rel="noopener noreferrer">Leonid Zhukov's</a> <a href='https://www.youtube.com/playlist?list=PLriUvS7IljvkGesFRuYjqRz4lKgodJgh2' target="_blank" rel="noopener noreferrer">lecture series on YouTube</a> discussing Network Science was another invaluable resource.
                         </p>
 
                         <p>
