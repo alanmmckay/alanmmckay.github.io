@@ -56,8 +56,8 @@ include('../../header.php');
                             To provide a basic understanding, "<a href='http://www.networksciencebook.com/' target="_blank" rel="noopener noreferrer">Network Science</a>" authored by <a href='https://barabasi.com/' target="_blank" rel="noopener noreferrer">Albert-László Barabási</a> was used. The chapters on graph theory, random networks, and the scale-free property provide a great resource in terms of understanding complex social networks. Additionally, <a href='http://www.leonidzhukov.net/hse/2020/datascience/' target="_blank" rel="noopener noreferrer">Leonid Zhukov's</a> <a href='https://www.youtube.com/playlist?list=PLriUvS7IljvkGesFRuYjqRz4lKgodJgh2' target="_blank" rel="noopener noreferrer">lecture series on YouTube</a> discussing Network Science was another invaluable resource.
                         </p>
 
-                        <p>
-                            An assigned project that I found interesting involved assigning each student a web scrape from a social network. Each student was ambiguously tasked to analyze the data. Below is the result of data analysis that I personally drew from the dataset. I feel this is worth sharing to help those who have a genuine interest in the subject understand the processes involved.
+                        <p id='note_origin'>
+                            An assigned project that I found interesting involved assigning each student a web scrape from a social network. Each student was ambiguously tasked to analyze the data. Below is the result of data analysis that I personally drew from the dataset. I feel this is worth sharing to help those who have a genuine interest in the subject understand the processes involved.<a href='#note'>*</a>
                         </p>
                     <hr>
                     </section>
@@ -345,7 +345,35 @@ include('../../header.php');
                         <hr>
                         <h3>Concluding notes</h3>
                         <p>
+                            <a href='#note_origin' id='note'>*</a> - <a href='../organization/' target="_blank" rel="noopener noreferrer">My writing on pedagogy</a> makes the following claims:
+                            <blockquote>
+                                In the domain of computer science, there are three different types of students:
+                                <ul>
+                                    <li>
+                                        There are those who are studying a different discipline who are required to take a CS course as a prerequisite.
+                                    </li>
 
+                                    <li>
+                                        There are those who have heard jobs related to the field pay well, and thus are studying on the prospect of future paycheck.
+                                    </li>
+
+                                    <li>
+                                        Finally, there are the individuals who are genuinely curious of the subject.
+                                    </li>
+                                </ul>
+                            </blockquote>
+                            <blockquote>
+                                Students who are genuinely curious of the subject will succeed. The definition of success is that they will get a degree and they will have a solid and flexible intuition of the machinations of the discipline.
+                                <ul>
+                                    <li>
+                                        The students in the other categories will get just a degree.
+                                    </li>
+                                </ul>
+                            </blockquote>
+                        </p>
+
+                        <p>
+                            I feel the need to emphasize on the fact this is for an individual who is genuinely curious. The description of the project as described is ambiguous, but there are metrics listed here that can turn a learning experience into an easy grade. Should this be the case, you are doing yourself as much of a disservice as an instructor who chooses to not provide a new/different dataset.
                         </p>
                         <hr>
                     </section>
