@@ -40,21 +40,13 @@ include('../../header.php');
                             What is this project? It is a dynamically generated hexagonal grid which can be interacted with via mouse input. Think of the layer on the map of the user-interface for a video game like Civilization. The end result of my efforts cumulated in a Javascript file getting close to 800 lines of code - something significant for an Alan who only had one semester prior of proper programming!
                         </p>
                         <p>
-                            I've learned a lot since then. This hex-grid was developed before a time I even knew what object-oriented programming was. The patterns I employed to solve this task were based on primitive approaches I only knew at the time. I have an old writing designed for an older portfolio website which describes how it works. Not understanding the prototyping nature of javascript, I tried my best to describe it as a set of function calls operating on a set of arrays; a lot of what was written here showed wider lack of understanding.
+                            A live version of the script is below. In addition to the buttons included below the visual panel, note that the grid responds to mouse input on both mouse-over and by tapping/clicking on it.
                         </p>
-                        <p>
-                            The design of the script itself shows a lack of regard for modularity. Indeed, I've done a little bit of refactoring to open options for hosting it on this page. Viewing the unedited version of the script can happen via this website's repository, specifically <a href='https://github.com/alanmmckay/alanmmckay.github.io/commit/644aa335a106aba0725e68d13a50913cf96acedd' target="_blank" rel="noopener noreferrer">here</a> at commit hash 644aa33. Note that the refactoring I've done is fairly minimal. A key reason for this is that this project warrants a fresh restart.
-                        </p>
-                        <p>
-                            A live version of the script is below this preface. I've left in place some buttons that act as a tool to show how it works through interaction. These tools will inform the user that a brute-force application of the closest pair algorithm is in use. If I decide to re-implement this project, I'll certainly be taking advantage of the divide and conquer algorithm that I've since learned.
-                        </p>
-                        <p>
-                            I may revisited this page in the future. I would like to add a section describing the logical sequence of events in terms of how it works, (just described broadly/ambiguously). Until then, note that the grid responds to mouse input on both mouse-over and through tapping/clicking the grid, in addition to the buttons included below the visual panel.
-                        </p>
+
                     <hr>
                     </section>
                     <header>
-                        <h1>Implementation of a Hexagon Grid</h1>
+                        <h1>Javascript: Hexagon Grid</h1>
                     </header>
                     <figure style='border:solid #5F666D 1px;overflow:auto;clear:both'>
                         <canvas id='myCanvas' width='500' height='275' style='width:100%;float:left;clear:right;'></canvas>
@@ -125,6 +117,21 @@ include('../../header.php');
                         drawHexes(0,hexV);
 
                 </script>
+                <section class='info'>
+                        <hr>
+                        <h3>Concluding notes</h3>
+                        <p>
+                            I've learned a lot since initially making this script. This hex-grid was developed before a time I even knew what object-oriented programming was. The patterns I employed to solve the task were based on primitive approaches I only knew at the time. I have an old writing designed for an older portfolio website which describes how it works. Not understanding the prototyping nature of javascript, I tried my best to describe it as a set of function calls operating on a set of arrays; a lot of what was written here showed wider lack of understanding.
+                        </p>
+                        <p>
+                            The design of the script itself shows a lack of regard for modularity. Indeed, I've done a little bit of refactoring to open options for hosting it on this page. Viewing the unedited version of the script can happen via this website's repository, specifically <a href='https://github.com/alanmmckay/alanmmckay.github.io/commit/644aa335a106aba0725e68d13a50913cf96acedd' target="_blank" rel="noopener noreferrer">here</a> at commit hash 644aa33. Note that the refactoring I've done is fairly minimal. A key reason for this is that this project warrants a fresh restart.
+                        </p>
+                        <p>
+                            Through the live script, I've left in place some buttons that act as a tool to show how it works through interaction. These tools will inform the user that a brute-force application of the closest pair algorithm is in use. If I decide to re-implement this project, I'll certainly be taking advantage of the divide and conquer algorithm that I've since learned.
+                        </p>
+                        <p>
+                            I may revisited this page in the future. I would like to add a section describing the logical sequence of events in terms of how it works, (just described broadly/ambiguously).
+                        </p>
                 </article>
                 <nav>
                     <a href='../'>Back</a>
