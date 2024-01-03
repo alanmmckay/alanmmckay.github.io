@@ -25,7 +25,39 @@ include('../../header.php');
                             <h2>Preface</h2>
                         </header>
                         <p>
+                            The final semester of my Master's degree had me taking a course called Web Mining. Admittedly, I was fatigued at the time of registering for this course, which motivated my registration as the course's description reminded me of one that I took as an undergrad student - Information Storage and Retrieval (ISR).
+                        </p>
 
+                        <p>
+                            ISR covered document representation and how to provide query mechanisms for groupings of texts. Typical search engine fodder involving scoring and term weighting which would then culminate into discussions of the vector space model. The course project was to build a crawler to collect and represent texts taken from MIT's collection of Shakespeare writings. (http://shakespeare.mit.edu/)
+                        </p>
+
+                        <blockquote>
+                            Natural language processing; analysis of textual material by statistical, syntactic, and logical methods; retrieval systems models, dictionary construction, query processing, file structures, content analysis; automatic retrieval systems and question-answering systems; and evaluation of retrieval effectiveness. <cite>- Verbatim course description from the University of Northern Iowa</cite>
+                        </blockquote>
+
+                        <p>
+                            ISR was fascinating as it gave insight to how complex data search can work. One invaluable resource to helping build an intuition for the subject was supplementary lecture provided by Victor Lavrenko through his Youtube Channel (https://www.youtube.com/user/victorlavrenko). Specifically, his lecture series labeled ISR3 Vector Space Model ([https://www.youtube.com/playlist?list=PLBv09BD7ez\_77rla9ZYx-OAdgo2r9USm4](https://www.youtube.com/playlist?list=PLBv09BD7ez%5C_77rla9ZYx-OAdgo2r9USm4)). This supplement also complemented thorough reading from "Introduction to Information Retrieval" authored by Manning, Raghavan, and Schütze. The textbook would also be a required reading within Web Mining, where a good chunk of time was also spent discussing language models and how to represent texts.
+                        </p>
+
+                        <p>
+                            Web Mining would turn out to be a deceptive course title. It differed from ISR by the exclusion of a project in which one would build a web crawler to harvest information. The course instead revolved around reading various research papers involving the processing of big data while interpreting the results said data provided. These papers asked questions such as "How has happiness shifted since a given event?" or "How does misinformation spread throughout social media communities?"
+                        </p>
+
+                        <blockquote>
+                            Core methods underlying development of applications on the Web; examples of relevant applications, including those pertaining to information retrieval, summarization of Web documents, and identifying social networks. <cite>- Verbatim course description from the University of Iowa</cite>
+                        </blockquote>
+
+                        <p>
+                            To answer these types of questions, one needs a basic understanding of network science. Network science is the study of complex networks; In the context of this course, it was an application of social computing to understand how networks of humans interact. It provides the understanding of scale-free networks and how they have a power-law distribution. These were concepts unknown to me prior to taking the course, which provided a pleasant surprise in terms of giving something new and interesting to study.
+                        </p>
+
+                        <p>
+                            To provide a basic understanding, "Network Science" authored by Albert-László Barabási was used. (http://www.networksciencebook.com/) The chapters on graph theory, random networks, and the scale-free property provide a great resource in terms of understanding complex social networks. Additionally, Leonid Zhukov's (http://www.leonidzhukov.net/hse/2020/datascience/) lecture series on YouTube discussing Network Science was another invaluable resource. (https://www.youtube.com/playlist?list=PLriUvS7IljvkGesFRuYjqRz4lKgodJgh2)
+                        </p>
+
+                        <p>
+                            An assigned project that I found interesting involved assigning each student a web scrape from a social network. Each student was ambiguously tasked to analyze the data. Below is the result of data analysis that I personally drew from the dataset. I feel this is worth sharing to help those who have a genuine interest in the subject understand the processes involved.
                         </p>
                     <hr>
                     </section>
