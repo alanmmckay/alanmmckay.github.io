@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xhtml="http://www.w3.org/1999/xhtml" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
     <url>
         <loc>
-            http://alanmckay.blog/
+            https://alanmckay.blog/
         </loc>
 
         <lastmod>
-            2022-01-08
+            2024-01-03
         </lastmod>
 
         <priority>
@@ -46,36 +46,17 @@
 
     <url>
         <loc>
-            http://alanmckay.blog/writings/safety/
+            http://alanmckay.blog/projects/safety/
         </loc>
 
         <lastmod>
-            2023-02-02
+            2024-01-03
         </lastmod>
     </url>
 
     <url>
         <loc>
-            http://alanmckay.blog/writings/leaf/
-        </loc>
-
-        <lastmod>
-            2022-01-08
-        </lastmod>
-    </url>
-    <url>
-        <loc>
-            http://alanmckay.blog/writings/social/
-        </loc>
-
-        <lastmod>
-            2022-01-08
-        </lastmod>
-    </url>
-
-    <url>
-        <loc>
-            http://alanmckay.blog/writings/sound/
+            https://alanmckay.blog/writings/leaf/
         </loc>
 
         <lastmod>
@@ -84,7 +65,17 @@
     </url>
     <url>
         <loc>
-            http://alanmckay.blog/writings/statement/
+            https://alanmckay.blog/writings/social/
+        </loc>
+
+        <lastmod>
+            2022-01-08
+        </lastmod>
+    </url>
+
+    <url>
+        <loc>
+            https://alanmckay.blog/writings/sound/
         </loc>
 
         <lastmod>
@@ -93,7 +84,16 @@
     </url>
     <url>
         <loc>
-            http://alanmckay.blog/writings/elsewhere/
+            https://alanmckay.blog/writings/statement/
+        </loc>
+
+        <lastmod>
+            2022-01-08
+        </lastmod>
+    </url>
+    <url>
+        <loc>
+            https://alanmckay.blog/writings/elsewhere/
         </loc>
 
         <lastmod>
@@ -102,11 +102,74 @@
     </url>
     <url>
         <loc>
-            http://alanmckay.blog/writings/describe/
+            https://alanmckay.blog/writings/describe/
         </loc>
 
         <lastmod>
             2022-02-06
+        </lastmod>
+    </url>
+    <url>
+        <loc>
+            https://alanmckay.blog/projects/
+        </loc>
+
+        <lastmod>
+            2024-01-03
+        </lastmod>
+    </url>
+    <url>
+        <loc>
+            https://alanmckay.blog/projects/compiler/
+        </loc>
+
+        <lastmod>
+            2024-01-03
+        </lastmod>
+    </url>
+    <url>
+        <loc>
+            https://alanmckay.blog/projects/cup/
+        </loc>
+
+        <lastmod>
+            2024-01-03
+        </lastmod>
+    </url>
+    <url>
+        <loc>
+            https://alanmckay.blog/projects/grid/
+        </loc>
+
+        <lastmod>
+            2024-01-03
+        </lastmod>
+    </url>
+    <url>
+        <loc>
+            https://alanmckay.blog/projects/organization/
+        </loc>
+
+        <lastmod>
+            2024-01-03
+        </lastmod>
+    </url>
+    <url>
+        <loc>
+            https://alanmckay.blog/projects/protocol/
+        </loc>
+
+        <lastmod>
+            2024-01-03
+        </lastmod>
+    </url>
+    <url>
+        <loc>
+            https://alanmckay.blog/projects/social/
+        </loc>
+
+        <lastmod>
+            2024-01-03
         </lastmod>
     </url>
 </urlset>
