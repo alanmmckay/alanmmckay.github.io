@@ -4,7 +4,7 @@ $normalize = '../../normalize.css';
 
 $style = '../../style.css';
 
-$canonical = 'http://alanmckay.blog/projects/grid/';
+$canonical = 'https://alanmckay.blog/projects/grid/';
 
 $title = 'Alan McKay | Project | HexGrid';
 
@@ -12,7 +12,7 @@ $meta['title'] = 'Alan McKay | HexGrid';
 
 $meta['description'] = '';
 
-$meta['url'] = 'http://alanmckay.blog/projects/grid/';
+$meta['url'] = 'https://alanmckay.blog/projects/grid/';
 
 include('../../header.php');
 

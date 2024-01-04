@@ -4,7 +4,7 @@ $normalize = '../../normalize.css';
 
 $style = '../../style.css';
 
-$canonical = 'http://alanmckay.blog/projects/safety/';
+$canonical = 'https://alanmckay.blog/projects/safety/';
 
 $title = 'Alan McKay | Project | Geography and Safety';
 
@@ -12,7 +12,7 @@ $meta['title'] = 'Alan McKay | Geography and Safety';
 
 $meta['description'] = "A primary facet to continuing my education through graduate school is to hone my ability to effectively communicate with people of other disciplines. Iowa...";
 
-$meta['url'] = 'http://alanmckay.blog/projects/safety/';
+$meta['url'] = 'https://alanmckay.blog/projects/safety/';
 
 include('../../header.php');
 

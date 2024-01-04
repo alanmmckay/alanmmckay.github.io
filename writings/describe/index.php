@@ -4,7 +4,7 @@ $normalize = '../../normalize.css';
 
 $style = '../../style.css';
 
-$canonical = 'http://alanmckay.blog/writings/describe/';
+$canonical = 'https://alanmckay.blog/writings/describe/';
 
 $title = 'Alan McKay | Writing | Describing Elsewhere';
 
@@ -12,7 +12,7 @@ $meta['title'] = 'Alan McKay | Describing Elsewhere';
 
 $meta['description'] = 'A conversation once had a friend observing that too many people are reliant on showing the detail of a story being told. That is, instead of...';
 
-$meta['url'] = 'http://alanmckay.blog/writings/describe/';
+$meta['url'] = 'https://alanmckay.blog/writings/describe/';
 
 include('../../header.php');
 

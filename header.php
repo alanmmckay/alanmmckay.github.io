@@ -9,7 +9,7 @@ if(!isset($style)){
 }
 
 if(!isset($canonical)){
-    $canonical = 'http://alanmckay.blog';
+    $canonical = 'https://alanmckay.blog';
 }
 
 if(!isset($title)){
@@ -39,7 +39,7 @@ if(!isset($meta['imageW'])){
 }
 
 if(!isset($meta['url'])){
-    $meta['url'] = 'http://alanmckay.blog/';
+    $meta['url'] = 'https://alanmckay.blog/';
 }
 
 ?>

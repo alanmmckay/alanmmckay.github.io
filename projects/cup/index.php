@@ -4,7 +4,7 @@ $normalize = '../../normalize.css';
 
 $style = '../../style.css';
 
-$canonical = 'http://alanmckay.blog/projects/cup/';
+$canonical = 'https://alanmckay.blog/projects/cup/';
 
 $title = 'Alan McKay | Project | Cup of Joe';
 
@@ -12,7 +12,7 @@ $meta['title'] = 'Alan McKay | Cup of Joe';
 
 $meta['description'] = '';
 
-$meta['url'] = 'http://alanmckay.blog/projects/cup/';
+$meta['url'] = 'https://alanmckay.blog/projects/cup/';
 
 include('../../header.php');
 
