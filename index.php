@@ -18,7 +18,7 @@ include('header.php');
                     Writings
                 </a>
                 <a href='projects/'>
-                    <img src='images/text-logo-grey.png' alt='Icon for projects link'>
+                    <img src='images/insert-endnote.svg' alt='Icon for projects link'>
                     Projects
                 </a>
                 <a href='https://vsco.co/alanmckay/gallery' target="_blank" rel="noopener noreferrer">

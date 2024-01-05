@@ -23,7 +23,7 @@ include('../header.php');
             </header>
             <nav>
                 <a href='./'>
-                    <img src='../images/text-logo-grey.png' alt='Icon for blog link'>
+                    <img src='../images/insert-endnote.svg' alt='Icon for blog link'>
                     Projects
                 </a>
                 <a href='social/' class='writing'> Project: Social Computing</a>
