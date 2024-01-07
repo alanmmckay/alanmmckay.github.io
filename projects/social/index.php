@@ -37,7 +37,7 @@ include('../../header.php');
                         </blockquote>
 
                         <p>
-                            ISR was fascinating as it gave insight to how complex data search can work. One invaluable resource to helping build an intuition for the subject was supplementary lecture provided by Victor Lavrenko through <a href='https://www.youtube.com/user/victorlavrenko' target="_blank" rel="noopener noreferrer">ahis Youtube Channel</a>. Specifically, his lecture series labeled <a href='https://www.youtube.com/playlist?list=PLBv09BD7ez%5C_77rla9ZYx-OAdgo2r9USm4' target="_blank" rel="noopener noreferrer">ISR3 Vector Space Model</a>. This supplement also complemented thorough reading from "<a href='https://nlp.stanford.edu/IR-book/' target="_blank" rel="noopener noreferrer">Introduction to Information Retrieval</a>" authored by Manning, Raghavan, and Schütze. The textbook would also be a required reading within Web Mining, where a good chunk of time was also spent discussing language models and how to represent texts.
+                            ISR was fascinating as it gave insight to how complex data search can work. One invaluable resource to helping build an intuition for the subject was supplementary lecture provided by Victor Lavrenko through <a href='https://www.youtube.com/user/victorlavrenko' target="_blank" rel="noopener noreferrer">at his Youtube Channel</a>. Specifically, his lecture series labeled <a href='https://www.youtube.com/playlist?list=PLBv09BD7ez_77rla9ZYx-OAdgo2r9USm4' target="_blank" rel="noopener noreferrer">ISR3 Vector Space Model</a>. This supplement also complemented thorough reading from "<a href='https://nlp.stanford.edu/IR-book/' target="_blank" rel="noopener noreferrer">Introduction to Information Retrieval</a>" authored by Manning, Raghavan, and Schütze. The textbook would also be a required reading within Web Mining, where a good chunk of time was also spent discussing language models and how to represent texts.
                         </p>
 
                         <p>
@@ -118,7 +118,7 @@ include('../../header.php');
                     <div class='fig-col'>
                         <a href='../../images/dist-outdeg.png' target="_blank" rel="noopener noreferrer">
                             <figure class='graph'>
-                                <img src='../../images/dist-outdeg.png'>
+                                <img src='../../images/dist-outdeg.png' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'>
                                 <figcaption>
                                     Figure 1: Distribution plotting of node out-degrees.
                                 </figcaption>
@@ -128,7 +128,7 @@ include('../../header.php');
 
                         <a href='../../images/dist-indeg.png' target="_blank" rel="noopener noreferrer">
                             <figure class='graph'>
-                                <img src='../../images/dist-indeg.png'>
+                                <img src='../../images/dist-indeg.png' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
                                 <figcaption>
                                     Figure 2: Distribution plotting of node-indegrees.
                                 </figcaption>
@@ -137,7 +137,7 @@ include('../../header.php');
 
                         <a href='../../images/dist-degree.png' target="_blank" rel="noopener noreferrer">
                             <figure class='graph' style='float:none'>
-                                <img src='../../images/dist-degree.png'>
+                                <img src='../../images/dist-degree.png' alt='A graph showing the distribution plotting of nodes in terms of both degrees.'>
                                 <figcaption>
                                     Figure 3: Distribution plotting of node degrees (inbound and outbound)
                                 </figcaption>
@@ -204,27 +204,27 @@ include('../../header.php');
 
                         <a href='../../images/pldist-outdeg.png' target="_blank" rel="noopener noreferrer">
                             <figure class='graph'>
-                                <img src='../../images/pldist-outdeg.png'>
+                                <img src='../../images/pldist-outdeg.png' alt='A graph showing the log-log scale distribution plotting of nodes in terms of out-degrees.'>
                                 <figcaption>
-                                    Figure 4: Power Law Distribution plotting of node-out degrees
+                                    Figure 4: Log-log scale distribution plotting of node-out degrees
                                 </figcaption>
                             </figure>
                         </a>
 
                         <a href='../../images/pldist-indeg.png' target="_blank" rel="noopener noreferrer">
                             <figure class='graph'>
-                                <img src='../../images/pldist-indeg.png'>
+                                <img src='../../images/pldist-indeg.png' alt='A graph showing the log-log scale distribution plotting of nodes in terms of in-degrees.'>
                                 <figcaption>
-                                    Figure 5: Power Law Distribution plotting of node-in degrees
+                                    Figure 5: Log-log scale distribution plotting of node-in degrees
                                 </figcaption>
                             </figure>
                         </a>
 
                         <a href='../../images/pldist-degree.png' target="_blank" rel="noopener noreferrer">
                             <figure class='graph' style='float:none'>
-                                <img src='../../images/pldist-degree.png'>
+                                <img src='../../images/pldist-degree.png' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
                                 <figcaption>
-                                    Figure 6: Power Law Distribution plotting of node degrees (inbound and outbound)
+                                    Figure 6: Log-log scale distribution plotting of node degrees (inbound and outbound)
                                 </figcaption>
                             </figure>
                         </a>
@@ -239,7 +239,7 @@ include('../../header.php');
                     <div class='fig-col'>
                         <a href='../../images/rdist-outdeg.png' target="_blank" rel="noopener noreferrer">
                             <figure class='graph'>
-                                <img src='../../images/rdist-outdeg.png'>
+                                <img src='../../images/rdist-outdeg.png' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'>
                                 <figcaption>
                                     Figure 7: Distribution plotting of node out-degrees
                                 </figcaption>
@@ -248,7 +248,7 @@ include('../../header.php');
 
                         <a href='../../images/rdist-indeg.png' target="_blank" rel="noopener noreferrer">
                             <figure class='graph'>
-                                <img src='../../images/rdist-indeg.png'>
+                                <img src='../../images/rdist-indeg.png' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
                                 <figcaption>
                                     Figure 8: Distribution plotting of node in-degrees of Randomized Network
                                 </figcaption>
@@ -257,7 +257,7 @@ include('../../header.php');
 
                         <a href='../../images/rdist-degree.png' target="_blank" rel="noopener noreferrer">
                             <figure class='graph' style='float:none;'>
-                                <img src='../../images/rdist-degree.png'>
+                                <img src='../../images/rdist-degree.png' alt='A graph showing the distribution plotting of nodes in terms of both degrees.'>
                                 <figcaption>
                                     Figure 9: Distribution plotting of node degrees (outbound and inbound) of Randomized Network
                                 </figcaption>
@@ -271,7 +271,7 @@ include('../../header.php');
 
                     <a href='../../images/plrdist-degree.png' target="_blank" rel="noopener noreferrer">
                         <figure class='graph'>
-                            <img src='../../images/plrdist-degree.png'>
+                            <img src='../../images/plrdist-degree.png' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
                             <figcaption>
                                 Figure 10: Power Law Distribution plotting of node degrees (inbound and outbound) of Randomized Network
                             </figcaption>
@@ -285,16 +285,16 @@ include('../../header.php');
                     <figure class='col-fig'>
 
                         <a href='../../images/rdist2-outdeg.png' target="_blank" rel="noopener noreferrer">
-                            <img src='../../images/rdist2-outdeg.png'>
+                            <img src='../../images/rdist2-outdeg.png' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
                         </a>
                         <a href='../../images/rdist3-outdeg.png' target="_blank" rel="noopener noreferrer">
-                            <img src='../../images/rdist3-outdeg.png'>
+                            <img src='../../images/rdist3-outdeg.png' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
                         </a>
                         <a href='../../images/rdist4-outdeg.png' target="_blank" rel="noopener noreferrer">
-                            <img src='../../images/rdist4-outdeg.png'>
+                            <img src='../../images/rdist4-outdeg.png' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
                         </a>
                         <a href='../../images/rdist5-outdeg.png' target="_blank" rel="noopener noreferrer">
-                            <img src='../../images/rdist5-outdeg.png'>
+                            <img src='../../images/rdist5-outdeg.png' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
                         </a>
 
                         <figcaption style='clear:both;padding-top:25px'>
@@ -309,7 +309,7 @@ include('../../header.php');
 
                     <a href='../../images/rnet-vis.png' target="_blank" rel="noopener noreferrer">
                     <figure class='graph'>
-                        <img src='../../images/rnet-vis.png'>
+                        <img src='../../images/rnet-vis.png' alt='A Gephi visualized graph which shows the clustering of the agents within a randomized network. The clustering shows consistency all around.'>
                         <figcaption>
                             Figure 13: Full visualization of randomized network indicates a lack of any hubs. The network seems to have reached a transition where there exists only one component.
                         </figcaption>
@@ -318,7 +318,7 @@ include('../../header.php');
 
                     <a href='../../images/sfnet-vis.png' target="_blank" rel="noopener noreferrer">
                     <figure class='graph'>
-                        <img src='../../images/sfnet-vis.png'>
+                        <img src='../../images/sfnet-vis.png' alt='A Gephi visualized graph which shows the clustering of the agents within a social network. Clustering is not consistent here, where clustering seems to revolve around a select few agents.'>
                         <figcaption>
                             Figure 14: Partial visualization of network representative of the Reddit dataset. Notice the significant hubs which are indicative of a higher degree.
                         </figcaption>
@@ -327,7 +327,7 @@ include('../../header.php');
 
                     <a href='../../images/sf-outliers.png' target="_blank" rel="noopener noreferrer">
                     <figure class='graph'>
-                        <img src='../../images/sf-outliers.png'>
+                        <img src='../../images/sf-outliers.png' alt='A gephi visualized grpah which shows outliers of the social network; disconnected interactions between a subset of agents involved.'>
                         <figcaption>
                             Figure 15: Partial visualization of the network representative of the Reddit dataset; structures like these exist in the orbit of the larger connected component of the prior figure. This is a property not observed in the generated randomized networks.
                         </figcaption>
