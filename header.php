@@ -42,6 +42,12 @@ if(!isset($meta['url'])){
     $meta['url'] = 'https://alanmckay.blog/';
 }
 
+if(!isset($images)){
+    $images = "../";
+}else{
+    $images = "";
+}
+
 ?>
 <!DOCTYPE html>
 <html prefix="og: https://ogp.me/ns#">
@@ -50,7 +56,7 @@ if(!isset($meta['url'])){
         <link rel='stylesheet' href='<?php echo $normalize;?>' />
         <link rel='stylesheet' href='<?php echo $style;?>' />
         <link rel='canonical' href='<?php echo $canonical;?>'/>
-        <link rel='icon' type='image/x-icon' href='images/text-logo-grey.ico'/>
+        <link rel='icon' type='image/x-icon' href='<?php echo $images; ?>images/text-logo-grey.ico'/>
         <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
         <title><?php echo $title;?></title>
         <meta name="author" content="Alan McKay" />
