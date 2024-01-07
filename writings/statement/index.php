@@ -14,6 +14,8 @@ $meta['description'] = "The following is the statement of purpose I wrote to pur
 
 $meta['url'] = 'https://alanmckay.blog/writings/statement/';
 
+$relative_path = "../../";
+
 include('../../header.php');
 
 ?>

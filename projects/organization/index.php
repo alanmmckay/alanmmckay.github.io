@@ -14,6 +14,8 @@ $meta['description'] = 'Essay discussing my time as a university instructor teac
 
 $meta['url'] = 'https://alanmckay.blog/projects/organization/';
 
+$relative_path = "../../";
+
 include('../../header.php');
 
 ?>

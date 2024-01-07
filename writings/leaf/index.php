@@ -14,6 +14,8 @@ $meta['description'] = '';
 
 $meta['url'] = 'https://alanmckay.blog/writings/leaf/';
 
+$relative_path = "../../";
+
 include('../../header.php');
 
 ?>

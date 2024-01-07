@@ -14,6 +14,8 @@ $meta['description'] = 'Project showcase and description of a dynamic hexagon gr
 
 $meta['url'] = 'https://alanmckay.blog/projects/grid/';
 
+$relative_path = "../../";
+
 include('../../header.php');
 
 ?>

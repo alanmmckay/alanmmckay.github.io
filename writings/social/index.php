@@ -16,6 +16,8 @@ $meta['image'] = 'https://image-aws-us-west-2.vsco.co/5ac5d6/146300964/5f41289e6
 
 $meta['url'] = 'https://alanmckay.blog/writings/social/';
 
+$relative_path = "../../";
+
 include('../../header.php');
 
 ?>

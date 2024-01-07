@@ -14,6 +14,8 @@ $meta['description'] = 'The old capitol building is a place I often spend time a
 
 $meta['url'] = 'https://alanmckay.blog/writings/flow/';
 
+$relative_path = "../../";
+
 include('../../header.php');
 
 ?>

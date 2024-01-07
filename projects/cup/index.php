@@ -14,6 +14,8 @@ $meta['description'] = 'Description of a freelance gig which involved the develo
 
 $meta['url'] = 'https://alanmckay.blog/projects/cup/';
 
+$relative_path = "../../";
+
 include('../../header.php');
 
 ?>

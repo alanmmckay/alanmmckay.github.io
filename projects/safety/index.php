@@ -14,6 +14,8 @@ $meta['description'] = "Project description of building a PostGIS database which
 
 $meta['url'] = 'https://alanmckay.blog/projects/safety/';
 
+$relative_path = "../../";
+
 include('../../header.php');
 
 ?>

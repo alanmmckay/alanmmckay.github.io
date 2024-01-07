@@ -14,6 +14,8 @@ $meta['description'] = 'A conversation once had a friend observing that too many
 
 $meta['url'] = 'https://alanmckay.blog/writings/describe/';
 
+$relative_path = "../../";
+
 include('../../header.php');
 
 ?>

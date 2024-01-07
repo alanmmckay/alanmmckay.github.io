@@ -14,6 +14,8 @@ $meta['description'] = 'Project description detailing the process and specificat
 
 $meta['url'] = 'https://alanmckay.blog/project/compiler/';
 
+$relative_path = "../../";
+
 include('../../header.php');
 
 ?>

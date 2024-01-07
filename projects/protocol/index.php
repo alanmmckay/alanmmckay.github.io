@@ -14,6 +14,8 @@ $meta['description'] = 'Description of research on the Population Protocol model
 
 $meta['url'] = 'https://alanmckay.blog/projects/protocol/';
 
+$relative_path = "../../";
+
 include('../../header.php');
 
 ?>

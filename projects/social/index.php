@@ -14,6 +14,8 @@ $meta['description'] = 'Exploration of data science methodology to explore and e
 
 $meta['url'] = 'https://alanmckay.blog/projects/social/';
 
+$relative_path = "../../";
+
 include('../../header.php');
 
 ?>

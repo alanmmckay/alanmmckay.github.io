@@ -14,6 +14,8 @@ $meta['description'] = "Various writings of Alan McKay. Writings of the some obs
 
 $meta['url'] = 'https://alanmckay.blog/writings/';
 
+$relative_path = "../";
+
 include('../header.php');
 
 ?>

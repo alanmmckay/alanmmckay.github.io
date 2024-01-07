@@ -14,6 +14,8 @@ $meta['description'] = 'A wintery haze shrouded the top of the Black Hills as th
 
 $meta['url'] = 'https://alanmckay.blog/writings/elsewhere/';
 
+$relative_path = "../../";
+
 include('../../header.php');
 
 ?>
