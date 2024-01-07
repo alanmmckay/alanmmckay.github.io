@@ -10,7 +10,7 @@ $title = 'Alan McKay | Project | Cup of Joe';
 
 $meta['title'] = 'Alan McKay | Cup of Joe';
 
-$meta['description'] = '';
+$meta['description'] = 'Description of a freelance gig which involved the development of a website for a local coffee shop.';
 
 $meta['url'] = 'https://alanmckay.blog/projects/cup/';
 

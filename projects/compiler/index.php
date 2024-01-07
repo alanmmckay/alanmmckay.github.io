@@ -10,7 +10,7 @@ $title = 'Alan McKay | Project | Compiler';
 
 $meta['title'] = 'Alan McKay | Compiler';
 
-$meta['description'] = '';
+$meta['description'] = 'Project description detailing the process and specification of a compiler which translates Klein programs to an equivalent TM assembly language program.';
 
 $meta['url'] = 'https://alanmckay.blog/project/compiler/';
 

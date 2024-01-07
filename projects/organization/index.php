@@ -10,7 +10,7 @@ $title = 'Alan McKay | Teaching | Computer Organization';
 
 $meta['title'] = 'Alan McKay | Computer Organization';
 
-$meta['description'] = '';
+$meta['description'] = 'Essay discussing my time as a university instructor teaching Computer Organization. Discussion includes general computer science pedagogy.';
 
 $meta['url'] = 'https://alanmckay.blog/projects/organization/';
 

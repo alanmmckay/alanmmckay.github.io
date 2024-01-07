@@ -10,7 +10,7 @@ $title = 'Alan McKay | Project | HexGrid';
 
 $meta['title'] = 'Alan McKay | HexGrid';
 
-$meta['description'] = '';
+$meta['description'] = 'Project showcase and description of a dynamic hexagon grid written in core Javascript.';
 
 $meta['url'] = 'https://alanmckay.blog/projects/grid/';
 

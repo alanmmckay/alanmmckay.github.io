@@ -10,7 +10,7 @@ $title = 'Alan McKay | Project | Social Computing';
 
 $meta['title'] = 'Alan McKay | Social Computing';
 
-$meta['description'] = '';
+$meta['description'] = 'Exploration of data science methodology to explore and explain social behaviors exhibited within the domain of social media networks.';
 
 $meta['url'] = 'https://alanmckay.blog/projects/social/';
 

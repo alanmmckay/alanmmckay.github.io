@@ -10,7 +10,7 @@ $title = 'Alan McKay | Project | Population Protocol';
 
 $meta['title'] = 'Alan McKay | Population Protocol';
 
-$meta['description'] = '';
+$meta['description'] = 'Description of research on the Population Protocol model of computation. Description includes discussion of the benefits provided by simulating the model.';
 
 $meta['url'] = 'https://alanmckay.blog/projects/protocol/';
 
