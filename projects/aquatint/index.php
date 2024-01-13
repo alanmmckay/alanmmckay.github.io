@@ -131,7 +131,27 @@ done
                         <p>
                             One-hundred and twenty-five images in total were produced on account of running the bash script. Those who have javascript enabled for this page can view the effect of each variable, (with respect to the values set for the others), within the following figure:
                         </p>
+                        <figure>
+                            <div id='image-bucket'>
+                            </div>
+                            <figcaption>
+                                <label for='greycutSlider'>Greycut:</label>
+                                <input type="range" min="0.1" max="0.9" id="greycutSlider" value="0.5" step="0.2" style='width:95%;' oninput="setSliderVal('greycutSlider',0,false)"/>
 
+                                <p style='margin-top:0px'>Value: <span id='greycutSliderVal'> </span></p>
+
+                                <label for='temperatureSlider'>Temperature:</label>
+                                <input type="range" min="1" max="9" id="temperatureSlider" value="5" step="2" style='width:95%;' oninput="setSliderVal('temperatureSlider',0,false)"/>
+
+                                <p style='margin-top:0px'>Value: <span id='temperatureSliderVal'> </span></p>
+
+                                <label for='sweepSlider' style='text-align:left'>Sweeps:</label>
+                                <input type="range" min="1" max="5" id="sweepSlider" value="1" step="1" style='width:95%;' oninput="setSliderVal('sweepSlider',0,false)"/>
+
+                                <p style='margin-top:0px'>Value: <span id='sweepSliderVal'> </span></p>
+
+                            </figcaption>
+                        </figure>
                         <p>
                             The view provided here helps establish the set of user controls needed to actually implement the web app.
                         </p>
@@ -145,6 +165,58 @@ done
                         <hr>
                     </section>
                 </article>
+                <script>
+
+                    var bucket = document.getElementById('image-bucket');
+                    for(i=1;i<=9;i+=2){
+                        greycut_value = "0."+i;
+                        for(j=1;j<=9;j+=2){
+                            temperature_value = j+".0";
+                            for(k=1;k<=5;k++){
+                                sweep_value = k;
+                                file_name = greycut_value+"_"+temperature_value+"_"+sweep_value;
+                                file_name = file_name + "-cycle_resize-aquatint.png";
+                                new_image = document.createElement('img');
+                                new_image.setAttribute('src','generate_png/'+file_name);
+                                new_image.setAttribute('id',greycut_value+"_"+temperature_value+"_"+sweep_value);
+                                if(!(i == 5 && j == 5 && k == 1)){
+                                    new_image.style.display = 'none';
+                                }
+                                bucket.appendChild(new_image);
+                            }
+                        }
+                    }
+
+                    var current_greycut = 0.5;
+                    var current_temp = 5.0;
+                    var current_sweep = 1;
+                    var current_file_name = greycut_value+"_"+temperature_value+"_"+sweep_value;
+                    var current_file_name = current_file_name + "-cycle_resize-aquatint.png";
+
+                    setSliderVal = function(sliderName,skew,init){
+                        slider = document.getElementById(sliderName);
+                        output = document.getElementById(sliderName+'Val');
+                        output.innerHTML =  Number(slider.value)+skew;
+                        old_id = current_greycut+"_"+current_temp+".0_"+current_sweep;
+                        if(init == false){
+                            document.getElementById(old_id).style.display = "none";
+                        }
+                        if(sliderName == 'greycutSlider'){
+                            current_greycut = slider.value;
+                        }else if(sliderName == 'temperatureSlider'){
+                            current_temp = slider.value;
+                        }else if(sliderName == 'sweepSlider'){
+                            current_sweep = slider.value;
+                        }
+                        new_id = current_greycut+"_"+current_temp+".0_"+current_sweep;
+                        document.getElementById(new_id).style.display = 'block';
+                        return (Number(slider.value) + skew);
+                    }
+
+                    setSliderVal('greycutSlider',0,true);
+                    setSliderVal('temperatureSlider',0,true);
+                    setSliderVal('sweepSlider',0,true);
+                </script>
                 <nav>
                     <a href='../'>Back</a>
                 </nav>
