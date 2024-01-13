@@ -155,13 +155,57 @@ done
                         <p>
                             The view provided here helps establish the set of user controls needed to actually implement the web app.
                         </p>
-                        <h2>Web app and upload security</h2>
+                        <h2>The Web App</h2>
                         <p>
                             What's been discussed so far has involved Jupyter notebooks, python, and bash scripting. These are technologies not often associated with the core of web development. A utilitarian product needed to be produced with a hint of time constraint. Thus, I opted for using the Bootstrap framework to handle the front-end styling. The view provided by the previous figure implies that Javascript is also at play for the web app. Finally, an engine was needed to process the uploads.
                         </p>
                         <p>
                             My experience using Python as a web server back-end is minimal. It is likely that using Python here would lend well to the situation considering the aquatint scripts were written in the language. At the time, I had no experience handling file uploads. The back-end most familiar to me was PHP. Thus I decided to take the opportunity to shore up that gap in my experience with the language.
                         </p>
+                        <h3>Upload Security</h3>
+                        <p>
+                            The upload form consists of three sliders and a file upload box. It needs to be ensured that the selections for the sliders are numbers that reside in a specific range. It also needs to be ensured that the file being uploaded is indeed an image with an applicable type. It is not sufficient to rely on the constraints set forth by the front-end in general. Any individual can change the arbitrary restrictions by these mechanisms through the element inspector or by circumventing a browser environment altogether by means of an http post with some other program.
+                        </p>
+                        <p>
+                            The assurance of valid slider input is trivial through the back-end logic. Each slider has an id associated with the control. On submission post, PHP will check whether the posted values are numeric and whether they exist in the expected range. Assurance that a given file is indeed an image is another story.
+                        </p>
+                        <p>
+                            An individual who is used to operating in computing environments which abstract away file information from the user may think it's sufficient to simply check the extension as its given in the file name. Any power user, (or any user of a linux distribution), will know this is lacking.
+                        </p>
+                        <p>
+                            The key methods used to ensure image upload are <code>basename</code>, <code>pathinfo</code>, <code>exif_imagetype</code>, and <code>image_type_to_mime_type</code>.
+                        </p>
+                        <p>
+                            The <code>basename</code> function is used to truncate any attempts to submit a filename that attempts to traverse the server's file system. Consider a post variable with the identifier of uploadImage:
+                        </p>
+                        <code>
+
+                        </code>
+                        <p>
+                            The <code>pathinfo</code> function is used to isolate the extension of the filename string. Contrary to sentiment posed in paragraphs prior, this is still worthy of checking to provide useful feedback for those who are making sincere attempts at using the application.
+                        </p>
+                        <code>
+
+                        </code>
+                        <p>
+                            The <code>exif_imagetype</code> function provides a means within PHP to drill down into byte-level to validate file structure. This is validated further by <code>image_type_to_mime_type</code> which makes use of Apache's <code>mime_magic</code> module to make the same assurance.
+                        </p>
+                        <code>
+
+                        </code>
+                        <p>
+                            These functions are used in conjunction with safe system administration procedure. Within the linux environment, proper(ly strict) permissions are granted to the upload folder and Apache configuration restricts file-type access to the folder to only allow access to what is relevant.
+                        </p>
+                        <p>
+                            Slider and file selection input has been validated. A keen observer will discover a hidden input form. A decision was made to assign a random name to the uploaded file as it is placed into the upload folder. This is an attempt to decouple any malicious attempts at file system traversal and malicious script execution vectors that the previous measures may have missed. The back-end generates this random string as the template for the submission page is built.
+                        </p>
+                        <code>
+
+                        </code>
+                        <p>
+                            A hidden input form was opted instead of using a query string to embed this information. The reason for this was to keep the submission url clean. Another reason involves the necessity to know the filename before any submission is made! This relates to giving the user feedback of progress once they've made a submission.
+                        </p>
+                        <h3>Providing feedback</h3>
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
