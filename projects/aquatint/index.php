@@ -155,7 +155,13 @@ done
                         <p>
                             The view provided here helps establish the set of user controls needed to actually implement the web app.
                         </p>
-
+                        <h2>Web app and upload security</h2>
+                        <p>
+                            What's been discussed so far has involved Jupyter notebooks, python, and bash scripting. These are technologies not often associated with the core of web development. A utilitarian product needed to be produced with a hint of time constraint. Thus, I opted for using the Bootstrap framework to handle the front-end styling. The view provided by the previous figure implies that Javascript is also at play for the web app. Finally, an engine was needed to process the uploads.
+                        </p>
+                        <p>
+                            My experience using Python as a web server back-end is minimal. It is likely that using Python here would lend well to the situation considering the aquatint scripts were written in the language. At the time, I had no experience handling file uploads. The back-end most familiar to me was PHP. Thus I decided to take the opportunity to shore up that gap in my experience with the language.
+                        </p>
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
