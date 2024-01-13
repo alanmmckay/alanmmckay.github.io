@@ -60,11 +60,82 @@ include('../../header.php');
                     <hr>
                     </section>
                     <header>
-                        <h1></h1>
+                        <h1>Web Development: Aquatint Image Processor</h1>
                     </header>
+                    <h2>Interpretation of the original Python script</h2>
                     <p>
+                            It seems to be typical for other academic domains to produce code within in a Jupyter notebook. The advantage here is it allows the output of running the code to be interspersed within the script itself; contrary to being produced in a mutually exclusive environment, (such as stdout or some log file). This makes sense given the context of a computer scientist as someone who is moulded in such a manner to think a like a machine - one that is able to easily parse through such output.
+                        </p>
+                        <p>
+                            An advantage to being provided a script within a Jupyter notebook is that it's easier to discern the sections the developer finds important. The script received from Professor Meurice took advantage of matplotlib to display the reprocessed images. Within the notebook, each significant step was capped by a display of the reprocessed image as-in progress. For example, the first significant step of the algorithm was to apply a grey-scale to each individual pixel. A given image would be read in using the imageio library then processed as such:
+                        </p>
+                        <code>
+                            <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+im2 = imageio.imread(filename)
+Nix=im2.shape[0]
+Niy=im2.shape[1]
+grayimage=np.zeros([Nix,Niy])
+for i in range(0,Nix):
+        for j in range(0,Niy):
+            blueComponent = im2[i][j][0]
+            greenComponent = im2[i][j][1]
+            redComponent = im2[i][j][2]
+            grayValue = 0.07 * blueComponent + 0.72 * greenComponent + 0.21 * redComponent
+            grayimage[i][j] = grayValue
+            pass
+dsqin=1-grayimage/255.0
+hsimage=plt.imshow(dsqin,cmap='Greys',aspect=1,interpolation='none')
+plt.colorbar(hsimage)
+plt.show(hsimage)
+                            </pre>
+                        </code>
+                        <p>
+                            An import of matplotlib.pyplot as plt preceded this block. Knowing this, take note of the usage of pyplot's show method near the end of the code snippet.
+                        </p>
+                        <p>
+                            The set of images produced in the notebook, along with various textual/comment blocks, made it easy to discover a set of variables that can be chosen by a user to tune the appearance of an image that has been processed by the aquatint script. These variables are a greycut, temperature, and the amount of sweeps to be applied.
+                        </p>
+                        <p>
+                            Greycut was well defined within the documentation of the notebook:
+                            <blockquote>
+                                The output image will have only black and white pixels so it is a good exercise to convert the original one to this form. Provide a greycut (contrast) number between 0 and 1. This converts the grey pixels into black (above greycut) and white (below greycut).
+                            </blockquote>
+                        </p>
+                        <p>
+                            The other values weren't clearly defined within the notebook itself. Since the product of the script is of visual nature, this provided an opportunity to produce something which visually informs one what the variance in these values can produce. This would require a combinatoric production of the same image using a valid range of values of these variables. I refactored the code from the Jupyter notebook into an external python file and ran the following bash script:
+                        </p>
+                        <code>
+                            <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+sweeps=1
+while [ $sweeps -le 5 ]
+do
+    greycut=1
+    while [ $greycut -le 9 ]
+    do
+        greycut_float=`bc &lt;&lt;&lt; "scale=2; ${greycut}/10"`
+        temperature=1
+        while [ $temperature -le 9 ]
+        do
+            `python3 "aquatintScript.py" "cycle.png" $greycut_float $temperature $sweeps`
+            temperature=`expr $temperature + 2`
+        done
+        greycut=`expr $greycut + 2`
+    done
+    sweeps=`expr $sweeps + 1`
+done
+                            </pre>
+                        </code>
+                        <p>
+                            The ranges of the loops were restricted to keep a reasonable runtime of this process. A lot of the image processing is dependent on the amount of pixels contained in a given image, so the input image size was kept low enough whilst ensuring enough pixels were available to gauge the differences the other input parameters bring to the process.
+                        </p>
+                        <p>
+                            One-hundred and twenty-five images in total were produced on account of running the bash script. Those who have javascript enabled for this page can view the effect of each variable, (with respect to the values set for the others), within the following figure:
+                        </p>
 
-                    </p>
+                        <p>
+                            The view provided here helps establish the set of user controls needed to actually implement the web app.
+                        </p>
+
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
