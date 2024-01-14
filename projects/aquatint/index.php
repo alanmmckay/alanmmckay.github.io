@@ -179,19 +179,25 @@ done
                             The <code>basename</code> function is used to truncate any attempts to submit a filename that attempts to traverse the server's file system. Consider a post variable with the identifier of uploadImage:
                         </p>
                         <code>
-
+                            <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+$origin_file = $target_dir . basename($_FILES['uploadImage']['name']);
+                            </pre>
                         </code>
                         <p>
                             The <code>pathinfo</code> function is used to isolate the extension of the filename string. Contrary to sentiment posed in paragraphs prior, this is still worthy of checking to provide useful feedback for those who are making sincere attempts at using the application.
                         </p>
                         <code>
-
+                            <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+$imageFileType = strtolower(pathinfo($target_dir . $origin_file,PATHINFO_EXTENSION));
+                            </pre>
                         </code>
                         <p>
                             The <code>exif_imagetype</code> function provides a means within PHP to drill down into byte-level to validate file structure. This is validated further by <code>image_type_to_mime_type</code> which makes use of Apache's <code>mime_magic</code> module to make the same assurance.
                         </p>
                         <code>
-
+                            <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+$target_file = $target_dir . $file_name  . "." . $imageFileType;
+                            </pre>
                         </code>
                         <p>
                             These functions are used in conjunction with safe system administration procedure. Within the linux environment, proper(ly strict) permissions are granted to the upload folder and Apache configuration restricts file-type access to the folder to only allow access to what is relevant.
@@ -200,11 +206,158 @@ done
                             Slider and file selection input has been validated. A keen observer will discover a hidden input form. A decision was made to assign a random name to the uploaded file as it is placed into the upload folder. This is an attempt to decouple any malicious attempts at file system traversal and malicious script execution vectors that the previous measures may have missed. The back-end generates this random string as the template for the submission page is built.
                         </p>
                         <code>
-
+                            <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+$check = exif_imagetype($_FILES['uploadImage']['tmp_name']);
+$mimeType = image_type_to_mime_type($check);
+                            </pre>
                         </code>
                         <p>
                             A hidden input form was opted instead of using a query string to embed this information. The reason for this was to keep the submission url clean. Another reason involves the necessity to know the filename before any submission is made! This relates to giving the user feedback of progress once they've made a submission.
                         </p>
+                        <figure>
+                            <hr>
+                            <h4 id='validation_group_1_header' onclick='reveal("validation_group_1")' class='expandable'>[ - ] Validation of strings</h4>
+                            <code id='validation_group_1'>
+                                <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+$target_dir = 'uploads/';
+$uploadOk = 1;
+
+//Validate string form controls:
+if(isset($_POST['file_name']) &amp;&amp; isset($_FILES['uploadImage']['name'])){
+    if(strlen($_FILES['uploadImage']['name']) &lt;= 0 || strlen($_POST['file_name']) &lt;= 0){
+        $uploadOk = 0;
+    }else{
+        $preg_result = preg_match("/\A([a-z0-9]+)\z/",$_POST['file_name']);
+        if($preg_result == 0){
+            echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Please refrain from altering hidden form.&lt;/div&gt;';
+            $uploadOk = 0;
+        }
+    }
+
+    if($uploadOk == 1){
+        $file_name = $_POST['file_name'];
+        $origin_file = $target_dir . basename($_FILES['uploadImage']['name']);
+        $imageFileType = strtolower(pathinfo($target_dir . $origin_file,PATHINFO_EXTENSION));
+        $target_file = $target_dir . $file_name  . "." . $imageFileType;
+        $check = exif_imagetype($_FILES['uploadImage']['tmp_name']);
+        $mimeType = image_type_to_mime_type($check);
+    }
+}else{
+    $uploadOk = 0;
+}
+                                </pre>
+                            </code>
+                            <h4 id='validation_group_2_header' onclick='reveal("validation_group_2")' class='expandable'>[ - ] Validation of filetype</h4>
+                            <code id='validation_group_2'>
+                                <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+//Validate filetype:
+if($uploadOk == 1 ){
+    if($check !== false){
+        //$uploadOk = 1;
+        if($_FILES['uploadImage']['size'] &gt; 1048576){
+            echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Sorry, your file is too large.&lt;/div&gt;';
+            $uploadOk = 0;
+        }
+    }else{
+        echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; File is not an image.&lt;/div&gt;';
+        $uploadOk = 0;
+    }
+
+    if( ($imageFileType != 'jpg') &amp;&amp; ($imageFileType != 'png') &amp;&amp; ($imageFileType != 'jpeg') &amp;&amp; ($imageFileType != 'gif') ){
+        echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Only jpg, jpeg, png, and gif files are allowed.&lt;/div&gt;';
+        $uploadOk = 0;
+    }else
+
+    if( ($mimeType != 'image/gif') &amp;&amp; ($mimeType != 'image/jpeg') &amp;&amp; ($mimeType != 'image/png') ){
+        echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Only jpg, jpeg, png, and gif files are allowed.&lt;/div&gt;';
+        $uploadOk = 0;
+    }
+
+}
+                                </pre>
+                            </code>
+                            <h4 id='validation_group_3_header' onclick='reveal("validation_group_3")' class='expandable'>[ - ] Validation of numeric input</h4>
+                            <code id='validation_group_3'>
+                                <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+//Validate numeric form controls:
+if($uploadOk == 1){
+
+    //Greycut:
+    try{
+        $greycut = (float) $_POST['greycut'];
+        if($greycut &lt; 0 || $greycut &gt; 1){
+            echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Please refrain from changing form values with the element inspector.&lt;/div&gt;';
+            $uploadOk = 0;
+        }else{
+            $greycut = (string) $greycut;
+        }
+    }catch (Exception $ex){
+        echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Please refrain from changing form values with the element inspector.&lt;/div&gt;';
+        $uploadOk = 0;
+    }
+
+    //Temperature:
+    try{
+        $temperature = (float) $_POST['temperature'];
+        if($temperature &lt; 0.1 || $temperature &gt; 10){
+            echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Please refrain from changing form values with the element inspector.&lt;/div&gt;';
+            $uploadOk = 0;
+        }else{
+            $temperature = (string) $temperature;
+        }
+    }catch (Exception $ex){
+        echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Please refrain from changing form values with the element inspector.&lt;/div&gt;';
+        $uploadOk = 0;
+    }
+
+    //Total Sweeps:
+    try{
+        $totalsweeps = (float) $_POST['totalsweeps'];
+        if($totalsweeps &lt; 1 || $totalsweeps &gt; 10){
+            echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Please refrain from changing form values with the element inspector.&lt;/div&gt;';
+            $uploadOk = 0;
+        }else{
+            $totalsweeps = (string) $totalsweeps;
+        }
+    }catch (Exception $ex){
+        echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Please refrain from changing form values with the element inspector.&lt;/div&gt;';
+        $uploadOk = 0;
+    }
+
+}
+                                </pre>
+                            </code>
+                            <h4 id='validation_group_4_header' onclick='reveal("validation_group_4")' class='expandable'>[ - ] Validation success</h4>
+                            <code id='validation_group_4'>
+                                <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+if($uploadOk == 0){
+    echo '&lt;div class="alert alert-warning"&gt;Your file was not uploaded.&lt;/div&gt;';
+}else{
+    echo '&lt;div class="alert alert-info"&gt;&lt;a href="submit.php" class="alert-link"&gt;Process a new image&lt;/a&gt;&lt;/div&gt;';
+    if (move_uploaded_file($_FILES['uploadImage']['tmp_name'], $target_file)){
+
+        $fileName = pathinfo($target_file);
+        $prefix = $fileName['filename'];
+        $suffix = $fileName['extension'];
+        $new_file = $target_dir.$prefix.'-aquatint.jpg';
+
+        $script = 'python3 aquatintScript.py "'.$target_file.'" ';
+        $script = $script.$greycut.' ';
+        $script = $script.$temperature.' ';
+        $script = $script.$totalsweeps;
+
+        exec($script,$output,$result);
+        if(count($output) == 0 and $result == 0){
+            ...
+            ...
+            ...
+                                </pre>
+                            </code>
+                            <figcaption>
+                                The hidden form input has an id of "file_name". Expand the following sections to see the relevant code-block for each tier of validation.
+                            </figcaption>
+                        <hr>
+                        </figure>
                         <h3>Providing feedback</h3>
                     <section class='info'>
                         <hr>
@@ -266,6 +419,24 @@ done
                     setSliderVal('greycutSlider',0,true);
                     setSliderVal('temperatureSlider',0,true);
                     setSliderVal('sweepSlider',0,true);
+
+                    let status ={"validation_group_1":true,"validation_group_2":true,"validation_group_3":true,"validation_group_4":true};
+                    let status_map = {false:"none",true:"block"};
+                    let inner_html_map = {"validation_group_1":{false:"[ + ] Validation of strings",true:"[ - ] Validation of strings"},
+                                          "validation_group_2":{false:"[ + ] Validation of filetype",true:"[ - ] Validation of filetype"},
+                                          "validation_group_3":{false:"[ + ] Validation of numeric input",true:"[ - ] Validation of numeric input"},
+                                          "validation_group_4":{false:"[ + ] Validation success",true:"[ - ] Validation success"}
+                    }
+
+                    function reveal(id){
+                        status[id] = !status[id];
+                        document.getElementById(id).style.display = status_map[status[id]];
+                        document.getElementById(id+"_header").innerHTML = inner_html_map[id][status[id]];
+                    }
+                    reveal("validation_group_1");
+                    reveal("validation_group_2");
+                    reveal("validation_group_3");
+                    reveal("validation_group_4");
                 </script>
                 <nav>
                     <a href='../'>Back</a>
