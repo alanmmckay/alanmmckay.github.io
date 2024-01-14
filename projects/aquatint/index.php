@@ -155,6 +155,7 @@ done
                         <p>
                             The view provided here helps establish the set of user controls needed to actually implement the web app.
                         </p>
+                        <hr>
                         <h2>The Web App</h2>
                         <p>
                             What's been discussed so far has involved Jupyter notebooks, python, and bash scripting. These are technologies not often associated with the core of web development. A utilitarian product needed to be produced with a hint of time constraint. Thus, I opted for using the Bootstrap framework to handle the front-end styling. The view provided by the previous figure implies that Javascript is also at play for the web app. Finally, an engine was needed to process the uploads.
@@ -327,38 +328,25 @@ if($uploadOk == 1){
 }
                                 </pre>
                             </code>
-                            <h4 id='validation_group_4_header' onclick='reveal("validation_group_4")' class='expandable'>[ - ] Validation success</h4>
-                            <code id='validation_group_4'>
-                                <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
-if($uploadOk == 0){
-    echo '&lt;div class="alert alert-warning"&gt;Your file was not uploaded.&lt;/div&gt;';
-}else{
-    echo '&lt;div class="alert alert-info"&gt;&lt;a href="submit.php" class="alert-link"&gt;Process a new image&lt;/a&gt;&lt;/div&gt;';
-    if (move_uploaded_file($_FILES['uploadImage']['tmp_name'], $target_file)){
-
-        $fileName = pathinfo($target_file);
-        $prefix = $fileName['filename'];
-        $suffix = $fileName['extension'];
-        $new_file = $target_dir.$prefix.'-aquatint.jpg';
-
-        $script = 'python3 aquatintScript.py "'.$target_file.'" ';
-        $script = $script.$greycut.' ';
-        $script = $script.$temperature.' ';
-        $script = $script.$totalsweeps;
-
-        exec($script,$output,$result);
-        if(count($output) == 0 and $result == 0){
-            ...
-            ...
-            ...
-                                </pre>
-                            </code>
                             <figcaption>
-                                The hidden form input has an id of "file_name". Expand the following sections to see the relevant code-block for each tier of validation.
+                            The hidden form input has an id of "file_name". Expand the following sections to see the relevant code-block for each tier of validation.
                             </figcaption>
-                        <hr>
+                            <hr>
                         </figure>
+
                         <h3>Providing feedback</h3>
+                        <p>
+                            Once the validation check passes, <code>move_uploaded_files</code> is called such that the receiving file is given the random name generated within the hidden form. This new file's name will be used in concatenating a string to use for an <code>exec</code> call:
+                        </p>
+                        <code>
+                            <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+$script = 'python3 aquatintScript.py "'.$target_file.'" '.$greycut.' '.$temperature.' '.$totalsweeps;
+exec($script,$output,$result);
+                            </pre>
+                        </code>
+                        <p>
+                            All the user has to do now is wait for the aquatint script to complete; And wait they shall! Dependent on resolution, it may take a good amount of time for an image to process. The algorithm itself is at least quadratic in runtime, ignoring unknown runtime of any library method calls embedded within the iteration of pixels. This is compounded by the measly 1 gigabyte of ram and 2Ghz single core CPU that my LAMP server has access to. It is necessary to let the user know how far along the aquatint process is.
+                        </p>
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
@@ -424,8 +412,7 @@ if($uploadOk == 0){
                     let status_map = {false:"none",true:"block"};
                     let inner_html_map = {"validation_group_1":{false:"[ + ] Validation of strings",true:"[ - ] Validation of strings"},
                                           "validation_group_2":{false:"[ + ] Validation of filetype",true:"[ - ] Validation of filetype"},
-                                          "validation_group_3":{false:"[ + ] Validation of numeric input",true:"[ - ] Validation of numeric input"},
-                                          "validation_group_4":{false:"[ + ] Validation success",true:"[ - ] Validation success"}
+                                          "validation_group_3":{false:"[ + ] Validation of numeric input",true:"[ - ] Validation of numeric input"}
                     }
 
                     function reveal(id){
@@ -436,7 +423,6 @@ if($uploadOk == 0){
                     reveal("validation_group_1");
                     reveal("validation_group_2");
                     reveal("validation_group_3");
-                    reveal("validation_group_4");
                 </script>
                 <nav>
                     <a href='../'>Back</a>
