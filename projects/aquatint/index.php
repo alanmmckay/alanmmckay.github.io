@@ -49,7 +49,26 @@ include('../../header.php');
                         <p>
                             The script would reprocess an image to one that had the appearance of being produced using the aquatint printmaking technique. The product would be the same image with a more old-time aesthetic to it; the image would be more grainy with a warm temperature reminiscent of early photography.
                         </p>
+                        <div class='fig-col'>
+                        <a href='../../images/cycle.png' target="_blank" rel="noopener noreferrer">
+                            <figure class='graph'>
+                                <img src='../../images/cycle.png' alt='A photograph of an individual dressed in army attire of the world war 2 era cycling on a non-descript highway.'>
+                                <figcaption>
+                                    A photo of myself during RAGBRAI sometime during the late 2010s.
+                                </figcaption>
+                            </figure>
+                        </a>
 
+
+                        <a href='../../images/cycle_AT.png' target="_blank" rel="noopener noreferrer">
+                            <figure class='graph'>
+                                <img src='../../images/cycle_AT.png' alt='A photograph of an individual dressed in army attire of the world war 2 era cycling on a non-descript highway. This photograph has had color removed and pixel highlighting to resemble an aquatint image.'>
+                                <figcaption>
+                                    The same photo processed by the Aquatint Image Processor.
+                                </figcaption>
+                            </figure>
+                        </a>
+                        </div>
                         <p>
                             The professor's script, through the web app I would end up building, would be used to produce three pieces of building art for the Physics Research Center at the University of Chicago. It's fitting that a serendipitous connection at a climbing wall would manifest on a wall at an educational institution elsewhere.
                         </p>
@@ -57,6 +76,7 @@ include('../../header.php');
                         <p>
                             The main body of this page discusses three primary facets of the web app that I find interesting: handling of the original script, upload security, and supplying feedback to a user.
                         </p>
+                        <p> To use the web app, follow this link: <a href='../../aquatint/submit.php' target="_blank" rel="noopener noreferrer">Aquatint Image Processor</a>
                     <hr>
                     </section>
                     <header>
@@ -567,17 +587,32 @@ if($valid == 1){
                         <p>
                             Another potential vector of future work is to add a mechanism to allow a user to bookmark a completion page and refer to it later. This would be a trivial endeavor by implementing a query string that the API can use to look up and return the relevant images in the uploads folder. There is hesitance in implementing this. It is at odds with the scheduled cleanup of the uploads folder. This scheduled cleanup is a security necessity from both a systems perspective and a social perspective - I cannot verify, in real time, the contents of an image and thus must assume the worse. The regularly scheduled deletion of the images helps moderate this.
                         </p>
-                        <p>
-                            If any progress is made for this web app, it will be posted in a concluding notes section.
-                        </p>
                         <hr>
-                    <!--section class='info'>
+                    <section class='info'>
                         <h3>Concluding notes</h3>
                         <p>
-
+                            Credit for the Aquatint script goes to <a href='https://physics.uiowa.edu/people/yannick-meurice' target="_blank" rel="noopener noreferrer">Professor Yannick Meurice</a> at the University of Iowa. Literature pertaining to the script can be read through the <a href='https://pubs.aip.org/aapt/ajp/article-abstract/90/2/87/2819740/Making-digital-aquatint-with-the-Ising-model?redirectedFrom=fulltext' target="_blank" rel="noopener noreferrer">American Journal of Physics Volume 90, Issue 2</a>.
                         </p>
                         <hr>
-                    </section-->
+                        <figure class='col-fig'>
+
+                            <a href='../../images/ngr.png' target="_blank" rel="noopener noreferrer">
+                                <img src='../../images/ngr.png' alt=''>
+                            </a>
+                            <a href='../../images/sr.png' target="_blank" rel="noopener noreferrer">
+                                <img src='../../images/sr.png' alt=''>
+                            </a>
+                            <a href='../../images/pn.png' target="_blank" rel="noopener noreferrer">
+                                <img src='../../images/pn.png' style='float:none;' alt=''>
+                            </a>
+
+                            <figcaption style='clear:both;padding-top:25px'>
+                                Images created by the University of Chicago in which the Aquatint Image Processor was leveraged.
+                            </figcaption>
+
+                    </figure>
+                        <hr>
+                    </section>
                 </article>
                 <script>
 
