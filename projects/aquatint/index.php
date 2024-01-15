@@ -347,14 +347,224 @@ exec($script,$output,$result);
                         <p>
                             All the user has to do now is wait for the aquatint script to complete; And wait they shall! Dependent on resolution, it may take a good amount of time for an image to process. The algorithm itself is at least quadratic in runtime, ignoring unknown runtime of any library method calls embedded within the iteration of pixels. This is compounded by the measly 1 gigabyte of ram and 2Ghz single core CPU that my LAMP server has access to. It is necessary to let the user know how far along the aquatint process is.
                         </p>
-                    <section class='info'>
+                        <p>
+                            Some would rightfully claim that using exec is a code smell. It took a bit to convince myself that the steps described in the previous section are adequate to scrub input of malicious intent. In terms of running the aquatint script, a string is being passed that has been stripped of any POSIX compliant command. The same can be said in terms of the Python code embedded in the script itself.
+                        </p>
+                        <p>
+                            Initial intuition for supplying a user progress-feedback was to leverage print statements in the aquatint script to expose progress through stdout. These print statements would occur upon the completion of significant steps within the script, such as when grey-scaling is finished. The problem here is the exec call is an atomic operation in the eyes of PHP. One could skirt around this by instead of leveraging a call to proc_open, but programming intuition has me believe this is an even greater code smell than using exec in the first place.
+                        </p>
+                        <p>
+                            The propensity to lean towards leveraging stdout is likely related to the opening discussion of this article; it is influenced by experiences of studying computer science which has been heavily guided by interpretation of the stdout environment. Program state still can be relayed through other mechanisms, though. The solution to this problem was leveraging the ability to write to file instead of standard output.
+                        </p>
+                        <p>
+                            The decision to write state to some file to be read by the app aligns more with the intuit of a web developer. Development of a Restful API has been the cornerstone of one significant projects throughout my studies. This was by means of a PHP project whilst attending community college. The span of time since then once again warranted practice for the sake of refilling a gap of knowledge. The process is as follows:
+                        </p>
+                        <p>
+                          When the submission form is loaded, ensure the back-end automatically generates a filename. It's necessary to know the file-name before the submission is posted to the server. Write this string to the hidden form and write it to a json file that only the back-end may access. This file will serve as a map for the API endpoint to use.
+                        </p>
+                        <code>
+                            <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+$file_name = '';
+for($i = 0; $i &lt;= rand(10,20); $i++){
+    $new_ord = rand(87,122);
+    if($new_ord &gt;= 97){
+        $file_name = $file_name . chr($new_ord);
+    }else{
+        $file_name = $file_name . $new_ord;
+    }
+}
+$json = file_get_contents("map.json");
+$json_data = json_decode($json,true);
+$json_data[$file_name] = array("status" =&gt; 0, "time" =&gt; time());
+file_put_contents("map.json",json_encode($json_data));
+                            </pre>
+                        </code>
+                        <p>
+                            Once the submit button is pressed, PHP will only serve the resulting page once all the program statements are completed. This includes the execution of the exec statement. This necessitates the need to have a filename pre-generated. Thus, add a Javascript event listener to the submission button to know when it is pressed. This event listener must know the string that represents the filename.
+                        </p>
+                        <code>
+                            <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+&lt;div class='form-group'&gt;
+    &lt;input type='submit' value='Upload Image' name='submit' onclick="submit_process('&lt;?php echo $file_name; ?&gt;');" /&gt;
+    &lt;p id='wait' style='visibility:hidden;'&gt;&lt;b&gt;Please wait...&lt;/b&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="progress"&gt;
+    &lt;div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: 0%" &gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id='progress-text' class='alert alert-light'&gt;
+&lt;/div&gt;
+                            </pre>
+                        </code>
+                        <p>
+                            Once submit is pressed, toggle a visual prompt for the user that they should wait. Trigger an interval loop which runs an AJAX query to the server's API endpoint to query for status. This query occurs once every three seconds.
+                        </p>
+                        <code>
+                            <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+submit_process = function(filestring){
+    document.getElementById("wait").style.visibility = "visible";
+    setInterval(function(){
+        query("&lt;?php echo $file_name;?&gt;");
+    },3000);
+}
+                            </pre>
+                        </code>
+                        <p>
+                            Once submit is pressed, the aquatint script will be run via the PHP script's exec command. Within the aquatint script, create a json file that resides in the uploads folder. This json file is prefixed with the name of the file to be written. It will contain entry points to indicate when a certain step of the algorithm is completed. It will also have a spot to indicate the progress of the current step being executed.
+                        </p>
+                        <code>
+                            <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+status_dict = {"origin":False,"greycut":False,"temperature":False,"sweeps":dict(),"finished":0,"total":3+totalsweeps,"progress":0}
+
+for i in range(0,totalsweeps):
+    status_dict['sweeps']["sweep"+str(i)] = False
+
+write_to_json(filename.split('.')[-2]+'-status.json',json.dumps(status_dict))
+                            </pre>
+                        </code>
+                        <p>
+                            As the aquatint program is running, it will write to the file once a significant step is completed. Within each significant step, (usually embedded in an outer-loop), it will write a value indicating the percentage of the step completed. This will only be written for every 3% completed to save the amount of times the progress is written to this file.
+                        </p>
+                        <code>
+                            <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+# !!! This is the same loop described earlier in the reading.
+#     It has been expanded to allow progress reporting.
+#     Note that this is only a subsection of the Aquatint script.
+
+im2 = imageio.imread(filename)
+Nix=im2.shape[0]
+Niy=im2.shape[1]
+grayimage=np.zeros([Nix,Niy])
+
+rewrite_switch = True
+for i in range(0,Nix):
+        for j in range(0,Niy):
+            blueComponent = im2[i][j][0]
+            greenComponent = im2[i][j][1]
+            redComponent = im2[i][j][2]
+            grayValue = 0.07 * blueComponent + 0.72 * greenComponent + 0.21 * redComponent
+            grayimage[i][j] = grayValue
+            pass
+        status_dict['progress'] = i / Nix
+        if round((i * 100) / Nix) % 3 == 0:
+            if rewrite_switch == True:
+                write_to_json(filename.split('.')[-2]+'-status.json',json.dumps(status_dict))
+                rewrite_switch = False
+        else:
+            rewrite_switch = True
+status_dict["progress"] = 0
+
+dsqin=1-grayimage/255.0
+hsimage=plt.imshow(dsqin,cmap='Greys',aspect=1,interpolation='none')
+#cb = plt.colorbar(hsimage)
+plt.savefig(filename.split('.')[-2]+'-origin.jpg',dpi=300)
+
+status_dict["origin"] = True
+status_dict['finished'] += 1
+write_to_json(filename.split('.')[-2]+'-status.json',json.dumps(status_dict))
+                            </pre>
+                        </code>
+                        <p>
+                            As the user's browser is waiting for a post response, the AJAX method will be querying the endpoint and receiving new state written by the python script. The ajax call will work through a set of states which represent the completion of a certain step of the aquatint process. Percentage of a given step will be reported, and once a step is completed, a progress bar will be filled in.
+                        </p>
+                        <code>
+                            <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+query = function(filestring){
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            result = this.responseText;
+            finished = JSON.parse(result)[0];
+            total = JSON.parse(result)[1];
+            ratio = (finished/total) * 100;
+            new_width = '' + ratio + "%";
+            document.getElementById('progress-bar').style.width = new_width;
+            progress_text_object = document.getElementById('progress-text');
+            if(finished == 0){
+                progress = JSON.parse(result)[2];
+                progress_text_object.innerHTML = 'Step 1/'+total+'; Resizing and applying greyscale to original image: ' + Math.ceil(progress * 100) + '% complete.';
+            }else if(finished == 1){
+                progress_text_object.innerHTML = 'Step 2/'+total+'; Original image resized - Applying greycut...';
+            }else if(finished == 2){
+                progress_text_object.innerHTML = 'Step 3/'+total+'; Greycut applied - Applying temperature...';
+            }else if(finished == 3){
+                progress = JSON.parse(result)[2];
+                progress_text_object.innerHTML = 'Step 4/'+total+'; Greycut and Temperature applied - Applying first sweep: ' + Math.ceil(progress * 100) + '% complete.';
+            }else if(finished >= 4){
+                progress = JSON.parse(result)[2];
+                progress_text_object.innerHTML = 'Step '+(finished+1)+'/'+total+'; Applying sweep: ' + Math.ceil(progress * 100) + '% complete.';
+            }
+        }
+    };
+    xmlhttp.open("GET","status.php?id="+filestring,true);
+    xmlhttp.send();
+}
+                            </pre>
+                        </code>
+                        <p>
+                            For every query to the API endpoint, the PHP script will then look up the relevant json status file and report the relevant status. The AJAX query will make use of the returned information to fill in the relevant html elements to give the user a sense of progress.
+                        </p>
+                        <code>
+                            <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
+&lt;?php
+$not_ready = json_encode(array(0,0));
+
+if(isset($_GET['id'])){
+    $result = preg_match("/\A([a-z0-9]+)\z/",$_GET['id']);
+    $valid = 0;
+    if($result == 1){
+        $json = file_get_contents("map.json");
+        $json_data = json_decode($json,true);
+        if(isset($json_data[$_GET['id']])){
+            $valid = 1;
+        }else{
+            echo $not_ready;
+        }
+    }else{
+        echo $not_ready;
+    }
+}else{
+    echo $not_ready;
+}
+
+if($valid == 1){
+    try{
+        $json = file_get_contents("uploads/".$_GET['id']."-status.json");
+        $json_data = json_decode($json,true);
+        $return = array($json_data["finished"],$json_data["total"],$json_data['progress']);
+        echo json_encode($return);
+    }catch(Exception $ex){
+        echo $not_ready;
+    }
+}
+?&gt;
+                            </pre>
+                        </code>
+                        <p>
+                            To clean-up things on the server-side, every time the submission page is accessed, the back end will take a look at the mapping json file and keep all the items that are less than 30 minutes old. A cronjob also works on the server-side and deletes all files within the uploads folder that meets this criteria as well.
+                        </p>
+                        <h3>Finished product</h3>
+                        <p>
+                            The rest of the web app isn't worth elaborating upon. If a reader has been able to track what's been said thus far, the remaining details are both trivial and intuitive.
+                        </p>
+                        <p>
+                            A working version of the web app can be viewed here: <a href=''>Aquatint Image Processor</a>. To label this as a finished project is a mischaracterization. Future work includes a cancel button that allows a user to discontinue waiting for an image to process within a sweep stage which would then forward them to a page with the most recent applied sweep.
+                        </p>
+                        <p>
+                            Another potential vector of future work is to add a mechanism to allow a user to bookmark a completion page and refer to it later. This would be a trivial endeavor by implementing a query string that the API can use to look up and return the relevant images in the uploads folder. There is hesitance in implementing this. It is at odds with the scheduled cleanup of the uploads folder. This scheduled cleanup is a security necessity from both a systems perspective and a social perspective - I cannot verify, in real time, the contents of an image and thus must assume the worse. The regularly scheduled deletion of the images helps moderate this.
+                        </p>
+                        <p>
+                            If any progress is made for this web app, it will be posted in a concluding notes section.
+                        </p>
                         <hr>
+                    <!--section class='info'>
                         <h3>Concluding notes</h3>
                         <p>
 
                         </p>
                         <hr>
-                    </section>
+                    </section-->
                 </article>
                 <script>
 
