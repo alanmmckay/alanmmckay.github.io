@@ -151,7 +151,7 @@ done
                         <p>
                             One-hundred and twenty-five images in total were produced on account of running the bash script. Those who have Javascript enabled for this page can view the effect of each variable, (with respect to the values set for the others), within the following figure:
                         </p>
-                        <figure>
+                        <figure id='image-bucket-figure' style='display:none;'>
                             <div id='image-bucket'>
                             </div>
                             <figcaption>
@@ -681,6 +681,8 @@ if($valid == 1){
                     reveal("validation_group_1");
                     reveal("validation_group_2");
                     reveal("validation_group_3");
+
+                    document.getElementById('image-bucket-figure').style.display = "inherit";
                 </script>
                 <nav>
                     <a href='../'>Back</a>
