@@ -70,19 +70,19 @@ include('../../header.php');
                         Consider a dataset which describes interactions between Reddit users for two different subreddits during the span of a specific month.
                         <ul>
                             <li>
-                                The given dataset is given as a file which is formatted as an adjacency list. I.e., User1, User2, User3 where User1 replied to a comment made by User2 and another one by User3.
+                                The given dataset is given as a file which is formatted as an adjacency list. Each line of the file is represented as such: <code>User1, User2, User3, ... Userx\n</code> where User1 replied to a comment made by User2 and another one by User3, and every user up to and including Userx.
                             </li>
                         </ul>
                     </p>
 
                     <p>
-                        Many different software solutions can be chosen for analysis. Gephi is one that is often recommended. Personal experience has found that Gephi is limited; It is handy for network visualization and generating a set of metrics which are indicative of the properties of the network. There seems to be no mechanism to display the calculated metrics using different scaling factors for any scatterplot graphs. For example, displaying a degree distribution graph in log-log scale doesn't seem to be an available option. To account for this, Python was leveraged, taking advantage of the <code>matplotlib</code>, <code>numpy</code>, and <code>powerlaw</code> libraries.
+                        Many different software solutions can be chosen for analysis. Gephi is one that is often recommended. Personal experience has found that Gephi is limited; It is handy for network visualization and generating a set of metrics which are indeed indicative of the properties of the network. Unfortunately, there seems to be no mechanism to display the calculated metrics using different scaling factors for any given scatterplot graph. For example, displaying a degree distribution graph in log-log scale doesn't seem to be an available option. To account for this, Python was leveraged, taking advantage of the <code>matplotlib</code>, <code>numpy</code>, and <code>powerlaw</code> libraries.
                         <ul>
                             <li>
                                 <code>numpy</code> arrays are used to interface with <code>matplotlib.pyplot</code> and <code>powerlaw</code>.
                             </li>
                             <li>
-                                <code>powerlaw</code> allows the generation of a Fitting function for a bin of data. It can also generate relevant alpha values, (the gamma value with respect to the textbook used in this class), for a power-law distribution function. <code>powerlaw</code> also interfaces with matplotlib to allow visual representation of these functions.
+                                <code>powerlaw</code> allows the generation of a fitting function for a bin of data. It can also generate relevant alpha values, (the gamma value with respect to the textbook used in this class), for a power-law distribution function. <code>powerlaw</code> also interfaces with matplotlib to allow visual representation of these functions.
                                 <ul>
                                     <li>
                                         Relevant class methods are <code>powerlaw.Fit</code> and <code>powerlaw.plot_pdf</code>. Relevant instance methods are <code>powerlaw.Fit(&lt;args&gt;).plot_pdf</code>. Relevant instance variables are <code>powerlaw.Fit(&lt;args&gt;).alpha</code>.
@@ -93,20 +93,20 @@ include('../../header.php');
                                 <code>matplotlib.pyplot</code> allows plotting of arrays as scatterplot. It has scaling methods to allow for the display of some graph in log-log scale.
                             </li>
                         </ul>
-                        The python files included are ad hoc scripts leveraged to complete the required analysis.
+                        The python files associated with this are ad hoc scripts leveraged to complete the required analysis.
                     </p>
 
                     <p>
                          It's worth elaborating on what is happening within the represention of the dataset. The existence of some edge in the adjacency list is a means of communication. Communication can be interpreted ambiguously. So it should also be noted that communication here is directed. The node that is representative of a list entry is replying to a comment made by a user within that list entry:
                          <ul>
                             <li>
-                                User1 replied to a comment by user2 and another comment by user3;
+                                User1 replied to a comment by User2 and another comment by User3;
                             </li>
                             <li>
                                 Can be interpreted as (user1 -> user2) and (user1 -> user3)
                             </li>
                          </ul>
-                         Thus, an entry of the adjacency list is indicative of the out-degree of a given node, (a node representing a user). To calculate the in-degree of the same node requires parsing through the adjacency list and taking note of how many times communication is directed towards it.
+                         Thus, an entry of the adjacency list is indicative of the out-degree of a given node, (a node representing a user). In order to calculate the in-degree of the same node requires parsing through the adjacency list and taking note of how many times communication is directed towards it.
                     </p>
 
                     <p>

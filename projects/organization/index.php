@@ -44,7 +44,7 @@ include('../../header.php');
                         </p>
 
                         <p>
-                            The question needs to be asked of who is at a disadvantage through this environment? What type of student is at risk here? These questions are too general for the focus of this writing, but I invite the reader to linger and muse on them. I will make the following assertions based on my experiences which should also be considered:
+                            Who is at a disadvantage through this environment? What type of student is at risk here? These questions are too general for the focus of this writing, but I invite the reader to linger and muse on them. I will make the following assertions based on my experiences which should also be considered:
                             <ul>
                                 <li>
                                     In the domain of computer science, there are three different types of students:
@@ -374,7 +374,7 @@ def sum_l(aList):
                             <hr>
                                 <figure>
                                     <code>
-<pre class='code info-code' style='max-width:32em;max-height:250px'>
+<pre class='code info-code' style='max-height:250px'>
 01    # --- --- --- --- --- --- #
 02    sum:
 03    # Two arguments $a0 (memory address of list) and $a1 (length value of list)

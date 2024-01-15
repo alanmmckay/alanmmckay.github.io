@@ -6,9 +6,9 @@ $style = '../../style.css';
 
 $canonical = 'https://alanmckay.blog/projects/safety/';
 
-$title = 'Alan McKay | Project | Geography and Safety';
+$title = 'Alan McKay | Project | Cycling Safety Database';
 
-$meta['title'] = 'Alan McKay | Geography and Safety';
+$meta['title'] = 'Alan McKay | Cycling Safety Database';
 
 $meta['description'] = "Project description of building a PostGIS database which cumulates DOT traffic information to provide safety insights for cyclists.";
 
