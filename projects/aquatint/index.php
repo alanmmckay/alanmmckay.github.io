@@ -666,23 +666,26 @@ if($valid == 1){
                     setSliderVal('temperatureSlider',0,true);
                     setSliderVal('sweepSlider',0,true);
 
-                    let status ={"validation_group_1":true,"validation_group_2":true,"validation_group_3":true,"validation_group_4":true};
-                    let status_map = {false:"none",true:"block"};
-                    let inner_html_map = {"validation_group_1":{false:"[ + ] Validation of strings",true:"[ - ] Validation of strings"},
-                                          "validation_group_2":{false:"[ + ] Validation of filetype",true:"[ - ] Validation of filetype"},
-                                          "validation_group_3":{false:"[ + ] Validation of numeric input",true:"[ - ] Validation of numeric input"}
-                    }
-
+                    let status ={"validation_group_1":true,"validation_group_2":true,"validation_group_3":true};
                     function reveal(id){
                         status[id] = !status[id];
-                        document.getElementById(id).style.display = status_map[status[id]];
-                        document.getElementById(id+"_header").innerHTML = inner_html_map[id][status[id]];
+                        old_string = document.getElementById(id+"_header").innerHTML;
+                        if(status[id] == true){
+                            new_string = "[ - ]";
+                            document.getElementById(id).style.display = "block";
+                        }else{
+                            new_string = "[ + ]";
+                            document.getElementById(id).style.display = "none";
+                        }
+                        new_string = new_string + old_string.slice(5,old_string.length)
+                        document.getElementById(id+"_header").innerHTML = new_string;
                     }
                     reveal("validation_group_1");
                     reveal("validation_group_2");
                     reveal("validation_group_3");
 
                     document.getElementById('image-bucket-figure').style.display = "inherit";
+
                 </script>
                 <nav>
                     <a href='../'>Back</a>
