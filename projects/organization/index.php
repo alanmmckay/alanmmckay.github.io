@@ -105,7 +105,7 @@ include('../../header.php');
                         <hr>
                         <figure>
                             <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:70vw;max-width:32em;padding-left:10px;max-height:250px'>
+<pre class='code info-code' style='max-width:32em;max-height:250px'>
 def sum_a(aList):
     total = 0
     for value in aList:
@@ -160,7 +160,7 @@ def sum_f(aList):
 
                         <figure>
                             <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:70vw;max-width:32em;padding-left:10px;max-height:250px'>
+<pre class='code info-code' style='max-width:32em;max-height:250px'>
 def sum_g(aList):
     return sum(alist)
 
@@ -374,7 +374,7 @@ def sum_l(aList):
                             <hr>
                                 <figure>
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:70vw;max-width:50em;padding-left:10px;'>
+<pre class='code info-code' style='max-width:32em;max-height:250px'>
 01    # --- --- --- --- --- --- #
 02    sum:
 03    # Two arguments $a0 (memory address of list) and $a1 (length value of list)

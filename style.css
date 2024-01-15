@@ -1,3 +1,8 @@
+body{
+    max-width: 1600px;
+    margin: auto;
+}
+
 #homeWrapper{
     width:100%;
     margin:auto;
@@ -325,6 +330,18 @@ ul.filelist li{
     text-align:left;
 }
 
+code pre.code{
+    overflow:scroll;
+    background-color:#f2f2f2;
+    width:95vw;
+    max-width:40em;
+    padding-left:10px;
+}
+
+code pre.info-code{
+    width:70vw;
+}
+
 @media screen and (min-width:800px){
     #writingsWrapper .fig-col{
         overflow:auto;
@@ -503,11 +520,26 @@ ul.filelist li{
         margin-left:5%;
     }
 
+    code pre.code{
+        width:80vw;
+    }
+
+    code pre.info-code{
+        width:65vw;
+    }
 }
 
 @media screen and (max-width:400px){
     div.slide-deck{
         display:none;
+    }
+
+    code pre.code{
+        width:260px;
+    }
+
+    code pre.info-code{
+        width:230px
     }
 }
 

@@ -507,7 +507,7 @@ V :                   :
 
                             <h4>Grammar</h4>
                             <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:45em;padding-left:10px'>
+<pre class='code info-code'>
         &lt;PROGRAM&gt; ::= &lt;DEFINITIONS&gt;
 
         &lt;DEFINITIONS&gt; ::= ε
@@ -569,7 +569,7 @@ V :                   :
                                 <li>
                                     These are the reserved words of Klein:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:35em;padding-left:10px'>
+<pre class='code info-code' style='max-width:35em;'>
     integer     boolean
     true        false
     if          then       else
@@ -593,7 +593,7 @@ V :                   :
                                 <li>
                                     The following are the primitive operators and punctuation marks of Klein:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:35em;padding-left:10px'>
+<pre class='code info-code' style='max-width:35em;'>
     +           -          *        /
     &lt;           =          (        )
     ,           :          (*       *)
@@ -648,7 +648,7 @@ V :                   :
                                     <h5>Arithmetic</h5>
                                     Adds, subtracts, multiplies, or divides two integers.
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:15em;padding-left:10px'>
+<pre class='code info-code' style='max-width:15em;'>
      x + y
      x - y
      x * y
@@ -660,7 +660,7 @@ V :                   :
                                     <h5>Boolean Comparisons</h5>
                                     Compares two integers, yielding one of the boolean values <code>true</code> or <code>false</code>. <code>&lt;</code> yields <code>true</code> if its left operand is less than its right operand, and <code>false</code> otherwise. <code>=</code> yields true if its left operand has the same value as its right operand, and <code>false</code> otherwise.
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:15em;padding-left:10px'>
+<pre class='code info-code' style='max-width:15em;'>
      x &lt; y
      x = y
 </pre>
@@ -669,7 +669,7 @@ V :                   :
                                 <li>
                                     <h5>Boolean Connectives</h5>
                                     Negates a single boolean value, or computes the disjunction or conjunction of two boolean values. The unary <code>not</code> yields <code>true</code> if its operand is <code>false</code>, and <code>false</code> otherwise. <code>or</code> yields <code>true</code> if either its left operand or its right operand yields <code>true</code>, and <code>false</code> otherwise. <code>and</code> yields <code>true</code> if both its left operand and its right operand yield <code>true</code>, and <code>false</code> otherwise.                                    <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:15em;padding-left:10px'>
+<pre class='code info-code' style='max-width:15em;'>
      not x
      x or y
      x and y
@@ -682,7 +682,7 @@ V :                   :
                                     Evaluates a test expression, and uses its value to select one of two expressions to evaluate. Yields the value of the first of these expressions if the test expression produces a true value, and the value of the second if the test expression yields a false value. The <code>else</code> clause is required.<br>
                                     For example:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:15em;padding-left:10px'>
+<pre class='code info-code' style='max-width:15em;'>
      if flag &lt; 0 then
         x + y
      else
@@ -696,7 +696,7 @@ V :                   :
                                     Applies a function to zero or more arguments, and yields the value of the expression in the body of the function. All functions return an integer value or a boolean value; Klein has no notion of a "void" function.<br>
                                     For example:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:15em;padding-left:10px'>
+<pre class='code info-code' style='max-width:15em;'>
      f( x+y, 1 )
 </pre>
                                     </code>
@@ -730,7 +730,7 @@ V :                   :
                                 <li>
                                     For the purposes of user interaction, Klein provides the primitive function <code>print(expression)</code>. For example:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:15em;padding-left:10px'>
+<pre class='code info-code' style='max-width:15em;'>
      print( x+y )
 </pre>
                                     </code>
@@ -752,7 +752,7 @@ V :                   :
                                 <li>
                                     For example, here is a complete Klein program that computes the absolute value of its argument:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:35em;padding-left:10px'>
+<pre class='code info-code' style='max-width:35em;'>
      function main( n : integer ) : integer
         if n &lt; 0
            then -n
@@ -761,7 +761,7 @@ V :                   :
                                     </code>
                                     If this program were compiled into an executable file named <code>abs</code>, then running it under Unix might look something like this:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:35em;padding-left:10px'>
+<pre class='code info-code' style='max-width:35em;'>
     mac os x > abs -3
     3
 </pre>
@@ -820,7 +820,7 @@ V :                   :
                             <li>
                                 Register-only (RO) instructions are of the form
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:25em;padding-left:10px'>
+<pre class='code info-code' style='max-width:25em;'>
     opcode r1,r2,r3
 </pre>
                                     </code>
@@ -829,7 +829,7 @@ V :                   :
                             <li>
                                 These are the RO opcodes:
                                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:45em;padding-left:10px'>
+<pre class='code info-code'>
 <b>IN</b>      read an integer from stdin and place result in <b>r1</b>; ignore operands <b>r2</b> and <b>r3</b>
 <b>OUT</b>     write contents of <b>r1</b> to stdout; ignore operands <b>r2</b> and <b>r3</b>
 <b>ADD</b>     add contents of <b>r2</b> and <b>r3</b> and place result in <b>r1</b>
@@ -843,13 +843,13 @@ V :                   :
                             <li>
                                 Register-memory (RM) instructions are of the form
                                 <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:25em;padding-left:10px'>
+<pre class='code info-code' style='max-width:25em;'>
     opcode r1,offset(r2)
 </pre>
                                 </code>
                                 Where the <code>ri</code> are legal registers and <code>offset</code> is an integer offset. <code>offset</code> may be negative. With the exception of the <code>LDC</code> instruction, the expression <code>offset(r2)</code> is used to compute the address of a memory at location:
                                 <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:25em;padding-left:10px'>
+<pre class='code info-code' style='max-width:25em;'>
     address = (contents of r2) + offset
 </pre>
                                 </code>
@@ -857,7 +857,7 @@ V :                   :
                             <li>
                                 There are four RM opcodes for memory manipulation:
                                 <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:45em;padding-left:10px'>
+<pre class='code info-code'>
 <b>LDC</b>    place the constant <b>offset</b> in <b>r1</b>; ignore <b>r2</b>
 <b>LDA</b>    place the address <b>address</b> in <b>r1</b>
 <b>LD</b>     place the contents of data memory location <b>address</b> in <b>r1</b>
@@ -868,7 +868,7 @@ V :                   :
                             <li>
                                 There are six RM opcodes for branching. If the value of <code>r1</code> satisfies the opcode's condition, then branch to the instruction at memory location <code>address</code>.
                                 <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:45em;padding-left:10px'>
+<pre class='code info-code'>
 <b>JEQ</b>    equal to 0
 <b>JNE</b>    not equal to 0
 <b>JLT</b>    less than 0
