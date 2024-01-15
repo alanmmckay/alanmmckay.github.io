@@ -156,17 +156,17 @@ done
                             </div>
                             <figcaption>
                                 <label for='greycutSlider'>Greycut:</label>
-                                <input type="range" min="0.1" max="0.9" id="greycutSlider" value="0.5" step="0.2" style='width:95%;' oninput="setSliderVal('greycutSlider',0,false)"/>
+                                <input type="range" min="0.1" max="0.9" id="greycutSlider" value="0.5" step="0.2" style='width:95%;accent-color:grey;' oninput="setSliderVal('greycutSlider',0,false)"/>
 
                                 <p style='margin-top:0px'>Value: <span id='greycutSliderVal'> </span></p>
 
                                 <label for='temperatureSlider'>Temperature:</label>
-                                <input type="range" min="1" max="9" id="temperatureSlider" value="5" step="2" style='width:95%;' oninput="setSliderVal('temperatureSlider',0,false)"/>
+                                <input type="range" min="1" max="9" id="temperatureSlider" value="5" step="2" style='width:95%;accent-color:grey;' oninput="setSliderVal('temperatureSlider',0,false)"/>
 
                                 <p style='margin-top:0px'>Value: <span id='temperatureSliderVal'> </span></p>
 
                                 <label for='sweepSlider' style='text-align:left'>Sweeps:</label>
-                                <input type="range" min="1" max="5" id="sweepSlider" value="1" step="1" style='width:95%;' oninput="setSliderVal('sweepSlider',0,false)"/>
+                                <input type="range" min="1" max="5" id="sweepSlider" value="1" step="1" style='width:95%;accent-color:grey;' oninput="setSliderVal('sweepSlider',0,false)"/>
 
                                 <p style='margin-top:0px'>Value: <span id='sweepSliderVal'> </span></p>
 
