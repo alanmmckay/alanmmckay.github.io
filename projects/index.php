@@ -10,7 +10,7 @@ $title = 'Alan McKay | Projects';
 
 $meta['title'] = 'Alan McKay | Projects';
 
-$meta['description'] = "";
+$meta['description'] = "Index of articles detailing various programming projects worked on. All related to Computer Science from the context of assessment, freelance, and/or interest.";
 
 $meta['url'] = 'https://alanmckay.blog/projects/';
 

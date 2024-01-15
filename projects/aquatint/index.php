@@ -10,7 +10,7 @@ $title = 'Alan McKay | Project | Aquatint';
 
 $meta['title'] = 'Alan McKay | Aquatint';
 
-$meta['description'] = '';
+$meta['description'] = 'Project description detailing facets of interest pertaining to building a web app for running the Aquatint Image Processor.';
 
 $meta['url'] = 'https://alanmckay.blog/projects/aquatint/';
 
