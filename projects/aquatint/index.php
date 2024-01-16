@@ -734,6 +734,13 @@ if($valid == 1){
 
                     screen.orientation.addEventListener("change", (event) => {
                         if(screen.orientation.type != old_orientation){
+                            if(screen.orientation.type == 'landscape-primary'){
+                                shrinking = true;
+                                growing = false;
+                            }else if(screen.orientation.type == 'portrait-primary'){
+                                shrinking = false;
+                                growing = true;
+                            }
                             setDynamicFigureStyle();
                             old_orientation = screen.orientation.type;
                         }
