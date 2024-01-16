@@ -731,12 +731,22 @@ if($valid == 1){
                         setDynamicFigureStyle();
                     }
 
+
+                    screen.orientation.addEventListener("change", (event) => {
+                        if(screen.orientation.type != old_orientation){
+                            setDynamicFigureStyle();
+                            old_orientation = screen.orientation.type;
+                        }
+                    });
+
+
                     var shrinking = false;
                     var growing = false;
                     var old_height = window.outerHeight;
                     var old_ele_height = document.getElementById('image-bucket-figure').getBoundingClientRect().height;
                     var flex_switch = false;
 
+                    var old_orientation = screen.orientation.type;
                 </script>
                 <nav>
                     <a href='../'>Back</a>
