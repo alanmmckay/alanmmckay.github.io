@@ -346,6 +346,23 @@ code pre.info-code{
     width:70vw;
 }
 
+.dynamic-figure-container{
+    align-items:center;
+}
+
+.dynamic-figure-container .dynamic-figure-view{
+    width:45%;
+}
+
+.dynamic-figure-container .dynamic-figure-controls{
+    width:50%;
+}
+
+.dynamic-figure-container .dynamic-figure-controls p{
+    margin:0px;
+    float:right;
+}
+
 @media screen and (min-width:800px){
     #writingsWrapper .fig-col{
         overflow:auto;
@@ -530,6 +547,25 @@ code pre.info-code{
 
     code pre.info-code{
         width:65vw;
+    }
+
+    .dynamic-figure-container .dynamic-figure-view{
+        width:55%;
+    }
+
+    .dynamic-figure-container .dynamic-figure-controls{
+        width:40%;
+    }
+
+    .dynamic-figure-container .dynamic-figure-controls label{
+        display:block;
+        width: 89px;
+        float:left;
+    }
+
+    .dynamic-figure-container .dynamic-figure-controls p{
+        width:67px;
+        float:left;
     }
 }
 

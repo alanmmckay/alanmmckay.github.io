@@ -151,24 +151,24 @@ done
                         <p>
                             One-hundred and twenty-five images in total were produced on account of running the bash script. Those who have Javascript enabled for this page can view the effect of each variable, (with respect to the values set for the others), within the following figure:
                         </p>
-                        <figure id='image-bucket-figure' style='display:none;'>
-                            <div id='image-bucket'>
+                        <figure id='image-bucket-figure' class='' >
+                            <div class='dynamic-figure-view' id='image-bucket'>
                             </div>
-                            <figcaption>
+                            <figcaption class='dynamic-figure-controls'>
                                 <label for='greycutSlider'>Greycut:</label>
-                                <input type="range" min="0.1" max="0.9" id="greycutSlider" value="0.5" step="0.2" style='width:95%;accent-color:grey;' oninput="setSliderVal('greycutSlider',0,false)"/>
+                                <p style='float:right;margin-top:0px'>Value: <span id='greycutSliderVal'> </span></p>
+                                <input type="range" min="0.1" max="0.9" id="greycutSlider" value="0.5" step="0.2" style='width:95%;accent-color:grey;margin-bottom:5px;' oninput="setSliderVal('greycutSlider',0,false)"/>
 
-                                <p style='margin-top:0px'>Value: <span id='greycutSliderVal'> </span></p>
 
                                 <label for='temperatureSlider'>Temperature:</label>
-                                <input type="range" min="1" max="9" id="temperatureSlider" value="5" step="2" style='width:95%;accent-color:grey;' oninput="setSliderVal('temperatureSlider',0,false)"/>
+                                <p style='float:right;margin-top:0px'>Value: <span id='temperatureSliderVal'> </span></p>
+                                <input type="range" min="1" max="9" id="temperatureSlider" value="5" step="2" style='width:95%;accent-color:grey;margin-bottom:5px;' oninput="setSliderVal('temperatureSlider',0,false)"/>
 
-                                <p style='margin-top:0px'>Value: <span id='temperatureSliderVal'> </span></p>
 
                                 <label for='sweepSlider' style='text-align:left'>Sweeps:</label>
-                                <input type="range" min="1" max="5" id="sweepSlider" value="1" step="1" style='width:95%;accent-color:grey;' oninput="setSliderVal('sweepSlider',0,false)"/>
+                                <p style='float:right;margin-top:0px'>Value: <span id='sweepSliderVal'> </span></p>
+                                <input type="range" min="1" max="5" id="sweepSlider" value="1" step="1" style='width:95%;accent-color:grey;margin-bottom:5px;' oninput="setSliderVal('sweepSlider',0,false)"/>
 
-                                <p style='margin-top:0px'>Value: <span id='sweepSliderVal'> </span></p>
 
                             </figcaption>
                         </figure>
@@ -685,6 +685,57 @@ if($valid == 1){
                     reveal("validation_group_3");
 
                     document.getElementById('image-bucket-figure').style.display = "inherit";
+
+                    function setDynamicFigureStyle(){
+                        element = document.getElementById('image-bucket-figure');
+                        screen_height = window.outerHeight;
+                        if(old_height < screen_height){
+                            shrinking = false;
+                            growing = true;
+                        }else if(old_height > screen_height){
+                            shrinking = true;
+                            growing = false;
+                        }else{
+                            shrinking = false;
+                            growing = false;
+                            old_ele_height = element.getBoundingClientRect().height;
+                        }
+                        element_height = element.getBoundingClientRect().height;
+                        if(shrinking == true){
+                            if(element_height >= screen_height){
+                                if(flex_switch == false){
+                                    old_ele_height = element.getBoundingClientRect().height;
+                                    flex_switch = true;
+                                }
+                                element.classList.add('dynamic-figure-container');
+                                element.style.display = 'flex';
+                            }
+                        }
+                        if(growing == true){
+                            if(old_ele_height < screen_height){
+                                element.classList.remove('dynamic-figure-container');
+                                element.style.display = 'inherit';
+                                flex_switch = false;
+                            }
+                        }
+                        old_height = screen_height;
+                        log = "new_height: "+ old_height;
+                        log = log + "; shrinking: "+shrinking;
+                        log = log + "; growing: "+growing;
+                        log = log + "; flex_switch: "+flex_switch;
+                    }
+
+
+
+                    window.onresize = function(){
+                        setDynamicFigureStyle();
+                    }
+
+                    var shrinking = false;
+                    var growing = false;
+                    var old_height = window.outerHeight;
+                    var old_ele_height = document.getElementById('image-bucket-figure').getBoundingClientRect().height;
+                    var flex_switch = false;
 
                 </script>
                 <nav>
