@@ -330,6 +330,10 @@ ul.filelist li{
     text-align:left;
 }
 
+/*ul{
+    text-align:left;
+}*/
+
 code pre.code{
     overflow:scroll;
     background-color:#f2f2f2;
@@ -529,21 +533,47 @@ code pre.info-code{
     }
 }
 
+@media screen and (max-width:425px){
+    .tech ul{
+        text-align:left;
+    }
+}
+
 @media screen and (max-width:400px){
     div.slide-deck{
         display:none;
     }
 
     code pre.code{
-        width:260px;
+        min-width:260px;
     }
 
     code pre.info-code{
-        width:230px
+        min-width:230px
+    }
+
+    blockquote{
+        width:95%;
+        margin:0px;
+        margin-bottom:10px;
     }
 }
 
 @media screen and (max-width:300px){
+    body{
+        width:100%;
+    }
+
+    #writingsWrapper{
+        justify-content:inherit;
+        min-width:300px;
+    }
+
+    #writingsWrapper section{
+        margin-left:5px;
+        margin-right:20px;
+    }
+
     #writingsWrapper article ul li{
         /*list-style-type:none;*/
         margin-left:20px;
@@ -552,4 +582,5 @@ code pre.info-code{
     #writingsWrapper div.aside figure.responsive_aside{
         width:80%;
     }
+
 }

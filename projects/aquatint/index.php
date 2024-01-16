@@ -54,7 +54,7 @@ include('../../header.php');
                             <figure class='graph'>
                                 <img src='../../images/cycle.png' alt='A photograph of an individual dressed in army attire of the world war 2 era cycling on a non-descript highway.'>
                                 <figcaption>
-                                    A photo of myself during RAGBRAI sometime during the late 2010s.
+                                    A photo of myself during RAGBRAI sometime the late 2010s.
                                 </figcaption>
                             </figure>
                         </a>
