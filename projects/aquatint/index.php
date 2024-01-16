@@ -151,7 +151,7 @@ done
                         <p>
                             One-hundred and twenty-five images in total were produced on account of running the bash script. Those who have Javascript enabled for this page can view the effect of each variable, (with respect to the values set for the others), within the following figure:
                         </p>
-                        <figure id='image-bucket-figure' class='' >
+                        <figure id='image-bucket-figure' class='' style='display:none'>
                             <div class='dynamic-figure-view' id='image-bucket'>
                             </div>
                             <figcaption class='dynamic-figure-controls'>
@@ -689,16 +689,21 @@ if($valid == 1){
                     function setDynamicFigureStyle(){
                         element = document.getElementById('image-bucket-figure');
                         screen_height = window.outerHeight;
-                        if(old_height < screen_height){
-                            shrinking = false;
-                            growing = true;
-                        }else if(old_height > screen_height){
+                        if(!(shrinking == true && growing == true)){
+                            if(old_height < screen_height){
+                                shrinking = false;
+                                growing = true;
+                            }else if(old_height > screen_height){
+                                shrinking = true;
+                                growing = false;
+                            }else{
+                                shrinking = false;
+                                growing = false;
+                                old_ele_height = element.getBoundingClientRect().height;
+                            }
+                        }else{
                             shrinking = true;
                             growing = false;
-                        }else{
-                            shrinking = false;
-                            growing = false;
-                            old_ele_height = element.getBoundingClientRect().height;
                         }
                         element_height = element.getBoundingClientRect().height;
                         if(shrinking == true){
@@ -747,13 +752,19 @@ if($valid == 1){
                     });
 
 
-                    var shrinking = false;
-                    var growing = false;
                     var old_height = window.outerHeight;
                     var old_ele_height = document.getElementById('image-bucket-figure').getBoundingClientRect().height;
+                    var old_orientation = screen.orientation.type;
                     var flex_switch = false;
 
-                    var old_orientation = screen.orientation.type;
+
+                    var shrinking = true;
+                    var growing = true;
+                    window.addEventListener('load', function () {
+                        setDynamicFigureStyle();
+                        shrinking = false;
+                        growing = false;
+                    });
                 </script>
                 <nav>
                     <a href='../'>Back</a>
