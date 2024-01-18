@@ -149,29 +149,18 @@ include('../../header.php');
             </section>
         </section>
     </body>
+    <script src='../../js/writing_functions.js'></script>
     <script>
-        //Abstract this function to include range parameters
-        function inViewRange(elementID,inPosition,outPosition){
-            element = document.getElementById(elementID);
-            bounding = element.getBoundingClientRect();
-            if ( ((window.innerHeight/2) - bounding.top > 0) && (bounding.top > 0) )
-            {
-                element.style['object-position'] = inPosition;
-            } else{
-                element.style['object-position'] = outPosition;
-            }
-        }
-
         window.onscroll = function(){
-            inViewRange('black-hills-peak','0 20%','0 55%');
-            inViewRange('black-hills-silhouette','0 0%','0 20%');
-            inViewRange('black-hills-trees','0 75%','0 0%');
-            inViewRange('black-hills-path', '0 85%', '0 0%');
+            reframeImage('black-hills-peak','0 20%','0 55%', window.innerHeight/2);
+            reframeImage('black-hills-silhouette','0 0%','0 20%', window.innerHeight/2);
+            reframeImage('black-hills-trees','0 75%','0 0%', window.innerHeight/2);
+            reframeImage('black-hills-path', '0 85%', '0 0%', window.innerHeight/2);
         }
 
-        inViewRange('black-hills-peak','0 20%','0 55%');
-        inViewRange('black-hills-silhouette','0 0%','0 20%');
-        inViewRange('black-hills-trees','0 75%','0 0%');
-        inViewRange('black-hills-path', '0 85%', '0 0%');
+        reframeImage('black-hills-peak','0 20%','0 55%', window.innerHeight/2);
+        reframeImage('black-hills-silhouette','0 0%','0 20%', window.innerHeight/2);
+        reframeImage('black-hills-trees','0 75%','0 0%', window.innerHeight/2);
+        reframeImage('black-hills-path', '0 85%', '0 0%', window.innerHeight/2);
     </script>
 </html>

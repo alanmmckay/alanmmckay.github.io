@@ -164,31 +164,18 @@ window.onscroll = function(){
             </section>
         </section>
     </body>
+    <script src='../../js/writing_functions.js'></script>
     <script>
-        //Abstract this function to include range parameters
-        function inViewRange(elementID,inPosition,outPosition){
-            element = document.getElementById(elementID);
-            bounding = element.getBoundingClientRect();
-            if ( ((window.innerHeight/2) - bounding.top > 0) && (bounding.top > 0) )
-            {
-                element.style['object-position'] = inPosition;
-            } else{
-                element.style['object-position'] = outPosition;
-            }
-        }
-
-
-
         window.onscroll = function(){
-            inViewRange('mike-black-elk', '0 20%', '0 45%');
-            inViewRange('connor-grimes', '0 20%', '0 70%');
-            inViewRange('anon-sidecar', '0 60%', '0 20%');
-            inViewRange('clayton-bear-butte', '0 80%', '0 0%');
+            reframeImage('mike-black-elk', '0 20%', '0 45%', window.innerHeight/2);
+            reframeImage('connor-grimes', '0 20%', '0 70%', window.innerHeight/2);
+            reframeImage('anon-sidecar', '0 60%', '0 20%', window.innerHeight/2);
+            reframeImage('clayton-bear-butte', '0 80%', '0 0%', window.innerHeight/2);
         }
 
-        inViewRange('mike-black-elk', '0 20%', '0 45%');
-        inViewRange('connor-grimes', '0 20%', '0 70%');
-        inViewRange('anon-sidecar', '0 60%', '0 20%');
-        inViewRange('clayton-bear-butte', '0 80%', '0 0%');
+        reframeImage('mike-black-elk', '0 20%', '0 45%', window.innerHeight/2);
+        reframeImage('connor-grimes', '0 20%', '0 70%', window.innerHeight/2);
+        reframeImage('anon-sidecar', '0 60%', '0 20%', window.innerHeight/2);
+        reframeImage('clayton-bear-butte', '0 80%', '0 0%', window.innerHeight/2);
     </script>
 </html>
