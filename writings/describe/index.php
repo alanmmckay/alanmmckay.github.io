@@ -92,7 +92,7 @@ include('../../header.php');
                         In terms of technical detail, a CSS class was set for all the affected elements. Here, the width is set to 100%, the height to some fixed pixel value, and the object-fit attribute set to cover. Inline styling is then applied to each of these image tags where the object-position attribute is set to define the position in which an image will be centered with respect to the cropped container. Then, also within the inline styling, the transition property of the object-position attribute is set to define how long it will take for an image to scan to a position.
                     </p>
                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+<pre class='code'>
 img.animate{
     width:100%;
     height:300px;
@@ -105,7 +105,7 @@ img.animate{
                     </p>
                     <!--- JAVASCRIPT EXAMPLE! --->
                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+<pre class='code'>
 function inViewRange(elementID,inPosition,outPosition){
     element = document.getElementById(elementID);
     bounding = element.getBoundingClientRect();
@@ -124,7 +124,7 @@ function inViewRange(elementID,inPosition,outPosition){
                     </p>
                     <!--- JAVASCRIPT EXAMPLE! --->
                     <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2'>
+<pre class='code'>
 window.onscroll = function(){
     inViewRange('image-tag-ID', '0 20%', '0 45%');
 }
@@ -177,24 +177,8 @@ window.onscroll = function(){
             }
         }
 
-        function setCodeContainerSize(){
-            elements = document.getElementsByClassName('code');
-            for(i=0;i<elements.length;i++){
-                element = elements[i];
-                width = window.outerWidth;
-                if (width > 800){
-                    width = 800;
-                }else{
-                    width = width*.9;
-                }
-                element.style.width = width + "px";
-            }
-        }
 
-        window.onresize = function(){
-            setCodeContainerSize();
-        }
-        console.log('yes');
+
         window.onscroll = function(){
             inViewRange('mike-black-elk', '0 20%', '0 45%');
             inViewRange('connor-grimes', '0 20%', '0 70%');
@@ -206,6 +190,5 @@ window.onscroll = function(){
         inViewRange('connor-grimes', '0 20%', '0 70%');
         inViewRange('anon-sidecar', '0 60%', '0 20%');
         inViewRange('clayton-bear-butte', '0 80%', '0 0%');
-        setCodeContainerSize();
     </script>
 </html>
