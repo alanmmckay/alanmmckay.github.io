@@ -48,14 +48,12 @@ include('../header.php');
                 for (i = 0; i < writings.length; i++){
                     writing = writings[i];
                     if (transition == true){
-                        writing.style['transition'] = 'border-left .20s';
+                        writing.style['transition'] = 'border-left 2s';
                     }else{
                         writing.style['transition'] = 'border-left 0s';
                     }
                     bound = writing.getBoundingClientRect();
-                    //if (bound.y > screen.height){
-                        writing.style['border-left'] = 'solid 2px';
-                    //}
+                    writing.style['border-left'] = 'solid 2px';
                 }
             }
         }
@@ -67,34 +65,51 @@ include('../header.php');
                 writings = document.getElementsByClassName("writing");
                 for (i = 0; i < writings.length; i++){
                     writing = writings[i];
-                    writing.style['transition'] = 'border-left .20s';
                     bound = writing.getBoundingClientRect();
                     if (bound.y < height - threshold){
-                        writing.style['border-left'] = 'solid 3px';
+                        writing.style['transition'] = 'border-left .5s';
+                        writing.style['border-left'] = 'solid white 10px';
                     }
                     if ((bound.y < 0) || (bound.y > height - threshold)){
-                        writing.style['border-left'] = 'solid 2px';
+                        writing.style['transition'] = 'border-left 1s';
+                        writing.style['border-left'] = 'solid #778088 2px';
                     }
                 }
             }
         }
 
-        primeBorders(false);
-
-        /*window.onscroll = function(ev){
+        window.onscroll = function(ev){
             scrollEffect();
-        }*/
+        }
 
+        window.onscrollend = function(ev){
+            primeBorders(true);
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(function(){
+                primeBorders(false);
+            },100);
+
+        });
+
+
+       /*
         window.ontouchmove = function(ev){
+            console.log('ontouchmove');
             scrollEffect();
         }
 
         window.ontouchstart = function(ev){
+            console.log('ontouchstart');
             scrollEffect();
         }
 
         window.ontouchend = function(ev){
+            console.log('ontouchend');
             primeBorders(true);
         }
+        */
+
     </script>
 </html>
