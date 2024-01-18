@@ -1,51 +1,30 @@
-var isMobile = window.matchMedia || window.msMatchMedia;
-/* Exercise: Need to abstract the styles being changed */
-function primeBorders(transition){
-    if (isMobile("(pointer:coarse)").matches){
-    writings = document.getElementsByClassName("writing");
-        for (i = 0; i < writings.length; i++){
-            writing = writings[i];
-            if (transition == true){
-                writing.style['transition'] = 'border-left 2s';
-            }else{
-                writing.style['transition'] = 'border-left 0s';
-            }
-            bound = writing.getBoundingClientRect();
-            writing.style['border-left'] = 'solid 2px';
+function primeClassTransitions(class_name, css_property, initial_value, transition_time, transition_switch){
+    elements = document.getElementsByClassName(class_name);
+    for (i = 0; i < elements.length; i++){
+        element = elements[i];
+        if (transition_switch == true){
+            element.style['transition'] = css_property + ' ' + transition_time;
+        }else{
+            element.style['transition'] = css_property + ' 0s';
         }
+        element.style[css_property] = initial_value;
     }
 }
 
-function scrollEffect() {
-    if (isMobile("(pointer:coarse)").matches){
-        height = screen.height;
-        threshold = 35;
-        writings = document.getElementsByClassName("writing");
-        for (i = 0; i < writings.length; i++){
-            writing = writings[i];
-            bound = writing.getBoundingClientRect();
-            if (bound.y < height - threshold){
-                writing.style['transition'] = 'border-left .5s';
-                writing.style['border-left'] = 'solid white 10px';
-            }
-            if ((bound.y < 0) || (bound.y > height - threshold)){
-                writing.style['transition'] = 'border-left 1s';
-                writing.style['border-left'] = 'solid #778088 2px';
-            }
+
+function applyClassTransitionEffects(class_name, css_property, thresh_in_value, thresh_in_time, thresh_out_value, thresh_out_time, screen_threshold) {
+    height = screen.height;
+    elements = document.getElementsByClassName(class_name);
+    for (i = 0; i < elements.length; i++){
+        element = elements[i];
+        bound = element.getBoundingClientRect();
+        if (bound.y < height - screen_threshold){
+            element.style['transition'] = css_property + ' ' + thresh_in_time;
+            element.style[css_property] = thresh_in_value;
+        }
+        if ((bound.y < 0) || (bound.y > height - screen_threshold)){
+            element.style['transition'] = css_property + ' ' + thresh_out_time;
+            element.style[css_property] = thresh_out_value;
         }
     }
 }
-
-window.onscroll = function(ev){
-    scrollEffect();
-}
-
-window.onscrollend = function(ev){
-    primeBorders(true);
-}
-
-window.addEventListener('load', function () {
-    setTimeout(function(){
-        primeBorders(false);
-    },100);
-});

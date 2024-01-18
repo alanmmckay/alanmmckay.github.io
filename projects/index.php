@@ -39,6 +39,29 @@ include('../header.php');
             </nav>
         </div>
     </body>
-    <script src='../js/index_functions.js'>
+    <script src='../js/index_functions.js'></script>
+    <script>
+        var isMobile = window.matchMedia || window.msMatchMedia;
+        isMobile = isMobile("(pointer:coarse)").matches;
+
+        window.onscroll = function(ev){
+            if(isMobile){
+                applyClassTransitionEffects('writing', 'border-left', 'solid white 10px', '.5s', 'solid #778088 2px', '1s', 35);
+            }
+        }
+
+        window.onscrollend = function(ev){
+            if(isMobile){
+                primeClassTransitions("writing","border-left","solid 2px","2s",true);
+            }
+        }
+
+        window.addEventListener('load', function () {
+            if(isMobile){
+                setTimeout(function(){
+                    primeClassTransitions("writing","border-left","solid 2px","2s",false);
+                },100);
+            }
+        });
     </script>
 </html>
