@@ -23,7 +23,6 @@ include('../header.php');
             <header>
                 <h1><a href='../'>Alan McKay</a></h1>
             </header>
-            <p id='debug' style='position:fixed;display:none;'>here</p>
             <nav>
                 <a href='./'>
                     <img src='../images/description.svg' alt='Icon for blog link'>
@@ -42,61 +41,28 @@ include('../header.php');
     </body>
     <script src='../js/index_functions.js' ></script>
     <script>
+
         var isMobile = window.matchMedia || window.msMatchMedia;
         isMobile = isMobile("(pointer:coarse)").matches;
-        debug_output = function(string){
-            document.getElementById('debug').innerHTML = string;
-        }
+
         if(isMobile){
 
-            if(typeof window.onscrollend == "object"){
-                debug_output("detected");
-                let scroll_bool;
-                let count = 0;
-                window.onscroll = function(ev){
-                    scroll_bool = true;
-                    body = document.getElementsByTagName('body')[0];
-                    perimeter_bool = body.getBoundingClientRect().top >= 0;
-                    perimeter_bool = perimeter_bool || ( (window.innerHeight + Math.round(window.scrollY)) >= document.body.offsetHeight )
-                    //if(perimeter_bool){
-                    //    debug_output("reached the perimeter");
-                    //    primeClassTransitions("writing","border-left","solid 2px","2s",true);
-                    //}else{
-                        debug_output("scrolling " + body.getBoundingClientRect().top);
-                        applyClassTransitionEffects('writing', 'border-left', 'solid white 10px', '.5s', 'solid #778088 2px', '1s', 35);
-                        setTimeout(function(){
-                            if(scroll_bool == true){
-                                count = count + 1;
-                                debug_output('reprime ' + count);
-                                console.log("reprime");
-                                primeClassTransitions("writing","border-left","solid 2px","2s",true);
-                                scroll_bool = false;
-                            }
-                        },750);
-                    //}
+            let scroll_bool;
 
-                }
+            window.onscroll = function(ev){
+                scroll_bool = true;
+                applyClassTransitionEffects('writing', 'border-left', 'solid white 10px', '.5s', 'solid #778088 2px', '1s', 35);
+                setTimeout(function(){
+                    if(scroll_bool == true){
+                        primeClassTransitions("writing","border-left","solid 2px","2s",true);
+                        scroll_bool = false;
+                    }
+                },750);
+            }
 
-                window.onscrollend = function(ev){
-                    debug_output("onscrollend");
-                    primeClassTransitions("writing","border-left","solid 2px","2s",true);
-                    scrolling = false;
-                }
-
-            }else{
-                debug_output("not detected");
-                window.ontouchstart = function(ev){
-                    applyClassTransitionEffects('writing', 'border-left', 'solid white 10px', '.5s', 'solid #778088 2px', '1s', 35);
-                }
-
-                window.ontouchmove = function(ev){
-                    applyClassTransitionEffects('writing', 'border-left', 'solid white 10px', '.5s', 'solid #778088 2px', '1s', 35);
-                }
-
-                window.ontouchend = function(ev){
-                    primeClassTransitions("writing","border-left","solid 2px","2s",true);
-                }
-
+            window.onscrollend = function(ev){
+                primeClassTransitions("writing","border-left","solid 2px","2s",true);
+                scroll_bool = false;
             }
 
             window.addEventListener('load', function () {

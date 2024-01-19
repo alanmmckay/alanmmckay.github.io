@@ -41,37 +41,29 @@ include('../header.php');
     </body>
     <script src='../js/index_functions.js' ></script>
     <script>
+
         var isMobile = window.matchMedia || window.msMatchMedia;
         isMobile = isMobile("(pointer:coarse)").matches;
 
         if(isMobile){
 
-            if(typeof window.onscrollend == "object"){
+            let scroll_bool;
 
-                window.onscroll = function(ev){
-                    applyClassTransitionEffects('writing', 'border-left', 'solid white 10px', '.5s', 'solid #778088 2px', '1s', 35);
-                }
-
-                window.onscrollend = function(ev){
-                    primeClassTransitions("writing","border-left","solid 2px","2s",true);
-                }
-
-            }else{
-
-                window.ontouchstart = function(ev){
-                    applyClassTransitionEffects('writing', 'border-left', 'solid white 10px', '.5s', 'solid #778088 2px', '1s', 35);
-                }
-
-                window.ontouchmove = function(ev){
-                    applyClassTransitionEffects('writing', 'border-left', 'solid white 10px', '.5s', 'solid #778088 2px', '1s', 35);
-                }
-
-                window.ontouchend = function(ev){
-                    primeClassTransitions("writing","border-left","solid 2px","2s",true);
-                }
-
+            window.onscroll = function(ev){
+                scroll_bool = true;
+                applyClassTransitionEffects('writing', 'border-left', 'solid white 10px', '.5s', 'solid #778088 2px', '1s', 35);
+                setTimeout(function(){
+                    if(scroll_bool == true){
+                        primeClassTransitions("writing","border-left","solid 2px","2s",true);
+                        scroll_bool = false;
+                    }
+                },750);
             }
 
+            window.onscrollend = function(ev){
+                primeClassTransitions("writing","border-left","solid 2px","2s",true);
+                scroll_bool = false;
+            }
 
             window.addEventListener('load', function () {
                 setTimeout(function(){
