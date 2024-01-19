@@ -653,6 +653,8 @@ if($valid == 1){
                         }
                     }
 
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
+
                     var current_greycut = 0.5;
                     var current_temp = 5.0;
                     var current_sweep = 1;
@@ -683,29 +685,47 @@ if($valid == 1){
                     setSliderVal('temperatureSlider',0,true);
                     setSliderVal('sweepSlider',0,true);
 
-
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
 
                     document.getElementById('image-bucket-figure').style.display = "inherit";
 
+                    var old_screen_height = window.outerHeight;
+                    var old_ele_height = document.getElementById('image-bucket-figure').getBoundingClientRect().height;
+                    var old_orientation = screen.orientation.type;
+                    var flex_switch = false;
+
+                    var shrinking = true;
+                    var growing = true;
+
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
+
+                    // This solves the problem of proportional scaling with respect to
+                    //  height and an image's width being scaled on window resize;
+                    //  Something that native css can't handle as far as I know.
                     function setDynamicFigureStyle(){
                         element = document.getElementById('image-bucket-figure');
                         screen_height = window.outerHeight;
+                        // Conditional considers prior values of shrinking and growing:
                         if(!(shrinking == true && growing == true)){
-                            if(old_height < screen_height){
+                            // Determine if screen is currently shrinking or growing:
+                            if(old_screen_height < screen_height){
                                 shrinking = false;
                                 growing = true;
-                            }else if(old_height > screen_height){
+                            }else if(old_screen_height > screen_height){
                                 shrinking = true;
                                 growing = false;
                             }else{
                                 shrinking = false;
                                 growing = false;
+                                // Contingent Redundancy:
                                 old_ele_height = element.getBoundingClientRect().height;
                             }
                         }else{
                             shrinking = true;
                             growing = false;
                         }
+
+                        // Get the height of the figure as a whole (not the window):
                         element_height = element.getBoundingClientRect().height;
                         if(shrinking == true){
                             if(element_height >= screen_height){
@@ -724,19 +744,12 @@ if($valid == 1){
                                 flex_switch = false;
                             }
                         }
-                        old_height = screen_height;
-                        log = "new_height: "+ old_height;
-                        log = log + "; shrinking: "+shrinking;
-                        log = log + "; growing: "+growing;
-                        log = log + "; flex_switch: "+flex_switch;
+                        old_screen_height = screen_height;
                     }
-
-
 
                     window.onresize = function(){
                         setDynamicFigureStyle();
                     }
-
 
                     screen.orientation.addEventListener("change", (event) => {
                         if(screen.orientation.type != old_orientation){
@@ -752,20 +765,14 @@ if($valid == 1){
                         }
                     });
 
-
-                    var old_height = window.outerHeight;
-                    var old_ele_height = document.getElementById('image-bucket-figure').getBoundingClientRect().height;
-                    var old_orientation = screen.orientation.type;
-                    var flex_switch = false;
-
-
-                    var shrinking = true;
-                    var growing = true;
                     window.addEventListener('load', function () {
                         setDynamicFigureStyle();
                         shrinking = false;
                         growing = false;
                     });
+
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
+
                 </script>
                 <nav>
                     <a href='../'>Back</a>
