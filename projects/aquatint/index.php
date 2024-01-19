@@ -616,6 +616,7 @@ if($valid == 1){
                 </article>
                 <script src='../../js/project_functions.js'></script>
                 <script>
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
 
                     let status = {"validation_group_1":true,"validation_group_2":true,"validation_group_3":true};
                     Object.entries(status).forEach(entry => {
@@ -630,7 +631,51 @@ if($valid == 1){
                         clickerEvent();
                     });
 
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
+
+                    document.getElementById('image-bucket-figure').style.display = "inherit";
+
+                    var screen_state = {}
+                    screen_state['old_screen_height'] = window.outerHeight;
+                    screen_state['shrinking'] = true;
+                    screen_state['growing'] = true;
+                    screen_state['old_orientation'] = screen.orientation.type;
+                    screen_state['flex_switch'] = false;
+
+                    var figure_element = document.getElementById('image-bucket-figure');
+                    var old_element_height = figure_element.getBoundingClientRect().height;
+
+                    window.onresize = function(){
+                        return_package = setDynamicFigureStyle('resize',screen_state,figure_element,old_element_height,'dynamic-figure-container');
+                        screen_state = return_package[0];
+                        old_element_height = return_package[1];
+                    }
+
+                    screen.orientation.addEventListener("change", (event) => {
+                        if(screen.orientation.type != screen_state['old_orientation']){
+                            if(screen.orientation.type == 'landscape-primary'){
+                                screen_state['shrinking'] = true;
+                                screen_state['growing'] = false;
+                            }else if(screen.orientation.type == 'portrait-primary'){
+                                screen_state['shrinking'] = false;
+                                screen_state['growing'] = true;
+                            }
+                            return_package = setDynamicFigureStyle('resize',screen_state,figure_element,old_element_height,'dynamic-figure-container');
+                            screen_state = return_package[0];
+                            old_element_height = return_package[1];
+                            screen_state['old_orientation'] = screen.orientation.type;
+                        }
+                    });
+
+                    window.addEventListener('load', function () {
+                        return_package = setDynamicFigureStyle('resize',screen_state,figure_element,old_element_height,'dynamic-figure-container');
+                        screen_state['shrinking'] = false;
+                        screen_state['growing'] = false;
+                    });
+
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
                 </script>
+
                 <script>
 
                     var bucket = document.getElementById('image-bucket');
@@ -684,94 +729,6 @@ if($valid == 1){
                     setSliderVal('greycutSlider',0,true);
                     setSliderVal('temperatureSlider',0,true);
                     setSliderVal('sweepSlider',0,true);
-
-/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
-
-                    document.getElementById('image-bucket-figure').style.display = "inherit";
-
-                    var old_screen_height = window.outerHeight;
-                    var old_ele_height = document.getElementById('image-bucket-figure').getBoundingClientRect().height;
-                    var old_orientation = screen.orientation.type;
-                    var flex_switch = false;
-
-                    var shrinking = true;
-                    var growing = true;
-
-/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
-
-                    // This solves the problem of proportional scaling with respect to
-                    //  height and an image's width being scaled on window resize;
-                    //  Something that native css can't handle as far as I know.
-                    function setDynamicFigureStyle(){
-                        element = document.getElementById('image-bucket-figure');
-                        screen_height = window.outerHeight;
-                        // Conditional considers prior values of shrinking and growing:
-                        if(!(shrinking == true && growing == true)){
-                            // Determine if screen is currently shrinking or growing:
-                            if(old_screen_height < screen_height){
-                                shrinking = false;
-                                growing = true;
-                            }else if(old_screen_height > screen_height){
-                                shrinking = true;
-                                growing = false;
-                            }else{
-                                shrinking = false;
-                                growing = false;
-                                // Contingent Redundancy:
-                                old_ele_height = element.getBoundingClientRect().height;
-                            }
-                        }else{
-                            shrinking = true;
-                            growing = false;
-                        }
-
-                        // Get the height of the figure as a whole (not the window):
-                        element_height = element.getBoundingClientRect().height;
-                        if(shrinking == true){
-                            if(element_height >= screen_height){
-                                if(flex_switch == false){
-                                    old_ele_height = element.getBoundingClientRect().height;
-                                    flex_switch = true;
-                                }
-                                element.classList.add('dynamic-figure-container');
-                                element.style.display = 'flex';
-                            }
-                        }
-                        if(growing == true){
-                            if(old_ele_height < screen_height){
-                                element.classList.remove('dynamic-figure-container');
-                                element.style.display = 'inherit';
-                                flex_switch = false;
-                            }
-                        }
-                        old_screen_height = screen_height;
-                    }
-
-                    window.onresize = function(){
-                        setDynamicFigureStyle();
-                    }
-
-                    screen.orientation.addEventListener("change", (event) => {
-                        if(screen.orientation.type != old_orientation){
-                            if(screen.orientation.type == 'landscape-primary'){
-                                shrinking = true;
-                                growing = false;
-                            }else if(screen.orientation.type == 'portrait-primary'){
-                                shrinking = false;
-                                growing = true;
-                            }
-                            setDynamicFigureStyle();
-                            old_orientation = screen.orientation.type;
-                        }
-                    });
-
-                    window.addEventListener('load', function () {
-                        setDynamicFigureStyle();
-                        shrinking = false;
-                        growing = false;
-                    });
-
-/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
 
                 </script>
                 <nav>
