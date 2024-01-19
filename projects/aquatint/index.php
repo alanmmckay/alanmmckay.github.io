@@ -246,7 +246,7 @@ for($i = 0; $i &lt;= rand(10,20); $i++){
                         </p>
                         <figure>
                             <hr>
-                            <h4 id='validation_group_1_header' onclick='reveal("validation_group_1")' class='expandable'>[ - ] Validation of strings</h4>
+                            <h4 id='validation_group_1_header' class='expandable'>[ - ] Validation of strings</h4>
                             <code id='validation_group_1'>
                                 <pre class='code'>
 $target_dir = 'uploads/';
@@ -277,7 +277,7 @@ if(isset($_POST['hidden_file_name']) &amp;&amp; isset($_FILES['uploadImage']['na
 }
                                 </pre>
                             </code>
-                            <h4 id='validation_group_2_header' onclick='reveal("validation_group_2")' class='expandable'>[ - ] Validation of filetype</h4>
+                            <h4 id='validation_group_2_header' class='expandable'>[ - ] Validation of filetype</h4>
                             <code id='validation_group_2'>
                                 <pre class='code'>
 //Validate filetype:
@@ -306,7 +306,7 @@ if($uploadOk == 1 ){
 }
                                 </pre>
                             </code>
-                            <h4 id='validation_group_3_header' onclick='reveal("validation_group_3")' class='expandable'>[ - ] Validation of numeric input</h4>
+                            <h4 id='validation_group_3_header' class='expandable'>[ - ] Validation of numeric input</h4>
                             <code id='validation_group_3'>
                                 <pre class='code'>
 //Validate numeric form controls:
@@ -614,6 +614,23 @@ if($valid == 1){
                         <hr>
                     </section>
                 </article>
+                <script src='../../js/project_functions.js'></script>
+                <script>
+
+                    let status = {"validation_group_1":true,"validation_group_2":true,"validation_group_3":true};
+                    Object.entries(status).forEach(entry => {
+                        let [key,value] = entry;
+
+                        header = document.getElementById(key+"_header");
+                        header.setAttribute("collapsed_attribute",true);
+                        clickerEvent = function(){
+                            toggleCollapsible(key, key+"_header", "[ + ]", "[ - ]", "collapsed_attribute");
+                        }
+                        header.addEventListener("click", clickerEvent);
+                        clickerEvent();
+                    });
+
+                </script>
                 <script>
 
                     var bucket = document.getElementById('image-bucket');
@@ -666,23 +683,7 @@ if($valid == 1){
                     setSliderVal('temperatureSlider',0,true);
                     setSliderVal('sweepSlider',0,true);
 
-                    let status ={"validation_group_1":true,"validation_group_2":true,"validation_group_3":true};
-                    function reveal(id){
-                        status[id] = !status[id];
-                        old_string = document.getElementById(id+"_header").innerHTML;
-                        if(status[id] == true){
-                            new_string = "[ - ]";
-                            document.getElementById(id).style.display = "block";
-                        }else{
-                            new_string = "[ + ]";
-                            document.getElementById(id).style.display = "none";
-                        }
-                        new_string = new_string + old_string.slice(5,old_string.length)
-                        document.getElementById(id+"_header").innerHTML = new_string;
-                    }
-                    reveal("validation_group_1");
-                    reveal("validation_group_2");
-                    reveal("validation_group_3");
+
 
                     document.getElementById('image-bucket-figure').style.display = "inherit";
 
