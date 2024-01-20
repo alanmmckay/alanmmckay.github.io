@@ -4,7 +4,7 @@ $normalize = '../../normalize.css';
 
 $style = '../../style.css';
 
-$canonical = 'http://alanmckay.blog/writings/bench/';
+$canonical = 'https://alanmckay.blog/writings/bench/';
 
 $title = 'Alan McKay | Writing | The Bench';
 
@@ -12,7 +12,9 @@ $meta['title'] = 'Alan McKay | The Bench';
 
 $meta['description'] = 'Last weekend, I visited the town in which I studied for my undergraduate degree - Cedar Falls. A friend was visiting, whom also went to the school. We had...';
 
-$meta['url'] = 'http://alanmckay.blog/writings/bench/';
+$meta['url'] = 'https://alanmckay.blog/writings/bench/';
+
+$relative_path = "../../";
 
 include('../../header.php');
 

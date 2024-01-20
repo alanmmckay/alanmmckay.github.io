@@ -4,7 +4,7 @@ $normalize = '../../normalize.css';
 
 $style = '../../style.css';
 
-$canonical = 'http://alanmckay.blog/writings/sound/';
+$canonical = 'https://alanmckay.blog/writings/sound/';
 
 $title = 'Alan McKay | Writing | The Connectivity of Sound';
 
@@ -12,7 +12,9 @@ $meta['title'] = 'Alan McKay | Connectivity of Sound';
 
 $meta['description'] = 'Seven years ago, I woke up looking at a moving hospital ceiling. I was being carted in, voices sounding off around me; all informing each other information...';
 
-$meta['url'] = 'http://alanmckay.blog/writings/sound/';
+$meta['url'] = 'https://alanmckay.blog/writings/sound/';
+
+$relative_path = "../../";
 
 include('../../header.php');
 

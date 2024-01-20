@@ -4,7 +4,7 @@ $normalize = '../../normalize.css';
 
 $style = '../../style.css';
 
-$canonical = 'http://alanmckay.blog/writings/statement/';
+$canonical = 'https://alanmckay.blog/writings/statement/';
 
 $title = 'Alan McKay | Writing | Statement of Purpose';
 
@@ -12,7 +12,9 @@ $meta['title'] = 'Alan McKay | Statement of Purpose';
 
 $meta['description'] = "The following is the statement of purpose I wrote to pursue a Master's of Computer Science at the University of Iowa. The primary goal of this statement was...";
 
-$meta['url'] = 'http://alanmckay.blog/writings/statement/';
+$meta['url'] = 'https://alanmckay.blog/writings/statement/';
+
+$relative_path = "../../";
 
 include('../../header.php');
 

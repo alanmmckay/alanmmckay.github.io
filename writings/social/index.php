@@ -4,7 +4,7 @@ $normalize = '../../normalize.css';
 
 $style = '../../style.css';
 
-$canonical = 'http://alanmckay.blog/writings/social/';
+$canonical = 'https://alanmckay.blog/writings/social/';
 
 $title = 'Alan McKay | Writing | Social Media';
 
@@ -14,7 +14,9 @@ $meta['description'] = 'It is common knowledge to skirt any mention of personal 
 
 $meta['image'] = 'https://image-aws-us-west-2.vsco.co/5ac5d6/146300964/5f41289e6bd09b5ab9000003/1600x900/vsco5f4128a0276b5.jpg';
 
-$meta['url'] = 'http://alanmckay.blog/writings/social/';
+$meta['url'] = 'https://alanmckay.blog/writings/social/';
+
+$relative_path = "../../";
 
 include('../../header.php');
 

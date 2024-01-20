@@ -1,3 +1,8 @@
+body{
+    max-width: 1600px;
+    margin: auto;
+}
+
 #homeWrapper{
     width:100%;
     margin:auto;
@@ -61,7 +66,12 @@
 #homeWrapper nav a:hover{
     border-left:solid 25px white;
 }
-
+/*
+#homeWrapper nav a:first-child:hover{
+    border-left:inherit;
+    cursor:default;
+}
+*/
 #homeWrapper nav a img{
     width:50px;
     height:50px;
@@ -121,7 +131,11 @@
 
 #writingsWrapper nav a, a{
     color:#7b869d;
-    text-decoration:none;
+    text-decoration-color:#c4c9d4;
+}
+
+#writingsWrapper a:has(> figure){
+    text-decoration-line:none;
 }
 
 #writingsWrapper nav a:visited, a:visited{
@@ -146,6 +160,10 @@
     font-size:17px;
 }
 
+#writingsWrapper article h1, #writingsWrapper article h2, #writingsWrapper article h3, #writingsWrapper article h4, #writingsWrapper article h5, #writingsWrapper article h6{
+    text-align:left;
+}
+
 #writingsWrapper header{
     text-align: left;
 }
@@ -155,6 +173,12 @@
     margin:auto;
     padding:2%;
     padding-bottom:0%;
+}
+
+#writingsWrapper blockquote{
+    border-left: solid 3px #778088;
+    padding-left:10px;
+    color:#6b747b
 }
 
 #writingsWrapper figcaption{
@@ -175,6 +199,191 @@
     object-fit:cover;
 }
 
+#writingsWrapper div.aside{
+    clear:both;
+    overflow:auto;
+}
+
+#writingsWrapper div.aside figure{
+    float:right;
+    width:25%;
+    margin-left:5%;
+    margin-right:1%;
+    margin-top:1%;
+    margin-bottom:2%
+}
+
+#writingsWrapper div.aside figure.responsive_aside{
+    margin-top:1%;
+    margin-bottom:2%;
+    margin:auto;
+    width:65%;
+    float:none;
+    display:none;
+}
+
+#grid-control h4{
+    margin-bottom:0px;
+}
+
+#grid-control ul{
+    text-align: left;
+    margin-top:10px;
+}
+
+#grid-control ul li{
+    margin:1%;
+}
+
+#grid-control ul li input{
+    margin:1%;
+}
+
+#grid-control ul.horizontal{
+    width:42%;
+    float:left;
+}
+
+figure.image-collage{
+
+}
+
+figure.image-collage ul li{
+    display:inline-block;
+}
+
+#writingsWrapper figure.image-collage ul li{
+    width:49%;
+}
+
+#writingsWrapper figure.image-collage ul li#sixty{
+    width: 60%;
+}
+
+#writingsWrapper figure.image-collage ul li#thirty{
+    width: 35%;
+}
+
+#writingsWrapper figure.image-collage ul li figure figcaption{
+    display:none;
+}
+
+.expandable:hover{
+    cursor:pointer;
+    color:black;
+}
+
+div.slide-deck figure figcaption ul{
+    margin:auto;
+    text-align:center;
+}
+
+div.slide-deck figure figcaption ul li{
+    display:inline-block;
+}
+
+div.slide-deck figure ul li{
+    list-style-type:none;
+}
+
+div.slide-deck figure ul li figure img{
+    border: solid #E9ECEF 3px;
+    /*padding-left:5px;
+    padding-right:5px;*/
+}
+
+div.slide-deck figure figcaption ul li a{
+    font-size:24px;
+    padding-left:30px;
+    padding-right:30px;
+    cursor:pointer;
+}
+
+div.slide-deck figure figcaption ul li a:hover{
+    color:black;
+}
+
+
+div.slide-deck figure figcaption ul li:hover{
+    color:black;
+}
+
+figure.graph img{
+    max-width:550px;
+}
+
+figure.graph figcaption{
+    text-align:center;
+}
+
+ul.filelist{
+}
+
+ul.filelist li{
+}
+
+.tech code{
+    font-size:90%;
+}
+
+.formulas{
+    text-align:left;
+}
+
+/*ul{
+    text-align:left;
+}*/
+
+code pre.code{
+    overflow:scroll;
+    background-color:#f2f2f2;
+    width:95vw;
+    max-width:40em;
+    padding-left:10px;
+}
+
+code pre.info-code{
+    width:70vw;
+}
+
+.dynamic-figure-container{
+    align-items:center;
+}
+
+.dynamic-figure-container .dynamic-figure-view{
+    width:45%;
+}
+
+.dynamic-figure-container .dynamic-figure-controls{
+    width:50%;
+}
+
+.dynamic-figure-container .dynamic-figure-controls p{
+    margin:0px;
+    float:right;
+}
+
+@media screen and (min-width:800px){
+    #writingsWrapper .fig-col{
+        overflow:auto;
+    }
+
+    #writingsWrapper .fig-col figure{
+        width:45%;
+        float:left;
+        margin:auto;
+    }
+
+    #writingsWrapper figure.col-fig{
+        overflow:auto;
+    }
+
+    #writingsWrapper figure.col-fig img{
+        width:45%;
+        float:left;
+        margin:auto;
+    }
+}
 @media screen and (min-width: 1100px){
     #writingsWrapper{
         width:50%;
@@ -189,13 +398,26 @@
     #writingsWrapper article img#black-hills-path{
         height:350px;
     }
-}
 
+}
 
 @media screen and (max-width: 480px){
     #writingsWrapper article img#black-hills-path{
         height:200px;
     }
+
+    #writingsWrapper .info{
+        width:100%;
+    }
+
+    #writingsWrapper ul.filelist li{
+        margin-bottom:0px;
+    }
+
+    ul.filelist li code{
+        font-size:65%
+    }
+
 }
 
 @media screen and (max-width:600px) and (min-width: 481px){
@@ -208,7 +430,193 @@
     #writingsWrapper article img.animate{
         height:250px;
     }
+
     #writingsWrapper article img#black-hills-path{
         height:250px;
     }
+}
+
+@media screen and (max-width:800px){
+    #writingsWrapper article ul{
+        padding-left:5%;
+    }
+
+    #writingsWrapper article li{
+        margin-bottom:10px;
+    }
+
+    #writingsWrapper div.aside figure{
+        width:35%;
+    }
+
+    #writingsWrapper figure.image-collage ul li figure{
+        width:100%;
+    }
+
+    #grid-control ul.horizontal{
+        width:45%;
+    }
+
+    #grid-control ul li{
+        font-size:14px;
+    }
+
+    #grid-control ul li input{
+        font-size:12px;
+    }
+
+}
+
+@media screen and (max-width:600px){
+    #grid-control ul.horizontal{
+        margin-top:10px;
+        margin-bottom:5px;
+        display:inline-block;
+        width:90%;
+    }
+
+    #grid-control ul.horizontal li{
+        display:inline-block;
+    }
+
+    #grid-control ul.horizontal li label{
+        display:none;
+    }
+
+    #grid-control ul.horizontal li input{
+
+    }
+
+    #grid-control ul li br{
+        display:none;
+    }
+
+    #writingsWrapper div.aside figure.responsive_aside{
+        display:block;
+        width:60%;
+    }
+
+    #writingsWrapper div.aside figure{
+        display:none
+    }
+
+    #writingsWrapper div.aside figure.narrow{
+        display:block;
+        width:95%;
+        border-bottom:solid #9A9A9A 1px;
+        border-top: solid #9A9A9A 1px;
+    }
+
+    #writingsWrapper div.slide-deck figure ul{
+        padding-left:0%;
+    }
+
+    div.slide-deck figure figcaption ul li{
+        font-size:16px;
+    }
+
+    div.slide-deck figure figcaption ul li a{
+        padding:10px;
+        font-size:18px;
+    }
+
+    #writingsWrapper figure.image-collage ul li{
+        width:100%;
+    }
+
+    #writingsWrapper figure.image-collage ul li figure figcaption{
+        display:block;
+    }
+
+    #writingsWrapper figure.image-collage figcaption{
+        display:none;
+    }
+
+    #writingsWrapper figure.image-collage ul li#sixty{
+        width: 100%;
+    }
+
+    #writingsWrapper figure.image-collage ul li#thirty{
+        width: 85%;
+        margin-left:5%;
+    }
+
+    code pre.code{
+        width:80vw;
+    }
+
+    code pre.info-code{
+        width:65vw;
+    }
+
+    .dynamic-figure-container .dynamic-figure-view{
+        width:55%;
+    }
+
+    .dynamic-figure-container .dynamic-figure-controls{
+        width:40%;
+    }
+
+    .dynamic-figure-container .dynamic-figure-controls label{
+        display:block;
+        width: 89px;
+        float:left;
+    }
+
+    .dynamic-figure-container .dynamic-figure-controls p{
+        width:67px;
+        float:left;
+    }
+}
+
+@media screen and (max-width:425px){
+    .tech ul{
+        text-align:left;
+    }
+}
+
+@media screen and (max-width:400px){
+    div.slide-deck{
+        display:none;
+    }
+
+    code pre.code{
+        min-width:260px;
+    }
+
+    code pre.info-code{
+        min-width:230px
+    }
+
+    blockquote{
+        width:95%;
+        margin:0px;
+        margin-bottom:10px;
+    }
+}
+
+@media screen and (max-width:300px){
+    body{
+        width:100%;
+    }
+
+    #writingsWrapper{
+        justify-content:inherit;
+        min-width:300px;
+    }
+
+    #writingsWrapper section{
+        margin-left:5px;
+        margin-right:20px;
+    }
+
+    #writingsWrapper article ul li{
+        /*list-style-type:none;*/
+        margin-left:20px;
+    }
+
+    #writingsWrapper div.aside figure.responsive_aside{
+        width:80%;
+    }
+
 }

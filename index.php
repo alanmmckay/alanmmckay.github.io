@@ -17,6 +17,10 @@ include('header.php');
                     <img src='images/text-logo-grey.png' alt='Icon for blog link'>
                     Writings
                 </a>
+                <a href='projects/'>
+                    <img src='images/description.svg' alt='Icon for projects link'>
+                    Projects
+                </a>
                 <a href='https://vsco.co/alanmckay/gallery' target="_blank" rel="noopener noreferrer">
                     <img src='images/vsco-logo-grey.png' alt='Icon for VSCO link'>
                     VSCO
