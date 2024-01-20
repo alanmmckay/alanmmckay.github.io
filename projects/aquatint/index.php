@@ -669,6 +669,8 @@ if($valid == 1){
 
                     window.addEventListener('load', function () {
                         return_package = setDynamicFigureStyle('resize',screen_state,figure_element,old_element_height,'dynamic-figure-container');
+                        screen_state = return_package[0];
+                        old_element_height = return_package[1];
                         screen_state['shrinking'] = false;
                         screen_state['growing'] = false;
                     });
