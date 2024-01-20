@@ -39,62 +39,39 @@ include('../header.php');
             </nav>
         </div>
     </body>
+    <script src='../js/index_functions.js' ></script>
     <script>
+
         var isMobile = window.matchMedia || window.msMatchMedia;
-        /* Exercise: Need to abstract the styles being changed */
-        function primeBorders(transition){
-            if (isMobile("(pointer:coarse)").matches){
-            writings = document.getElementsByClassName("writing");
-                for (i = 0; i < writings.length; i++){
-                    writing = writings[i];
-                    if (transition == true){
-                        writing.style['transition'] = 'border-left .20s';
-                    }else{
-                        writing.style['transition'] = 'border-left 0s';
+        isMobile = isMobile("(pointer:coarse)").matches;
+
+        if(isMobile){
+
+            let scroll_bool;
+
+            window.onscroll = function(ev){
+                scroll_bool = true;
+                applyClassTransitionEffects('writing', 'border-left', 'solid white 10px', '.5s', 'solid #778088 2px', '1s', 35);
+                setTimeout(function(){
+                    if(scroll_bool == true){
+                        primeClassTransitions("writing","border-left","solid 2px","2s",true);
+                        scroll_bool = false;
                     }
-                    bound = writing.getBoundingClientRect();
-                    //if (bound.y > screen.height){
-                        writing.style['border-left'] = 'solid 2px';
-                    //}
-                }
+                },750);
             }
-        }
 
-        function scrollEffect() {
-            if (isMobile("(pointer:coarse)").matches){
-                height = screen.height;
-                threshold = 35;
-                writings = document.getElementsByClassName("writing");
-                for (i = 0; i < writings.length; i++){
-                    writing = writings[i];
-                    writing.style['transition'] = 'border-left .20s';
-                    bound = writing.getBoundingClientRect();
-                    if (bound.y < height - threshold){
-                        writing.style['border-left'] = 'solid 3px';
-                    }
-                    if ((bound.y < 0) || (bound.y > height - threshold)){
-                        writing.style['border-left'] = 'solid 2px';
-                    }
-                }
+            window.onscrollend = function(ev){
+                primeClassTransitions("writing","border-left","solid 2px","2s",true);
+                scroll_bool = false;
             }
+
+            window.addEventListener('load', function () {
+                setTimeout(function(){
+                    primeClassTransitions("writing","border-left","solid 2px","2s",false);
+                },100);
+            });
+
         }
 
-        primeBorders(false);
-
-        /*window.onscroll = function(ev){
-            scrollEffect();
-        }*/
-
-        window.ontouchmove = function(ev){
-            scrollEffect();
-        }
-
-        window.ontouchstart = function(ev){
-            scrollEffect();
-        }
-
-        window.ontouchend = function(ev){
-            primeBorders(true);
-        }
     </script>
 </html>

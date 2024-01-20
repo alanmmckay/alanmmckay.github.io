@@ -903,26 +903,22 @@ V :                   :
                 </nav>
             </section>
         </section>
+        <script src='../../js/project_functions.js'></script>
         <script>
-            //Here's some code-smells for 'ya!
-            let status = {"k_spec":true,"tm_spec":true,"phase_1":true,"phase_2":true,"phase_3":true,"phase_4":true,"phase_5":true,"phase_6":true,"phase_7":true};
-            let status_map = {false:"none",true:"block"};
-            let inner_html_map = {"k_spec":{false:"[ + ] Klein Language Specification",true:"[ - ] Klein Language Specification"}, "tm_spec":{false:"[ + ] TM Machine Specification", true:"[ - ] TM Machine Specification"}, "phase_1":{false:"[ + ] Phase 1: Scanner", true:"[ - ] Phase 1: Scanner"}, "phase_2":{false:"[ + ] Phase 2: Parser - Syntactic Analyzer", true:"[ - ] Phase 2: Parser - Syntactic Analyzer"}, "phase_3":{false:"[ + ] Phase 3: Parser - Abstract Syntax Tree", true:"[ - ] Phase 3: Parser - Abstract Syntax Tree"}, "phase_4":{false:"[ + ] Phase 4: Type Checker", true:"[ - ] Phase 4: Type Checker"}, "phase_5":{false:"[ + ] Phase 5: Code Generator - Environment", true:"[ - ] Phase 5: Code Generator - Environment"}, "phase_6":{false:"[ + ] Phase 6: Code Generator - Operations and Functions", true:"[ - ] Phase 6: Code Generator - Operations and Functions"}, "phase_7":{false:"[ + ] Phase 7: Project Conclusion", true:"[ - ] Phase 7: Project Conclusion"}}
-            function reveal(id){
-                status[id] = !status[id];
-                document.getElementById(id).style.display = status_map[status[id]];
-                document.getElementById(id+"_header").innerHTML = inner_html_map[id][status[id]];
-            }
 
-            reveal("k_spec");
-            reveal("tm_spec");
-            reveal("phase_1");
-            reveal("phase_2");
-            reveal("phase_3");
-            reveal("phase_4");
-            reveal("phase_5");
-            reveal("phase_6");
-            reveal("phase_7");
+            let status = {"k_spec":true,"tm_spec":true,"phase_1":true,"phase_2":true,"phase_3":true,"phase_4":true,"phase_5":true,"phase_6":true,"phase_7":true};
+            Object.entries(status).forEach(entry => {
+                let [key,value] = entry;
+
+                header = document.getElementById(key+"_header");
+                header.setAttribute("collapsed_attribute",true);
+                clickerEvent = function(){
+                    toggleCollapsible(key, key+"_header", "[ + ]", "[ - ]", "collapsed_attribute");
+                }
+                header.addEventListener("click", clickerEvent);
+                clickerEvent();
+            });
+
         </script>
     </body>
 </html>

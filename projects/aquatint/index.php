@@ -246,7 +246,7 @@ for($i = 0; $i &lt;= rand(10,20); $i++){
                         </p>
                         <figure>
                             <hr>
-                            <h4 id='validation_group_1_header' onclick='reveal("validation_group_1")' class='expandable'>[ - ] Validation of strings</h4>
+                            <h4 id='validation_group_1_header' class='expandable'>[ - ] Validation of strings</h4>
                             <code id='validation_group_1'>
                                 <pre class='code'>
 $target_dir = 'uploads/';
@@ -277,7 +277,7 @@ if(isset($_POST['hidden_file_name']) &amp;&amp; isset($_FILES['uploadImage']['na
 }
                                 </pre>
                             </code>
-                            <h4 id='validation_group_2_header' onclick='reveal("validation_group_2")' class='expandable'>[ - ] Validation of filetype</h4>
+                            <h4 id='validation_group_2_header' class='expandable'>[ - ] Validation of filetype</h4>
                             <code id='validation_group_2'>
                                 <pre class='code'>
 //Validate filetype:
@@ -306,7 +306,7 @@ if($uploadOk == 1 ){
 }
                                 </pre>
                             </code>
-                            <h4 id='validation_group_3_header' onclick='reveal("validation_group_3")' class='expandable'>[ - ] Validation of numeric input</h4>
+                            <h4 id='validation_group_3_header' class='expandable'>[ - ] Validation of numeric input</h4>
                             <code id='validation_group_3'>
                                 <pre class='code'>
 //Validate numeric form controls:
@@ -614,6 +614,70 @@ if($valid == 1){
                         <hr>
                     </section>
                 </article>
+                <script src='../../js/project_functions.js'></script>
+                <script>
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
+
+                    let status = {"validation_group_1":true,"validation_group_2":true,"validation_group_3":true};
+                    Object.entries(status).forEach(entry => {
+                        let [key,value] = entry;
+
+                        header = document.getElementById(key+"_header");
+                        header.setAttribute("collapsed_attribute",true);
+                        clickerEvent = function(){
+                            toggleCollapsible(key, key+"_header", "[ + ]", "[ - ]", "collapsed_attribute");
+                        }
+                        header.addEventListener("click", clickerEvent);
+                        clickerEvent();
+                    });
+
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
+
+                    document.getElementById('image-bucket-figure').style.display = "inherit";
+
+                    var screen_state = {}
+                    screen_state['old_screen_height'] = window.outerHeight;
+                    screen_state['shrinking'] = true;
+                    screen_state['growing'] = true;
+                    screen_state['old_orientation'] = screen.orientation.type;
+                    screen_state['flex_switch'] = false;
+
+                    var figure_element = document.getElementById('image-bucket-figure');
+                    var old_element_height = figure_element.getBoundingClientRect().height;
+
+                    window.onresize = function(){
+                        return_package = setDynamicFigureStyle('resize',screen_state,figure_element,old_element_height,'dynamic-figure-container');
+                        screen_state = return_package[0];
+                        old_element_height = return_package[1];
+                    }
+
+                    screen.orientation.addEventListener("change", (event) => {
+                        if(screen.orientation.type != screen_state['old_orientation']){
+                            if(screen.orientation.type == 'landscape-primary'){
+                                screen_state['shrinking'] = true;
+                                screen_state['growing'] = false;
+                            }else if(screen.orientation.type == 'portrait-primary'){
+                                screen_state['shrinking'] = false;
+                                screen_state['growing'] = true;
+                            }
+                            return_package = setDynamicFigureStyle('resize',screen_state,figure_element,old_element_height,'dynamic-figure-container');
+                            screen_state = return_package[0];
+                            old_element_height = return_package[1];
+                            screen_state['old_orientation'] = screen.orientation.type;
+                        }
+                    });
+
+                    window.addEventListener('load', function () {
+                        return_package = setDynamicFigureStyle('resize',screen_state,figure_element,old_element_height,'dynamic-figure-container');
+                        screen_state = return_package[0];
+                        old_element_height = return_package[1];
+                        screen_state['shrinking'] = false;
+                        screen_state['growing'] = false;
+                    });
+
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
+                </script>
+
                 <script>
 
                     var bucket = document.getElementById('image-bucket');
@@ -635,6 +699,8 @@ if($valid == 1){
                             }
                         }
                     }
+
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
 
                     var current_greycut = 0.5;
                     var current_temp = 5.0;
@@ -666,105 +732,6 @@ if($valid == 1){
                     setSliderVal('temperatureSlider',0,true);
                     setSliderVal('sweepSlider',0,true);
 
-                    let status ={"validation_group_1":true,"validation_group_2":true,"validation_group_3":true};
-                    function reveal(id){
-                        status[id] = !status[id];
-                        old_string = document.getElementById(id+"_header").innerHTML;
-                        if(status[id] == true){
-                            new_string = "[ - ]";
-                            document.getElementById(id).style.display = "block";
-                        }else{
-                            new_string = "[ + ]";
-                            document.getElementById(id).style.display = "none";
-                        }
-                        new_string = new_string + old_string.slice(5,old_string.length)
-                        document.getElementById(id+"_header").innerHTML = new_string;
-                    }
-                    reveal("validation_group_1");
-                    reveal("validation_group_2");
-                    reveal("validation_group_3");
-
-                    document.getElementById('image-bucket-figure').style.display = "inherit";
-
-                    function setDynamicFigureStyle(){
-                        element = document.getElementById('image-bucket-figure');
-                        screen_height = window.outerHeight;
-                        if(!(shrinking == true && growing == true)){
-                            if(old_height < screen_height){
-                                shrinking = false;
-                                growing = true;
-                            }else if(old_height > screen_height){
-                                shrinking = true;
-                                growing = false;
-                            }else{
-                                shrinking = false;
-                                growing = false;
-                                old_ele_height = element.getBoundingClientRect().height;
-                            }
-                        }else{
-                            shrinking = true;
-                            growing = false;
-                        }
-                        element_height = element.getBoundingClientRect().height;
-                        if(shrinking == true){
-                            if(element_height >= screen_height){
-                                if(flex_switch == false){
-                                    old_ele_height = element.getBoundingClientRect().height;
-                                    flex_switch = true;
-                                }
-                                element.classList.add('dynamic-figure-container');
-                                element.style.display = 'flex';
-                            }
-                        }
-                        if(growing == true){
-                            if(old_ele_height < screen_height){
-                                element.classList.remove('dynamic-figure-container');
-                                element.style.display = 'inherit';
-                                flex_switch = false;
-                            }
-                        }
-                        old_height = screen_height;
-                        log = "new_height: "+ old_height;
-                        log = log + "; shrinking: "+shrinking;
-                        log = log + "; growing: "+growing;
-                        log = log + "; flex_switch: "+flex_switch;
-                    }
-
-
-
-                    window.onresize = function(){
-                        setDynamicFigureStyle();
-                    }
-
-
-                    screen.orientation.addEventListener("change", (event) => {
-                        if(screen.orientation.type != old_orientation){
-                            if(screen.orientation.type == 'landscape-primary'){
-                                shrinking = true;
-                                growing = false;
-                            }else if(screen.orientation.type == 'portrait-primary'){
-                                shrinking = false;
-                                growing = true;
-                            }
-                            setDynamicFigureStyle();
-                            old_orientation = screen.orientation.type;
-                        }
-                    });
-
-
-                    var old_height = window.outerHeight;
-                    var old_ele_height = document.getElementById('image-bucket-figure').getBoundingClientRect().height;
-                    var old_orientation = screen.orientation.type;
-                    var flex_switch = false;
-
-
-                    var shrinking = true;
-                    var growing = true;
-                    window.addEventListener('load', function () {
-                        setDynamicFigureStyle();
-                        shrinking = false;
-                        growing = false;
-                    });
                 </script>
                 <nav>
                     <a href='../'>Back</a>
