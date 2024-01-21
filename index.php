@@ -9,8 +9,9 @@ include('header.php');
 ?>
 
 <div id='homeWrapper'>
-            <header>
-                <h1><a href='./'>Alan McKay</a></h1>
+            <header style='overflow:auto'>
+                <h1 style='float:right'><a href='about/'>&nbsp;About</a>
+                <h1 style='float:right'><a id='home_link' href='./'>Alan McKay |</a></h1>
             </header>
             <nav>
                 <a href='writings/'>
@@ -35,5 +36,15 @@ include('header.php');
                 </a>
             </nav>
         </div>
+        <script>
+            var isMobile = window.matchMedia || window.msMatchMedia;
+            isMobile = isMobile("(pointer:coarse)").matches;
+
+            if(isMobile){
+                anchor_object = document.getElementById('home_link');
+                anchor_object.setAttribute("href","about/");
+            }
+
+        </script>
     </body>
 </html>

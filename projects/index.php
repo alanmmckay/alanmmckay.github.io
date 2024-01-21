@@ -47,22 +47,18 @@ include('../header.php');
 
         if(isMobile){
 
-            let scroll_bool;
+            let scroll_end = null;
 
             window.onscroll = function(ev){
-                scroll_bool = true;
+                if(scroll_end != null){clearTimeout(scroll_end);}
                 applyClassTransitionEffects('writing', 'border-left', 'solid white 10px', '.5s', 'solid #778088 2px', '1s', 35);
-                setTimeout(function(){
-                    if(scroll_bool == true){
-                        primeClassTransitions("writing","border-left","solid 2px","2s",true);
-                        scroll_bool = false;
-                    }
+                scroll_end = setTimeout(function(){
+                    primeClassTransitions("writing","border-left","solid 2px","2s",true);
                 },750);
             }
 
             window.onscrollend = function(ev){
                 primeClassTransitions("writing","border-left","solid 2px","2s",true);
-                scroll_bool = false;
             }
 
             window.addEventListener('load', function () {
