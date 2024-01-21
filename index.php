@@ -9,7 +9,7 @@ include('header.php');
 ?>
 
 <div id='homeWrapper'>
-            <header style='overflow:auto'>
+            <header style='overflow:hidden'>
                 <h1 style='float:right'><a href='about/'>&nbsp;About</a>
                 <h1 style='float:right'><a id='home_link' href='./'>Alan McKay |</a></h1>
             </header>
