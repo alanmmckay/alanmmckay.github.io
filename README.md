@@ -2,7 +2,7 @@
 
 This repository exists to track the progress of my personal portfolio. The portfolio includes a range of computer science related topics from web development to the discussion of theory. The motive of having a website housing project a portfolio has evolved to an extent such that the website can be considered a digital garden with the inclusion of personal writings. This is elaborated further in the about-page of the website.
 
-Code used here is developed form scratch, barring the normalizing css stylesheet which was taken from a [repository](github.com/necolas/normalize.css) hosted by [necolas](https://github.com/necolas). The code is templated using PHP and a non-traditional layout is leveraged whilst still maintaining accessibility for a variety of browsing environments.
+Code used here is developed form scratch, barring the normalizing css stylesheet which was taken from a [repository](https://github.com/necolas/normalize.css) hosted by [necolas](https://github.com/necolas). The code is templated using PHP and a non-traditional layout is leveraged whilst still maintaining accessibility for a variety of browsing environments.
 
 This readme file will act as a progress checklist for items I would like to develop for the website.
 
