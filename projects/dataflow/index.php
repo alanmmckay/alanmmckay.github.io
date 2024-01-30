@@ -316,7 +316,45 @@ include('../../header.php');
                     </p>
                     <h3>Aggregating Entity Relationship Networks</h3>
                     <p>
-
+                        The following section defines the main component of our framework: a mathematical approach to combine multiple networks into one multi-layer graph that gives a confidence scores for each edge.
+                    </p>
+                    <p>
+                        We define <i>collapsing</i> a set of entity relationship networks 𝐺<sub>𝑀</sub> = 𝐺<sub>1</sub>, ...,𝐺<sub>𝑁</sub> by aggregating their edge weights to reflect an overall relationship between nodes. We define this as a collapse function 𝐶 : 𝑉 × 𝑉 → R that maps each pair of nodes (𝑢, 𝑣) ∈ 𝑉 × 𝑉 to a <i>confidence score</i> that represents how sure we are of a data sharing relationship between entities.
+                    </p>
+                    <p>
+                        Given an aggregation function agg(·), we must define a custom function 𝑓<sub>𝑘</sub> : 𝑤<sub>𝑢𝑣</sub> → R<sub>+</sub> that standardizes the relationship 𝑤𝑢𝑣 between nodes in each entity relationship network 𝐺<sub>𝑘</sub> for 𝑘 ∈ 1, ..., 𝑁. The aggregation function agg(·) could be any combination of terms, such as a sum or average.
+                    </p>
+                    <p>
+                        We define our collapse function 𝐶(·) as
+                        <br>
+                        <br>
+                        <code>
+                            𝐶(𝑢, 𝑣) = agg(𝑓<sub>1</sub>(𝑤<sub>𝑢𝑣</sub>),...,𝑓<sub>𝑁</sub>(𝑤<sub>𝑢𝑣</sub>))
+                        </code>
+                        <br>
+                        <br>
+                        We then arrive at our aggregated entity relationship network 𝐺&#770; = (𝑉, 𝐸&#770;, 𝑤&#770;), where 𝑤&#770;<sub>𝑢𝑣</sub> = 𝐶(𝑢, 𝑣) ∀𝑢, 𝑣 ∈ 𝑉. As an example, consider the following:
+                    </p>
+                    <p>
+                        Suppose we obtain five datasets, three of which connect Company A to Company B, and two of which connect Company A to Company B but not to Company C. Each dataset could represent its own relationship graph. However, all five could be combined into one aggregated relationship network (illustrated in figure 7). We propose the above method to weight the edges representing relationships between entities to encapsulate that we cannot know with certainty whether data sharing is occurring.
+                    </p>
+                    <figure>
+                        <img>
+                        <figcaption>
+                            Figure 7: Aggregation example of 5 relationship entity graphs with 3 nodes.
+                        </figcaption>
+                    </figure>
+                    <h4>Comparison of Potential Aggregation Functions</h4>
+                    <p>
+                        Once we have a standardized confidence score provided by the functions 𝑓<sub>𝑘</sub>(·) (described in section 4.3.2), we have many choices for the aggregation function agg(·). Let 𝑓<sub>𝑘</sub>(𝐺<sub>𝑘</sub>) denote the function mapping every edge weight in the edge set of 𝐺<sub>𝑘</sub> to a standardized confidence score.
+                        <ul>
+                            <li>
+                                <i>agg(𝐺<sub>𝑀</sub> ) = average(𝑓<sub>1</sub>(𝐺<sub>1</sub> ),...,𝑓<sub>𝑁</sub> (𝐺<sub>𝑁</sub> ))</i>: Using an average may result in lost information - if there is a single source with high confidence, that instance would be lost in the average with many smaller instances.
+                            </li>
+                            <li>
+                                 agg(𝐺𝑀 ) = Í 𝑁 𝑘=1 𝑓𝑘(𝐺𝑘): Using a sum as an aggregation would result in an opposite problem as the previous point. Suppose we have many low-confidence weights and they are added together, resulting in a single high confidence weight in the aggregated network. Since we likely do not want to convey a high confidence in such a relationship, this represents a problem.
+                            </li>
+                        </ul>
                     </p>
                     <section class='info'>
                         <hr>
