@@ -216,7 +216,7 @@ include('../../header.php');
                         A graph 𝐺 (see figure 3b) refers to an abstract mathematical object describing relationships between a set of nodes 𝑉 through edges 𝐸 between them. The degree of a node refers to how many edges it is connected to. The distribution of these values over the entire graph is known as the degree distribution. For some graphs most of the nodes have similar degrees (a uniform distribution) and for others there may be a few nodes with a high number of edges while the rest have a low degree (power-law distribution). Graphs can be either undirected (edges denote a 2-way connection as in figure 3a) or directed (edges denote a 1-way connection as in figure 3a). A network is what we refer to when we use a graph to model real-world relationships.
                     </p>
                     <p>
-                        A multi-layer graph 𝐺ˆ(e.g., see figure 3a) is one that has a single set of nodes or points 𝑉 , but multiple types of edge sets 𝐸1, ..., 𝐸𝑁. Each edge set connects the nodes with different types of edges defined as a layer. The edge sets are used to represents varying types of relationships between nodes.
+                        A multi-layer graph 𝐺&#770; (e.g., see figure 3a) is one that has a single set of nodes or points 𝑉 , but multiple types of edge sets 𝐸1, ..., 𝐸𝑁. Each edge set connects the nodes with different types of edges defined as a layer. The edge sets are used to represents varying types of relationships between nodes.
                     </p>
                     <p>
                         For example, suppose we wish to represent two different relationships between entities. Edges in the first layer represent entities that have been inferred to share data, such as in Bashir, et. al. [2]. Edges in the second layer are to be based on corporation ownership data (e.g., Lexus is owned by Toyota). Therefore, a multi-layer graph can represent the same companies, but express a distinction between different varieties of company relationships or, as we will propose, varying confidence that a relationship exists.
@@ -352,10 +352,218 @@ include('../../header.php');
                                 <i>agg(𝐺<sub>𝑀</sub> ) = average(𝑓<sub>1</sub>(𝐺<sub>1</sub> ),...,𝑓<sub>𝑁</sub> (𝐺<sub>𝑁</sub> ))</i>: Using an average may result in lost information - if there is a single source with high confidence, that instance would be lost in the average with many smaller instances.
                             </li>
                             <li>
-                                 agg(𝐺𝑀 ) = Í 𝑁 𝑘=1 𝑓𝑘(𝐺𝑘): Using a sum as an aggregation would result in an opposite problem as the previous point. Suppose we have many low-confidence weights and they are added together, resulting in a single high confidence weight in the aggregated network. Since we likely do not want to convey a high confidence in such a relationship, this represents a problem.
+                                 <i>agg(𝐺𝑀 ) = </i>&sum;<sub>𝑘=1</sub><sup>𝑁</sup><i> 𝑓<sub>𝑘</sub> (𝐺<sub>𝑘</sub> )</i>: Using a sum as an aggregation would result in an opposite problem as the previous point. Suppose we have many low-confidence weights and they are added together, resulting in a single high confidence weight in the aggregated network. Since we likely do not want to convey a high confidence in such a relationship, this represents a problem.
+                            </li>
+                            <li>
+                                 <i>agg(𝐺<sub>𝑀</sub>) = max<sub>1≤𝑘≤𝑁</sub> (𝑓<sub>1</sub> (𝐺<sub>1</sub> ),...,𝑓<sub>𝑁</sub> (𝐺<sub>𝑁</sub> ))</i>: Taking the maximum over confidence weights is the most promising aggregation function we have come up with so far. Low confidence scores do not convey a confidence that there is not a sharing relationship between two entities, only that the evidence for it is not apparent from their methods. If someone comes up with conclusive evidence, we want it to be reflected in the aggregated entity relationship network.
                             </li>
                         </ul>
                     </p>
+                    <h4>Parameterized 𝑓<sub>𝑘</sub></h4>
+                    <p>
+                         The weight 𝑤<sub>𝑢𝑣</sub> for each network layer must be described. A confidence scoring must be given with respect to the source of the network. Currently, the primary source of these discovered networks is via academic study such as those discussed in related works. Another source is via disclosure policy afforded by regulation.
+                    </p>
+                    <p>
+                        An academic study produces a graph of binary connections with a degree of confidence. This confidence is based on the strength of the study. Closer scrutiny of a given study may cause one to notice ambiguity in control. This is due to the fact a given study may capture a wide range of features for the sake of generating a response from some entity. These features range from the set of devices being used to the personas employed.
+                    </p>
+                    <p>
+                        Advertisers ultimately make decisions based on some demographic. Browsing history helps determine the correct demographic. This observation gives insight into implicit features a study may explore which then can be used to determine its own confidence score. Table 2 begins to highlight the features which contribute to these inferences.
+                    </p>
+                    <p>
+                        Given some <i>&lt;Persona&gt;</i>, an <i>&lt;Entity&gt;</i> will seek to find a match to some subset of <i>&lt;Demographics&gt;</i> in combination with a subset of <i>&lt;Content Categories&gt;</i>, (of which a <i>&lt;Persona&gt;</i> is also defined as the combination of these two subsets.) Which features can be used to infer these combinations? The answer to this question is discovered by tracing the the possible productions of the grammar given in Table 2. Each non-terminal used in a production plays a role in strengthening the confidence of the production; something which is required for developing a confident weight 𝑤<sub>𝑢𝑣</sub>.
+                    </p>
+                    <figure>
+
+                        <figcaption>
+                            Table 2: Interplay of Entities and Persona can be surmised using BNF notation. <i>&lt;Aggregation&gt;</i> is representative of the means in which inferences can be made: via research or disclosure.
+                        </figcaption>
+                    </figure>
+                    <p>
+                        This schema is also capable of considering productions that are <i>only</i> inferred from a <i>&lt;Persona&gt;</i>. This is indicative of an alternative form of aggregation - legal disclosure. How this type of production is weighted against another hinges upon discussion in section 4.4. The level of confidence in these types of productions also hinges on how well defined the non-terminals are. If an individual decides to contribute to the aggregated network by disclosing only the entities involved and not their own browsing history, then the effect this layer has on others should be less than one which discloses browsing history.
+                    </p>
+                    <p>
+                        It can be observed that a production leads to non-terminal which itself does not make a production. These terms, like the others, are indicative of another set of information. These sets are dependent on the business rules set in place by the market being examined.
+                    </p>
+                    <p>
+                        The semantics of <i>&lt;Hardware&gt;</i> and <i>&lt;Software&gt;</i> is dependent upon what is available to the public for use. <i>&lt;Hardware&gt;</i> can be the set of hardware components that compose a device. <i>&lt;Software&gt;</i> can be evaluated as the pieces of software, and their properties, that are used to interact with the ecosystem. This can ultimately represent a device fingerprint. The semantics of <i>&lt;Content Categories&gt;</i> and <i>&lt;Demographic&gt;</i> are more in tune with <i>&lt;Entity&gt;</i> expectations. These semantics provide the semantics of what a <i>&lt;Persona&gt;</i> is, which is ultimately what an <i>&lt;Entity&gt;</i> is interested in and attempts to infer.
+                    </p>
+                    <p>
+                        To define these sets is another combinatorics problem which requires more insight into the ecosystem at play. To gain this insight requires further study which constrains the control to garner reaction on a tighter range of features. Insight can also be gained by the inclusion of more datasets as network layers which will help provide a correlation between various subsets of features and thus improving confidence overall. How a given network layer chooses to define some weight 𝑤<sub>𝑢𝑣</sub> needs to consider all these factors in order to help an aggregated network have optimal confidence.
+                    </p>
+                    <h3>Disclosure Reliability Analysis</h3>
+                    <p>
+                        Suppose we observe the presence of an individual’s personal data possessed by a set of entities within the aggregated relationship network, where the data was only given to a proper subset of those entities. If the nodes in which we observe that possession are not directly connected by edges, how did the data flow between them?
+                    </p>
+                    <p>
+                        We can infer these flows of data in a similar fashion to the missing infections problem outlined in Rozenshtein <i>et. al</i>. [10], by constructing a minimum Steiner tree using the observed nodes as terminals and computing over the inverse edge weights.
+                    </p>
+                    <h5 style='margin-bottom:0px;'>Definition 1. Minimum Steiner Tree</h5>
+                    <p style='margin-top:0px;'>
+                        A minimum Steiner tree 𝑇 is a minimum spanning tree (MST) which contains a subset of nodes (terminals) 𝑉<sub>𝑇</sub> ⊆ 𝑉 .
+                    </p>
+                    <p>
+                        We formally state the problem as follows:
+                        <ul>
+                            <li>
+                                Given: An aggregated relationship network 𝐺&#770;<sub>𝑝</sub> = (𝑉 ,𝐸&#770;,𝑤&#770;<sub>𝑖𝑗</sub><sup>𝑝</sup> )(where 𝑤&#770;<sub>𝑖𝑗</sub><sup>𝑝</sup> = (1/𝑤&#770;<sub>𝑖𝑗</sub>)), a set of observed data possessions, and a network diffusion model M.
+                            </li>
+                            <li>
+                                Find: A Steiner tree whose node set represents inferred data possessions.
+                            </li>
+                        </ul>
+                    </p>
+                    <p>
+                        We acknowledge this is a simplification of any actual algorithms that may be developed since the minimum steiner tree problem is known to be NP-hard [10]. The context of the problem is extremely relevant in the development of approximation algorithms in this setting. Approximate solutions must not generate trees that are extremely unlikely given the terminals, so approximation guarantees are necessary to establish confidence in any solutions.
+                    </p>
+                    <h3>Additional Relationship Inferrence</h3>
+                    <p>
+                        In order to bolster our existing network, we may infer additional sharing relationships using the output we generate in section 4.5. This application is less broad, but we illustrate it through an example below.
+                    </p>
+                    <p>
+                        Return to the case of five datasets compiled into one aggregated entity relationship network, as below, but this time with five nodes, 𝑉 = {𝐴, 𝐵,𝐶, 𝐷, 𝐸}, with an edge set {𝐸<sub>1</sub>, 𝐸<sub>2</sub>, 𝐸<sub>3</sub>, 𝐸<sub>4</sub>, 𝐸<sub>5</sub>} = {(𝐴, 𝐵, 0.6), (𝐵, 𝐷, 0.9), (𝐴,𝐶, 0.1), (𝐶, 𝐷, 0.1), (𝐶, 𝐸, 0.1)} as seen in figure 8.
+                    </p>
+                    <figure>
+                        <img>
+                        <figcaption>
+                            Figure 8: Example aggregate entity relationship network with 5 nodes and 5 edges.
+                        </figcaption>
+                    </figure>
+                    <p>
+                        Consider Figure 9a. This represents an individual providing data to Company A, and at some later time, receiving an inquiry from Company D. The data has clearly travelled from Company A to Company D, but due to the black box nature of data sharing between data aggregators, the route is unclear. With an aggregated network of confidence scores such as this proposed framework, a researcher could infer with higher confidence that the data travelled the green route through Company B to Company D, and might have higher confidence in dismissing the orange route through Company C. Then, they could infer that Company B holds the data.
+                    </p>
+                    <p>
+                        However, they could further reexamine the confidence network, with the new data point that they have just witnessed of spread from Company A to Company D. This section of the research inquiry suggests that a framework of aggregated relationship networks could account for an evolution of confidence scores as new data becomes available. Perhaps a researcher could now infer a higher strength of relationship between Companies A and B and B and D, having witnessed real data spread between the two.
+                    </p>
+                    <figure>
+                        <figcaption>
+                            Figure 9: Examples of data injected into networks.
+                        </figcaption>
+                    </figure>
+                    <p>
+                        A more stark example appears in the below 𝐹𝑖𝑔𝑢𝑟𝑒 (𝑏), with an edge set with an edge set {𝐸1, 𝐸2, 𝐸3, 𝐸4, 𝐸5} = {(𝐴, 𝐵, 0.4), (𝐵, 𝐷, 0.4), (𝐴,𝐶, 0.4), (𝐶, 𝐷, 0.1), (𝐶, 𝐸, 0.1)}. This represents an individual providing data to Company A, and at some later time, receiving an inquiry from Company E. Again, data spread has occurred between Company A and Company E through some path, but in this case, working from the current known networks, a researcher could infer that Company C passed the data to Company E and that Company C holds the data. The researcher can also be more confident that the data travelled the blue route through Company C, and dismiss the purple route with more confidence.
+                    </p>
+                    <p>
+                        In this example, it seems that the data was shared from Company A to Company C to Company E. Previously, the relationship network had assigned a low confidence score to the relationships between each of these node. With the new information of data spread from Company C to Company E, the relationship network could be altered in two ways:
+                        <ol>
+                            <li>
+                                Suppose that an entity node 𝐹 is missing, which has a strong confidence score relationship to both Company A and Company 𝐸.
+                            </li>
+                            <li>
+                                Consider that the new data regarding data spread increases our confidence that strong relationships exist between 𝐴, 𝐶 and 𝐸, and increase each confidence score for 𝐸3 and 𝐸5.
+                            </li>
+                        </ol>
+                    </p>
+                    <h3>Estimating Proliferation Risk Given Initial Entry Points</h4>
+                    <p>
+                        If you are a consumer considering giving a certain piece of personally identifiable information to a company, how would you know the risk that entails? Assuming you are aware of the general privacy risks of sharing data, how can you make an informed decision about how much to share? By analyzing the output of network diffusion models over an aggregated relationship network, we may gather estimates about how prolifically that data will spread dependent upon where it is added into the network. In this setting, we hypothesize that the level of proliferation is highly dependent upon the topology of the network, such as in Ganesh <i>et. al</i> [8].
+                        <ul>
+                            <li>
+                                Given: An aggregated relationship network 𝐺&#770; = (𝑉, 𝐸&#770;, 𝑤&#770;<sub>𝑖𝑗</sub>), a set of hypothetical data possessions (initial points), and a network diffusion model M.
+                            </li>
+                            <li>
+                                Find: The expected data proliferation across 𝐺&#770; of the PII in the entry points.
+                            </li>
+                        </ul>
+                        One way to model this diffusion process is to convert the edge weights to be interpreted as probabilities and run an independent cascade simulation over it.
+                    </p>
+                    <h2>Translation to consumer-facing API</h2>
+                    <p>
+                        For this framework to provide a viable effect as an auditing tool to compare hypothesized data spread, it must exist in a user-interface. We propose a web app with an API that would allow for simple interaction between individuals and the proposed framework (see figure 10).
+                    </p>
+                    <figure>
+                        <img>
+                        <figcaption>
+                            Figure 10: Possible mock wireframe of a user interface interacting with an API for the proposed relation network auditing framework.
+                        </figcaption>
+                    </figure>
+                    <p>
+                        The proposed web app should have the following functions:
+                        <ul>
+                            <li>Users can can view and explore the aggregate network by means of moving and zooming to get a high level understanding of the data sharing network.</li>
+                            <li>Users can click and drag to redraw and realign the network for different types of views.</li>
+                            <li>Users can add new data by use of the API to mock and envision possible variations of the network.</li>
+                            <li>Users can split and explore the composite relational networks to see the different individual networks that make up the aggregate network.</li>
+                            <li>Users can adjust confidence scores to see hypothesized shifts in related confidences.</li>
+                            <li>Users can search and filter by entity, confidence scores, or paths to get a clearer picture of how data might spread under different types of conditions and scenarios.</li>
+                            <li>Users can set and save possible data spread paths to audit their existing hypothesized data spread.</li>
+                        </ul>
+                    </p>
+                    <p>
+                        Offering such a web app could be done in a centralized manner, where each user has access to the same instance of the framework that is built on verified data, and additional data that is submitted is thoroughly vetted before being added to the framework for others to see and use. Giving each user a unique instance of the network that they can edit for themselves, where the framework only offers some baseline data that isn’t necessarily verified, would likely be a better solution for a number of reasons. This is explored further in section 7.
+                    </p>
+                    <p>
+                        It should be noted that different types of representations could also be conceived, such as desktop or mobile application, however a web app would have the lowest barrier to entry both in terms of development and usage.
+                    </p>
+                    <h2>Verification of methods</h2>
+                    <p>
+                        Since an actual ground truth (see section 7.1) concerning how data spreads, (which may not be viably represented given the complexity of the process), methods like the ones discussed in this paper will likely never be able to be thoroughly validated, but they may be able to garner insight into some of the dynamics of aggregated relationship networks. One method of validating our methods would be to generate a synthetic "ground truth" network as well as a set of synthetic individual entity relationship as described in section 4.2.2. Solutions to our problems would then be compared to the behavior of data spread in the ground truth network.
+                    </p>
+                    <h2>Discussion</h2>
+                    <h3>Limitations</h3>
+                    <p>
+                        The ground truth, what is occurring in the real world, versus the aggregated relationship graph is a main point of contention when discussing this framework. The real world contexts in which the framework can be used is limited, however as a general tool for individuals and researchers to gauge a measure confidence it can be highly effective. This is obviously dependent on the data that is used within the framework.
+                    </p>
+                    <p>
+                        Many problem settings are highly dependent upon the accuracy of the aggregated relationship network. If two entities are connected through another and we accuse the middleman of sharing data when the other two were in fact sharing directly (but not reflected by the network), the accusation would be unjust. Warranting such accusations requires a much finer level of evidence and isn’t the main objective for the proposed framework.
+                    </p>
+                    <p>
+                        How data is shared in the real world obviously varies from one entity to another. Whether data is shared between entities is one question, however what kind of data and in what format and context it is shared is another question, an arguably much more difficult one at that. Creating high level abstractions of data sharing will only tell part of the story, and the further up in abstraction one goes, the less details of the real interactions that are occurring are kept. Finding the right level of abstraction for the use case in question is key, and it seems that the proposed framework is positioned where it needs to be with currently available information and methodologies to answer the questions many individuals and researchers pose.
+                    </p>
+                    <p>
+                        The precision of the confidence score ultimately relies upon the given data. Creating a precise network with representative confidence scores is only possible by developing methods that extract the obfuscated information from the black box that is in the middle of an-arms race. With increasing legislation, required disclosures, and a growing number of researchers devising methods to gather this information, it seems that the proposed confidence scores, and in turn the framework, will have great utility.
+                    </p>
+                    <h3>Possible Extensions</h3>
+                    <p>
+                        A natural extension of this project would be to increase the types of data the framework can work with. Similar to the idea discussed in section 5, allowing data to be supplied by means of an API that accepts different types of files would help by making any work done with the framework much more streamlined. Ideally, this should allow both individual data points and data sets. Beyond this, allowing data that isn’t binary and weighing it appropriately, similar to the binary relationships, would help when more detailed information about relationships is available.
+                    </p>
+                    <p>
+                        The framework is intended to be an auditing tool for individuals and researchers, however an entity could also use the framework in an adversarial sense. Considering a publicly accessible implementation of the framework with the option of anyone being able to contribute to a centralized multi-layer graph, an arms-race between auditors and entities could ensue, similar to that currently seen in the online privacy ecosystem. Obfuscation of the relationships between entities in this manner would essentially be an extension of the obfuscation occurring in the context of the advertising network black box discussed in section 2.1. Publishing an accessible and modifiable implementation of this framework should be done with caution. Datasets must be carefully considered and any individual data points should be well backed. Ultimately, it comes to verification in the aforementioned issue of the ground truth versus an aggregated relationship graph.
+                    </p>
+                    <h2>References</h2>
+                    <ul style='list-style-type:none;'>
+                        <li>
+                            [1] M.A. Bashir and C. Wilson. Diffusion of User Tracking Data in the Online Advertising Ecosystem. Proceedings on Privacy Enhancing Technologies (PETS). 2018.
+                        </li>
+                        <li>
+                            [2] M.A. Bashir, S. Arshad, W. Robertson, and C. Wilson. Tracing Information Flows between Ad Exchanges Using Retargeted Ads. Proceedings of the 25th USENIX Conference on Security Symposium, USENIX Association. 481-496, 2016.
+                        </li>
+                        <li>
+                            [3] M. Bin Musa and R. Nithyanand. ATOM: Ad-Network Tomography. Proceedings on Privacy-Enhancing Technologies Symposium. 295–313, 2022.
+                        </li>
+                        <li>
+                            [4] J. Cook, R. Nithyanand, and Z. Shafiq. Inferring Tracker-Advertiser Relationships in the Online Advertising Ecosystem using Header Bidding. Proceedings on Privacy-Enhancing Technologies Symposium. 65-82, 2020.
+                        </li>
+                        <li>
+                            [5] Built With. 2023. Available from: https://pro.builtwith.com/report/export/48d5ac51-1c24-4df8-944d-d05b5ff8d032
+                        </li>
+                        <li>
+                            [6] Enlyft. 2023. Available from: https://enlyft.com/tech/products/googledoubleclick
+                        </li>
+                        <li>
+                            [7] European ePrivacy Directive. 2011. Available from the European Data Protection Supervisor at: https://edps.europa.eu/data-protection/our-work/subjects/eprivacy-directive_en
+                        </li>
+                        <li>
+                            [8] A. Ganesh, L. Massoulie, and D. Towsley. The effect of network topology on the spread of epidemics. Proceedings IEEE 24th Annual Joint Conference of the IEEE Computer and Communications Societies. 1455-1466, 2005.
+                        </li>
+                        <li>
+                            [9] B. Rose. The Commodification of Personal Data and the Road to Consumer Autonomy Through the CCPA. Brooklyn Journal of Corporate, Financial, and Commercial Law. 2021.
+                        </li>
+                        <li>
+                            [10] P. Rozenshtein, A. Gionis, B.A. Prakash, and J. Vreeken. Reconstructing an Epidemic Over Time. Association for Computing Machinery. 1835–1844, 2016.
+                        </li>
+                        <li>
+                            [11] N.Samarin, S. Kothari, Z. Siyed, P. Wijesekera, J. Fischer, C. Hoofnagle, and S. Egelman. Investigating the Compliance of Android App Developers with the CCPA. IEEE Security, 2021.
+                        </li>
+                        <li>
+                            [12] M. Van Nortwick and C. Wilson. Setting the Bar Low: Are Websites Complying with the Minimum Requirements of CCPA. Proceedings on Privacy-Enhancing Technologies Symposium. 2022.
+                        </li>
+                        <li>
+                            [13] N. Moshiri. The dual-Barabási-Albert model. arXiv physics.soc-ph. 2018.
+                        </li>
+                        <li>
+                            [14] R. Albert and A. Barabási. Statistical mechanics of complex networks. Reviews of Modern Physics. 1-74(47-97), 2002.
+                        </li>
+                    </ul>
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
