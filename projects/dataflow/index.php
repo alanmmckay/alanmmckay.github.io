@@ -81,10 +81,10 @@ include('../../header.php');
                         Cookies are such a mechanism. Although one of their original functions was to save a user’s shopping cart between browser sessions, cookies have evolved to allow a data aggregator to gain insight into a user’s browsing history. When a user visits a web page, web scripts are inserted into the page by a tracker which can access the website’s cookies. This connection allows communication of relevant information to the black box, which produces an advertisement from another web server. Researchers can measure the origin of the scripts that exist on a web page as well as the origin of the servers that return the advertisements, but are limited in observations beyond this communication. The resulting data is a tracking domain communicating with an advertising domain. This level of communication produces the so-called perimeter of the black box.
                     </p>
                     <p>
-                        Researchers have endeavored to observe communication past this perimeter. One such study observes that as the web browser loads a tracking script, the server in which the script serves may change as the page is gradually rendered.[2] This is implicit of an information flow as one server communicates to another, passing information. A browser can be instrumented to take a snapshot of each mutation of the script, which gives a more complete picture of who is talking to who and the related information flow during the execution of the script.
+                        Researchers have endeavored to observe communication past this perimeter. One such study observes that as the web browser loads a tracking script, the server in which the script serves may change as the page is gradually rendered.<a href='#references2'>[2]</a> This is implicit of an information flow as one server communicates to another, passing information. A browser can be instrumented to take a snapshot of each mutation of the script, which gives a more complete picture of who is talking to who and the related information flow during the execution of the script.
                     </p>
                     <p>
-                        Other studies, as in [4], have focused on the surface features of Real Time Bidding (RTB) auctions, a mechanism used by trackers to sell advertising space to advertisers. Some of the communication pertaining to space bidding are handled on a client to provide a closer interface to the tracking scripts; something that can be measured by any client machine. These measurements contribute to the mapping of the advertising networks at play.
+                        Other studies, as in <a href='#references4'>[4]</a>, have focused on the surface features of Real Time Bidding (RTB) auctions, a mechanism used by trackers to sell advertising space to advertisers. Some of the communication pertaining to space bidding are handled on a client to provide a closer interface to the tracking scripts; something that can be measured by any client machine. These measurements contribute to the mapping of the advertising networks at play.
                     </p>
                     <p>
                         As time has progressed, users have become privy to some of the approaches advertising entities have taken to track them. This increase in awareness has led many to disable functionality within their web browser; disabling cookies, for example. Data aggregators counteract these evasive measures by users by conceiving new approaches, such as fingerprinting, to track user browsing history without reliance on the storage of a user’s browsing environment. Browser fingerprinting works by collecting information about a user’s browser, such as the version, installed plugins, fonts, and device characteristics, such as screen resolution and operating system. This information is then combined to create a unique identifier or "fingerprint" for the user’s device.
@@ -109,10 +109,10 @@ include('../../header.php');
                         In the context of advertising, a similar algorithm likely evaluates the conditions of the user. In this case, the feature set includes browsing history, purchase history, and any other relevant actions. The machine learning algorithm tries to match this pattern to a personalized advertisement. How this algorithm ultimately makes the decision is often a black box even for those who maintain it. As a result, the process of running live data points on a machine learning algorithm to calculate an output is dubbed an "inference system."
                     </p>
                     <p>
-                        Studies which have helped map advertising networks have sought to maximize these feature sets to produce a measurable outcome.[3] Specifically, researchers formulate online personas which are shaped to maximize the targeting of personal advertisements. The methodology involves creating fictitious online personas that represent potential users with specific interests and demographics. By interacting with the ad network, data can be collected with respect to the targeting criteria used by the network. This data can then be used by researchers to gain insight into the targeting methods used by the ad network and the types of personal data being used to inform targeting.
+                        Studies which have helped map advertising networks have sought to maximize these feature sets to produce a measurable outcome.<a href='#references3'>[3]</a> Specifically, researchers formulate online personas which are shaped to maximize the targeting of personal advertisements. The methodology involves creating fictitious online personas that represent potential users with specific interests and demographics. By interacting with the ad network, data can be collected with respect to the targeting criteria used by the network. This data can then be used by researchers to gain insight into the targeting methods used by the ad network and the types of personal data being used to inform targeting.
                     </p>
                     <p>
-                        The apex of this bewildering chain of inference arms-race is encapsulated by a machine learning study which seeks to infer advertising relationships by leveraging online personas. [3] The study blocks individual trackers from a page, then gathers data points which record the change in behavior. It’s not guaranteed that a blocked tracker would have won a RTB auction, so the effect cannot be guaranteed. Site behavior can instead be predicted with a degree of confidence. Thus, the resultant data acts as a training set for a machine learning algorithm, ATOM, which is used to make an inference of a data sharing relationship between an advertiser and a tracker. It does so with a high degree of accuracy compared to a control set.
+                        The apex of this bewildering chain of inference arms-race is encapsulated by a machine learning study which seeks to infer advertising relationships by leveraging online personas. <a href='#references3'>[3]</a> The study blocks individual trackers from a page, then gathers data points which record the change in behavior. It’s not guaranteed that a blocked tracker would have won a RTB auction, so the effect cannot be guaranteed. Site behavior can instead be predicted with a degree of confidence. Thus, the resultant data acts as a training set for a machine learning algorithm, ATOM, which is used to make an inference of a data sharing relationship between an advertiser and a tracker. It does so with a high degree of accuracy compared to a control set.
                     </p>
                     <h3>User and Regulatory Confidence</h3>
                     <p>
@@ -141,16 +141,16 @@ include('../../header.php');
                         To understand and audit new privacy laws and regulations, research first needs to address the current state of the internet and where consumers’ data interests are violated. Data-sharing practices are an element of data aggregator behavior that needs further regulation.
                     </p>
                     <p>
-                        In the paper "ATOM: Ad-network Tomography", Nithyanand and Bin Musa address the black box nature of data sharing between data aggregators, and acknowledge that CCPA audits are made difficult by the lack of transparency as to the routes through which data spreads. They propose a framework, ATOM, which enables tracker-blocking strategies, then observes changes in site behavior to theorize advertiser relationships where data spread occurs.[3]
+                        In the paper "ATOM: Ad-network Tomography", Nithyanand and Bin Musa address the black box nature of data sharing between data aggregators, and acknowledge that CCPA audits are made difficult by the lack of transparency as to the routes through which data spreads. They propose a framework, ATOM, which enables tracker-blocking strategies, then observes changes in site behavior to theorize advertiser relationships where data spread occurs.<a href='#references3'>[3]</a>
                     </p>
                     <p>
-                        In the paper "Tracing Information Flows Between Ad Exchanges Using Retargeted Ads", the authors track information sharing between data aggregators, and develop a new auditing mechanism for examining these relationships. The authors find that existing auditing frameworks that rely on cookie matching "are unable to identify 31% of ad exchange pairs that share data." [2].
+                        In the paper "Tracing Information Flows Between Ad Exchanges Using Retargeted Ads", the authors track information sharing between data aggregators, and develop a new auditing mechanism for examining these relationships. The authors find that existing auditing frameworks that rely on cookie matching "are unable to identify 31% of ad exchange pairs that share data." <a href='#references2'>[2]</a>.
                     </p>
                     <p>
                         The authors develop a method which tracks client-to-server-side sharing through retargeted ads. A retargeted ad is an advertisement personalized towards a user with a product they directly interacted with. For example, a Facebook ad for a Target shirt that a user had placed in their Target.com shopping cart would indicate that Facebook and Target may have a data sharing relationship. After crawling the web, the authors formulate an open-source dataset of retargeted ad relationships between data aggregators.
                     </p>
                     <p>
-                        In the paper "Inferring Tracker-Advertiser Relationships in the Online Advertising Ecosystem using Header Bidding", the authors also aim to track data sharing relationships not captured by cookiesyncing studies. They propose a new system, KASHF, which uses a machine learning algorithm to predict how advertisers bid for ad space based on the information they have about users.[4]
+                        In the paper "Inferring Tracker-Advertiser Relationships in the Online Advertising Ecosystem using Header Bidding", the authors also aim to track data sharing relationships not captured by cookiesyncing studies. They propose a new system, KASHF, which uses a machine learning algorithm to predict how advertisers bid for ad space based on the information they have about users.<a href='#references4'>[4]</a>
                     </p>
                     <p>
                         The researchers focus on Header Bidding, a variation of Real Time Bidding (RTB). RTB is a mechanism that determines how ads are dynamically placed on websites for different users, by offering ad space to high-profile advertisers first, then continuing on taking bids from advertisers in a waterfall manner to fill the space. Header Bidding is a more competitive variation on RTB in which advertisers can all place bids simultaneously for ad space depending on the consumer.
@@ -159,7 +159,7 @@ include('../../header.php');
                         KASHF can use Header Bidding prediction to analyze data sharing routes between entities by observing bidding by advertisers change depending on the information available to certain trackers about a consumer.
                     </p>
                     <p>
-                        The paper "Diffusion of User Tracking Data in the Online Advertising Ecosystem", employs a similar philosophy to KASHF, but with Real Time Bidding instead of Header Bidding. The authors of this paper use the dataset from the paper "Tracing Information Flows Between Ad Exchanges Using Retargeted Ads", and verify these relationships depending on advertiser behavior in RTB. The authors were able to formulate inclusion trees connecting the data spread from tracker data to advertisers. The authors predict that the top advertising companies collect from 91% to 99% of user browsing data. [1][2][4]
+                        The paper "Diffusion of User Tracking Data in the Online Advertising Ecosystem", employs a similar philosophy to KASHF, but with Real Time Bidding instead of Header Bidding. The authors of this paper use the dataset from the paper "Tracing Information Flows Between Ad Exchanges Using Retargeted Ads", and verify these relationships depending on advertiser behavior in RTB. The authors were able to formulate inclusion trees connecting the data spread from tracker data to advertisers. The authors predict that the top advertising companies collect from 91% to 99% of user browsing data. <a href='#references1'>[1]</a><a href='#references2'>[2]</a><a href='#references4'>[4]</a>
                     </p>
                     <p>
                         The methods in the above papers vary, from observation of advertiser bidding, to tracker blocking, but the papers all focus on the same goal as this work: to explore routes through which data sharing occurs. Another similarity between these related works is the nature of their datasets. Each research group tracks relationships between advertisers, trackers, and data aggregators as binary: the relationship does or doesn’t exist. This work aims to aggregate the varying research methods in the field in a gradient, non-binary manner. We acknowledge that an outside observer cannot be sure where data sharing is occurring, and that these datasets exist on a spectrum of confidence. This auditing framework could be expanded and applied to a large body of datasets to create a true image of the state of internet data-sharing. As a proof of concept, we apply the theory to a small subset of data, addressed in section 4.1.
@@ -219,7 +219,7 @@ include('../../header.php');
                         A multi-layer graph 𝐺&#770; (e.g., see figure 3a) is one that has a single set of nodes or points 𝑉 , but multiple types of edge sets 𝐸1, ..., 𝐸𝑁. Each edge set connects the nodes with different types of edges defined as a layer. The edge sets are used to represents varying types of relationships between nodes.
                     </p>
                     <p>
-                        For example, suppose we wish to represent two different relationships between entities. Edges in the first layer represent entities that have been inferred to share data, such as in Bashir, et. al. [2]. Edges in the second layer are to be based on corporation ownership data (e.g., Lexus is owned by Toyota). Therefore, a multi-layer graph can represent the same companies, but express a distinction between different varieties of company relationships or, as we will propose, varying confidence that a relationship exists.
+                        For example, suppose we wish to represent two different relationships between entities. Edges in the first layer represent entities that have been inferred to share data, such as in Bashir, et. al. <a href='#references2'>[2]</a>. Edges in the second layer are to be based on corporation ownership data (e.g., Lexus is owned by Toyota). Therefore, a multi-layer graph can represent the same companies, but express a distinction between different varieties of company relationships or, as we will propose, varying confidence that a relationship exists.
                     </p>
                     <figure>
                         <img>
@@ -238,7 +238,7 @@ include('../../header.php');
                     <h3>Data</h3>
                     <h4>Cookie Disclosure Datasets</h4>
                     <p>
-                        In 2011, the European ePrivacy Directive (Directive 2009/136/EC), colloquially known as the cookie law, was enacted in Europe. It requires accessible and thorough cookie disclosures from all companies collecting data in the EU, and effectively mandates companies list the types of cookies or actual cookies they use. [7]
+                        In 2011, the European ePrivacy Directive (Directive 2009/136/EC), colloquially known as the cookie law, was enacted in Europe. It requires accessible and thorough cookie disclosures from all companies collecting data in the EU, and effectively mandates companies list the types of cookies or actual cookies they use. <a href='#references7'>[7]</a>
                     </p>
                     <p>
                         Many data aggregators therefore have a section of their site with their legal documents or privacy policy containing a cookie-table or cookie-policy (see figure 1). Some companies further provide a list of companies with which they share third-party cookies for advertising or data-tracking purposes.
@@ -286,7 +286,7 @@ include('../../header.php');
                     </figure>
                     <h4>Synthetic Data</h3>
                     <p>
-                        We use the dual-Barabási-Albert model [13] with parameters 𝑚1 = 3, 𝑚2 = 1, and 𝑝 = 0.3. We use this model to mimic the nature of datasets inspected so far, which have a highlyconnected core and many degree-1 nodes branching out. In this model, we start with max(𝑚1,𝑚2) nodes. We then iteratively add the remaining nodes one at a time, with probability 𝑝 of having 𝑚1 edges and probability 1 − 𝑝 of having 𝑚2 edges added according to the Barabási-Albert model [14] resulting in a "ground truth" graph 𝐺. We then proceed in two phases:
+                        We use the dual-Barabási-Albert model <a href='#references13'>[13]</a> with parameters 𝑚1 = 3, 𝑚2 = 1, and 𝑝 = 0.3. We use this model to mimic the nature of datasets inspected so far, which have a highlyconnected core and many degree-1 nodes branching out. In this model, we start with max(𝑚1,𝑚2) nodes. We then iteratively add the remaining nodes one at a time, with probability 𝑝 of having 𝑚1 edges and probability 1 − 𝑝 of having 𝑚2 edges added according to the Barabási-Albert model <a href='#references14'>[14]</a> resulting in a "ground truth" graph 𝐺. We then proceed in two phases:
                     </p>
                     <p>
                         <u>Phase 1</u>: We begin by removing 𝑁<sub>𝑝1</sub> (determined by sampling from a uniform distribution in a given range) nodes and 𝐸<sub>𝑝1</sub> edges from 𝐺, resulting in 𝐺′. We then assign weights 𝑤<sub>𝑖𝑗</sub> ∈ [1, 10] sampled from a Pareto distribution to each edge in 𝐺′.
@@ -395,7 +395,7 @@ include('../../header.php');
                         Suppose we observe the presence of an individual’s personal data possessed by a set of entities within the aggregated relationship network, where the data was only given to a proper subset of those entities. If the nodes in which we observe that possession are not directly connected by edges, how did the data flow between them?
                     </p>
                     <p>
-                        We can infer these flows of data in a similar fashion to the missing infections problem outlined in Rozenshtein <i>et. al</i>. [10], by constructing a minimum Steiner tree using the observed nodes as terminals and computing over the inverse edge weights.
+                        We can infer these flows of data in a similar fashion to the missing infections problem outlined in Rozenshtein <i>et. al</i>. <a href='#references10'>[10]</a>, by constructing a minimum Steiner tree using the observed nodes as terminals and computing over the inverse edge weights.
                     </p>
                     <h5 style='margin-bottom:0px;'>Definition 1. Minimum Steiner Tree</h5>
                     <p style='margin-top:0px;'>
@@ -413,7 +413,7 @@ include('../../header.php');
                         </ul>
                     </p>
                     <p>
-                        We acknowledge this is a simplification of any actual algorithms that may be developed since the minimum steiner tree problem is known to be NP-hard [10]. The context of the problem is extremely relevant in the development of approximation algorithms in this setting. Approximate solutions must not generate trees that are extremely unlikely given the terminals, so approximation guarantees are necessary to establish confidence in any solutions.
+                        We acknowledge this is a simplification of any actual algorithms that may be developed since the minimum steiner tree problem is known to be NP-hard <a href='#references10'>[10]</a>. The context of the problem is extremely relevant in the development of approximation algorithms in this setting. Approximate solutions must not generate trees that are extremely unlikely given the terminals, so approximation guarantees are necessary to establish confidence in any solutions.
                     </p>
                     <h3>Additional Relationship Inferrence</h3>
                     <p>
@@ -455,7 +455,7 @@ include('../../header.php');
                     </p>
                     <h3>Estimating Proliferation Risk Given Initial Entry Points</h4>
                     <p>
-                        If you are a consumer considering giving a certain piece of personally identifiable information to a company, how would you know the risk that entails? Assuming you are aware of the general privacy risks of sharing data, how can you make an informed decision about how much to share? By analyzing the output of network diffusion models over an aggregated relationship network, we may gather estimates about how prolifically that data will spread dependent upon where it is added into the network. In this setting, we hypothesize that the level of proliferation is highly dependent upon the topology of the network, such as in Ganesh <i>et. al</i> [8].
+                        If you are a consumer considering giving a certain piece of personally identifiable information to a company, how would you know the risk that entails? Assuming you are aware of the general privacy risks of sharing data, how can you make an informed decision about how much to share? By analyzing the output of network diffusion models over an aggregated relationship network, we may gather estimates about how prolifically that data will spread dependent upon where it is added into the network. In this setting, we hypothesize that the level of proliferation is highly dependent upon the topology of the network, such as in Ganesh <i>et. al</i> <a href='#references8'>[8]</a>.
                         <ul>
                             <li>
                                 Given: An aggregated relationship network 𝐺&#770; = (𝑉, 𝐸&#770;, 𝑤&#770;<sub>𝑖𝑗</sub>), a set of hypothetical data possessions (initial points), and a network diffusion model M.
@@ -521,46 +521,46 @@ include('../../header.php');
                     </p>
                     <h2>References</h2>
                     <ul style='list-style-type:none;'>
-                        <li>
+                        <li id='references1'>
                             [1] M.A. Bashir and C. Wilson. Diffusion of User Tracking Data in the Online Advertising Ecosystem. Proceedings on Privacy Enhancing Technologies (PETS). 2018.
                         </li>
-                        <li>
+                        <li id='references2'>
                             [2] M.A. Bashir, S. Arshad, W. Robertson, and C. Wilson. Tracing Information Flows between Ad Exchanges Using Retargeted Ads. Proceedings of the 25th USENIX Conference on Security Symposium, USENIX Association. 481-496, 2016.
                         </li>
-                        <li>
+                        <li id='references3'>
                             [3] M. Bin Musa and R. Nithyanand. ATOM: Ad-Network Tomography. Proceedings on Privacy-Enhancing Technologies Symposium. 295–313, 2022.
                         </li>
-                        <li>
+                        <li id='references4'>
                             [4] J. Cook, R. Nithyanand, and Z. Shafiq. Inferring Tracker-Advertiser Relationships in the Online Advertising Ecosystem using Header Bidding. Proceedings on Privacy-Enhancing Technologies Symposium. 65-82, 2020.
                         </li>
-                        <li>
+                        <li id='references5'>
                             [5] Built With. 2023. Available from: https://pro.builtwith.com/report/export/48d5ac51-1c24-4df8-944d-d05b5ff8d032
                         </li>
-                        <li>
+                        <li id='references6'>
                             [6] Enlyft. 2023. Available from: https://enlyft.com/tech/products/googledoubleclick
                         </li>
-                        <li>
+                        <li id='references7'>
                             [7] European ePrivacy Directive. 2011. Available from the European Data Protection Supervisor at: https://edps.europa.eu/data-protection/our-work/subjects/eprivacy-directive_en
                         </li>
-                        <li>
+                        <li id='references8'>
                             [8] A. Ganesh, L. Massoulie, and D. Towsley. The effect of network topology on the spread of epidemics. Proceedings IEEE 24th Annual Joint Conference of the IEEE Computer and Communications Societies. 1455-1466, 2005.
                         </li>
-                        <li>
+                        <li id='references9'>
                             [9] B. Rose. The Commodification of Personal Data and the Road to Consumer Autonomy Through the CCPA. Brooklyn Journal of Corporate, Financial, and Commercial Law. 2021.
                         </li>
-                        <li>
+                        <li id='references10'>
                             [10] P. Rozenshtein, A. Gionis, B.A. Prakash, and J. Vreeken. Reconstructing an Epidemic Over Time. Association for Computing Machinery. 1835–1844, 2016.
                         </li>
-                        <li>
+                        <li id='references11'>
                             [11] N.Samarin, S. Kothari, Z. Siyed, P. Wijesekera, J. Fischer, C. Hoofnagle, and S. Egelman. Investigating the Compliance of Android App Developers with the CCPA. IEEE Security, 2021.
                         </li>
-                        <li>
+                        <li id='references12'>
                             [12] M. Van Nortwick and C. Wilson. Setting the Bar Low: Are Websites Complying with the Minimum Requirements of CCPA. Proceedings on Privacy-Enhancing Technologies Symposium. 2022.
                         </li>
-                        <li>
+                        <li id='references13'>
                             [13] N. Moshiri. The dual-Barabási-Albert model. arXiv physics.soc-ph. 2018.
                         </li>
-                        <li>
+                        <li id='references14'>
                             [14] R. Albert and A. Barabási. Statistical mechanics of complex networks. Reviews of Modern Physics. 1-74(47-97), 2002.
                         </li>
                     </ul>
