@@ -34,8 +34,8 @@ include('../../header.php');
                     <header>
                         <h1>Estimating Flow and Validating Disclosures</h1>
                     </header>
-                    <h2>Introduction</h2>
-                    <h3>Context</h3>
+                    <h2>1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Introduction</h2>
+                    <h3>1.1&nbsp;&nbsp;&nbsp;&nbsp;Context</h3>
                     <p>
                         Online privacy has become an increasingly pressing concern in today’s digital age. As more and more personal information is collected and shared online, users are becoming increasingly aware that their data is used for targeted advertising purposes. Targeted advertising is the practice of using data to personalize advertisements to specific individuals based on their online behaviors, a phenomenon which is often not in the general consumer’s best interest.
                     </p>
@@ -55,19 +55,19 @@ include('../../header.php');
                         While these methodologies are useful, they only propose absolute binary: within the metric they are using to discover communication between advertising entities, relationships exist or do not. Often, these methodologies make conclusions based purely off of the context of the specific study at hand, leading to a fragmented understanding of the targeted advertising ecosystem.
                     </p>
 
-                    <h3>Contributions</h3>
+                    <h3>1.2&nbsp;&nbsp;&nbsp;&nbsp;Contributions</h3>
                     <p>
                         This research proposes a framework in which the results of various privacy studies can be aggregated, in which the degree to which entities share data can be gauged. Within the the proposed framework, these relationships are predicted on a certainty gradient, by a measure of confidence derived from a multi-layer graph. This framework will help provide a more comprehensive understanding of the targeted advertising ecosystem and enable us to assess the potential ramifications more accurately.
                     </p>
                     <p>
                         The proposed framework will build upon current methodologies and their results, providing a more complete understanding of the targeted advertising ecosystem. The findings of this research will be useful for individuals who seek to better understand and navigate the complex world of targeted advertising. Therein, we aim to further decisions regarding privacy and security of user data.
                     </p>
-                    <h3>Road Map</h3>
+                    <h3>1.3&nbsp;&nbsp;&nbsp;&nbsp;Road Map</h3>
                     <p>
                         The paper will begin with an outline of the current landscape of advertising networks: how the networks interact with users, mechanisms to balance the scale of online privacy, and related previous work. Next, the paper will offer background on related technical and legal concepts, definitions, necessary methods, and the technical problems that arise from the proposed framework. To conclude, we propose requirements of a web API which could leverage our research on the user side, discuss validation of our methods, and address limitations and future work.
                     </p>
-                    <h2>Motivation</h2>
-                    <h3>The perimeter of the Black Box</h3>
+                    <h2>2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Motivation</h2>
+                    <h3>2.1&nbsp;&nbsp;&nbsp;&nbsp;The perimeter of the Black Box</h3>
                     <p>
                         Communication within ad networks operate as a black box, with little transparency into their inner workings, rendering detection difficult. Surface features of such networks can be determined by observing the attributes of digital advertising in web browsers. However, such methods do not provide a complete or detailed picture of the routes data travels (see figure 1). These ad networks are built by use of web tracking, which occurs via placement of various mechanisms into the browsing environment that an ad entity can use to track the user.
                     </p>
@@ -95,7 +95,7 @@ include('../../header.php');
                     <p>
                         Fingerprinting along with a push from client-side RTB to serverside are two reactions from advertisers which are emblematic of the privacy arms-race occurring online. These reactionary efforts seek to obfuscate data-sharing; an effort to fortify the perimeter of the black box.
                     </p>
-                    <h3>Inferring Relationships</h3>
+                    <h3>2.2&nbsp;&nbsp;&nbsp;&nbsp;Inferring Relationships</h3>
                     <p>
                         An advertising entity infers what a given user may like to purchase by evaluating their browsing history. This history is important as it allows the examination of patterns of a user’s behavior. These patterns can be used to make the best recommendation given the context of the user. An advertisement mechanism within the black box will likely serve out an advertisement option in which it has the most confidence that the user will engage with.
                     </p>
@@ -114,7 +114,7 @@ include('../../header.php');
                     <p>
                         The apex of this bewildering chain of inference arms-race is encapsulated by a machine learning study which seeks to infer advertising relationships by leveraging online personas. <a href='#references3'>[3]</a> The study blocks individual trackers from a page, then gathers data points which record the change in behavior. It’s not guaranteed that a blocked tracker would have won a RTB auction, so the effect cannot be guaranteed. Site behavior can instead be predicted with a degree of confidence. Thus, the resultant data acts as a training set for a machine learning algorithm, ATOM, which is used to make an inference of a data sharing relationship between an advertiser and a tracker. It does so with a high degree of accuracy compared to a control set.
                     </p>
-                    <h3>User and Regulatory Confidence</h3>
+                    <h3>2.3&nbsp;&nbsp;&nbsp;&nbsp;User and Regulatory Confidence</h3>
                     <p>
                         The tension of obfuscation is something advertising entities have generally been domineering. What they can infer about the user is not reciprocated. Legislation and law is starting to help balance the scale in this regard. Regulations are starting to provide mechanisms for users to ask an advertising entity what exactly it is that they know about a user and who they shared that information with. This provides the user an easier look at the perimeter of the black box. Should they choose, the user can look past the perimeter by following the chain of entities whom the data was shared with and request disclosures from each of them. This can be time consuming and hinges on the entities involved being compliant with the regulations in place.
                     </p>
@@ -133,7 +133,7 @@ include('../../header.php');
                             Figure 2: Network Examples
                         </figcaption>
                     </figure>
-                    <h3>Previous Work</h3>
+                    <h3>2.4&nbsp;&nbsp;&nbsp;&nbsp;Previous Work</h3>
                     <p>
                         Although the current research on technological privacy law is limited, scholars like Christo Wilson, Zubair Shafiq, and Rishab Nithyanand publish bodies of work which delve into the intricacies of data sharing and disclosures, and the field is ever-growing.
                     </p>
@@ -164,8 +164,8 @@ include('../../header.php');
                     <p>
                         The methods in the above papers vary, from observation of advertiser bidding, to tracker blocking, but the papers all focus on the same goal as this work: to explore routes through which data sharing occurs. Another similarity between these related works is the nature of their datasets. Each research group tracks relationships between advertisers, trackers, and data aggregators as binary: the relationship does or doesn’t exist. This work aims to aggregate the varying research methods in the field in a gradient, non-binary manner. We acknowledge that an outside observer cannot be sure where data sharing is occurring, and that these datasets exist on a spectrum of confidence. This auditing framework could be expanded and applied to a large body of datasets to create a true image of the state of internet data-sharing. As a proof of concept, we apply the theory to a small subset of data, addressed in section 4.1.
                     </p>
-                    <h2>Background and Definitions</h2>
-                    <h3>Terminology</h3>
+                    <h2>3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Background and Definitions</h2>
+                    <h3>3.1&nbsp;&nbsp;&nbsp;&nbsp;Terminology</h3>
                     <ul>
                         <li>
                             <i>Personally Identifiable Information (PII)</i>: Information that can identify, or be aggregated to identify, an individual.
@@ -195,7 +195,7 @@ include('../../header.php');
                             <i>Data Proliferation</i>: The expected fraction of entities in an aggregated relationship network to possess personally identifiable information after a network diffusion process.
                         </li>
                     </ul>
-                    <h3>Legal Disclosure Mechanisms</h3>
+                    <h3>3.2&nbsp;&nbsp;&nbsp;&nbsp;Legal Disclosure Mechanisms</h3>
                     <p>
                         Current data regulation laws worldwide are by-in-large modeled after Europe’s General Data Protection Regulation (GDPR), which was established in 2016 and outlines eight rights: the right of access, the right to rectification, the right to erasure, the right to restrict processing, the right to data portability, the right to object, and the right to opt out of automated decision making. These rights enable consumers to access the data that companies collect about them, correct inaccuracies, and remove consent for data-sharing as easily as they provided it. Since the ratification of GDPR, Data Protection Authorities (DPAs) across Europe have levied thousands of warnings and fines to data aggregators.
                     </p>
@@ -211,7 +211,7 @@ include('../../header.php');
                     <p>
                         An individual disclosure from some entity 𝐴 will contain a set of entities 𝐵1, ..., 𝐵𝑛 that 𝐴 claims to have shared data with. It is unlikely that entity 𝐴 will falsely report instances of sharing, that is, we assume to get a negligible amount of false positives. The more likely scenario is that an entity will omit instances of sharing that did happen, so we expect to receive more false negatives than false positives. Therefore, these disclosures may present a pathway for some researchers to explore connections between data aggregators. However, under CCPA, companies can take 45-90 days to share this data, and accuracy and level of detail may vary. This paper presents a different approach to mapping these networks, that could then be compared and audited by CCPA disclosures.
                     </p>
-                    <h3>Graphs/Networks</h3>
+                    <h3>3.3&nbsp;&nbsp;&nbsp;&nbsp;Graphs/Networks</h3>
                     <p>
                         A graph 𝐺 (see figure 3b) refers to an abstract mathematical object describing relationships between a set of nodes 𝑉 through edges 𝐸 between them. The degree of a node refers to how many edges it is connected to. The distribution of these values over the entire graph is known as the degree distribution. For some graphs most of the nodes have similar degrees (a uniform distribution) and for others there may be a few nodes with a high number of edges while the rest have a low degree (power-law distribution). Graphs can be either undirected (edges denote a 2-way connection as in figure 3a) or directed (edges denote a 1-way connection as in figure 3a). A network is what we refer to when we use a graph to model real-world relationships.
                     </p>
@@ -227,16 +227,16 @@ include('../../header.php');
                             Figure 3: Graph examples
                         </figcaption>
                     </figure>
-                    <h3>Network Diffusion Process</h3>
+                    <h3>3.4&nbsp;&nbsp;&nbsp;&nbsp;Network Diffusion Process</h3>
                     <p>
                         A network diffusion process M describes how spreading on networks occurs, such as infections or ideas. In this paper, we focus on the diffusion of data. Given a network 𝐺 = (𝑉 , 𝐸,𝑤) (where 𝑉, 𝐸, and 𝑤 represent nodes, edges, and weights, respectively), and an initial set of nodes which possess some personally identifiable information, a network diffusion process is defined by a set of rules which govern how the data is shared and which nodes will ultimately possess that data.
                     </p>
                     <p>
                         As an example, one such process can be defined by the independent cascade model. Let 𝐺 = (𝑉 , 𝐸) be a directed graph with node set 𝑉 and edge set 𝐸. We have a set V ⊆ 𝑉 of initially activated nodes. For this process, once a node is activated it cannot revert to being inactive. After the initial activation, we define discrete time steps 𝑡 for which the process will progress. We define the end of a diffusion process to be when no additional nodes can be activated. After a given diffusion process finishes, 𝜎(V) denotes the number of nodes we expect to be activated given the initially activated nodes V. Since these diffusion models are stochastic, 𝜎(V) is the expectation of a random variable. We will revisit this concept and its relevance in section 4.7.
                     </p>
-                    <h2>Materials and Methods</h2>
-                    <h3>Data</h3>
-                    <h4>Cookie Disclosure Datasets</h4>
+                    <h2>4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Materials and Methods</h2>
+                    <h3>4.1&nbsp;&nbsp;&nbsp;&nbsp;Data</h3>
+                    <h4>4.1.1&nbsp;&nbsp;&nbsp;Cookie Disclosure Datasets</h4>
                     <p>
                         In 2011, the European ePrivacy Directive (Directive 2009/136/EC), colloquially known as the cookie law, was enacted in Europe. It requires accessible and thorough cookie disclosures from all companies collecting data in the EU, and effectively mandates companies list the types of cookies or actual cookies they use. <a href='#references7'>[7]</a>
                     </p>
@@ -254,15 +254,15 @@ include('../../header.php');
                     <p>
                         In this work, we performed a small scrape of these cookie policies, starting with Microsoft.com, then iterating through Microsoft’s declared cookie-sharing partners to find their cookie tables. With this method, we were able to identify 606 entity relationships across 32 data aggregators including Microsoft, Amazon, Adobe, Ziprecruiter, Taboola, MediaMath, Uber, and Twitter. Moreover, this method provided us with clean, standardized data as a base for the more complex research datasets we also examined.
                     </p>
-                    <h4>Synthetic Data</h4>
+                    <h4>4.1.2&nbsp;&nbsp;&nbsp;Synthetic Data</h4>
                     <p>
                         We also outline a method to generate synthetic datasets that mimic the degree distributions of previous datasets we have inspected in section 4.2.2.
                     </p>
-                    <h3>Data Processing</h3>
+                    <h3>4.2&nbsp;&nbsp;&nbsp;&nbsp;Data Processing</h3>
                     <p>
                         The purpose of processing data into a network is to enable us to solve computational problems using those relationships.
                     </p>
-                    <h4>Cookie Disclosure Datasets</h4>
+                    <h4>4.2.1&nbsp;&nbsp;&nbsp;Cookie Disclosure Datasets</h4>
                     <p>
                         We process these datasets simply by taking the union of each graph. They are currently unweighted, so we only seek to connect each disclosure together. Some of these individual networks are shown in figure 4 and the aggregated network is shown in figure 5.
                     </p>
@@ -284,7 +284,7 @@ include('../../header.php');
                             Figure 6: Aggregated network degree distribution
                         </figcaption>
                     </figure>
-                    <h4>Synthetic Data</h3>
+                    <h4>4.2.2&nbsp;&nbsp;&nbsp;Synthetic Data</h3>
                     <p>
                         We use the dual-Barabási-Albert model <a href='#references13'>[13]</a> with parameters 𝑚1 = 3, 𝑚2 = 1, and 𝑝 = 0.3. We use this model to mimic the nature of datasets inspected so far, which have a highlyconnected core and many degree-1 nodes branching out. In this model, we start with max(𝑚1,𝑚2) nodes. We then iteratively add the remaining nodes one at a time, with probability 𝑝 of having 𝑚1 edges and probability 1 − 𝑝 of having 𝑚2 edges added according to the Barabási-Albert model <a href='#references14'>[14]</a> resulting in a "ground truth" graph 𝐺. We then proceed in two phases:
                     </p>
@@ -314,7 +314,7 @@ include('../../header.php');
                         </ol>
                         We are left with a set of synthetic entity relationship networks 𝐺<sub>𝑆𝑌𝑁</sub> = {𝐺′<sub>1</sub>, ...,𝐺′<sub>𝑘</sub>}.
                     </p>
-                    <h3>Aggregating Entity Relationship Networks</h3>
+                    <h3>4.3&nbsp;&nbsp;&nbsp;&nbsp;Aggregating Entity Relationship Networks</h3>
                     <p>
                         The following section defines the main component of our framework: a mathematical approach to combine multiple networks into one multi-layer graph that gives a confidence scores for each edge.
                     </p>
@@ -344,7 +344,7 @@ include('../../header.php');
                             Figure 7: Aggregation example of 5 relationship entity graphs with 3 nodes.
                         </figcaption>
                     </figure>
-                    <h4>Comparison of Potential Aggregation Functions</h4>
+                    <h4>4.3.1&nbsp;&nbsp;&nbsp;Comparison of Potential Aggregation Functions</h4>
                     <p>
                         Once we have a standardized confidence score provided by the functions 𝑓<sub>𝑘</sub>(·) (described in section 4.3.2), we have many choices for the aggregation function agg(·). Let 𝑓<sub>𝑘</sub>(𝐺<sub>𝑘</sub>) denote the function mapping every edge weight in the edge set of 𝐺<sub>𝑘</sub> to a standardized confidence score.
                         <ul>
@@ -359,7 +359,7 @@ include('../../header.php');
                             </li>
                         </ul>
                     </p>
-                    <h4>Parameterized 𝑓<sub>𝑘</sub></h4>
+                    <h4>4.3.2&nbsp;&nbsp;&nbsp;Parameterized 𝑓<sub>𝑘</sub></h4>
                     <p>
                          The weight 𝑤<sub>𝑢𝑣</sub> for each network layer must be described. A confidence scoring must be given with respect to the source of the network. Currently, the primary source of these discovered networks is via academic study such as those discussed in related works. Another source is via disclosure policy afforded by regulation.
                     </p>
@@ -390,7 +390,20 @@ include('../../header.php');
                     <p>
                         To define these sets is another combinatorics problem which requires more insight into the ecosystem at play. To gain this insight requires further study which constrains the control to garner reaction on a tighter range of features. Insight can also be gained by the inclusion of more datasets as network layers which will help provide a correlation between various subsets of features and thus improving confidence overall. How a given network layer chooses to define some weight 𝑤<sub>𝑢𝑣</sub> needs to consider all these factors in order to help an aggregated network have optimal confidence.
                     </p>
-                    <h3>Disclosure Reliability Analysis</h3>
+                    <h3>4.4&nbsp;&nbsp;&nbsp;&nbsp;Disclosure Reliability Analysis</h3>
+                    <p>
+                        As described above in section 3.2, there exist legal frameworks that require entities to disclose information to individuals about the possession and sharing activity of personal information, such as GDPR or CCPA right to access. Although individuals can contact data protection authorities in Europe to verify GDPR right to access requests, that can be time consuming. In the US, enforcement is limited or non-existent, and no such auditing framework exists.
+                    </p>
+                    <p>
+                        An individual with an incomplete right to access disclosure or one with dubious veracity given to them has no recourse. How can they verify the declared third-party sharing of their data is accurate or complete? This motivates the question of how to validate and audit individual disclosures, i.e., determine whether the company is omitting details.
+                    </p>
+                    <p>
+                        We assume that false disclosures will only exhibit false negatives, i.e., the entity is not telling the whole truth. Our proposed framework can expose some of these instances of non-compliance. One such example would be if a disclosure reveals wide-spread data sharing, but is missing some entities which share high-confidence relationships with the original data aggregator.
+                    </p>
+                    <p>
+                        Using the aggregated relationship network described in section 4.3, we may compare the set of expected data sharing instances with the set of reported instances.
+                    </p>
+                    <h3>4.5&nbsp;&nbsp;&nbsp;&nbsp;Observing Missing Data Transmission Links</h3>
                     <p>
                         Suppose we observe the presence of an individual’s personal data possessed by a set of entities within the aggregated relationship network, where the data was only given to a proper subset of those entities. If the nodes in which we observe that possession are not directly connected by edges, how did the data flow between them?
                     </p>
@@ -415,7 +428,7 @@ include('../../header.php');
                     <p>
                         We acknowledge this is a simplification of any actual algorithms that may be developed since the minimum steiner tree problem is known to be NP-hard <a href='#references10'>[10]</a>. The context of the problem is extremely relevant in the development of approximation algorithms in this setting. Approximate solutions must not generate trees that are extremely unlikely given the terminals, so approximation guarantees are necessary to establish confidence in any solutions.
                     </p>
-                    <h3>Additional Relationship Inferrence</h3>
+                    <h3>4.6&nbsp;&nbsp;&nbsp;&nbsp;Additional Relationship Inferrence</h3>
                     <p>
                         In order to bolster our existing network, we may infer additional sharing relationships using the output we generate in section 4.5. This application is less broad, but we illustrate it through an example below.
                     </p>
@@ -453,7 +466,7 @@ include('../../header.php');
                             </li>
                         </ol>
                     </p>
-                    <h3>Estimating Proliferation Risk Given Initial Entry Points</h4>
+                    <h3>4.7&nbsp;&nbsp;&nbsp;&nbsp;Estimating Proliferation Risk Given Initial Entry Points</h4>
                     <p>
                         If you are a consumer considering giving a certain piece of personally identifiable information to a company, how would you know the risk that entails? Assuming you are aware of the general privacy risks of sharing data, how can you make an informed decision about how much to share? By analyzing the output of network diffusion models over an aggregated relationship network, we may gather estimates about how prolifically that data will spread dependent upon where it is added into the network. In this setting, we hypothesize that the level of proliferation is highly dependent upon the topology of the network, such as in Ganesh <i>et. al</i> <a href='#references8'>[8]</a>.
                         <ul>
@@ -466,7 +479,7 @@ include('../../header.php');
                         </ul>
                         One way to model this diffusion process is to convert the edge weights to be interpreted as probabilities and run an independent cascade simulation over it.
                     </p>
-                    <h2>Translation to consumer-facing API</h2>
+                    <h2>5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Translation to consumer-facing API</h2>
                     <p>
                         For this framework to provide a viable effect as an auditing tool to compare hypothesized data spread, it must exist in a user-interface. We propose a web app with an API that would allow for simple interaction between individuals and the proposed framework (see figure 10).
                     </p>
@@ -494,12 +507,12 @@ include('../../header.php');
                     <p>
                         It should be noted that different types of representations could also be conceived, such as desktop or mobile application, however a web app would have the lowest barrier to entry both in terms of development and usage.
                     </p>
-                    <h2>Verification of methods</h2>
+                    <h2>6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification of methods</h2>
                     <p>
                         Since an actual ground truth (see section 7.1) concerning how data spreads, (which may not be viably represented given the complexity of the process), methods like the ones discussed in this paper will likely never be able to be thoroughly validated, but they may be able to garner insight into some of the dynamics of aggregated relationship networks. One method of validating our methods would be to generate a synthetic "ground truth" network as well as a set of synthetic individual entity relationship as described in section 4.2.2. Solutions to our problems would then be compared to the behavior of data spread in the ground truth network.
                     </p>
-                    <h2>Discussion</h2>
-                    <h3>Limitations</h3>
+                    <h2>7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discussion</h2>
+                    <h3>7.1&nbsp;&nbsp;&nbsp;&nbsp;Limitations</h3>
                     <p>
                         The ground truth, what is occurring in the real world, versus the aggregated relationship graph is a main point of contention when discussing this framework. The real world contexts in which the framework can be used is limited, however as a general tool for individuals and researchers to gauge a measure confidence it can be highly effective. This is obviously dependent on the data that is used within the framework.
                     </p>
@@ -512,7 +525,7 @@ include('../../header.php');
                     <p>
                         The precision of the confidence score ultimately relies upon the given data. Creating a precise network with representative confidence scores is only possible by developing methods that extract the obfuscated information from the black box that is in the middle of an-arms race. With increasing legislation, required disclosures, and a growing number of researchers devising methods to gather this information, it seems that the proposed confidence scores, and in turn the framework, will have great utility.
                     </p>
-                    <h3>Possible Extensions</h3>
+                    <h3>7.2&nbsp;&nbsp;&nbsp;&nbsp;Possible Extensions</h3>
                     <p>
                         A natural extension of this project would be to increase the types of data the framework can work with. Similar to the idea discussed in section 5, allowing data to be supplied by means of an API that accepts different types of files would help by making any work done with the framework much more streamlined. Ideally, this should allow both individual data points and data sets. Beyond this, allowing data that isn’t binary and weighing it appropriately, similar to the binary relationships, would help when more detailed information about relationships is available.
                     </p>
@@ -564,14 +577,14 @@ include('../../header.php');
                             [14] R. Albert and A. Barabási. Statistical mechanics of complex networks. Reviews of Modern Physics. 1-74(47-97), 2002.
                         </li>
                     </ul>
-                    <section class='info'>
+                    <!--section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
                         <p>
 
                         </p>
                         <hr>
-                    </section>
+                    </section-->
                 </article>
                 <nav>
                     <a href='../'>Back</a>
