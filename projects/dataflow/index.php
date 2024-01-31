@@ -71,8 +71,8 @@ include('../../header.php');
                     <p>
                         Communication within ad networks operate as a black box, with little transparency into their inner workings, rendering detection difficult. Surface features of such networks can be determined by observing the attributes of digital advertising in web browsers. However, such methods do not provide a complete or detailed picture of the routes data travels (see figure 1). These ad networks are built by use of web tracking, which occurs via placement of various mechanisms into the browsing environment that an ad entity can use to track the user.
                     </p>
-                    <figure>
-                        <img>
+                    <figure class='graph'>
+                        <img src='../../images/black_box_diagram.png'>
                         <figcaption>
                             Figure 1: The advertising network black box exists as part of a system that interacts with the user by means of their interaction with a web platform as an input and advertisements for that user as an output.
                         </figcaption>
@@ -127,9 +127,20 @@ include('../../header.php');
                     <p>
                         The visual tool will estimate data flow and help validate disclosure. It will present confidence of inference by presenting the advertising entities within a graph such that the context the user provides will cluster entities who are likely communicating the user’s information (see figure 2b). This paper will formalize such a tool. Formalization requires the definition of the concepts in the next section.
                     </p>
-                    <figure>
-                        <img>
-                        <figcaption>
+                    <figure class='fig-col'>
+                        <figure class='graph'>
+                            <img src='../../images/random_network.png' style='max-width:200px;'>
+                            <figcaption>
+                                (a) Conceptual slice of the discovered advertising network.
+                            </figcaption>
+                        </figure>
+                        <figure class='graph'>
+                            <img src='../../images/scale_free_network.png' style='max-width:200px;'>
+                            <figcaption>
+                                (b) A concept of the network processed through the tool.
+                            </figcaption>
+                        </figure>
+                        <figcaption style='clear:both;text-align:center;padding-top:5px;font-weight:bold;'>
                             Figure 2: Network Examples
                         </figcaption>
                     </figure>
@@ -221,10 +232,21 @@ include('../../header.php');
                     <p>
                         For example, suppose we wish to represent two different relationships between entities. Edges in the first layer represent entities that have been inferred to share data, such as in Bashir, et. al. <a href='#references2'>[2]</a>. Edges in the second layer are to be based on corporation ownership data (e.g., Lexus is owned by Toyota). Therefore, a multi-layer graph can represent the same companies, but express a distinction between different varieties of company relationships or, as we will propose, varying confidence that a relationship exists.
                     </p>
-                    <figure>
-                        <img>
-                        <figcaption>
-                            Figure 3: Graph examples
+                    <figure class='fig-col'>
+                        <figure class='graph'>
+                            <img src='../../images/multi-layered-graph.png' style='max-width:200px;'>
+                            <figcaption>
+                                (a) Multi-layer graph with 4 nodes and 2 layers.
+                            </figcaption>
+                        </figure>
+                        <figure class='graph'>
+                            <img src='../../images/multi-layered-graph-weights.png' style='max-width:200px;'>
+                            <figcaption>
+                                (b) Weighted and directed graph with 4 nodes and 5 edges.
+                            </figcaption>
+                        </figure>
+                        <figcaption style='clear:both;text-align:center;padding-top:5px;font-weight:bold;'>
+                            Figure 3: Graph examples.
                         </figcaption>
                     </figure>
                     <h3>3.4&nbsp;&nbsp;&nbsp;&nbsp;Network Diffusion Process</h3>
@@ -241,11 +263,43 @@ include('../../header.php');
                         In 2011, the European ePrivacy Directive (Directive 2009/136/EC), colloquially known as the cookie law, was enacted in Europe. It requires accessible and thorough cookie disclosures from all companies collecting data in the EU, and effectively mandates companies list the types of cookies or actual cookies they use. <a href='#references7'>[7]</a>
                     </p>
                     <p>
-                        Many data aggregators therefore have a section of their site with their legal documents or privacy policy containing a cookie-table or cookie-policy (see figure 1). Some companies further provide a list of companies with which they share third-party cookies for advertising or data-tracking purposes.
+                        Many data aggregators therefore have a section of their site with their legal documents or privacy policy containing a cookie-table or cookie-policy (see Table 1). Some companies further provide a list of companies with which they share third-party cookies for advertising or data-tracking purposes.
                     </p>
                     <figure>
+                        <table style='background-color:#f1f1f1;padding:5px;'>
+                            <thead>
+                                <tr>
+                                    <th>Cookies</th>
+                                    <th>Domain</th>
+                                    <th>Descritpion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>_gads</td>
+                                    <td>www.google.com</td>
+                                    <td>
+                                        This cookie is associated with the DoubleClick for Publisher service from Google. Its purpose is to do with the showing of adverts on the site, for which the owner may earn some revenue.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>_uin_an, _uin</td>
+                                    <td>sonobi.com</td>
+                                    <td>
+                                        This cookie is owned by Sonobi, an automated audience buying and selling platform for online advertising.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>_cc_aud</td>
+                                    <td>www.lotame.com</td>
+                                    <td>
+                                        This domain is owned by Lotame. The main business activity is: Data Management Platform - Targeting/Advertising.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <figcaption>
-                            Table 1: Microsoft advertiser cookie disclosure table.
+                            Table 1: Advertiser cookie disclosure table provided by Microsoft.
                         </figcaption>
                     </figure>
                     <p>
