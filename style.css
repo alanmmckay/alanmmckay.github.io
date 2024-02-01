@@ -334,6 +334,27 @@ ul.filelist li{
     text-align:left;
 }*/
 
+#writingsWrapper table{
+    width:100%;
+    border-collapse:collapse;
+    padding:5px;
+}
+
+#writingsWrapper table tbody tr td{
+    padding:10px;
+    padding-bottom:15px;
+    padding-top:15px;
+}
+
+#writingsWrapper table tbody tr td.table-description{
+    display:block;
+    overflow-y:scroll;
+    scrollbar-gutter: stable;
+    text-align:left;
+    max-height:4em;
+    border-bottom: 1px solid #999DA1;
+}
+
 code pre.code{
     overflow:scroll;
     background-color:#f2f2f2;
@@ -576,26 +597,7 @@ code pre.info-code{
 }
 
 @media screen and (max-width:400px){
-    div.slide-deck{
-        display:none;
-    }
 
-    code pre.code{
-        min-width:260px;
-    }
-
-    code pre.info-code{
-        min-width:230px
-    }
-
-    blockquote{
-        width:95%;
-        margin:0px;
-        margin-bottom:10px;
-    }
-}
-
-@media screen and (max-width:300px){
     body{
         width:100%;
     }
@@ -614,6 +616,23 @@ code pre.info-code{
         /*list-style-type:none;*/
         margin-left:20px;
     }
+
+    code pre.code{
+        min-width:260px;
+    }
+
+    code pre.info-code{
+        min-width:230px
+    }
+
+    blockquote{
+        width:95%;
+        margin:0px;
+        margin-bottom:10px;
+    }
+}
+
+@media screen and (max-width:300px){
 
     #writingsWrapper div.aside figure.responsive_aside{
         width:80%;
