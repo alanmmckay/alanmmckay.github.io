@@ -320,21 +320,56 @@ include('../../header.php');
                     <p>
                         We process these datasets simply by taking the union of each graph. They are currently unweighted, so we only seek to connect each disclosure together. Some of these individual networks are shown in figure 4 and the aggregated network is shown in figure 5.
                     </p>
-                    <figure>
-
-                        <figcaption>
+                    <figure class='fig-col'>
+                        <figure class='graph'>
+                            <img src='graphs/cbre.png' style='max-width:250px;'>
+                            <figcaption>
+                                CBRE
+                            </figcaption>
+                        </figure>
+                        <figure class='graph'>
+                            <img src='graphs/all-live-doubleclick-sites.png' style='max-width:250px;'>
+                            <figcaption>
+                                All-Live_DoubleClick.Net-Sites
+                            </figcaption>
+                        </figure>
+                        <figure class='graph'>
+                            <img src='graphs/linkedin.png' style='max-width:250px;'>
+                            <figcaption>
+                                Linkedin
+                            </figcaption>
+                        </figure>
+                        <figure class='graph'>
+                            <img src='graphs/microsoft.png' style='max-width:250px;'>
+                            <figcaption>
+                                Microsoft
+                            </figcaption>
+                        </figure>
+                        <figure class='graph'>
+                            <img src='graphs/roundup.png' style='max-width:250px;'>
+                            <figcaption>
+                                Roundup
+                            </figcaption>
+                        </figure>
+                        <figure class='graph'>
+                            <img src='graphs/roundup2.png' style='max-width:250px;'>
+                            <figcaption>
+                                Roundup2
+                            </figcaption>
+                        </figure>
+                        <figcaption style='clear:both;text-align:center;padding-top:5px;font-weight:bold;'>
                             Figure 4: Individual networks
                         </figcaption>
                     </figure>
                     <figure>
-
-                        <figcaption>
+                        <img src='graphs/gagg.png' style='max-width:350px;'>
+                        <figcaption style='clear:both;text-align:center;padding-top:5px;font-weight:bold;'>
                             Figure 5: Aggregated network
                         </figcaption>
                     </figure>
                     <figure>
-
-                        <figcaption>
+                        <img src='graphs/gagg_degreedist.png' style='max-width:350px;'>
+                        <figcaption style='clear:both;text-align:center;padding-top:5px;font-weight:bold;'>
                             Figure 6: Aggregated network degree distribution
                         </figcaption>
                     </figure>
@@ -393,8 +428,8 @@ include('../../header.php');
                         Suppose we obtain five datasets, three of which connect Company A to Company B, and two of which connect Company A to Company B but not to Company C. Each dataset could represent its own relationship graph. However, all five could be combined into one aggregated relationship network (illustrated in figure 7). We propose the above method to weight the edges representing relationships between entities to encapsulate that we cannot know with certainty whether data sharing is occurring.
                     </p>
                     <figure>
-                        <img>
-                        <figcaption>
+                        <img src='graphs/agg_reg.png' style='max-width:450px;'>
+                        <figcaption style='clear:both;text-align:center;padding-top:5px;font-weight:bold;'>
                             Figure 7: Aggregation example of 5 relationship entity graphs with 3 nodes.
                         </figcaption>
                     </figure>
@@ -427,8 +462,45 @@ include('../../header.php');
                         Given some <i>&lt;Persona&gt;</i>, an <i>&lt;Entity&gt;</i> will seek to find a match to some subset of <i>&lt;Demographics&gt;</i> in combination with a subset of <i>&lt;Content Categories&gt;</i>, (of which a <i>&lt;Persona&gt;</i> is also defined as the combination of these two subsets.) Which features can be used to infer these combinations? The answer to this question is discovered by tracing the the possible productions of the grammar given in Table 2. Each non-terminal used in a production plays a role in strengthening the confidence of the production; something which is required for developing a confident weight 𝑤<sub>𝑢𝑣</sub>.
                     </p>
                     <figure>
+                        <code>
+                            <pre class='code info-code' style='margin:auto;'>
+        &lt;Aggregation&gt; :: (&lt;Personas&gt; | &lt;Devices&gt;)
+                         &lt;Platforms&gt;
 
-                        <figcaption>
+           &lt;Personas&gt; :: &lt;Persona&gt; &lt;Personas&gt; | ∅
+
+            &lt;Persona&gt; :: &lt;Browsing History&gt;
+                         &lt;Disclosure History&gt;
+
+   &lt;Browsing History&gt; :: &lt;Platforms&gt; &lt;Devices&gt;
+
+          &lt;Platforms&gt; :: &lt;Platform&gt; &lt;Platforms&gt; | ∅
+
+           &lt;Platform&gt; :: &lt;Target Demographics&gt;
+                         &lt;Content Categories&gt;
+                         &lt;Entities&gt; &lt;Devices&gt;
+
+            &lt;Devices&gt; :: &lt;Device&gt; &lt;Devices&gt; | ∅
+
+             &lt;Device&gt; :: &lt;Hardware&gt; &lt;Software&gt;
+
+           &lt;Entities&gt; :: &lt;Entity&gt; &lt;Entities&gt;
+
+             &lt;Entity&gt; :: &lt;Tracker&gt; | &lt;Advertiser&gt; |
+                         &lt;Platform&gt; | ∅
+
+            &lt;Tracker&gt; :: &lt;Target Demographics&gt;
+                         &lt;Content Categories&gt;
+
+         &lt;Advertiser&gt; :: &lt;Target Demographics&gt;
+                         &lt;Content Categories&gt;
+
+&lt;Target Demographics&gt; :: &lt;Demographic&gt; &lt;Demographics&gt;
+
+       &lt;Demographics&gt; :: &lt;Demographic&gt; &lt;Demographics&gt; | ∅
+                            </pre>
+                        </code>
+                        <figcaption style='clear:both;text-align:center;padding-top:5px;font-weight:bold;'>
                             Table 2: Interplay of Entities and Persona can be surmised using BNF notation. <i>&lt;Aggregation&gt;</i> is representative of the means in which inferences can be made: via research or disclosure.
                         </figcaption>
                     </figure>
@@ -486,12 +558,19 @@ include('../../header.php');
                     <p>
                         In order to bolster our existing network, we may infer additional sharing relationships using the output we generate in section 4.5. This application is less broad, but we illustrate it through an example below.
                     </p>
+                    <div class='aside' style='margin:0px;'>
+                    <figure>
+                        <img src='graphs/aern_5x5.png'>
+                        <figcaption style='clear:both;text-align:center;padding-top:5px;'>
+                            Figure 8: Example aggregate entity relationship network with 5 nodes and 5 edges.
+                        </figcaption>
+                    </figure>
                     <p>
                         Return to the case of five datasets compiled into one aggregated entity relationship network, as below, but this time with five nodes, 𝑉 = {𝐴, 𝐵,𝐶, 𝐷, 𝐸}, with an edge set {𝐸<sub>1</sub>, 𝐸<sub>2</sub>, 𝐸<sub>3</sub>, 𝐸<sub>4</sub>, 𝐸<sub>5</sub>} = {(𝐴, 𝐵, 0.6), (𝐵, 𝐷, 0.9), (𝐴,𝐶, 0.1), (𝐶, 𝐷, 0.1), (𝐶, 𝐸, 0.1)} as seen in figure 8.
                     </p>
-                    <figure>
-                        <img>
-                        <figcaption>
+                    <figure class='responsive_aside' style='max-width:400px;'>
+                        <img src='graphs/aern_5x5.png' style='max-width:200px;'>
+                        <figcaption style='clear:both;text-align:center;padding-top:5px;font-weight:bold;'>
                             Figure 8: Example aggregate entity relationship network with 5 nodes and 5 edges.
                         </figcaption>
                     </figure>
@@ -501,14 +580,27 @@ include('../../header.php');
                     <p>
                         However, they could further reexamine the confidence network, with the new data point that they have just witnessed of spread from Company A to Company D. This section of the research inquiry suggests that a framework of aggregated relationship networks could account for an evolution of confidence scores as new data becomes available. Perhaps a researcher could now infer a higher strength of relationship between Companies A and B and B and D, having witnessed real data spread between the two.
                     </p>
-                    <figure>
-                        <figcaption>
-                            Figure 9: Examples of data injected into networks.
-                        </figcaption>
-                    </figure>
+                    </div>
                     <p>
                         A more stark example appears in the below 𝐹𝑖𝑔𝑢𝑟𝑒 (𝑏), with an edge set with an edge set {𝐸1, 𝐸2, 𝐸3, 𝐸4, 𝐸5} = {(𝐴, 𝐵, 0.4), (𝐵, 𝐷, 0.4), (𝐴,𝐶, 0.4), (𝐶, 𝐷, 0.1), (𝐶, 𝐸, 0.1)}. This represents an individual providing data to Company A, and at some later time, receiving an inquiry from Company E. Again, data spread has occurred between Company A and Company E through some path, but in this case, working from the current known networks, a researcher could infer that Company C passed the data to Company E and that Company C holds the data. The researcher can also be more confident that the data travelled the blue route through Company C, and dismiss the purple route with more confidence.
                     </p>
+                    <figure class='fig-col'>
+                        <figure class='graph'>
+                            <img src='graphs/saern01.png' style='max-width:200px;'>
+                            <figcaption>
+                                (a) Path tracking of data from primary source 𝐴 to final source 𝐷.
+                            </figcaption>
+                        </figure>
+                        <figure class='graph'>
+                            <img src='graphs/saern02.png' style='max-width:200px;'>
+                            <figcaption>
+                                (b) Path tracking of data from primary source 𝐴 to final source 𝐸.
+                            </figcaption>
+                        </figure>
+                        <figcaption style='clear:both;text-align:center;padding-top:5px;font-weight:bold;'>
+                            Figure 9: Examples of data injected into networks.
+                        </figcaption>
+                    </figure>
                     <p>
                         In this example, it seems that the data was shared from Company A to Company C to Company E. Previously, the relationship network had assigned a low confidence score to the relationships between each of these node. With the new information of data spread from Company C to Company E, the relationship network could be altered in two ways:
                         <ol>
