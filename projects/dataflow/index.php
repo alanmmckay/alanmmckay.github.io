@@ -630,8 +630,8 @@ include('../../header.php');
                         For this framework to provide a viable effect as an auditing tool to compare hypothesized data spread, it must exist in a user-interface. We propose a web app with an API that would allow for simple interaction between individuals and the proposed framework (see figure 10).
                     </p>
                     <figure>
-                        <img>
-                        <figcaption>
+                        <img src='graphs/disclosure_ui.png' style='border:solid 3px #CCCCCC'>
+                        <figcaption style='clear:both;text-align:center;padding-top:5px;font-weight:bold;'>
                             Figure 10: Possible mock wireframe of a user interface interacting with an API for the proposed relation network auditing framework.
                         </figcaption>
                     </figure>
