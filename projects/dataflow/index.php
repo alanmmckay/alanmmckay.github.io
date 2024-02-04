@@ -260,7 +260,7 @@ include('../../header.php');
                     <h3>4.1&nbsp;&nbsp;&nbsp; Data</h3>
                     <h4>4.1.1&nbsp;&nbsp; Cookie Disclosure Datasets</h4>
                     <p>
-                        In 2011, the European ePrivacy Directive (Directive 2009/136/EC), colloquially known as the cookie law, was enacted in Europe. It requires accessible and thorough cookie disclosures from all companies collecting data in the EU, and effectively mandates companies list the types of cookies or actual cookies they use. <a href='#references7'>[7]</a>
+                        In 2011, the European ePrivacy Directive (Directive 2009/136/EC), colloquially known as the cookie law, was enacted in Europe. It requires both accessible and thorough cookie disclosures from all companies collecting data within the EU, and effectively mandates companies list the types of cookies or actual cookies they use. <a href='#references7'>[7]</a>
                     </p>
                     <p>
                         Many data aggregators therefore have a section of their site with their legal documents or privacy policy containing a cookie-table or cookie-policy (see Table 1). Some companies further provide a list of companies with which they share third-party cookies for advertising or data-tracking purposes.
@@ -303,14 +303,14 @@ include('../../header.php');
                         </figcaption>
                     </figure>
                     <p>
-                        This data is limited by the fact that it relies on companies to self-disclose, but is easily accessible for the sake of a proof of concept graph. By web scraping for cookie-policies and tracking the standardized formatting and language of the cookie disclosure tables, we can obtain lists of data sharing relationships between data aggregators.
+                        This data is limited by the fact that it relies on companies to self-disclose, but is easily accessible for the sake of a proof of concept graph. By web scraping for cookie-policies and tracking the standardized formatting and language of the cookie disclosure tables, lists of data sharing relationships between data aggregators can be obtained.
                     </p>
                     <p>
-                        In this work, we performed a small scrape of these cookie policies, starting with Microsoft.com, then iterating through Microsoft’s declared cookie-sharing partners to find their cookie tables. With this method, we were able to identify 606 entity relationships across 32 data aggregators including Microsoft, Amazon, Adobe, Ziprecruiter, Taboola, MediaMath, Uber, and Twitter. Moreover, this method provided us with clean, standardized data as a base for the more complex research datasets we also examined.
+                        In this work, a small scrape of these cookie policies was performed. This started with Microsoft.com, then by iterating through Microsoft’s declared cookie-sharing partners to find their cookie tables. With this method, 606 entity relationships across 32 data aggregators were identified. This includes Microsoft, Amazon, Adobe, Ziprecruiter, Taboola, MediaMath, Uber, and Twitter. Moreover, this method provided clean, standardized data as a base for the more complex research datasets tht were also examined.
                     </p>
                     <h4>4.1.2&nbsp;&nbsp; Synthetic Data</h4>
                     <p>
-                        We also outline a method to generate synthetic datasets that mimic the degree distributions of previous datasets we have inspected in section 4.2.2.
+                        A method to generate synthetic datasets that mimic the degree distributions of previous datasets is outlined in section 4.2.2.
                     </p>
                     <h3>4.2&nbsp;&nbsp;&nbsp; Data Processing</h3>
                     <p>
@@ -318,7 +318,7 @@ include('../../header.php');
                     </p>
                     <h4>4.2.1&nbsp;&nbsp; Cookie Disclosure Datasets</h4>
                     <p>
-                        We process these datasets simply by taking the union of each graph. They are currently unweighted, so we only seek to connect each disclosure together. Some of these individual networks are shown in figure 4 and the aggregated network is shown in figure 5.
+                        These datasets are processed simply by taking the union of each graph. They are currently unweighted, so we only seek to connect each disclosure. Some of these individual networks are shown in figure 4 and the aggregated network is shown in figure 5.
                     </p>
                     <figure class='fig-col'>
                         <figure class='graph'>
@@ -375,13 +375,13 @@ include('../../header.php');
                     </figure>
                     <h4>4.2.2&nbsp;&nbsp; Synthetic Data</h3>
                     <p>
-                        We use the dual-Barabási-Albert model <a href='#references13'>[13]</a> with parameters 𝑚1 = 3, 𝑚2 = 1, and 𝑝 = 0.3. We use this model to mimic the nature of datasets inspected so far, which have a highlyconnected core and many degree-1 nodes branching out. In this model, we start with max(𝑚1,𝑚2) nodes. We then iteratively add the remaining nodes one at a time, with probability 𝑝 of having 𝑚1 edges and probability 1 − 𝑝 of having 𝑚2 edges added according to the Barabási-Albert model <a href='#references14'>[14]</a> resulting in a "ground truth" graph 𝐺. We then proceed in two phases:
+                        The dual-Barabási-Albert model <a href='#references13'>[13]</a> is used with parameters 𝑚<sub>1</sub> = 3, 𝑚<sub>2</sub> = 1, and 𝑝 = 0.3. This model is used to mimic the nature of the datasets inspected so far, which have a highlyconnected core and many degree-1 nodes branching out. In this model, a max(𝑚<sub>1</sub>,𝑚<sub>2</sub>) nodes are intially considered. The remaining are iteratively added one at a time, with probability 𝑝 of having 𝑚<sub>1</sub> edges and probability 1 − 𝑝 of having 𝑚<sub>2</sub> edges added according to the Barabási-Albert model <a href='#references14'>[14]</a> resulting in a "ground truth" graph 𝐺. We then proceed in two phases:
                     </p>
                     <p>
-                        <u>Phase 1</u>: We begin by removing 𝑁<sub>𝑝1</sub> (determined by sampling from a uniform distribution in a given range) nodes and 𝐸<sub>𝑝1</sub> edges from 𝐺, resulting in 𝐺′. We then assign weights 𝑤<sub>𝑖𝑗</sub> ∈ [1, 10] sampled from a Pareto distribution to each edge in 𝐺′.
+                        <u>Phase 1</u>: Begin by removing 𝑁<sub>𝑝1</sub> (determined by sampling from a uniform distribution in a given range) nodes and 𝐸<sub>𝑝1</sub> edges from 𝐺, resulting in 𝐺′. Then assign weights 𝑤<sub>𝑖𝑗</sub> ∈ [1, 10] sampled from a Pareto distribution to each edge in 𝐺′.
                     </p>
                     <p>
-                        Phase 2: Stemming from 𝐺′, we produce a set of 𝐾 networks. Foreach network initialized to 𝐺′<sub>𝑘</sub> ← 𝐺′, perform the following:
+                        Phase 2: Stemming from 𝐺′, produce a set of 𝐾 networks. Foreach network initialized to 𝐺′<sub>𝑘</sub> ← 𝐺′, perform the following:
                         <ol>
                             <li>
                                 Choose 𝑁<sub>𝑝2</sub> nodes uniformly at random to remove from 𝐺′<sub>k</sub>
@@ -408,13 +408,13 @@ include('../../header.php');
                         The following section defines the main component of our framework: a mathematical approach to combine multiple networks into one multi-layer graph that gives a confidence scores for each edge.
                     </p>
                     <p>
-                        We define <i>collapsing</i> a set of entity relationship networks 𝐺<sub>𝑀</sub> = 𝐺<sub>1</sub>, ...,𝐺<sub>𝑁</sub> by aggregating their edge weights to reflect an overall relationship between nodes. We define this as a collapse function 𝐶 : 𝑉 × 𝑉 → R that maps each pair of nodes (𝑢, 𝑣) ∈ 𝑉 × 𝑉 to a <i>confidence score</i> that represents how sure we are of a data sharing relationship between entities.
+                        Define <i>collapsing</i> a set of entity relationship networks 𝐺<sub>𝑀</sub> = 𝐺<sub>1</sub>, ...,𝐺<sub>𝑁</sub> by aggregating their edge weights to reflect an overall relationship between nodes. Define this as a collapse function 𝐶 : 𝑉 × 𝑉 → R that maps each pair of nodes (𝑢, 𝑣) ∈ 𝑉 × 𝑉 to a <i>confidence score</i> that represents how sure we are of a data sharing relationship between entities.
                     </p>
                     <p>
-                        Given an aggregation function agg(·), we must define a custom function 𝑓<sub>𝑘</sub> : 𝑤<sub>𝑢𝑣</sub> → R<sub>+</sub> that standardizes the relationship 𝑤𝑢𝑣 between nodes in each entity relationship network 𝐺<sub>𝑘</sub> for 𝑘 ∈ 1, ..., 𝑁. The aggregation function agg(·) could be any combination of terms, such as a sum or average.
+                        Given an aggregation function agg(·), one must define a custom function 𝑓<sub>𝑘</sub> : 𝑤<sub>𝑢𝑣</sub> → R<sub>+</sub> that standardizes the relationship 𝑤𝑢𝑣 between nodes in each entity relationship network 𝐺<sub>𝑘</sub> for 𝑘 ∈ 1, ..., 𝑁. The aggregation function agg(·) could be any combination of terms, such as a sum or average.
                     </p>
                     <p>
-                        We define our collapse function 𝐶(·) as
+                        Define the collapse function 𝐶(·) as
                         <br>
                         <br>
                         <code>
@@ -422,10 +422,10 @@ include('../../header.php');
                         </code>
                         <br>
                         <br>
-                        We then arrive at our aggregated entity relationship network 𝐺&#770; = (𝑉, 𝐸&#770;, 𝑤&#770;), where 𝑤&#770;<sub>𝑢𝑣</sub> = 𝐶(𝑢, 𝑣) ∀𝑢, 𝑣 ∈ 𝑉. As an example, consider the following:
+                        The process then arrives at an aggregated entity relationship network 𝐺&#770; = (𝑉, 𝐸&#770;, 𝑤&#770;), where 𝑤&#770;<sub>𝑢𝑣</sub> = 𝐶(𝑢, 𝑣) ∀𝑢, 𝑣 ∈ 𝑉. As an example, consider the following:
                     </p>
                     <p>
-                        Suppose we obtain five datasets, three of which connect Company A to Company B, and two of which connect Company A to Company B but not to Company C. Each dataset could represent its own relationship graph. However, all five could be combined into one aggregated relationship network (illustrated in figure 7). We propose the above method to weight the edges representing relationships between entities to encapsulate that we cannot know with certainty whether data sharing is occurring.
+                        Suppose one obtains five datasets, three of which connect Company A to Company B, and two of which connect Company A to Company B but not to Company C. Each dataset could represent its own relationship graph. However, all five could be combined into one aggregated relationship network (illustrated in figure 7). It can be proposed the above method to weight the edges representing relationships between entities to encapsulate that which one cannot know with certainty whether data sharing is occurring.
                     </p>
                     <figure>
                         <img src='graphs/agg_reg.png' style='max-width:450px;'>
@@ -435,16 +435,16 @@ include('../../header.php');
                     </figure>
                     <h4>4.3.1&nbsp;&nbsp; Comparison of Potential Aggregation Functions</h4>
                     <p>
-                        Once we have a standardized confidence score provided by the functions 𝑓<sub>𝑘</sub>(·) (described in section 4.3.2), we have many choices for the aggregation function agg(·). Let 𝑓<sub>𝑘</sub>(𝐺<sub>𝑘</sub>) denote the function mapping every edge weight in the edge set of 𝐺<sub>𝑘</sub> to a standardized confidence score.
+                        Once a standardized confidence score provided by the functions 𝑓<sub>𝑘</sub>(·) (described in section 4.3.2) is decided, there are many choices for determining the aggregation function agg(·). Let 𝑓<sub>𝑘</sub>(𝐺<sub>𝑘</sub>) denote the function mapping every edge weight in the edge set of 𝐺<sub>𝑘</sub> to a standardized confidence score.
                         <ul>
                             <li>
                                 <i>agg(𝐺<sub>𝑀</sub> ) = average(𝑓<sub>1</sub>(𝐺<sub>1</sub> ),...,𝑓<sub>𝑁</sub> (𝐺<sub>𝑁</sub> ))</i>: Using an average may result in lost information - if there is a single source with high confidence, that instance would be lost in the average with many smaller instances.
                             </li>
                             <li>
-                                 <i>agg(𝐺𝑀 ) = </i>&sum;<sub>𝑘=1</sub><sup>𝑁</sup><i> 𝑓<sub>𝑘</sub> (𝐺<sub>𝑘</sub> )</i>: Using a sum as an aggregation would result in an opposite problem as the previous point. Suppose we have many low-confidence weights and they are added together, resulting in a single high confidence weight in the aggregated network. Since we likely do not want to convey a high confidence in such a relationship, this represents a problem.
+                                 <i>agg(𝐺𝑀 ) = </i>&sum;<sub>𝑘=1</sub><sup>𝑁</sup><i> 𝑓<sub>𝑘</sub> (𝐺<sub>𝑘</sub> )</i>: Using a sum as an aggregation would result in an opposite problem as the previous point. Suppose there exists many low-confidence weights which are added together, resulting in a single high confidence weight in the aggregated network. Since there likely is not a want to convey a high confidence in such a relationship, this represents a problem.
                             </li>
                             <li>
-                                 <i>agg(𝐺<sub>𝑀</sub>) = max<sub>1≤𝑘≤𝑁</sub> (𝑓<sub>1</sub> (𝐺<sub>1</sub> ),...,𝑓<sub>𝑁</sub> (𝐺<sub>𝑁</sub> ))</i>: Taking the maximum over confidence weights is the most promising aggregation function we have come up with so far. Low confidence scores do not convey a confidence that there is not a sharing relationship between two entities, only that the evidence for it is not apparent from their methods. If someone comes up with conclusive evidence, we want it to be reflected in the aggregated entity relationship network.
+                                 <i>agg(𝐺<sub>𝑀</sub>) = max<sub>1≤𝑘≤𝑁</sub> (𝑓<sub>1</sub> (𝐺<sub>1</sub> ),...,𝑓<sub>𝑁</sub> (𝐺<sub>𝑁</sub> ))</i>: Taking the maximum over confidence weighting is the most promising aggregation function thus far. Low confidence scores do not convey a confidence that there indeed is not a sharing relationship between two entities; only that the evidence for it is not apparent from the methods involved. If someone comes up with conclusive evidence, it should be reflected in the aggregated entity relationship network.
                             </li>
                         </ul>
                     </p>
@@ -518,30 +518,30 @@ include('../../header.php');
                     </p>
                     <h3>4.4&nbsp;&nbsp;&nbsp; Disclosure Reliability Analysis</h3>
                     <p>
-                        As described above in section 3.2, there exist legal frameworks that require entities to disclose information to individuals about the possession and sharing activity of personal information, such as GDPR or CCPA right to access. Although individuals can contact data protection authorities in Europe to verify GDPR right to access requests, that can be time consuming. In the US, enforcement is limited or non-existent, and no such auditing framework exists.
+                        As described in section 3.2, there exist legal frameworks that require entities to disclose information to individuals about the possession and sharing activity of personal information, such as the GDPR or CCPA right to access. Although individuals can contact data protection authorities in Europe to verify GDPR right to access requests, that can be time consuming. In the US, enforcement is limited or non-existent, and no such auditing framework exists.
                     </p>
                     <p>
                         An individual with an incomplete right to access disclosure or one with dubious veracity given to them has no recourse. How can they verify the declared third-party sharing of their data is accurate or complete? This motivates the question of how to validate and audit individual disclosures, i.e., determine whether the company is omitting details.
                     </p>
                     <p>
-                        We assume that false disclosures will only exhibit false negatives, i.e., the entity is not telling the whole truth. Our proposed framework can expose some of these instances of non-compliance. One such example would be if a disclosure reveals wide-spread data sharing, but is missing some entities which share high-confidence relationships with the original data aggregator.
+                        It can be assumed that false disclosures will only exhibit false negatives, i.e., the entity is not telling the whole truth. The proposed framework can expose some of these instances of non-compliance. One such example would be if a disclosure reveals wide-spread data sharing, but is missing some entities which share high-confidence relationships with the original data aggregator.
                     </p>
                     <p>
                         Using the aggregated relationship network described in section 4.3, we may compare the set of expected data sharing instances with the set of reported instances.
                     </p>
                     <h3>4.5&nbsp;&nbsp;&nbsp; Observing Missing Data Transmission Links</h3>
                     <p>
-                        Suppose we observe the presence of an individual’s personal data possessed by a set of entities within the aggregated relationship network, where the data was only given to a proper subset of those entities. If the nodes in which we observe that possession are not directly connected by edges, how did the data flow between them?
+                        Suppose the presence of an individual’s personal data possessed by a set of entities within the aggregated relationship network can be observed. Here, the data was only given to a proper subset of those entities. If the observed nodes are not directly connected by edges, how did the data flow between them?
                     </p>
                     <p>
-                        We can infer these flows of data in a similar fashion to the missing infections problem outlined in Rozenshtein <i>et. al</i>. <a href='#references10'>[10]</a>, by constructing a minimum Steiner tree using the observed nodes as terminals and computing over the inverse edge weights.
+                        These flows of data can be inferred in a similar fashion to the missing infections problem outlined in Rozenshtein <i>et. al</i>. <a href='#references10'>[10]</a>, by constructing a minimum Steiner tree using the observed nodes as terminals and computing over the inverse edge weights.
                     </p>
                     <h5 style='margin-bottom:0px;'>Definition 1. Minimum Steiner Tree</h5>
                     <p style='margin-top:0px;'>
                         A minimum Steiner tree 𝑇 is a minimum spanning tree (MST) which contains a subset of nodes (terminals) 𝑉<sub>𝑇</sub> ⊆ 𝑉 .
                     </p>
                     <p>
-                        We formally state the problem as follows:
+                        A formal statement of the problem is as follows:
                         <ul>
                             <li>
                                 Given: An aggregated relationship network 𝐺&#770;<sub>𝑝</sub> = (𝑉 ,𝐸&#770;,𝑤&#770;<sub>𝑖𝑗</sub><sup>𝑝</sup> )(where 𝑤&#770;<sub>𝑖𝑗</sub><sup>𝑝</sup> = (1/𝑤&#770;<sub>𝑖𝑗</sub>)), a set of observed data possessions, and a network diffusion model M.
@@ -552,11 +552,11 @@ include('../../header.php');
                         </ul>
                     </p>
                     <p>
-                        We acknowledge this is a simplification of any actual algorithms that may be developed since the minimum steiner tree problem is known to be NP-hard <a href='#references10'>[10]</a>. The context of the problem is extremely relevant in the development of approximation algorithms in this setting. Approximate solutions must not generate trees that are extremely unlikely given the terminals, so approximation guarantees are necessary to establish confidence in any solutions.
+                        It should be acknowledged that this is a simplification of any actual algorithm that may be developed since the minimum steiner tree problem is known to be NP-hard <a href='#references10'>[10]</a>. The context of the problem is extremely relevant in the development of approximation algorithms in this setting. Approximate solutions must not generate trees that are extremely unlikely given the terminals, so approximation guarantees are necessary to establish confidence in any solutions.
                     </p>
                     <h3>4.6&nbsp;&nbsp;&nbsp; Additional Relationship Inferrence</h3>
                     <p>
-                        In order to bolster our existing network, we may infer additional sharing relationships using the output we generate in section 4.5. This application is less broad, but we illustrate it through an example below.
+                        In order to bolster the existing network, additional sharing relationships may be inferred using the output generated in section 4.5. This application is less broad, but consider the illustration by means of an example below:
                     </p>
                     <div class='aside' style='margin:0px;'>
                     <figure>
@@ -566,7 +566,7 @@ include('../../header.php');
                         </figcaption>
                     </figure>
                     <p>
-                        Return to the case of five datasets compiled into one aggregated entity relationship network, as below, but this time with five nodes, 𝑉 = {𝐴, 𝐵,𝐶, 𝐷, 𝐸}, with an edge set {𝐸<sub>1</sub>, 𝐸<sub>2</sub>, 𝐸<sub>3</sub>, 𝐸<sub>4</sub>, 𝐸<sub>5</sub>} = {(𝐴, 𝐵, 0.6), (𝐵, 𝐷, 0.9), (𝐴,𝐶, 0.1), (𝐶, 𝐷, 0.1), (𝐶, 𝐸, 0.1)} as seen in figure 8.
+                        Return to the case of five datasets compiled into one aggregated entity relationship network but this time with five nodes, 𝑉 = {𝐴, 𝐵,𝐶, 𝐷, 𝐸}, with an edge set {𝐸<sub>1</sub>, 𝐸<sub>2</sub>, 𝐸<sub>3</sub>, 𝐸<sub>4</sub>, 𝐸<sub>5</sub>} = {(𝐴, 𝐵, 0.6), (𝐵, 𝐷, 0.9), (𝐴,𝐶, 0.1), (𝐶, 𝐷, 0.1), (𝐶, 𝐸, 0.1)} as seen in figure 8.
                     </p>
                     <figure class='responsive_aside' style='max-width:400px;'>
                         <img src='graphs/aern_5x5.png' style='max-width:200px;'>
@@ -614,7 +614,7 @@ include('../../header.php');
                     </p>
                     <h3>4.7&nbsp;&nbsp;&nbsp; Estimating Proliferation Risk Given Initial Entry Points</h4>
                     <p>
-                        If you are a consumer considering giving a certain piece of personally identifiable information to a company, how would you know the risk that entails? Assuming you are aware of the general privacy risks of sharing data, how can you make an informed decision about how much to share? By analyzing the output of network diffusion models over an aggregated relationship network, we may gather estimates about how prolifically that data will spread dependent upon where it is added into the network. In this setting, we hypothesize that the level of proliferation is highly dependent upon the topology of the network, such as in Ganesh <i>et. al</i> <a href='#references8'>[8]</a>.
+                        If you are a consumer considering giving a certain piece of personally identifiable information to a company, how would you know the risk that entails? Assuming you are aware of the general privacy risks of sharing data, how can you make an informed decision about how much to share? By analyzing the output of network diffusion models over an aggregated relationship network, estimates can be gathered about how prolifically that data will spread dependent upon where it is added into the network. In this setting, one can hypothesize that the level of proliferation is highly dependent upon the topology of the network, such as in Ganesh <i>et. al</i> <a href='#references8'>[8]</a>.
                         <ul>
                             <li>
                                 Given: An aggregated relationship network 𝐺&#770; = (𝑉, 𝐸&#770;, 𝑤&#770;<sub>𝑖𝑗</sub>), a set of hypothetical data possessions (initial points), and a network diffusion model M.
