@@ -655,7 +655,7 @@ include('../../header.php');
                     </p>
                     <h2>6&nbsp;&nbsp;&nbsp;&nbsp; Verification of methods</h2>
                     <p>
-                        Since an actual ground truth (see section 7.1) concerning how data spreads, (which may not be viably represented given the complexity of the process), methods like the ones discussed in this paper will likely never be able to be thoroughly validated, but they may be able to garner insight into some of the dynamics of aggregated relationship networks. One method of validating our methods would be to generate a synthetic "ground truth" network as well as a set of synthetic individual entity relationship as described in section 4.2.2. Solutions to our problems would then be compared to the behavior of data spread in the ground truth network.
+                        Since an actual ground truth (see section 7.1) concerning how data spreads, (which may not be viably represented given the complexity of the process), methods like the ones discussed in this proposal will likely never be able to be thoroughly validated, but they may be able to garner insight into some of the dynamics of aggregated relationship networks. One method of validating our methods would be to generate a synthetic "ground truth" network as well as a set of synthetic individual entity relationship as described in section 4.2.2. Solutions to our problems would then be compared to the behavior of data spread in the ground truth network.
                     </p>
                     <h2>7&nbsp;&nbsp;&nbsp;&nbsp; Discussion</h2>
                     <h3>7.1&nbsp;&nbsp;&nbsp; Limitations</h3>
