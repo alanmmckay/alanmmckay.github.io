@@ -40,7 +40,7 @@ include('../../header.php');
                         Online privacy has become an increasingly pressing concern in today’s digital age. As more and more personal information is collected and shared online, users are becoming increasingly aware that their data is used for targeted advertising purposes. Targeted advertising is the practice of using data to personalize advertisements to specific individuals based on their online behaviors, a phenomenon which is often not in the general consumer’s best interest.
                     </p>
                     <p>
-                        The targeted advertising ecosystem largely remains a black box, with little transparency into how user data is collected, processed, and used. This lack of transparency has led to concerns about the potential for misuse of personal data, and has made it difficult for users to understand and control their online privacy
+                        The targeted advertising ecosystem largely remains a black box, with little transparency into how user data is collected, processed, and used. This lack of transparency has led to concerns about the potential for misuse of personal data, and has made it difficult for users to understand and control their online privacy.
                     </p>
                     <p>
                         To address this issue, various methodologies have been developed to measure and analyze the targeted advertising ecosystem. These methodologies aim to provide insights into how data is collected and used, ultimately helping users make more informed decisions about their online privacy.
@@ -52,19 +52,19 @@ include('../../header.php');
                         Another approach is to leverage machine learning to predict communication patterns within ad-networks. This process relies on observing the effect of manipulating a single piece of data in the ad-network and noting how the network responds.
                     </p>
                     <p>
-                        While these methodologies are useful, they only propose absolute binary: within the metric they are using to discover communication between advertising entities, relationships exist or do not. Often, these methodologies make conclusions based purely off of the context of the specific study at hand, leading to a fragmented understanding of the targeted advertising ecosystem.
+                        While these methodologies are useful, they only propose an absolute binary decision with respect to the metric being used to discover the communication between advertising entities. That is, they only answer the question of whether a relation exists or not. It is often that these methodologies make conclusions based purely on the context of the specific study at hand, leading to a fragmented understanding of the targeted advertising ecosystem.
                     </p>
 
-                    <h3>1.2&nbsp;&nbsp;&nbsp; Contributions</h3>
+                    <h3>1.2&nbsp;&nbsp;&nbsp; Contribution</h3>
                     <p>
-                        This research proposes a framework in which the results of various privacy studies can be aggregated, in which the degree to which entities share data can be gauged. Within the the proposed framework, these relationships are predicted on a certainty gradient, by a measure of confidence derived from a multi-layer graph. This framework will help provide a more comprehensive understanding of the targeted advertising ecosystem and enable us to assess the potential ramifications more accurately.
+                        This research proposes a framework in which the results of various privacy studies can be aggregated; in which the degree to which entities share data can be gauged. Within the the proposed framework, these relationships are predicted on a certainty gradient, by a measure of confidence derived from a multi-layer graph. This framework will help provide a more comprehensive understanding of the targeted advertising ecosystem and enable an assessment to the potential ramifications to a more accurate degree.
                     </p>
                     <p>
                         The proposed framework will build upon current methodologies and their results, providing a more complete understanding of the targeted advertising ecosystem. The findings of this research will be useful for individuals who seek to better understand and navigate the complex world of targeted advertising. Therein, we aim to further decisions regarding privacy and security of user data.
                     </p>
                     <h3>1.3&nbsp;&nbsp;&nbsp; Road Map</h3>
                     <p>
-                        The paper will begin with an outline of the current landscape of advertising networks: how the networks interact with users, mechanisms to balance the scale of online privacy, and related previous work. Next, the paper will offer background on related technical and legal concepts, definitions, necessary methods, and the technical problems that arise from the proposed framework. To conclude, we propose requirements of a web API which could leverage our research on the user side, discuss validation of our methods, and address limitations and future work.
+                        The proposal will begin with an outline of the current landscape of advertising networks: how the networks interact with users, mechanisms to balance the scale of online privacy, and related previous works. Following this, the proposal will offer background on related technical and legal concepts, definitions, necessary methods, and the technical problems that arise from the proposed framework. The proposal then concludes with discussion of the potential of a web API, discussion of validation to the methodology, and an address to the limitations and future work.
                     </p>
                     <h2>2&nbsp;&nbsp;&nbsp;&nbsp; Motivation</h2>
                     <h3>2.1&nbsp;&nbsp;&nbsp; The perimeter of the Black Box</h3>
