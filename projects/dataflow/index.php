@@ -64,7 +64,7 @@ include('../../header.php');
                     </p>
                     <h3>1.3&nbsp;&nbsp;&nbsp; Road Map</h3>
                     <p>
-                        The proposal will begin with an outline of the current landscape of advertising networks: how the networks interact with users, mechanisms to balance the scale of online privacy, and related previous works. Following this, the proposal will offer background on related technical and legal concepts, definitions, necessary methods, and the technical problems that arise from the proposed framework. The proposal then concludes with discussion of the potential of a web API, discussion of validation to the methodology, and an address to the limitations and future work.
+                        The framework proposal will begin with an outline of the current landscape of advertising networks: how the networks interact with users, mechanisms to balance the scale of online privacy, and related previous works. Following this, the proposal will offer background on related technical and legal concepts, definitions, necessary methods, and the technical problems that arise from the proposed framework. The proposal then concludes with discussion of the potential of a web API, discussion of validation to the methodology, and an address to the limitations and future work.
                     </p>
                     <h2>2&nbsp;&nbsp;&nbsp;&nbsp; Motivation</h2>
                     <h3>2.1&nbsp;&nbsp;&nbsp; The perimeter of the Black Box</h3>
@@ -122,7 +122,7 @@ include('../../header.php');
                         For a regulatory auditor to validate compliance, (and for a user to trust feedback from advertising entities), a set of tools need to be leveraged. Some of these tools should consider what has been historically validated through data of relationships gathered via studies. These tools should also be flexible to accept data from future works. These works can be future studies which explore a specific feature of the advertising network. It should also consider data returned from feedback of compliance; Advertising entities who explicitly state that they have a communication channel with another entity and have shared information on this channel.
                     </p>
                     <p>
-                        One such tool should also present the amalgamation of this information in a digestible manner. It should consider the weight of confidence relevant to all features brought forth from the differing sets of data and present a user a visual of the network that reflects this collection of features. The tool should allow a user to anonymously define its context - the type of devices they use, the websites and platforms they visit, type of content they digest, the region in which they live, etc. It should also allow a user to declare which ad entities have disclosed that they’ve used data of the user and which entities it has been shared with. With this information, the network will then help the user infer which advertising entities likely have their data based on these relationships. This inference will be associated with some level confidence.
+                        Such a tool should also present the amalgamation of this information in a digestible manner. It should consider the weight of confidence relevant to all features brought forth from the differing sets of data and present a user a visual of the network that reflects this collection of features. The tool should allow a user to anonymously define its context - the type of devices they use, the websites and platforms they visit, type of content they digest, the region in which they live, etc. It should also allow a user to declare which ad entities have disclosed that they’ve used data of the user and which entities it has been shared with. With this information, the network will then help the user infer which advertising entities likely have their data based on these relationships. This inference will be associated with some level confidence.
                     </p>
                     <p>
                         The visual tool will estimate data flow and help validate disclosure. It will present confidence of inference by presenting the advertising entities within a graph such that the context the user provides will cluster entities who are likely communicating the user’s information (see figure 2b). This paper will formalize such a tool. Formalization requires the definition of the concepts in the next section.
@@ -251,10 +251,10 @@ include('../../header.php');
                     </figure>
                     <h3>3.4&nbsp;&nbsp;&nbsp; Network Diffusion Process</h3>
                     <p>
-                        A network diffusion process M describes how spreading on networks occurs, such as infections or ideas. In this proposal, there is a focus on the diffusion of data. Given a network 𝐺 = (𝑉 , 𝐸,𝑤) (where 𝑉, 𝐸, and 𝑤 represent nodes, edges, and weights, respectively), and an initial set of nodes which possess some personally identifiable information, a network diffusion process is defined by a set of rules which govern how the data is shared and which nodes will ultimately possess that data.
+                        A network diffusion process M describes how spreading on networks occurs, such as infections or ideas. In this proposal, there is a focus on the diffusion of data. Given a network 𝐺 = (𝑉, 𝐸, 𝑤) (where 𝑉, 𝐸, and 𝑤 represent nodes, edges, and weights, respectively), and an initial set of nodes which possess some personally identifiable information, a network diffusion process is defined by a set of rules which govern how the data is shared and which nodes will ultimately possess that data.
                     </p>
                     <p>
-                        As an example, one such process can be defined by the independent cascade model. Let 𝐺 = (𝑉 , 𝐸) be a directed graph with node set 𝑉 and edge set 𝐸. Consider a set V ⊆ 𝑉 of initially activated nodes. For this process, once a node is activated it cannot revert to being inactive. After the initial activation, discrete time steps 𝑡 for which the process will progress can be defined. The end of a diffusion process is when no additional nodes can be activated. Upon the conclusion of a given diffusion process, 𝜎(V) denotes the number of nodes expected to be activated given the initially activated nodes V. Since these diffusion models are stochastic, 𝜎(V) is the expectation of a random variable. This concept will be revisited and given relevance in section 4.7.
+                        As an example, one such process can be defined by the independent cascade model. Let 𝐺 = (𝑉, 𝐸) be a directed graph with node set 𝑉 and edge set 𝐸. Consider a set V ⊆ 𝑉 of initially activated nodes. For this process, once a node is activated it cannot revert to being inactive. After the initial activation, discrete time steps 𝑡 for which the process will progress can be defined. The end of a diffusion process is when no additional nodes can be activated. Upon the conclusion of a given diffusion process, 𝜎(V) denotes the number of nodes expected to be activated given the initially activated nodes V. Since these diffusion models are stochastic, 𝜎(V) is the expectation of a random variable. This concept will be revisited and given relevance in section 4.7.
                     </p>
                     <h2>4&nbsp;&nbsp;&nbsp;&nbsp; Materials and Methods</h2>
                     <h3>4.1&nbsp;&nbsp;&nbsp; Data</h3>
@@ -401,17 +401,17 @@ include('../../header.php');
                                 Remove any completely disconnected nodes.
                             </li>
                         </ol>
-                        We are left with a set of synthetic entity relationship networks 𝐺<sub>𝑆𝑌𝑁</sub> = {𝐺′<sub>1</sub>, ...,𝐺′<sub>𝑘</sub>}.
+                        This allows a set of synthetic entity relationship networks 𝐺<sub>𝑆𝑌𝑁</sub> = {𝐺′<sub>1</sub>, ...,𝐺′<sub>𝑘</sub>}.
                     </p>
                     <h3>4.3&nbsp;&nbsp;&nbsp; Aggregating Entity Relationship Networks</h3>
                     <p>
                         The following section defines the main component of our framework: a mathematical approach to combine multiple networks into one multi-layer graph that gives a confidence scores for each edge.
                     </p>
                     <p>
-                        Define <i>collapsing</i> a set of entity relationship networks 𝐺<sub>𝑀</sub> = 𝐺<sub>1</sub>, ...,𝐺<sub>𝑁</sub> by aggregating their edge weights to reflect an overall relationship between nodes. Define this as a collapse function 𝐶 : 𝑉 × 𝑉 → R that maps each pair of nodes (𝑢, 𝑣) ∈ 𝑉 × 𝑉 to a <i>confidence score</i> that represents how sure we are of a data sharing relationship between entities.
+                        Define <i>collapsing</i> a set of entity relationship networks 𝐺<sub>𝑀</sub> = 𝐺<sub>1</sub>, ..., 𝐺<sub>𝑁</sub> by aggregating their edge weights to reflect an overall relationship between nodes. Define this as a collapse function 𝐶 : 𝑉 × 𝑉 → R that maps each pair of nodes (𝑢, 𝑣) ∈ 𝑉 × 𝑉 to a <i>confidence score</i> that represents how sure we are of a data sharing relationship between entities.
                     </p>
                     <p>
-                        Given an aggregation function agg(·), one must define a custom function 𝑓<sub>𝑘</sub> : 𝑤<sub>𝑢𝑣</sub> → R<sub>+</sub> that standardizes the relationship 𝑤𝑢𝑣 between nodes in each entity relationship network 𝐺<sub>𝑘</sub> for 𝑘 ∈ 1, ..., 𝑁. The aggregation function agg(·) could be any combination of terms, such as a sum or average.
+                        Given an aggregation function agg(·), a custom function 𝑓<sub>𝑘</sub> : 𝑤<sub>𝑢𝑣</sub> → R<sub>+</sub> must be defined which standardizes the relationship 𝑤<sub>𝑢𝑣</sub> between nodes in each entity relationship network 𝐺<sub>𝑘</sub> for 𝑘 ∈ 1, ..., 𝑁. The aggregation function agg(·) could be any combination of terms, such as a sum or average.
                     </p>
                     <p>
                         Define the collapse function 𝐶(·) as
@@ -425,7 +425,7 @@ include('../../header.php');
                         The process then arrives at an aggregated entity relationship network 𝐺&#770; = (𝑉, 𝐸&#770;, 𝑤&#770;), where 𝑤&#770;<sub>𝑢𝑣</sub> = 𝐶(𝑢, 𝑣) ∀𝑢, 𝑣 ∈ 𝑉. As an example, consider the following:
                     </p>
                     <p>
-                        Suppose one obtains five datasets, three of which connect Company A to Company B, and two of which connect Company A to Company B but not to Company C. Each dataset could represent its own relationship graph. However, all five could be combined into one aggregated relationship network (illustrated in figure 7). It can be proposed the above method to weight the edges representing relationships between entities to encapsulate that which one cannot know with certainty whether data sharing is occurring.
+                        Suppose five datasets are obtained, three of which connect Company A to Company B, and two of which connect Company A to Company B but not to Company C. Each dataset could represent its own relationship graph. However, all five could be combined into one aggregated relationship network (illustrated in figure 7). The above method can be used to weigh the edges to represent relationships between entities where unkown data sharing is occurring.
                     </p>
                     <figure>
                         <img src='graphs/agg_reg.png' style='max-width:450px;'>
@@ -544,7 +544,7 @@ include('../../header.php');
                         A formal statement of the problem is as follows:
                         <ul>
                             <li>
-                                Given: An aggregated relationship network 𝐺&#770;<sub>𝑝</sub> = (𝑉 ,𝐸&#770;,𝑤&#770;<sub>𝑖𝑗</sub><sup>𝑝</sup> )(where 𝑤&#770;<sub>𝑖𝑗</sub><sup>𝑝</sup> = (1/𝑤&#770;<sub>𝑖𝑗</sub>)), a set of observed data possessions, and a network diffusion model M.
+                                Given: An aggregated relationship network 𝐺&#770;<sub>𝑝</sub> = (𝑉 ,𝐸&#770;,𝑤&#770;<sub>𝑖𝑗</sub><sup>𝑝</sup> ) (where 𝑤&#770;<sub>𝑖𝑗</sub><sup>𝑝</sup> = (1/𝑤&#770;<sub>𝑖𝑗</sub>)), a set of observed data possessions, and a network diffusion model M.
                             </li>
                             <li>
                                 Find: A Steiner tree whose node set represents inferred data possessions.
@@ -614,7 +614,7 @@ include('../../header.php');
                     </p>
                     <h3>4.7&nbsp;&nbsp;&nbsp; Estimating Proliferation Risk Given Initial Entry Points</h4>
                     <p>
-                        If you are a consumer considering giving a certain piece of personally identifiable information to a company, how would you know the risk that entails? Assuming you are aware of the general privacy risks of sharing data, how can you make an informed decision about how much to share? By analyzing the output of network diffusion models over an aggregated relationship network, estimates can be gathered about how prolifically that data will spread dependent upon where it is added into the network. In this setting, one can hypothesize that the level of proliferation is highly dependent upon the topology of the network, such as in Ganesh <i>et. al</i> <a href='#references8'>[8]</a>.
+                        If you are a consumer considering giving a certain piece of personally identifiable information to a company, how would you know the risk that entails? Assuming you are aware of the general privacy risks of sharing data, how can you make an informed decision about how much to share? By analyzing the output of network diffusion models over an aggregated relationship network, estimates can be gathered about how prolifically that data will spread dependent upon where it is added into the network. In this setting, it can hypothesized that the level of proliferation is highly dependent upon the topology of the network, such as in Ganesh <i>et. al</i> <a href='#references8'>[8]</a>.
                         <ul>
                             <li>
                                 Given: An aggregated relationship network 𝐺&#770; = (𝑉, 𝐸&#770;, 𝑤&#770;<sub>𝑖𝑗</sub>), a set of hypothetical data possessions (initial points), and a network diffusion model M.
@@ -655,7 +655,7 @@ include('../../header.php');
                     </p>
                     <h2>6&nbsp;&nbsp;&nbsp;&nbsp; Verification of methods</h2>
                     <p>
-                        Since an actual ground truth (see section 7.1) concerning how data spreads, (which may not be viably represented given the complexity of the process), methods like the ones discussed in this proposal will likely never be able to be thoroughly validated, but they may be able to garner insight into some of the dynamics of aggregated relationship networks. One method of validating our methods would be to generate a synthetic "ground truth" network as well as a set of synthetic individual entity relationship as described in section 4.2.2. Solutions to our problems would then be compared to the behavior of data spread in the ground truth network.
+                        Since an actual ground truth (see section 7.1) concerning how data spreads, (which may not be viably represented given the complexity of the process), methods like those discussed in this proposal will likely never be able to be thoroughly validated, but they may be able to garner insight into some of the dynamics of aggregated relationship networks. One method of validating our methods would be to generate a synthetic "ground truth" network as well as a set of synthetic individual entity relationship as described in section 4.2.2. Solutions to our problems would then be compared to the behavior of data spread in the ground truth network.
                     </p>
                     <h2>7&nbsp;&nbsp;&nbsp;&nbsp; Discussion</h2>
                     <h3>7.1&nbsp;&nbsp;&nbsp; Limitations</h3>
@@ -666,7 +666,7 @@ include('../../header.php');
                         Many problem settings are highly dependent upon the accuracy of the aggregated relationship network. If two entities are connected through another and we accuse the middleman of sharing data while the other two were in fact sharing directly (but not reflected by the network), this accusation would be unjust. Warranting such accusations requires a much finer level of evidence and isn’t the main objective for the proposed framework.
                     </p>
                     <p>
-                        How data is shared in the real world obviously varies from one entity to another. Whether data is shared between entities is one question while what kind of data and in what format and context it is shared is another question. Creating high level abstractions of data sharing will only tell part of the story - The further up in abstraction one goes, detail of the real interactions that occur is sacrificed. Finding the right level of abstraction for the use case is key. It seems that the proposed framework is positioned where it needs to be paired with currently available information and methodologies to answer the questions many individuals and researchers pose.
+                        How data is shared in the real world obviously varies from one entity to another. Whether data is shared between entities is one question while what kind of data and in what format and context it is shared is another question. Creating high level abstractions of data sharing will only tell part of the story - The further up in abstraction one goes, detail of the actual interaction is sacrificed. Finding the right level of abstraction for the use case is key. It seems that the proposed framework is positioned where it needs to be paired with currently available information and methodologies to answer the questions many individuals and researchers pose.
                     </p>
                     <p>
                         The precision of the confidence score ultimately relies upon the given data. Creating a precise network with representative confidence scores is only possible by developing methods that extract the obfuscated information from the black box that is in the middle of an-arms race. With increasing legislation, required disclosures, and a growing number of researchers devising methods to gather this information, it seems that the proposed confidence scores, and in turn the framework, will have great utility.
