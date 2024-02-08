@@ -44,7 +44,7 @@ include('../../header.php');
                     <hr>
                     </section>
                     <header>
-                        <h1>Research: Privacy and Data Flow</h1>
+                        <h1>Research: Privacy and Dataflow</h1>
                     </header>
                     <h2>1&nbsp;&nbsp;&nbsp;&nbsp; Introduction</h2>
                     <h3>1.1&nbsp;&nbsp;&nbsp; Context</h3>
