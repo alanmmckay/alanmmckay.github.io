@@ -10,7 +10,7 @@ $title = 'Alan McKay | Projects | Privacy and Data Flow';
 
 $meta['title'] = 'Alan McKay | Privacy and Data Flow';
 
-$meta['description'] = '';
+$meta['description'] = 'Description of research conducted for a proposal of a framework for privacy disclosure audit. Proposal involves leveraging multi-layered graphs and how to parse them.';
 
 $meta['url'] = 'https://alanmckay.blog/projects/dataflow/';
 
@@ -32,7 +32,7 @@ include('../../header.php');
                     <hr>
                     </section>
                     <header>
-                        <h1>Estimating Flow and Validating Disclosures</h1>
+                        <h1>Research: Privacy and Data Flow</h1>
                     </header>
                     <h2>1&nbsp;&nbsp;&nbsp;&nbsp; Introduction</h2>
                     <h3>1.1&nbsp;&nbsp;&nbsp; Context</h3>
