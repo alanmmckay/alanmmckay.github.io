@@ -27,7 +27,19 @@ include('../../header.php');
                             <h2>Preface</h2>
                         </header>
                         <p>
-
+                            Below is a paper detailing preliminary research for a proposed framework that can be used to audit data flow related to privacy disclosures. This framework can potentially be used as a tool to validate disclosure compliance for entities seeking to comply with regulations such as the <a href='https://www.oag.ca.gov/privacy/ccpa' target="_blank" rel="noopener noreferrer">CCPA</a> or <a href='https://gdpr.eu/what-is-gdpr/' target="_blank" rel="noopener noreferrer">GDPR</a>.
+                        </p>
+                        <p>
+                            The proposal helps provide a scaffold of knowledge pertaining to the relevant regulations while also giving insight to current means of discovering compliance. This is not all-encompassing. It's recommended to follow through the citations and references to learn more.
+                        </p>
+                        <p>
+                            Knowledge of graph theory will be needed to be able to digest the formal methodology and reasoning for building the framework as described on this page.
+                        </p>
+                        <p>
+                            This paper was written whilst taking a graduate course called Privacy Law and Technology, which explored the various impasses presented through the involved disciplines. An enjoyable course for myself, having the opportunity to interact with individuals from a different field of study.
+                        </p>
+                        <p>
+                            This paper was co-authored by Jeffrey Keithley, Mira Tellegen, and Levin Leesemann.
                         </p>
                     <hr>
                     </section>
