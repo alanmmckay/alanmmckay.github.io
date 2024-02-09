@@ -691,7 +691,7 @@ include('../../header.php');
                         The framework is intended to be an auditing tool for individuals and researchers, however an entity could also use the framework in an adversarial sense. Considering a publicly accessible implementation of the framework with the option of anyone being able to contribute to a centralized multi-layer graph, an arms-race between auditors and entities could ensue, similar to that currently seen in the online privacy ecosystem. Obfuscation of the relationships between entities in this manner would essentially be an extension of the obfuscation occurring in the context of the advertising network black box discussed in section 2.1. Publishing an accessible and modifiable implementation of this framework should be done with caution. Datasets must be carefully considered and any individual data points should be well backed. Ultimately, it comes to verification in the aforementioned issue of the ground truth versus an aggregated relationship graph.
                     </p>
                     <h2>References</h2>
-                    <ul style='list-style-type:none;'>
+                    <ul style='list-style-type:none;overflow:scroll;'>
                         <li id='references1'>
                             [1] M.A. Bashir and C. Wilson. Diffusion of User Tracking Data in the Online Advertising Ecosystem. Proceedings on Privacy Enhancing Technologies (PETS). 2018.
                         </li>

@@ -335,7 +335,6 @@ ul.filelist li{
 }*/
 
 #writingsWrapper table{
-    width:100%;
     border-collapse:collapse;
     padding:5px;
 }
@@ -459,6 +458,10 @@ code pre.info-code{
 
 @media screen and (max-width:800px){
     #writingsWrapper article ul{
+        padding-left:5%;
+    }
+
+    #wraitingsWrapper article ol{
         padding-left:5%;
     }
 
@@ -600,25 +603,40 @@ code pre.info-code{
 
     body{
         width:100%;
+        min-width:300px;
     }
 
     #writingsWrapper{
         justify-content:inherit;
-        min-width:300px;
+        /*min-width:300px;*/
+        width:85%;
+        margin:auto;
+        display:block;
     }
 
     #writingsWrapper section{
-        margin-left:5px;
-        margin-right:20px;
+        margin-left:0px;
+        margin-right:0px;
     }
 
     #writingsWrapper article ul li{
         /*list-style-type:none;*/
-        margin-left:20px;
+        margin-left:0px;
     }
 
+    #writingsWrapper article ol li{
+        margin-left:0px;
+    }
+    #writingsWrapper ul, #writingsWrapper ol{
+        padding-left:15px;
+    }
+
+    #writingsWrapper li{
+        margin-left:0px;
+    }
     code pre.code{
         min-width:260px;
+        width:95%;
     }
 
     code pre.info-code{
@@ -627,8 +645,14 @@ code pre.info-code{
 
     blockquote{
         width:95%;
-        margin:0px;
+        margin:5px;
         margin-bottom:10px;
+    }
+
+    table{
+        display:block;
+        width:97%;
+        overflow:scroll;
     }
 }
 
