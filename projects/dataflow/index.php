@@ -263,10 +263,10 @@ include('../../header.php');
                     </figure>
                     <h3>3.4&nbsp;&nbsp;&nbsp; Network Diffusion Process</h3>
                     <p>
-                        A network diffusion process M describes how spreading on networks occurs, such as infections or ideas. In this proposal, there is a focus on the diffusion of data. Given a network 𝐺 = (𝑉, 𝐸, 𝑤) (where 𝑉, 𝐸, and 𝑤 represent nodes, edges, and weights, respectively), and an initial set of nodes which possess some personally identifiable information, a network diffusion process is defined by a set of rules which govern how the data is shared and which nodes will ultimately possess that data.
+                        A network diffusion process M describes how spreading on networks occurs, such as infections or ideas. In this proposal, there is a focus on the diffusion of data. Given a network <span style='text-align:left;white-space:nowrap;'>𝐺 = (𝑉, 𝐸, 𝑤)</span> (where 𝑉, 𝐸, and 𝑤 represent nodes, edges, and weights, respectively), and an initial set of nodes which possess some personally identifiable information, a network diffusion process is defined by a set of rules which govern how the data is shared and which nodes will ultimately possess that data.
                     </p>
                     <p>
-                        As an example, one such process can be defined by the independent cascade model. Let 𝐺 = (𝑉, 𝐸) be a directed graph with node set 𝑉 and edge set 𝐸. Consider a set V ⊆ 𝑉 of initially activated nodes. For this process, once a node is activated it cannot revert to being inactive. After the initial activation, discrete time steps 𝑡 for which the process will progress can be defined. The end of a diffusion process is when no additional nodes can be activated. Upon the conclusion of a given diffusion process, 𝜎(V) denotes the number of nodes expected to be activated given the initially activated nodes V. Since these diffusion models are stochastic, 𝜎(V) is the expectation of a random variable. This concept will be revisited and given relevance in section 4.7.
+                        As an example, one such process can be defined by the independent cascade model. Let <span style='text-align:left;white-space:nowrap;'>𝐺 = (𝑉, 𝐸)</span> be a directed graph with node set 𝑉 and edge set 𝐸. Consider a set <span style='text-align:left;white-space:nowrap;'>V ⊆ 𝑉</span> of initially activated nodes. For this process, once a node is activated it cannot revert to being inactive. After the initial activation, discrete time steps 𝑡 for which the process will progress can be defined. The end of a diffusion process is when no additional nodes can be activated. Upon the conclusion of a given diffusion process, 𝜎(V) denotes the number of nodes expected to be activated given the initially activated nodes V. Since these diffusion models are stochastic, 𝜎(V) is the expectation of a random variable. This concept will be revisited and given relevance in section 4.7.
                     </p>
                     <h2>4&nbsp;&nbsp;&nbsp;&nbsp; Materials and Methods</h2>
                     <h3>4.1&nbsp;&nbsp;&nbsp; Data</h3>
@@ -387,13 +387,13 @@ include('../../header.php');
                     </figure>
                     <h4>4.2.2&nbsp;&nbsp; Synthetic Data</h3>
                     <p>
-                        The dual-Barabási-Albert model <a href='#references13'>[13]</a> is used with parameters 𝑚<sub>1</sub> = 3, 𝑚<sub>2</sub> = 1, and 𝑝 = 0.3. This model is used to mimic the nature of the datasets inspected so far, which have a highlyconnected core and many degree-1 nodes branching out. In this model, a max(𝑚<sub>1</sub>,𝑚<sub>2</sub>) nodes are intially considered. The remaining are iteratively added one at a time, with probability 𝑝 of having 𝑚<sub>1</sub> edges and probability 1 − 𝑝 of having 𝑚<sub>2</sub> edges added according to the Barabási-Albert model <a href='#references14'>[14]</a> resulting in a "ground truth" graph 𝐺. We then proceed in two phases:
+                        The dual-Barabási-Albert model <a href='#references13'>[13]</a> is used with parameters <span style='text-align:left;white-space:nowrap;'>𝑚<sub>1</sub> = 3,</span> <span style='text-align:left;white-space:nowrap;'>𝑚<sub>2</sub> = 1,</span> and <span style='text-align:left;white-space:nowrap;'>𝑝 = 0.3.</span> This model is used to mimic the nature of the datasets inspected so far, which have a highlyconnected core and many degree-1 nodes branching out. In this model, a max(𝑚<sub>1</sub>,𝑚<sub>2</sub>) nodes are intially considered. The remaining are iteratively added one at a time, with probability 𝑝 of having 𝑚<sub>1</sub> edges and probability <span style='text-align:left;white-space:nowrap;'>1 − 𝑝</span> of having 𝑚<sub>2</sub> edges added according to the Barabási-Albert model <a href='#references14'>[14]</a> resulting in a "ground truth" graph 𝐺. We then proceed in two phases:
                     </p>
                     <p>
-                        <u>Phase 1</u>: Begin by removing 𝑁<sub>𝑝1</sub> (determined by sampling from a uniform distribution in a given range) nodes and 𝐸<sub>𝑝1</sub> edges from 𝐺, resulting in 𝐺′. Then assign weights 𝑤<sub>𝑖𝑗</sub> ∈ [1, 10] sampled from a Pareto distribution to each edge in 𝐺′.
+                        <u>Phase 1</u>: Begin by removing 𝑁<sub>𝑝1</sub> (determined by sampling from a uniform distribution in a given range) nodes and 𝐸<sub>𝑝1</sub> edges from 𝐺, resulting in 𝐺′. Then assign weights <span style='text-align:left;white-space:nowrap;'>𝑤<sub>𝑖𝑗</sub> ∈ [1, 10]</span> sampled from a Pareto distribution to each edge in 𝐺′.
                     </p>
                     <p>
-                        Phase 2: Stemming from 𝐺′, produce a set of 𝐾 networks. Foreach network initialized to 𝐺′<sub>𝑘</sub> ← 𝐺′, perform the following:
+                        Phase 2: Stemming from 𝐺′, produce a set of 𝐾 networks. Foreach network initialized to <span style='text-align:left;white-space:nowrap;'>𝐺′<sub>𝑘</sub> ← 𝐺′,</span> perform the following:
                         <ol>
                             <li>
                                 Choose 𝑁<sub>𝑝2</sub> nodes uniformly at random to remove from 𝐺′<sub>k</sub>
@@ -402,10 +402,10 @@ include('../../header.php');
                                 Repeat 𝐸<sub>𝑝2</sub> times:
                                 <ul>
                                     <li>
-                                        Randomly sample a value 𝑑 ∈ [𝑑<sub>1</sub>, 𝑑<sub>2</sub>], where 𝑑<sub>1</sub> ≥ 1 and 𝑑<sub>2</sub> ≤ 10 are given endpoints of a range of values.
+                                        Randomly sample a value <span style='text-align:left;white-space:nowrap;'>𝑑 ∈ [𝑑<sub>1</sub>, 𝑑<sub>2</sub>],</span> where <span style='text-align:left;white-space:nowrap;'>𝑑<sub>1</sub> ≥ 1</span> and <span style='text-align:left;white-space:nowrap;'>𝑑<sub>2</sub> ≤ 10</span> are given endpoints of a range of values.
                                     </li>
                                     <li>
-                                        Choose an edge uniformly at random from 𝐺′<sub>𝑘</sub> and assign its weight to 𝑤′<sub>𝑖𝑗</sub> ← max(0,𝑤′<sub>𝑖𝑗</sub> − 𝑑).
+                                        Choose an edge uniformly at random from 𝐺′<sub>𝑘</sub> and assign its weight to <span style='text-align:left;white-space:nowrap;'>𝑤′<sub>𝑖𝑗</sub> ← max(0,𝑤′<sub>𝑖𝑗</sub> − 𝑑).</span>
                                     </li>
                                 </ul>
                             </li>
@@ -413,28 +413,30 @@ include('../../header.php');
                                 Remove any completely disconnected nodes.
                             </li>
                         </ol>
-                        This allows a set of synthetic entity relationship networks 𝐺<sub>𝑆𝑌𝑁</sub> = {𝐺′<sub>1</sub>, ...,𝐺′<sub>𝑘</sub>}.
+                    </p>
+                    <p >
+                        This allows a set of synthetic entity relationship networks <span style='text-align:left;white-space:nowrap;'>𝐺<sub>𝑆𝑌𝑁</sub> = {𝐺′<sub>1</sub>, ...,𝐺′<sub>𝑘</sub>}.</span>
                     </p>
                     <h3>4.3&nbsp;&nbsp;&nbsp; Aggregating Entity Relationship Networks</h3>
                     <p>
                         The following section defines the main component of our framework: a mathematical approach to combine multiple networks into one multi-layer graph that gives a confidence scores for each edge.
                     </p>
                     <p>
-                        Define <i>collapsing</i> a set of entity relationship networks 𝐺<sub>𝑀</sub> = 𝐺<sub>1</sub>, ..., 𝐺<sub>𝑁</sub> by aggregating their edge weights to reflect an overall relationship between nodes. Define this as a collapse function 𝐶 : 𝑉 × 𝑉 → R that maps each pair of nodes (𝑢, 𝑣) ∈ 𝑉 × 𝑉 to a <i>confidence score</i> that represents how sure we are of a data sharing relationship between entities.
+                        Define <i>collapsing</i> a set of entity relationship networks <span style='text-align:left;white-space:nowrap;'>𝐺<sub>𝑀</sub> = 𝐺<sub>1</sub>, ..., 𝐺<sub>𝑁</sub></span> by aggregating their edge weights to reflect an overall relationship between nodes. Define this as a collapse function <span style='text-align:left;white-space:nowrap;'>𝐶 : 𝑉 × 𝑉 → R</span> that maps each pair of nodes <span style='text-align:left;white-space:nowrap;'>(𝑢, 𝑣) ∈ 𝑉 × 𝑉</span> to a <i>confidence score</i> that represents how sure we are of a data sharing relationship between entities.
                     </p>
                     <p>
-                        Given an aggregation function agg(·), a custom function 𝑓<sub>𝑘</sub> : 𝑤<sub>𝑢𝑣</sub> → R<sub>+</sub> must be defined which standardizes the relationship 𝑤<sub>𝑢𝑣</sub> between nodes in each entity relationship network 𝐺<sub>𝑘</sub> for 𝑘 ∈ 1, ..., 𝑁. The aggregation function agg(·) could be any combination of terms, such as a sum or average.
+                        Given an aggregation function agg(·), a custom function <span style='text-align:left;white-space:nowrap;'>𝑓<sub>𝑘</sub> : 𝑤<sub>𝑢𝑣</sub> → R<sub>+</sub></span> must be defined which standardizes the relationship 𝑤<sub>𝑢𝑣</sub> between nodes in each entity relationship network <span style='text-align:left;white-space:nowrap;'>𝐺<sub>𝑘</sub> for 𝑘 ∈ 1,...,𝑁.</span> The aggregation function agg(·) could be any combination of terms, such as a sum or average.
                     </p>
                     <p>
                         Define the collapse function 𝐶(·) as
                         <br>
                         <br>
-                        <code>
-                            𝐶(𝑢, 𝑣) = agg(𝑓<sub>1</sub>(𝑤<sub>𝑢𝑣</sub>),...,𝑓<sub>𝑁</sub>(𝑤<sub>𝑢𝑣</sub>))
+                        <code style='display:block;text-align:left;'>
+                            <span style='text-align:left;white-space:nowrap;'>𝐶(𝑢, 𝑣) =</span> <span style='text-align:left;white-space:nowrap;'>agg(𝑓<sub>1</sub>(𝑤<sub>𝑢𝑣</sub>),...,𝑓<sub>𝑁</sub>(𝑤<sub>𝑢𝑣</sub>))</span>
                         </code>
                         <br>
                         <br>
-                        The process then arrives at an aggregated entity relationship network 𝐺&#770; = (𝑉, 𝐸&#770;, 𝑤&#770;), where 𝑤&#770;<sub>𝑢𝑣</sub> = 𝐶(𝑢, 𝑣) ∀𝑢, 𝑣 ∈ 𝑉. As an example, consider the following:
+                        The process then arrives at an aggregated entity relationship network <span style='text-align:left;white-space:nowrap;'>𝐺&#770; = (𝑉, 𝐸&#770;, 𝑤&#770;),</span> where <span style='text-align:left;white-space:nowrap;'>𝑤&#770;<sub>𝑢𝑣</sub> = 𝐶(𝑢, 𝑣) ∀𝑢, 𝑣 ∈ 𝑉.</span> As an example, consider the following:
                     </p>
                     <p>
                         Suppose five datasets are obtained, three of which connect Company A to Company B, and two of which connect Company A to Company B but not to Company C. Each dataset could represent its own relationship graph. However, all five could be combined into one aggregated relationship network (illustrated in figure 7). The above method can be used to weigh the edges to represent relationships between entities where unkown data sharing is occurring.
@@ -550,13 +552,13 @@ include('../../header.php');
                     </p>
                     <h5 style='margin-bottom:0px;'>Definition 1. Minimum Steiner Tree</h5>
                     <p style='margin-top:0px;'>
-                        A minimum Steiner tree 𝑇 is a minimum spanning tree (MST) which contains a subset of nodes (terminals) 𝑉<sub>𝑇</sub> ⊆ 𝑉 .
+                        A minimum Steiner tree 𝑇 is a minimum spanning tree (MST) which contains a subset of nodes (terminals) <span style='text-align:left;white-space:nowrap;'>𝑉<sub>𝑇</sub> ⊆ 𝑉 .</span>
                     </p>
                     <p>
                         A formal statement of the problem is as follows:
                         <ul>
                             <li>
-                                Given: An aggregated relationship network 𝐺&#770;<sub>𝑝</sub> = (𝑉 ,𝐸&#770;,𝑤&#770;<sub>𝑖𝑗</sub><sup>𝑝</sup> ) (where 𝑤&#770;<sub>𝑖𝑗</sub><sup>𝑝</sup> = (1/𝑤&#770;<sub>𝑖𝑗</sub>)), a set of observed data possessions, and a network diffusion model M.
+                                Given: An aggregated relationship network <span style='text-align:left;white-space:nowrap;'>𝐺&#770;<sub>𝑝</sub> = (𝑉 ,𝐸&#770;,𝑤&#770;<sub>𝑖𝑗</sub><sup>𝑝</sup> )</span> <span style='text-align:left;white-space:nowrap;'>(where 𝑤&#770;<sub>𝑖𝑗</sub><sup>𝑝</sup> = (1/𝑤&#770;<sub>𝑖𝑗</sub>)),</span> a set of observed data possessions, and a network diffusion model M.
                             </li>
                             <li>
                                 Find: A Steiner tree whose node set represents inferred data possessions.
@@ -629,7 +631,7 @@ include('../../header.php');
                         If you are a consumer considering giving a certain piece of personally identifiable information to a company, how would you know the risk that entails? Assuming you are aware of the general privacy risks of sharing data, how can you make an informed decision about how much to share? By analyzing the output of network diffusion models over an aggregated relationship network, estimates can be gathered about how prolifically that data will spread dependent upon where it is added into the network. In this setting, it can hypothesized that the level of proliferation is highly dependent upon the topology of the network, such as in Ganesh <i>et. al</i> <a href='#references8'>[8]</a>.
                         <ul>
                             <li>
-                                Given: An aggregated relationship network 𝐺&#770; = (𝑉, 𝐸&#770;, 𝑤&#770;<sub>𝑖𝑗</sub>), a set of hypothetical data possessions (initial points), and a network diffusion model M.
+                                Given: An aggregated relationship network <span style='text-align:left;white-space:nowrap;'>𝐺&#770; = (𝑉, 𝐸&#770;, 𝑤&#770;<sub>𝑖𝑗</sub>),</span> a set of hypothetical data possessions (initial points), and a network diffusion model M.
                             </li>
                             <li>
                                 Find: The expected data proliferation across 𝐺&#770; of the PII in the entry points.
@@ -691,7 +693,7 @@ include('../../header.php');
                         The framework is intended to be an auditing tool for individuals and researchers, however an entity could also use the framework in an adversarial sense. Considering a publicly accessible implementation of the framework with the option of anyone being able to contribute to a centralized multi-layer graph, an arms-race between auditors and entities could ensue, similar to that currently seen in the online privacy ecosystem. Obfuscation of the relationships between entities in this manner would essentially be an extension of the obfuscation occurring in the context of the advertising network black box discussed in section 2.1. Publishing an accessible and modifiable implementation of this framework should be done with caution. Datasets must be carefully considered and any individual data points should be well backed. Ultimately, it comes to verification in the aforementioned issue of the ground truth versus an aggregated relationship graph.
                     </p>
                     <h2>References</h2>
-                    <ul style='list-style-type:none;overflow:scroll;'>
+                    <ul style='list-style-type:none;overflow-wrap:break-word;'>
                         <li id='references1'>
                             [1] M.A. Bashir and C. Wilson. Diffusion of User Tracking Data in the Online Advertising Ecosystem. Proceedings on Privacy Enhancing Technologies (PETS). 2018.
                         </li>
