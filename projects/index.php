@@ -28,6 +28,7 @@ include('../header.php');
                     <img src='../images/description.svg' alt='Icon for blog link'>
                     Projects
                 </a>
+                <a href='dataflow/' class='writing'> Research: Privacy and Dataflow</a>
                 <a href='social/' class='writing'> Project: Social Computing</a>
                 <a href='aquatint/' class='writing'> Web Development: Aquatint Image Processor</a>
                 <a href='safety/' class='writing'> PostgreSQL GIS: Cycling Safety Database</a>
