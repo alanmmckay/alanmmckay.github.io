@@ -65,67 +65,10 @@ include('../header.php');
                     </header>
                     <div class='image-gallery' style='display:grid;grid-template-columns: repeat(3, minmax(0px,1fr));align-items:start;'>
                         <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/01.jpg'/>
-                            </figure>
-                            <figure id='test' style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/02.jpg'/>
-                            </figure>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/03.jpg'/>
-                            </figure>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/04.jpg'/>
-                            </figure>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/12.jpg'/>
-                            </figure>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/13.jpg'/>
-                            </figure>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/14.jpg'/>
-                            </figure>
                         </div>
-                        <div class='image-col' style='display:grid'>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/05.jpg'/>
-                            </figure>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/06.jpg'/>
-                            </figure>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/07.jpg'/>
-                            </figure>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/08.jpg'/>
-                            </figure>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/15.jpg'/>
-                            </figure>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/16.jpg'/>
-                            </figure>
+                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
                         </div>
-                        <div class='image-col' style='display:grid'>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/09.jpg'/>
-                            </figure>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/10.jpg'/>
-                            </figure>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/11.jpg'/>
-                            </figure>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/18.jpg'/>
-                            </figure>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/19.jpg'/>
-                            </figure>
-                            <figure style='border-top:solid white 25px;opacity:0;'>
-                                <img src='images/17.jpg'/>
-                            </figure>
+                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
                         </div>
                     </div>
                     <section class='info'>
@@ -145,6 +88,7 @@ include('../header.php');
         </section>
         <script>
             var manifest;
+            var load_flag = true;
             var manifest_tracker = 0;
             var columns = document.getElementsByClassName('image-col');
             var grid = document.getElementsByClassName('image-gallery')[0];
@@ -159,7 +103,7 @@ include('../header.php');
 
             function isFigureBottom(fig_object){
                 fig_height = fig_object.getBoundingClientRect().height;
-                fig_top = fig_object.getBoundingClientRect().y;
+                fig_top = fig_object.getBoundingClientRect().top;
                 if((window.pageYOffset + window.innerHeight) > (fig_top + (window.innerHeight * .1))){ 
                     return true;
                 }else{
@@ -176,61 +120,101 @@ include('../header.php');
                 }
             }
 
-            /* Adding this logic:
             var col_map = [];
             for(i=0;i<columns.length;i++){
                 col_map[i] = [];
-                col_map[i]['loaded'] = -1;
+                col_map[i]['loaded'] = 0;
                 col_map[i]['displayed'] = -1;
             }
 
+            function create_new_figure(manifest_id,init_style){
+                const figure = document.createElement('figure');
+                figure.style['border-top'] = init_style['border-top'];
+                figure.style['opacity'] = init_style['opacity'];
+
+                const image = document.createElement('img');
+                image.src = 'images/'+manifest_id;
+                figure.appendChild(image);
+
+                return figure;
+            }
+
+            var load_count = 0;
+            var display_count = 0;
             function grid_load_agent(){
-                for(i=0;i<columns.length;i++){
-                    if(col_map[i]['loaded'] = -1){
-                        const figure = document.createElement('figure');
-                        figure.style['border-top'] = 'solid 25px white';
-                        figure.style['opacity'] = 0;
-                        const image = document.createElement('img');
-                        image.src = 'images/01.jpg';
-                        figure.appendChild(image);
-                        columns[i].appendChild(figure);
-                        col_map[i]['loaded'] += 1;
+                let init_manifest = (manifest_tracker);
+                manifest_size = Object.keys(manifest).length;
+                if(manifest_tracker < manifest_size){
+                    if( (manifest_tracker+columns.length) >= manifest_size){
+                        boundary = manifest_size - manifest_tracker
+                    }else{
+                        boundary = columns.length
+                    }
+                    if(load_flag){
+                        load_count = load_count + boundary;
+                        console.log("load count: " + load_count);
+                        new_figures = []
+                        for(i=0;i<boundary;i++){
+                            if(manifest_tracker - columns.length < 0){
+                                new_figures.push(create_new_figure(manifest[init_manifest+i]['file_name'],{'border-top':'solid 0px white','opacity':1}));
+                            }else{
+                                new_figures.push(create_new_figure(manifest[init_manifest+i]['file_name'],{'border-top':'solid 25px white','opacity':0}));
+                            }
+                            //columns[i].appendChild(new_figures[i]);
+                            col_map[i]['loaded'] += 1;
+                            manifest_tracker += 1;
+                        }
+                        
+                        let col_index = 0;
+                        for(i=init_manifest;i<(init_manifest+columns.length);i++){
+                            columns[col_index].appendChild(new_figures[col_index]);
+                            col_index += 1;
+                        }
+                        grid_display_agent();
                     }
                 }
             }
-            grid_load_agent();
-            */
-
+            
+           
             function grid_display_agent(){
+                load_flag = false;
                 for(i=0;i<3;i++){
                     col = columns[i];
                     figures = col.getElementsByTagName('figure');
-                    for(j=0;j<figures.length;j++){
+                    for(j=Math.max(0,col_map[i]['displayed']);j<col_map[i]['loaded'];j++){
                         figure = figures[j];
                         if(isFigureBottom(figure)){
                             figure.style['opacity'] = 1;
                             figure.style['border-top'] = 'solid white 0px';
+                            col_map[i]['displayed'] += 1;
+                            load_flag = true;
+                            display_count = display_count + 1;
+                            console.log('display count: ' + display_count);
                         }else{
-                            break;
+                            load_flag = load_flag || false;
                         }
                     }
                 }
+                if(load_flag){
+                    grid_load_agent();
+                }
             }
-
 
 
             var parse_manifest;
 
             window.onscroll = function(){
                 grid_display_agent();
+                console.log(manifest_tracker);
             }
 
             window.addEventListener('load', function () {
-                grid_display_agent();
+                //grid_display_agent();
                 get_manifest().then(function(result){
                     manifest = result;
                     parse_manifest = function(){
-
+                        grid_load_agent();
+                        grid_display_agent();
                     }
                     parse_manifest();
                  });
