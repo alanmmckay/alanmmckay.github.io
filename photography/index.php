@@ -104,7 +104,7 @@ include('../header.php');
             function isFigureBottom(fig_object){
                 fig_height = fig_object.getBoundingClientRect().height;
                 fig_top = fig_object.getBoundingClientRect().top;
-                if((window.innerHeight * .9)-fig_top > 0){ 
+                if((window.innerHeight * .95)-fig_top > 0){ 
                     return true;
                 }else{
                     return false;
@@ -143,6 +143,7 @@ include('../header.php');
             var display_count = 0;
             function grid_load_agent(){
                 let init_manifest = (manifest_tracker);
+                let col_sort = [];
                 manifest_size = Object.keys(manifest).length;
                 if(manifest_tracker < manifest_size){
                     if( (manifest_tracker+columns.length) >= manifest_size){
@@ -155,19 +156,28 @@ include('../header.php');
                         console.log("load count: " + load_count);
                         new_figures = []
                         for(i=0;i<boundary;i++){
+                            reference = manifest[init_manifest+i];
                             if(manifest_tracker - columns.length < 0){
-                                new_figures.push(create_new_figure(manifest[init_manifest+i]['file_name'],{'border-top':'solid 0px white','opacity':1}));
+                                new_figures.push({
+                                                    'object':create_new_figure(reference['file_name'],{'border-top':'solid 0px white','opacity':1}),
+                                                    'height':reference['height']
+                                                });
                             }else{
-                                new_figures.push(create_new_figure(manifest[init_manifest+i]['file_name'],{'border-top':'solid 25px white','opacity':0}));
+                                new_figures.push({
+                                                    'object':create_new_figure(reference['file_name'],{'border-top':'solid 25px white','opacity':0}),
+                                                    'height': reference['height']
+                                                });
                             }
                             //columns[i].appendChild(new_figures[i]);
                             col_map[i]['loaded'] += 1;
                             manifest_tracker += 1;
                         }
+
+
                         
-                        let col_index = 0;
-                        for(i=init_manifest;i<(init_manifest+columns.length);i++){
-                            columns[col_index].appendChild(new_figures[col_index]);
+                        col_index = 0;
+                        for(i=init_manifest;i<(init_manifest+boundary);i++){
+                            columns[col_index].appendChild(new_figures[col_index]['object']);
                             col_index += 1;
                         }
                         grid_display_agent();
@@ -190,6 +200,7 @@ include('../header.php');
                             load_flag = true;
                             display_count = display_count + 1;
                             console.log('display count: ' + display_count);
+                            console.log('load count: ' + load_count);
                         }else{
                             load_flag = load_flag && false;
                         }
@@ -206,6 +217,8 @@ include('../header.php');
             window.onscroll = function(){
                 grid_display_agent();
                 console.log(manifest_tracker);
+                //need to add a logic that checks to see if a user has scrolled to the bottom of the page;
+                //  if so, then switch the load_flag to true and call the load_agent.
             }
 
             window.addEventListener('load', function () {
