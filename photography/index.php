@@ -104,7 +104,7 @@ include('../header.php');
             function isFigureBottom(fig_object){
                 fig_height = fig_object.getBoundingClientRect().height;
                 fig_top = fig_object.getBoundingClientRect().top;
-                if((window.pageYOffset + window.innerHeight) > (fig_top + (window.innerHeight * .1))){ 
+                if((window.innerHeight * .9)-fig_top > 0){ 
                     return true;
                 }else{
                     return false;
@@ -178,20 +178,20 @@ include('../header.php');
            
             function grid_display_agent(){
                 load_flag = false;
-                for(i=0;i<3;i++){
+                for(i=0;i<columns.length;i++){
                     col = columns[i];
                     figures = col.getElementsByTagName('figure');
                     for(j=Math.max(0,col_map[i]['displayed']);j<col_map[i]['loaded'];j++){
                         figure = figures[j];
                         if(isFigureBottom(figure)){
                             figure.style['opacity'] = 1;
-                            figure.style['border-top'] = 'solid white 0px';
+                            figure.style['border-top'] = 'solid white 5px';
                             col_map[i]['displayed'] += 1;
                             load_flag = true;
                             display_count = display_count + 1;
                             console.log('display count: ' + display_count);
                         }else{
-                            load_flag = load_flag || false;
+                            load_flag = load_flag && false;
                         }
                     }
                 }
