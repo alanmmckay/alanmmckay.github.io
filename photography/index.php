@@ -152,83 +152,90 @@ include('../header.php');
                         boundary = columns.length;
                     }
                     if(load_flag){
-                        load_count = load_count + boundary;
-                        new_figures = [];
-                        height_list = []
-                        figure_map = [];
-                        col_h_list = [];
-                        col_h_map = [];
-                        for(i=0;i<boundary;i++){
-                            reference = manifest[init_manifest+i];
-                            if(manifest_tracker - columns.length < 0){
-                                new_figure_data = {
-                                                    'object':create_new_figure(reference['file_name'],{'border-top':'solid 0px white','opacity':0}),
-                                                    'height':reference['height']
-                                                  }
-                                //new_figures.push(new_figure_data);
-                            }else{
-                                new_figure_data = {
-                                                    'object':create_new_figure(reference['file_name'],{'border-top':'solid 25px white','opacity':0}),
-                                                    'height': reference['height']
-                                                  }
-                                //new_figures.push(new_figure_data);
+
+                        console.log('difference: ' + ((load_count) - display_count));
+                        if((load_count - display_count) <= 6){
+                            console.log('loading!');
+                            load_count = load_count + boundary;
+                            new_figures = [];
+                            height_list = []
+                            figure_map = [];
+                            col_h_list = [];
+                            col_h_map = [];
+                            for(i=0;i<boundary;i++){
+                                reference = manifest[init_manifest+i];
+                                if(manifest_tracker - columns.length < 0){
+                                    new_figure_data = {
+                                                        'object':create_new_figure(reference['file_name'],{'border-top':'solid 0px white','opacity':0}),
+                                                        'height':reference['height']
+                                                    }
+                                    //new_figures.push(new_figure_data);
+                                }else{
+                                    new_figure_data = {
+                                                        'object':create_new_figure(reference['file_name'],{'border-top':'solid 25px white','opacity':0}),
+                                                        'height': reference['height']
+                                                    }
+                                    //new_figures.push(new_figure_data);
+                                }
+
+
+                                if (Object.keys(figure_map).includes(new_figure_data['height'].toString())){
+                                    figure_map[new_figure_data['height'].toString()].push(new_figure_data['object']);
+                                }else{
+                                    figure_map[new_figure_data['height'].toString()] = [];
+                                    figure_map[new_figure_data['height'].toString()].push(new_figure_data['object']);
+                                }
+                                height_list.push(new_figure_data['height']);
+                                //columns[i].appendChild(new_figures[i]);
+                                col_map[i]['loaded'] += 1;
+                                manifest_tracker += 1;
                             }
 
+                            height_list.sort(function(a,b){
+                                return b-a
+                            });
 
-                            if (Object.keys(figure_map).includes(new_figure_data['height'].toString())){
-                                figure_map[new_figure_data['height'].toString()].push(new_figure_data['object']);
-                            }else{
-                                figure_map[new_figure_data['height'].toString()] = [];
-                                figure_map[new_figure_data['height'].toString()].push(new_figure_data['object']);
+
+                            for(i=0;i<columns.length;i++){
+                                column_height = columns[i].getBoundingClientRect().height;
+                                col_h_list.push(column_height);
+                                if(Object.keys(col_h_map).includes(column_height.toString())){
+                                    col_h_map[column_height].push(i);
+                                }else{
+                                    col_h_map[column_height] = [];
+                                    col_h_map[column_height].push(i);
+                                }
                             }
-                            height_list.push(new_figure_data['height']);
-                            //columns[i].appendChild(new_figures[i]);
-                            col_map[i]['loaded'] += 1;
-                            manifest_tracker += 1;
-                        }
 
-                        height_list.sort(function(a,b){
-                            return b-a
-                        });
+                            col_h_list.sort(function(a,b){
+                                return b-a
+                            });
 
-
-                        for(i=0;i<columns.length;i++){
-                            column_height = columns[i].getBoundingClientRect().height;
-                            col_h_list.push(column_height);
-                            if(Object.keys(col_h_map).includes(column_height.toString())){
-                                col_h_map[column_height].push(i);
-                            }else{
-                                col_h_map[column_height] = [];
-                                col_h_map[column_height].push(i);
-                            }
-                        }
-
-                        col_h_list.sort(function(a,b){
-                            return b-a
-                        });
-
-                        iteration_index = 0;
-                        figure_index = height_list[iteration_index];
-                        height_selection = figure_map[figure_index];
-                        while(iteration_index < boundary){
-                            for(i=0;i<height_selection.length;i++){
-                                col_index = col_h_list[iteration_index];
-                                figure = height_selection[i]
-                                columns[iteration_index].appendChild(figure);
-                                iteration_index += 1;
-                            }
+                            iteration_index = 0;
                             figure_index = height_list[iteration_index];
                             height_selection = figure_map[figure_index];
+                            while(iteration_index < boundary){
+                                for(i=0;i<height_selection.length;i++){
+                                    col_index = col_h_list[iteration_index];
+                                    figure = height_selection[i]
+                                    columns[iteration_index].appendChild(figure);
+                                    iteration_index += 1;
+                                }
+                                figure_index = height_list[iteration_index];
+                                height_selection = figure_map[figure_index];
+                            }
+
+
+                            /*
+                            col_index = 0;
+                            for(i=init_manifest;i<(init_manifest+boundary);i++){
+                                //columns[col_index].appendChild(new_figures[col_index]['object']);
+                                col_index += 1;
+                            }*/
+                            grid_display_agent();
+                        }else{
+                            console.log('no load!');
                         }
-
-
-                        /*
-                        col_index = 0;
-                        for(i=init_manifest;i<(init_manifest+boundary);i++){
-                            //columns[col_index].appendChild(new_figures[col_index]['object']);
-                            col_index += 1;
-                        }*/
-                        grid_display_agent();
                     }
                 }
             }
