@@ -141,44 +141,59 @@ include('../header.php');
 
             var load_count = 0;
             var display_count = 0;
+
             function grid_load_agent(){
+                //Manifest tracker keeps count of quantity of items pulled from manifest:
                 let init_manifest = (manifest_tracker);
-                let col_sort = [];
+                //Grab the size of the manifest regardless of pull:
                 manifest_size = Object.keys(manifest).length;
+                //Check whether we've run out of images to load:
                 if(manifest_tracker < manifest_size){
+                    //Ensure the amount of columns does not cause us to overdraft:
                     if( (manifest_tracker+columns.length) >= manifest_size){
                         boundary = manifest_size - manifest_tracker;
                     }else{
                         boundary = columns.length;
                     }
-                    if(load_flag){
 
+                    //If the grid_display_agent has flagged that we need to grab more images:
+                    if(load_flag){
                         console.log('difference: ' + ((load_count) - display_count));
+                        //A check to ensure that we don't grab too many images beyond the viewport boundary:
                         if((load_count - display_count) <= 6){
                             console.log('loading!');
+                            //Increment program's load_counter:
                             load_count = load_count + boundary;
-                            new_figures = [];
+
+                            //A to-be-ordered list of height values for each figure loaded:
                             height_list = []
+                            //A mapping of figure objects such that the key is it's height:
                             figure_map = [];
+                            //A to-be-ordered list of height values with respect to the columns being used for display:
                             col_h_list = [];
+                            //A mapping of column objects such that a key is a column's height:
                             col_h_map = [];
+
+                            //Iterate an amount of times equivalent to amount of images being buffered:
                             for(i=0;i<boundary;i++){
+
+                                //Grab the next image from the manifest:
                                 reference = manifest[init_manifest+i];
+
+                                //Unecessary check; simply forces the initial set of images to not have animated transition:
                                 if(manifest_tracker - columns.length < 0){
                                     new_figure_data = {
                                                         'object':create_new_figure(reference['file_name'],{'border-top':'solid 0px white','opacity':0}),
                                                         'height':reference['height']
                                                     }
-                                    //new_figures.push(new_figure_data);
                                 }else{
                                     new_figure_data = {
                                                         'object':create_new_figure(reference['file_name'],{'border-top':'solid 25px white','opacity':0}),
                                                         'height': reference['height']
                                                     }
-                                    //new_figures.push(new_figure_data);
                                 }
 
-
+                                //Create height buckets within the figure map - accounts for images that may have the same height:
                                 if (Object.keys(figure_map).includes(new_figure_data['height'].toString())){
                                     figure_map[new_figure_data['height'].toString()].push(new_figure_data['object']);
                                 }else{
@@ -186,15 +201,14 @@ include('../header.php');
                                     figure_map[new_figure_data['height'].toString()].push(new_figure_data['object']);
                                 }
                                 height_list.push(new_figure_data['height']);
-                                //columns[i].appendChild(new_figures[i]);
-                                col_map[i]['loaded'] += 1;
+                                col_map[i]['loaded'] += 1; //col_map tracks amount of images loaded and displayed for each column.
                                 manifest_tracker += 1;
                             }
 
+                            //position the program to iterate through the figure height values by order of height values:
                             height_list.sort(function(a,b){
                                 return b-a
                             });
-
 
                             for(i=0;i<columns.length;i++){
                                 column_height = columns[i].getBoundingClientRect().height;
@@ -208,31 +222,32 @@ include('../header.php');
                             }
 
                             col_h_list.sort(function(a,b){
-                                return b-a
+                                return a-b
                             });
 
+                            console.log(col_h_list);
                             iteration_index = 0;
                             figure_index = height_list[iteration_index];
                             height_selection = figure_map[figure_index];
                             while(iteration_index < boundary){
+                                //allow iteration of multiple columns with the same height:
+                                console.log('col selectins: ');
                                 for(i=0;i<height_selection.length;i++){
+                                    //Grab the height-value of the next-smallest colulmn:
                                     col_index = col_h_list[iteration_index];
+                                    //Get the index of the column with respect to the columns collection:
+                                    col_index = col_h_map[col_index].pop()
+                                    //Grab the next figure of the current height:
                                     figure = height_selection[i]
-                                    columns[iteration_index].appendChild(figure);
+                                    console.log(col_index);
+                                    columns[col_index].appendChild(figure);
                                     iteration_index += 1;
                                 }
                                 figure_index = height_list[iteration_index];
                                 height_selection = figure_map[figure_index];
                             }
 
-
-                            /*
-                            col_index = 0;
-                            for(i=init_manifest;i<(init_manifest+boundary);i++){
-                                //columns[col_index].appendChild(new_figures[col_index]['object']);
-                                col_index += 1;
-                            }*/
-                            grid_display_agent();
+                            setTimeout(grid_display_agent,500);
                         }else{
                             console.log('no load!');
                         }
