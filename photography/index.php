@@ -92,6 +92,7 @@ include('../header.php');
             var manifest_tracker = 0;
             var columns = document.getElementsByClassName('image-col');
             var grid = document.getElementsByClassName('image-gallery')[0];
+            var figure_bucket = [];
 
             async function get_manifest(){
                 let manifest_response = await fetch("./manifest.json");
@@ -142,6 +143,9 @@ include('../header.php');
             var load_count = 0;
             var display_count = 0;
 
+            // This agent does **batch** loading of images. It makes decisions based on
+            //  the **grouping** of images being loaded in. This is to refute the notion
+            //  of abstracting responsibilities of creation to something more finite.
             function grid_load_agent(){
                 //Manifest tracker keeps count of quantity of items pulled from manifest:
                 let init_manifest = (manifest_tracker);
@@ -160,7 +164,7 @@ include('../header.php');
                     if(load_flag){
                         console.log('difference: ' + ((load_count) - display_count));
                         //A check to ensure that we don't grab too many images beyond the viewport boundary:
-                        if((load_count - display_count) <= 6){
+                        if((manifest_tracker - display_count) <= 6){
                             console.log('loading!');
                             //Increment program's load_counter:
                             load_count = load_count + boundary;
@@ -201,10 +205,11 @@ include('../header.php');
                                     figure_map[new_figure_data['height'].toString()].push(new_figure_data['object']);
                                 }
                                 height_list.push(new_figure_data['height']);
+                                figure_bucket.push(manifest[init_manifest+i]);
                                 col_map[i]['loaded'] += 1; //col_map tracks amount of images loaded and displayed for each column.
                                 manifest_tracker += 1;
                             }
-
+                            console.log(figure_bucket);
                             //position the program to iterate through the figure height values by order of height values:
                             height_list.sort(function(a,b){
                                 return b-a
@@ -225,21 +230,19 @@ include('../header.php');
                                 return a-b
                             });
 
-                            console.log(col_h_list);
+                            //console.log(col_h_list);
                             iteration_index = 0;
                             figure_index = height_list[iteration_index];
                             height_selection = figure_map[figure_index];
                             while(iteration_index < boundary){
-                                //allow iteration of multiple columns with the same height:
-                                console.log('col selectins: ');
+                                //allow iteration of multiple columns with the same height-tier:
                                 for(i=0;i<height_selection.length;i++){
                                     //Grab the height-value of the next-smallest colulmn:
                                     col_index = col_h_list[iteration_index];
                                     //Get the index of the column with respect to the columns collection:
-                                    col_index = col_h_map[col_index].pop()
-                                    //Grab the next figure of the current height:
-                                    figure = height_selection[i]
-                                    console.log(col_index);
+                                    col_index = col_h_map[col_index].pop();
+                                    //Grab the next figure of the current height-tier:
+                                    figure = height_selection[i];
                                     columns[col_index].appendChild(figure);
                                     iteration_index += 1;
                                 }
@@ -255,7 +258,19 @@ include('../header.php');
                 }
             }
             
-           
+            function readjust_columns(direction){
+                if(direction == false){ //gaining a column
+                    grid.appendChild();
+                    //add a new column child to column container.
+                    //Iterate through the figure_bucket, selecting the next columns.length figures
+                    //  and making a decision of which column to place them.
+                    //Set the column container's css to account for new quantity of columns.
+                }else{//losing a column
+                    grid.removeChild(columns[columns.length-1]);
+                }
+                columns = document.getElementsByClassName('image-col');
+            }
+
             function grid_display_agent(){
                 load_flag = false;
                 for(i=0;i<columns.length;i++){
