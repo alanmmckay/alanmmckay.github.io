@@ -63,6 +63,16 @@ include('../header.php');
                     <header>
                         <h1>Photography</h1>
                     </header>
+                    <div id='image-gallery-1' class='image-gallery' style='display:none;grid-template-columns: repeat(1, minmax(0px,1fr));align-items:start;'>
+                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                        </div>
+                    </div>
+                    <div id='image-gallery-2' class='image-gallery' style='display:none;grid-template-columns: repeat(2, minmax(0px,1fr));align-items:start;'>
+                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                        </div>
+                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                        </div>
+                    </div>
                     <div class='image-gallery' style='display:grid;grid-template-columns: repeat(3, minmax(0px,1fr));align-items:start;'>
                         <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
                         </div>
@@ -90,9 +100,11 @@ include('../header.php');
             var manifest;
             var load_flag = true;
             var manifest_tracker = 0;
-            var columns = document.getElementsByClassName('image-col');
-            var grid = document.getElementsByClassName('image-gallery')[0];
-            var figure_bucket = [];
+            var column_heights = {'1':[0], '2': [0,0], '3': [0,0,0]};
+            var grids = document.getElementsByClassName('image-gallery');
+            var active_grid = 3;
+            var grid = grids[(active_grid)-1];
+            var columns = grid.children;
 
             async function get_manifest(){
                 let manifest_response = await fetch("./manifest.json");
@@ -142,7 +154,7 @@ include('../header.php');
 
             var load_count = 0;
             var display_count = 0;
-
+            
             // This agent does **batch** loading of images. It makes decisions based on
             //  the **grouping** of images being loaded in. This is to refute the notion
             //  of abstracting responsibilities of creation to something more finite.
@@ -154,10 +166,10 @@ include('../header.php');
                 //Check whether we've run out of images to load:
                 if(manifest_tracker < manifest_size){
                     //Ensure the amount of columns does not cause us to overdraft:
-                    if( (manifest_tracker+columns.length) >= manifest_size){
+                    if( (manifest_tracker+active_grid) >= manifest_size){
                         boundary = manifest_size - manifest_tracker;
                     }else{
-                        boundary = columns.length;
+                        boundary = active_grid;
                     }
 
                     //If the grid_display_agent has flagged that we need to grab more images:
@@ -185,7 +197,7 @@ include('../header.php');
                                 reference = manifest[init_manifest+i];
 
                                 //Unecessary check; simply forces the initial set of images to not have animated transition:
-                                if(manifest_tracker - columns.length < 0){
+                                if(manifest_tracker - active_grid < 0){
                                     new_figure_data = {
                                                         'object':create_new_figure(reference['file_name'],{'border-top':'solid 0px white','opacity':0}),
                                                         'height':reference['height']
@@ -205,17 +217,16 @@ include('../header.php');
                                     figure_map[new_figure_data['height'].toString()].push(new_figure_data['object']);
                                 }
                                 height_list.push(new_figure_data['height']);
-                                figure_bucket.push(manifest[init_manifest+i]);
                                 col_map[i]['loaded'] += 1; //col_map tracks amount of images loaded and displayed for each column.
                                 manifest_tracker += 1;
                             }
-                            console.log(figure_bucket);
+                            
                             //position the program to iterate through the figure height values by order of height values:
                             height_list.sort(function(a,b){
                                 return b-a
                             });
 
-                            for(i=0;i<columns.length;i++){
+                            for(i=0;i<active_grid;i++){
                                 column_height = columns[i].getBoundingClientRect().height;
                                 col_h_list.push(column_height);
                                 if(Object.keys(col_h_map).includes(column_height.toString())){
@@ -260,20 +271,15 @@ include('../header.php');
             
             function readjust_columns(direction){
                 if(direction == false){ //gaining a column
-                    grid.appendChild();
-                    //add a new column child to column container.
-                    //Iterate through the figure_bucket, selecting the next columns.length figures
-                    //  and making a decision of which column to place them.
-                    //Set the column container's css to account for new quantity of columns.
+
                 }else{//losing a column
-                    grid.removeChild(columns[columns.length-1]);
+
                 }
-                columns = document.getElementsByClassName('image-col');
             }
 
             function grid_display_agent(){
                 load_flag = false;
-                for(i=0;i<columns.length;i++){
+                for(i=0;i<active_grid;i++){
                     col = columns[i];
                     figures = col.getElementsByTagName('figure');
                     for(j=Math.max(0,col_map[i]['displayed']);j<col_map[i]['loaded'];j++){
