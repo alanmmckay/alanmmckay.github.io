@@ -97,14 +97,24 @@ include('../header.php');
             </section>
         </section>
         <script>
+            // JSON object which houses image information:
             var manifest;
-            var load_flag = true;
+            // Integer to determine amount of entries of the manifest that have been considered:
             var manifest_tracker = 0;
+            // Switch to determine whether or not more images should be loaded:
+            var load_flag = true;
+            // Array to keep track of the heights of each column context:
             var column_heights = {'1':[0], '2': [0,0], '3': [0,0,0]};
+            // Array of the html elements that act as grids for each set of columns:
             var grids = document.getElementsByClassName('image-gallery');
+            // The current active grid:
             var active_grid = 3;
+            // The html element of the current actie grid:
             var grid = grids[(active_grid)-1];
+            // The columns contained in the currently active grid:
             var columns = grid.children;
+
+            var max_column_size = 3;
 
             async function get_manifest(){
                 let manifest_response = await fetch("./manifest.json");
@@ -124,20 +134,18 @@ include('../header.php');
                 }
             }
 
-            function isColBottom(col_object){
-                col_height = col_object.getBoundingClientRect().height;
-                if((window.pageYOffset + window.innerHeight) > (grid.getBoundingClientRect().y + col_height)){
-                    return true;
-                }else{
-                    return false;
+            var col_maps = []
+            console.log('col_maps');
+            for(i=0;i<max_column_size;i++){
+                console.log(i);
+                col_map = [];
+                for(j=0;j<(i+1);j++){
+                    col_map[j] = []
+                    col_map[j]['loaded'] = 0;
+                    col_map[j]['displayed'] = -1;
                 }
-            }
-
-            var col_map = [];
-            for(i=0;i<columns.length;i++){
-                col_map[i] = [];
-                col_map[i]['loaded'] = 0;
-                col_map[i]['displayed'] = -1;
+                col_maps.push(col_map);
+                console.log(col_maps);
             }
 
             function create_new_figure(manifest_id,init_style){
@@ -217,7 +225,7 @@ include('../header.php');
                                     figure_map[new_figure_data['height'].toString()].push(new_figure_data['object']);
                                 }
                                 height_list.push(new_figure_data['height']);
-                                col_map[i]['loaded'] += 1; //col_map tracks amount of images loaded and displayed for each column.
+                                col_maps[active_grid-1][i]['loaded'] += 1; //col_map tracks amount of images loaded and displayed for each column.
                                 manifest_tracker += 1;
                             }
                             
@@ -282,12 +290,13 @@ include('../header.php');
                 for(i=0;i<active_grid;i++){
                     col = columns[i];
                     figures = col.getElementsByTagName('figure');
-                    for(j=Math.max(0,col_map[i]['displayed']);j<col_map[i]['loaded'];j++){
+                    console.log('here')
+                    for(j=Math.max(0,col_maps[active_grid-1][i]['displayed']);j<col_maps[active_grid-1][i]['loaded'];j++){
                         figure = figures[j];
                         if(isFigureBottom(figure)){
                             figure.style['opacity'] = 1;
                             figure.style['border-top'] = 'solid white 5px';
-                            col_map[i]['displayed'] += 1;
+                            col_maps[active_grid-1][i]['displayed'] += 1;
                             load_flag = true;
                             display_count = display_count + 1;
                             console.log('display count: ' + display_count);
