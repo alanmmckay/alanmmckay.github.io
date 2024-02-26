@@ -134,18 +134,15 @@ include('../header.php');
                 }
             }
 
-            var col_maps = []
-            console.log('col_maps');
+            var col_maps = [];
             for(i=0;i<max_column_size;i++){
-                console.log(i);
                 col_map = [];
                 for(j=0;j<(i+1);j++){
-                    col_map[j] = []
+                    col_map[j] = [];
                     col_map[j]['loaded'] = 0;
                     col_map[j]['displayed'] = -1;
                 }
                 col_maps.push(col_map);
-                console.log(col_maps);
             }
 
             function create_new_figure(manifest_id,init_style){
@@ -190,7 +187,7 @@ include('../header.php');
                             load_count = load_count + boundary;
 
                             //A to-be-ordered list of height values for each figure loaded:
-                            height_list = []
+                            height_list = [];
                             //A mapping of figure objects such that the key is it's height:
                             figure_map = [];
                             //A to-be-ordered list of height values with respect to the columns being used for display:
@@ -209,12 +206,12 @@ include('../header.php');
                                     new_figure_data = {
                                                         'object':create_new_figure(reference['file_name'],{'border-top':'solid 0px white','opacity':0}),
                                                         'height':reference['height']
-                                                    }
+                                                    };
                                 }else{
                                     new_figure_data = {
                                                         'object':create_new_figure(reference['file_name'],{'border-top':'solid 25px white','opacity':0}),
                                                         'height': reference['height']
-                                                    }
+                                                    };
                                 }
 
                                 //Create height buckets within the figure map - accounts for images that may have the same height:
@@ -231,7 +228,7 @@ include('../header.php');
                             
                             //position the program to iterate through the figure height values by order of height values:
                             height_list.sort(function(a,b){
-                                return b-a
+                                return b-a;
                             });
 
                             for(i=0;i<active_grid;i++){
@@ -246,7 +243,7 @@ include('../header.php');
                             }
 
                             col_h_list.sort(function(a,b){
-                                return a-b
+                                return a-b;
                             });
 
                             //console.log(col_h_list);
@@ -268,7 +265,6 @@ include('../header.php');
                                 figure_index = height_list[iteration_index];
                                 height_selection = figure_map[figure_index];
                             }
-
                             setTimeout(grid_display_agent,500);
                         }else{
                             console.log('no load!');
@@ -290,7 +286,6 @@ include('../header.php');
                 for(i=0;i<active_grid;i++){
                     col = columns[i];
                     figures = col.getElementsByTagName('figure');
-                    console.log('here')
                     for(j=Math.max(0,col_maps[active_grid-1][i]['displayed']);j<col_maps[active_grid-1][i]['loaded'];j++){
                         figure = figures[j];
                         if(isFigureBottom(figure)){
@@ -311,15 +306,14 @@ include('../header.php');
                 }
             }
 
-
-            var parse_manifest;
-
             window.onscroll = function(){
                 grid_display_agent();
                 console.log(manifest_tracker);
                 //need to add a logic that checks to see if a user has scrolled to the bottom of the page;
                 //  if so, then switch the load_flag to true and call the load_agent.
             }
+
+            var parse_manifest;
 
             window.addEventListener('load', function () {
                 //grid_display_agent();
@@ -332,8 +326,6 @@ include('../header.php');
                     parse_manifest();
                  });
             });
-
-
 
         </script>
     </body>
