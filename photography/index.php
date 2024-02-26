@@ -73,7 +73,17 @@ include('../header.php');
                         <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
                         </div>
                     </div>
-                    <div class='image-gallery' style='display:grid;grid-template-columns: repeat(3, minmax(0px,1fr));align-items:start;'>
+                    <div class='image-gallery' style='display:none;grid-template-columns: repeat(3, minmax(0px,1fr));align-items:start;'>
+                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                        </div>
+                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                        </div>
+                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                        </div>
+                    </div>
+                    <div class='image-gallery' style='display:grid;grid-template-columns: repeat(4, minmax(0px,1fr));align-items:start;'>
+                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                        </div>
                         <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
                         </div>
                         <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
@@ -100,21 +110,21 @@ include('../header.php');
             // JSON object which houses image information:
             var manifest;
             // Integer to determine amount of entries of the manifest that have been considered:
-            var manifest_tracker = 0;
+            var manifest_trackers = [0,0,0,0];
             // Switch to determine whether or not more images should be loaded:
             var load_flag = true;
             // Array to keep track of the heights of each column context:
-            var column_heights = [[0], [0,0], [0,0,0]];
+            var column_heights = [[0], [0,0], [0,0,0], [0,0,0,0]];
             // Array of the html elements that act as grids for each set of columns:
             var grids = document.getElementsByClassName('image-gallery');
             // The current active grid:
-            var active_grid = 3;
+            var active_grid = 4;
             // The html element of the current actie grid:
             var grid = grids[(active_grid)-1];
             // The columns contained in the currently active grid:
             var columns = grid.children;
 
-            var max_column_size = 3;
+            var max_column_size = 4;
 
             async function get_manifest(){
                 let manifest_response = await fetch("./manifest.json");
@@ -149,7 +159,7 @@ include('../header.php');
                 const figure = document.createElement('figure');
                 figure.style['border-top'] = init_style['border-top'];
                 figure.style['opacity'] = init_style['opacity'];
-
+                figure.setAttribute('data_height',init_style['height']);
                 const image = document.createElement('img');
                 image.src = 'images/'+manifest_id;
                 figure.appendChild(image);
@@ -157,35 +167,45 @@ include('../header.php');
                 return figure;
             }
 
-            var load_count = 0;
-            var display_count = 0;
+            var load_counts = [0,0,0,0];
+            //var load_count = 0;
+            var display_counts = [0,0,0,0];
+            //var display_count = 0;
             
             // This agent does **batch** loading of images. It makes decisions based on
             //  the **grouping** of images being loaded in. This is to refute the notion
             //  of abstracting responsibilities of creation to something more finite.
-            function grid_load_agent(){
+            function grid_load_agent(grid_selection){//grid_selection is not zero-based
                 //Manifest tracker keeps count of quantity of items pulled from manifest:
+                //columns = grids[(grid_selection-1)].children;
+                console.log('grid_selection: '+grid_selection);
+                let manifest_tracker = manifest_trackers[grid_selection-1];
+                console.log('manifest_tracker: '+ manifest_tracker);
                 let init_manifest = (manifest_tracker);
+                console.log('init_manifest: '+init_manifest);
+                let columns = grids[grid_selection-1].children
                 //Grab the size of the manifest regardless of pull:
                 manifest_size = Object.keys(manifest).length;
                 //Check whether we've run out of images to load:
                 if(manifest_tracker < manifest_size){
                     //Ensure the amount of columns does not cause us to overdraft:
-                    if( (manifest_tracker+active_grid) >= manifest_size){
+                    if( (manifest_tracker+grid_selection) >= manifest_size){
                         boundary = manifest_size - manifest_tracker;
                     }else{
-                        boundary = active_grid;
+                        boundary = grid_selection;
                     }
 
                     //If the grid_display_agent has flagged that we need to grab more images:
                     if(load_flag){
+                        load_count = load_counts[grid_selection-1];
+                        display_count = display_counts[grid_selection-1];
                         console.log('difference: ' + ((load_count) - display_count));
                         //A check to ensure that we don't grab too many images beyond the viewport boundary:
                         if((manifest_tracker - display_count) <= 6){
                             console.log('loading!');
                             //Increment program's load_counter:
                             load_count = load_count + boundary;
-
+                            load_counts[grid_selection-1] = load_count;
                             //A to-be-ordered list of height values for each figure loaded:
                             height_list = [];
                             //A mapping of figure objects such that the key is it's height:
@@ -202,14 +222,14 @@ include('../header.php');
                                 reference = manifest[init_manifest+i];
 
                                 //Unecessary check; simply forces the initial set of images to not have animated transition:
-                                if(manifest_tracker - active_grid < 0){
+                                if(manifest_tracker - grid_selection < 0){
                                     new_figure_data = {
-                                                        'object':create_new_figure(reference['file_name'],{'border-top':'solid 0px white','opacity':0}),
+                                                        'object':create_new_figure(reference['file_name'],{'border-top':'solid 0px white','opacity':0, 'height':reference['height']}),
                                                         'height':reference['height']
                                                     };
                                 }else{
                                     new_figure_data = {
-                                                        'object':create_new_figure(reference['file_name'],{'border-top':'solid 25px white','opacity':0}),
+                                                        'object':create_new_figure(reference['file_name'],{'border-top':'solid 25px white','opacity':0, 'height':reference['height']}),
                                                         'height': reference['height']
                                                     };
                                 }
@@ -222,17 +242,18 @@ include('../header.php');
                                     figure_map[new_figure_data['height'].toString()].push(new_figure_data['object']);
                                 }
                                 height_list.push(new_figure_data['height']);
-                                col_maps[active_grid-1][i]['loaded'] += 1; //col_map tracks amount of images loaded and displayed for each column.
+                                col_maps[grid_selection-1][i]['loaded'] += 1; //col_map tracks amount of images loaded and displayed for each column.
                                 manifest_tracker += 1;
                             }
-                            
+
+                            manifest_trackers[grid_selection-1] = manifest_tracker;
                             //position the program to iterate through the figure height values by order of height values:
                             height_list.sort(function(a,b){
                                 return b-a;
                             });
 
-                            for(i=0;i<active_grid;i++){
-                                column_height = column_heights[active_grid-1][i]; //columns[i].getBoundingClientRect().height;
+                            for(i=0;i<grid_selection;i++){
+                                column_height = column_heights[grid_selection-1][i];
                                 col_h_list.push(column_height);
                                 if(Object.keys(col_h_map).includes(column_height.toString())){
                                     col_h_map[column_height].push(i);
@@ -260,13 +281,13 @@ include('../header.php');
                                     //Grab the next figure of the current height-tier:
                                     figure = height_selection[i];
                                     columns[col_index].appendChild(figure);
-                                    column_heights[active_grid-1][col_index] += figure_index;
+                                    column_heights[grid_selection-1][col_index] += figure_index;
                                     iteration_index += 1;
                                 }
                                 figure_index = height_list[iteration_index];
                                 height_selection = figure_map[figure_index];
                             }
-                            setTimeout(grid_display_agent,500);
+                            setTimeout(grid_display_agent(grid_selection),500);
                         }else{
                             console.log('no load!');
                         }
@@ -282,34 +303,40 @@ include('../header.php');
                 }
             }
 
-            function grid_display_agent(){
+            function grid_display_agent(grid_selection){
                 load_flag = false;
-                for(i=0;i<active_grid;i++){
-                    col = columns[i];
+                for(i=0;i<grid_selection;i++){
+                    col = grids[grid_selection-1].children[i];
                     figures = col.getElementsByTagName('figure');
-                    for(j=Math.max(0,col_maps[active_grid-1][i]['displayed']);j<col_maps[active_grid-1][i]['loaded'];j++){
+                    console.log('figures: ');
+                    console.log(figures);
+                    console.log(Math.max(0,col_maps[grid_selection-1][i]['displayed']));
+                    for(j=Math.max(0,col_maps[grid_selection-1][i]['displayed']);j<col_maps[grid_selection-1][i]['loaded'];j++){
                         figure = figures[j];
                         if(isFigureBottom(figure)){
+                            console.log('flag flagged');
                             figure.style['opacity'] = 1;
                             figure.style['border-top'] = 'solid white 5px';
-                            col_maps[active_grid-1][i]['displayed'] += 1;
+                            col_maps[grid_selection-1][i]['displayed'] += 1;
                             load_flag = true;
-                            display_count = display_count + 1;
-                            console.log('display count: ' + display_count);
-                            console.log('load count: ' + load_count);
+                            display_counts[grid_selection-1] = display_counts[grid_selection-1] + 1;
+                            console.log('display count: ' + display_counts[grid_selection-1]);
+                            console.log('load count: ' + load_counts[grid_selection-1]);
                         }else{
                             load_flag = load_flag || false;
                         }
                     }
                 }
                 if(load_flag){
-                    grid_load_agent();
+                    grid_load_agent(grid_selection);
+                    //grid_load_agent(1);
                 }
             }
 
             window.onscroll = function(){
-                grid_display_agent();
-                console.log(manifest_tracker);
+                grid_display_agent(active_grid);
+                //grid_display_agent(1);
+                console.log(manifest_trackers[active_grid-1]);
                 //need to add a logic that checks to see if a user has scrolled to the bottom of the page;
                 //  if so, then switch the load_flag to true and call the load_agent.
             }
@@ -317,12 +344,15 @@ include('../header.php');
             var parse_manifest;
 
             window.addEventListener('load', function () {
+                console.log('begining');
                 //grid_display_agent();
                 get_manifest().then(function(result){
                     manifest = result;
                     parse_manifest = function(){
-                        grid_load_agent();
-                        grid_display_agent();
+                        grid_load_agent(active_grid);
+                        grid_load_agent(1);
+                        grid_display_agent(active_grid);
+                        grid_display_agent(1);
                     }
                     parse_manifest();
                  });
