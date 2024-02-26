@@ -104,7 +104,7 @@ include('../header.php');
             // Switch to determine whether or not more images should be loaded:
             var load_flag = true;
             // Array to keep track of the heights of each column context:
-            var column_heights = {'1':[0], '2': [0,0], '3': [0,0,0]};
+            var column_heights = [[0], [0,0], [0,0,0]];
             // Array of the html elements that act as grids for each set of columns:
             var grids = document.getElementsByClassName('image-gallery');
             // The current active grid:
@@ -232,7 +232,7 @@ include('../header.php');
                             });
 
                             for(i=0;i<active_grid;i++){
-                                column_height = column_heights[active_grid][i]; //columns[i].getBoundingClientRect().height;
+                                column_height = column_heights[active_grid-1][i]; //columns[i].getBoundingClientRect().height;
                                 col_h_list.push(column_height);
                                 if(Object.keys(col_h_map).includes(column_height.toString())){
                                     col_h_map[column_height].push(i);
@@ -260,7 +260,7 @@ include('../header.php');
                                     //Grab the next figure of the current height-tier:
                                     figure = height_selection[i];
                                     columns[col_index].appendChild(figure);
-                                    column_heights[active_grid][col_index] += figure_index;
+                                    column_heights[active_grid-1][col_index] += figure_index;
                                     iteration_index += 1;
                                 }
                                 figure_index = height_list[iteration_index];
