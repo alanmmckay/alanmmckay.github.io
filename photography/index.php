@@ -232,7 +232,7 @@ include('../header.php');
                             });
 
                             for(i=0;i<active_grid;i++){
-                                column_height = columns[i].getBoundingClientRect().height;
+                                column_height = column_heights[active_grid][i]; //columns[i].getBoundingClientRect().height;
                                 col_h_list.push(column_height);
                                 if(Object.keys(col_h_map).includes(column_height.toString())){
                                     col_h_map[column_height].push(i);
@@ -260,6 +260,7 @@ include('../header.php');
                                     //Grab the next figure of the current height-tier:
                                     figure = height_selection[i];
                                     columns[col_index].appendChild(figure);
+                                    column_heights[active_grid][col_index] += figure_index;
                                     iteration_index += 1;
                                 }
                                 figure_index = height_list[iteration_index];
