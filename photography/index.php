@@ -63,32 +63,34 @@ include('../header.php');
                     <header>
                         <h1>Photography</h1>
                     </header>
-                    <div id='image-gallery-1' class='image-gallery' style='display:none;grid-template-columns: repeat(1, minmax(0px,1fr));align-items:start;'>
-                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                    <div id='galleries'>
+                        <div id='image-gallery-1' class='image-gallery' style='display:grid;grid-template-columns: repeat(1, minmax(0px,1fr));align-items:start;height:0px;overflow:scroll;'>
+                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                            </div>
                         </div>
-                    </div>
-                    <div id='image-gallery-2' class='image-gallery' style='display:none;grid-template-columns: repeat(2, minmax(0px,1fr));align-items:start;'>
-                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                        <div id='image-gallery-2' class='image-gallery' style='display:grid;grid-template-columns: repeat(2, minmax(0px,1fr));align-items:start;height:0px;overflow:scroll;'>
+                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                            </div>
+                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                            </div>
                         </div>
-                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                        <div class='image-gallery' style='display:grid;grid-template-columns: repeat(3, minmax(0px,1fr));align-items:start;'>
+                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                            </div>
+                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                            </div>
+                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                            </div>
                         </div>
-                    </div>
-                    <div class='image-gallery' style='display:none;grid-template-columns: repeat(3, minmax(0px,1fr));align-items:start;'>
-                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                        </div>
-                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                        </div>
-                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                        </div>
-                    </div>
-                    <div class='image-gallery' style='display:grid;grid-template-columns: repeat(4, minmax(0px,1fr));align-items:start;'>
-                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                        </div>
-                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                        </div>
-                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                        </div>
-                        <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                        <div class='image-gallery' style='display:grid;grid-template-columns: repeat(4, minmax(0px,1fr));align-items:start;height:0px;overflow:scroll;'>
+                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                            </div>
+                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                            </div>
+                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                            </div>
+                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                            </div>
                         </div>
                     </div>
                     <section class='info'>
@@ -296,6 +298,23 @@ include('../header.php');
             }
             
             function readjust_columns(direction){
+                console.log('direction' + direction);
+                active_grid = direction+1;
+                for(i=0;i<max_column_size;i++){
+                    grid = grids[i];
+                    console.log(grid);
+                    console.log(i);
+                    console.log((i+1)==active_grid);
+                    if((i+1) == active_grid){
+                        grid.style.height = null;
+                        grid.style.overflow = null;;
+                    }else{
+                        grid.style.height = '0px';
+                        grid.style.overflow = 'scroll';
+                    }
+                    
+                    console.log(grid);
+                }
                 if(direction == false){ //gaining a column
 
                 }else{//losing a column
@@ -313,6 +332,8 @@ include('../header.php');
                     console.log(Math.max(0,col_maps[grid_selection-1][i]['displayed']));
                     for(j=Math.max(0,col_maps[grid_selection-1][i]['displayed']);j<col_maps[grid_selection-1][i]['loaded'];j++){
                         figure = figures[j];
+                        console.log('grid selection:' +grid_selection);
+                        console.log(figures);
                         if(isFigureBottom(figure)){
                             console.log('flag flagged');
                             figure.style['opacity'] = 1;
@@ -329,12 +350,14 @@ include('../header.php');
                 }
                 if(load_flag){
                     grid_load_agent(grid_selection);
-                    //grid_load_agent(1);
                 }
             }
-
+            active_grid = 3;
             window.onscroll = function(){
-                grid_display_agent(active_grid);
+                for(i=1;i<=max_column_size;i++){
+                    grid_load_agent(i);
+                    grid_display_agent(i);
+                }
                 //grid_display_agent(1);
                 console.log(manifest_trackers[active_grid-1]);
                 //need to add a logic that checks to see if a user has scrolled to the bottom of the page;
@@ -350,9 +373,12 @@ include('../header.php');
                     manifest = result;
                     parse_manifest = function(){
                         grid_load_agent(active_grid);
-                        grid_load_agent(1);
                         grid_display_agent(active_grid);
-                        grid_display_agent(1);
+                        for(i=1;i<=max_column_size;i++){
+                            load_flag = true;
+                            grid_load_agent(i);
+                            grid_display_agent(i);
+                        }
                     }
                     parse_manifest();
                  });
