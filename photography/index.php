@@ -191,7 +191,7 @@ include('../header.php');
             // This agent does **batch** loading of images. It makes decisions based on
             //  the **grouping** of images being loaded in. This is to refute the notion
             //  of abstracting responsibilities of creation to something more finite.
-            function grid_load_agent(grid_selection){//grid_selection is not zero-based
+            async function grid_load_agent(grid_selection){//grid_selection is not zero-based
                 //Manifest tracker keeps count of quantity of items pulled from manifest:
                 //columns = grids[(grid_selection-1)].children;
                 console.log('grid_selection: '+grid_selection);
@@ -217,7 +217,7 @@ include('../header.php');
                         display_count = display_counts[grid_selection-1];
                         console.log('difference: ' + ((load_count) - display_count));
                         //A check to ensure that we don't grab too many images beyond the viewport boundary:
-                        if((manifest_tracker - display_count) <= 6){
+                        if((manifest_tracker - display_count) <= max_column_size){
                             console.log('loading!');
                             //Increment program's load_counter:
                             load_count = load_count + boundary;
@@ -303,7 +303,11 @@ include('../header.php');
                                 figure_index = height_list[iteration_index];
                                 height_selection = figure_map[figure_index];
                             }
-                            setTimeout(grid_display_agent(grid_selection),500);
+                            setTimeout(function(){
+                                grid_display_agent(grid_selection).then(function(){
+                                    load_flag = false;
+                                })
+                            },750);
                         }else{
                             console.log('no load!');
                         }
@@ -336,7 +340,7 @@ include('../header.php');
                 }
             }
 
-            function grid_display_agent(grid_selection){
+            async function grid_display_agent(grid_selection){
                 load_flag = false;
                 for(i=0;i<grid_selection;i++){
                     col = grids[grid_selection-1].children[i];
@@ -363,7 +367,9 @@ include('../header.php');
                     }
                 }
                 if(load_flag){
-                    grid_load_agent(grid_selection);
+                    grid_load_agent(grid_selection).then(function(){
+                        load_flag = false;
+                    });
                 }
             }
 
@@ -394,17 +400,16 @@ include('../header.php');
 
             window.addEventListener('load', function () {
                 console.log('begining');
-                //grid_display_agent();
                 get_manifest().then(function(result){
                     manifest = result;
                     parse_manifest = function(){
-                        grid_load_agent(active_grid);
-                        grid_display_agent(active_grid);
+                        grid_load_agent(active_grid).then(
+                        grid_display_agent(active_grid));
                         for(i=1;i<=max_column_size;i++){
                             if(i != active_grid){
                                 load_flag = true;
-                                grid_load_agent(i);
-                                grid_display_agent(i);
+                                grid_load_agent(i).then(
+                                grid_display_agent(i));
                             }
                         }
                     previous_screen_width = window.innerWidth;
