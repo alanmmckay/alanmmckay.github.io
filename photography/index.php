@@ -64,34 +64,8 @@ include('../header.php');
                         <h1>Photography</h1>
                     </header>
                     <div id='galleries'>
-                        <div id='image-gallery-1' class='image-gallery' style='display:grid;grid-template-columns: repeat(1, minmax(0px,1fr));align-items:start;height:0px;overflow:scroll;'>
-                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                            </div>
-                        </div>
-                        <div id='image-gallery-2' class='image-gallery' style='display:grid;grid-template-columns: repeat(2, minmax(0px,1fr));align-items:start;height:0px;overflow:scroll;'>
-                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                            </div>
-                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                            </div>
-                        </div>
-                        <div class='image-gallery' style='display:grid;grid-template-columns: repeat(3, minmax(0px,1fr));align-items:start;'>
-                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                            </div>
-                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                            </div>
-                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                            </div>
-                        </div>
-                        <div class='image-gallery' style='display:grid;grid-template-columns: repeat(4, minmax(0px,1fr));align-items:start;height:0px;overflow:scroll;'>
-                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                            </div>
-                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                            </div>
-                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                            </div>
-                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                            </div>
-                        </div>
+                        
+               
                     </div>
                     <section class='info'>
                         <hr>
@@ -139,12 +113,37 @@ include('../header.php');
             var load_flag = true;
             // Array of the html elements that act as grids for each set of columns:
             var grids = document.getElementsByClassName('image-gallery');
+
+            /*<div id='image-gallery-1' class='image-gallery' style='display:grid;grid-template-columns: repeat(1, minmax(0px,1fr));align-items:start;height:0px;overflow:scroll;'>
+                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                            </div>
+            </div>*/
+            
+            grids_html = document.getElementById('galleries');
+            for(i=0;i<max_column_size;i++){
+                const grid = document.createElement('div');
+                grid.setAttribute('class','image-gallery');
+                grid.style['display'] = 'grid';
+                grid.style['grid-template-columns'] = 'repeat('+(i+1)+', minmax(0px,1fr))';
+                grid.style['align-items'] = 'start';
+                grid.style['height'] = '0px';
+                grid.style['overflow'] = 'scroll';
+                for(j=0;j<=i;j++){
+                    const column = document.createElement('div');
+                    column.setAttribute('class','image-col');
+                    column.style['display'] = 'grid';
+                    column.style['grid-template-columns'] = 'minmax(0px,1fr)';
+                    grid.appendChild(column);
+                }
+                grids_html.appendChild(grid);
+            }
+
             // The current active grid:
-            var active_grid = 3;
+            var active_grid;
             // The html element of the current actie grid:
-            var grid = grids[(active_grid)-1];
+            //var grid = grids[(active_grid)-1];
             // The columns contained in the currently active grid:
-            var columns = grid.children;
+            //var columns = grid.children;
 
             async function get_manifest(){
                 let manifest_response = await fetch("./manifest.json");
@@ -307,7 +306,7 @@ include('../header.php');
                                 grid_display_agent(grid_selection).then(function(){
                                     load_flag = false;
                                 })
-                            },750);
+                            },Math.random(500,1500));
                         }else{
                             console.log('no load!');
                         }
@@ -400,6 +399,9 @@ include('../header.php');
 
             window.addEventListener('load', function () {
                 console.log('begining');
+                active_grid = 4;
+                grids[active_grid-1].style['overflow'] = 'inherit';
+                grids[active_grid-1].style['height'] = 'inherit';
                 get_manifest().then(function(result){
                     manifest = result;
                     parse_manifest = function(){
