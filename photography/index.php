@@ -111,22 +111,40 @@ include('../header.php');
         <script>
             // JSON object which houses image information:
             var manifest;
-            // Integer to determine amount of entries of the manifest that have been considered:
-            var manifest_trackers = [0,0,0,0];
+
+            var max_column_size = 4;
+            // Integer array to determine amount of entries of the manifest that have been considered:
+            var manifest_trackers = [];
+            // Integer array to determine how many images have been loaded for a given column:
+            var load_counts = []
+            // Integer array to determine how many images have been displayed for a given column:
+            var display_counts = []
+
+            for(i=0;i<max_column_size;i++){
+                manifest_trackers.push(0);
+                load_counts.push(0);
+                display_counts.push(0);
+            }
+            // Array to keep track of the heights of each column context:
+            var column_heights = [];
+            for(i=0;i<max_column_size;i++){
+                column = []
+                for(j=0;j<=i;j++){
+                    column.push(0);
+                }
+                column_heights.push(column);
+            }
+
             // Switch to determine whether or not more images should be loaded:
             var load_flag = true;
-            // Array to keep track of the heights of each column context:
-            var column_heights = [[0], [0,0], [0,0,0], [0,0,0,0]];
             // Array of the html elements that act as grids for each set of columns:
             var grids = document.getElementsByClassName('image-gallery');
             // The current active grid:
-            var active_grid = 4;
+            var active_grid = 3;
             // The html element of the current actie grid:
             var grid = grids[(active_grid)-1];
             // The columns contained in the currently active grid:
             var columns = grid.children;
-
-            var max_column_size = 4;
 
             async function get_manifest(){
                 let manifest_response = await fetch("./manifest.json");
@@ -169,10 +187,6 @@ include('../header.php');
                 return figure;
             }
 
-            var load_counts = [0,0,0,0];
-            //var load_count = 0;
-            var display_counts = [0,0,0,0];
-            //var display_count = 0;
             
             // This agent does **batch** loading of images. It makes decisions based on
             //  the **grouping** of images being loaded in. This is to refute the notion
@@ -352,19 +366,31 @@ include('../header.php');
                     grid_load_agent(grid_selection);
                 }
             }
-            active_grid = 3;
+
             window.onscroll = function(){
+                    grid_load_agent(active_grid);
+                    grid_display_agent(active_grid);
                 for(i=1;i<=max_column_size;i++){
-                    grid_load_agent(i);
-                    grid_display_agent(i);
+                    if(i != active_grid){
+                        grid_load_agent(i);
+                        grid_display_agent(i);
+                    }
                 }
-                //grid_display_agent(1);
-                console.log(manifest_trackers[active_grid-1]);
-                //need to add a logic that checks to see if a user has scrolled to the bottom of the page;
-                //  if so, then switch the load_flag to true and call the load_agent.
+            }
+
+            window.onresize = function(){
+                if(window.innerWidth > previous_screen_width){
+                    screen_growth_state = true;
+                }else{
+                    screen_growth_state = false;
+                }
+                previous_screen_width = window.innerWidth;
+
             }
 
             var parse_manifest;
+            var previous_screen_width = 0;
+            var screen_growth_state = false;
 
             window.addEventListener('load', function () {
                 console.log('begining');
@@ -375,10 +401,13 @@ include('../header.php');
                         grid_load_agent(active_grid);
                         grid_display_agent(active_grid);
                         for(i=1;i<=max_column_size;i++){
-                            load_flag = true;
-                            grid_load_agent(i);
-                            grid_display_agent(i);
+                            if(i != active_grid){
+                                load_flag = true;
+                                grid_load_agent(i);
+                                grid_display_agent(i);
+                            }
                         }
+                    previous_screen_width = window.innerWidth;
                     }
                     parse_manifest();
                  });
