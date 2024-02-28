@@ -282,7 +282,6 @@ include('../header.php');
                                 return a-b;
                             });
 
-                            //console.log(col_h_list);
                             iteration_index = 0;
                             figure_index = height_list[iteration_index];
                             height_selection = figure_map[figure_index];
@@ -314,28 +313,23 @@ include('../header.php');
                 }
             }
             
-            function readjust_columns(direction){
-                console.log('direction' + direction);
-                active_grid = direction+1;
-                for(i=0;i<max_column_size;i++){
-                    grid = grids[i];
-                    console.log(grid);
-                    console.log(i);
-                    console.log((i+1)==active_grid);
-                    if((i+1) == active_grid){
-                        grid.style.height = null;
-                        grid.style.overflow = null;;
-                    }else{
-                        grid.style.height = '0px';
-                        grid.style.overflow = 'scroll';
+            function readjust_columns(grid_selection){
+                if(grid_selection != active_grid){
+                    active_grid = grid_selection;
+                    for(i=0;i<max_column_size;i++){
+                        grid = grids[i];
+                        console.log(grid);
+                        console.log(i);
+                        console.log((i+1)==active_grid);
+                        if((i+1) == active_grid){
+                            grid.style.height = null;
+                            grid.style.overflow = null;;
+                        }else{
+                            grid.style.height = '0px';
+                            grid.style.overflow = 'scroll';
+                        }
                     }
-                    
-                    console.log(grid);
-                }
-                if(direction == false){ //gaining a column
-
-                }else{//losing a column
-
+                    grid_load_agent(grid_selection).then(grid_display_agent(grid_selection));
                 }
             }
 
@@ -384,22 +378,49 @@ include('../header.php');
             }
 
             window.onresize = function(){
-                if(window.innerWidth > previous_screen_width){
-                    screen_growth_state = true;
-                }else{
-                    screen_growth_state = false;
+                //0 <= x <= 400 -> one col;
+                //400 < x <= 542 -> two col;
+                //542 < x <= 768 -> three col;
+                //768 < x <= 1012 -> four call;
+                //1012 < x -> five col;
+                console.log('resize event triggered');
+                container = document.getElementById('writingsWrapper');
+                container_width = container.getBoundingClientRect().width;
+                if(container_width <= 400){
+                    readjust_columns(1);
+                }else if(container_width > 400 && container_width <= 542){
+                    readjust_columns(2);
+                }else if(container_width > 542 && container_width <= 768){
+                    readjust_columns(3);
+                }else if(container_width > 768 /*&& container_width <= 1012*/){
+                    readjust_columns(4);
+                }/*else if(container_width > 1012){
+                    readjust_columns(5);
+                }*/
+                if(old_height < window.innerHeight){
+                    grid_load_agent(active_grid).then(grid_display_agent(active_grid));
                 }
-                previous_screen_width = window.innerWidth;
-
+                old_height = window.innerHeight;
             }
 
             var parse_manifest;
-            var previous_screen_width = 0;
-            var screen_growth_state = false;
+            var old_height = 0;
 
             window.addEventListener('load', function () {
                 console.log('begining');
-                active_grid = 4;
+                container = document.getElementById('writingsWrapper');
+                container_width = container.getBoundingClientRect().width;
+                if(container_width <= 400){
+                    active_grid = 1;
+                }else if(container_width >400 && container_width <= 542){
+                    active_grid = 2;
+                }else if(container_width > 542 && container_width <= 768){
+                    active_grid = 3;
+                }else if(container_width > 768 && container_width <= 1012){
+                    active_grid = 4;
+                }else{
+                    active_grid = 5;
+                }
                 grids[active_grid-1].style['overflow'] = 'inherit';
                 grids[active_grid-1].style['height'] = 'inherit';
                 get_manifest().then(function(result){
@@ -414,9 +435,9 @@ include('../header.php');
                                 grid_display_agent(i));
                             }
                         }
-                    previous_screen_width = window.innerWidth;
                     }
                     parse_manifest();
+                    old_height = window.innerHeight;
                  });
             });
 
