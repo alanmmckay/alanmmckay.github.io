@@ -193,11 +193,11 @@ include('../header.php');
             async function grid_load_agent(grid_selection){//grid_selection is not zero-based
                 //Manifest tracker keeps count of quantity of items pulled from manifest:
                 //columns = grids[(grid_selection-1)].children;
-                console.log('grid_selection: '+grid_selection);
+                //console.log('grid_selection: '+grid_selection);
                 let manifest_tracker = manifest_trackers[grid_selection-1];
-                console.log('manifest_tracker: '+ manifest_tracker);
+                //console.log('manifest_tracker: '+ manifest_tracker);
                 let init_manifest = (manifest_tracker);
-                console.log('init_manifest: '+init_manifest);
+                //console.log('init_manifest: '+init_manifest);
                 let columns = grids[grid_selection-1].children
                 //Grab the size of the manifest regardless of pull:
                 manifest_size = Object.keys(manifest).length;
@@ -214,10 +214,10 @@ include('../header.php');
                     if(load_flag){
                         load_count = load_counts[grid_selection-1];
                         display_count = display_counts[grid_selection-1];
-                        console.log('difference: ' + ((load_count) - display_count));
+                        //console.log('difference: ' + ((load_count) - display_count));
                         //A check to ensure that we don't grab too many images beyond the viewport boundary:
                         if((manifest_tracker - display_count) <= max_column_size){
-                            console.log('loading!');
+                            //console.log('loading!');
                             //Increment program's load_counter:
                             load_count = load_count + boundary;
                             load_counts[grid_selection-1] = load_count;
@@ -307,7 +307,7 @@ include('../header.php');
                                 })
                             },Math.random(500,1500));
                         }else{
-                            console.log('no load!');
+                            //console.log('no load!');
                         }
                     }
                 }
@@ -318,9 +318,6 @@ include('../header.php');
                     active_grid = grid_selection;
                     for(i=0;i<max_column_size;i++){
                         grid = grids[i];
-                        console.log(grid);
-                        console.log(i);
-                        console.log((i+1)==active_grid);
                         if((i+1) == active_grid){
                             grid.style.height = null;
                             grid.style.overflow = null;;
@@ -338,22 +335,19 @@ include('../header.php');
                 for(i=0;i<grid_selection;i++){
                     col = grids[grid_selection-1].children[i];
                     figures = col.getElementsByTagName('figure');
-                    console.log('figures: ');
-                    console.log(figures);
-                    console.log(Math.max(0,col_maps[grid_selection-1][i]['displayed']));
                     for(j=Math.max(0,col_maps[grid_selection-1][i]['displayed']);j<col_maps[grid_selection-1][i]['loaded'];j++){
                         figure = figures[j];
-                        console.log('grid selection:' +grid_selection);
-                        console.log(figures);
+                        //console.log('grid selection:' +grid_selection);
+                        //console.log(figures);
                         if(isFigureBottom(figure)){
-                            console.log('flag flagged');
+                            //console.log('flag flagged');
                             figure.style['opacity'] = 1;
                             figure.style['border-top'] = 'solid white 5px';
                             col_maps[grid_selection-1][i]['displayed'] += 1;
                             load_flag = true;
                             display_counts[grid_selection-1] = display_counts[grid_selection-1] + 1;
-                            console.log('display count: ' + display_counts[grid_selection-1]);
-                            console.log('load count: ' + load_counts[grid_selection-1]);
+                            //console.log('display count: ' + display_counts[grid_selection-1]);
+                            //console.log('load count: ' + load_counts[grid_selection-1]);
                         }else{
                             load_flag = load_flag || false;
                         }
@@ -383,7 +377,6 @@ include('../header.php');
                 //542 < x <= 768 -> three col;
                 //768 < x <= 1012 -> four call;
                 //1012 < x -> five col;
-                console.log('resize event triggered');
                 container = document.getElementById('writingsWrapper');
                 container_width = container.getBoundingClientRect().width;
                 if(container_width <= 400){
@@ -407,7 +400,6 @@ include('../header.php');
             var old_height = 0;
 
             window.addEventListener('load', function () {
-                console.log('begining');
                 container = document.getElementById('writingsWrapper');
                 container_width = container.getBoundingClientRect().width;
                 if(container_width <= 400){
@@ -416,11 +408,11 @@ include('../header.php');
                     active_grid = 2;
                 }else if(container_width > 542 && container_width <= 768){
                     active_grid = 3;
-                }else if(container_width > 768 && container_width <= 1012){
+                }else if(container_width > 768 /*&& container_width <= 1012*/){
                     active_grid = 4;
-                }else{
+                }/*else{
                     active_grid = 5;
-                }
+                }*/
                 grids[active_grid-1].style['overflow'] = 'inherit';
                 grids[active_grid-1].style['height'] = 'inherit';
                 get_manifest().then(function(result){
