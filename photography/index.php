@@ -305,7 +305,7 @@ include('../header.php');
                                 grid_display_agent(grid_selection).then(function(){
                                     load_flag = false;
                                 })
-                            },Math.random(500,1500));
+                            },750);
                         }else{
                             //console.log('no load!');
                         }
