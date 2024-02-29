@@ -18,33 +18,6 @@ $relative_path = "../";
 
 include('../header.php');
 
-//vsco: width == 1012 kicks into displaying 5 in a row
-//      width ==  768 kicks into displaying 4 in a row
-//      width ==  543 kicks into displaying 3 in a row
-//    Each column has display:grid; There exists a container of the columns that
-//      has the same display property. The width of these columns sets the width
-//      of the images via percentages and application of max-width.
-
-// . Do a preliminary load of n images, where n is the max amount of columns.
-// . Calculate the height of the smallest column
-//      - This is a compound measurement of the height values of each image
-//          within the column.
-// . When a resize occurs which adds a new column, recalculate height of the
-//      smallest column.
-//      - Rebucket the images in the grid with respect to new quantity of cols
-// . When the viewport is determined to be at a point where more images should
-//      be loaded, add the next image to the col with the smallest height, re-
-//      calculate the smallest column.
-
-//I want to have fade-in animations for the new images being loaded. This can
-//  be accomplished by creating a new figure tag whose display is initially set
-//  to none.
-
-//Would like to have a buffer of images loaded in which aren't displayed, and
-//  the view-port trigger displays these images then loads in a new buffer.
-
-//Need to consider the images.json file with respect to finding the order to
-//  to load in these images. Should also create my own manifest datastructure.
 ?>
         <section id='writingsWrapper'>
             <section>
@@ -59,13 +32,11 @@ include('../header.php');
                         </p>
                     <hr>
                     </section>
-
                     <header>
                         <h1>Photography</h1>
                     </header>
                     <div id='galleries'>
-                        
-               
+
                     </div>
                     <section class='info'>
                         <hr>
@@ -83,24 +54,34 @@ include('../header.php');
             </section>
         </section>
         <script>
+
+            // --- --- --- Declarations --- --- --- //
+
             // JSON object which houses image information:
             var manifest;
 
             var max_column_size = 4;
-            // Integer array to determine amount of entries of the manifest that have been considered:
+            // Integer array to determine amount of entries of the manifest that have been considered for a given column:
             var manifest_trackers = [];
             // Integer array to determine how many images have been loaded for a given column:
             var load_counts = []
             // Integer array to determine how many images have been displayed for a given column:
             var display_counts = []
 
+            // --- --- --- //
+            // Priming the above arrays:
             for(i=0;i<max_column_size;i++){
                 manifest_trackers.push(0);
                 load_counts.push(0);
                 display_counts.push(0);
             }
+            // -- -- -- //
+
             // Array to keep track of the heights of each column context:
             var column_heights = [];
+
+            // --- --- --- //
+            // Priming column_heights:
             for(i=0;i<max_column_size;i++){
                 column = []
                 for(j=0;j<=i;j++){
@@ -108,21 +89,39 @@ include('../header.php');
                 }
                 column_heights.push(column);
             }
+            // -- -- -- //
+
+            // Array to track quantity of figures that have been loaded and the quantity of figures that have been displayed for a given grid:
+            var col_maps = [];
+
+            // --- --- --- //
+            // Priming col_maps:
+            for(i=0;i<max_column_size;i++){
+                col_map = [];
+                for(j=0;j<(i+1);j++){
+                    col_map[j] = [];
+                    col_map[j]['loaded'] = 0;
+                    col_map[j]['displayed'] = -1;
+                }
+                col_maps.push(col_map);
+            }
+            // -- -- -- //
 
             // Switch to determine whether or not more images should be loaded:
             var load_flag = true;
-            // Array of the html elements that act as grids for each set of columns:
-            var grids = document.getElementsByClassName('image-gallery');
-
-            /*<div id='image-gallery-1' class='image-gallery' style='display:grid;grid-template-columns: repeat(1, minmax(0px,1fr));align-items:start;height:0px;overflow:scroll;'>
-                            <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                            </div>
-            </div>*/
             
+            // --- --- --- //
+            //Block of logic to create the divs that house the grids of each column length:
             grids_html = document.getElementById('galleries');
+            // Template:
+            /*<div id='image-gallery-1' class='image-gallery' style='display:grid;grid-template-columns: repeat(1, minmax(0px,1fr));align-items:start;height:0px;overflow:scroll;'>
+                <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
+                </div>
+            </div>*/
             for(i=0;i<max_column_size;i++){
                 const grid = document.createElement('div');
                 grid.setAttribute('class','image-gallery');
+                // TODO: Create a css class for the folowing properties:
                 grid.style['display'] = 'grid';
                 grid.style['grid-template-columns'] = 'repeat('+(i+1)+', minmax(0px,1fr))';
                 grid.style['align-items'] = 'start';
@@ -137,13 +136,14 @@ include('../header.php');
                 }
                 grids_html.appendChild(grid);
             }
+            // -- -- -- //
 
-            // The current active grid:
+            // Array of the html elements that act as grids for each set of columns:
+            var grids = document.getElementsByClassName('image-gallery');
+            // The current active grid; 1-based index:
             var active_grid;
-            // The html element of the current actie grid:
-            //var grid = grids[(active_grid)-1];
-            // The columns contained in the currently active grid:
-            //var columns = grid.children;
+
+            // --- --- --- ------------ --- --- --- //
 
             async function get_manifest(){
                 let manifest_response = await fetch("./manifest.json");
@@ -163,17 +163,6 @@ include('../header.php');
                 }
             }
 
-            var col_maps = [];
-            for(i=0;i<max_column_size;i++){
-                col_map = [];
-                for(j=0;j<(i+1);j++){
-                    col_map[j] = [];
-                    col_map[j]['loaded'] = 0;
-                    col_map[j]['displayed'] = -1;
-                }
-                col_maps.push(col_map);
-            }
-
             function create_new_figure(manifest_id,init_style){
                 const figure = document.createElement('figure');
                 figure.style['border-top'] = init_style['border-top'];
@@ -188,7 +177,7 @@ include('../header.php');
 
             
             // This agent does **batch** loading of images. It makes decisions based on
-            //  the **grouping** of images being loaded in. This is to refute the notion
+            //  the **grouping** of images being loaded in. This is said to refute the notion
             //  of abstracting responsibilities of creation to something more finite.
             async function grid_load_agent(grid_selection){//grid_selection is not zero-based
                 //Manifest tracker keeps count of quantity of items pulled from manifest:
