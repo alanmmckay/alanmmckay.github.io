@@ -350,35 +350,43 @@ include('../header.php');
             }
 
             window.onscroll = function(){
-                    grid_load_agent(active_grid);
-                    grid_display_agent(active_grid);
+                    grid_load_agent(active_grid).then(
+                    grid_display_agent(active_grid));
                 for(i=1;i<=max_column_size;i++){
                     if(i != active_grid){
-                        grid_load_agent(i);
-                        grid_display_agent(i);
+                        grid_load_agent(i).then(
+                        grid_display_agent(i));
                     }
                 }
             }
 
             window.onresize = function(){
-                //0 <= x <= 400 -> one col;
-                //400 < x <= 542 -> two col;
-                //542 < x <= 768 -> three col;
-                //768 < x <= 1012 -> four call;
-                //1012 < x -> five col;
+                //   0 <= x <= 400  -> one col;
+                // 400 <  x <= 542  -> two col;
+                // 542 <  x <= 768  -> three col;
+                // 768 <  x <= 1012 -> four call;
+                //1012 <  x         -> five col;
                 container = document.getElementById('writingsWrapper');
                 container_width = container.getBoundingClientRect().width;
+                if(isMobile){
+                    max_column_size = 3;
+                    if(container_width <= 400){
+                        readjust_columns(1);
+                    }else if(container_width > 400 && container_width <= 542){
+                        readjust_columns(2);
+                    }else if(container_width > 542){
+                        readjust_columns(3);
+                    }
+                }else
                 if(container_width <= 400){
                     readjust_columns(1);
                 }else if(container_width > 400 && container_width <= 542){
                     readjust_columns(2);
                 }else if(container_width > 542 && container_width <= 768){
                     readjust_columns(3);
-                }else if(container_width > 768 /*&& container_width <= 1012*/){
+                }else if(container_width > 768){
                     readjust_columns(4);
-                }/*else if(container_width > 1012){
-                    readjust_columns(5);
-                }*/
+                }
                 if(old_height < window.innerHeight){
                     grid_load_agent(active_grid).then(grid_display_agent(active_grid));
                 }
@@ -388,20 +396,31 @@ include('../header.php');
             var parse_manifest;
             var old_height = 0;
 
+            var isMobile = window.matchMedia || window.msMatchMedia;
+            isMobile = isMobile("(pointer:coarse)").matches;
+
             window.addEventListener('load', function () {
                 container = document.getElementById('writingsWrapper');
                 container_width = container.getBoundingClientRect().width;
+                if(isMobile){
+                    max_column_size = 3;
+                    if(container_width <= 400){
+                        active_grid = 1;
+                    }else if(container_width > 400 && container_width <= 542){
+                        active_grid = 2;
+                    }else if(container_width > 542){
+                        active_grid = 3;
+                    }
+                }else
                 if(container_width <= 400){
                     active_grid = 1;
                 }else if(container_width >400 && container_width <= 542){
                     active_grid = 2;
                 }else if(container_width > 542 && container_width <= 768){
                     active_grid = 3;
-                }else if(container_width > 768 /*&& container_width <= 1012*/){
+                }else if(container_width > 768){
                     active_grid = 4;
-                }/*else{
-                    active_grid = 5;
-                }*/
+                }
                 grids[active_grid-1].style['overflow'] = 'inherit';
                 grids[active_grid-1].style['height'] = 'inherit';
                 get_manifest().then(function(result){
