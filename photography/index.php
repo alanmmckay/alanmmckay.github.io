@@ -53,12 +53,13 @@ include('../header.php');
                 </nav>
             </section>
         </section>
+        <script src='manifest.js'></script>
         <script>
 
             // --- --- --- Declarations --- --- --- //
 
             // JSON object which houses image information:
-            var manifest;
+            //var manifest;
 
             var max_column_size = 4;
             // Integer array to determine amount of entries of the manifest that have been considered for a given column:
@@ -113,11 +114,6 @@ include('../header.php');
             // --- --- --- //
             //Block of logic to create the divs that house the grids of each column length:
             grids_html = document.getElementById('galleries');
-            // Template:
-            /*<div id='image-gallery-1' class='image-gallery' style='display:grid;grid-template-columns: repeat(1, minmax(0px,1fr));align-items:start;height:0px;overflow:scroll;'>
-                <div class='image-col' style='display:grid;grid-template-columns: minmax(0px,1fr);'>
-                </div>
-            </div>*/
             for(i=0;i<max_column_size;i++){
                 const grid = document.createElement('div');
                 grid.setAttribute('class','image-gallery');
@@ -146,11 +142,12 @@ include('../header.php');
             // --- --- --- ------------ --- --- --- //
 
             async function get_manifest(){
-                let manifest_response = await fetch("./manifest.json");
+                /*let manifest_response = await fetch("./manifest.json");
                 if (manifest_response.ok){
                     let manifest_result = await manifest_response.json();
                     return manifest_result;
-                }
+                }*/
+                return manifest;
             }
 
             function isFigureBottom(fig_object){
