@@ -169,7 +169,7 @@ include('../header.php');
                 figure.style['opacity'] = init_style['opacity'];
                 figure.setAttribute('data_height',init_style['height']);
                 const image = document.createElement('img');
-                image.src = 'images/'+manifest_id;
+                image.src = 'thumbnails/'+manifest_id;
                 figure.appendChild(image);
 
                 return figure;
@@ -228,12 +228,12 @@ include('../header.php');
                                 //Unecessary check; simply forces the initial set of images to not have animated transition:
                                 if(manifest_tracker - grid_selection < 0){
                                     new_figure_data = {
-                                                        'object':create_new_figure(reference['file_name'],{'border-top':'solid 0px white','opacity':0, 'height':reference['height']}),
+                                                        'object':create_new_figure(reference['webp_file'],{'border-top':'solid 0px white','opacity':0, 'height':reference['height']}),
                                                         'height':reference['height']
                                                     };
                                 }else{
                                     new_figure_data = {
-                                                        'object':create_new_figure(reference['file_name'],{'border-top':'solid 25px white','opacity':0, 'height':reference['height']}),
+                                                        'object':create_new_figure(reference['webp_file'],{'border-top':'solid 25px white','opacity':0, 'height':reference['height']}),
                                                         'height': reference['height']
                                                     };
                                 }
