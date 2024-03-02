@@ -200,6 +200,7 @@ include('../header.php');
                     if(load_flag){
                         load_count = load_counts[grid_selection-1];
                         display_count = display_counts[grid_selection-1];
+
                         //console.log('difference: ' + ((load_count) - display_count));
                         //A check to ensure that we don't grab too many images beyond the viewport boundary:
                         if((manifest_tracker - display_count) <= max_column_size){
@@ -210,11 +211,11 @@ include('../header.php');
                             //A to-be-ordered list of height values for each figure loaded:
                             height_list = [];
                             //A mapping of figure objects such that the key is it's height:
-                            figure_map = [];
+                            figure_map = {};
                             //A to-be-ordered list of height values with respect to the columns being used for display:
                             col_h_list = [];
                             //A mapping of column objects such that a key is a column's height:
-                            col_h_map = [];
+                            col_h_map = {};
 
                             //Iterate an amount of times equivalent to amount of images being buffered:
                             for(i=0;i<boundary;i++){
@@ -254,13 +255,13 @@ include('../header.php');
                             });
 
                             for(i=0;i<grid_selection;i++){
-                                column_height = column_heights[grid_selection-1][i];
+                                column_height = columns[i].getBoundingClientRect().height//column_heights[(grid_selection-1).toString()][i];
                                 col_h_list.push(column_height);
                                 if(Object.keys(col_h_map).includes(column_height.toString())){
-                                    col_h_map[column_height].push(i);
+                                    col_h_map[column_height.toString()].push(i);
                                 }else{
-                                    col_h_map[column_height] = [];
-                                    col_h_map[column_height].push(i);
+                                    col_h_map[column_height.toString()] = [];
+                                    col_h_map[column_height.toString()].push(i);
                                 }
                             }
 
@@ -321,10 +322,8 @@ include('../header.php');
                 for(i=0;i<grid_selection;i++){
                     col = grids[grid_selection-1].children[i];
                     figures = col.getElementsByTagName('figure');
-                    for(j=Math.max(0,col_maps[grid_selection-1][i]['displayed']);j<col_maps[grid_selection-1][i]['loaded'];j++){
+                    for(j=Math.max(0,col_maps[grid_selection-1][i]['displayed']);j<Math.min(figures.length,col_maps[grid_selection-1][i]['loaded']);j++){
                         figure = figures[j];
-                        //console.log('grid selection:' +grid_selection);
-                        //console.log(figures);
                         if(isFigureBottom(figure)){
                             //console.log('flag flagged');
                             figure.style['opacity'] = 1;
@@ -347,14 +346,16 @@ include('../header.php');
             }
 
             window.onscroll = function(){
+                setTimeout(function(){
                     grid_load_agent(active_grid).then(
                     grid_display_agent(active_grid));
-                for(i=1;i<=max_column_size;i++){
-                    if(i != active_grid){
-                        grid_load_agent(i).then(
-                        grid_display_agent(i));
+                    for(i=1;i<=max_column_size;i++){
+                        if(i != active_grid){
+                            grid_load_agent(i).then(
+                            grid_display_agent(i));
+                        }
                     }
-                }
+                }, 750);
             }
 
             window.onresize = function(){
