@@ -383,6 +383,10 @@ code pre.info-code{
     float:right;
 }
 
+div.image-col figure{
+    transition:border-top 1.5s, opacity 4s;
+}
+
 @media screen and (min-width:800px){
     #writingsWrapper .fig-col{
         overflow:auto;
