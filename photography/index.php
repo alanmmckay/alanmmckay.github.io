@@ -25,10 +25,13 @@ include('../header.php');
 
                     <section class='info'>
                         <header>
-                            <h2>Preface</h2>
+                            <h2>On VSCO:</h2>
                         </header>
                         <p>
-
+                            From the homepage, navigating to my photography portal used to take a visitor to my <a href='https://vsco.co/alanmckay/gallery' target="_blank" rel="noopener noreferrer">VSCO profile</a>. The platform has recently made a change forcing a vistor to sign into their service in order to view the entirety of a given profile's image gallery, effectively putting their users into a silo. This has encouraged me to stop paying a subscription for the service and develop my own gallery.
+                        </p>
+                        <p>
+                            Feel free to take a look at the various photographs I've started taking since 2018. There is no obligation to sign in here. Interacting with an image will take you to the relevant photo within the VSCO platform. This will be changed once the gate is locked for individual images as well.
                         </p>
                     <hr>
                     </section>
@@ -355,7 +358,7 @@ include('../header.php');
                             grid_display_agent(i));
                         }
                     }
-                }, 750);
+                }, (150 * active_grid));
             }
 
             window.onresize = function(){
