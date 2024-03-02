@@ -28,7 +28,7 @@ include('../header.php');
                             <h2>On VSCO:</h2>
                         </header>
                         <p>
-                            From the homepage, navigating to my photography portal used to take a visitor to my <a href='https://vsco.co/alanmckay/gallery' target="_blank" rel="noopener noreferrer">VSCO profile</a>. The platform has recently made a change forcing a vistor to sign into their service in order to view the entirety of a given profile's image gallery, effectively putting their users into a silo. This has encouraged me to stop paying a subscription for the service and develop my own gallery.
+                            From the homepage, navigating to my photography portal used to take a visitor to my <a href='https://vsco.co/alanmckay/gallery' target="_blank" rel="noopener noreferrer">VSCO profile</a>. The platform has recently made a change forcing a vistor to sign into their service in order to view the entirety of a given profile's image gallery. This has effectively put their users into a silo, which has encouraged me to stop paying a subscription for the service and develop my own gallery.
                         </p>
                         <p>
                             Feel free to take a look at the various photographs I've started taking since 2018. There is no obligation to sign in here. Interacting with an image will take you to the relevant photo within the VSCO platform. This will be changed once the gate is locked for individual images as well.
@@ -43,7 +43,7 @@ include('../header.php');
                     </div>
                     <section class='info'>
                         <hr>
-                        <h3>Concluding notes</h3>
+                        <h3></h3>
                         <p>
 
                         </p>
@@ -163,16 +163,21 @@ include('../header.php');
                 }
             }
 
-            function create_new_figure(manifest_id,init_style){
+            function create_new_figure(manifest_id,init_style,url){
+                const anchor = document.createElement('a');
+                anchor.setAttribute('target','_blank');
+                anchor.setAttribute('rel','noopener noreferrer');
+                anchor.setAttribute('href',url);
+
                 const figure = document.createElement('figure');
                 figure.style['border-top'] = init_style['border-top'];
                 figure.style['opacity'] = init_style['opacity'];
-                figure.setAttribute('data_height',init_style['height']);
+
                 const image = document.createElement('img');
                 image.src = 'thumbnails/'+manifest_id;
                 figure.appendChild(image);
-
-                return figure;
+                anchor.appendChild(figure);
+                return anchor;
             }
 
             
@@ -229,12 +234,12 @@ include('../header.php');
                                 //Unecessary check; simply forces the initial set of images to not have animated transition:
                                 if(manifest_tracker - grid_selection < 0){
                                     new_figure_data = {
-                                                        'object':create_new_figure(reference['webp_file'],{'border-top':'solid 0px white','opacity':0, 'height':reference['height']}),
+                                                        'object':create_new_figure(reference['webp_file'],{'border-top':'solid 0px white','opacity':0},reference['share_link']),
                                                         'height':reference['height']
                                                     };
                                 }else{
                                     new_figure_data = {
-                                                        'object':create_new_figure(reference['webp_file'],{'border-top':'solid 25px white','opacity':0, 'height':reference['height']}),
+                                                        'object':create_new_figure(reference['webp_file'],{'border-top':'solid 25px white','opacity':0},reference['share_link']),
                                                         'height': reference['height']
                                                     };
                                 }
@@ -358,7 +363,7 @@ include('../header.php');
                             grid_display_agent(i));
                         }
                     }
-                }, (150 * active_grid));
+                }, (200 * active_grid));
             }
 
             window.onresize = function(){
