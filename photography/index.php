@@ -82,7 +82,7 @@ include('../header.php');
             // -- -- -- //
 
             // Array to keep track of the heights of each column context:
-            var column_heights = [];
+            /*var column_heights = [];
 
             // --- --- --- //
             // Priming column_heights:
@@ -92,7 +92,7 @@ include('../header.php');
                     column.push(0);
                 }
                 column_heights.push(column);
-            }
+            }*/
             // -- -- -- //
 
             // Array to track quantity of figures that have been loaded and the quantity of figures that have been displayed for a given grid:
@@ -290,7 +290,7 @@ include('../header.php');
                                     //Grab the next figure of the current height-tier:
                                     figure = height_selection[i];
                                     columns[col_index].appendChild(figure);
-                                    column_heights[grid_selection-1][col_index] += figure_index;
+                                    //column_heights[grid_selection-1][col_index] += figure_index;
                                     iteration_index += 1;
                                 }
                                 figure_index = height_list[iteration_index];
