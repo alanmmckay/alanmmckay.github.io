@@ -25,7 +25,7 @@ include('../header.php');
 
                     <section class='info'>
                         <header>
-                            <h2>On VSCO:</h2>
+                            <h2>On VSCO</h2>
                         </header>
                         <p>
                             From the homepage, navigating to my photography portal used to take a visitor to my <a href='https://vsco.co/alanmckay/gallery' target="_blank" rel="noopener noreferrer">VSCO profile</a>. The platform has recently made a change forcing a vistor to sign into their service in order to view the entirety of a given profile's image gallery. This has effectively put their users into a silo, which has encouraged me to stop paying a subscription for the service and develop my own gallery.
@@ -38,8 +38,30 @@ include('../header.php');
                     <header>
                         <h1>Photography</h1>
                     </header>
-                    <div id='galleries'>
+<?php
+    $json = file_get_contents("manifest.json");
+    $json_data = json_decode($json,true);
+    $image_count = 18;
+    $image_index = 0;
+    $images_quantity = count($json_data);
+    $max_page_number = ceil($images_quantity / $image_count);
+    if(isset($_GET['page']) && is_numeric($_GET['page']) && ($_GET['page'] <= $max_page_number) && ($_GET['page'] > 0)){
+        $initial_index = $image_count * ((int)$_GET['page'] - 1);
+        $image_index = $initial_index;
+    }
+    echo "<div id='static-image-gallery' style='display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); align-items: center; column-gap: 15px; row-gap:15px;'>";
+    for($i = 0; $i < min(($images_quantity - $initial_index),$image_count); $i++){
+        echo "<a href='".$json_data[$image_index]['share_link']."'>";
+        echo "<figure>";
+        echo "<img src='thumbnails/".$json_data[$image_index]['webp_file']."'/>";
+        $image_index = $image_index + 1;
+        echo "</figure>";
+        echo "</a>";
+    }
+    echo "</div>";
+?>
 
+                    <div id='galleries'>
                     </div>
                     <section class='info'>
                         <hr>
@@ -59,6 +81,7 @@ include('../header.php');
         <script src='manifest.js'></script>
         <script>
 
+            document.getElementById('static-image-gallery').style['display'] = 'none';
             // --- --- --- Declarations --- --- --- //
 
             // JSON object which houses image information:
