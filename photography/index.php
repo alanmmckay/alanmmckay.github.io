@@ -79,6 +79,7 @@ include('../header.php');
                 </nav>
             </section>
         </section>
+
         <script>
 
             document.getElementById('static-image-gallery').style['display'] = 'none';
@@ -265,15 +266,15 @@ include('../header.php');
                                                         'height': reference['height']
                                                     };
                                 }
-
+                                new_figure_ratio = (100 * reference['height']) / reference['width'];
                                 //Create height buckets within the figure map - accounts for images that may have the same height:
-                                if (Object.keys(figure_map).includes(new_figure_data['height'].toString())){
-                                    figure_map[new_figure_data['height'].toString()].push(new_figure_data['object']);
+                                if (Object.keys(figure_map).includes(new_figure_ratio.toString())){
+                                    figure_map[new_figure_ratio.toString()].push(new_figure_data['object']);
                                 }else{
-                                    figure_map[new_figure_data['height'].toString()] = [];
-                                    figure_map[new_figure_data['height'].toString()].push(new_figure_data['object']);
+                                    figure_map[new_figure_ratio.toString()] = [];
+                                    figure_map[new_figure_ratio.toString()].push(new_figure_data['object']);
                                 }
-                                height_list.push(new_figure_data['height']);
+                                height_list.push(new_figure_ratio);
                                 col_maps[grid_selection-1][i]['loaded'] += 1; //col_map tracks amount of images loaded and displayed for each column.
                                 manifest_tracker += 1;
                             }
