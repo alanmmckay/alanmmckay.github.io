@@ -38,6 +38,7 @@ include('../header.php');
                     <header>
                         <h1>Photography</h1>
                     </header>
+                    <script src='manifest.js'></script>
 <?php
     $json = file_get_contents("manifest.json");
     $json_data = json_decode($json,true);
@@ -53,7 +54,7 @@ include('../header.php');
     for($i = 0; $i < min(($images_quantity - $initial_index),$image_count); $i++){
         echo "<a href='".$json_data[$image_index]['share_link']."'>";
         echo "<figure>";
-        echo "<img src='thumbnails/".$json_data[$image_index]['webp_file']."'/>";
+        echo "<img src='thumbnails/".$json_data[$image_index]['webp_file']."?static'/>";
         $image_index = $image_index + 1;
         echo "</figure>";
         echo "</a>";
@@ -78,7 +79,6 @@ include('../header.php');
                 </nav>
             </section>
         </section>
-        <script src='manifest.js'></script>
         <script>
 
             document.getElementById('static-image-gallery').style['display'] = 'none';
@@ -135,7 +135,7 @@ include('../header.php');
             // -- -- -- //
 
             // Switch to determine whether or not more images should be loaded:
-            var load_flag = true;
+            //var load_flag = true;
             
             // --- --- --- //
             //Block of logic to create the divs that house the grids of each column length:
@@ -203,11 +203,10 @@ include('../header.php');
                 return anchor;
             }
 
-            
             // This agent does **batch** loading of images. It makes decisions based on
             //  the **grouping** of images being loaded in. This is said to refute the notion
             //  of abstracting responsibilities of creation to something more finite.
-            async function grid_load_agent(grid_selection){//grid_selection is not zero-based
+            async function grid_load_agent(grid_selection,load_flag = false){//grid_selection is not zero-based
                 //Manifest tracker keeps count of quantity of items pulled from manifest:
                 //columns = grids[(grid_selection-1)].children;
                 //console.log('grid_selection: '+grid_selection);
@@ -215,7 +214,7 @@ include('../header.php');
                 //console.log('manifest_tracker: '+ manifest_tracker);
                 let init_manifest = (manifest_tracker);
                 //console.log('init_manifest: '+init_manifest);
-                let columns = grids[grid_selection-1].children
+                let columns = grids[grid_selection-1].children;
                 //Grab the size of the manifest regardless of pull:
                 manifest_size = Object.keys(manifest).length;
                 //Check whether we've run out of images to load:
@@ -320,10 +319,8 @@ include('../header.php');
                                 height_selection = figure_map[figure_index];
                             }
                             setTimeout(function(){
-                                grid_display_agent(grid_selection).then(function(){
-                                    load_flag = false;
-                                })
-                            },750);
+                                grid_display_agent(grid_selection);
+                            },(grid_selection * 100));
                         }else{
                             //console.log('no load!');
                         }
@@ -344,7 +341,7 @@ include('../header.php');
                             grid.style.overflow = 'scroll';
                         }
                     }
-                    grid_load_agent(grid_selection).then(grid_display_agent(grid_selection));
+                    grid_display_agent(grid_selection);//.then(grid_display_agent(grid_selection));
                 }
             }
 
@@ -356,7 +353,6 @@ include('../header.php');
                     for(j=Math.max(0,col_maps[grid_selection-1][i]['displayed']);j<Math.min(figures.length,col_maps[grid_selection-1][i]['loaded']);j++){
                         figure = figures[j];
                         if(isFigureBottom(figure)){
-                            //console.log('flag flagged');
                             figure.style['opacity'] = 1;
                             figure.style['border-top'] = 'solid white 5px';
                             col_maps[grid_selection-1][i]['displayed'] += 1;
@@ -369,24 +365,23 @@ include('../header.php');
                         }
                     }
                 }
-                if(load_flag){
-                    grid_load_agent(grid_selection).then(function(){
-                        load_flag = false;
-                    });
+                if(load_flag === true){
+                    setTimeout(function(){grid_load_agent(grid_selection,true)},(grid_selection * 100));
                 }
+                
             }
 
             window.onscroll = function(){
                 setTimeout(function(){
-                    grid_load_agent(active_grid).then(
-                    grid_display_agent(active_grid));
+                    grid_display_agent(active_grid);//.then(
+                    //grid_display_agent(active_grid));
                     for(i=1;i<=max_column_size;i++){
                         if(i != active_grid){
-                            grid_load_agent(i).then(
-                            grid_display_agent(i));
+                            grid_display_agent(i);//.then(
+                            //grid_display_agent(i));
                         }
                     }
-                }, (200 * active_grid));
+                }, (100 * active_grid));
             }
 
             window.onresize = function(){
@@ -417,7 +412,7 @@ include('../header.php');
                     readjust_columns(4);
                 }
                 if(old_height < window.innerHeight){
-                    grid_load_agent(active_grid).then(grid_display_agent(active_grid));
+                    grid_display_agent(active_grid);//.then(grid_display_agent(active_grid));
                 }
                 old_height = window.innerHeight;
             }
@@ -452,22 +447,17 @@ include('../header.php');
                 }
                 grids[active_grid-1].style['overflow'] = 'inherit';
                 grids[active_grid-1].style['height'] = 'inherit';
-                get_manifest().then(function(result){
-                    manifest = result;
-                    parse_manifest = function(){
-                        grid_load_agent(active_grid).then(
-                        grid_display_agent(active_grid));
-                        for(i=1;i<=max_column_size;i++){
-                            if(i != active_grid){
-                                load_flag = true;
-                                grid_load_agent(i).then(
-                                grid_display_agent(i));
-                            }
+                
+                    grid_load_agent(active_grid,true)//.then(
+                    //grid_display_agent(active_grid));
+                    for(i=1;i<=max_column_size;i++){
+                        if(i != active_grid){
+                            grid_load_agent(i,true)//.then(
+                            //grid_display_agent(i));
                         }
                     }
-                    parse_manifest();
-                    old_height = window.innerHeight;
-                 });
+                    
+                old_height = window.innerHeight;
             });
 
         </script>
