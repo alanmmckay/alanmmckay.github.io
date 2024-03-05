@@ -98,7 +98,7 @@ include('../header.php');
 
             // --- --- --- //
             // Priming the above arrays:
-            for(i=0;i<max_column_size;i++){
+            for(let i=0;i<max_column_size;i++){
                 manifest_trackers.push(0);
                 load_counts.push(0);
                 display_counts.push(0);
@@ -124,9 +124,9 @@ include('../header.php');
 
             // --- --- --- //
             // Priming col_maps:
-            for(i=0;i<max_column_size;i++){
+            for(let i=0;i<max_column_size;i++){
                 col_map = [];
-                for(j=0;j<(i+1);j++){
+                for(let j=0;j<(i+1);j++){
                     col_map[j] = [];
                     col_map[j]['loaded'] = 0;
                     col_map[j]['displayed'] = -1;
@@ -141,7 +141,7 @@ include('../header.php');
             // --- --- --- //
             //Block of logic to create the divs that house the grids of each column length:
             grids_html = document.getElementById('galleries');
-            for(i=0;i<max_column_size;i++){
+            for(let i=0;i<max_column_size;i++){
                 const grid = document.createElement('div');
                 grid.setAttribute('class','image-gallery');
                 // TODO: Create a css class for the folowing properties:
@@ -150,7 +150,7 @@ include('../header.php');
                 grid.style['align-items'] = 'start';
                 grid.style['height'] = '0px';
                 grid.style['overflow'] = 'scroll';
-                for(j=0;j<=i;j++){
+                for(let j=0;j<=i;j++){
                     const column = document.createElement('div');
                     column.setAttribute('class','image-col');
                     column.style['display'] = 'grid';
@@ -159,6 +159,7 @@ include('../header.php');
                 }
                 grids_html.appendChild(grid);
             }
+            delete grids_html;
             // -- -- -- //
 
             // Array of the html elements that act as grids for each set of columns:
@@ -168,18 +169,17 @@ include('../header.php');
 
             // --- --- --- ------------ --- --- --- //
 
-            async function get_manifest(){
-                /*let manifest_response = await fetch("./manifest.json");
+            async function get_manifest(){ // currently unused function
+                let manifest_response = await fetch("./manifest.json");
                 if (manifest_response.ok){
                     let manifest_result = await manifest_response.json();
                     return manifest_result;
-                }*/
-                return manifest;
+                }
             }
 
             function isFigureBottom(fig_object){
-                fig_height = fig_object.getBoundingClientRect().height;
-                fig_top = fig_object.getBoundingClientRect().top;
+                var fig_height = fig_object.getBoundingClientRect().height;
+                var fig_top = fig_object.getBoundingClientRect().top;
                 if((window.innerHeight * .95)-fig_top > 0){ 
                     return true;
                 }else{
@@ -188,16 +188,16 @@ include('../header.php');
             }
 
             function create_new_figure(manifest_id,init_style,url){
-                const anchor = document.createElement('a');
+                var anchor = document.createElement('a');
                 anchor.setAttribute('target','_blank');
                 anchor.setAttribute('rel','noopener noreferrer');
                 anchor.setAttribute('href',url);
 
-                const figure = document.createElement('figure');
+                var figure = document.createElement('figure');
                 figure.style['border-top'] = init_style['border-top'];
                 figure.style['opacity'] = init_style['opacity'];
 
-                const image = document.createElement('img');
+                var image = document.createElement('img');
                 image.src = 'thumbnails/'+manifest_id;
                 figure.appendChild(image);
                 anchor.appendChild(figure);
@@ -211,26 +211,26 @@ include('../header.php');
                 //Manifest tracker keeps count of quantity of items pulled from manifest:
                 //columns = grids[(grid_selection-1)].children;
                 //console.log('grid_selection: '+grid_selection);
-                let manifest_tracker = manifest_trackers[grid_selection-1];
+                var manifest_tracker = manifest_trackers[grid_selection-1];
                 //console.log('manifest_tracker: '+ manifest_tracker);
-                let init_manifest = (manifest_tracker);
+                var init_manifest = (manifest_tracker);
                 //console.log('init_manifest: '+init_manifest);
-                let columns = grids[grid_selection-1].children;
+                var columns = grids[grid_selection-1].children;
                 //Grab the size of the manifest regardless of pull:
                 manifest_size = Object.keys(manifest).length;
                 //Check whether we've run out of images to load:
                 if(manifest_tracker < manifest_size){
                     //Ensure the amount of columns does not cause us to overdraft:
                     if( (manifest_tracker+grid_selection) >= manifest_size){
-                        boundary = manifest_size - manifest_tracker;
+                        var boundary = manifest_size - manifest_tracker;
                     }else{
-                        boundary = grid_selection;
+                        var boundary = grid_selection;
                     }
 
                     //If the grid_display_agent has flagged that we need to grab more images:
                     if(load_flag){
-                        load_count = load_counts[grid_selection-1];
-                        display_count = display_counts[grid_selection-1];
+                        var load_count = load_counts[grid_selection-1];
+                        var display_count = display_counts[grid_selection-1];
 
                         //console.log('difference: ' + ((load_count) - display_count));
                         //A check to ensure that we don't grab too many images beyond the viewport boundary:
@@ -240,33 +240,33 @@ include('../header.php');
                             load_count = load_count + boundary;
                             load_counts[grid_selection-1] = load_count;
                             //A to-be-ordered list of height values for each figure loaded:
-                            height_list = [];
+                            var height_list = [];
                             //A mapping of figure objects such that the key is it's height:
-                            figure_map = {};
+                            var figure_map = {};
                             //A to-be-ordered list of height values with respect to the columns being used for display:
-                            col_h_list = [];
+                            var col_h_list = [];
                             //A mapping of column objects such that a key is a column's height:
-                            col_h_map = {};
+                            var col_h_map = {};
 
                             //Iterate an amount of times equivalent to amount of images being buffered:
-                            for(i=0;i<boundary;i++){
+                            for(let i=0;i<boundary;i++){
 
                                 //Grab the next image from the manifest:
-                                reference = manifest[init_manifest+i];
+                                var reference = manifest[init_manifest+i];
 
                                 //Unecessary check; simply forces the initial set of images to not have animated transition:
                                 if(manifest_tracker - grid_selection < 0){
-                                    new_figure_data = {
+                                    var new_figure_data = {
                                                         'object':create_new_figure(reference['webp_file'],{'border-top':'solid 0px white','opacity':0},reference['share_link']),
                                                         'height':reference['height']
                                                     };
                                 }else{
-                                    new_figure_data = {
+                                    var new_figure_data = {
                                                         'object':create_new_figure(reference['webp_file'],{'border-top':'solid 25px white','opacity':0},reference['share_link']),
                                                         'height': reference['height']
                                                     };
                                 }
-                                new_figure_ratio = (100 * reference['height']) / reference['width'];
+                                var new_figure_ratio = (100 * reference['height']) / reference['width'];
                                 //Create height buckets within the figure map - accounts for images that may have the same height:
                                 if (Object.keys(figure_map).includes(new_figure_ratio.toString())){
                                     figure_map[new_figure_ratio.toString()].push(new_figure_data['object']);
@@ -285,8 +285,8 @@ include('../header.php');
                                 return b-a;
                             });
 
-                            for(i=0;i<grid_selection;i++){
-                                column_height = columns[i].getBoundingClientRect().height//column_heights[(grid_selection-1).toString()][i];
+                            for(let i=0;i<grid_selection;i++){
+                                let column_height = columns[i].getBoundingClientRect().height//column_heights[(grid_selection-1).toString()][i];
                                 col_h_list.push(column_height);
                                 if(Object.keys(col_h_map).includes(column_height.toString())){
                                     col_h_map[column_height.toString()].push(i);
@@ -300,14 +300,14 @@ include('../header.php');
                                 return a-b;
                             });
 
-                            iteration_index = 0;
-                            figure_index = height_list[iteration_index];
-                            height_selection = figure_map[figure_index];
+                            var iteration_index = 0;
+                            var figure_index = height_list[iteration_index];
+                            var height_selection = figure_map[figure_index];
                             while(iteration_index < boundary){
                                 //allow iteration of multiple columns with the same height-tier:
-                                for(i=0;i<height_selection.length;i++){
+                                for(let i=0;i<height_selection.length;i++){
                                     //Grab the height-value of the next-smallest colulmn:
-                                    col_index = col_h_list[iteration_index];
+                                    let col_index = col_h_list[iteration_index];
                                     //Get the index of the column with respect to the columns collection:
                                     col_index = col_h_map[col_index].pop();
                                     //Grab the next figure of the current height-tier:
@@ -332,8 +332,8 @@ include('../header.php');
             function readjust_columns(grid_selection){
                 if(grid_selection != active_grid){
                     active_grid = grid_selection;
-                    for(i=0;i<max_column_size;i++){
-                        grid = grids[i];
+                    for(let i=0;i<max_column_size;i++){
+                        let grid = grids[i];
                         if((i+1) == active_grid){
                             grid.style.height = null;
                             grid.style.overflow = null;;
@@ -347,12 +347,12 @@ include('../header.php');
             }
 
             async function grid_display_agent(grid_selection){
-                load_flag = false;
-                for(i=0;i<grid_selection;i++){
-                    col = grids[grid_selection-1].children[i];
-                    figures = col.getElementsByTagName('figure');
-                    for(j=Math.max(0,col_maps[grid_selection-1][i]['displayed']);j<Math.min(figures.length,col_maps[grid_selection-1][i]['loaded']);j++){
-                        figure = figures[j];
+                var load_flag = false;
+                for(let i=0;i<grid_selection;i++){
+                    let col = grids[grid_selection-1].children[i];
+                    let figures = col.getElementsByTagName('figure');
+                    for(let j=Math.max(0,col_maps[grid_selection-1][i]['displayed']);j<Math.min(figures.length,col_maps[grid_selection-1][i]['loaded']);j++){
+                        let figure = figures[j];
                         if(isFigureBottom(figure)){
                             figure.style['opacity'] = 1;
                             figure.style['border-top'] = 'solid white 5px';
@@ -376,7 +376,7 @@ include('../header.php');
                 setTimeout(function(){
                     grid_display_agent(active_grid);//.then(
                     //grid_display_agent(active_grid));
-                    for(i=1;i<=max_column_size;i++){
+                    for(let i=1;i<=max_column_size;i++){
                         if(i != active_grid){
                             grid_display_agent(i);//.then(
                             //grid_display_agent(i));
@@ -391,8 +391,8 @@ include('../header.php');
                 // 542 <  x <= 768  -> three col;
                 // 768 <  x <= 1012 -> four call;
                 //1012 <  x         -> five col;
-                container = document.getElementById('writingsWrapper');
-                container_width = container.getBoundingClientRect().width;
+                var container = document.getElementById('writingsWrapper');
+                var container_width = container.getBoundingClientRect().width;
                 if(isMobile){
                     max_column_size = 3;
                     if(container_width <= 400){
@@ -425,8 +425,8 @@ include('../header.php');
             isMobile = isMobile("(pointer:coarse)").matches;
 
             window.addEventListener('load', function () {
-                container = document.getElementById('writingsWrapper');
-                container_width = container.getBoundingClientRect().width;
+                var container = document.getElementById('writingsWrapper');
+                var container_width = container.getBoundingClientRect().width;
                 if(isMobile){
                     max_column_size = 3;
                     if(container_width <= 400){
@@ -451,7 +451,7 @@ include('../header.php');
                 
                     grid_load_agent(active_grid,true)//.then(
                     //grid_display_agent(active_grid));
-                    for(i=1;i<=max_column_size;i++){
+                    for(let i=1;i<=max_column_size;i++){
                         if(i != active_grid){
                             grid_load_agent(i,true)//.then(
                             //grid_display_agent(i));
