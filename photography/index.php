@@ -52,7 +52,7 @@ include('../header.php');
     }
     echo "<div  id='static-image-gallery' style='max-width:720px;margin:auto;display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); align-items: center; column-gap: 15px; row-gap:15px;'>";
     for($i = 0; $i < min(($images_quantity - $initial_index),$image_count); $i++){
-        echo "<a href='".$json_data[$image_index]['share_link']."'>";
+        echo "<a href='".$json_data[$image_index]['share_link']."' target='_blank' rel='noopener noreferrer'>";
         echo "<figure>";
         echo "<img src='thumbnails/".$json_data[$image_index]['webp_file']."'/>";
         $image_index = $image_index + 1;
@@ -65,42 +65,39 @@ include('../header.php');
     }else{
         $current_page = $_GET['page'];
     }
-    echo "<nav id='static-gallery-control'>";
+    echo "<nav id='static-gallery-control' style='padding-top:15px;'>";
         echo "Current Page: ".$current_page;
-        echo "<ul>";
+        echo "<ul style='padding-left:0px;'>";
+        //echo "<li><ul>";
             if($current_page > 1){
             echo "<li>";
-                echo "<a href='index.php?page=1'> &lt;&lt; First Page</a>";
+                echo "<a href='index.php?page=1'>&lt;&lt; First</a>";
             echo "</li>";
             echo "<li>";
-                echo "<a href='index.php?page=".($current_page-1)."'>&lt; Previous Page</a>";
+                echo "<a href='index.php?page=".($current_page-1)."'>&lt; Previous</a>";
             echo "</li>";
             }
-            if((1 < $current_page) && ($current_page < $max_page_number)){
+        //echo "</ul></li>";
+            /*if((1 < $current_page) && ($current_page < $max_page_number)){
                 echo "<li>...</li>";
-            }
+            }*/
+        //echo "<li><ul>";
             if($current_page < $max_page_number){
                 echo "<li>";
-                    echo "<a href='index.php?page=".($current_page+1)."'>Next Page &gt;</a>";
+                    echo "<a href='index.php?page=".($current_page+1)."'>Next &gt;</a>";
                 echo "</li>";
                 echo "<li>";
-                    echo "<a href='index.php?page=".$max_page_number."'>Last Page &gt;&gt;</a>";
+                    echo "<a href='index.php?page=".$max_page_number."'>Last &gt;&gt;</a>";
                 echo "</li>";
             }
+        //echo "</ul></li>";
         echo "</ul>";
     echo "</nav>";
 ?>
 
                     <div id='galleries'>
                     </div>
-                    <section class='info'>
-                        <hr>
-                        <h3></h3>
-                        <p>
-
-                        </p>
-                        <hr>
-                    </section>
+                    <hr>
 
                 </article>
                 <nav>
