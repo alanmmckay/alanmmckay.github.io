@@ -28,10 +28,10 @@ include('../header.php');
                             <h2>On VSCO</h2>
                         </header>
                         <p>
-                            From the homepage, navigating to my photography portal used to take a visitor to my <a href='https://vsco.co/alanmckay/gallery' target="_blank" rel="noopener noreferrer">VSCO profile</a>. The platform has recently made a change forcing a vistor to sign into their service in order to view the entirety of a given profile's image gallery. This has effectively put their users into a silo, which has encouraged me to stop paying a subscription for the service and develop my own gallery.
+                            From the homepage, navigating to my photography portal used to take a visitor to my <a href='https://vsco.co/alanmckay/gallery' target="_blank" rel="noopener noreferrer">VSCO profile</a>. The platform has recently made a change forcing a vistor to sign into their service in order to view the entirety of a given profile's image gallery. This has effectively put their users into a silo, which has encouraged me to stop paying a subscription and develop my own image gallery.
                         </p>
                         <p>
-                            Feel free to take a look at the various photographs I've started taking since 2018. There is no obligation to sign in here. Interacting with an image will take you to the relevant photo within the VSCO platform. This will be changed once the gate is locked for individual images as well.
+                            This is the result of my efforts. Feel free to take a look at the various photographs I've taken since 2018. There is no obligation to sign in here. Interacting with an image will take you to the relevant photo within the VSCO platform. This will be changed once the gate is locked for individual images as well.
                         </p>
                     <hr>
                     </section>
