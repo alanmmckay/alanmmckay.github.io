@@ -387,6 +387,26 @@ div.image-col figure{
     transition:border-top 1.5s, opacity 4s;
 }
 
+#static-gallery-control ul{
+    display:flex;
+    justify-content:center;
+    margin-left:0px;
+    padding-left:0px;
+    margin:auto;
+}
+
+#static-gallery-control ul li{
+    white-space:nowrap;
+    display:block;
+    padding:3%;
+    font-size:85%;
+}
+
+#static-gallery-control ul li ul li{
+    display:inline-block;
+    padding:5%;
+}
+
 @media screen and (min-width:800px){
     #writingsWrapper .fig-col{
         overflow:auto;
