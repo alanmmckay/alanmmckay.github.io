@@ -425,9 +425,9 @@ include('../header.php');
                 var container_width = container.getBoundingClientRect().width;
                 if(isMobile){
                     max_column_size = 3;
-                    if(container_width <= 400){
+                    if(container_width <= 315){
                         readjust_columns(1);
-                    }else if(container_width > 400 && container_width <= 542){
+                    }else if(container_width > 315 && container_width <= 542){
                         readjust_columns(2);
                     }else if(container_width > 542){
                         readjust_columns(3);
@@ -459,9 +459,9 @@ include('../header.php');
                 var container_width = container.getBoundingClientRect().width;
                 if(isMobile){
                     max_column_size = 3;
-                    if(container_width <= 400){
+                    if(container_width <= 315){
                         active_grid = 1;
-                    }else if(container_width > 400 && container_width <= 542){
+                    }else if(container_width > 315 && container_width <= 542){
                         active_grid = 2;
                     }else if(container_width > 542){
                         active_grid = 3;
