@@ -630,6 +630,10 @@ div.image-col figure{
         min-width:300px;
     }
 
+    #homeWrapper nav a{
+        font-size:24px;
+    }
+
     #writingsWrapper{
         justify-content:inherit;
         /*min-width:300px;*/
