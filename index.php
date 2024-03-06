@@ -22,7 +22,7 @@ include('header.php');
                     <img src='images/description.svg' alt='Icon for projects link'>
                     &nbsp;Projects
                 </a>
-                <a href='photography/' target="_blank" rel="noopener noreferrer">
+                <a href='photography/'>
                     <img src='images/shutter-cut.png' alt='Icon for a camera shutter'>
                     &nbsp;Photography
                 </a>
