@@ -10,29 +10,29 @@ include('header.php');
 
 <div id='homeWrapper'>
             <header style='overflow:hidden'>
-                <h1 style='float:right'><a href='about/' style='font-weight:normal;'>&nbsp;About</a>
+                <h1 style='float:right'><a href='about/' style='font-weight:normal;font-size:16px;'>&nbsp;About</a>
                 <h1 style='float:right'><a id='home_link' href='./'>Alan McKay |</a></h1>
             </header>
             <nav>
                 <a href='writings/'>
                     <img src='images/text-logo-grey.png' alt='Icon for blog link'>
-                    Writings
+                    <span style='margin-left:10px;'>Writings</span>
                 </a>
                 <a href='projects/'>
                     <img src='images/description.svg' alt='Icon for projects link'>
-                    Projects
+                    <span style='margin-left:10px;'>Projects</span>
                 </a>
-                <a href='https://vsco.co/alanmckay/gallery' target="_blank" rel="noopener noreferrer">
-                    <img src='images/vsco-logo-grey.png' alt='Icon for VSCO link'>
-                    VSCO
+                <a href='photography/' style='overflow-wrap: break-word;hyphens: manual;'>
+                    <img src='images/shutter-cut.png' alt='Icon for a camera shutter'>
+                    <span style='margin-left:10px;'>Photo&shy;graphy</span>
                 </a>
                 <a href='https://github.com/alanmmckay' target="_blank" rel="noopener noreferrer">
                     <img src='images/github-logo-grey.png' alt='Icon for Github Link'>
-                    GitHub
+                    <span style='margin-left:10px;'>GitHub</span>
                 </a>
                 <a href='https://www.linkedin.com/in/alan-mckay-701b4a1b8/' target="_blank" rel="noopener noreferrer">
                     <img src='images/linkedin-logo-grey.png' alt='Icon for linked-in Link'>
-                    LinkedIn
+                    <span style='margin-left:10px;'>LinkedIn</span>
                 </a>
             </nav>
         </div>
