@@ -10,7 +10,7 @@ $title = 'Alan McKay | Photography';
 
 $meta['title'] = 'Alan McKay | Photography';
 
-$meta['description'] = '';
+$meta['description'] = 'Image gallery of photos taken by Alan McKay; Photography sharing interesting places, people, and experiences starting from 2018.';
 
 $meta['url'] = 'https://alanmckay.blog/photography/';
 
@@ -28,7 +28,7 @@ include('../header.php');
                             <h2>On VSCO</h2>
                         </header>
                         <p>
-                            From the homepage, navigating to my photography portal used to take a visitor to my <a href='https://vsco.co/alanmckay/gallery' target="_blank" rel="noopener noreferrer">VSCO profile</a>. The platform has recently made a change forcing a vistor to sign into their service in order to view the entirety of a given profile's image gallery. This has effectively put their users into a silo, which has encouraged me to stop paying a subscription and develop my own image gallery.
+                            From the homepage, navigating to my photography portal used to take a visitor to my <a href='https://vsco.co/alanmckay/gallery' target="_blank" rel="noopener noreferrer">VSCO profile</a>. The VSCO platform has recently made a change forcing a vistor to sign into their service in order to view the entirety of a given profile's image gallery. This has effectively siloed their users into a walled garden, which has encouraged me to stop paying an optional subscription and develop my own image gallery.
                         </p>
                         <p>
                             This is the result of my efforts. Feel free to take a look at the various photographs I've taken since 2018. There is no obligation to sign in here. Interacting with an image will take you to the relevant photo within the VSCO platform. This will be changed once the gate is locked for individual images as well.
