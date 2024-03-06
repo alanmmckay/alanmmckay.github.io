@@ -50,7 +50,7 @@ include('../header.php');
         $initial_index = $image_count * ((int)$_GET['page'] - 1);
         $image_index = $initial_index;
     }
-    echo "<div id='static-image-gallery' style='display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); align-items: center; column-gap: 15px; row-gap:15px;'>";
+    echo "<div  id='static-image-gallery' style='max-width:720px;margin:auto;display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); align-items: center; column-gap: 15px; row-gap:15px;'>";
     for($i = 0; $i < min(($images_quantity - $initial_index),$image_count); $i++){
         echo "<a href='".$json_data[$image_index]['share_link']."'>";
         echo "<figure>";
@@ -60,6 +60,35 @@ include('../header.php');
         echo "</a>";
     }
     echo "</div>";
+    if(!isset($_GET['page'])){
+        $current_page = 1;
+    }else{
+        $current_page = $_GET['page'];
+    }
+    echo "<nav id='static-gallery-control'>";
+        echo "Current Page: ".$current_page;
+        echo "<ul>";
+            if($current_page > 1){
+            echo "<li>";
+                echo "<a href='index.php?page=1'> &lt;&lt; First Page</a>";
+            echo "</li>";
+            echo "<li>";
+                echo "<a href='index.php?page=".($current_page-1)."'>&lt; Previous Page</a>";
+            echo "</li>";
+            }
+            if((1 < $current_page) && ($current_page < $max_page_number)){
+                echo "<li>...</li>";
+            }
+            if($current_page < $max_page_number){
+                echo "<li>";
+                    echo "<a href='index.php?page=".($current_page+1)."'>Next Page &gt;</a>";
+                echo "</li>";
+                echo "<li>";
+                    echo "<a href='index.php?page=".$max_page_number."'>Last Page &gt;&gt;</a>";
+                echo "</li>";
+            }
+        echo "</ul>";
+    echo "</nav>";
 ?>
 
                     <div id='galleries'>
@@ -83,6 +112,7 @@ include('../header.php');
         <script>
 
             document.getElementById('static-image-gallery').style['display'] = 'none';
+            document.getElementById('static-gallery-control').style['display'] = 'none';
             // --- --- --- Declarations --- --- --- //
 
             // JSON object which houses image information:
