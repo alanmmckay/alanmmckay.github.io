@@ -54,7 +54,7 @@ include('../header.php');
     for($i = 0; $i < min(($images_quantity - $initial_index),$image_count); $i++){
         echo "<a href='".$json_data[$image_index]['share_link']."'>";
         echo "<figure>";
-        echo "<img src='thumbnails/".$json_data[$image_index]['webp_file']."?static'/>";
+        echo "<img src='thumbnails/".$json_data[$image_index]['webp_file']."'/>";
         $image_index = $image_index + 1;
         echo "</figure>";
         echo "</a>";
