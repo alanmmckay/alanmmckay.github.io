@@ -123,12 +123,17 @@ include('../header.php');
             // Integer array to determine how many images have been displayed for a given column:
             var display_counts = []
 
+            var preload_switches = [];
+
+            var preload_multipliers = []
             // --- --- --- //
             // Priming the above arrays:
             for(let i=0;i<max_column_size;i++){
                 manifest_trackers.push(0);
                 load_counts.push(0);
                 display_counts.push(0);
+                preload_switches.push(true);
+                preload_multipliers.push(0);
             }
             // -- -- -- //
 
@@ -156,7 +161,7 @@ include('../header.php');
                 for(let j=0;j<(i+1);j++){
                     col_map[j] = [];
                     col_map[j]['loaded'] = 0;
-                    col_map[j]['displayed'] = -1;
+                    col_map[j]['displayed'] = 0;
                 }
                 col_maps.push(col_map);
             }
@@ -234,7 +239,7 @@ include('../header.php');
             // This agent does **batch** loading of images. It makes decisions based on
             //  the **grouping** of images being loaded in. This is said to refute the notion
             //  of abstracting responsibilities of creation to something more finite.
-            async function grid_load_agent(grid_selection,load_flag = false){//grid_selection is not zero-based
+            async function grid_load_agent(grid_selection){//grid_selection is not zero-based
                 //Manifest tracker keeps count of quantity of items pulled from manifest:
                 //columns = grids[(grid_selection-1)].children;
                 //console.log('grid_selection: '+grid_selection);
@@ -254,104 +259,103 @@ include('../header.php');
                         var boundary = grid_selection;
                     }
 
-                    //If the grid_display_agent has flagged that we need to grab more images:
-                    if(load_flag){
-                        var load_count = load_counts[grid_selection-1];
-                        var display_count = display_counts[grid_selection-1];
+                   
+                    var load_count = load_counts[grid_selection-1];
+                    var display_count = display_counts[grid_selection-1];
 
-                        //console.log('difference: ' + ((load_count) - display_count));
-                        //A check to ensure that we don't grab too many images beyond the viewport boundary:
-                        if((manifest_tracker - display_count) <= max_column_size){
-                            //console.log('loading!');
-                            //Increment program's load_counter:
-                            load_count = load_count + boundary;
-                            load_counts[grid_selection-1] = load_count;
-                            //A to-be-ordered list of height values for each figure loaded:
-                            var height_list = [];
-                            //A mapping of figure objects such that the key is it's height:
-                            var figure_map = {};
-                            //A to-be-ordered list of height values with respect to the columns being used for display:
-                            var col_h_list = [];
-                            //A mapping of column objects such that a key is a column's height:
-                            var col_h_map = {};
+                    //console.log('difference: ' + ((load_count) - display_count));
+                    //A check to ensure that we don't grab too many images beyond the viewport boundary:
+                    if((manifest_tracker - display_count) <= max_column_size){
+                        //console.log('loading!');
+                        //Increment program's load_counter:
+                        load_count = load_count + boundary;
+                        load_counts[grid_selection-1] = load_count;
+                        //A to-be-ordered list of height values for each figure loaded:
+                        var height_list = [];
+                        //A mapping of figure objects such that the key is it's height:
+                        var figure_map = {};
+                        //A to-be-ordered list of height values with respect to the columns being used for display:
+                        var col_h_list = [];
+                        //A mapping of column objects such that a key is a column's height:
+                        var col_h_map = {};
 
-                            //Iterate an amount of times equivalent to amount of images being buffered:
-                            for(let i=0;i<boundary;i++){
+                        //Iterate an amount of times equivalent to amount of images being buffered:
+                        for(let i=0;i<boundary;i++){
 
-                                //Grab the next image from the manifest:
-                                var reference = manifest[init_manifest+i];
-
-                                //Unecessary check; simply forces the initial set of images to not have animated transition:
-                                if(manifest_tracker - grid_selection < 0){
-                                    var new_figure_data = {
-                                                        'object':create_new_figure(reference['webp_file'],{'border-top':'solid 0px white','opacity':0},reference['share_link']),
-                                                        'height':reference['height']
-                                                    };
-                                }else{
-                                    var new_figure_data = {
-                                                        'object':create_new_figure(reference['webp_file'],{'border-top':'solid 25px white','opacity':0},reference['share_link']),
-                                                        'height': reference['height']
-                                                    };
-                                }
-                                var new_figure_ratio = (100 * reference['height']) / reference['width'];
-                                //Create height buckets within the figure map - accounts for images that may have the same height:
-                                if (Object.keys(figure_map).includes(new_figure_ratio.toString())){
-                                    figure_map[new_figure_ratio.toString()].push(new_figure_data['object']);
-                                }else{
-                                    figure_map[new_figure_ratio.toString()] = [];
-                                    figure_map[new_figure_ratio.toString()].push(new_figure_data['object']);
-                                }
-                                height_list.push(new_figure_ratio);
-                                col_maps[grid_selection-1][i]['loaded'] += 1; //col_map tracks amount of images loaded and displayed for each column.
-                                manifest_tracker += 1;
+                            //Grab the next image from the manifest:
+                            var reference = manifest[init_manifest+i];
+                            
+                            var preload_switch = preload_switches[grid_selection - 1];
+                            //Unecessary check; simply forces the initial set of images to not have animated transition:
+                            if(preload_switch == true){
+                                var new_figure_data = {
+                                                    'object':create_new_figure(reference['webp_file'],{'border-top':'solid 5px white','opacity':1},reference['share_link']),
+                                                    'height':reference['height']
+                                                };
+                            }else{
+                                var new_figure_data = {
+                                                    'object':create_new_figure(reference['webp_file'],{'border-top':'solid 25px white','opacity':0},reference['share_link']),
+                                                    'height': reference['height']
+                                                };
                             }
-
-                            manifest_trackers[grid_selection-1] = manifest_tracker;
-                            //position the program to iterate through the figure height values by order of height values:
-                            height_list.sort(function(a,b){
-                                return b-a;
-                            });
-
-                            for(let i=0;i<grid_selection;i++){
-                                let column_height = columns[i].getBoundingClientRect().height//column_heights[(grid_selection-1).toString()][i];
-                                col_h_list.push(column_height);
-                                if(Object.keys(col_h_map).includes(column_height.toString())){
-                                    col_h_map[column_height.toString()].push(i);
-                                }else{
-                                    col_h_map[column_height.toString()] = [];
-                                    col_h_map[column_height.toString()].push(i);
-                                }
+                            var new_figure_ratio = (100 * reference['height']) / reference['width'];
+                            //Create height buckets within the figure map - accounts for images that may have the same height:
+                            if (Object.keys(figure_map).includes(new_figure_ratio.toString())){
+                                figure_map[new_figure_ratio.toString()].push(new_figure_data['object']);
+                            }else{
+                                figure_map[new_figure_ratio.toString()] = [];
+                                figure_map[new_figure_ratio.toString()].push(new_figure_data['object']);
                             }
-
-                            col_h_list.sort(function(a,b){
-                                return a-b;
-                            });
-
-                            var iteration_index = 0;
-                            var figure_index = height_list[iteration_index];
-                            var height_selection = figure_map[figure_index];
-                            while(iteration_index < boundary){
-                                //allow iteration of multiple columns with the same height-tier:
-                                for(let i=0;i<height_selection.length;i++){
-                                    //Grab the height-value of the next-smallest colulmn:
-                                    let col_index = col_h_list[iteration_index];
-                                    //Get the index of the column with respect to the columns collection:
-                                    col_index = col_h_map[col_index].pop();
-                                    //Grab the next figure of the current height-tier:
-                                    figure = height_selection[i];
-                                    columns[col_index].appendChild(figure);
-                                    //column_heights[grid_selection-1][col_index] += figure_index;
-                                    iteration_index += 1;
-                                }
-                                figure_index = height_list[iteration_index];
-                                height_selection = figure_map[figure_index];
-                            }
-                            setTimeout(function(){
-                                grid_display_agent(grid_selection);
-                            },(grid_selection * 100));
-                        }else{
-                            //console.log('no load!');
+                            height_list.push(new_figure_ratio);
+                            col_maps[grid_selection-1][i]['loaded'] += 1; //col_map tracks amount of images loaded and displayed for each column.
+                            manifest_tracker += 1;
                         }
+
+                        manifest_trackers[grid_selection-1] = manifest_tracker;
+                        //position the program to iterate through the figure height values by order of height values:
+                        height_list.sort(function(a,b){
+                            return b-a;
+                        });
+
+                        for(let i=0;i<grid_selection;i++){
+                            let column_height = columns[i].getBoundingClientRect().height//column_heights[(grid_selection-1).toString()][i];
+                            col_h_list.push(column_height);
+                            if(Object.keys(col_h_map).includes(column_height.toString())){
+                                col_h_map[column_height.toString()].push(i);
+                            }else{
+                                col_h_map[column_height.toString()] = [];
+                                col_h_map[column_height.toString()].push(i);
+                            }
+                        }
+
+                        col_h_list.sort(function(a,b){
+                            return a-b;
+                        });
+
+                        var iteration_index = 0;
+                        var figure_index = height_list[iteration_index];
+                        var height_selection = figure_map[figure_index];
+                        while(iteration_index < boundary){
+                            //allow iteration of multiple columns with the same height-tier:
+                            for(let i=0;i<height_selection.length;i++){
+                                //Grab the height-value of the next-smallest colulmn:
+                                let col_index = col_h_list[iteration_index];
+                                //Get the index of the column with respect to the columns collection:
+                                col_index = col_h_map[col_index].pop();
+                                //Grab the next figure of the current height-tier:
+                                figure = height_selection[i];
+                                columns[col_index].appendChild(figure);
+                                //column_heights[grid_selection-1][col_index] += figure_index;
+                                iteration_index += 1;
+                            }
+                            figure_index = height_list[iteration_index];
+                            height_selection = figure_map[figure_index];
+                        }
+                        setTimeout(function(){
+                            grid_display_agent(grid_selection);
+                        },(preload_multipliers[grid_selection - 1] * grid_selection * 100));
+                    }else{
+                        //console.log('no load!');
                     }
                 }
             }
@@ -377,6 +381,13 @@ include('../header.php');
                 var load_flag = false;
                 for(let i=0;i<grid_selection;i++){
                     let col = grids[grid_selection-1].children[i];
+                    if(preload_switches[grid_selection - 1] == true){
+                        let col_height = col.getBoundingClientRect().height;
+                        if(col_height + initial_gallery_position > (window.innerHeight * .80)){
+                            preload_switches[grid_selection - 1] = false;
+                            preload_multipliers[grid_selection - 1] = 1;
+                        }
+                    }
                     let figures = col.getElementsByTagName('figure');
                     for(let j=Math.max(0,col_maps[grid_selection-1][i]['displayed']);j<Math.min(figures.length,col_maps[grid_selection-1][i]['loaded']);j++){
                         let figure = figures[j];
@@ -394,7 +405,7 @@ include('../header.php');
                     }
                 }
                 if(load_flag === true){
-                    setTimeout(function(){grid_load_agent(grid_selection,true)},(grid_selection * 100));
+                    setTimeout(function(){grid_load_agent(grid_selection)},(preload_multipliers[grid_selection - 1] * grid_selection * 100));
                 }
                 
             }
@@ -409,7 +420,7 @@ include('../header.php');
                             //grid_display_agent(i));
                         }
                     }
-                }, (100 * active_grid));
+                }, (preload_multipliers[active_grid - 1] * 100 * active_grid));
             }
 
             window.onresize = function(){
@@ -447,6 +458,7 @@ include('../header.php');
 
             var parse_manifest;
             var old_height = 0;
+            var initial_gallery_position;
 
             var isMobile = window.matchMedia || window.msMatchMedia;
             isMobile = isMobile("(pointer:coarse)").matches;
@@ -454,6 +466,7 @@ include('../header.php');
             window.addEventListener('load', function () {
                 var container = document.getElementById('writingsWrapper');
                 var container_width = container.getBoundingClientRect().width;
+                initial_gallery_position = document.getElementById('galleries').getBoundingClientRect().top;
                 if(isMobile){
                     max_column_size = 3;
                     if(container_width <= 315){
@@ -476,12 +489,10 @@ include('../header.php');
                 grids[active_grid-1].style['overflow'] = 'inherit';
                 grids[active_grid-1].style['height'] = 'inherit';
                 
-                    grid_load_agent(active_grid,true)//.then(
-                    //grid_display_agent(active_grid));
+                    grid_load_agent(active_grid);
                     for(let i=1;i<=max_column_size;i++){
                         if(i != active_grid){
-                            grid_load_agent(i,true)//.then(
-                            //grid_display_agent(i));
+                            grid_load_agent(i);
                         }
                     }
                     
