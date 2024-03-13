@@ -289,7 +289,7 @@ include('../header.php');
                             //Unecessary check; simply forces the initial set of images to not have animated transition:
                             if(preload_switch == true){
                                 var new_figure_data = {
-                                                    'object':create_new_figure(reference['webp_file'],{'border-top':'solid 5px white','opacity':1},reference['share_link']),
+                                                    'object':create_new_figure(reference['webp_file'],{'border-top':'solid 5px white','opacity':0},reference['share_link']),
                                                     'height':reference['height']
                                                 };
                             }else{
@@ -373,7 +373,7 @@ include('../header.php');
                             grid.style.overflow = 'scroll';
                         }
                     }
-                    grid_display_agent(grid_selection);//.then(grid_display_agent(grid_selection));
+                    grid_display_agent(grid_selection);
                 }
             }
 
@@ -412,12 +412,10 @@ include('../header.php');
 
             window.onscroll = function(){
                 setTimeout(function(){
-                    grid_display_agent(active_grid);//.then(
-                    //grid_display_agent(active_grid));
+                    grid_display_agent(active_grid);
                     for(let i=1;i<=max_column_size;i++){
                         if(i != active_grid){
-                            grid_display_agent(i);//.then(
-                            //grid_display_agent(i));
+                            grid_display_agent(i);
                         }
                     }
                 }, (preload_multipliers[active_grid - 1] * 100 * active_grid));
@@ -451,7 +449,7 @@ include('../header.php');
                     readjust_columns(4);
                 }
                 if(old_height < window.innerHeight){
-                    grid_display_agent(active_grid);//.then(grid_display_agent(active_grid));
+                    grid_display_agent(active_grid);
                 }
                 old_height = window.innerHeight;
             }
