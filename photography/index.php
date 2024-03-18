@@ -113,7 +113,9 @@ include('../header.php');
             // --- --- --- Declarations --- --- --- //
 
             // JSON object which houses image information:
-            //var manifest;
+            //var manifest; //This is now introduced via <script> source.
+
+            var manifest_size = Object.keys(manifest).length;
 
             var max_column_size = 4;
             // Integer array to determine amount of entries of the manifest that have been considered for a given column:
@@ -122,9 +124,9 @@ include('../header.php');
             var load_counts = []
             // Integer array to determine how many images have been displayed for a given column:
             var display_counts = []
-
+            // An array of booleans used to determine if the initial load is concluded for a given column:
             var preload_switches = [];
-
+            // An array of integers that act as timing multipliers for a given column:
             var preload_multipliers = []
             // --- --- --- //
             // Priming the above arrays:
@@ -135,20 +137,6 @@ include('../header.php');
                 preload_switches.push(true);
                 preload_multipliers.push(0);
             }
-            // -- -- -- //
-
-            // Array to keep track of the heights of each column context:
-            /*var column_heights = [];
-
-            // --- --- --- //
-            // Priming column_heights:
-            for(i=0;i<max_column_size;i++){
-                column = []
-                for(j=0;j<=i;j++){
-                    column.push(0);
-                }
-                column_heights.push(column);
-            }*/
             // -- -- -- //
 
             // Array to track quantity of figures that have been loaded and the quantity of figures that have been displayed for a given grid:
@@ -166,9 +154,6 @@ include('../header.php');
                 col_maps.push(col_map);
             }
             // -- -- -- //
-
-            // Switch to determine whether or not more images should be loaded:
-            //var load_flag = true;
             
             // --- --- --- //
             //Block of logic to create the divs that house the grids of each column length:
@@ -237,19 +222,12 @@ include('../header.php');
             }
 
             // This agent does **batch** loading of images. It makes decisions based on
-            //  the **grouping** of images being loaded in. This is said to refute the notion
-            //  of abstracting responsibilities of creation to something more finite.
+            //  the **grouping** of images being loaded in.
             async function grid_load_agent(grid_selection){//grid_selection is not zero-based
                 //Manifest tracker keeps count of quantity of items pulled from manifest:
-                //columns = grids[(grid_selection-1)].children;
-                //console.log('grid_selection: '+grid_selection);
                 var manifest_tracker = manifest_trackers[grid_selection-1];
-                //console.log('manifest_tracker: '+ manifest_tracker);
-                var init_manifest = (manifest_tracker);
-                //console.log('init_manifest: '+init_manifest);
                 var columns = grids[grid_selection-1].children;
-                //Grab the size of the manifest regardless of pull:
-                manifest_size = Object.keys(manifest).length;
+
                 //Check whether we've run out of images to load:
                 if(manifest_tracker < manifest_size){
                     //Ensure the amount of columns does not cause us to overdraft:
@@ -259,14 +237,15 @@ include('../header.php');
                         var boundary = grid_selection;
                     }
 
-                   
                     var load_count = load_counts[grid_selection-1];
                     var display_count = display_counts[grid_selection-1];
 
-                    //console.log('difference: ' + ((load_count) - display_count));
+                    //This initial boolean is a means to force loading for unactive grids; a code smell that implies a refactor of behavior is needed.
+                    load_condition_check = active_grid != grid_selection;
                     //A check to ensure that we don't grab too many images beyond the viewport boundary:
-                    if((manifest_tracker - display_count) <= max_column_size){
-                        //console.log('loading!');
+                    load_condition_check = (load_condition_check || ((manifest_tracker - display_count) <= max_column_size)) && manifest_tracker < manifest_size;
+                    //if not active grid then pass next condition; display_count is irrelevant
+                    if(load_condition_check){
                         //Increment program's load_counter:
                         load_count = load_count + boundary;
                         load_counts[grid_selection-1] = load_count;
@@ -283,13 +262,21 @@ include('../header.php');
                         for(let i=0;i<boundary;i++){
 
                             //Grab the next image from the manifest:
-                            var reference = manifest[init_manifest+i];
+                            var reference = manifest[manifest_tracker];
                             
-                            var preload_switch = preload_switches[grid_selection - 1];
+                            var preload_switch;
+                            if(grid_selection != active_grid){
+                                preload_switch = true;
+                                preload_opacity = 1;
+                            }else{
+                                preload_switch = preload_switches[grid_selection - 1];
+                                preload_opacity = 0;
+                            }
+
                             //Unecessary check; simply forces the initial set of images to not have animated transition:
                             if(preload_switch == true){
                                 var new_figure_data = {
-                                                    'object':create_new_figure(reference['webp_file'],{'border-top':'solid 5px white','opacity':1},reference['share_link']),
+                                                    'object':create_new_figure(reference['webp_file'],{'border-top':'solid 5px white','opacity':preload_opacity},reference['share_link']),
                                                     'height':reference['height']
                                                 };
                             }else{
@@ -318,7 +305,7 @@ include('../header.php');
                         });
 
                         for(let i=0;i<grid_selection;i++){
-                            let column_height = columns[i].getBoundingClientRect().height//column_heights[(grid_selection-1).toString()][i];
+                            let column_height = columns[i].getBoundingClientRect().height
                             col_h_list.push(column_height);
                             if(Object.keys(col_h_map).includes(column_height.toString())){
                                 col_h_map[column_height.toString()].push(i);
@@ -345,7 +332,6 @@ include('../header.php');
                                 //Grab the next figure of the current height-tier:
                                 figure = height_selection[i];
                                 columns[col_index].appendChild(figure);
-                                //column_heights[grid_selection-1][col_index] += figure_index;
                                 iteration_index += 1;
                             }
                             figure_index = height_list[iteration_index];
@@ -354,8 +340,6 @@ include('../header.php');
                         setTimeout(function(){
                             grid_display_agent(grid_selection);
                         },(preload_multipliers[grid_selection - 1] * grid_selection * 100));
-                    }else{
-                        //console.log('no load!');
                     }
                 }
             }
@@ -373,7 +357,7 @@ include('../header.php');
                             grid.style.overflow = 'scroll';
                         }
                     }
-                    grid_display_agent(grid_selection);//.then(grid_display_agent(grid_selection));
+                    grid_display_agent(grid_selection);
                 }
             }
 
@@ -381,6 +365,7 @@ include('../header.php');
                 var load_flag = false;
                 for(let i=0;i<grid_selection;i++){
                     let col = grids[grid_selection-1].children[i];
+                    // ---
                     if(preload_switches[grid_selection - 1] == true){
                         let col_height = col.getBoundingClientRect().height;
                         if(col_height + initial_gallery_position > (window.innerHeight * .80)){
@@ -388,6 +373,7 @@ include('../header.php');
                             preload_multipliers[grid_selection - 1] = 1;
                         }
                     }
+                    // ---
                     let figures = col.getElementsByTagName('figure');
                     for(let j=Math.max(0,col_maps[grid_selection-1][i]['displayed']);j<Math.min(figures.length,col_maps[grid_selection-1][i]['loaded']);j++){
                         let figure = figures[j];
@@ -397,8 +383,6 @@ include('../header.php');
                             col_maps[grid_selection-1][i]['displayed'] += 1;
                             load_flag = true;
                             display_counts[grid_selection-1] = display_counts[grid_selection-1] + 1;
-                            //console.log('display count: ' + display_counts[grid_selection-1]);
-                            //console.log('load count: ' + load_counts[grid_selection-1]);
                         }else{
                             load_flag = load_flag || false;
                         }
@@ -412,30 +396,31 @@ include('../header.php');
 
             window.onscroll = function(){
                 setTimeout(function(){
-                    grid_display_agent(active_grid);//.then(
-                    //grid_display_agent(active_grid));
+                    grid_display_agent(active_grid);
+                    let base = manifest_trackers[active_grid - 1];
                     for(let i=1;i<=max_column_size;i++){
                         if(i != active_grid){
-                            grid_display_agent(i);//.then(
-                            //grid_display_agent(i));
+                            if(load_counts[i-1] != base){
+                                if(base%i == 0){
+                                    while(manifest_trackers[i-1] <= base && manifest_trackers[i-1] < manifest_size){
+                                        grid_load_agent(i);
+                                    }
+                                }
+                            }
+                            grid_display_agent(i);
                         }
                     }
                 }, (preload_multipliers[active_grid - 1] * 100 * active_grid));
             }
 
             window.onresize = function(){
-                //   0 <= x <= 400  -> one col;
-                // 400 <  x <= 542  -> two col;
-                // 542 <  x <= 768  -> three col;
-                // 768 <  x <= 1012 -> four call;
-                //1012 <  x         -> five col;
                 var container = document.getElementById('writingsWrapper');
                 var container_width = container.getBoundingClientRect().width;
                 if(isMobile){
                     max_column_size = 3;
-                    if(container_width <= 315){
+                    if(container_width <= 300){
                         readjust_columns(1);
-                    }else if(container_width > 315 && container_width <= 542){
+                    }else if(container_width > 300 && container_width <= 542){
                         readjust_columns(2);
                     }else if(container_width > 542){
                         readjust_columns(3);
@@ -451,7 +436,7 @@ include('../header.php');
                     readjust_columns(4);
                 }
                 if(old_height < window.innerHeight){
-                    grid_display_agent(active_grid);//.then(grid_display_agent(active_grid));
+                    grid_display_agent(active_grid);
                 }
                 old_height = window.innerHeight;
             }
@@ -469,9 +454,9 @@ include('../header.php');
                 initial_gallery_position = document.getElementById('galleries').getBoundingClientRect().top;
                 if(isMobile){
                     max_column_size = 3;
-                    if(container_width <= 315){
+                    if(container_width <= 300){
                         active_grid = 1;
-                    }else if(container_width > 315 && container_width <= 542){
+                    }else if(container_width > 300 && container_width <= 542){
                         active_grid = 2;
                     }else if(container_width > 542){
                         active_grid = 3;
@@ -497,6 +482,7 @@ include('../header.php');
                     }
                     
                 old_height = window.innerHeight;
+
             });
 
         </script>
