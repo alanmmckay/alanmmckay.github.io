@@ -263,7 +263,8 @@ include('../header.php');
 
                             //Grab the next image from the manifest:
                             var reference = manifest[manifest_tracker];
-                            
+
+                            //Determine the initial state of an image (pre-grid_display_agent)
                             var preload_switch;
                             if(grid_selection != active_grid){
                                 preload_switch = true;
@@ -273,7 +274,6 @@ include('../header.php');
                                 preload_opacity = 0;
                             }
 
-                            //Unecessary check; simply forces the initial set of images to not have animated transition:
                             if(preload_switch == true){
                                 var new_figure_data = {
                                                     'object':create_new_figure(reference['webp_file'],{'border-top':'solid 5px white','opacity':preload_opacity},reference['share_link']),
@@ -285,8 +285,9 @@ include('../header.php');
                                                     'height': reference['height']
                                                 };
                             }
-                            var new_figure_ratio = (100 * reference['height']) / reference['width'];
+
                             //Create height buckets within the figure map - accounts for images that may have the same height:
+                            var new_figure_ratio = (100 * reference['height']) / reference['width'];
                             if (Object.keys(figure_map).includes(new_figure_ratio.toString())){
                                 figure_map[new_figure_ratio.toString()].push(new_figure_data['object']);
                             }else{
@@ -315,6 +316,7 @@ include('../header.php');
                             }
                         }
 
+                        // TODO: create an insertion subroutine in place of what these sorts accomplish.
                         col_h_list.sort(function(a,b){
                             return a-b;
                         });
@@ -344,19 +346,23 @@ include('../header.php');
                 }
             }
             
+            function preload_handler(grid_selection, col_object){
+                let col_height = col_object.getBoundingClientRect().height;
+                if(col_height + initial_gallery_position > (window.innerHeight * .80)){
+                    preload_switches[grid_selection - 1] = false;
+                    preload_multipliers[grid_selection - 1] = 1;
+                }
+            }
+
             async function grid_display_agent(grid_selection){
                 var load_flag = false;
                 for(let i=0;i<grid_selection;i++){
                     let col = grids[grid_selection-1].children[i];
-                    // ---
+
                     if(preload_switches[grid_selection - 1] == true){
-                        let col_height = col.getBoundingClientRect().height;
-                        if(col_height + initial_gallery_position > (window.innerHeight * .80)){
-                            preload_switches[grid_selection - 1] = false;
-                            preload_multipliers[grid_selection - 1] = 1;
-                        }
+                        preload_handler(grid_selection, col);
                     }
-                    // ---
+
                     let figures = col.getElementsByTagName('figure');
                     for(let j=Math.max(0,col_maps[grid_selection-1][i]['displayed']);j<Math.min(figures.length,col_maps[grid_selection-1][i]['loaded']);j++){
                         let figure = figures[j];
@@ -382,15 +388,13 @@ include('../header.php');
                     grid_display_agent(active_grid);
                     let base = manifest_trackers[active_grid - 1];
                     for(let i=1;i<=max_column_size;i++){
-                        if(i != active_grid){
-                            if(load_counts[i-1] != base){
-                                if(base%i == 0){
-                                    while(manifest_trackers[i-1] <= base && manifest_trackers[i-1] < manifest_size){
-                                        grid_load_agent(i);
-                                    }
-                                }
+                        let is_not_active_column = i != active_grid;
+                        let has_less_loaded = load_counts[i-1] < base;
+                        let is_multiple_of = base % i == 0;
+                        if(is_not_active_column && has_less_loaded && is_multiple_of){
+                            while(manifest_trackers[i-1] <= base && manifest_trackers[i-1] < manifest_size){
+                                grid_load_agent(i);
                             }
-                            grid_display_agent(i);
                         }
                     }
                 }, (preload_multipliers[active_grid - 1] * 100 * active_grid));
@@ -449,7 +453,6 @@ include('../header.php');
                 old_height = window.innerHeight;
             }
 
-            var parse_manifest;
             var old_height = 0;
             var initial_gallery_position;
 
