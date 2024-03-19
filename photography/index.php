@@ -69,27 +69,29 @@ include('../header.php');
         echo "Current Page: ".$current_page;
         echo "<ul style='padding-left:0px;'>";
         //echo "<li><ul>";
+
             if($current_page > 1){
-            echo "<li>";
+                $first_display = 'visible;';
+            }else{
+                $first_display = 'hidden;';
+            }
+            if($current_page < $max_page_number){
+                $last_display = 'visible;';
+            }else{
+                $last_display = 'hidden;';
+            }
+            echo "<li style='visibility:".$first_display."'>";
                 echo "<a href='index.php?page=1'>&lt;&lt; First</a>";
             echo "</li>";
-            echo "<li>";
+            echo "<li style='visibility:".$first_display."'>";
                 echo "<a href='index.php?page=".($current_page-1)."'>&lt; Previous</a>";
             echo "</li>";
-            }
-        //echo "</ul></li>";
-            /*if((1 < $current_page) && ($current_page < $max_page_number)){
-                echo "<li>...</li>";
-            }*/
-        //echo "<li><ul>";
-            if($current_page < $max_page_number){
-                echo "<li>";
-                    echo "<a href='index.php?page=".($current_page+1)."'>Next &gt;</a>";
-                echo "</li>";
-                echo "<li>";
-                    echo "<a href='index.php?page=".$max_page_number."'>Last &gt;&gt;</a>";
-                echo "</li>";
-            }
+            echo "<li style='visibility:".$last_display."'>";
+                echo "<a href='index.php?page=".($current_page+1)."'>Next &gt;</a>";
+            echo "</li>";
+            echo "<li style='visibility:".$last_display."'>";
+                echo "<a href='index.php?page=".$max_page_number."'>Last &gt;&gt;</a>";
+            echo "</li>";
         //echo "</ul></li>";
         echo "</ul>";
     echo "</nav>";
