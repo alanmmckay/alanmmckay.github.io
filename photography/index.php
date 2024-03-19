@@ -344,23 +344,6 @@ include('../header.php');
                 }
             }
             
-            function readjust_columns(grid_selection){
-                if(grid_selection != active_grid){
-                    active_grid = grid_selection;
-                    for(let i=0;i<max_column_size;i++){
-                        let grid = grids[i];
-                        if((i+1) == active_grid){
-                            grid.style.height = null;
-                            grid.style.overflow = null;;
-                        }else{
-                            grid.style.height = '0px';
-                            grid.style.overflow = 'scroll';
-                        }
-                    }
-                    grid_display_agent(grid_selection);
-                }
-            }
-
             async function grid_display_agent(grid_selection){
                 var load_flag = false;
                 for(let i=0;i<grid_selection;i++){
@@ -413,28 +396,53 @@ include('../header.php');
                 }, (preload_multipliers[active_grid - 1] * 100 * active_grid));
             }
 
-            window.onresize = function(){
+
+            function readjust_columns(grid_selection){
+                if(grid_selection != active_grid){
+                    active_grid = grid_selection;
+                    for(let i=0;i<max_column_size;i++){
+                        let grid = grids[i];
+                        if((i+1) == active_grid){
+                            grid.style.height = null;
+                            grid.style.overflow = null;;
+                        }else{
+                            grid.style.height = '0px';
+                            grid.style.overflow = 'scroll';
+                        }
+                    }
+                    grid_display_agent(grid_selection);
+                }
+            }
+
+            var size_thresholds = {'mobile':[300,542],'desktop':[400,542,768]};
+            function readjust_caller(){
                 var container = document.getElementById('writingsWrapper');
                 var container_width = container.getBoundingClientRect().width;
+                let mobile = size_thresholds['mobile'];
+                let desktop = size_thresholds['desktop'];
                 if(isMobile){
                     max_column_size = 3;
-                    if(container_width <= 300){
+                    if(container_width <= mobile[0]){
                         readjust_columns(1);
-                    }else if(container_width > 300 && container_width <= 542){
+                    }else if(container_width > mobile[0] && container_width <= mobile[1]){
                         readjust_columns(2);
-                    }else if(container_width > 542){
+                    }else if(container_width > mobile[1]){
                         readjust_columns(3);
                     }
                 }else
-                if(container_width <= 400){
+                if(container_width <= desktop[0]){
                     readjust_columns(1);
-                }else if(container_width > 400 && container_width <= 542){
+                }else if(container_width > desktop[0] && container_width <= desktop[1]){
                     readjust_columns(2);
-                }else if(container_width > 542 && container_width <= 768){
+                }else if(container_width > desktop[1] && container_width <= desktop[2]){
                     readjust_columns(3);
-                }else if(container_width > 768){
+                }else if(container_width > desktop[2]){
                     readjust_columns(4);
                 }
+            }
+
+            window.onresize = function(){
+                readjust_caller();
                 if(old_height < window.innerHeight){
                     grid_display_agent(active_grid);
                 }
@@ -449,40 +457,17 @@ include('../header.php');
             isMobile = isMobile("(pointer:coarse)").matches;
 
             window.addEventListener('load', function () {
-                var container = document.getElementById('writingsWrapper');
-                var container_width = container.getBoundingClientRect().width;
                 initial_gallery_position = document.getElementById('galleries').getBoundingClientRect().top;
-                if(isMobile){
-                    max_column_size = 3;
-                    if(container_width <= 300){
-                        active_grid = 1;
-                    }else if(container_width > 300 && container_width <= 542){
-                        active_grid = 2;
-                    }else if(container_width > 542){
-                        active_grid = 3;
-                    }
-                }else
-                if(container_width <= 400){
-                    active_grid = 1;
-                }else if(container_width >400 && container_width <= 542){
-                    active_grid = 2;
-                }else if(container_width > 542 && container_width <= 768){
-                    active_grid = 3;
-                }else if(container_width > 768){
-                    active_grid = 4;
-                }
+                readjust_caller();
                 grids[active_grid-1].style['overflow'] = 'inherit';
                 grids[active_grid-1].style['height'] = 'inherit';
-                
-                    grid_load_agent(active_grid);
-                    for(let i=1;i<=max_column_size;i++){
-                        if(i != active_grid){
-                            grid_load_agent(i);
-                        }
+                grid_load_agent(active_grid);
+                for(let i=1;i<=max_column_size;i++){
+                    if(i != active_grid){
+                        grid_load_agent(i);
                     }
-                    
+                }
                 old_height = window.innerHeight;
-
             });
 
         </script>
