@@ -51,6 +51,7 @@ include('../header.php');
         $image_index = $initial_index;
     }
     echo "<div  id='static-image-gallery' style='max-width:720px;margin:auto;display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); align-items: center; column-gap: 15px; row-gap:15px;'>";
+        echo "<script> document.getElementById('static-image-gallery').remove();</script>";
     for($i = 0; $i < min(($images_quantity - $initial_index),$image_count); $i++){
         echo "<a href='".$json_data[$image_index]['share_link']."' target='_blank' rel='noopener noreferrer'>";
         echo "<figure>";
@@ -66,10 +67,9 @@ include('../header.php');
         $current_page = $_GET['page'];
     }
     echo "<nav id='static-gallery-control' style='padding-top:15px;'>";
+        echo "<script>document.getElementById('static-gallery-control').remove();</script>";
         echo "Current Page: ".$current_page;
         echo "<ul style='padding-left:0px;'>";
-        //echo "<li><ul>";
-
             if($current_page > 1){
                 $first_display = 'visible;';
             }else{
@@ -92,7 +92,6 @@ include('../header.php');
             echo "<li style='visibility:".$last_display."'>";
                 echo "<a href='index.php?page=".$max_page_number."'>Last &gt;&gt;</a>";
             echo "</li>";
-        //echo "</ul></li>";
         echo "</ul>";
     echo "</nav>";
 ?>
@@ -110,8 +109,6 @@ include('../header.php');
 
         <script>
 
-            document.getElementById('static-image-gallery').style['display'] = 'none';
-            document.getElementById('static-gallery-control').style['display'] = 'none';
             // --- --- --- Declarations --- --- --- //
 
             // JSON object which houses image information:
