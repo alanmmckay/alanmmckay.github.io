@@ -110,6 +110,7 @@ include('../header.php');
 
         <script>
             document.getElementById('wait').style['visibility'] = 'inherit';
+
             // --- --- --- Declarations --- --- --- //
 
             // JSON object which houses image information:
@@ -197,14 +198,14 @@ include('../header.php');
             function isFigureBottom(fig_object){
                 var fig_height = fig_object.getBoundingClientRect().height;
                 var fig_top = fig_object.getBoundingClientRect().top;
-                if((window.innerHeight * .95)-fig_top > 0){ 
+                if((window.innerHeight * .95)-fig_top > 0){
                     return true;
                 }else{
                     return false;
                 }
             }
 
-            function create_new_figure(manifest_id,init_style,url){
+            function create_new_figure(manifest_id,init_style,url,source_grid,image_number){
                 var anchor = document.createElement('a');
                 anchor.setAttribute('target','_blank');
                 anchor.setAttribute('rel','noopener noreferrer');
@@ -213,9 +214,17 @@ include('../header.php');
                 var figure = document.createElement('figure');
                 figure.style['border-top'] = init_style['border-top'];
                 figure.style['opacity'] = init_style['opacity'];
+                var id_string = source_grid+'-'+image_number;
+                figure.id = 'figure-'+id_string;
+                figure.setAttribute('loaded',false);
 
                 var image = document.createElement('img');
                 image.src = 'thumbnails/'+manifest_id;
+                image.id = 'image-'+id_string;
+                image.onload = function(){
+                    document.getElementById('figure-'+id_string).setAttribute('loaded',true);
+                }
+
                 figure.appendChild(image);
                 anchor.appendChild(figure);
                 return anchor;
@@ -276,12 +285,12 @@ include('../header.php');
 
                             if(preload_switch == true){
                                 var new_figure_data = {
-                                                    'object':create_new_figure(reference['webp_file'],{'border-top':'solid 5px white','opacity':preload_opacity},reference['share_link']),
+                                                    'object':create_new_figure(reference['webp_file'],{'border-top':'solid 5px white','opacity':preload_opacity},reference['share_link'],grid_selection,manifest_tracker),
                                                     'height':reference['height']
                                                 };
                             }else{
                                 var new_figure_data = {
-                                                    'object':create_new_figure(reference['webp_file'],{'border-top':'solid 25px white','opacity':0},reference['share_link']),
+                                                    'object':create_new_figure(reference['webp_file'],{'border-top':'solid 25px white','opacity':0},reference['share_link'],grid_selection,manifest_tracker),
                                                     'height': reference['height']
                                                 };
                             }
@@ -367,8 +376,17 @@ include('../header.php');
                     for(let j=Math.max(0,col_maps[grid_selection-1][i]['displayed']);j<Math.min(figures.length,col_maps[grid_selection-1][i]['loaded']);j++){
                         let figure = figures[j];
                         if(isFigureBottom(figure)){
-                            figure.style['opacity'] = 1;
-                            figure.style['border-top'] = 'solid white 5px';
+                            let figureDisplayLambda = function(){
+                                if(figure.getAttribute('loaded') == 'true'){
+                                    //console.log(figure.id + '- done');
+                                    figure.style['opacity'] = 1;
+                                    figure.style['border-top'] = 'solid white 5px';
+                                }else{
+                                    //console.log('not done - ' + figure.id);
+                                    setTimeout(figureDisplayLambda,500);
+                                }
+                            }
+                            figureDisplayLambda();
                             col_maps[grid_selection-1][i]['displayed'] += 1;
                             load_flag = true;
                             display_counts[grid_selection-1] = display_counts[grid_selection-1] + 1;
