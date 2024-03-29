@@ -42,7 +42,7 @@ include('../header.php');
 <?php
     $json = file_get_contents("manifest.json");
     $json_data = json_decode($json,true);
-    $image_count = 18;
+    $image_count = 9;
     $image_index = 0;
     $images_quantity = count($json_data);
     $max_page_number = ceil($images_quantity / $image_count);
@@ -55,7 +55,7 @@ include('../header.php');
     for($i = 0; $i < min(($images_quantity - $initial_index),$image_count); $i++){
         echo "<a href='".$json_data[$image_index]['share_link']."' target='_blank' rel='noopener noreferrer'>";
         echo "<figure>";
-        echo "<img src='thumbnails/".$json_data[$image_index]['webp_file']."'/>";
+        echo "<img load='lazy' src='thumbnails/".$json_data[$image_index]['webp_file']."'?static/>";
         $image_index = $image_index + 1;
         echo "</figure>";
         echo "</a>";
@@ -98,6 +98,7 @@ include('../header.php');
 
                     <div id='galleries'>
                     </div>
+                    <p id='wait' style='visibility:hidden;text-align:center;'><i>Loading Images<span id='sf1'>.</span><span id='sf2'>.</span><span id='sf3'>.</span></i></p>
                     <hr>
 
                 </article>
@@ -108,7 +109,7 @@ include('../header.php');
         </section>
 
         <script>
-
+            document.getElementById('wait').style['visibility'] = 'inherit';
             // --- --- --- Declarations --- --- --- //
 
             // JSON object which houses image information:
@@ -377,6 +378,9 @@ include('../header.php');
                     }
                 }
                 if(load_flag === true){
+                    if(load_counts[max_column_size-1] >= manifest_size){
+                        document.getElementById('wait').style['visibility'] = 'hidden';
+                    }
                     setTimeout(function(){grid_load_agent(grid_selection)},(preload_multipliers[grid_selection - 1] * grid_selection * 100));
                 }
                 
