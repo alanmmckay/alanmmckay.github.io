@@ -355,7 +355,7 @@ include('../header.php');
                 let col_height = col_object.getBoundingClientRect().height;
                 if(col_height + initial_gallery_position > (window.innerHeight * .80)){
                     preload_switches[grid_selection - 1] = false;
-                    preload_multipliers[grid_selection - 1] = 0;
+                    preload_multipliers[grid_selection - 1] = 1;
                 }
             }
 
