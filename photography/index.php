@@ -119,8 +119,6 @@ include('../header.php');
             var manifest_size = Object.keys(manifest).length;
 
             var max_column_size = 4;
-            // Integer array to determine amount of entries of the manifest that have been considered for a given column:
-            var manifest_trackers = [];
             // Integer array to determine how many images have been loaded for a given column:
             var load_counts = []
             // Integer array to determine how many images have been displayed for a given column:
@@ -132,7 +130,6 @@ include('../header.php');
             // --- --- --- //
             // Priming the above arrays:
             for(let i=0;i<max_column_size;i++){
-                manifest_trackers.push(0);
                 load_counts.push(0);
                 display_counts.push(0);
                 preload_switches.push(true);
@@ -205,11 +202,11 @@ include('../header.php');
                 }
             }
 
-            function create_new_figure(manifest_id,init_style,url,source_grid,image_number){
+            function create_new_figure(file_name,init_style,vsco_url,source_grid,image_number){
                 var anchor = document.createElement('a');
                 anchor.setAttribute('target','_blank');
                 anchor.setAttribute('rel','noopener noreferrer');
-                anchor.setAttribute('href',url);
+                anchor.setAttribute('href',vsco_url);
 
                 var figure = document.createElement('figure');
                 figure.style['border-top'] = init_style['border-top'];
@@ -219,7 +216,7 @@ include('../header.php');
                 figure.setAttribute('loaded',false);
 
                 var image = document.createElement('img');
-                image.src = 'thumbnails/'+manifest_id;
+                image.src = 'thumbnails/'+file_name;
                 image.id = 'image-'+id_string;
                 image.onload = function(){
                     document.getElementById('figure-'+id_string).setAttribute('loaded',true);
@@ -233,31 +230,30 @@ include('../header.php');
             // This agent does **batch** loading of images. It makes decisions based on
             //  the **grouping** of images being loaded in.
             async function grid_load_agent(grid_selection){//grid_selection is not zero-based
-                //Manifest tracker keeps count of quantity of items pulled from manifest:
-                var manifest_tracker = manifest_trackers[grid_selection-1];
+                var load_count = load_counts[grid_selection-1];
                 var columns = grids[grid_selection-1].children;
 
                 //Check whether we've run out of images to load:
-                if(manifest_tracker < manifest_size){
+                if(load_count < manifest_size){
                     //Ensure the amount of columns does not cause us to overdraft:
-                    if( (manifest_tracker+grid_selection) >= manifest_size){
-                        var boundary = manifest_size - manifest_tracker;
+                    if( (load_count+grid_selection) >= manifest_size){
+                        var boundary = manifest_size - load_count;
                     }else{
                         var boundary = grid_selection;
                     }
 
-                    var load_count = load_counts[grid_selection-1];
+                    //var load_count = load_counts[grid_selection-1];
                     var display_count = display_counts[grid_selection-1];
 
                     //This initial boolean is a means to force loading for unactive grids; a code smell that implies a refactor of behavior is needed.
                     load_condition_check = active_grid != grid_selection;
                     //A check to ensure that we don't grab too many images beyond the viewport boundary:
-                    load_condition_check = (load_condition_check || ((manifest_tracker - display_count) <= max_column_size)) && manifest_tracker < manifest_size;
+                    load_condition_check = (load_condition_check || ((load_count - display_count) <= max_column_size)) && load_count < manifest_size;
                     //if not active grid then pass next condition; display_count is irrelevant
                     if(load_condition_check){
                         //Increment program's load_counter:
-                        load_count = load_count + boundary;
-                        load_counts[grid_selection-1] = load_count;
+                        //load_count = load_count + boundary;
+                        //load_counts[grid_selection-1] = load_count;
                         //A to-be-ordered list of height values for each figure loaded:
                         var height_list = [];
                         //A mapping of figure objects such that the key is it's height:
@@ -271,7 +267,7 @@ include('../header.php');
                         for(let i=0;i<boundary;i++){
 
                             //Grab the next image from the manifest:
-                            var reference = manifest[manifest_tracker];
+                            var reference = manifest[load_count];
 
                             //Determine the initial state of an image (pre-grid_display_agent)
                             var preload_switch;
@@ -285,12 +281,12 @@ include('../header.php');
 
                             if(preload_switch == true){
                                 var new_figure_data = {
-                                                    'object':create_new_figure(reference['webp_file'],{'border-top':'solid 5px white','opacity':preload_opacity},reference['share_link'],grid_selection,manifest_tracker),
+                                                    'object':create_new_figure(reference['webp_file'],{'border-top':'solid 5px white','opacity':preload_opacity},reference['share_link'],grid_selection,load_count),
                                                     'height':reference['height']
                                                 };
                             }else{
                                 var new_figure_data = {
-                                                    'object':create_new_figure(reference['webp_file'],{'border-top':'solid 25px white','opacity':0},reference['share_link'],grid_selection,manifest_tracker),
+                                                    'object':create_new_figure(reference['webp_file'],{'border-top':'solid 25px white','opacity':0},reference['share_link'],grid_selection,load_count),
                                                     'height': reference['height']
                                                 };
                             }
@@ -305,10 +301,10 @@ include('../header.php');
                             }
                             height_list.push(new_figure_ratio);
                             col_maps[grid_selection-1][i]['loaded'] += 1; //col_map tracks amount of images loaded and displayed for each column.
-                            manifest_tracker += 1;
+                            load_count += 1;
                         }
+                        load_counts[grid_selection-1] = load_count;
 
-                        manifest_trackers[grid_selection-1] = manifest_tracker;
                         //position the program to iterate through the figure height values by order of height values:
                         height_list.sort(function(a,b){
                             return b-a;
@@ -359,7 +355,7 @@ include('../header.php');
                 let col_height = col_object.getBoundingClientRect().height;
                 if(col_height + initial_gallery_position > (window.innerHeight * .80)){
                     preload_switches[grid_selection - 1] = false;
-                    preload_multipliers[grid_selection - 1] = 1;
+                    preload_multipliers[grid_selection - 1] = 0;
                 }
             }
 
@@ -407,13 +403,13 @@ include('../header.php');
             window.onscroll = function(){
                 setTimeout(function(){
                     grid_display_agent(active_grid);
-                    let base = manifest_trackers[active_grid - 1];
+                    let base = load_counts[active_grid - 1];
                     for(let i=1;i<=max_column_size;i++){
                         let is_not_active_column = i != active_grid;
                         let has_less_loaded = load_counts[i-1] < base;
                         let is_multiple_of = base % i == 0;
                         if(is_not_active_column && has_less_loaded && is_multiple_of){
-                            while(manifest_trackers[i-1] <= base && manifest_trackers[i-1] < manifest_size){
+                            while(load_counts[i-1] <= base && load_counts[i-1] < manifest_size){
                                 grid_load_agent(i);
                             }
                         }
