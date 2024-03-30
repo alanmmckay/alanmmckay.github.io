@@ -383,8 +383,8 @@ include('../header.php');
                                 }
                             }
                             figureDisplayLambda();
-                            col_maps[grid_selection-1][i]['displayed'] += 1;
                             load_flag = true;
+                            col_maps[grid_selection-1][i]['displayed'] += 1;
                             display_counts[grid_selection-1] = display_counts[grid_selection-1] + 1;
                         }else{
                             load_flag = load_flag || false;
@@ -401,20 +401,22 @@ include('../header.php');
             }
 
             window.onscroll = function(){
-                setTimeout(function(){
-                    grid_display_agent(active_grid);
-                    let base = load_counts[active_grid - 1];
-                    for(let i=1;i<=max_column_size;i++){
-                        let is_not_active_column = i != active_grid;
-                        let has_less_loaded = load_counts[i-1] < base;
-                        let is_multiple_of = base % i == 0;
-                        if(is_not_active_column && has_less_loaded && is_multiple_of){
-                            while(load_counts[i-1] <= base && load_counts[i-1] < manifest_size){
-                                grid_load_agent(i);
+                if(display_counts[active_grid - 1] <= load_counts[active_grid - 1] - active_grid){
+                    setTimeout(function(){
+                        grid_display_agent(active_grid);
+                        let base = load_counts[active_grid - 1];
+                        for(let i=1;i<=max_column_size;i++){
+                            let is_not_active_column = i != active_grid;
+                            let has_less_loaded = load_counts[i-1] < base;
+                            let is_multiple_of = base % i == 0;
+                            if(is_not_active_column && has_less_loaded && is_multiple_of){
+                                while(load_counts[i-1] <= base && load_counts[i-1] < manifest_size){
+                                    grid_load_agent(i);
+                                }
                             }
                         }
-                    }
-                }, (preload_multipliers[active_grid - 1] * 100 * active_grid));
+                    }, (preload_multipliers[active_grid - 1] * 200 * active_grid));
+                }
             }
 
 
