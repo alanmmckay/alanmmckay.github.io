@@ -248,16 +248,16 @@ include('../header.php');
                     //This initial boolean is a means to force loading for unactive grids; a code smell that implies a refactor of behavior is needed.
                     load_condition_check = active_grid != grid_selection;
                     //A check to ensure that we don't grab too many images beyond the viewport boundary:
-                    load_condition_check = (load_condition_check || ((load_count - display_count) <= max_column_size)) && load_count < manifest_size;
+                    load_condition_check = (load_condition_check || ((load_count - display_count) <= max_column_size));
                     //if not active grid then pass next condition; display_count is irrelevant
                     if(load_condition_check){
                         //Increment program's load_counter:
                         //load_count = load_count + boundary;
                         //load_counts[grid_selection-1] = load_count;
                         //A to-be-ordered list of height values for each figure loaded:
-                        var height_list = [];
+                        var figure_height_list = [];
                         //A mapping of figure objects such that the key is it's height:
-                        var figure_map = {};
+                        var figure_height_map = {};
                         //A to-be-ordered list of height values with respect to the columns being used for display:
                         var col_h_list = [];
                         //A mapping of column objects such that a key is a column's height:
@@ -293,20 +293,20 @@ include('../header.php');
 
                             //Create height buckets within the figure map - accounts for images that may have the same height:
                             var new_figure_ratio = (100 * reference['height']) / reference['width'];
-                            if (Object.keys(figure_map).includes(new_figure_ratio.toString())){
-                                figure_map[new_figure_ratio.toString()].push(new_figure_data['object']);
+                            if (Object.keys(figure_height_map).includes(new_figure_ratio.toString())){
+                                figure_height_map[new_figure_ratio.toString()].push(new_figure_data['object']);
                             }else{
-                                figure_map[new_figure_ratio.toString()] = [];
-                                figure_map[new_figure_ratio.toString()].push(new_figure_data['object']);
+                                figure_height_map[new_figure_ratio.toString()] = [];
+                                figure_height_map[new_figure_ratio.toString()].push(new_figure_data['object']);
                             }
-                            height_list.push(new_figure_ratio);
+                            figure_height_list.push(new_figure_ratio);
                             col_maps[grid_selection-1][i]['loaded'] += 1; //col_map tracks amount of images loaded and displayed for each column.
                             load_count += 1;
                         }
                         load_counts[grid_selection-1] = load_count;
 
                         //position the program to iterate through the figure height values by order of height values:
-                        height_list.sort(function(a,b){
+                        figure_height_list.sort(function(a,b){
                             return b-a;
                         });
 
@@ -327,22 +327,22 @@ include('../header.php');
                         });
 
                         var iteration_index = 0;
-                        var figure_index = height_list[iteration_index];
-                        var height_selection = figure_map[figure_index];
+                        var figure_key = figure_height_list[iteration_index];
+                        var figure_group = figure_height_map[figure_key];
                         while(iteration_index < boundary){
                             //allow iteration of multiple columns with the same height-tier:
-                            for(let i=0;i<height_selection.length;i++){
+                            for(let i=0;i<figure_group.length;i++){
                                 //Grab the height-value of the next-smallest colulmn:
-                                let col_index = col_h_list[iteration_index];
+                                let col_key = col_h_list[iteration_index];
                                 //Get the index of the column with respect to the columns collection:
-                                col_index = col_h_map[col_index].pop();
+                                col_index = col_h_map[col_key].pop();
                                 //Grab the next figure of the current height-tier:
-                                figure = height_selection[i];
+                                figure = figure_group[i];
                                 columns[col_index].appendChild(figure);
                                 iteration_index += 1;
                             }
-                            figure_index = height_list[iteration_index];
-                            height_selection = figure_map[figure_index];
+                            figure_key = figure_height_list[iteration_index];
+                            figure_group = figure_height_map[figure_key];
                         }
                         setTimeout(function(){
                             grid_display_agent(grid_selection);
@@ -379,7 +379,7 @@ include('../header.php');
                                     figure.style['border-top'] = 'solid white 5px';
                                 }else{
                                     //console.log('not done - ' + figure.id);
-                                    setTimeout(figureDisplayLambda,500);
+                                    setTimeout(figureDisplayLambda,1000);
                                 }
                             }
                             figureDisplayLambda();
@@ -392,7 +392,7 @@ include('../header.php');
                     }
                 }
                 if(load_flag === true){
-                    if(load_counts[max_column_size-1] >= manifest_size){
+                    if(load_counts[max_column_size-1] >= manifest_size-4){
                         document.getElementById('wait').style['visibility'] = 'hidden';
                     }
                     setTimeout(function(){grid_load_agent(grid_selection)},(preload_multipliers[grid_selection - 1] * grid_selection * 100));
