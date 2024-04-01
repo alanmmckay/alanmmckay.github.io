@@ -1,0 +1,6 @@
+Order deny,allow
+Deny from all
+
+<Files *.webp>
+    Allow from all
+</Files>
