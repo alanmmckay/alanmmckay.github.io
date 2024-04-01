@@ -10,6 +10,8 @@ This readme file will act as a progress checklist for items I would like to deve
 
 - [ ] Implement a project page discussing research done pertaining to chat-gpt and stack-overflow comparison.
 - [ ] Implement a project page discussing my experience as a university adjunct teaching data structures.
+- [x] Implement a project page discussing research scaffold of a privacy audit framework.
+- [x] Implement a project page discussing the implementation of the image gallery for `/photography/`.
 - [ ] Javascript refactor to DRY out the scripts currently in use:
     - [x] Mobile scrolling logic used in index pages.
         - `primeClassTransitions()`
@@ -21,3 +23,10 @@ This readme file will act as a progress checklist for items I would like to deve
     - [ ] Functionality that repositions a figure with a set of javascript controls.
         - `setDynamicFigureStyle()`
 - [ ] Implement webmentions.
+- [x] Implement an image gallery as an alternative to VSCO.
+    - [ ] Optimize image placement algorithm.
+    - [ ] Fine-tune column readjustment algorithm.
+    - [ ] Generate caption study.
+- [ ] Reorganize image placement.
+    - [ ] Change format of images to something more portable (webp).
+- [ ] Add meta tag management for PHP template.
