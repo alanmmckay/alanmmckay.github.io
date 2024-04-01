@@ -40,35 +40,46 @@ include('../../header.php');
                     <header>
                         <h1>Javascript: Image Gallery</h1>
                     </header>
+                    <div class='aside'>
+                    <figure style='max-width:175px;'>
+                        <img src='images/instagram_blurred.png'>
+                        <figcaption> Take note of the shape of the thumbnails.</figcaption>
+                    </figure>
                     <p>
                         One thing that pushes VSCO above Instagram is its image gallery. As a web developer, it's not lost that the view of an image gallery within Instagram is fixed. That is, every image given in the view of a profile, (regardless of dimension), is fitted to a certain aspect ratio. It doesn't matter whether the uploaded image is a portrait or a landscape; when viewing the image in a profile's gallery, the image is fitted within a 1:1 frame.
                     </p>
-                    <figure>
-
+                    <figure class='responsive_aside' style='max-width:140px;'>
+                        <img src='images/instagram_blurred.png'>
+                        <figcaption> Take note of the shape of the thumbnails.</figcaption>
                     </figure>
                     <p>
                         VSCO differs by maintaining an image's aspect ratio within a profile's gallery view. This allows an extra visual dimension that can help one profile feel apart from another. In the past, I've seen profiles of creators who create a sense of coherency through a deliberate choice of color palette within their images. This is something witnessed within both platforms. VSCO goes beyond by inviting deliberate usage of shape.
                     </p>
-                    <figure>
-
+                    </div>
+                    <figure style='max-width:400px'>
+                        <img src='images/vsco_grid_view.png'>
+                        <figcaption> The VSCO image gallery does force image thumbnails to be square in shape.</figcaption>
                     </figure>
                     <p>
                         Another facet that used to set VSCO apart from Instagram was the fact a visitor need not sign in to view the entirety of a profile. Unfortunately, this is no longer the case. Thus the ultimate motive of creating my own.
                     </p>
-                    <figure>
-
+                    <figure style='max-width:400px'>
+                        <img src='images/vsco_sign-in.png'>
+                        <figcaption> An attempt at scrolling through an image gallery within VSCO forces a user to sign in</figcaption>
                     </figure>
                     <p>
                         In creating an image gallery, maintaining the aspect ratio of an image within the gallery view is a primary goal. There exists built-in functionality for CSS to help accomplish this. Images can be scaled by their aspect ratio to fit within a container. Furthermore, modern browsers provide functionality for grid support such that each column of a grid has the same length regardless of the size of its individual items. This is accomplished by providing padding for items that exist in a given row that have a lesser height than the item with the maximum height.
                     </p>
-                    <figure>
-
+                    <figure style='max-width:400px'>
+                        <img src='images/static_gallery.png'>
+                        <figcaption> An implementation of a grid-view image gallery. Note the inconsistent white-space margins surrounding each image.</figcaption>
                     </figure>
                     <p>
                         An observer of the VSCO gallery will notice the margins between images are fixed regardless of the aspect ratio of an image. Due to the temporal prioritization of displaying images within the gallery, this poses a potential problem: images can be uploaded in such a manner that the height of one column can completely overwhelm another. This creates situations within the platform where a given column is blank while another introduces more images. This can be apparent looking at the end of an image gallery for a profile which has inconsistent image sizes.
                     </p>
-                    <figure>
-
+                    <figure style='max-width:400px'>
+                        <img src='images/vsco_bottom.png'>
+                        <figcaption> The bottom of an image gallery on VSCO. Notice the left column completely overwhelms the others. This column continues downward for a few more screens-worth of space.</figcaption>
                     </figure>
                     <p>
                         As indicated, this anomaly can occur whilst scrolling through the gallery. It seems this behavior is exacerbated by employing an algorithm which decides to load in new images based on having the bottom of the largest column reaching the bottom of the viewport. When this is triggered, a set amount of images is loaded for each column, which will lead to the gaps of the shorter columns being filled in. This creates situations where a user must scroll back up to view new images. Why the developers decided to use the column height of the largest column is beyond me. Ultimately this creates a subpar viewing experience within web browsers where more than two columns can exist.
@@ -76,8 +87,9 @@ include('../../header.php');
                     <p>
                         The image gallery I've developed improves upon the VSCO gallery by using the shortest column as a trigger for loading in new images. It also diverges from the temporal priority; It is more loose in terms of chronological ordering than the algorithm used by VSCO. Here, the a set of images are grabbed in chronological order, but are then sorted by size. This occurs such that the shortest image in a batch is placed in the column with the largest height, and the tallest image in a batch is placed within the shortest column. This approach helps keep columns balanced.
                     </p>
-                    <figure>
-
+                    <figure style='max-width:400px'>
+                        <img src='images/bottom_of_gallery.png'>
+                        <figcaption> An image gallery whose columns are balanced.</figcaption>
                     </figure>
                     <p>
                         Many organizations use lazy loading for image content. What this does is tell the browser to only fetch a resource once it is brought into the viewport. In the realm of near-endless scrolling, it would be too much to ask a visitor to download all the resources required in preparation of viewing a page. Thus, an image locator that is placed inside an image tag is only acted upon once the bounding box of the image is near the bottom of the viewport.
@@ -92,7 +104,26 @@ include('../../header.php');
                         The amount of time it takes the web browser to render the downloaded resource is represented by the partial fill of the actual image. How this is reflected is dependent on the usage environment and image format. Within my web browser, swaths of the image are rendered from the bottom-up. Typically, the bottom half is rendered before the first half. This usually takes less than a second, but can be noticeable. The half-rendering is why the term "jagged rendering" is used in this context. From the perspective of a user, a small span of time occurs, the first half of an image pops into view, then the next half pops into view. After an image is loaded, repeat the process for the next image to be loaded. The mental imagery I conjure for this process is a timeline describing when a new chunk of visual information is loaded in - a timeline which has a jagged saw-tooth like appearance.
                     </p>
                     <figure>
-
+                        <img id='gif-frame' src='images/firstframe.png' style='display:none'>
+                        <img id='gif' src='images/02_resize.gif'>
+                        <script>
+                            toggle = true;
+                            document.getElementById('gif').style['display'] = 'none';
+                            document.getElementById('gif-frame').style['display'] = 'inherit';
+                            function play_gif(){
+                                if(toggle){
+                                    document.getElementById('gif').style['display'] = 'inherit';
+                                    document.getElementById('gif-frame').style['display'] = 'none';
+                                }else{
+                                    document.getElementById('gif').style['display'] = 'none';
+                                    document.getElementById('gif-frame').style['display'] = 'inherit';
+                                }
+                                toggle = !toggle;
+                            }
+                        </script>
+                        <figcaption>
+                            Animated gif showing how images pop into view within VSCO. Note the attempt in obscuring this pop-in by placing a random background color from the site's color palette before an image load. Press <a onclick='play_gif();' style='text-decoration:underline'>here</a> to toggle playing the animated gif.
+                        </figcaption>
                     </figure>
                     <p>
                         Obscuring the jaggedness of this loading procedure was another primary facet of this project; I wanted to substitute the partial on-screen loading behavior with a transition effect that is more smooth. Knowing this goal, a practitioner of CSS will take note of the term "transition". Such an intuition is accurate to what is happening.
