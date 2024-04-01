@@ -355,7 +355,7 @@ include('../header.php');
                 let col_height = col_object.getBoundingClientRect().height;
                 if(col_height + initial_gallery_position > (window.innerHeight * .90)){
                     preload_switches[grid_selection - 1] = false;
-                    preload_multipliers[grid_selection - 1] = 2.25;
+                    preload_multipliers[grid_selection - 1] = 1;
                 }
             }
 
@@ -385,19 +385,39 @@ include('../header.php');
                             figureDisplayLambda();
                             load_flag = true;
                             col_maps[grid_selection-1][i]['displayed'] += 1;
-                            display_counts[grid_selection-1] = display_counts[grid_selection-1] + 1;
+                            display_counts[grid_selection-1] += 1;
                         }else{
                             load_flag = load_flag || false;
                         }
                     }
                 }
                 if(load_flag === true){
-                    if(load_counts[max_column_size-1] >= manifest_size-4){
+                    if(load_counts[grid_selection-1] >= manifest_size-max_column_size){
                         document.getElementById('wait').style['visibility'] = 'hidden';
+                        if(cleanup_flag == true){
+                            setTimeout(function(){cleanup();},5000);
+                            cleanup_flag = false;
+                        }
                     }
                     setTimeout(function(){grid_load_agent(grid_selection)},(preload_multipliers[grid_selection - 1] * grid_selection * 100));
                 }
                 
+            }
+
+            var cleanup_flag = true;
+            function cleanup(){
+                for(let i=0;i<max_column_size;i++){
+                    var grid = grids[i];
+                    var cols = grid.children;
+                    for(let j = 0;j < cols.length; j++){
+                        var figures = cols[j].children;
+                        for(let k = 0; k < figures.length;k++){
+                            var figure = figures[k].children[0];
+                            figure.style['opacity'] = 1;
+                            figure.style['border-top'] = 'solid white 5px';
+                        }
+                    }
+                }
             }
 
             window.onscroll = function(){
@@ -408,7 +428,7 @@ include('../header.php');
                         for(let i=1;i<=max_column_size;i++){
                             let is_not_active_column = i != active_grid;
                             let has_less_loaded = load_counts[i-1] < base;
-                            let is_multiple_of = base % i == 0;
+                            let is_multiple_of = (base % i) == 0;
                             if(is_not_active_column && has_less_loaded && is_multiple_of){
                                 while(load_counts[i-1] <= base && load_counts[i-1] < manifest_size){
                                     grid_load_agent(i);
@@ -472,11 +492,11 @@ include('../header.php');
                 old_height = window.innerHeight;
             }
 
-            var old_height = 0;
-            var initial_gallery_position;
-
             var isMobile = window.matchMedia || window.msMatchMedia;
             isMobile = isMobile("(pointer:coarse)").matches;
+
+            var old_height = 0;
+            var initial_gallery_position;
 
             window.addEventListener('load', function () {
                 initial_gallery_position = document.getElementById('galleries').getBoundingClientRect().top;
