@@ -679,6 +679,27 @@ window.onscroll = function(){
 }
 </pre>
                     </code>
+                    <p>
+                        The set of booleans that scaffold the conditional within this subroutine's loop really emphasizes on a common pattern that has not been explicitly discussed thus far. Recall that both grid_load_agent and grid_display agent have a single parameter which represents a certain grid view. A single call will determine the transitional state for a grid of the size given as an argument and decide whether an image should move from one state of display to another. As a user scrolls through the gallery, it's obvious what is occurring for the current grid view. It is not obvious that the same decisions are being made for the grids which are out of view.
+                    </p>
+                    </p>
+                        Thus, when a user scrolls while the active_grid is 3, (for example), checks need to occur whether or not images should be placed into the buffer zone for the other grids.
+                    <p>
+                    <p>
+                        The mutually recursive structure in place will also determine whether these hidden grid views move a given figure from this zone as well. This is done by some css trickery. Instead of setting the display property of these grids to none, the height is instead set to zero and an overflow property is set to obscure the scroll-bar that may be displayed as a result. This allows the calculation of the height values of the columns in place in this hidden state; the calculations that occur within grid_load_agent. It also allows isFigureBottom to work in this context as well.
+                    </p>
+                    <p>
+                        Ultimately, this is a code smell. This code smell has the consequence of being affected by the whims of web browser if it decides to change rendering behavior. Future work on this script will remove the reliance of the calculation of a columns height via getBoundingClientRect() and instead populate a data structure with the height information calculated by the the new_figure_ratio within grid_load_agent().
+                    </p>
+                    <p>
+                        A closer look at this code smell reveals the unintended behavior of the fact that grids of differing column lengths reveal images at differing rates. This is because isFigureBottom may flag true for images that are scaled differently on account of the amount of space afforded by a column. The consequence of this is when a user resizes the window, and the resize presents a different grid-view, they may have to witness the transition effect of an image being brought into view again. This may give the false impression that the image has been reloaded into the browser and/or that may gaslight a user into thinking they have not viewed that image yet.
+                    </p>
+                    <p>
+                        Taking a look at the deployment of the image gallery, as of date in which this writing is published, will show that this is not an issue. Some patches have been made to the code which can be viewed via this site's github repository.
+                    </p>
+                    <p>
+                        A closer look at the repository will also reveal additional code in place. What's not been discussed here is how to differentiate transition effects for images that are a part of the initial batch of images loaded in upon page view and the subsequent images that are loaded upon scroll. Ultimately this is a trivial adaptation, so it's encouraged the reader of this article investigate the repository's code or think of their own solution on the matter.
+                    </p>
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
