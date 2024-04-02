@@ -35,10 +35,13 @@ include('../../header.php');
                         <p>
                             This project page will discuss the differences between the behaviors of my gallery and the gallery hosted on VSCO. This will transition into discussion of implementation, followed by discussion of how to improve.
                         </p>
+                        <p>
+                            A working implementation can be viewed <a href='../../photography/index.php?intro'>here</a>.
+                        </p>
                     <hr>
                     </section>
                     <header>
-                        <h1>Javascript: Image Gallery</h1>
+                        <h1>Javascript: Balanced Image Gallery</h1>
                     </header>
                     <div class='aside'>
                     <figure style='max-width:175px;'>
@@ -776,11 +779,17 @@ window.onscroll = function(){
                     <p>
                         A closer look at the repository will also reveal additional code in place. What's not been discussed here is how to differentiate transition effects for images that are a part of the initial batch of images loaded in upon page view and the subsequent images that are loaded upon scroll. Ultimately this is a trivial adaptation, so it's encouraged the reader of this article investigate the repository's code or think of their own solution on the matter.
                     </p>
+                    <p>
+                        Another side effect related to the flaws discussed so far is that a user with a slower internet speed will be required to commit to a larger amount of files upon the initial load. The reason of this is because it takes more time for the rendering environment to allocate space within each individual column. This allows for a greater amount of calls to <code>isFigureBottom</code> to pass, which in turn will prompt the script to load in more assets. This primarily becomes an issue when the time it takes to get a response to the server is measured around 1 second (1000ms) or higher.
+                    </p>
+                    <p>
+                        This implementation works for my use-case. To fix these issues will require some code refactoring. Anyone who has been able to keep up to speed with the architecture and code discussed thus far will likely have seen places in which a good refactor can be helpful. These refactors, and any subsequent cleaning up of logical errors, will be the next step in terms of this project. The goal is to eventually have a package that can be used as a web component elsewhere. Any progress made on this front will be cataloged within the concluding notes section of this writing. Eventually a repository dedicated to this component will be produced along with documentation in terms of how to deploy it.
+                    </p>
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
                         <p>
-
+                            Check back later for updates. - Alan
                         </p>
                         <hr>
                     </section>
