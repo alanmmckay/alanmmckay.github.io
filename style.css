@@ -366,6 +366,10 @@ code pre.info-code{
     width:70vw;
 }
 
+code pre.test-code{
+    width:85vw;
+}
+
 .dynamic-figure-container{
     align-items:center;
 }
@@ -634,6 +638,10 @@ div.image-col figure{
 
     code pre.info-code{
         width:65vw;
+    }
+
+    code pre.test-code{
+        width:85vw;
     }
 
     .dynamic-figure-container .dynamic-figure-view{
