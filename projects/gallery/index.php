@@ -42,15 +42,15 @@ include('../../header.php');
                     </header>
                     <div class='aside'>
                     <figure style='max-width:175px;'>
-                        <img src='images/instagram_blurred.png'>
-                        <figcaption> Take note of the shape of the thumbnails.</figcaption>
+                        <img src='images/instagram.png'>
+                        <figcaption> Instagram gallery view with square thumbnails.</figcaption>
                     </figure>
                     <p>
                         One thing that pushes VSCO above Instagram is its image gallery. As a web developer, it's not lost that the view of an image gallery within Instagram is fixed. That is, every image given in the view of a profile, (regardless of dimension), is fitted to a certain aspect ratio. It doesn't matter whether the uploaded image is a portrait or a landscape; when viewing the image in a profile's gallery, the image is fitted within a 1:1 frame.
                     </p>
-                    <figure class='responsive_aside' style='max-width:140px;'>
-                        <img src='images/instagram_blurred.png'>
-                        <figcaption> Take note of the shape of the thumbnails.</figcaption>
+                    <figure class='responsive_aside' style='max-width:200px;'>
+                        <img src='images/instagram.png'>
+                        <figcaption> Instagram gallery view with square thumbnails.</figcaption>
                     </figure>
                     <p>
                         VSCO differs by maintaining an image's aspect ratio within a profile's gallery view. This allows an extra visual dimension that can help one profile feel apart from another. In the past, I've seen profiles of creators who create a sense of coherency through a deliberate choice of color palette within their images. This is something witnessed within both platforms. VSCO goes beyond by inviting deliberate usage of shape.
@@ -474,15 +474,14 @@ for(let i=0;i&lt;boundary;i++){
         figure_height_map[new_figure_ratio.toString()].push(new_figure_data['object']);
     }
     figure_height_list.push(new_figure_ratio);
-    col_maps[grid_selection-1][i]['loaded'] += 1; //col_map tracks amount of images loaded and displayed for each column.
-    load_count += 1;
+    <mark>col_maps[grid_selection-1][i]['loaded'] += 1;</mark>
+    <mark>load_count += 1;</mark>
 }//end loop
-load_counts[grid_selection-1] = load_count;
+<mark>load_counts[grid_selection-1] = load_count;</mark>
 
-//position the program to iterate through the figure height values by order of height values:
-figure_height_list.sort(function(a,b){
-    return b-a;
-});
+<mark>figure_height_list.sort(function(a,b){</mark>
+    <mark>return b-a;</mark>
+<mark>});</mark>
 
 </pre>
                     </code>
