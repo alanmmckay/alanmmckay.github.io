@@ -10,7 +10,7 @@ $title = 'Alan McKay | Project | Balanced Image Gallery';
 
 $meta['title'] = 'Alan McKay | Balanced Image Gallery';
 
-$meta['description'] = '';
+$meta['description'] = 'Project description detailing facets of interest pertaining to building a responsive and balanced image gallery as an alternative to options given through social media.';
 
 $meta['url'] = 'https://alanmckay.blog/projects/gallery/';
 
