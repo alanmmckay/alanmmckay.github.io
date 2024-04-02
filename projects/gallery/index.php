@@ -104,25 +104,31 @@ include('../../header.php');
                         The amount of time it takes the web browser to render the downloaded resource is represented by the partial fill of the actual image. How this is reflected is dependent on the usage environment and image format. Within my web browser, swaths of the image are rendered from the bottom-up. Typically, the bottom half is rendered before the first half. This usually takes less than a second, but can be noticeable. The half-rendering is why the term "jagged rendering" is used in this context. From the perspective of a user, a small span of time occurs, the first half of an image pops into view, then the next half pops into view. After an image is loaded, repeat the process for the next image to be loaded. The mental imagery I conjure for this process is a timeline describing when a new chunk of visual information is loaded in - a timeline which has a jagged saw-tooth like appearance.
                     </p>
                     <figure>
-                        <img id='gif-frame' src='images/firstframe.png' style='display:none'>
-                        <img id='gif' src='images/02_resize.gif'>
+                        <img id='gif-frame02' src='images/firstframe.png' style='display:none' toggle='true'>
+                        <img id='gif02' src='images/02_resize.gif' toggle='true'>
                         <script>
-                            toggle = true;
-                            document.getElementById('gif').style['display'] = 'none';
-                            document.getElementById('gif-frame').style['display'] = 'inherit';
-                            function play_gif(){
-                                if(toggle){
-                                    document.getElementById('gif').style['display'] = 'inherit';
-                                    document.getElementById('gif-frame').style['display'] = 'none';
+                            document.getElementById('gif02').style['display'] = 'none';
+                            document.getElementById('gif-frame02').style['display'] = 'inherit';
+                            function play_gif(id){
+                                let aniEle = document.getElementById('gif'+id);
+                                let frameEle = document.getElementById('gif-frame'+id);
+                                let toggle = aniEle.getAttribute('toggle');
+                                console.log(toggle);
+                                if(toggle == 'true'){
+                                    aniEle.style['display'] = 'inherit';
+                                    frameEle.style['display'] = 'none';
+                                    toggle = false;
                                 }else{
-                                    document.getElementById('gif').style['display'] = 'none';
-                                    document.getElementById('gif-frame').style['display'] = 'inherit';
+                                    aniEle.style['display'] = 'none';
+                                    frameEle.style['display'] = 'inherit';
+                                    toggle = true;
                                 }
-                                toggle = !toggle;
+                                aniEle.setAttribute('toggle',toggle);
+                                frameEle.setAttribute('toggle',toggle);
                             }
                         </script>
                         <figcaption>
-                            Animated gif showing how images pop into view within VSCO. Note the attempt in obscuring this pop-in by placing a random background color from the site's color palette before an image load. Press <a onclick='play_gif();' style='text-decoration:underline'>here</a> to toggle playing the animated gif.
+                            Animated gif showing how images pop into view within VSCO. Note the attempt in obscuring this pop-in by placing a random background color from the site's color palette before an image load. Press <a onclick='play_gif("02");' style='text-decoration:underline'>here</a> to toggle playing the animated gif.
                         </figcaption>
                     </figure>
                     <p>
@@ -132,7 +138,15 @@ include('../../header.php');
                         The implementation of the image gallery has two primary routines. One loads a set of images into an off-screen buffer. The images that are loaded into this buffer are initially set with an opacity value of 0. The other routine enables transition styling for the set of images that have been loaded into said buffer. This is done by adding a new set of CSS styles to an image that is in the buffer-zone where opacity is changed to to 1, (in addition to setting other transition effects). A class to which the image belongs contains transition effects within an external style sheet, which are in place after the document load and thus are active once the routine calls for a figure to be displayed.
                     </p>
                     <figure>
-
+                        <img id='gif-frame03' src='images/03_firstframe.png' style='display:none' toggle='true'>
+                        <img id='gif03' src='images/03_resize.gif' toggle='true'>
+                        <script>
+                            document.getElementById('gif03').style['display'] = 'none';
+                            document.getElementById('gif-frame03').style['display'] = 'inherit';
+                        </script>
+                        <figcaption>
+                            Animated gif showing how images transition into view within this website's image gallery implementation. Press <a onclick='play_gif("03");' style='text-decoration:underline'>here</a> to toggle playing the animated gif.
+                        </figcaption>
                     </figure>
                     <p>
                         When exactly does this transition occur? "Near the bottom" of the viewport is defined explicitly within this implementation. Consider the following function that returns true should a figure reach the threshold to trigger a transition:
