@@ -22,7 +22,14 @@ include('../header.php');
         <section id='writingsWrapper'>
             <section>
                 <article>
+<?php
+    if(
+        (isset($_GET['page']) && $_GET['page'] <= 1) ||
+        !(isset($_GET['page'])) &&
+        !(isset($_GET['intro']))
 
+    ){
+?>
                     <section class='info'>
                         <header>
                             <h2>On VSCO</h2>
@@ -35,6 +42,9 @@ include('../header.php');
                         </p>
                     <hr>
                     </section>
+<?php
+    }
+?>
                     <header>
                         <h1>Photography</h1>
                     </header>
@@ -55,7 +65,7 @@ include('../header.php');
     for($i = 0; $i < min(($images_quantity - $initial_index),$image_count); $i++){
         echo "<a href='".$json_data[$image_index]['share_link']."' target='_blank' rel='noopener noreferrer'>";
         echo "<figure>";
-        echo "<img load='lazy' src='thumbnails/".$json_data[$image_index]['webp_file']."'?static/>";
+        echo "<img load='lazy' src='thumbnails/".$json_data[$image_index]['webp_file']."'/>";
         $image_index = $image_index + 1;
         echo "</figure>";
         echo "</a>";
