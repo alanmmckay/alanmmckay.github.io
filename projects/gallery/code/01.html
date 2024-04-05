@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../style.css">
+    </head>
+    <body>
+<pre>
+<code class='iframe'>
+function isFigureBottom(fig_object){
+    var fig_height = fig_object.getBoundingClientRect().height;
+    var fig_top = fig_object.getBoundingClientRect().top;
+    if((window.innerHeight * .95)-fig_top &gt; 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+</code>
+</pre>
+    </body>
+</html>
