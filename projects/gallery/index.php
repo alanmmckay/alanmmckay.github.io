@@ -165,14 +165,12 @@ include('../../header.php');
                                     <li>
                                         The declaration region of this script includes logic which creates this nested <code>div</code> structure. It operates with respect to this global. To get a closer feel of this structure, one only need to consider the following block:
                                     </li>
+                                    <li style='list-style-type:none'>
+                                        <iframe frameborder="0" style='width:100%;height:600px;overflow:auto' src='code/02.html'>
+                                        </iframe>
+                                    </li>
                                 </ul>
                             </li>
-                        </ul>
-                    </p>
-                    <iframe frameborder="0" style='width:100%;height:600px;overflow:auto' src='code/02.html'>
-                    </iframe>
-                    <p>
-                        <ul>
                             <li>
                                 <code>var load_counts = [];</code> - Contains a <code>max_column_size</code> amount of integer values which indicate how many images have been <i>loaded</i> for a given column. This number is incremented every time an image gets placed into the buffer zone.
                             </li>
@@ -185,16 +183,10 @@ include('../../header.php');
                                     <li>
                                         <code>col_maps[1][1]</code> points to information of the 2nd column within a gallery consisting of 2 columns. <code>col_maps[2][1]</code> points to information of the 2nd column within a gallery consisting of 3 columns. The logic which primes this structure is also based on <code>max_column_size</code>. The code which does this is as follows:
                                     </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </p>
-                    <iframe frameborder="0" style='width:100%;height:300px;overflow:auto' src='code/03.html'>
-                    </iframe>
-                    <p>
-                        <ul>
-                            <li style='list-style-type:none'>
-                                <ul>
+                                    <li style='list-style-type:none'>
+                                        <iframe frameborder="0" style='width:100%;height:300px;overflow:auto' src='code/03.html'>
+                                        </iframe>
+                                    </li>
                                     <li>
                                         The associative array contained in each column index has two keys: 'displayed' and 'loaded'. The values are simply the amount of images in a column that have been loaded and displayed. Indeed, the sum of the 'loaded' values within <code>col_maps[i]</code> will be equivalent to <code>load_counts[i]</code>. The same can be said for the sum of 'displayed' values within <code>col_maps[i]</code> being equivalent to <code>display_counts[i]</code>. A choice was made to keep track of the explicit counts within <code>load_counts</code> and <code>display_counts</code> instead. This acts as a means to minimize the amount of computation it would take to sum up the values from the inferred data structure.
                                     </li>
