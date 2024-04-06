@@ -91,45 +91,20 @@ include('../../header.php');
                     <p>
                         In terms of technical detail, a CSS class was set for all the affected elements. Here, the width is set to 100%, the height to some fixed pixel value, and the object-fit attribute set to cover. Inline styling is then applied to each of these image tags where the object-position attribute is set to define the position in which an image will be centered with respect to the cropped container. Then, also within the inline styling, the transition property of the object-position attribute is set to define how long it will take for an image to scan to a position.
                     </p>
-                    <code>
-<pre class='code'>
-img.animate{
-    width:100%;
-    height:300px;
-    object-fit:cover;
-}
-</pre>
-                    </code>
+                    <iframe frameborder="0" style='width:100%;max-height:190px;overflow:auto' src='code/01.html'>
+                    </iframe>
                     <p>
                         When and where the image scans is determined by JavaScript. A function was made to detect how far along an element has scrolled into the viewport. Should this threshold be met, the object-position CSS property changes; a new position is centered with respect to the cropped container and the previously set transition attribute enacts which causes the smooth scrolling effect.
                     </p>
                     <!--- JAVASCRIPT EXAMPLE! --->
-                    <code>
-<pre class='code'>
-function inViewRange(elementID,inPosition,outPosition){
-    element = document.getElementById(elementID);
-    bounding = element.getBoundingClientRect();
-    if ( ((window.innerHeight/2) - bounding.top > 0) && (bounding.top > 0) )
-    {
-        element.style['object-position'] = inPosition;
-    } else{
-        element.style['object-position'] = outPosition;
-    }
-}
-</pre>
-
-                    </code>
+                    <iframe frameborder="0" style='width:100%;max-height:340px;overflow:auto' src='code/02.html'>
+                    </iframe>
                     <p>
                         The logic described above is called upon by some event handler that detects when the window is scrolled.
                     </p>
                     <!--- JAVASCRIPT EXAMPLE! --->
-                    <code>
-<pre class='code'>
-window.onscroll = function(){
-    inViewRange('image-tag-ID', '0 20%', '0 45%');
-}
-</pre>
-                    </code>
+                    <iframe frameborder="0" style='width:100%;max-height:140px;overflow:auto' src='code/03.html'>
+                    </iframe>
                     <p>
                         The images can still be viewed in their entirety by clicking or tapping their containers. This is done by wrapping the figure tag up on an anchor tag which directs to the associated image.
                     </p>
