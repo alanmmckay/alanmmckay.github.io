@@ -354,22 +354,6 @@ ul.filelist li{
     border-bottom: 1px solid #999DA1;
 }
 
-code pre.code{
-    overflow:scroll;
-    background-color:#f2f2f2;
-    width:95vw;
-    max-width:40em;
-    padding-left:10px;
-}
-
-code pre.info-code{
-    width:70vw;
-}
-
-code pre.test-code{
-    width:85vw;
-}
-
 .dynamic-figure-container{
     align-items:center;
 }
@@ -435,6 +419,9 @@ div.image-col figure{
 iframe{
     background-color:#f2f2f2;
     padding-left:10px;
+    resize:vertical;
+    min-height:85px;
+    height:50vh;
 }
 
 code.iframe{
@@ -644,18 +631,6 @@ code.iframe{
         margin-left:5%;
     }
 
-    code pre.code{
-        width:80vw;
-    }
-
-    code pre.info-code{
-        width:65vw;
-    }
-
-    code pre.test-code{
-        width:85vw;
-    }
-
     .dynamic-figure-container .dynamic-figure-view{
         width:55%;
     }
@@ -720,14 +695,6 @@ code.iframe{
 
     #writingsWrapper li{
         margin-left:0px;
-    }
-    code pre.code{
-        min-width:260px;
-        width:95%;
-    }
-
-    code pre.info-code{
-        min-width:230px
     }
 
     blockquote{

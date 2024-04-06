@@ -73,7 +73,7 @@ include('../../header.php');
                     <p>
                         Consider the following protocol:
                     </p>
-                    <iframe frameborder="0" style='width:100%;height:325px;overflow:auto' src='code/01.html'>
+                    <iframe frameborder="0" style='width:100%;max-height:325px;overflow:auto' src='code/01.html'>
                     </iframe>
                     <p>
                         The above protocol is equivalent to running an AND boolean operation on a population where L=1 and H=0.
@@ -106,7 +106,7 @@ include('../../header.php');
                                     Figure B.
                                 </figcaption>
                                 </figure-->
-                        <iframe frameborder="0" style='width:100%;height:375px;overflow:auto' src='code/02.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:375px;overflow:auto' src='code/02.html'>
                         </iframe>
                             <p>
                                 This Algorithm can be used in conjunction with leader election and epidemics<a href='#references3'>[3]</a><a href='#references4'>[4]</a> to ensure data is ready to be collected.  Once it is, the collector simply has to check the given ratio.

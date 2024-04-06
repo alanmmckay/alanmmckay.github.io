@@ -204,7 +204,7 @@ include('../../header.php');
                         application permission. The process entails registering an application within Strava's system. Each
                         application has a unique client ID. Said application should direct a user to the following URL:
                     </p>
-                    <iframe frameborder="0" style='width:100%;height:100px;overflow:auto' src='code/01.html'>
+                    <iframe frameborder="0" style='width:100%;max-height:100px;overflow:auto' src='code/01.html'>
                     </iframe>
                     <p>The bracketed attributes can be described as:</p>
                     <ul>
@@ -226,12 +226,12 @@ include('../../header.php');
                         client id, client secret token (given upon application creation), and authorization code generates a
                         response with an access code to use to query the API. I.e.,
                     </p>
-                    <iframe frameborder="0" style='width:100%;height:190px;overflow:auto' src='code/02.html'>
+                    <iframe frameborder="0" style='width:100%;max-height:190px;overflow:auto' src='code/02.html'>
                     </iframe>
                     <p>
                         Responds with a user access token to be used via:
                     </p>
-                    <iframe frameborder="0" style='width:100%;height:100px;overflow:auto' src='code/03.html'>
+                    <iframe frameborder="0" style='width:100%;max-height:100px;overflow:auto' src='code/03.html'>
                     </iframe>
                     <p>
                         Which can be piped into a json file.
@@ -248,13 +248,13 @@ include('../../header.php');
                     <p>
                         The python script developed for this project is as follows:
                     </p>
-                    <iframe frameborder="0" style='width:100%;height:865px;overflow:auto' src='code/04.html'>
+                    <iframe frameborder="0" style='width:100%;max-height:865px;overflow:auto' src='code/04.html'>
                     </iframe>
                     <p>
                         This information can now be imported to a staging table. With a schema called "cycling" created, the
                         table definition can be described as:
                     </p>
-                    <iframe frameborder="0" style='width:100%;height:400px;overflow:auto' src='code/05.html'>
+                    <iframe frameborder="0" style='width:100%;max-height:400px;overflow:auto' src='code/05.html'>
                     </iframe>
                     <p>
                         Highlighted is a column called "encoded_route". Strava stores its polyline information as an encoded
@@ -267,12 +267,12 @@ include('../../header.php');
                     <p>
                         The activities table is created via:
                     </p>
-                    <iframe frameborder="0" style='width:100%;height:535px;overflow:auto' src='code/06.html'>
+                    <iframe frameborder="0" style='width:100%;max-height:535px;overflow:auto' src='code/06.html'>
                     </iframe>
                     <p>
                         And the data insertion query is as follows:
                     </p>
-                    <iframe frameborder="0" style='width:100%;height:760px;overflow:auto' src='code/07.html'>
+                    <iframe frameborder="0" style='width:100%;max-height:760px;overflow:auto' src='code/07.html'>
                     </iframe>
                     <p>
                         What has not been shared is the creation of an athletes table. This table creation is a trivial matter.
@@ -298,7 +298,7 @@ include('../../header.php');
                     <p>
                         The traffic volume table can be described as:
                     </p>
-                    <iframe frameborder="0" style='width:100%;height:350px;overflow:auto' src='code/08.html'>
+                    <iframe frameborder="0" style='width:100%;max-height:350px;overflow:auto' src='code/08.html'>
                     </iframe>
                     <p>
                         This contains the information that's required, and no more. There are two obstacles in terms of
@@ -320,7 +320,7 @@ include('../../header.php');
                     <p>
                         The following insertion query addresses these two obstacles:
                     </p>
-                    <iframe frameborder="0" style='width:100%;height:205px;overflow:auto' src='code/09.html'>
+                    <iframe frameborder="0" style='width:100%;max-height:205px;overflow:auto' src='code/09.html'>
                     </iframe>
                     <p>
                         (Note that the shapefiles have poorly named attributes; "effective_" is the column name for the
@@ -373,7 +373,7 @@ include('../../header.php');
                     <p>
                         Queries gauging proximity safety can start being employed. I.e.,
                     </p>
-                    <iframe frameborder="0" style='width:100%;height:125px;overflow:auto' src='code/10.html'>
+                    <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' src='code/10.html'>
                     </iframe>
                     <h2>Segmentation</h2>
                     <p>
@@ -391,14 +391,14 @@ include('../../header.php');
                         good start in this effort. It produces an index for each point being produced along with the geometry.
                         Consider the following query:
                     </p>
-                    <iframe frameborder="0" style='width:100%;height:125px;overflow:auto' src='code/11.html'>
+                    <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' src='code/11.html'>
                     </iframe>
                     <p>
                         This query produces a set of results in which the route_id is associated with a set of points which are
                         also given an index. Let's assign this to a view called list_points. The task is now to wrap these points up
                         into individual lines. This can be accomplished with the following query:
                     </p>
-                    <iframe frameborder="0" style='width:100%;height:125px;overflow:auto' src='code/12.html'>
+                    <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' src='code/12.html'>
                     </iframe>
                     <p>
                         What makes the above query work is the logic in the where clause. The statement "<code>lp2.path_index

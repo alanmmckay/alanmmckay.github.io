@@ -89,7 +89,7 @@ include('../../header.php');
                         <p>
                             An advantage to being provided a script within a Jupyter notebook is that it's easier to discern the sections the developer finds important. The script received from Professor Meurice took advantage of <code>matplotlib</code> to display the reprocessed images. Within the notebook, each significant step was capped by a display of the reprocessed image as-in progress. For example, the first significant step of the algorithm was to apply a grey-scale to each individual pixel. A given image would be read in using the imageio library then processed as such:
                         </p>
-                        <iframe frameborder="0" style='width:100%;height:495px;overflow:auto' src='code/01.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:495px;overflow:auto' src='code/01.html'>
                         </iframe>
                         <p>
                             An import of <code>matplotlib.pyplot</code> as <code>plt</code> preceded this block. Knowing this, take note of the usage of pyplot's show method near the end of the code snippet.
@@ -106,7 +106,7 @@ include('../../header.php');
                         <p>
                             The other values weren't clearly defined here. Since the product of the script is of visual nature, this provided an opportunity to produce something which can visually inform the variance of these values can produce. This would require a combinatoric production of the same image using a valid range of values. I refactored the code from the Jupyter notebook into an external python file and ran the following bash script:
                         </p>
-                        <iframe frameborder="0" style='width:100%;height:520px;overflow:auto' src='code/02.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:520px;overflow:auto' src='code/02.html'>
                         </iframe>
                         <p>
                             The ranges of the loops were restricted to keep a reasonable runtime of this process. A lot of the image processing is dependent on the amount of pixels contained in a given image, so the input image size was kept low enough whilst ensuring enough pixels were available to be able to gauge the differences the other input parameters bring to the process.
@@ -165,12 +165,12 @@ include('../../header.php');
                         <p>
                             The <code>pathinfo</code> function is used to isolate the extension of the filename string. Contrary to sentiment posed in paragraphs prior, this is still worthy of checking to provide useful feedback for those who are making sincere attempts at using the application.
                         </p>
-                        <iframe frameborder="0" style='width:100%;height:100px;overflow:auto' src='code/04.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:100px;overflow:auto' src='code/04.html'>
                         </iframe>
                         <p>
                             The <code>exif_imagetype</code> function provides a means within PHP to drill down to byte-level in order to validate file structure. This is validated further by <code>image_type_to_mime_type</code> which makes use of Apache's <code>mime_magic</code> module to make the same assurance.
                         </p>
-                        <iframe frameborder="0" style='width:100%;height:140px;overflow:auto' src='code/05.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:140px;overflow:auto' src='code/05.html'>
                         </iframe>
                         <p>
                             These functions are used in conjunction with safe system administration procedure. Within the Linux environment, proper(ly strict) permissions are granted to the upload folder while Apache configuration restricts file-type access to the folder to only allow access to what is relevant.
@@ -178,7 +178,7 @@ include('../../header.php');
                         <p>
                             Slider and file selection input has been validated. A keen observer will discover a hidden input form. A decision was made to assign a random name to the uploaded file as it is placed into the upload folder. This is an attempt to decouple any malicious attempts at file system traversal and malicious script execution vectors that the previous measures may have missed. The back-end generates this random string as the template for the submission page is built.
                         </p>
-                        <iframe frameborder="0" style='width:100%;height:295px;overflow:auto' src='code/06.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:295px;overflow:auto' src='code/06.html'>
                         </iframe>
                         <p>
                             A hidden input form was opted instead of using a query string to embed this information. The reason for this was to keep the submission url clean. Another reason involves the necessity to know the filename before any submission is made! This relates to giving the user feedback of progress once they've made a submission.
@@ -204,7 +204,7 @@ include('../../header.php');
                         <p>
                             Once the validation check passes, <code>move_uploaded_files</code> is called such that the receiving file is given the random name generated within the hidden input form. This new file's name will be used in concatenating a string to use for an <code>exec</code> call:
                         </p>
-                        <iframe frameborder="0" style='width:100%;height:125px;overflow:auto' src='code/10.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' src='code/10.html'>
                         </iframe>
                         <p>
                             All the user has to do now is wait for the Aquatint script to complete; And to wait they shall! Dependent on resolution, it may take a good amount of time for an image to process. The algorithm itself is at least quadratic in runtime with respect to the amount of pixels an image has. This is said ignoring unknown runtime of any library method calls embedded within the iteration of these pixels. This potential for slowness is compounded by the measly 1 gigabyte of ram and 2Ghz single core CPU that my LAMP server has access to. For these reasons, it is necessary to let the user know how far along the Aquatint conversion process is.
@@ -224,39 +224,41 @@ include('../../header.php');
                         <p>
                           The process is as follows: When the submission form is loaded, the back-end automatically generates a filename. This has already been discussed in the section prior. It's necessary to know the file-name before the submission is posted to the server. Write this string to the hidden form and write it to a JSON file that only the back-end may access. This file will serve as a map for an API to use.
                         </p>
-                        <iframe frameborder="0" style='width:100%;height:400px;overflow:auto' src='code/11.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:400px;overflow:auto' src='code/11.html'>
                         </iframe>
                         <p>
                             Once the submit button is pressed, PHP will only serve the resulting page once all the program statements are completed. This includes the execution of the <code>exec</code> statement. This necessitates the need to have a filename pre-generated. Thus, a Javascript event listener is added to the submission button as a means know when it is pressed. This event listener must know the string that represents the filename.
                         </p>
-                        <iframe frameborder="0" style='width:100%;height:180px;overflow:auto' src='code/12.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:180px;overflow:auto' src='code/12.html'>
                         </iframe>
                         <p>
                             Once submit is pressed, toggle a visual prompt for the user that they should wait. Trigger an interval loop which runs an AJAX query to the server's API to query for the status of an upload based on the randomly generated filename. This query occurs once every three seconds.
                         </p>
-                        <iframe frameborder="0" style='width:100%;height:215px;overflow:auto' src='code/13.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:215px;overflow:auto' src='code/13.html'>
                         </iframe>
                         <p>
                             Once submit is pressed, the Aquatint script will be run via the PHP script's exec command. Within the Aquatint script, create a JSON file that resides in the uploads folder. This JSON file is prefixed with the name of the file to be written. It will contain entry points to indicate when a certain step of the algorithm is completed. It will also have a spot to indicate the progress of the current step being executed.
                         </p>
-                        <iframe frameborder="0" style='width:100%;height:230px;overflow:auto' src='code/14.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:230px;overflow:auto' src='code/14.html'>
                         </iframe>
                         <p>
                             As the Aquatint program is running, it will write to the file once a significant step has been completed. Within each significant step, (usually embedded in an outer-loop), it will write a value indicating the percentage of the step completed. This will only be written for every 3% completed to save the amount of times the progress is written to this file.
                         </p>
-                        <iframe frameborder="0" style='width:100%;height:995px;overflow:auto' src='code/15.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:995px;overflow:auto' src='code/15.html'>
                         </iframe>
                         <p>
                             As the user's browser is waiting for a response of the <code>post</code>, the AJAX method will be querying the API and receiving new state written by the Python script. The AJAX call will work through a set of states which represent the completion of a certain step of the Aquatint conversion process. Percentage of a given step will be reported, and once a step is completed, a progress bar will be filled in.
                         </p>
-                        <iframe frameborder="0" style='width:100%;height:865px;overflow:auto' src='code/16.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:865px;overflow:auto' src='code/16.html'>
                         </iframe>
-                        <iframe frameborder="0" style='width:100%;height:230px;overflow:auto' src='code/17.html'>
+                        <br>
+                        <br>
+                        <iframe frameborder="0" style='width:100%;max-height:230px;overflow:auto' src='code/17.html'>
                         </iframe>
                         <p>
                             For every query to the API, the PHP script will then look up the relevant JSON status file and report the relevant status. The AJAX query will make use of the returned information to fill in the relevant HTML elements to give the user a sense of progress.
                         </p>
-                        <iframe frameborder="0" style='width:100%;height:915px;overflow:auto' src='code/18.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:915px;overflow:auto' src='code/18.html'>
                         </iframe>
                         <p>
                             To clean-up things on the server-side, every time the submission page is accessed, the back end will take a look at the mapping json file and keep all the items that are less than 30 minutes old. A cronjob also works on the server and deletes all files within the uploads folder that meets this criteria as well.
