@@ -77,17 +77,17 @@ include('../../header.php');
                                             <li><code>./kleinc</code> : code generation; the completed compiler</li>
                                         </ul>
                                         To run each script run the following command:
-                                        <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:35em;padding-left:10px;margin-top:5px;margin-left:5px;'>
-    sh &lt;script name&gt; &lt;program to be tested&gt;
-</pre>
+                                        <ul><li>
+                                        <code style='display:block;text-align:start;'>
+                                            sh &lt;script name&gt; &lt;program to be tested&gt;
                                         </code>
+                                        </ul></li>
                                         For example:
-                                        <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:35em;padding-left:10px;margin-top:5px;margin-left:5px;'>
-    sh kleinc programs/exclusive_or.kln
-</pre>
+                                        <ul><li>
+                                        <code style='display:block;text-align:start;'>
+                                            sh kleinc programs/exclusive_or.kln
                                         </code>
+                                        </ul></li>
                                     </li>
                                 </ul>
                             </li>
