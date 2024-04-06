@@ -204,11 +204,8 @@ include('../../header.php');
                         application permission. The process entails registering an application within Strava's system. Each
                         application has a unique client ID. Said application should direct a user to the following URL:
                     </p>
-                    <code>
-<pre class='code'>
-https://www.strava.com/oauth/authorize?client_id=&lt;CLIENT_ID&gt;response_type=code&amp;redirect_uri=&lt;APPLICATION_LOCATION&gt;/exchange_token&amp;approval_prompt=force&amp;scope=activity:&lt;SCOPE&gt;
-</pre>
-                    </code>
+                    <iframe frameborder="0" style='width:100%;height:100px;overflow:auto' src='code/01.html'>
+                    </iframe>
                     <p>The bracketed attributes can be described as:</p>
                     <ul>
                         <li>
@@ -229,23 +226,13 @@ https://www.strava.com/oauth/authorize?client_id=&lt;CLIENT_ID&gt;response_type=
                         client id, client secret token (given upon application creation), and authorization code generates a
                         response with an access code to use to query the API. I.e.,
                     </p>
-                    <code>
-<pre class='code'>
-curl -X POST https://www.strava.com/oauth/token \
--F client_id=&lt;CLIENT_ID&gt; \
--F client_secret=&lt;CLIENT_SECRET&gt; \
--F code=&lt;AUTHORIZATION_CODE&gt; \
--F grant_type=authorization_code
-</pre>
-                    </code>
+                    <iframe frameborder="0" style='width:100%;height:190px;overflow:auto' src='code/02.html'>
+                    </iframe>
                     <p>
                         Responds with a user access token to be used via:
                     </p>
-                    <code>
-<pre class='code'>
-http GET "https://www.strava.com/api/v3/athlete/activities" "Authorization: Bearer &lt;access token&gt;"
-</pre>
-                    </code>
+                    <iframe frameborder="0" style='width:100%;height:100px;overflow:auto' src='code/03.html'>
+                    </iframe>
                     <p>
                         Which can be piped into a json file.
                     </p>
@@ -261,61 +248,14 @@ http GET "https://www.strava.com/api/v3/athlete/activities" "Authorization: Bear
                     <p>
                         The python script developed for this project is as follows:
                     </p>
-                    <code>
-<pre class='code'>
-with open('morerides.json','r') as rides_file:
-    rides_data = json.load(rides_file)
-
-csv_string = "activity_id,athlete_id,route_id,route,type,location_country"
-csv_string = csv_string + ",start_date,start_date_local,timezone\n"
-
-for ride in rides_data:
-    if ride['map']['summary_polyline'] and ride['map']['summary_polyline'] != '':
-        #gather values:
-        activityId = ride['id']
-        athleteId = ride['athlete']['id']
-        routeId = ride['map']['id']
-        route = ride['map']['summary_polyline']
-        type = ride['type']
-        locationCountry = ride['location_country']
-        startDate = ride['start_date']
-        startDateLocal = ride['start_date_local']
-        timezone = ride['timezone']
-
-        #create row string
-        line = str(activityId) + "," + str(athleteId) + "," + str(routeId) + ","
-        line = line + str(route) + "," + str(type) + "," + str(locationCountry)
-        line = line + "," + str(startDate) + "," + str(startDateLocal)
-        line = line + "," + str(timezone) + "\n"
-
-        #concatenate the row string to the csv_string
-        csv_string = csv_string + line
-
-with open('rides.csv','w') as rides_file:
-    rides_file.write(csv_string)
-</pre>
-                    </code>
+                    <iframe frameborder="0" style='width:100%;height:865px;overflow:auto' src='code/04.html'>
+                    </iframe>
                     <p>
                         This information can now be imported to a staging table. With a schema called "cycling" created, the
                         table definition can be described as:
                     </p>
-                    <code>
-<pre class='code'>
-CREATE TABLE cycling.activities_staging
-(
-    activity_id BIGINT,
-    athlete_id BIGINT,
-    route_id varchar,
-    <mark>encoded_route text COLLATE pg_catalog."default",</mark>
-    activity_type char(8),
-    location_country varchar,
-    start_date timestamp,
-    start_date_local timestamp,
-    timezone varchar,
-    PRIMARY KEY(activity_id)
-);
-</pre>
-                    </code>
+                    <iframe frameborder="0" style='width:100%;height:400px;overflow:auto' src='code/05.html'>
+                    </iframe>
                     <p>
                         Highlighted is a column called "encoded_route". Strava stores its polyline information as an encoded
                         polyline string. This is a syntax used by services such as open street map. Indeed, Strava does not inform
@@ -327,61 +267,13 @@ CREATE TABLE cycling.activities_staging
                     <p>
                         The activities table is created via:
                     </p>
-                    <code>
-<pre class='code'>
-CREATE TABLE cycling.activities
-(
-    activity_id BIGINT,
-    athlete_id BIGINT,
-    route_id varchar,
-    encoded_route text COLLATE pg_catalog."default",
-    activity_type char(8),
-    location_country varchar,
-    start_date timestamp,
-    start_date_local timestamp,
-    timezone varchar,
-    user_id BIGINT,
-    <mark>route geometry(linestring,4326),</mark>
-    PRIMARY KEY(activity_id),
-    CONSTRAINT fk_athlete
-    FOREIGN KEY(user_id)
-    REFERENCES cycling.athletes(user_id)
-);
-</pre>
-                    </code>
+                    <iframe frameborder="0" style='width:100%;height:535px;overflow:auto' src='code/06.html'>
+                    </iframe>
                     <p>
                         And the data insertion query is as follows:
                     </p>
-                    <code>
-<pre class='code'>
-INSERT INTO cycling.activities(
-    activity_id,
-    athlete_id,
-    route_id,
-    encoded_route,
-    activity_type,
-    location_country,
-    start_date,
-    start_date_local,
-    timezone,
-    user_id,
-    route)
-SELECT staging.activity_id,
-        staging.athlete_id,
-        staging.route_id,
-        staging.encoded_route,
-        staging.activity_type,
-        staging.location_country,
-        staging.start_date,
-        staging.start_date_local,
-        staging.timezone,
-        u.user_id,
-        <mark>(SELECT ST_AsEWKT(ST_LineFromEncodedPolyline(staging.encoded_route)))</mark>
-            FROM cycling.activities_staging as staging
-            JOIN cycling.athletes as u ON strava_athlete_id = athlete_id
-;
-</pre>
-                    </code>
+                    <iframe frameborder="0" style='width:100%;height:760px;overflow:auto' src='code/07.html'>
+                    </iframe>
                     <p>
                         What has not been shared is the creation of an athletes table. This table creation is a trivial matter.
                         What's important is the join statement of the insertion query which adheres to the foreign key
@@ -406,21 +298,8 @@ SELECT staging.activity_id,
                     <p>
                         The traffic volume table can be described as:
                     </p>
-                    <code>
-<pre class='code'>
-CREATE TABLE cycling.traffic_vol
-(
-    gid INT,
-    route_id varchar,
-    aadt BIGINT,
-    aadt_year SMALLINT,
-    effective_start_date date,
-    effective_end_date date,
-    geom geometry(multilinestring,4326),
-    PRIMARY KEY(gid)
-);
-</pre>
-                    </code>
+                    <iframe frameborder="0" style='width:100%;height:350px;overflow:auto' src='code/08.html'>
+                    </iframe>
                     <p>
                         This contains the information that's required, and no more. There are two obstacles in terms of
                         migrating the relevant data from its staging table and the production table:
@@ -441,15 +320,8 @@ CREATE TABLE cycling.traffic_vol
                     <p>
                         The following insertion query addresses these two obstacles:
                     </p>
-                    <code>
-<pre class='code'>
-INSERT INTO cycling.traffic_vol (gid,route_id, aadt, aadt_year, effective_start_date,
-effective_end_date,geom)
-    SELECT distinct gid,route_id, aadt, aadt_year, effective_, effectiv_1,
-    <mark>ST_Force2D(ST_Transform(geom,4326))</mark> FROM cycling.traffic_vol_staging WHERE <mark>effective_ is
-    not null ORDER BY effective_ DESC;</mark>
-</pre>
-                    </code>
+                    <iframe frameborder="0" style='width:100%;height:205px;overflow:auto' src='code/09.html'>
+                    </iframe>
                     <p>
                         (Note that the shapefiles have poorly named attributes; "effective_" is the column name for the
                         attribute describing the effective start date.)
@@ -501,12 +373,8 @@ effective_end_date,geom)
                     <p>
                         Queries gauging proximity safety can start being employed. I.e.,
                     </p>
-                    <code>
-<pre class='code'>
-SELECT crash.geom FROM cycling.crashes as crash, cycling.activities as activity
-WHERE ST_DWithin(crash.geom,activity.route,0.01);
-</pre>
-                    </code>
+                    <iframe frameborder="0" style='width:100%;height:125px;overflow:auto' src='code/10.html'>
+                    </iframe>
                     <h2>Segmentation</h2>
                     <p>
                         One facet of the database has yet to be discussed. The entity that is a Cycling Segment. The intention for
@@ -523,23 +391,15 @@ WHERE ST_DWithin(crash.geom,activity.route,0.01);
                         good start in this effort. It produces an index for each point being produced along with the geometry.
                         Consider the following query:
                     </p>
-                    <code>
-<pre class='code'>
-SELECT route_id, <mark>(dp).path[1]</mark> As path_index, ST_AsTEXT(<mark>(dp).geom</mark>) AS node
-FROM (SELECT route_id, <mark>ST_DumpPoints(route) AS dp</mark> FROM cycling.activities) as segments;
-</pre>
-                    </code>
+                    <iframe frameborder="0" style='width:100%;height:125px;overflow:auto' src='code/11.html'>
+                    </iframe>
                     <p>
                         This query produces a set of results in which the route_id is associated with a set of points which are
                         also given an index. Let's assign this to a view called list_points. The task is now to wrap these points up
                         into individual lines. This can be accomplished with the following query:
                     </p>
-                    <code>
-<pre class='code'>
-SELECT lp1.route_id, <mark>st_makeline(lp1.node, lp2.node)</mark> as line FROM <mark>list_points as lp1,
-list_points as lp2</mark> WHERE lp2.path_index - lp1.path_index = 1 AND lp1.route_id = lp2.route_id;
-</pre>
-                    </code>
+                    <iframe frameborder="0" style='width:100%;height:125px;overflow:auto' src='code/12.html'>
+                    </iframe>
                     <p>
                         What makes the above query work is the logic in the where clause. The statement "<code>lp2.path_index
                         - lp1.path_index = 1</code>" ensures that points are contiguous form a line. Performing basic algebraic

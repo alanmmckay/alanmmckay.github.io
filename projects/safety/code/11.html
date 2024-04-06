@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../style.css">
+    </head>
+    <body>
+<pre>
+<code class='iframe'>
+SELECT route_id, <mark>(dp).path[1]</mark> As path_index, ST_AsTEXT(<mark>(dp).geom</mark>) AS node
+FROM (SELECT route_id, <mark>ST_DumpPoints(route) AS dp</mark> FROM cycling.activities) as segments;
+</code>
+</pre>
+    </body>
+</html>
