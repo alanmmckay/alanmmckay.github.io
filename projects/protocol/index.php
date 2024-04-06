@@ -73,20 +73,8 @@ include('../../header.php');
                     <p>
                         Consider the following protocol:
                     </p>
-                        <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:35em;padding-left:10px'>
-Q = {L,H}
-Σ = {L,H}
-ι(x) = x
-ω(x) = x
-δ = {
-    (L,L) -> (L,L),
-    (L,H) -> (H,H),
-    (H,L) -> (H,H),
-    (H, H) -> (H,H)
-    }
-</pre>
-                        </code>
+                    <iframe frameborder="0" style='width:100%;height:325px;overflow:auto' src='code/01.html'>
+                    </iframe>
                     <p>
                         The above protocol is equivalent to running an AND boolean operation on a population where L=1 and H=0.
                     </p>
@@ -117,23 +105,9 @@ Q = {L,H}
                                 <figcaption>
                                     Figure B.
                                 </figcaption>
-                            </figure-->
-                            <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:40em;padding-left:10px'>
-Q = {L -/-, H -/-, 0 n/m, 1 x/y} where n,m,x, y are Integers
-Σ = {L, H}
-ι(x) = x
-ω(0 n/m) = ω(1 n/m) = n/m
-δ = {
-    (H -/-,H -/-) -> (2/2, 2/2),
-    (L -/-, H -/-) -> (1/2, 1/2),
-    (H -/-, L -/-) -> (1/2, 1/2),
-    (L -/-, L -/-) -> (0/2, 0/2),
-    (0 n/m, 0 x/y) -> (0 (n+x)/(m+y), (1 (n+x)/(m+y)),
-    (0 n/m, 1 x/y) -> (0 n/m, 1 n/m)
-    }
-</pre>
-                            </code>
+                                </figure-->
+                        <iframe frameborder="0" style='width:100%;height:375px;overflow:auto' src='code/02.html'>
+                        </iframe>
                             <p>
                                 This Algorithm can be used in conjunction with leader election and epidemics<a href='#references3'>[3]</a><a href='#references4'>[4]</a> to ensure data is ready to be collected.  Once it is, the collector simply has to check the given ratio.
                             </p>
