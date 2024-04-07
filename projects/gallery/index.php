@@ -45,14 +45,14 @@ include('../../header.php');
                     </header>
                     <div class='aside'>
                     <figure style='max-width:175px;'>
-                        <img src='images/instagram.png'>
+                        <img src='images/instagram.webp'>
                         <figcaption> Instagram gallery view with square thumbnails.</figcaption>
                     </figure>
                     <p>
                         One thing that pushes VSCO above Instagram is its image gallery. As a web developer, it's not lost that the view of an image gallery within Instagram is fixed. That is, every image given in the view of a profile, (regardless of dimension), is fitted to a certain aspect ratio. It doesn't matter whether the uploaded image is a portrait or a landscape; when viewing the image in a profile's gallery, the image is fitted within a 1:1 frame.
                     </p>
                     <figure class='responsive_aside' style='max-width:200px;'>
-                        <img src='images/instagram.png'>
+                        <img src='images/instagram.webp'>
                         <figcaption> Instagram gallery view with square thumbnails.</figcaption>
                     </figure>
                     <p>
@@ -60,28 +60,28 @@ include('../../header.php');
                     </p>
                     </div>
                     <figure style='max-width:400px'>
-                        <img src='images/vsco_grid_view.png'>
+                        <img src='images/vsco_grid_view.webp'>
                         <figcaption> The VSCO image gallery does force image thumbnails to be square in shape.</figcaption>
                     </figure>
                     <p>
                         Another facet that used to set VSCO apart from Instagram was the fact a visitor need not sign in to view the entirety of a profile. Unfortunately, this is no longer the case. Thus the ultimate motive of creating my own.
                     </p>
                     <figure style='max-width:400px'>
-                        <img src='images/vsco_sign-in.png'>
+                        <img src='images/vsco_sign-in.webp'>
                         <figcaption> An attempt at scrolling through an image gallery within VSCO forces a user to sign in</figcaption>
                     </figure>
                     <p>
                         In creating an image gallery, maintaining the aspect ratio of an image within the gallery view is a primary goal. There exists built-in functionality for CSS to help accomplish this. Images can be scaled by their aspect ratio to fit within a container. Furthermore, modern browsers provide functionality for grid support such that each column of a grid has the same length regardless of the size of its individual items. This is accomplished by providing padding for items that exist in a given row that have a lesser height than the item with the maximum height.
                     </p>
                     <figure style='max-width:400px'>
-                        <img src='images/static_gallery.png'>
+                        <img src='images/static_gallery.webp'>
                         <figcaption> An implementation of a grid-view image gallery. Note the inconsistent white-space margins surrounding each image.</figcaption>
                     </figure>
                     <p>
                         An observer of the VSCO gallery will notice the margins between images are fixed regardless of the aspect ratio of an image. Due to the temporal prioritization of displaying images within the gallery, this poses a potential problem: images can be uploaded in such a manner that the height of one column can completely overwhelm another. This creates situations within the platform where a given column is blank while another introduces more images. This can be apparent looking at the end of an image gallery for a profile which has inconsistent image sizes.
                     </p>
                     <figure style='max-width:400px'>
-                        <img src='images/vsco_bottom.png'>
+                        <img src='images/vsco_bottom.webp'>
                         <figcaption> The bottom of an image gallery on VSCO. Notice the left column completely overwhelms the others. This column continues downward for a few more screens-worth of space.</figcaption>
                     </figure>
                     <p>
@@ -91,7 +91,7 @@ include('../../header.php');
                         The image gallery I've developed improves upon the VSCO gallery by using the shortest column as a trigger for loading in new images. It also diverges from the temporal priority; It is more loose in terms of chronological ordering than the algorithm used by VSCO. Here, the a set of images are grabbed in chronological order, but are then sorted by size. This occurs such that the shortest image in a batch is placed in the column with the largest height, and the tallest image in a batch is placed within the shortest column. This approach helps keep columns balanced in size.
                     </p>
                     <figure style='max-width:400px'>
-                        <img src='images/bottom_of_gallery.png'>
+                        <img src='images/bottom_of_gallery.webp'>
                         <figcaption> An image gallery whose columns are balanced in size.</figcaption>
                     </figure>
                     <p>
@@ -107,31 +107,12 @@ include('../../header.php');
                         The amount of time it takes the web browser to render the downloaded resource is represented by the partial fill of the actual image. How this is reflected is dependent on the usage environment and image format. Within my web browser, swaths of the image are rendered from the bottom-up. Typically, the bottom half is rendered before the first half. This usually takes less than a second, but can be noticeable. The half-rendering is why the term "jagged rendering" is used in this context. From the perspective of a user, a small span of time occurs, the first half of an image pops into view, then the next half pops into view. After an image is loaded, repeat the process for the next image to be loaded. The mental imagery I conjure for this process is a timeline describing when a new chunk of visual information is loaded in - a timeline which has a jagged saw-tooth like appearance.
                     </p>
                     <figure>
-                        <img id='gif-frame02' src='images/firstframe.png' style='display:none' toggle='true'>
-                        <img id='gif02' src='images/02_resize.gif' toggle='true'>
-                        <script>
-                            document.getElementById('gif02').style['display'] = 'none';
-                            document.getElementById('gif-frame02').style['display'] = 'inherit';
-                            function play_gif(id){
-                                let aniEle = document.getElementById('gif'+id);
-                                let frameEle = document.getElementById('gif-frame'+id);
-                                let toggle = aniEle.getAttribute('toggle');
-                                console.log(toggle);
-                                if(toggle == 'true'){
-                                    aniEle.style['display'] = 'inherit';
-                                    frameEle.style['display'] = 'none';
-                                    toggle = false;
-                                }else{
-                                    aniEle.style['display'] = 'none';
-                                    frameEle.style['display'] = 'inherit';
-                                    toggle = true;
-                                }
-                                aniEle.setAttribute('toggle',toggle);
-                                frameEle.setAttribute('toggle',toggle);
-                            }
-                        </script>
+                        <video style='width:100%;' controls>
+                            <source src='videos/02_resize.webm'>
+                            <source src='videos/02_resize.mp4'>
+                        </video>
                         <figcaption>
-                            Animated gif showing how images pop into view within VSCO. Note the attempt in obscuring this pop-in by placing a random background color from the site's color palette before an image load. Press <a onclick='play_gif("02");' style='text-decoration:underline'>here</a> to toggle playing the animated gif.
+                            Animation showing how images pop into view within VSCO. Note the attempt in obscuring this pop-in by placing a random background color from the site's color palette before an image load.
                         </figcaption>
                     </figure>
                     <p>
@@ -141,14 +122,12 @@ include('../../header.php');
                         The implementation of the image gallery has two primary routines. One loads a set of images into an off-screen buffer. The images that are loaded into this buffer are initially set with an opacity value of 0. The other routine enables transition styling for the set of images that have been loaded into said buffer. This is done by adding a new set of CSS styles to an image that is in the buffer-zone where opacity is changed to to 1, (in addition to setting other transition effects). A class to which the image belongs contains transition effects within an external style sheet, which are in place after the document load and thus are active once the routine calls for a figure to be displayed.
                     </p>
                     <figure>
-                        <img id='gif-frame03' src='images/03_firstframe.png' style='display:none' toggle='true'>
-                        <img id='gif03' src='images/03_resize.gif' toggle='true'>
-                        <script>
-                            document.getElementById('gif03').style['display'] = 'none';
-                            document.getElementById('gif-frame03').style['display'] = 'inherit';
-                        </script>
+                        <video style='width:100%;' controls>
+                            <source src='videos/03_resize.webm'>
+                            <source src='videos/03_resize.mp4'>
+                        </video>
                         <figcaption>
-                            Animated gif showing how images transition into view within this website's image gallery implementation. Press <a onclick='play_gif("03");' style='text-decoration:underline'>here</a> to toggle playing the animated gif.
+                            Animation showing how images transition into view within this website's image gallery implementation.
                         </figcaption>
                     </figure>
                     <p>
