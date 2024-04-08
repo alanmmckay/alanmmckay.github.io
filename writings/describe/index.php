@@ -45,9 +45,9 @@ include('../../header.php');
                     </p>
                     <br>
                     <hr>
-                    <a href='../../images/mike-black-elk.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/mike-black-elk.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/mike-black-elk.jpg' id='mike-black-elk' class='animate' alt="A man climbing the stone steps leading to a tower on top of Black Elk Peak" style='transition:object-position 4s;object-position:0 45%;' />
+                            <img src='./images/mike-black-elk.webp' id='mike-black-elk' class='animate' alt="A man climbing the stone steps leading to a tower on top of Black Elk Peak" style='transition:object-position 4s;object-position:0 45%;' />
                             <figcaption>
                                 Michael reaching the summit of Black Elk Peak.
                             </figcaption>
@@ -63,9 +63,9 @@ include('../../header.php');
                     </p>
                     <br>
                     <hr>
-                    <a href='../../images/connor-grimes.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/connor-grimes.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/connor-grimes.jpg' id='connor-grimes' class='animate' alt="A man scaling an interior rock climbing wall contained within a gymnasium." style='transition:object-position 4s;object-position:0 70%;' />
+                            <img src='./images/connor-grimes.webp' id='connor-grimes' class='animate' alt="A man scaling an interior rock climbing wall contained within a gymnasium." style='transition:object-position 4s;object-position:0 70%;' />
                             <figcaption>
                                 Connor working on a project at Climb Iowa.
                             </figcaption>
@@ -78,9 +78,9 @@ include('../../header.php');
                     </p>
                     <br>
                     <hr>
-                    <a href='../../images/anon-sidecar.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/anon-sidecar.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/anon-sidecar.jpg' id='anon-sidecar' class='animate' alt="A silhouette of a man working on a laptop sits before a wall which sunlight is casting the shadow of the window's logo which says Side Car." style='transition:object-position 4s;object-position:0 20%;' />
+                            <img src='./images/anon-sidecar.webp' id='anon-sidecar' class='animate' alt="A silhouette of a man working on a laptop sits before a wall which sunlight is casting the shadow of the window's logo which says Side Car." style='transition:object-position 4s;object-position:0 20%;' />
                             <figcaption>
                                 A stranger doing some work at Sidecar Coffee.
                             </figcaption>
@@ -111,9 +111,9 @@ include('../../header.php');
                     <!--- HTML EXAMPLE! --->
                     <br>
                     <hr>
-                    <a href='../../images/clayton-bear-butte.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/clayton-bear-butte.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/clayton-bear-butte.jpg' id='clayton-bear-butte' class='animate' alt="A man climbs a path up Bear Butte. This path is dominated by a single tree." style='transition:object-position 8s;object-position:0 0%;' />
+                            <img src='./images/clayton-bear-butte.webp' id='clayton-bear-butte' class='animate' alt="A man climbs a path up Bear Butte. This path is dominated by a single tree." style='transition:object-position 8s;object-position:0 0%;' />
                             <figcaption>
                                 Clayton hiking up Bear Butte.
                             </figcaption>
