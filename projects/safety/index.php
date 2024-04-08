@@ -117,9 +117,9 @@ include('../../header.php');
                     <p>
                         The following is a UML diagram describing such a database:
                     </p>
-                    <a href='./images/erd-gis.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/erd-gis.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='./images/erd-gis.png' alt='A UML diagram describing the database discussed in this report.'/>
+                            <img src='./images/erd-gis.webp' alt='A UML diagram describing the database discussed in this report.'/>
                             <figcaption>
                                 Preliminary UML diagram
                             </figcaption>
@@ -286,9 +286,9 @@ include('../../header.php');
                         information, sparse data on account of the 40+ attributes for each source, and the storage required to
                         house all this. Trimming this fat will hope the project maintain scope and performance.
                     </p>
-                    <a href='./images/01-gis.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/01-gis.webp' target="_blank" rel="noopener noreferrer">
                         <figure style='border-bottom:1px solid #7b869d;border-top:1px solid #7b869d'>
-                            <img src='./images/01-gis.png' alt='A screenshot showing the significant differences in sizes between data tables.'/>
+                            <img src='./images/01-gis.webp' alt='A screenshot showing the significant differences in sizes between data tables.'/>
                             <figcaption>
                                 Note the contrast of storage between the production tables and their staging counterparts.
                             </figcaption>
@@ -337,9 +337,9 @@ include('../../header.php');
                         The data can now start being used. The following figure shows the grouping of activities gathered via
                         Strava being displayed:
                     </p>
-                    <a href='./images/02-gis.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/02-gis.webp' target="_blank" rel="noopener noreferrer">
                         <figure style='border-bottom:1px solid #7b869d;border-top:1px solid #7b869d'>
-                            <img src='./images/02-gis.png' alt='A map showing a set of lines that chart cycling routes taken from Strava.'/>
+                            <img src='./images/02-gis.webp' alt='A map showing a set of lines that chart cycling routes taken from Strava.'/>
                             <figcaption>
                                 Mapping of Strava activities
                             </figcaption>
@@ -349,9 +349,9 @@ include('../../header.php');
                     <p>
                         The following shows these activities overlaying the traffic network. Keep in mind that each road segment has an associated AADT value:
                     </p>
-                    <a href='./images/03-gis.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/03-gis.webp' target="_blank" rel="noopener noreferrer">
                         <figure style='border-bottom:1px solid #7b869d;border-top:1px solid #7b869d'>
-                            <img src='./images/03-gis.png' alt='A map showing the previous strava mappings that are overlaying a set of lines describing public roads.'/>
+                            <img src='./images/03-gis.webp' alt='A map showing the previous strava mappings that are overlaying a set of lines describing public roads.'/>
                             <figcaption>
                                 Strava activities overlaying AADT mapping
                             </figcaption>
@@ -361,9 +361,9 @@ include('../../header.php');
                     <p>
                         And then traffic crash reporting can be overlayed:
                     </p>
-                    <a href='./images/04-gis.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/04-gis.webp' target="_blank" rel="noopener noreferrer">
                         <figure style='border-bottom:1px solid #7b869d;border-top:1px solid #7b869d'>
-                            <img src='./images/04-gis.png' alt='A map showing the previous strava and public road mappings that are overlayed by a set of points describing locations of motorized crashes.'/>
+                            <img src='./images/04-gis.webp' alt='A map showing the previous strava and public road mappings that are overlayed by a set of points describing locations of motorized crashes.'/>
                             <figcaption>
                                 Strava activity and AADT mappings in overlayed by SOR crash plottings.
                             </figcaption>
@@ -412,27 +412,27 @@ include('../../header.php');
                         problem though - overlap is not factored! If these lines are to be stored in the segments table, there
                         would be a lot of redundant information stored. Consider the following figures:
                     </p>
-                    <a href='./images/05-gis.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/05-gis.webp' target="_blank" rel="noopener noreferrer">
                         <figure style='border-top:1px solid #7b869d'>
-                            <img src='./images/05-gis.png' alt='A map showing the initial Strava activity mappings where the lines are now represented by their vertices.'/>
+                            <img src='./images/05-gis.webp' alt='A map showing the initial Strava activity mappings where the lines are now represented by their vertices.'/>
                             <figcaption>
                                 Individual plotting of vertices for each activity polyline. Scale of 1:20929. Query used was <code>SELECT * FROM list_points</code>
                             </figcaption>
                         </figure>
                     </a>
                     <br>
-                    <a href='./images/06-gis.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/06-gis.webp' target="_blank" rel="noopener noreferrer">
                         <figure style='border-top:1px solid #7b869d;'>
-                            <img src='./images/06-gis.png' alt='A map showing the vertices of the initial Strava activity mappings with a more precise scale.'/>
+                            <img src='./images/06-gis.webp' alt='A map showing the vertices of the initial Strava activity mappings with a more precise scale.'/>
                             <figcaption>
                                 Same plotting of vertices for activity polylines. Scale is now 1:5232; Same query as previous figure.
                             </figcaption>
                         </figure>
                     </a>
                     <br>
-                    <a href='./images/07-gis.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/07-gis.webp' target="_blank" rel="noopener noreferrer">
                         <figure style='border-bottom:1px solid #7b869d;border-top:1px solid #7b869d'>
-                            <img src='./images/07-gis.png' alt='A zoomed in scale of the initial Strava activities exposing many redundant lines.'/>
+                            <img src='./images/07-gis.webp' alt='A zoomed in scale of the initial Strava activities exposing many redundant lines.'/>
                             <figcaption>
                                 Conversion of polyline vertex plotting to contiguous monolines. Scale is now 1:654.
                             </figcaption>
