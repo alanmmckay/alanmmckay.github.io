@@ -26,9 +26,9 @@ include('../../header.php');
                 <article>
                     <section class='info'>
                         <br>
-                        <a href='../../images/alan.jpg' target="_blank" rel="noopener noreferrer">
+                        <a href='./images/alan.jpg' target="_blank" rel="noopener noreferrer">
                             <figure>
-                                <img src='../../images/alan-edited.jpg' alt="Alan McKay's reflection in a computer screen">
+                                <img src='./images/alan-edited.webp' alt="Alan McKay's reflection in a computer screen">
                             </figure>
                         </a>
                     </section>
@@ -48,9 +48,9 @@ include('../../header.php');
                         Being someone who does a lot of cycling, backpacking, and kayaking, a lot of the pictures I took began to form a standard. A pattern began to develop observing scale and the juxtaposition of two objects in terms of how they occupy space in this world. This contrast allowed a means of introspection where I could recognize I am one of these objects. It started to help isolate the racing thoughts to the moment of time in which they occurred; like a snapshot.
                     </p>
                     <hr>
-                    <a href='../../images/val.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/val.jpg' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/val.jpg' alt="The silhouette of a girl amongst tiered catwalks" >
+                            <img src='./images/val.jpg' alt="The silhouette of a girl amongst tiered catwalks" >
                             <figcaption>
                                 Valarie among walkways of the Visual Arts Building
                             </figcaption>
@@ -61,9 +61,9 @@ include('../../header.php');
                         As time progresses, I find myself taking less photos. This is due to a combination of a newfound of ease of mind and a tempered skill of recognizing the worthwhile moments to capture; moments which are worth getting caught up in. Photos are still taken. Each a beautiful scene. Each a front for a string of anxious thought - some underlying form of a human condition in which one should not lose sight on.
                     </p>
                     <hr>
-                    <a href='../../images/clayton.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/clayton.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/clayton.jpg' alt="The silhouette of a man amongst tall trees on a hill">
+                            <img src='./images/clayton.webp' alt="The silhouette of a man amongst tall trees on a hill">
                             <figcaption>
                                 Clayton among the trees of the Black Hills
                             </figcaption>
