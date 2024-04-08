@@ -32,9 +32,9 @@ include('../../header.php');
                         A local coffee shop, Cup of Joe, was a frequent spot of study; this fact helped contribute to successful grades. So what better way to give back by doing a redesign of the current website? A redesign which would make it mobile friendly.
                     </p>
                     <div class='aside'>
-                    <a href='../../images/cup_story_mobile.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/cup_story_mobile.png' target="_blank" rel="noopener noreferrer">
                     <figure>
-                        <img src='../../images/cup_story_mobile.png' alt='Screenshot of the layout of the Cup of Joe website using a mobile display.' />
+                        <img src='./images/cup_story_mobile.png' alt='Screenshot of the layout of the Cup of Joe website using a mobile display.' />
                         <figcaption>
                             Mobile variant of the Story page.
                         </figcaption>
@@ -47,9 +47,9 @@ include('../../header.php');
                     <p>
                         The foundation of this implementation was built upon a mobile-first design. Here, media queries would kick a certain layout into view based on window size where the initial template being considered was designed for mobile devices. This involved careful consideration towards maintaining the website's aesthetic - an aesthetic which does a good job adhering to the aesthetic of the shop proper. One key facet in accomplishing this was the decision to maintain the site's identity with the navigation bar. Instead of leveraging a hamburger button to splay navigational options, the navigation bar is fixed to the left where the size of its selections maintain a good compromise between easy interaction while not obscuring too much of the view, (regardless of view-screen size). The redesign differentiated further by fixing the navigation bar into view as a user scrolls through a given page.
                     </p>
-                    <a href='../../images/cup_story_mobile.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/cup_story_mobile.png' target="_blank" rel="noopener noreferrer">
                     <figure class='responsive_aside'>
-                        <img src='../../images/cup_story_mobile.png' alt='Screenshot of the layout of the Cup of Joe website using a mobile display.' />
+                        <img src='./images/cup_story_mobile.png' alt='Screenshot of the layout of the Cup of Joe website using a mobile display.' />
                         <figcaption>
                             Mobile variant of the Story page.
                         </figcaption>
@@ -65,9 +65,9 @@ include('../../header.php');
                         <ul>
 
                             <li id='sixty'>
-                                <a href='../../images/cup_story_desktop.png' target="_blank" rel="noopener noreferrer">
+                                <a href='./images/cup_story_desktop.png' target="_blank" rel="noopener noreferrer">
                                 <figure>
-                                    <img src='../../images/cup_story_desktop.png' alt='Screenshot of the layout of the Cup of Joe website using a desktop display.' />
+                                    <img src='./images/cup_story_desktop.png' alt='Screenshot of the layout of the Cup of Joe website using a desktop display.' />
                                     <figcaption>
                                         The desktop variant of the Cup of Joe website. Not much was changed here; Things look mostly the same.
                                     </figcaption>
@@ -76,9 +76,9 @@ include('../../header.php');
                             </li>
 
                             <li id='thirty'>
-                                <a href='../../images/cup_story_tablet.png' target="_blank" rel="noopener noreferrer">
+                                <a href='./images/cup_story_tablet.png' target="_blank" rel="noopener noreferrer">
                                 <figure>
-                                    <img src='../../images/cup_story_tablet.png' alt='Screenshot of the layout of the Cup of Joe website using a tablet display.' />
+                                    <img src='./images/cup_story_tablet.png' alt='Screenshot of the layout of the Cup of Joe website using a tablet display.' />
                                     <figcaption>
                                         The tablet layout of the Cup of Joe website. Note the repositioning and resizing of elements which lend well to the browsing context.
                                     </figcaption>
@@ -107,9 +107,9 @@ include('../../header.php');
                             <ul>
 
                                 <li class='control_slide'>
-                                    <a href='../../images/cup_control_01.png' target="_blank" rel="noopener noreferrer">
+                                    <a href='./images/cup_control_01.png' target="_blank" rel="noopener noreferrer">
                                         <figure>
-                                            <img src='../../images/cup_control_01.png' alt='A screenshot of the Cup of Joe control page in which a user is navigating to an event creation page.'/>
+                                            <img src='./images/cup_control_01.png' alt='A screenshot of the Cup of Joe control page in which a user is navigating to an event creation page.'/>
                                             <figcaption>
                                                 Slide 1/5: Selecting a menu item.
                                             </figcaption>
@@ -118,9 +118,9 @@ include('../../header.php');
                                 </li>
 
                                 <li class='control_slide'>
-                                    <a href='../../images/cup_control_02.png' target="_blank" rel="noopener noreferrer">
+                                    <a href='./images/cup_control_02.png' target="_blank" rel="noopener noreferrer">
                                         <figure>
-                                            <img src='../../images/cup_control_02.png' alt='A screenshot of the Cup of Joe event creation page in which a user is filling out the relevant forms.'/>
+                                            <img src='./images/cup_control_02.png' alt='A screenshot of the Cup of Joe event creation page in which a user is filling out the relevant forms.'/>
                                             <figcaption>
                                                 Slide 2/5: Filling out an event creation form.
                                             </figcaption>
@@ -129,9 +129,9 @@ include('../../header.php');
                                 </li>
 
                                 <li class='control_slide'>
-                                    <a href='../../images/cup_control_03.png' target="_blank" rel="noopener noreferrer">
+                                    <a href='./images/cup_control_03.png' target="_blank" rel="noopener noreferrer">
                                         <figure>
-                                            <img src='../../images/cup_control_03.png' alt='A screenshot of the Cup of Joe control page in which a user is selecting an option to edit a current event.'/>
+                                            <img src='./images/cup_control_03.png' alt='A screenshot of the Cup of Joe control page in which a user is selecting an option to edit a current event.'/>
                                             <figcaption>
                                                 Slide 3/5: Receiving feedback for event created. Selecting an event to edit.
                                             </figcaption>
@@ -140,9 +140,9 @@ include('../../header.php');
                                 </li>
 
                                 <li class='control_slide'>
-                                    <a href='../../images/cup_control_04.png' target="_blank" rel="noopener noreferrer">
+                                    <a href='./images/cup_control_04.png' target="_blank" rel="noopener noreferrer">
                                         <figure>
-                                            <img src='../../images/cup_control_04.png' alt='A screenshot of the Cup of Joe edit event page in which a user is changing the date of an event.'/>
+                                            <img src='./images/cup_control_04.png' alt='A screenshot of the Cup of Joe edit event page in which a user is changing the date of an event.'/>
                                             <figcaption>
                                                 Slide 4/5: Viewing event edit form; Selecting a new Date of event.
                                             </figcaption>
@@ -151,9 +151,9 @@ include('../../header.php');
                                 </li>
 
                                 <li class='control_slide'>
-                                    <a href='../../images/cup_control_05.png' target="_blank" rel="noopener noreferrer">
+                                    <a href='./images/cup_control_05.png' target="_blank" rel="noopener noreferrer">
                                         <figure>
-                                            <img src='../../images/cup_control_05.png' alt='A screenshot of the Cup of Joe control page which is informing a user that the changes made in a prior edit have taken effect.'/>
+                                            <img src='./images/cup_control_05.png' alt='A screenshot of the Cup of Joe control page which is informing a user that the changes made in a prior edit have taken effect.'/>
                                             <figcaption>
                                                 Slide 5/5: Receiving feedback for event edited.
                                             </figcaption>
@@ -191,9 +191,9 @@ include('../../header.php');
                         <ul>
 
                             <li>
-                                <a href='../../images/cup_events_red.png' target="_blank" rel="noopener noreferrer">
+                                <a href='./images/cup_events_red.png' target="_blank" rel="noopener noreferrer">
                                     <figure>
-                                        <img src='../../images/cup_events_red.png' alt='A screenshot of the Cup of Joe events page.' />
+                                        <img src='./images/cup_events_red.png' alt='A screenshot of the Cup of Joe events page.' />
                                         <figcaption>
                                             The events page as it currently exists.
                                         </figcaption>
@@ -202,9 +202,9 @@ include('../../header.php');
                             </li>
 
                             <li>
-                                <a href='../../images/cup_music.png' target="_blank" rel="noopener noreferrer">
+                                <a href='./images/cup_music.png' target="_blank" rel="noopener noreferrer">
                                     <figure>
-                                        <img src='../../images/cup_music.png' alt='A screenshot of the Cup of Joe events page as it existed prior to the website rebuild.' />
+                                        <img src='./images/cup_music.png' alt='A screenshot of the Cup of Joe events page as it existed prior to the website rebuild.' />
                                         <figcaption>
                                             The variant of the events page as it existed prior to the overhaul.
                                         </figcaption>

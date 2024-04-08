@@ -50,9 +50,9 @@ include('../../header.php');
                             The script would reprocess an image to one that had the appearance of being produced using the aquatint printmaking technique. The product would be the same image with a more old-time aesthetic to it; the image would be more grainy with a warm temperature reminiscent of early print making.
                         </p>
                         <div class='fig-col'>
-                        <a href='../../images/cycle.png' target="_blank" rel="noopener noreferrer">
+                        <a href='./images/cycle.png' target="_blank" rel="noopener noreferrer">
                             <figure class='graph'>
-                                <img src='../../images/cycle.png' alt='A photograph of an individual dressed in army attire of the world war 2 era cycling on a non-descript highway.'>
+                                <img src='./images/cycle.png' alt='A photograph of an individual dressed in army attire of the world war 2 era cycling on a non-descript highway.'>
                                 <figcaption>
                                     A photo of myself during RAGBRAI sometime the late 2010s.
                                 </figcaption>
@@ -60,9 +60,9 @@ include('../../header.php');
                         </a>
 
 
-                        <a href='../../images/cycle_AT.png' target="_blank" rel="noopener noreferrer">
+                        <a href='./images/cycle_AT.png' target="_blank" rel="noopener noreferrer">
                             <figure class='graph'>
-                                <img src='../../images/cycle_AT.png' alt='A photograph of an individual dressed in army attire of the world war 2 era cycling on a non-descript highway. This photograph has had color removed and pixel highlighting to resemble an aquatint image.'>
+                                <img src='./images/cycle_AT.png' alt='A photograph of an individual dressed in army attire of the world war 2 era cycling on a non-descript highway. This photograph has had color removed and pixel highlighting to resemble an aquatint image.'>
                                 <figcaption>
                                     The same photo processed by the Aquatint Image Processor.
                                 </figcaption>
@@ -282,14 +282,14 @@ include('../../header.php');
                         <hr>
                         <figure class='col-fig'>
 
-                            <a href='../../images/ngr.png' target="_blank" rel="noopener noreferrer">
-                                <img src='../../images/ngr.png' alt=''>
+                            <a href='./images/ngr.png' target="_blank" rel="noopener noreferrer">
+                                <img src='./images/ngr.png' alt=''>
                             </a>
-                            <a href='../../images/sr.png' target="_blank" rel="noopener noreferrer">
-                                <img src='../../images/sr.png' alt=''>
+                            <a href='./images/sr.png' target="_blank" rel="noopener noreferrer">
+                                <img src='./images/sr.png' alt=''>
                             </a>
-                            <a href='../../images/pn.png' target="_blank" rel="noopener noreferrer">
-                                <img src='../../images/pn.png' style='float:none;' alt=''>
+                            <a href='./images/pn.png' target="_blank" rel="noopener noreferrer">
+                                <img src='./images/pn.png' style='float:none;' alt=''>
                             </a>
 
                             <figcaption style='clear:both;padding-top:25px'>
