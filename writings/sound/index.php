@@ -105,9 +105,9 @@ include('../../header.php');
                         Only one time before in my life had I felt so at ease; only one time before had I felt so well rested from sound.
                     </p>
                     <hr>
-                    <a href='../../images/sean.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/sean.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/sean.jpg' alt="A man at a warmly lit bar strumming in a guitar">
+                            <img src='./images/sean.webp' alt="A man at a warmly lit bar strumming in a guitar">
                             <figcaption>
                                 Sean: both visually and aurally sound.
                             </figcaption>
