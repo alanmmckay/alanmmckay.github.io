@@ -82,7 +82,7 @@ include('../../header.php');
                         A bird’s sensor switches from L to H when it’s temperature reaches the threshold. When it interacts with another bird, it will then communicate this fact. The following is one possible set of interactions a group of  5 birds may exhibit when one has a status of H:
                     </p>
                     <figure>
-                        <img src="../../images/pp_A.png" style="max-width:400px;" alt="A series of graphs which describe the interaction of nodes in a singular network. These interactions are highlighted by the edges the nodes share. Each subsequent graph in the series indicates the state of the network upon each interaction."/>
+                        <img src="./images/pp_A.webp" style="max-width:400px;" alt="A series of graphs which describe the interaction of nodes in a singular network. These interactions are highlighted by the edges the nodes share. Each subsequent graph in the series indicates the state of the network upon each interaction."/>
                         <figcaption style='max-width:450px;margin:auto;margin-top:1%;'>
                             Figure A.
                         </figcaption>
@@ -101,7 +101,7 @@ include('../../header.php');
                         </p>
                         <!--div class='aside'>
                             <figure class='narrow'>
-                                <img src='../../images/pp_B.png' style='width:95%;max-width:150px'/>
+                                <img src='./images/pp_B.webp' style='width:95%;max-width:150px'/>
                                 <figcaption>
                                     Figure B.
                                 </figcaption>
@@ -121,7 +121,7 @@ include('../../header.php');
                     <h2> Future and Application </h2>
                     <div class='aside'>
                     <figure class='narrow'>
-                        <img src="../../images/pp_C.png" style='max-width:200px;' alt='A graph which represents a network of nodes. Each edge connecting two nodes indicates an interaction channel. The more vibrant an edge, the more interactions occurred between the two nodes.'/>
+                        <img src="./images/pp_C.webp" style='max-width:200px;' alt='A graph which represents a network of nodes. Each edge connecting two nodes indicates an interaction channel. The more vibrant an edge, the more interactions occurred between the two nodes.'/>
                         <figcaption>
                             Figure B.
                         </figcaption>

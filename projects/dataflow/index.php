@@ -84,7 +84,7 @@ include('../../header.php');
                         Communication within ad networks operate as a black box, with little transparency into their inner workings which renders detection difficult. Surface features of such networks can be determined by observing the attributes of digital advertising in web browsers. However, such methods do not provide a complete or detailed picture of the routes data travels (see figure 1). These ad networks are built by use of web tracking, which occurs via placement of various mechanisms into the browsing environment that an ad entity can use to track the user.
                     </p>
                     <figure class='graph'>
-                        <img src='../../images/black_box_diagram.png'>
+                        <img src='./graphs/black_box_diagram.webp'>
                         <figcaption>
                             Figure 1: The advertising network black box exists as part of a system that interacts with the user by means of their interactions with a web platform.
                         </figcaption>
@@ -141,13 +141,13 @@ include('../../header.php');
                     </p>
                     <figure class='fig-col'>
                         <figure class='graph'>
-                            <img src='../../images/random_network.png' style='max-width:200px;'>
+                            <img src='./graphs/random_network.webp' style='max-width:200px;'>
                             <figcaption>
                                 (a) Conceptual slice of the discovered advertising network.
                             </figcaption>
                         </figure>
                         <figure class='graph'>
-                            <img src='../../images/scale_free_network.png' style='max-width:200px;'>
+                            <img src='./graphs/scale_free_network.webp' style='max-width:200px;'>
                             <figcaption>
                                 (b) A concept of the network processed through the tool.
                             </figcaption>
@@ -246,13 +246,13 @@ include('../../header.php');
                     </p>
                     <figure class='fig-col'>
                         <figure class='graph'>
-                            <img src='../../images/multi-layered-graph.png' style='max-width:200px;'>
+                            <img src='./graphs/multi-layered-graph.webp' style='max-width:200px;'>
                             <figcaption>
                                 (a) Multi-layer graph with 4 nodes and 2 layers.
                             </figcaption>
                         </figure>
                         <figure class='graph'>
-                            <img src='../../images/multi-layered-graph-weights.png' style='max-width:200px;'>
+                            <img src='./graphs/multi-layered-graph-weights.webp' style='max-width:200px;'>
                             <figcaption>
                                 (b) Weighted and directed graph with 4 nodes and 5 edges.
                             </figcaption>
@@ -334,37 +334,37 @@ include('../../header.php');
                     </p>
                     <figure class='fig-col'>
                         <figure class='graph'>
-                            <img src='graphs/cbre.png' style='max-width:250px;'>
+                            <img src='graphs/cbre.webp' style='max-width:250px;'>
                             <figcaption>
                                 CBRE
                             </figcaption>
                         </figure>
                         <figure class='graph'>
-                            <img src='graphs/all-live-doubleclick-sites.png' style='max-width:250px;'>
+                            <img src='graphs/all-live-doubleclick-sites.webp' style='max-width:250px;'>
                             <figcaption>
                                 All-Live_DoubleClick.Net-Sites
                             </figcaption>
                         </figure>
                         <figure class='graph'>
-                            <img src='graphs/linkedin.png' style='max-width:250px;'>
+                            <img src='graphs/linkedin.webp' style='max-width:250px;'>
                             <figcaption>
                                 Linkedin
                             </figcaption>
                         </figure>
                         <figure class='graph'>
-                            <img src='graphs/microsoft.png' style='max-width:250px;'>
+                            <img src='graphs/microsoft.webp' style='max-width:250px;'>
                             <figcaption>
                                 Microsoft
                             </figcaption>
                         </figure>
                         <figure class='graph'>
-                            <img src='graphs/roundup.png' style='max-width:250px;'>
+                            <img src='graphs/roundup.webp' style='max-width:250px;'>
                             <figcaption>
                                 Roundup
                             </figcaption>
                         </figure>
                         <figure class='graph'>
-                            <img src='graphs/roundup2.png' style='max-width:250px;'>
+                            <img src='graphs/roundup2.webp' style='max-width:250px;'>
                             <figcaption>
                                 Roundup2
                             </figcaption>
@@ -374,13 +374,13 @@ include('../../header.php');
                         </figcaption>
                     </figure>
                     <figure>
-                        <img src='graphs/gagg.png' style='max-width:350px;'>
+                        <img src='graphs/gagg.webp' style='max-width:350px;'>
                         <figcaption style='clear:both;text-align:center;padding-top:5px;font-weight:bold;'>
                             Figure 5: Aggregated network
                         </figcaption>
                     </figure>
                     <figure>
-                        <img src='graphs/gagg_degreedist.png' style='max-width:350px;'>
+                        <img src='graphs/gagg_degreedist.webp' style='max-width:350px;'>
                         <figcaption style='clear:both;text-align:center;padding-top:5px;font-weight:bold;'>
                             Figure 6: Aggregated network degree distribution
                         </figcaption>
@@ -442,7 +442,7 @@ include('../../header.php');
                         Suppose five datasets are obtained, three of which connect Company A to Company B, and two of which connect Company A to Company B but not to Company C. Each dataset could represent its own relationship graph. However, all five could be combined into one aggregated relationship network (illustrated in figure 7). The above method can be used to weigh the edges to represent relationships between entities where unkown data sharing is occurring.
                     </p>
                     <figure>
-                        <img src='graphs/agg_reg.png' style='max-width:450px;'>
+                        <img src='graphs/agg_reg.webp' style='max-width:450px;'>
                         <figcaption style='clear:both;text-align:center;padding-top:5px;font-weight:bold;'>
                             Figure 7: Aggregation example of 5 relationship entity graphs with 3 nodes.
                         </figcaption>
@@ -538,7 +538,7 @@ include('../../header.php');
                     </p>
                     <div class='aside' style='margin:0px;'>
                     <figure>
-                        <img src='graphs/aern_5x5.png'>
+                        <img src='graphs/aern_5x5.webp'>
                         <figcaption style='clear:both;text-align:center;padding-top:5px;'>
                             Figure 8: Example aggregate entity relationship network with 5 nodes and 5 edges.
                         </figcaption>
@@ -547,7 +547,7 @@ include('../../header.php');
                         Return to the case of five datasets compiled into one aggregated entity relationship network but this time with five nodes, 𝑉 = {𝐴, 𝐵,𝐶, 𝐷, 𝐸}, with an edge set {𝐸<sub>1</sub>, 𝐸<sub>2</sub>, 𝐸<sub>3</sub>, 𝐸<sub>4</sub>, 𝐸<sub>5</sub>} = {(𝐴, 𝐵, 0.6), (𝐵, 𝐷, 0.9), (𝐴,𝐶, 0.1), (𝐶, 𝐷, 0.1), (𝐶, 𝐸, 0.1)} as seen in figure 8.
                     </p>
                     <figure class='responsive_aside' style='max-width:400px;'>
-                        <img src='graphs/aern_5x5.png' style='max-width:200px;'>
+                        <img src='graphs/aern_5x5.webp' style='max-width:200px;'>
                         <figcaption style='clear:both;text-align:center;padding-top:5px;font-weight:bold;'>
                             Figure 8: Example aggregate entity relationship network with 5 nodes and 5 edges.
                         </figcaption>
@@ -564,13 +564,13 @@ include('../../header.php');
                     </p>
                     <figure class='fig-col'>
                         <figure class='graph'>
-                            <img src='graphs/saern01.png' style='max-width:200px;'>
+                            <img src='graphs/saern01.webp' style='max-width:200px;'>
                             <figcaption>
                                 (a) Path tracking of data from primary source 𝐴 to final source 𝐷.
                             </figcaption>
                         </figure>
                         <figure class='graph'>
-                            <img src='graphs/saern02.png' style='max-width:200px;'>
+                            <img src='graphs/saern02.webp' style='max-width:200px;'>
                             <figcaption>
                                 (b) Path tracking of data from primary source 𝐴 to final source 𝐸.
                             </figcaption>
@@ -608,7 +608,7 @@ include('../../header.php');
                         For this framework to provide a viable effect as an auditing tool to compare hypothesized data spread, it must exist in a user-interface. We propose a web app with an API that would allow for simple interaction between individuals and the proposed framework (see figure 10).
                     </p>
                     <figure>
-                        <img src='graphs/disclosure_ui.png' style='border:solid 3px #CCCCCC'>
+                        <img src='graphs/disclosure_ui.webp' style='border:solid 3px #CCCCCC'>
                         <figcaption style='clear:both;text-align:center;padding-top:5px;font-weight:bold;'>
                             Figure 10: Possible mock wireframe of a user interface interacting with an API for the proposed relation network auditing framework.
                         </figcaption>
