@@ -84,7 +84,7 @@ include('../../header.php');
                         Communication within ad networks operate as a black box, with little transparency into their inner workings which renders detection difficult. Surface features of such networks can be determined by observing the attributes of digital advertising in web browsers. However, such methods do not provide a complete or detailed picture of the routes data travels (see figure 1). These ad networks are built by use of web tracking, which occurs via placement of various mechanisms into the browsing environment that an ad entity can use to track the user.
                     </p>
                     <figure class='graph'>
-                        <img src='../../images/black_box_diagram.png'>
+                        <img src='./graphs/black_box_diagram.png'>
                         <figcaption>
                             Figure 1: The advertising network black box exists as part of a system that interacts with the user by means of their interactions with a web platform.
                         </figcaption>
@@ -141,13 +141,13 @@ include('../../header.php');
                     </p>
                     <figure class='fig-col'>
                         <figure class='graph'>
-                            <img src='../../images/random_network.png' style='max-width:200px;'>
+                            <img src='./graphs/random_network.png' style='max-width:200px;'>
                             <figcaption>
                                 (a) Conceptual slice of the discovered advertising network.
                             </figcaption>
                         </figure>
                         <figure class='graph'>
-                            <img src='../../images/scale_free_network.png' style='max-width:200px;'>
+                            <img src='./graphs/scale_free_network.png' style='max-width:200px;'>
                             <figcaption>
                                 (b) A concept of the network processed through the tool.
                             </figcaption>
@@ -246,13 +246,13 @@ include('../../header.php');
                     </p>
                     <figure class='fig-col'>
                         <figure class='graph'>
-                            <img src='../../images/multi-layered-graph.png' style='max-width:200px;'>
+                            <img src='./graphs/multi-layered-graph.png' style='max-width:200px;'>
                             <figcaption>
                                 (a) Multi-layer graph with 4 nodes and 2 layers.
                             </figcaption>
                         </figure>
                         <figure class='graph'>
-                            <img src='../../images/multi-layered-graph-weights.png' style='max-width:200px;'>
+                            <img src='./graphs/multi-layered-graph-weights.png' style='max-width:200px;'>
                             <figcaption>
                                 (b) Weighted and directed graph with 4 nodes and 5 edges.
                             </figcaption>
