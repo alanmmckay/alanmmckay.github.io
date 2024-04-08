@@ -42,9 +42,9 @@ include('../../header.php');
                     </p>
                     <br>
                     <hr>
-                    <a href='../../images/black-hills-silhouette.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/black-hills-silhouette.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/black-hills-silhouette.jpg' id='black-hills-silhouette' class='animate' alt="A silhouetted man stepping to peer through winter forest foliage." style='transition:object-position 4s;object-position:0 20%;' />
+                            <img src='./images/black-hills-silhouette.webp' id='black-hills-silhouette' class='animate' alt="A silhouetted man stepping to peer through winter forest foliage." style='transition:object-position 4s;object-position:0 20%;' />
                             <figcaption>
                                 Clayton stepping up to peer out of the forest line.
                             </figcaption>
@@ -57,9 +57,9 @@ include('../../header.php');
                     </p>
                     <br>
                     <hr>
-                    <a href='../../images/black-hills-trees.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/black-hills-trees.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/black-hills-trees.jpg' id='black-hills-trees' class='animate' alt="Frosted pine along the contour of a hill" style='transition:object-position 9s;object-position:0 0%;'/>
+                            <img src='./images/black-hills-trees.webp' id='black-hills-trees' class='animate' alt="Frosted pine along the contour of a hill" style='transition:object-position 9s;object-position:0 0%;'/>
                             <figcaption>
                                 The frosted pine following the ridgelines of the Black Hills.
                             </figcaption>
@@ -74,9 +74,9 @@ include('../../header.php');
                         Back on the path, the relation of altitude and conversation is maintained. The temperature drops as this relation strengthens. The ice on the trees becomes more vivid along with the increasing jaggedness of the exposed rock in the hills.
                     </p>
                     <!--hr>
-                    <a href='../../images/black-hills-tree.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/black-hills-tree.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/black-hills-tree.jpg' id='black-hills-tree' alt='' style='transition:object-position 9s;width:100%;height:400px;object-fit:cover;object-position:0 0%;'/>
+                            <img src='./images/black-hills-tree.webp' id='black-hills-tree' alt='' style='transition:object-position 9s;width:100%;height:400px;object-fit:cover;object-position:0 0%;'/>
                             <figcaption>
 
                             </figcaption>
@@ -91,9 +91,9 @@ include('../../header.php');
                     </p>
                     <br>
                     <hr>
-                    <a href='../../images/black-hills-peak.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/black-hills-peak.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/black-hills-peak.jpg' id='black-hills-peak' class='animate' alt="Two men face away, overlooking a summit. A sea of frosted pine flow down into the valley adjacent." style='transition:object-position 4s;object-position:0 55%;'>
+                            <img src='./images/black-hills-peak.webp' id='black-hills-peak' class='animate' alt="Two men face away, overlooking a summit. A sea of frosted pine flow down into the valley adjacent." style='transition:object-position 4s;object-position:0 55%;'>
                             <figcaption>
                                 Clayton and Michael overlooking the peak of the day's hike.
                             </figcaption>
@@ -109,9 +109,9 @@ include('../../header.php');
                     </p>
                     <br>
                     <hr>
-                    <a href='../../images/black-hills-path-cropped.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/black-hills-path-cropped.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/black-hills-path-cropped.jpg' id='black-hills-path' class='animate' alt="The silhouette of a man traversing through a pine forest." style='transition:object-position 9s;object-position:0 0%;'/>
+                            <img src='./images/black-hills-path-cropped.webp' id='black-hills-path' class='animate' alt="The silhouette of a man traversing through a pine forest." style='transition:object-position 9s;object-position:0 0%;'/>
                             <figcaption>
                                 The sharp sunlight of a setting sun emphasizes the ordinary pine in the lower altitude of the descent.
                             </figcaption>
@@ -130,9 +130,9 @@ include('../../header.php');
                     </p>
                     <br>
                     <hr>
-                    <a href='../../images/black-hills-lake.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/black-hills-lake.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/black-hills-lake.jpg' alt="A frozen lake with a ice fishing tent and a game of hockey being played upon it." />
+                            <img src='./images/black-hills-lake.webp' alt="A frozen lake with a ice fishing tent and a game of hockey being played upon it." />
                             <!--figcaption>
                                 The lake at the end of the hike.
                             </figcaption-->
