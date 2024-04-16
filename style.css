@@ -421,7 +421,7 @@ iframe{
     padding-left:10px;
     resize:vertical;
     min-height:85px;
-    height:50vh;
+    height:70vh;
 }
 
 code.iframe{
@@ -429,6 +429,46 @@ code.iframe{
     font-size: 17px;
     line-height:1.55;
     color:#5f666d;
+}
+
+div.code-font button{
+    position:-webkit-sticky;
+    position:relative;
+    top:28px;
+    float:right;
+    font-size:14px;
+    color:#5f666d;
+    border: solid #5f666d 1px;
+    border-radius:4px;
+    transition:color .5s;
+    transition:background-color .5s;
+    width:115px;
+    margin-right:10px;
+}
+
+div.code-font button:hover{
+    color:#242629;
+    background-color: #f9f9f9;
+    border: solid #5f666d 1px;
+    border-radius:4px;
+    outline:none;
+    cursor:pointer;
+}
+
+div.code-font input{
+    position:-webkit-sticky;
+    position:relative;
+    top:28px;
+    float:right;
+    cursor:pointer;
+    accent-color:grey;
+    height:20.09px;
+    margin-right:10px;
+    display:none;
+}
+
+#writingsWrapper figure.code-figure{
+    padding:0px;
 }
 
 @keyframes fadein1 {
