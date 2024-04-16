@@ -278,7 +278,7 @@ include('../../header.php');
                         The activities table is created via:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:545px;overflow:auto' max-height='560' src='code/06.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:560px;overflow:auto' max-height='560' src='code/06.html'>
                         </iframe>
                     </figure>
                     <p>

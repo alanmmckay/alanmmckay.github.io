@@ -90,7 +90,7 @@ include('../../header.php');
                             An advantage to being provided a script within a Jupyter notebook is that it's easier to discern the sections the developer finds important. The script received from Professor Meurice took advantage of <code>matplotlib</code> to display the reprocessed images. Within the notebook, each significant step was capped by a display of the reprocessed image as-in progress. For example, the first significant step of the algorithm was to apply a grey-scale to each individual pixel. A given image would be read in using the imageio library then processed as such:
                         </p>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:505px;overflow:auto' max-height='495' src='code/01.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:505px;overflow:auto' max-height='505' src='code/01.html'>
                             </iframe>
                         </figure>
                         <p>
