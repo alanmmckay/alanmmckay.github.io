@@ -424,6 +424,10 @@ iframe{
     height:70vh;
 }
 
+pre:has(code.iframe){
+    padding-top:10px;
+}
+
 code.iframe{
     font-family: monospace, monospace;
     font-size: 17px;
