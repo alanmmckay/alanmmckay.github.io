@@ -73,8 +73,10 @@ include('../../header.php');
                     <p>
                         Consider the following protocol:
                     </p>
-                    <iframe frameborder="0" style='width:100%;max-height:325px;overflow:auto' src='code/01.html'>
-                    </iframe>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:325px;overflow:auto' max-height='325' src='code/01.html'>
+                        </iframe>
+                    </figure>
                     <p>
                         The above protocol is equivalent to running an AND boolean operation on a population where L=1 and H=0.
                     </p>
@@ -106,8 +108,10 @@ include('../../header.php');
                                     Figure B.
                                 </figcaption>
                                 </figure-->
-                        <iframe frameborder="0" style='width:100%;max-height:375px;overflow:auto' src='code/02.html'>
-                        </iframe>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:375px;overflow:auto' max-height='375' src='code/02.html'>
+                            </iframe>
+                        </figure>
                             <p>
                                 This Algorithm can be used in conjunction with leader election and epidemics<a href='#references3'>[3]</a><a href='#references4'>[4]</a> to ensure data is ready to be collected.  Once it is, the collector simply has to check the given ratio.
                             </p>
@@ -153,5 +157,9 @@ include('../../header.php');
                 </nav>
             </section>
         </section>
+        <script src='../../js/project_functions.js'></script>
+        <script>
+            setCodeSizeSliders();
+        </script>
     </body>
 </html>
