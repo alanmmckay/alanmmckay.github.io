@@ -337,94 +337,9 @@ include('../../header.php');
                 <script src='../../js/project_functions.js'></script>
 
                 <script>
-                    function changeCodeSize(element){
-                        var value = element.value;
-                        var iframes = document.getElementsByTagName('iframe');
-                        for(let i=0; i<iframes.length; i++){
-                            var iframe = iframes[i];
-                            var iframe_content = iframe.contentWindow.document;
-                            var pre = iframe_content.getElementsByTagName('pre')[0];
-                            var code = iframe_content.getElementsByTagName('code')[0];
-                            code.style['font-size'] = value+'px';
-                            // For hidden elements:
-                            if(pre.getBoundingClientRect().height == '' || pre.getBoundingClientRect().height == '0'){
-                                var new_height = Number(iframe.style['max-height'].substring(0,iframe.style['max-height'].length-2));
-                                var max = Number(iframe.getAttribute('max-height'));
-                                var ratio = max * ((17-1)-value);
-                                ratio = ratio / 17;
-                                iframe.style['max-height'] = max - ratio + 'px';
-                            }else{
-                                var new_height = pre.getBoundingClientRect().height;
-                                iframe.style['max-height'] = new_height+((17+1-value+85)*.40)+'px';
-                            }
-                            //
-                            if(pre.style['padding-top'] == '' || pre.style['padding-top'] == '0%'){
-                                var padding = 0;
-                            }else{
-                                var padding = Number(pre.style['padding-top'].substring(0,pre.style['padding-top'].length-1));
-                            };
-                            pre.style['padding-top'] = (17 + 1 - value)*.40 + '%';
-                        }
-                        slider_containers = document.getElementsByClassName('code-font');
-                        for(let i=0; i<slider_containers.length; i++){
-                            container = slider_containers[i];
-                            slider = container.getElementsByTagName('input')[0];
-                            slider.value = value;
-                        }
-                    }
-
-                    function revealCodeSizeSlider(bool){
-                        var buttons = document.getElementsByTagName('button');
-                        for(let i=0; i<buttons.length; i++){
-                            var button = buttons[i];
-                            if(bool == true){
-                                button.style['display'] = 'none';
-                            }else{
-                                button.style['display'] = 'inherit';
-                            }
-                        }
-                        slider_containers = document.getElementsByClassName('code-font');
-                        for(let i=0; i<slider_containers.length; i++){
-                            container = slider_containers[i];
-                            slider = container.getElementsByTagName('input')[0];
-                            if(bool == true){
-                                slider.style['display'] = 'inherit';
-                            }else{
-                                slider.style['display'] = 'none';
-                            }
-                        }
-                    }
-
-                    function setCodeSizeSliders(){
-                        var iframe_containers = document.getElementsByClassName('code-figure');
-                        for(let i=0; i<iframe_containers.length; i++){
-                            var container = iframe_containers[i];
-                            var div = document.createElement('div');
-                            div.classList.add('code-font');
-
-                            var button = document.createElement('button');
-                            button.addEventListener("click",function(){revealCodeSizeSlider(true);});
-                            button.innerHTML = "Code Size";
-
-                            var input = document.createElement('input');
-                            input.type = 'range';
-                            input.min = '12';
-                            input.max = '17';
-                            input.value = '17';
-                            input.addEventListener('input',function(){changeCodeSize(this);});
-                            input.addEventListener('mouseup',function(){revealCodeSizeSlider(false);});
-                            input.addEventListener('touchend',function(){revealCodeSizeSlider(false);});
-
-                            div.appendChild(button);
-                            div.appendChild(input);
-                            container.insertBefore(div,container.firstChild);
-                        }
-                    }
 
                     setCodeSizeSliders();
-                </script>
 
-                <script>
 /* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
 
                     let status = {"validation_group_1":true,"validation_group_2":true,"validation_group_3":true};
