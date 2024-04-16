@@ -103,16 +103,16 @@ include('../../header.php');
                             Once examples are given, I've always been keen to sharing alternatives to a given implementation of a loop. A for-loop absolutely should be taught in tandem with a while loop. This should occur with a light exposure to recursion. Various conditions of execution should be discussed here as well. Analog is not only given through context of every day living but also with respect to evaluating the loops themselves!
                         </p>
                         <hr>
-                        <figure>
-                            <iframe frameborder="0" style='width:100%;max-height:1245px;overflow:auto' src='code/01.html'>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:1245px;overflow:auto' max-height='1245' src='code/01.html'>
                             </iframe>
                             <figcaption>
                                 A set of functions which take a list as an input and sums their values. Each function accomplishes the same task. This illustrates that there are many different approaches to solving a given problem - a notion that is not intuitive to one first experiencing the rigidity of programming.
                             </figcaption>
                         </figure>
 
-                        <figure>
-                            <iframe frameborder="0" style='width:100%;max-height:1695px;overflow:auto' src='code/02.html'>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:1695px;overflow:auto' max-height='1695' src='code/02.html'>
                             </iframe>
                             <figcaption>
                                 Even more functions which take a list as an input and sums their values. This time leveraging the functional paradigm of programming.
@@ -261,8 +261,8 @@ include('../../header.php');
                                 My lack of experience with MIPS made the course more engaging in a way that creates a sincere connection between myself and the class in general. Any act of engagement to address an individual would usually involve addressing the questions/concerns by the use of analog and nudging the individual towards the conclusion they seek. This was done by asking them a set of questions to help them make the correct conclusion on their own! I believe this helps an individual feel personal agency by abstractly exposing them to how to think critically. One of my favorite pieces of feedback through student evaluation has been, "He makes you think."
                             </p>
                             <hr>
-                                <figure>
-                                <iframe frameborder="0" style='width:100%;max-height:840px;overflow:auto' src='code/03.html'>
+                                <figure class='code-figure'>
+                                <iframe frameborder="0" style='width:100%;max-height:840px;overflow:auto' max-height='840' src='code/03.html'>
                                 </iframe>
                                 <!--code>
 <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:70vw;max-width:32em;padding-left:10px;max-height:250px'>
@@ -325,5 +325,9 @@ include('../../header.php');
                 </nav>
             </section>
         </section>
+        <script src='../../js/project_functions.js'></script>
+        <script>
+            setCodeSizeSliders();
+        </script>
     </body>
 </html>
