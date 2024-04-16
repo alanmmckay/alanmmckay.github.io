@@ -204,8 +204,10 @@ include('../../header.php');
                         application permission. The process entails registering an application within Strava's system. Each
                         application has a unique client ID. Said application should direct a user to the following URL:
                     </p>
-                    <iframe frameborder="0" style='width:100%;max-height:100px;overflow:auto' src='code/01.html'>
-                    </iframe>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:100px;overflow:auto' max-height='100' src='code/01.html'>
+                        </iframe>
+                    </figure>
                     <p>The bracketed attributes can be described as:</p>
                     <ul>
                         <li>
@@ -226,13 +228,17 @@ include('../../header.php');
                         client id, client secret token (given upon application creation), and authorization code generates a
                         response with an access code to use to query the API. I.e.,
                     </p>
-                    <iframe frameborder="0" style='width:100%;max-height:190px;overflow:auto' src='code/02.html'>
-                    </iframe>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:190px;overflow:auto' max-height='190' src='code/02.html'>
+                        </iframe>
+                    </figure>
                     <p>
                         Responds with a user access token to be used via:
                     </p>
-                    <iframe frameborder="0" style='width:100%;max-height:100px;overflow:auto' src='code/03.html'>
-                    </iframe>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:100px;overflow:auto' max-height='100' src='code/03.html'>
+                        </iframe>
+                    </figure>
                     <p>
                         Which can be piped into a json file.
                     </p>
@@ -248,14 +254,18 @@ include('../../header.php');
                     <p>
                         The python script developed for this project is as follows:
                     </p>
-                    <iframe frameborder="0" style='width:100%;max-height:865px;overflow:auto' src='code/04.html'>
-                    </iframe>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:865px;overflow:auto' max-height='865' src='code/04.html'>
+                        </iframe>
+                    </figure>
                     <p>
                         This information can now be imported to a staging table. With a schema called "cycling" created, the
                         table definition can be described as:
                     </p>
-                    <iframe frameborder="0" style='width:100%;max-height:400px;overflow:auto' src='code/05.html'>
-                    </iframe>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:400px;overflow:auto' max-height='400' src='code/05.html'>
+                        </iframe>
+                    </figure>
                     <p>
                         Highlighted is a column called "encoded_route". Strava stores its polyline information as an encoded
                         polyline string. This is a syntax used by services such as open street map. Indeed, Strava does not inform
@@ -267,13 +277,17 @@ include('../../header.php');
                     <p>
                         The activities table is created via:
                     </p>
-                    <iframe frameborder="0" style='width:100%;max-height:535px;overflow:auto' src='code/06.html'>
-                    </iframe>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:535px;overflow:auto' max-height='535' src='code/06.html'>
+                        </iframe>
+                    </figure>
                     <p>
                         And the data insertion query is as follows:
                     </p>
-                    <iframe frameborder="0" style='width:100%;max-height:760px;overflow:auto' src='code/07.html'>
-                    </iframe>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:760px;overflow:auto' max-height='760' src='code/07.html'>
+                        </iframe>
+                    </figure>
                     <p>
                         What has not been shared is the creation of an athletes table. This table creation is a trivial matter.
                         What's important is the join statement of the insertion query which adheres to the foreign key
@@ -298,8 +312,10 @@ include('../../header.php');
                     <p>
                         The traffic volume table can be described as:
                     </p>
-                    <iframe frameborder="0" style='width:100%;max-height:350px;overflow:auto' src='code/08.html'>
-                    </iframe>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:350px;overflow:auto' max-height='350' src='code/08.html'>
+                        </iframe>
+                    </figure>
                     <p>
                         This contains the information that's required, and no more. There are two obstacles in terms of
                         migrating the relevant data from its staging table and the production table:
@@ -320,8 +336,10 @@ include('../../header.php');
                     <p>
                         The following insertion query addresses these two obstacles:
                     </p>
-                    <iframe frameborder="0" style='width:100%;max-height:205px;overflow:auto' src='code/09.html'>
-                    </iframe>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:205px;overflow:auto' max-height='205' src='code/09.html'>
+                        </iframe>
+                    </figure>
                     <p>
                         (Note that the shapefiles have poorly named attributes; "effective_" is the column name for the
                         attribute describing the effective start date.)
@@ -373,8 +391,10 @@ include('../../header.php');
                     <p>
                         Queries gauging proximity safety can start being employed. I.e.,
                     </p>
-                    <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' src='code/10.html'>
-                    </iframe>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' max-height='125' src='code/10.html'>
+                        </iframe>
+                    </figure>
                     <h2>Segmentation</h2>
                     <p>
                         One facet of the database has yet to be discussed. The entity that is a Cycling Segment. The intention for
@@ -391,15 +411,19 @@ include('../../header.php');
                         good start in this effort. It produces an index for each point being produced along with the geometry.
                         Consider the following query:
                     </p>
-                    <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' src='code/11.html'>
-                    </iframe>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' max-height='125' src='code/11.html'>
+                        </iframe>
+                    </figure>
                     <p>
                         This query produces a set of results in which the route_id is associated with a set of points which are
                         also given an index. Let's assign this to a view called list_points. The task is now to wrap these points up
                         into individual lines. This can be accomplished with the following query:
                     </p>
-                    <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' src='code/12.html'>
-                    </iframe>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' max-height='125' src='code/12.html'>
+                        </iframe>
+                    </figure>
                     <p>
                         What makes the above query work is the logic in the where clause. The statement "<code>lp2.path_index
                         - lp1.path_index = 1</code>" ensures that points are contiguous form a line. Performing basic algebraic
@@ -478,5 +502,9 @@ include('../../header.php');
                 </nav>
             </section>
         </section>
+        <script src='../../js/project_functions.js'></script>
+        <script>
+            setCodeSizeSliders();
+        </script>
     </body>
 </html>
