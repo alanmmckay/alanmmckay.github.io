@@ -316,23 +316,31 @@ include('../../header.php');
                             <ul>
                                 <li>The Stack Frame:
                                     <br><br>
-                                    <iframe frameborder="0" style='width:100%;max-height:400px;overflow:auto' src='code/01.html'>
-                                    </iframe>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:400px;overflow:auto' max-height='400' src='code/01.html'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                                 <li>Registers:
                                     <br><br>
-                                    <iframe frameborder="0" style='width:100%;max-height:505px;overflow:auto' src='code/02.html'>
-                                    </iframe>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:505px;overflow:auto' max-height='505' src='code/02.html'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                                 <li>DMEM:
                                     <br><br>
-                                    <iframe frameborder="0" style='width:100%;max-height:455px;overflow:auto' src='code/03.html'>
-                                    </iframe>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:455px;overflow:auto' max-height='455' src='code/03.html'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                                 <li>IMEM:
                                     <br><br>
-                                    <iframe frameborder="0" style='width:100%;max-height:375px;overflow:auto' src='code/04.html'>
-                                    </iframe>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:375px;overflow:auto' max-height='375' src='code/04.html'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                             </ul>
                         </li>
@@ -445,15 +453,19 @@ include('../../header.php');
                             <p>Klein is a small, mostly functional language that is designed specifically to be used as a manageable source language in a course on compiler design and implementation. Though small and simple, the language is Turing-complete.</p>
 
                             <h4>Grammar</h4>
-                            <iframe frameborder="0" style='width:100%;max-height:1495px;overflow:auto' src='code/05.html'>
-                            </iframe>
+                            <figure class='code-figure'>
+                                <iframe frameborder="0" style='width:100%;max-height:1495px;overflow:auto' max-height='1495' src='code/05.html'>
+                                </iframe>
+                            </figure>
                             <h4>Syntax Features</h4>
                             <ul>
                                 <li>
                                     These are the reserved words of Klein:
                                     <br><br>
-                                    <iframe frameborder="0" style='width:100%;max-height:190px;overflow:auto' src='code/06.html'>
-                                    </iframe>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:190px;overflow:auto' max-height='190' src='code/06.html'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                                 <li>
                                     <code>print</code> is a primitive identifier. <code>true</code> and <code>false</code> are boolean literals. The rest are keywords.
@@ -470,8 +482,10 @@ include('../../header.php');
                                 <li>
                                     The following are the primitive operators and punctuation marks of Klein:
                                     <br><br>
-                                    <iframe frameborder="0" style='width:100%;max-height:140px;overflow:auto' src='code/07.html'>
-                                    </iframe>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:140px;overflow:auto' max-height='140' src='code/07.html'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                                 <li>
                                     Klein operators and punctuation are self-delimiting.
@@ -521,22 +535,28 @@ include('../../header.php');
                                     <h5>Arithmetic</h5>
                                     Adds, subtracts, multiplies, or divides two integers.
                                     <br><br>
-                                    <iframe frameborder="0" style='width:100%;max-height:165px;overflow:auto' src='code/08.html'>
-                                    </iframe>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:165px;overflow:auto' max-height='165' src='code/08.html'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                                 <li>
                                     <h5>Boolean Comparisons</h5>
                                     Compares two integers, yielding one of the boolean values <code>true</code> or <code>false</code>. <code>&lt;</code> yields <code>true</code> if its left operand is less than its right operand, and <code>false</code> otherwise. <code>=</code> yields true if its left operand has the same value as its right operand, and <code>false</code> otherwise.
                                     <br><br>
-                                    <iframe frameborder="0" style='width:100%;max-height:110px;overflow:auto' src='code/09.html'>
-                                    </iframe>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:110px;overflow:auto' max-height='110' src='code/09.html'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                                 <li>
                                     <h5>Boolean Connectives</h5>
                                     Negates a single boolean value, or computes the disjunction or conjunction of two boolean values. The unary <code>not</code> yields <code>true</code> if its operand is <code>false</code>, and <code>false</code> otherwise. <code>or</code> yields <code>true</code> if either its left operand or its right operand yields <code>true</code>, and <code>false</code> otherwise. <code>and</code> yields <code>true</code> if both its left operand and its right operand yield <code>true</code>, and <code>false</code> otherwise.
                                     <br><br>
-                                    <iframe frameborder="0" style='width:100%;max-height:140px;overflow:auto' src='code/10.html'>
-                                    </iframe>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:140px;overflow:auto' max-height='140' src='code/10.html'>
+                                        </iframe>
+                                    </figure>
                                     <code>or</code> and <code>and</code> short-circuit evaluation when possible.
                                 </li>
                                 <li>
@@ -544,8 +564,10 @@ include('../../header.php');
                                     Evaluates a test expression, and uses its value to select one of two expressions to evaluate. Yields the value of the first of these expressions if the test expression produces a true value, and the value of the second if the test expression yields a false value. The <code>else</code> clause is required.<br>
                                     For example:
                                     <br><br>
-                                    <iframe frameborder="0" style='width:100%;max-height:165px;overflow:auto' src='code/11.html'>
-                                    </iframe>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:165px;overflow:auto' max-height='165' src='code/11.html'>
+                                        </iframe>
+                                    </figure>
                                     produces the sum of x and y if flag is less than 0; otherwise, it produces their difference.
                                 </li>
                                 <li>
@@ -553,8 +575,10 @@ include('../../header.php');
                                     Applies a function to zero or more arguments, and yields the value of the expression in the body of the function. All functions return an integer value or a boolean value; Klein has no notion of a "void" function.<br>
                                     For example:
                                     <br><br>
-                                    <iframe frameborder="0" style='width:100%;max-height:85px;overflow:auto' src='code/12.html'>
-                                    </iframe>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:85px;overflow:auto' max-height='85' src='code/12.html'>
+                                        </iframe>
+                                    </figure>
                                     computes the sum of x an dy, passes that value and a 1 to the function f, and produces the value returned by applying the function to its arguments.
                                 </li>
                                 <li>
@@ -585,8 +609,10 @@ include('../../header.php');
                                 <li>
                                     For the purposes of user interaction, Klein provides the primitive function <code>print(expression)</code>. For example:
                                     <br><br>
-                                    <iframe frameborder="0" style='width:100%;max-height:85px;overflow:auto' src='code/13.html'>
-                                    </iframe>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:85px;overflow:auto' max-height='85' src='code/13.html'>
+                                        </iframe>
+                                    </figure>
                                     <code>print</code> writes its argument on standard output, followed by a new line character.
                                 </li>
                                 <li>
@@ -605,12 +631,16 @@ include('../../header.php');
                                 <li>
                                     For example, here is a complete Klein program that computes the absolute value of its argument:
                                     <br><br>
-                                    <iframe frameborder="0" style='width:100%;max-height:165px;overflow:auto' src='code/14.html'>
-                                    </iframe>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:165px;overflow:auto' max-height='165' src='code/14.html'>
+                                        </iframe>
+                                    </figure>
                                     If this program were compiled into an executable file named <code>abs</code>, then running it under Unix might look something like this:
                                     <br><br>
-                                    <iframe frameborder="0" style='width:100%;max-height:110px;overflow:auto' src='code/15.html'>
-                                    </iframe>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:110px;overflow:auto' max-height='110' src='code/15.html'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                             </ul>
                         </article>
@@ -665,37 +695,49 @@ include('../../header.php');
                             <li>
                                 Register-only (RO) instructions are of the form
                                 <br><br>
-                                <iframe frameborder="0" style='width:100%;max-height:85px;overflow:auto' src='code/16.html'>
-                                </iframe>
+                                <figure class='code-figure'>
+                                    <iframe frameborder="0" style='width:100%;max-height:85px;overflow:auto' max-height='85' src='code/16.html'>
+                                    </iframe>
+                                </figure>
                                 where the <code>ri</code> are legal registers.
                             </li>
                             <li>
                                 These are the RO opcodes:
                                 <br><br>
-                                <iframe frameborder="0" style='width:100%;max-height:260px;overflow:auto' src='code/17.html'>
-                                </iframe>
+                                <figure class='code-figure'>
+                                    <iframe frameborder="0" style='width:100%;max-height:260px;overflow:auto' max-height='260' src='code/17.html'>
+                                    </iframe>
+                                </figure>
                             </li>
                             <li>
                                 Register-memory (RM) instructions are of the form
                                 <br><br>
-                                <iframe frameborder="0" style='width:100%;max-height:85px;overflow:auto' src='code/18.html'>
-                                </iframe>
+                                <figure class='code-figure'>
+                                    <iframe frameborder="0" style='width:100%;max-height:85px;overflow:auto' max-height='85' src='code/18.html'>
+                                    </iframe>
+                                </figure>
                                 Where the <code>ri</code> are legal registers and <code>offset</code> is an integer offset. <code>offset</code> may be negative. With the exception of the <code>LDC</code> instruction, the expression <code>offset(r2)</code> is used to compute the address of a memory at location:
                                 <br><br>
-                                <iframe frameborder="0" style='width:100%;max-height:85px;overflow:auto' src='code/19.html'>
-                                </iframe>
+                                <figure class='code-figure'>
+                                    <iframe frameborder="0" style='width:100%;max-height:85px;overflow:auto' src='code/19.html'>
+                                    </iframe>
+                                </figure>
                             </li>
                             <li>
                                 There are four RM opcodes for memory manipulation:
                                 <br><br>
-                                <iframe frameborder="0" style='width:100%;max-height:165px;overflow:auto' src='code/20.html'>
-                                </iframe>
+                                <figure class='code-figure'>
+                                    <iframe frameborder="0" style='width:100%;max-height:165px;overflow:auto' max-height='165' src='code/20.html'>
+                                    </iframe>
+                                </figure>
                             </li>
                             <li>
                                 There are six RM opcodes for branching. If the value of <code>r1</code> satisfies the opcode's condition, then branch to the instruction at memory location <code>address</code>.
                                 <br><br>
-                                <iframe frameborder="0" style='width:100%;max-height:215px;overflow:auto' src='code/21.html'>
-                                </iframe>
+                                <figure class='code-figure'>
+                                    <iframe frameborder="0" style='width:100%;max-height:215px;overflow:auto' max-height='215' src='code/21.html'>
+                                    </iframe>
+                                </figure>
                             </li>
                             <li>
                                 All arithmetic is done with registers (not memory locations) and on integers. Floating-point numbers must be simulated in the run-time system.
@@ -724,6 +766,8 @@ include('../../header.php');
         </section>
         <script src='../../js/project_functions.js'></script>
         <script>
+
+            setCodeSizeSliders();
 
             let status = {"k_spec":true,"tm_spec":true,"phase_1":true,"phase_2":true,"phase_3":true,"phase_4":true,"phase_5":true,"phase_6":true,"phase_7":true};
             Object.entries(status).forEach(entry => {
