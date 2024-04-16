@@ -475,8 +475,8 @@ include('../../header.php');
                     <p>
                         Given some <i>&lt;Persona&gt;</i>, an <i>&lt;Entity&gt;</i> will seek to find a match to some subset of <i>&lt;Demographics&gt;</i> in combination with a subset of <i>&lt;Content Categories&gt;</i>, (of which a <i>&lt;Persona&gt;</i> is also defined as the combination of these two subsets.) Which features can be used to infer these combinations? The answer to this question is discovered by tracing the the possible productions of the grammar given in Table 2. Each non-terminal used in a production plays a role in strengthening the confidence of the production; something which is required for developing a confident weight 𝑤<sub>𝑢𝑣</sub>.
                     </p>
-                    <figure>
-                        <iframe frameborder="0" style='width:100%;max-height:955px;overflow:auto' src='code/01.html'>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:955px;overflow:auto' max-height='955' src='code/01.html'>
                         </iframe>
                         <figcaption style='clear:both;text-align:center;padding-top:5px;font-weight:bold;'>
                             Table 2: Interplay of Entities and Persona can be surmised using BNF notation. <i>&lt;Aggregation&gt;</i> is representative of the means in which inferences can be made: via research or disclosure.
@@ -715,6 +715,10 @@ include('../../header.php');
                 </nav>
             </section>
         </section>
+        <script src='../../js/project_functions.js'></script>
+        <script>
+            setCodeSizeSliders();
+        </script>
     </body>
 </html>
 
