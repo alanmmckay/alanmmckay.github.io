@@ -431,19 +431,22 @@ code.iframe{
     color:#5f666d;
 }
 
-div.code-font button{
+div.code-font button, div.code-font input{
     position:-webkit-sticky;
     position:relative;
     top:28px;
     float:right;
+    margin-right:1%;
+}
+
+div.code-font button{
     font-size:14px;
-    color:#5f666d;
-    border: solid #5f666d 1px;
+    color:#a0a6ac;
+    border: solid #bbbfc4 1px;
     border-radius:4px;
-    transition:color .5s;
-    transition:background-color .5s;
-    width:115px;
-    margin-right:10px;
+    transition:color 1s, background-color 1s, border 1s;
+   /* width:115px;*/
+    width:80px;
 }
 
 div.code-font button:hover{
@@ -456,19 +459,15 @@ div.code-font button:hover{
 }
 
 div.code-font input{
-    position:-webkit-sticky;
-    position:relative;
-    top:28px;
-    float:right;
     cursor:pointer;
     accent-color:grey;
     height:20.09px;
-    margin-right:10px;
     display:none;
 }
 
 #writingsWrapper figure.code-figure{
     padding:0px;
+    margin:0px;
 }
 
 @keyframes fadein1 {
