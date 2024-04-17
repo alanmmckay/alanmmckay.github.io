@@ -106,8 +106,12 @@ function setDynamicFigureStyle(event_type, screen_state,element,old_ele_height,c
 // Changes made using this resize method is global for all code blocks being
 //  displayed on a page.
 
-function changeCodeSize(element){
-    var value = element.value;
+function changeCodeSize(element,mouseup=null){
+    if(mouseup != null){
+        var value = Number(mouseup);
+    }else{
+        var value = element.value;
+    }
     var iframes = document.getElementsByTagName('iframe');
     for(let i=0; i<iframes.length; i++){
         var iframe = iframes[i];
@@ -168,7 +172,13 @@ function setCodeSizeSliders(){
         input.max = '17';
         input.value = '17';
         input.addEventListener('input',function(){changeCodeSize(this);});
-        input.addEventListener('mouseup',function(){revealCodeSizeSlider(false);});
+        input.addEventListener('mouseup',function(){
+            revealCodeSizeSlider(false);
+            var new_val = Number(input.value);
+            setTimeout(function(){
+                changeCodeSize(this,new_val);
+            }, 1);
+        });
         input.addEventListener('touchend',function(){revealCodeSizeSlider(false);});
 
         div.appendChild(button);
