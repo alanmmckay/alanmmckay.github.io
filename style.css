@@ -422,6 +422,7 @@ iframe{
     resize:vertical;
     min-height:85px;
     height:70vh;
+    transition: max-height .5s;
 }
 
 pre:has(code.iframe){
@@ -433,6 +434,7 @@ code.iframe{
     font-size: 17px;
     line-height:1.55;
     color:#5f666d;
+    transition: font-size .25s;
 }
 
 div.code-font button, div.code-font input{
