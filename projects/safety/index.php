@@ -20,6 +20,11 @@ include('../../header.php');
 
 ?>
         <section id='writingsWrapper' style='min-width:300px;'>
+            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
+                <h1 class='breadCurrent'><a href='./'>&nbsp;&gt; Cycling Safety Database</a>
+                <h1><a href='../'>&nbsp;&gt; Projects</a>
+                <h1><a href='../../'>Home</a></h1>
+            </header>
             <section>
                 <article>
                     <section class='info'>

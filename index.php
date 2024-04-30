@@ -9,9 +9,9 @@ include('header.php');
 ?>
 
 <div id='homeWrapper'>
-            <header style='overflow:hidden'>
-                <h1 style='float:right'><a href='about/' style='font-weight:normal;font-size:16px;'>&nbsp;About</a>
-                <h1 style='float:right'><a id='home_link' href='./'>Alan McKay |</a></h1>
+            <header id='breadNav' style='overflow:hidden'>
+                <h1><a href='about/'>&nbsp;About</a>
+                <h1><a id='home_link' href='./' style='font-size:20px;'>Alan McKay |</a></h1>
             </header>
             <nav>
                 <a href='writings/'>

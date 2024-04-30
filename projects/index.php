@@ -20,8 +20,9 @@ include('../header.php');
 
 ?>
         <div id='homeWrapper'>
-            <header>
-                <h1><a href='../'>Alan McKay</a></h1>
+            <header id='breadNav' style='overflow:hidden'>
+                <h1 style='float:right'><a href='./' style='font-weight:normal;font-size:16px;'>&nbsp;&gt; Projects</a>
+                <h1 style='float:right'><a href='../' style='font-weight:normal;font-size:16px;'>Home</a></h1>
             </header>
             <nav>
                 <a href='./'>

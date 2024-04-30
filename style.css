@@ -10,33 +10,45 @@ body{
     min-width:260px;
 }
 
-#homeWrapper header{
+#writingsWrapper #breadNav{
+    width:100%;
+    border-bottom: solid 2px #778088;
+    margin:0;
+    width:90%;
+}
+
+header#breadNav{
     width:75%;
     margin:auto;
     text-align:right;
-    border-bottom: solid 3px;
+    border-bottom: solid 2px;
     color:#778088;
+    padding-bottom:5px;
 }
 
-#homeWrapper header h1{
+header#breadNav h1{
     margin-bottom:0px;
     font-family: Arial, Helvetica, sans-serif;
     font-size:18px;
     font-weight:normal;
     letter-spacing:1px;
     color:#778088;
+    float:right;
 }
 
-#homeWrapper header h1 a{
+header#breadNav h1 a{
     color:#778088;
     text-decoration:none;
     border:0px solid white;
     transition: border-right 1s;
+    font-weight:normal;
+    font-size:16px;
 }
 
-#homeWrapper header h1 a:hover{
+header#breadNav h1 a:hover{
     border-right:20px solid white;
 }
+
 #homeWrapper nav{
     width:75%;
     margin:auto;
@@ -117,8 +129,8 @@ body{
 #writingsWrapper{
     width:50%;
     margin:auto;
-    display:flex;
-    justify-content:space-around;
+    /*display:flex;
+    justify-content:space-around;*/
 }
 
 #writingsWrapper{
@@ -158,6 +170,7 @@ body{
     text-align:justify;
     line-height:1.55;
     font-size:17px;
+    padding-top:10px;
 }
 
 #writingsWrapper article h1, #writingsWrapper article h2, #writingsWrapper article h3, #writingsWrapper article h4, #writingsWrapper article h5, #writingsWrapper article h6{
@@ -549,6 +562,9 @@ div.code-font input{
         font-size:65%
     }
 
+    #writingsWrapper #breadNav{
+        width:100%;
+    }
 }
 
 @media screen and (max-width:600px) and (min-width: 481px){
@@ -676,6 +692,10 @@ div.code-font input{
         margin-left:5%;
     }
 
+    #writingsWrapper header#breadNav h1 a{
+        font-size:12px;
+    }
+
     .dynamic-figure-container .dynamic-figure-view{
         width:55%;
     }
@@ -699,6 +719,10 @@ div.code-font input{
 @media screen and (max-width:425px){
     .tech ul{
         text-align:left;
+    }
+
+    .breadCurrent{
+        display:none;
     }
 }
 

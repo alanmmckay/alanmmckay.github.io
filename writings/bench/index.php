@@ -20,11 +20,15 @@ include('../../header.php');
 
 ?>
         <section id='writingsWrapper'>
+            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
+                <h1 class='breadCurrent'><a href='./'>&nbsp;&gt; The Bench</a>
+                <h1><a href='../'>&nbsp;&gt; Writings</a>
+                <h1><a href='../../'>Home</a></h1>
+            </header>
             <section>
                 <article>
+                    <br>
                     <!--section class='info'--->
-                        <br>
-                        <hr>
                         <a href='./images/bench02.webp' target="_blank" rel="noopener noreferrer">
                             <figure>
                                 <img src='./images/bench02-edited.webp' alt="A desolate bench within a wintery courtyard">
