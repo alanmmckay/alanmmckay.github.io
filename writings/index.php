@@ -25,7 +25,7 @@ include('../header.php');
                 <h1 style='float:right'><a href='../' style='font-weight:normal;font-size:16px;'>Home</a></h1>
             </header>
             <nav>
-                <a href='./'>
+                <a href='./' class='currentLink'>
                     <img src='../images/text-logo-grey.png' alt='Icon for blog link'>
                     Writings
                 </a>
