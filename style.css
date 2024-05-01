@@ -267,6 +267,10 @@ header#breadNav h1 a.currentLink:hover{
     float:left;
 }
 
+dialog{
+    background-color:rgba(255, 255, 255,0.75);
+}
+
 figure.image-collage{
 
 }
@@ -642,6 +646,23 @@ div.code-font input{
 
     #grid-control ul.horizontal li label{
         display:none;
+    }
+
+    dialog{
+        width:95%;
+    }
+
+    dialog #grid-control ul.horizontal{
+        display:inherit;
+        width:45%;
+    }
+
+    dialog #grid-control ul.horizontal li{
+        display:inherit;
+    }
+
+    dialog #grid-control ul.horizontal li label{
+        display:inherit;
     }
 
     #grid-control ul.horizontal li input{

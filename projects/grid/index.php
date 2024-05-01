@@ -55,64 +55,129 @@ include('../../header.php');
                     <header>
                         <h1>Javascript: Hexagon Grid</h1>
                     </header>
-                    <figure style='border:solid #5F666D 1px;overflow:auto;clear:both'>
-                        <canvas id='myCanvas' width='500' height='275' style='width:100%;float:left;clear:right;'></canvas>
-                    </figure>
-                    <form id='grid-control'>
-                        <h4> Grid Controls: </h4>
-                        <div style='clear:both;overflow:auto'>
-                            <ul style='margin-bottom:0px;'>
-                                <li>
-                                    <label for='sizeslider'>Size of Hexagon:</label><br>
-                                    <input type='range' id='sizeslider' min='10' max='50' value='35' oninput='slider_function(hexV)' style='width:95%;'><br>
-                                </li>
-                            </ul>
-                            <ul class='horizontal'>
-                                <li>
-                                    <label for='addHex'>Add a hexagon to the grid</label><br>
-                                    <input type='button' id='addHex' value='Add hex' onclick='add_Hex(hexV)'>
-                                </li>
+                    <div id='gridContent'>
+                        <figure style='border:solid #5F666D 1px;overflow:auto;clear:both'>
+                            <canvas id='myCanvas' width='500' height='275' style='width:100%;float:left;clear:right;'></canvas>
+                        </figure>
+                        <form id='grid-control'>
+                                <h4> Grid Controls: </h4>
+                                <div style='clear:both;overflow:auto'>
+                                    <ul style='margin-bottom:0px;'>
+                                        <li>
+                                            <label for='sizeslider1'>Size of Hexagon:</label><br>
+                                            <input type='range' id='sizeslider1' min='10' max='50' value='35' oninput='slider_function(hexV,"sizeslider1");consolidate_sliders("sizeslider2",["sizeslider1"]);' style='width:95%;'><br>
+                                        </li>
+                                    </ul>
+                                    <ul class='horizontal'>
+                                        <li>
+                                            <label for='addHex'>Add a hexagon to the grid</label><br>
+                                            <input type='button' id='addHex' value='Add hex' onclick='add_Hex(hexV)'>
+                                        </li>
 
-                                <li>
-                                    <label for='addNullHex'>Add an invisible (null) hex to the grid</label><br>
-                                    <input type='button' id='addNullHex' value='Add Null hex' onclick='add_Hex(hexV,null)'>
-                                </li>
+                                        <li>
+                                            <label for='addNullHex'>Add an invisible (null) hex to the grid</label><br>
+                                            <input type='button' id='addNullHex' value='Add Null hex' onclick='add_Hex(hexV,null)'>
+                                        </li>
 
-                                <li>
-                                    <label for='removeHex'>Remove a hexagon from the grid</label><br>
-                                    <input type='button' id='removeHex' value='Remove hex' onclick='remove_Hex(hexV)'><br>
-                                </li>
-                            </ul>
+                                        <li>
+                                            <label for='removeHex'>Remove a hexagon from the grid</label><br>
+                                            <input type='button' id='removeHex' value='Remove hex' onclick='remove_Hex(hexV)'><br>
+                                        </li>
+                                    </ul>
 
-                            <ul class='horizontal'>
-                                <li>
-                                    <label for='addColumn'>Increase amount of columns</label><br>
-                                    <input type='button' id='addColumn' value='Add Column' onclick='add_Column(hexV)'>
-                                </li>
+                                    <ul class='horizontal'>
+                                        <li>
+                                            <label for='addColumn'>Increase amount of columns</label><br>
+                                            <input type='button' id='addColumn' value='Add Column' onclick='add_Column(hexV)'>
+                                        </li>
 
-                                <li>
-                                    <label for='removeColumn'>Decrease amount of columns</label><br>
-                                    <input type='button' id='removeColumn' value='Remove Column' onclick='remove_Column(hexV)'><br>
-                                </li>
+                                        <li>
+                                            <label for='removeColumn'>Decrease amount of columns</label><br>
+                                            <input type='button' id='removeColumn' value='Remove Column' onclick='remove_Column(hexV)'><br>
+                                        </li>
 
-                                <li>
-                                    <label for='originDisplay'>Display/Hide all points of origin</label><br>
-                                    <input type='button' id='originDisplay' value='Show Points of Origin' onclick='draw_Origin(hexV)'>
-                                </li>
-                            </ul>
-                        </div>
-                            <ul>
-                                <li>
-                                    <label for='traceOrig'>Toggle trace lines from any visible hexagon's point of origin to the mouse cursor</label><br>
-                                    <input type='button' id='traceOrig' value='Trace Origin lines' onclick='trace_Orig(hexV)'>
-                                </li>
+                                        <li>
+                                            <label for='originDisplay'>Display/Hide all points of origin</label><br>
+                                            <input type='button' id='originDisplay' value='Show Points of Origin' onclick='draw_Origin(hexV)'>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--<ul>
+                                    <li>
+                                        <label for='traceOrig'>Toggle trace lines from any visible hexagon's point of origin to the mouse cursor</label><br>
+                                        <input type='button' id='traceOrig' value='Trace Origin lines' onclick='trace_Orig(hexV)'>
+                                    </li>
 
-                                <li>
-                                    <label for='traceAdjOrig'>Toggle trace lines from any non-visible hexagons point of origin to the mouse cursor</label><br>
-                                    <input type='button' id='traceAdjOrig' value='Trace Adjacency lines' onclick='trace_Adj(hexV)'>
-                                </li>
-                            </ul>
-                </form>
+                                    <li>
+                                        <label for='traceAdjOrig'>Toggle trace lines from any non-visible hexagons point of origin to the mouse cursor</label><br>
+                                        <input type='button' id='traceAdjOrig' value='Trace Adjacency lines' onclick='trace_Adj(hexV)'>
+                                    </li>
+                                </ul>-->
+                            </form>
+                        <script>
+                            function closeDialog(){
+                                document.getElementById("grid_control_dialog").close();
+                            }
+                        </script>
+                        <dialog id='grid_control_dialog'>
+                            <span style='float:right; clear:both;' onclick="closeDialog()"> close [x] </span>
+                            <form id='grid-control'>
+                                <h4> Grid Controls: </h4>
+                                <div style='clear:both;overflow:auto'>
+                                    <ul style='margin-bottom:0px;'>
+                                        <li>
+                                            <label for='sizeslider2'>Size of Hexagon:</label><br>
+                                            <input type='range' id='sizeslider2' min='10' max='50' value='35' oninput='slider_function(hexV,"sizeslider2");consolidate_sliders("sizeslider2",["sizeslider1"]);' style='width:95%;'><br>
+                                        </li>
+                                    </ul>
+                                    <ul class='horizontal'>
+                                        <li>
+                                            <label for='addHex'>Add a hexagon to the grid</label><br>
+                                            <input type='button' id='addHex' value='Add hex' onclick='add_Hex(hexV)'>
+                                        </li>
+
+                                        <li>
+                                            <label for='addNullHex'>Add an invisible (null) hex to the grid</label><br>
+                                            <input type='button' id='addNullHex' value='Add Null hex' onclick='add_Hex(hexV,null)'>
+                                        </li>
+
+                                        <li>
+                                            <label for='removeHex'>Remove a hexagon from the grid</label><br>
+                                            <input type='button' id='removeHex' value='Remove hex' onclick='remove_Hex(hexV)'><br>
+                                        </li>
+                                    </ul>
+
+                                    <ul class='horizontal'>
+                                        <li>
+                                            <label for='addColumn'>Increase amount of columns</label><br>
+                                            <input type='button' id='addColumn' value='Add Column' onclick='add_Column(hexV)'>
+                                        </li>
+
+                                        <li>
+                                            <label for='removeColumn'>Decrease amount of columns</label><br>
+                                            <input type='button' id='removeColumn' value='Remove Column' onclick='remove_Column(hexV)'><br>
+                                        </li>
+
+                                        <li>
+                                            <label for='originDisplay'>Display/Hide all points of origin</label><br>
+                                            <input type='button' id='originDisplay' value='Show Points of Origin' onclick='draw_Origin(hexV)'>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--<ul>
+                                    <li>
+                                        <label for='traceOrig'>Toggle trace lines from any visible hexagon's point of origin to the mouse cursor</label><br>
+                                        <input type='button' id='traceOrig' value='Trace Origin lines' onclick='trace_Orig(hexV)'>
+                                    </li>
+
+                                    <li>
+                                        <label for='traceAdjOrig'>Toggle trace lines from any non-visible hexagons point of origin to the mouse cursor</label><br>
+                                        <input type='button' id='traceAdjOrig' value='Trace Adjacency lines' onclick='trace_Adj(hexV)'>
+                                    </li>
+                                </ul>-->
+                            </form>
+                        </dialog>
+                    </div>
                 <script src='hex.js'></script>
                 <script>
                     var hexV = grid_producer("myCanvas",35,3,25,25);
