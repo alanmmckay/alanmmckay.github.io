@@ -49,6 +49,11 @@ header#breadNav h1 a:hover{
     border-right:20px solid white;
 }
 
+header#breadNav h1 a.currentLink:hover{
+    border-right:0px;
+    cursor:default;
+}
+
 #homeWrapper nav{
     width:75%;
     margin:auto;

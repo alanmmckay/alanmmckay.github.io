@@ -21,8 +21,8 @@ include('../header.php');
 ?>
         <div id='homeWrapper'>
             <header id='breadNav' style='overflow:hidden'>
-                <h1 style='float:right'><a href='./' style='font-weight:normal;font-size:16px;'>&nbsp;&gt; Writings</a>
-                <h1 style='float:right'><a href='../' style='font-weight:normal;font-size:16px;'>Home</a></h1>
+                <h1><a href='./' class='currentLink'>&nbsp;&gt; Writings</a>
+                <h1><a href='../'>Home</a></h1>
             </header>
             <nav>
                 <a href='./' class='currentLink'>
