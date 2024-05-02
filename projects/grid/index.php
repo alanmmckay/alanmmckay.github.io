@@ -216,7 +216,10 @@ include('../../header.php');
                         if(growing && form.style['position'] == 'fixed'){
                             if(grid.getBoundingClientRect().height + form.getBoundingClientRect().height < window.outerHeight){
                                 form.style['position'] = 'inherit';
-                                form.style['top'] = '0px';                                document.getElementById('controlReveal').style['visibility'] = 'hidden';
+                                form.style['top'] = '0px';                                
+                                document.getElementById('controlReveal').style['visibility'] = 'hidden';
+                                document.getElementById("grid_control_dialog").close();
+                                document.getElementsByTagName('article')[0].style['filter'] = 'inherit';
                             }
                         }else
                         if(!growing && !shrinking){
