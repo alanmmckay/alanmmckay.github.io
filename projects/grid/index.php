@@ -245,11 +245,13 @@ include('../../header.php');
                     });
 
                     window.onscroll = function(){
-                        if(grid.getBoundingClientRect().top < -200){
-                            toggleDialog(false);
-                        }
-                        if(window.outerHeight - grid.getBoundingClientRect().bottom < -200){
-                            toggleDialog(false);
+                        if(dialog.style['visibility'] != 'hidden'){
+                            if(grid.getBoundingClientRect().top < -200){
+                                toggleDialog(false);
+                            }
+                            if(window.outerHeight - grid.getBoundingClientRect().bottom < -200){
+                                toggleDialog(false);
+                            }
                         }
                     }
 
@@ -266,7 +268,9 @@ include('../../header.php');
                         if(grid.getBoundingClientRect().height + form.getBoundingClientRect().height > old_screen_height){
                             form.style['position'] = 'fixed';
                             form.style['top'] = '-1000px';
-                            document.getElementById('controlReveal').style['visibility'] = 'inherit';
+                            document.getElementById('controlReveal').style['visibility'] = 'hidden';
+                        }else{
+                            document.getElementById('controlReveal').style['visibility'] = 'hidden';
                         }
                     });
                 </script>
