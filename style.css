@@ -40,17 +40,19 @@ header#breadNav h1 a{
     color:#778088;
     text-decoration:none;
     border:0px solid white;
-    transition: border-right 1s;
+    transition: border-right .25s, color .25s;
     font-weight:normal;
     font-size:16px;
 }
 
 header#breadNav h1 a:hover{
-    border-right:20px solid white;
+    border-right:5px solid white;
+    color: #535a5f;
 }
 
 header#breadNav h1 a.currentLink:hover{
     border-right:0px;
+    color:#778088;
     cursor:default;
 }
 
