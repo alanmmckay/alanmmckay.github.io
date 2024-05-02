@@ -245,24 +245,24 @@ header#breadNav h1 a.currentLink:hover{
     display:none;
 }
 
-#grid-control h4{
+.grid-control h4{
     margin-bottom:0px;
 }
 
-#grid-control ul{
+.grid-control ul{
     text-align: left;
     margin-top:10px;
 }
 
-#grid-control ul li{
+.grid-control ul li{
     margin:1%;
 }
 
-#grid-control ul li input{
+.grid-control ul li input{
     margin:1%;
 }
 
-#grid-control ul.horizontal{
+.grid-control ul.horizontal{
     width:42%;
     float:left;
 }
@@ -618,33 +618,33 @@ div.code-font input{
         width:100%;
     }
 
-    #grid-control ul.horizontal{
+    .grid-control ul.horizontal{
         width:45%;
     }
 
-    #grid-control ul li{
+    .grid-control ul li{
         font-size:14px;
     }
 
-    #grid-control ul li input{
+    .grid-control ul li input{
         font-size:12px;
     }
 
 }
 
 @media screen and (max-width:600px){
-    #grid-control ul.horizontal{
+    .grid-control ul.horizontal{
         margin-top:10px;
         margin-bottom:5px;
         display:inline-block;
         width:90%;
     }
 
-    #grid-control ul.horizontal li{
+    .grid-control ul.horizontal li{
         display:inline-block;
     }
 
-    #grid-control ul.horizontal li label{
+    .grid-control ul.horizontal li label{
         display:none;
     }
 
@@ -652,24 +652,24 @@ div.code-font input{
         width:95%;
     }
 
-    dialog #grid-control ul.horizontal{
+    dialog .grid-control ul.horizontal{
         display:inherit;
         width:45%;
     }
 
-    dialog #grid-control ul.horizontal li{
+    dialog .grid-control ul.horizontal li{
         display:inherit;
     }
 
-    dialog #grid-control ul.horizontal li label{
+    dialog .grid-control ul.horizontal li label{
         display:inherit;
     }
 
-    #grid-control ul.horizontal li input{
+    .grid-control ul.horizontal li input{
 
     }
 
-    #grid-control ul li br{
+    .grid-control ul li br{
         display:none;
     }
 

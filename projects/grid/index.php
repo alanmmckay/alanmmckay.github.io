@@ -58,14 +58,17 @@ include('../../header.php');
                     <div id='gridContent'>
                         <figure style='border:solid #5F666D 1px;overflow:auto;clear:both'>
                             <canvas id='myCanvas' width='500' height='275' style='width:100%;float:left;clear:right;'></canvas>
+                            <figcaption id='controlReveal' style='visibility:hidden;float:right'>
+                                <button onclick='toggleDialog(true);'> Show Controls </button>
+                            </figcaption>
                         </figure>
-                        <form id='grid-control'>
+                        <form class='grid-control'>
                                 <h4> Grid Controls: </h4>
                                 <div style='clear:both;overflow:auto'>
                                     <ul style='margin-bottom:0px;'>
                                         <li>
                                             <label for='sizeslider1'>Size of Hexagon:</label><br>
-                                            <input type='range' id='sizeslider1' min='10' max='50' value='35' oninput='slider_function(hexV,"sizeslider1");consolidate_sliders("sizeslider2",["sizeslider1"]);' style='width:95%;'><br>
+                                            <input type='range' id='sizeslider1' min='10' max='50' value='35' oninput='slider_function(hexV,"sizeslider1");consolidate_sliders("sizeslider1",["sizeslider2"]);' style='width:95%;'><br>
                                         </li>
                                     </ul>
                                     <ul class='horizontal'>
@@ -114,14 +117,9 @@ include('../../header.php');
                                     </li>
                                 </ul>-->
                             </form>
-                        <script>
-                            function closeDialog(){
-                                document.getElementById("grid_control_dialog").close();
-                            }
-                        </script>
                         <dialog id='grid_control_dialog'>
-                            <span style='float:right; clear:both;' onclick="closeDialog()"> close [x] </span>
-                            <form id='grid-control'>
+                            <span style='float:right; clear:both;' onclick="toggleDialog(false)"> close [x] </span>
+                            <form class='grid-control'>
                                 <h4> Grid Controls: </h4>
                                 <div style='clear:both;overflow:auto'>
                                     <ul style='margin-bottom:0px;'>
@@ -171,7 +169,7 @@ include('../../header.php');
                                     </li>
 
                                     <li>
-                                        <label for='traceAdjOrig'>Toggle trace lines from any non-visible hexagons point of origin to the mouse cursor</label><br>
+                                        <label for='traceAdjOrig'>Toggle trace lines from any non-visible hexagons point of origin to the mouse cursor</label><br>grid =
                                         <input type='button' id='traceAdjOrig' value='Trace Adjacency lines' onclick='trace_Adj(hexV)'>
                                     </li>
                                 </ul>-->
@@ -187,7 +185,85 @@ include('../../header.php');
                         hexContainer[1] = new hex(hexV,"tile1");
                         hexContainer[2] = new hex(hexV,"tile1");
                         drawHexes(0,hexV);
+                </script>
+                <script>
 
+                    function toggleDialog(state){
+                        if(state === true){
+                            document.getElementById("grid_control_dialog").showModal()
+                            document.getElementById('controlReveal').style['visibility'] = 'hidden';
+                            document.getElementsByTagName('article')[0].style['filter'] = 'blur(.05rem)';
+                        }else{
+                            document.getElementById("grid_control_dialog").close();
+                            document.getElementById('controlReveal').style['visibility'] = 'inherit';
+                            document.getElementsByTagName('article')[0].style['filter'] = 'inherit';
+                        }
+                    }
+
+                    var shrinking;
+                    var growing;
+                    function grid_control_handler(){
+                        shrinking = false;
+                        growing = false;
+                        if(window.outerHeight > old_screen_height){
+                            growing = true;
+                        }else if(window.outerHeight < old_screen_height){
+                            shrinking = true;
+                        }
+                        if(shrinking && form.style['position'] != 'fixed'){
+                            if(grid.getBoundingClientRect().height + form.getBoundingClientRect().height > window.outerHeight){
+                                form.style['position'] = 'fixed';
+                                form.style['top'] = '-1000px';
+                                document.getElementById('controlReveal').style['visibility'] = 'inherit';
+                            }
+                        }else
+                        if(growing && form.style['position'] == 'fixed'){
+                            if(grid.getBoundingClientRect().height + form.getBoundingClientRect().height < window.outerHeight){
+                                form.style['position'] = 'inherit';
+                                form.style['top'] = '0px';                                document.getElementById('controlReveal').style['visibility'] = 'hidden';
+                            }
+                        }else
+                        if(!growing && !shrinking){
+                            console.log('yes');
+                            if(grid.getBoundingClientRect().height + form.getBoundingClientRect().height > window.outerHeight){
+                                form.style['position'] = 'fixed';
+                                form.style['top'] = '-1000px';
+                                document.getElementById('controlReveal').style['visibility'] = 'inherit';
+                            }else
+                            if(grid.getBoundingClientRect().height + form.getBoundingClientRect().height < window.outerHeight){
+                                form.style['position'] = 'inherit';
+                                form.style['top'] = '0px';                                document.getElementById('controlReveal').style['visibility'] = 'hidden';
+                                document.getElementById("grid_control_dialog").close();
+                                document.getElementsByTagName('article')[0].style['filter'] = 'inherit';
+                            }
+                        }
+                        old_screen_height = window.outerHeight;
+                    }
+
+                    window.onresize = function(){
+                        grid_control_handler();
+                    }
+
+                    screen.orientation.addEventListener("change", (event) => {
+                        grid_control_handler();
+                    });
+
+                    var old_screen_height;
+                    var grid;
+                    var form;
+                    var modal;
+                    window.addEventListener('load', function () {
+                        old_screen_height = window.outerHeight;
+                        wrapper = document.getElementById('gridContent');
+                        grid = wrapper.getElementsByTagName('figure')[0];
+                        form = wrapper.getElementsByTagName('form')[0];
+                        modal = wrapper.getElementsByTagName('dialog')[0];
+                        if(grid.getBoundingClientRect().height + form.getBoundingClientRect().height > old_screen_height){
+                            form.style['position'] = 'fixed';
+                            form.style['top'] = '-1000px';
+                            document.getElementById('controlReveal').style['visibility'] = 'inherit';
+                        }
+                    });
                 </script>
                 <section class='info'>
                         <hr>
