@@ -78,7 +78,7 @@ include('../../header.php');
                                         </li>
 
                                         <li>
-                                            <label for='addNullHex'>Add an invisible (null) hex to the grid</label><br>
+                                            <label for='addNullHex'>Add an invisible hex to the grid</label><br>
                                             <input type='button' id='addNullHex' value='Add Null hex' onclick='add_Hex(hexV,null)'>
                                         </li>
 
@@ -135,7 +135,7 @@ include('../../header.php');
                                         </li>
 
                                         <li>
-                                            <label for='addNullHex'>Add an invisible (null) hex to the grid</label><br>
+                                            <label for='addNullHex'>Add an invisible hex to the grid</label><br>
                                             <input type='button' id='addNullHex' value='Add Null hex' onclick='add_Hex(hexV,null)'>
                                         </li>
 
