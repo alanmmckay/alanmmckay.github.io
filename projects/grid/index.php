@@ -248,6 +248,15 @@ include('../../header.php');
                         grid_control_handler();
                     });
 
+                    window.onscroll = function(){
+                        if(grid.getBoundingClientRect().top < -200){
+                            toggleDialog(false);
+                        }
+                        if(window.outerHeight - grid.getBoundingClientRect().bottom < -200){
+                            toggleDialog(false);
+                        }
+                    }
+
                     var old_screen_height;
                     var grid;
                     var form;
