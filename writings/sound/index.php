@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/writings/sound/';
 
 $title = 'Alan McKay | Writing | The Connectivity of Sound';

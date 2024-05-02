@@ -5,7 +5,7 @@ if(!isset($normalize)){
 }
 
 if(!isset($style)){
-    $style = 'style.css';
+    $style = 'style.css?v=050124';
 }
 
 if(!isset($canonical)){

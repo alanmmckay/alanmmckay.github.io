@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/writings/statement/';
 
 $title = 'Alan McKay | Writing | Statement of Purpose';

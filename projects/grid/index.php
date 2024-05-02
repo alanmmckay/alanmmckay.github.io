@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/projects/grid/';
 
 $title = 'Alan McKay | Project | HexGrid';
@@ -176,7 +172,7 @@ include('../../header.php');
                             </form>
                         </dialog>
                     </div>
-                <script src='hex.js'></script>
+                <script src='hex.js?v=050124'></script>
                 <script>
                     var hexV = grid_producer("myCanvas",35,3,25,25);
 

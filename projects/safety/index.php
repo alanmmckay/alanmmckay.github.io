@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/projects/safety/';
 
 $title = 'Alan McKay | Project | Cycling Safety Database';

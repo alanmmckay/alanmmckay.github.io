@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/writings/describe/';
 
 $title = 'Alan McKay | Writing | Describing Elsewhere';
