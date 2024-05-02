@@ -245,7 +245,7 @@ include('../../header.php');
                     });
 
                     window.onscroll = function(){
-                        if(dialog.style['visibility'] != 'hidden'){
+                        if(modal.open){
                             if(grid.getBoundingClientRect().top < -200){
                                 toggleDialog(false);
                             }
@@ -268,7 +268,7 @@ include('../../header.php');
                         if(grid.getBoundingClientRect().height + form.getBoundingClientRect().height > old_screen_height){
                             form.style['position'] = 'fixed';
                             form.style['top'] = '-1000px';
-                            document.getElementById('controlReveal').style['visibility'] = 'hidden';
+                            document.getElementById('controlReveal').style['visibility'] = 'inherit';
                         }else{
                             document.getElementById('controlReveal').style['visibility'] = 'hidden';
                         }
