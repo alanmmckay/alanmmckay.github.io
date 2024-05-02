@@ -25,6 +25,7 @@ include('../header.php');
                     <img src='../images/description.svg' alt='Icon for blog link'>
                     Projects
                 </a>
+                <a href="https://github.com/alanmmckay/graduate-app" class="writing" target="_blank" rel="noopener noreferrer"> [Coming Soon] Web Development: MVC Content Management System</a>
                 <a href='gallery/' class='writing'> Javascript: Balanced Image Gallery</a>
                 <a href='dataflow/' class='writing'> Research: Privacy and Dataflow</a>
                 <a href='social/' class='writing'> Project: Social Computing</a>
