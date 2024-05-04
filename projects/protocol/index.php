@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/projects/protocol/';
 
 $title = 'Alan McKay | Project | Population Protocol';
@@ -20,6 +16,11 @@ include('../../header.php');
 
 ?>
         <section id='writingsWrapper'>
+            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
+                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; Population Protocol</a>
+                <h1><a href='../'>&nbsp;&gt; Projects</a>
+                <h1><a href='../../'>Home</a></h1>
+            </header>
             <section>
                 <article>
                     <section class='info'>
@@ -74,7 +75,7 @@ include('../../header.php');
                         Consider the following protocol:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:325px;overflow:auto' max-height='325' src='code/01.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:335px;overflow:auto' max-height='335' src='code/01.html'>
                         </iframe>
                     </figure>
                     <p>
@@ -109,7 +110,7 @@ include('../../header.php');
                                 </figcaption>
                                 </figure-->
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:375px;overflow:auto' max-height='375' src='code/02.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:400px;overflow:auto' max-height='400' src='code/02.html'>
                             </iframe>
                         </figure>
                             <p>

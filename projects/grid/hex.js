@@ -523,9 +523,9 @@ function getMousePos(canvas, evt, hexV) {
 
 
 //** Page specific functions **//
-slider_function = function(hexV){
+slider_function = function(hexV,sliderId){
     hexContainer = [];
-    hexV.s = parseInt(document.getElementById("sizeslider").value);
+    hexV.s = parseInt(document.getElementById(sliderId).value);
     hexV.h = (Math.sin((30*(Math.PI/180))) * hexV.s);
     hexV.r = (Math.cos((30*(Math.PI/180))) * hexV.s);
     hexV.a = 2*hexV.r;
@@ -568,13 +568,20 @@ slider_function = function(hexV){
     drawHexes(0,hexV);
 }
 
-
+consolidate_sliders = function(inputSliderId,otherSliderIds){
+    let value = document.getElementById(inputSliderId).value;
+    for(let i = 0; i < otherSliderIds.length; i++){
+        let slider = document.getElementById(otherSliderIds[i]);
+        slider.value = value;
+    }
+    return true;
+}
 
 trace_Adj = function(hexV){
     if(hexV.adjLines === false){
         hexV.adjLines = true;
         document.getElementById("traceAdjOrig").value = "Disable Adjacency Trace";
-    }else{
+    }else{consolidate_sliders("sizeslider2",["sizeslider1"])
         hexV.adjLines = false;
         document.getElementById("traceAdjOrig").value = "Trace Adjacency Lines";
     }

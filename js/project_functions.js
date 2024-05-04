@@ -106,8 +106,12 @@ function setDynamicFigureStyle(event_type, screen_state,element,old_ele_height,c
 // Changes made using this resize method is global for all code blocks being
 //  displayed on a page.
 
-function changeCodeSize(element){
-    var value = element.value;
+function changeCodeSize(element,mouseup=null){
+    if(mouseup != null){
+        var value = Number(mouseup);
+    }else{
+        var value = element.value;
+    }
     var iframes = document.getElementsByTagName('iframe');
     for(let i=0; i<iframes.length; i++){
         var iframe = iframes[i];
@@ -115,24 +119,11 @@ function changeCodeSize(element){
         var pre = iframe_content.getElementsByTagName('pre')[0];
         var code = iframe_content.getElementsByTagName('code')[0];
         code.style['font-size'] = value+'px';
-        // For hidden elements:
-        if(pre.getBoundingClientRect().height == '' || pre.getBoundingClientRect().height == '0'){
-            var new_height = Number(iframe.style['max-height'].substring(0,iframe.style['max-height'].length-2));
-            var max = Number(iframe.getAttribute('max-height'));
-            var ratio = max * ((17-1)-value);
-            ratio = ratio / 17;
-            iframe.style['max-height'] = max - ratio + 'px';
-        }else{
-            var new_height = pre.getBoundingClientRect().height;
-            iframe.style['max-height'] = new_height+((17+1-value+85)*.40)+'px';
-        }
-        //
-        if(pre.style['padding-top'] == '' || pre.style['padding-top'] == '0%'){
-            var padding = 0;
-        }else{
-            var padding = Number(pre.style['padding-top'].substring(0,pre.style['padding-top'].length-1));
-        };
-        pre.style['padding-top'] = (17 + 1 - value)*.40 + '%';
+        var new_height = Number(iframe.style['max-height'].substring(0,iframe.style['max-height'].length-2));
+        var max = Number(iframe.getAttribute('max-height'));
+        var ratio = max * ((17-1)-value);
+        ratio = ratio / 17;
+        iframe.style['max-height'] = max - ratio + 'px';
     }
     slider_containers = document.getElementsByClassName('code-font');
     for(let i=0; i<slider_containers.length; i++){
@@ -181,7 +172,13 @@ function setCodeSizeSliders(){
         input.max = '17';
         input.value = '17';
         input.addEventListener('input',function(){changeCodeSize(this);});
-        input.addEventListener('mouseup',function(){revealCodeSizeSlider(false);});
+        input.addEventListener('mouseup',function(){
+            revealCodeSizeSlider(false);
+            var new_val = Number(input.value);
+            setTimeout(function(){
+                changeCodeSize(this,new_val);
+            }, 1);
+        });
         input.addEventListener('touchend',function(){revealCodeSizeSlider(false);});
 
         div.appendChild(button);

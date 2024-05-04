@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/writings/elsewhere/';
 
 $title = 'Alan McKay | Writing | Experiencing Elsewhere';
@@ -19,8 +15,12 @@ $relative_path = "../../";
 include('../../header.php');
 
 ?>
-
 <section id='writingsWrapper'>
+        <header id='breadNav' class='writingNav' style='overflow:hidden;'>
+            <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; Experiencing Elsewhere</a>
+            <h1><a href='../'>&nbsp;&gt; Writings</a>
+            <h1><a href='../../'>Home</a></h1>
+        </header>
             <section>
                 <article>
                     <header>

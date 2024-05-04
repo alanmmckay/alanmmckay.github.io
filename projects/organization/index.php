@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/projects/organization/';
 
 $title = 'Alan McKay | Teaching | Computer Organization';
@@ -20,6 +16,11 @@ include('../../header.php');
 
 ?>
         <section id='writingsWrapper'>
+            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
+                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; Computer Organization</a>
+                <h1><a href='../'>&nbsp;&gt; Projects</a>
+                <h1><a href='../../'>Home</a></h1>
+            </header>
             <section>
                 <article>
                     <section class='info'>
@@ -104,7 +105,7 @@ include('../../header.php');
                         </p>
                         <hr>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:1245px;overflow:auto' max-height='1245' src='code/01.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:1270px;overflow:auto' max-height='1270' src='code/01.html'>
                             </iframe>
                             <figcaption>
                                 A set of functions which take a list as an input and sums their values. Each function accomplishes the same task. This illustrates that there are many different approaches to solving a given problem - a notion that is not intuitive to one first experiencing the rigidity of programming.
@@ -112,7 +113,7 @@ include('../../header.php');
                         </figure>
 
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:1695px;overflow:auto' max-height='1695' src='code/02.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:1720px;overflow:auto' max-height='1720' src='code/02.html'>
                             </iframe>
                             <figcaption>
                                 Even more functions which take a list as an input and sums their values. This time leveraging the functional paradigm of programming.
@@ -262,7 +263,7 @@ include('../../header.php');
                             </p>
                             <hr>
                                 <figure class='code-figure'>
-                                <iframe frameborder="0" style='width:100%;max-height:840px;overflow:auto' max-height='840' src='code/03.html'>
+                                <iframe frameborder="0" style='width:100%;max-height:850px;overflow:auto' max-height='850' src='code/03.html'>
                                 </iframe>
                                 <!--code>
 <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:70vw;max-width:32em;padding-left:10px;max-height:250px'>

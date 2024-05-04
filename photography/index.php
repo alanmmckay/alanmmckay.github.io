@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../normalize.css';
-
-$style = '../style.css';
-
 $canonical = 'https://alanmckay.blog/photography/';
 
 $title = 'Alan McKay | Photography';
@@ -20,6 +16,10 @@ include('../header.php');
 
 ?>
         <section id='writingsWrapper'>
+            <header id='breadNav' style='overflow:hidden;border-bottom:solid 1px #778088;'>
+                <h1><a href='./' class='currentLink'>&nbsp;&gt; Photography</a>
+                <h1><a href='../'>Home</a></h1>
+            </header>
             <section>
                 <article>
 <?php
@@ -31,7 +31,6 @@ include('../header.php');
     ){
 ?>
                     <section class='info'>
-                        <br>
                         <p>
                             Unless noted otherwise, all photos on this page have been taken by Alan Mckay. A project description of how this gallery works can be found <a href='../projects/gallery/'>here</a>.
                         </p>

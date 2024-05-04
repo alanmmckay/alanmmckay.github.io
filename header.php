@@ -4,10 +4,6 @@ if(!isset($normalize)){
     $normalize = 'normalize.css';
 }
 
-if(!isset($style)){
-    $style = 'style.css';
-}
-
 if(!isset($canonical)){
     $canonical = 'https://alanmckay.blog';
 }
@@ -44,6 +40,10 @@ if(!isset($meta['url'])){
 
 if(!isset($relative_path)){
     $relative_path = "";
+}
+
+if(!isset($style)){
+    $style = $relative_path.'style.css?v=050124';
 }
 
 ?>

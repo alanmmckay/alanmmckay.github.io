@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/projects/safety/';
 
 $title = 'Alan McKay | Project | Cycling Safety Database';
@@ -20,6 +16,11 @@ include('../../header.php');
 
 ?>
         <section id='writingsWrapper' style='min-width:300px;'>
+            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
+                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; Cycling Safety Database</a>
+                <h1><a href='../'>&nbsp;&gt; Projects</a>
+                <h1><a href='../../'>Home</a></h1>
+            </header>
             <section>
                 <article>
                     <section class='info'>
@@ -205,7 +206,7 @@ include('../../header.php');
                         application has a unique client ID. Said application should direct a user to the following URL:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:100px;overflow:auto' max-height='100' src='code/01.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' max-height='125' src='code/01.html'>
                         </iframe>
                     </figure>
                     <p>The bracketed attributes can be described as:</p>
@@ -229,14 +230,14 @@ include('../../header.php');
                         response with an access code to use to query the API. I.e.,
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:190px;overflow:auto' max-height='190' src='code/02.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:215px;overflow:auto' max-height='215' src='code/02.html'>
                         </iframe>
                     </figure>
                     <p>
                         Responds with a user access token to be used via:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:100px;overflow:auto' max-height='100' src='code/03.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' max-height='125' src='code/03.html'>
                         </iframe>
                     </figure>
                     <p>
@@ -255,7 +256,7 @@ include('../../header.php');
                         The python script developed for this project is as follows:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:865px;overflow:auto' max-height='865' src='code/04.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:875px;overflow:auto' max-height='875' src='code/04.html'>
                         </iframe>
                     </figure>
                     <p>
@@ -263,7 +264,7 @@ include('../../header.php');
                         table definition can be described as:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:400px;overflow:auto' max-height='400' src='code/05.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:425px;overflow:auto' max-height='425' src='code/05.html'>
                         </iframe>
                     </figure>
                     <p>
@@ -278,14 +279,14 @@ include('../../header.php');
                         The activities table is created via:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:535px;overflow:auto' max-height='535' src='code/06.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:560px;overflow:auto' max-height='560' src='code/06.html'>
                         </iframe>
                     </figure>
                     <p>
                         And the data insertion query is as follows:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:760px;overflow:auto' max-height='760' src='code/07.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:770px;overflow:auto' max-height='770' src='code/07.html'>
                         </iframe>
                     </figure>
                     <p>
@@ -313,7 +314,7 @@ include('../../header.php');
                         The traffic volume table can be described as:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:350px;overflow:auto' max-height='350' src='code/08.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:375px;overflow:auto' max-height='375' src='code/08.html'>
                         </iframe>
                     </figure>
                     <p>
@@ -337,7 +338,7 @@ include('../../header.php');
                         The following insertion query addresses these two obstacles:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:205px;overflow:auto' max-height='205' src='code/09.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:220px;overflow:auto' max-height='220' src='code/09.html'>
                         </iframe>
                     </figure>
                     <p>
@@ -392,7 +393,7 @@ include('../../header.php');
                         Queries gauging proximity safety can start being employed. I.e.,
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' max-height='125' src='code/10.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:150px;overflow:auto' max-height='150' src='code/10.html'>
                         </iframe>
                     </figure>
                     <h2>Segmentation</h2>
@@ -412,7 +413,7 @@ include('../../header.php');
                         Consider the following query:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' max-height='125' src='code/11.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:150px;overflow:auto' max-height='150' src='code/11.html'>
                         </iframe>
                     </figure>
                     <p>
@@ -421,7 +422,7 @@ include('../../header.php');
                         into individual lines. This can be accomplished with the following query:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' max-height='125' src='code/12.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:150px;overflow:auto' max-height='150' src='code/12.html'>
                         </iframe>
                     </figure>
                     <p>

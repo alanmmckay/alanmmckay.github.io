@@ -9,6 +9,8 @@ This readme file will act as a progress checklist for items I would like to deve
 ## To-do list:
 
 - [ ] Implement a project page discussing research done pertaining to chat-gpt and stack-overflow comparison.
+- [ ] Implement a project page discussing Chrome Extension development.
+- [ ] Implement a project page discussing how to properly include code snippets in a web page.
 - [ ] Implement a project page discussing my experience as a university adjunct teaching data structures.
 - [x] Implement a project page discussing research scaffold of a privacy audit framework.
 - [x] Implement a project page discussing the implementation of the image gallery for `/photography/`.
@@ -27,6 +29,7 @@ This readme file will act as a progress checklist for items I would like to deve
     - [ ] Optimize image placement algorithm.
     - [ ] Fine-tune column readjustment algorithm.
     - [ ] Generate caption study.
-- [ ] Reorganize image placement.
-    - [ ] Change format of images to something more portable (webp).
+- [x] Reorganize image placement.
+    - [x] Change format of images to something more portable (webp).
 - [ ] Add meta tag management for PHP template.
+- [ ] Template code snippets for relevant pages.

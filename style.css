@@ -10,33 +10,52 @@ body{
     min-width:260px;
 }
 
-#homeWrapper header{
+#writingsWrapper #breadNav{
+    width:100%;
+    border-bottom: solid 2px #778088;
+    margin:0;
+    width:90%;
+}
+
+header#breadNav{
     width:75%;
     margin:auto;
     text-align:right;
-    border-bottom: solid 3px;
+    border-bottom: solid 2px;
     color:#778088;
+    padding-bottom:5px;
 }
 
-#homeWrapper header h1{
+header#breadNav h1{
     margin-bottom:0px;
     font-family: Arial, Helvetica, sans-serif;
     font-size:18px;
     font-weight:normal;
     letter-spacing:1px;
     color:#778088;
+    float:right;
 }
 
-#homeWrapper header h1 a{
+header#breadNav h1 a{
     color:#778088;
     text-decoration:none;
     border:0px solid white;
-    transition: border-right 1s;
+    transition: border-right .25s, color .25s;
+    font-weight:normal;
+    font-size:16px;
 }
 
-#homeWrapper header h1 a:hover{
-    border-right:20px solid white;
+header#breadNav h1 a:hover{
+    border-right:5px solid white;
+    color: #535a5f;
 }
+
+header#breadNav h1 a.currentLink:hover{
+    border-right:0px;
+    color:#778088;
+    cursor:default;
+}
+
 #homeWrapper nav{
     width:75%;
     margin:auto;
@@ -65,6 +84,11 @@ body{
 
 #homeWrapper nav a:hover{
     border-left:solid 25px white;
+}
+
+#homeWrapper nav a.currentLink:hover{
+    cursor:default;
+    border-left:0px;
 }
 /*
 #homeWrapper nav a:first-child:hover{
@@ -117,8 +141,8 @@ body{
 #writingsWrapper{
     width:50%;
     margin:auto;
-    display:flex;
-    justify-content:space-around;
+    /*display:flex;
+    justify-content:space-around;*/
 }
 
 #writingsWrapper{
@@ -158,6 +182,7 @@ body{
     text-align:justify;
     line-height:1.55;
     font-size:17px;
+    padding-top:10px;
 }
 
 #writingsWrapper article h1, #writingsWrapper article h2, #writingsWrapper article h3, #writingsWrapper article h4, #writingsWrapper article h5, #writingsWrapper article h6{
@@ -222,26 +247,30 @@ body{
     display:none;
 }
 
-#grid-control h4{
+.grid-control h4{
     margin-bottom:0px;
 }
 
-#grid-control ul{
+.grid-control ul{
     text-align: left;
     margin-top:10px;
 }
 
-#grid-control ul li{
+.grid-control ul li{
     margin:1%;
 }
 
-#grid-control ul li input{
+.grid-control ul li input{
     margin:1%;
 }
 
-#grid-control ul.horizontal{
+.grid-control ul.horizontal{
     width:42%;
     float:left;
+}
+
+dialog{
+    background-color:rgba(255, 255, 255,0.75);
 }
 
 figure.image-collage{
@@ -422,6 +451,11 @@ iframe{
     resize:vertical;
     min-height:85px;
     height:70vh;
+    transition: max-height .5s;
+}
+
+pre:has(code.iframe){
+    padding-top:10px;
 }
 
 code.iframe{
@@ -429,6 +463,7 @@ code.iframe{
     font-size: 17px;
     line-height:1.55;
     color:#5f666d;
+    transition: font-size .25s;
 }
 
 div.code-font button, div.code-font input{
@@ -543,6 +578,9 @@ div.code-font input{
         font-size:65%
     }
 
+    #writingsWrapper #breadNav{
+        width:100%;
+    }
 }
 
 @media screen and (max-width:600px) and (min-width: 481px){
@@ -582,41 +620,62 @@ div.code-font input{
         width:100%;
     }
 
-    #grid-control ul.horizontal{
+    .grid-control ul.horizontal{
         width:45%;
     }
 
-    #grid-control ul li{
+    .grid-control ul li{
         font-size:14px;
     }
 
-    #grid-control ul li input{
+    .grid-control ul li input{
         font-size:12px;
     }
 
 }
 
 @media screen and (max-width:600px){
-    #grid-control ul.horizontal{
+    .grid-control ul.horizontal{
         margin-top:10px;
         margin-bottom:5px;
         display:inline-block;
+        display:flex;
+        flex-wrap: wrap;
+        column-gap:10px;
+        row-gap:10px;
         width:90%;
     }
 
-    #grid-control ul.horizontal li{
+    .grid-control ul.horizontal li{
         display:inline-block;
     }
 
-    #grid-control ul.horizontal li label{
+    .grid-control ul.horizontal li label{
         display:none;
     }
 
-    #grid-control ul.horizontal li input{
+    dialog{
+        width:95%;
+    }
+
+    dialog .grid-control ul.horizontal{
+        display:inherit;
+        width:45%;
+    }
+
+    dialog .grid-control ul.horizontal li{
+        display:inherit;
+    }
+
+    dialog .grid-control ul.horizontal li label{
+        display:inherit;
+    }
+
+    .grid-control ul.horizontal li input{
 
     }
 
-    #grid-control ul li br{
+    .grid-control ul li br{
         display:none;
     }
 
@@ -670,6 +729,10 @@ div.code-font input{
         margin-left:5%;
     }
 
+    #writingsWrapper header#breadNav h1 a{
+        font-size:12px;
+    }
+
     .dynamic-figure-container .dynamic-figure-view{
         width:55%;
     }
@@ -693,6 +756,10 @@ div.code-font input{
 @media screen and (max-width:425px){
     .tech ul{
         text-align:left;
+    }
+
+    .breadCurrent{
+        display:none;
     }
 }
 
