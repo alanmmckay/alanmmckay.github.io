@@ -45,12 +45,100 @@ include('../../header.php');
                         <p>
                             A live version of the script is below. In addition to the buttons included below the visual panel, note that the grid responds to mouse input on both mouse-over and by tapping/clicking on it.
                         </p>
-
+                        <a href='#sandbox'>Jump to Sandbox</a>
                     <hr>
                     </section>
                     <header>
                         <h1>Javascript: Hexagon Grid</h1>
                     </header>
+                    <h2>Drawing Hexagons</h2>
+                    <p>
+                        The assignment which influenced this project was a to find a simple JavaScript web component and include it on a page. This would be an exercise of navigating documentation and an API to massage said plugin into a place; A very simple exercise for someone with a lot of programming experience, but a good exercise for someone new to development.
+                    </p>
+                    <p>
+                        Unfortunately, there did not exist a plugin that satisfied the needs for the page I was constructing. I was looking for a dynamic hexagon grid to represent information pertaining to a tabletop campaign. The solution to this conundrum? Make my own. This would be done using JavaScript's draw methods and the canvas element.
+                    </p>
+                    <p>
+                        Luckily I was taking trigonometry at the time. Generating a hexagon takes three key values. The length of any side - <code>S</code>, of the hexagon; and the two sides of the triangle whose hypotenuse is the length of any side which is drawn at an angle. The side which is adjacent to the 30 degree angle of the triangle is denoted as <code>r</code>, and the opposite side is denoted as </code>h</code>. Figure A represents these values.
+                    </p>
+                    <div class='aside'>
+                        <script src='figure_a.js'></script>
+                        <figure style='width:150px'>
+                            <canvas id='myCanvasA1' width='150' height='130'></canvas>
+                            <figcaption style='width:150px;text-align:center'>Figure A - The three trig variables</figcaption>
+                            <script>
+                                create_fig_a("myCanvasA1");
+                            </script>
+                        </figure>
+                        <figure class='responsive_aside' style='width:inherit;'>
+                            <div style='width:150px;margin:auto;'>
+                                <canvas id='myCanvasA2' width='150' height='130'></canvas>
+                                <figcaption style='width:150px;text-align:center'>Figure A - The three trig variables</figcaption>
+                            </div>
+                            <script>
+                                create_fig_a("myCanvasA2");
+                            </script>
+                        </figure>
+                        <p>
+                            If one knows the value of <code>S</code>, the values of h and r are as follows:
+                            <ul>
+                                <li>
+                                    <code>h = (sin(30)*PI/180)*S</code>
+                                </li>
+                                <li>
+                                    <code>r = (cos(30)*PI/180)*S</code>
+                                </li>
+                            </ul>
+                        </p>
+                        <p style='margin-bottom:0px'>
+                            Once these three values are calculated, drawing a hexagon is a matter of finding a starting point and walking around the perimeter using the three variables and enacting a set of canvas draw methods. This is where two more variables come in to represent the initial point of the perimeter of a given hexagon: some <code>X</code> and <code>y</code> value on two-dimensional plane. Following Figure A, the <code>X</code> and <code>Y</code> values are initially set to 25. This initial value represents the margin between the canvas tag and the hexagon's left-most point.
+                        </p>
+                    </div>
+                    <p>
+                        After the initialization of the X and Y values, the following logic is used to walk around the perimeter:
+                        <ul>
+                            <li>
+                                From the initial vertex, increase the x-coordinate by <code>h</code> and increase the y-coordinate by <code>r</code>. This is the bottom-left vertex.
+                            </li>
+                            <li>
+                                From the bottom-left vertex, increase the x-coordinate's value by <code>s</code>. This is the bottom-right vertex.
+                            </li>
+                            <li>
+                                From the bottom-right vertex, increase <code>X</code> by <code>h</code> and decrease <code>Y</code> by <code>r</code>. This is the middle-right vertex.
+                            </li>
+                            <li>
+                                From the middle-right vertex, decrease <code>X</code> by <code>h</code> and decrease <code>Y</code> by <code>r</code>. This is the top-right vertex.
+                            </li>
+                            <li>
+                                From the top-right vertex, decrease <code>X</code> by <code>S</code> and maintain the value of <code>Y</code>. This is the top left-vertex.
+                            </li>
+                            <li>
+                                From the top-left vertex, decrease <code>X</code> by <code>h</code> and increase <code>Y</code> by <code>r</code>. We are now at the initial vertex.
+                            </li>
+                        </ul>
+                    </p>
+                    <p>
+                        More logic is needed to handle multiple hexagons in terms of where they should lie on a grid. New values need to be established to organize this effort. The hexagons in this script are generated by establishing the amount of columns the grid has. This is another value that can easily be configured arbitrarily. Each subsequent hexagon is set down on a horizontal plane until the amount of hexagons in a row exceeds the amount of columns, wherein the next hexagon is kicked back to the starting x-coordinate and proper calculations are made to set it below the initial hexagon in the previous row. This is done by setting the y-coordinate to <code>2*r</code> below that very hexagon.
+                    </p>
+                    <p>
+                        Note that offset needs to be handled too. Consider the every-other nature of the hex-grid. The first hexagon is drawn, then logic needs to be introduced to draw the next hexagon by shifting the corresponding vertices down by <code>r</code> and over by <code>h + s</code>. The third hexagon needs to have the opposite applied to the y-coordinate to bring it back up to the same plane as the original hexagon. One last contingency needs to be made during this process: whether or not there is an odd or even number columns. This is relevant when a new row of hexagons starts as the previously drawn hexagon may be shifted by his offset.
+                    </p>
+                    <script src='figure_b.js'></script>
+                    <figure style='width:100%;'>
+                        <div style='width:100%;max-width:350px;margin:auto'>
+                            <canvas id='myCanvasB' width='350' height='200' style='width:100%;'></canvas>
+                        </div>
+                        <script>
+                            create_fig_b('myCanvasB');
+                        </script>
+                        <figcaption style='max-width:350px;text-align:right;margin:auto'>
+                            Figure B - Vertex Offset
+                        </figcaption>
+                    </figure>
+                    <p>
+
+                    </p>
+                    <h3 id='sandbox'> Sandbox: </h3>
                     <div id='gridContent'>
                         <figure style='border:solid #5F666D 1px;overflow:auto;clear:both'>
                             <canvas id='myCanvas' width='500' height='275' style='width:100%;float:left;clear:right;'></canvas>
@@ -223,7 +311,6 @@ include('../../header.php');
                             }
                         }else
                         if(!growing && !shrinking){
-                            console.log('yes');
                             if(grid.getBoundingClientRect().height + form.getBoundingClientRect().height > window.outerHeight){
                                 form.style['position'] = 'fixed';
                                 form.style['top'] = '-1000px';
