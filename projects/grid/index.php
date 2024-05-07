@@ -171,10 +171,39 @@ include('../../header.php');
                         This is a bit messy. It's good to look back on old work and reflect how one has progressed in experience and knowledge. Using a strictly object oriented paradigm of programming would encapsulate these ideas much more cleanly. Regardless, I will maintain that this is very advanced for someone new to programming - having only a single month of experience in JavaScript within the classroom setting. The inclusion of code snippets will cease for the remainder of this writing for this reason.
                     </p>
                     <h2>User Interaction</h2>
-                    <figure style='overflow:auto;clear:both'>
-                        <canvas id='figure_c' width='175' height='175' style='float:left;clear:right;'></canvas>
-                    </figure>
-
+                    <p>
+                        What's been discussed so far is the general logic to draw a hexagon and then to draw a grid of hexagons. This is done by storing vertex information for each hexagon in an array and then parsing through the array for each set of vertices while enacting a set of draw methods from the canvas API.
+                    </p>
+                    <p>
+                        The fact a grid can adapt to arbitrary size values for the hexagons and column quantities for the grid isn't solely what makes it dynamic. It needs to react to user input. A grid in this context exists to display and return relevant information; the original goal of having a campaign map for a tabletop game would imply that selecting a grid should return some amount of geographic data.
+                    </p>
+                    <p>
+                        Reaction to input implies a set of event handlers. The term "selecting" should key us into the usage of the <code>mousedown</code> event. What's also at play is a change of rendering whilst navigating the mouse through the grid to a target of for selection. The grid informs the user which hexagon <i>will be</i> selected based on their mouse position, as opposed to what <i>has been</i> selected. This is accomplished through the <code>mousemove</code> event.
+                    </p>
+                    <p>
+                        Both event handlers for these two events have a general common principal. The event is attached to the html canvas element in which the grid exists. When the event is fired, the coordinates of the mouse position are retrieved from the event and then normalized with respect to the position of the canvas element and the size of the element as it currently exists in the <code>DOM</code>. These normalized mouse coordinate values are then passed to <code>drawHexes</code> along with a switch condition to allow it to know which event type should be acted on.
+                    </p>
+                    <p>
+                        Before <code>drawHexes</code> is called in this context, the entire canvas is cleared such that it can be redrawn. In the case where the <code>mousedown</code> event was triggered, the fill color of the hexagon being selected will differ from the rest as the canvas is being redrawn. In the case where the <code>mousemove</code> event was triggered, the border of the hexagon will differ.
+                    </p>
+                    <p>
+                        Both these cases take advantage of the normalized mouse coordinates being passed. Recall that the master record of a grid contains two arrays of vertex data: one which contains the side vertices of a hexagon and another that contains the points of origin. A method called <code>getselectedHex</code> was developed to leverage the array that houses these points of origin while comparing them to these normalized mouse coordinates.
+                    </p>
+                    <div class='aside'>
+                        <figure style='overflow:auto;clear:both;width:175px'>
+                            <canvas id='figure_ca' width='175' height='175' style='float:left;clear:right;width:100%;'></canvas>
+                            <figcaption style='width:100%;text-align:left;margin:auto'>Figure C - Mouse-over distance formula illustration</figcaption>
+                        </figure>
+                        <p style='margin-top:0px;'>
+                            What is the comparison being made in <code>getselectedHex</code>? This method runs through the points of origin applying the distance formula between each point and the normalized mouse coordinates whilst maintaining a minimum value along with the point of origin that generated it. After finding the minimum, the relevant point is annotated within the origin array. Recall that this array is an associative array where each key is a numeric value - making access for this annotation trivial.
+                        </p>
+                        <figure class='responsive_aside' style='width:inherit;'>
+                            <div style='width:175px;margin:auto;'>
+                                <canvas id='figure_cb' width='175' height='175'></canvas>
+                            </div>
+                            <figcaption style='width:95%;text-align:center'>Figure C - Mouse-over distance formula illustration</figcaption>
+                        </figure>
+                    </div>
                     <figure style='overflow:auto;clear:both'>
                         <canvas id='figure_d' width='275' height='275' style='float:left;clear:right;'></canvas>
                     </figure>
@@ -304,13 +333,21 @@ include('../../header.php');
                 <script src='hex.js?v=050124'></script>
 
                 <script>
-                    var hexV1 = grid_producer("figure_c",60,1,25,25);
+                    var hexV1a = grid_producer("figure_ca",60,1,25,25);
+                    var hexContainer1a = [];
+                        hexContainer1a[0] = new hex(hexV1a,"tile1");
+                        drawHexes(0,hexV1a);
+                        trace_Adj(hexV1a);
+                        trace_Orig(hexV1a);
+                </script>
 
-                    var hexContainer1 = [];
-                        hexContainer1[0] = new hex(hexV1,"tile1");
-                        drawHexes(0,hexV1);
-                        trace_Adj(hexV1);
-                        trace_Orig(hexV1);
+                <script>
+                    var hexV1b = grid_producer("figure_cb",60,1,25,25);
+                    var hexContainer1b = [];
+                        hexContainer1b[0] = new hex(hexV1b,"tile1");
+                        drawHexes(0,hexV1b);
+                        trace_Adj(hexV1b);
+                        trace_Orig(hexV1b);
                 </script>
 
                  <script>
