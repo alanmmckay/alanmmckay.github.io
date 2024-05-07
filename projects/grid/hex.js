@@ -577,23 +577,31 @@ consolidate_sliders = function(inputSliderId,otherSliderIds){
     return true;
 }
 
-trace_Adj = function(hexV){
+trace_Adj = function(hexV,button_id = null){
     if(hexV.adjLines === false){
         hexV.adjLines = true;
-        document.getElementById("traceAdjOrig").value = "Disable Adjacency Trace";
-    }else{consolidate_sliders("sizeslider2",["sizeslider1"])
+        if(button_id){
+            document.getElementById(button_id).value = "Disable Adjacency Trace";
+        }
+    }else{
         hexV.adjLines = false;
-        document.getElementById("traceAdjOrig").value = "Trace Adjacency Lines";
+        if(button_id){
+            document.getElementById(button_id).value = "Trace Adjacency Lines";
+        }
     }
 }
 
-trace_Orig = function(hexV){
+trace_Orig = function(hexV,button_id = null){
     if(hexV.hexLines === false){
         hexV.hexLines = true;
-        document.getElementById("traceOrig").value = 'Disable Origin Trace';
+        if(button_id){
+            document.getElementById(button_id).value = 'Disable Origin Trace';
+        }
     }else{
         hexV.hexLines = false;
-        document.getElementById("traceOrig").value = 'Trace Origin Lines';
+        if(button_id){
+            document.getElementById(button_id).value = 'Trace Origin Lines';
+        }
     }
 }
 
