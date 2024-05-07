@@ -1,6 +1,6 @@
 
 grid_producer = function(canvas_id, s, cols, x_margin, y_margin){
-    hexV = [];//this array holds all the variables and values associated with this script.
+    let hexV = [];//this array holds all the variables and values associated with this script.
     //*** Putting everything in the above hex array allows helps prevent any other script variables from having conflict with this script. This also makes it easy to include multiples of this file within a web page to house multiple hexagonal grids. All that's required is to use a search and replace function in a text editor to replace the string "hexV." with whatever arbitrary name you want to use for the object ***//
 
     hexV.canvas = document.getElementById(canvas_id);
