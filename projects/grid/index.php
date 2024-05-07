@@ -136,8 +136,41 @@ include('../../header.php');
                         </figcaption>
                     </figure>
                     <p>
-
+                        This script was developed during a time before I knew what object oriented design was. A look at the source code will make this apparent. Interestingly, the prototyping nature of JavaScript provided a scaffold for me to implicitly use some of the ideas associated with object oriented design.
                     </p>
+                    <p>
+                        A minor effort was taken to refactor this code to allow it to easily be plugged into this very web page. This refactoring essentially encapsulates all the logic into a singular grid object. A grid object in this context is composed of a set of hexagons. Indeed, drilling through the logic of the source script will reveal a quasi-constructor to produce a hexagon:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:360px;overflow:auto' max-height='360' src='code/01.html'>
+                        </iframe>
+                    </figure>
+                    <p>
+                        Here, naivety can be gleaned. The parameter labeled <code>hexV</code> can be seen as a master record of values associated with the grid object in question. This was my way of of maintaining access to these set of values to make the decisions required to generating the relevant values of a hexagon. Indeed, before the minor set of refactors mentioned in the paragraph prior, this information was stored as a global. If I wanted to have multiple grids in the same page, multiple copies of the script's <code>.js</code> file would need to be named and the <code>hexV</code> value be renamed to something unique. A clear lack of understanding of what the <code>this</code> keyword means.
+                    </p>
+                    <p>
+                        The lack of understanding of the <code>this</code> keyword is more obviously realized in the last two statements of this function. The set of values calculated here are pushed into arrays which maintain the data. Within these arrays it's assumed that the first entry is related to the first hexagon of the grid, the second entry is related to the second hexagon of the grid, etc. Various other methods contained in this grid will operate upon these values and parse through these arrays under such an assumption.
+                    </p>
+                    <p>
+                        What exactly are these set of values? The call to hex_handler() gains access to the set of values previously discussed. It allows access to where the next point of origin for a hexagon lies. From this point of origin, the set of vertices associated with this new hexagon are computed and returned as an associative array:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:930px;overflow:auto' max-height='930' src='code/02.html'>
+                        </iframe>
+                    </figure>
+                    <p>
+                        This is where the aforementioned walk around the perimeter of a hexagon exists. The initial call to grid_handler essentially primes the X and Y coordinate previously discussed; it contains the logic that knocks into place the vertex offset described in Figure B and makes adjustments to these values dependent on the amount of columns contained in a grid.
+                    </p>
+                    <p>
+                        The key takeaway to understanding how this script works is that there exists a master array of data which contains a set of arrays and attributes. The nested arrays contain information relevant to a given layering of a function call. Looking at the function which this set of function calls are instantiated, we see two primary arrays being filled within the master array - <code>hexV.grid</code> and <code>hexV.origin</code>. The center points of each vertex get placed within the origin array. The side vertices get placed into the grid array. These two arrays will have the same length as far as this hex method is concerned. These two arrays will be operated upon concurrently.
+                    </p>
+                    <p>
+                        In terms of drawing the hexagons to a canvas element, this happens within a method called <code>drawHexes</code>. This method primarily iterates through the associative arrays contained in <code>hexV.grid</code> and enacts the relevant draw method calls from the canvas API; the associative arrays that contain the side vertices for each hexagon within the grid which was determined by both the <code>hex_handler</code> and <code>grid_handler</code> oracles.
+                    </p>
+                    <p>
+                        This is a bit messy. It's good to look back on old work and reflect how one has progressed in experience and knowledge. Using a strictly object oriented paradigm of programming would encapsulate these ideas much more cleanly. Regardless, I will maintain that this is very advanced for someone new to programming - having only a single month of experience in JavaScript within the classroom setting. The inclusion of code snippets will cease for the remainder of this writing for this reason.
+                    </p>
+                    <h2>User Interaction</h2>
                     <h3 id='sandbox'> Sandbox: </h3>
                     <div id='gridContent'>
                         <figure style='border:solid #5F666D 1px;overflow:auto;clear:both'>
@@ -334,17 +367,6 @@ include('../../header.php');
                         grid_control_handler();
                     });
 
-                    window.onscroll = function(){
-                        if(modal.open){
-                            if(grid.getBoundingClientRect().top < -200){
-                                toggleDialog(false);
-                            }
-                            if(window.outerHeight - grid.getBoundingClientRect().bottom < -200){
-                                toggleDialog(false);
-                            }
-                        }
-                    }
-
                     var old_screen_height;
                     var grid;
                     var form;
@@ -361,6 +383,17 @@ include('../../header.php');
                             document.getElementById('controlReveal').style['visibility'] = 'inherit';
                         }else{
                             document.getElementById('controlReveal').style['visibility'] = 'hidden';
+                        }
+
+                        window.onscroll = function(){
+                            if(modal.open){
+                                if(grid.getBoundingClientRect().top < -200){
+                                    toggleDialog(false);
+                                }
+                                if(window.outerHeight - grid.getBoundingClientRect().bottom < -200){
+                                    toggleDialog(false);
+                                }
+                            }
                         }
                     });
                 </script>
@@ -385,5 +418,9 @@ include('../../header.php');
                 </nav>
             </section>
         </section>
+        <script src='../../js/project_functions.js'></script>
+        <script>
+            setCodeSizeSliders();
+        </script>
     </body>
 </html>
