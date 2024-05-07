@@ -34,13 +34,13 @@ include('../../header.php');
                             Fall 2016 had me taking a Web Scripting course. The only scripting programming language I had prior experience with was PhP. This course would introduce Javascript. Web Scripting had us implementing simple things such as client-side form validation or simple canvas animations.
                         </p>
                         <p>
-                            It was during this course that I started and finished a project that I am still proud of to this day. It was the first time I dug real deep to become intimate with a language while applying some other facet of my studies - The functions learned through the trigonometry course I was also taking. These functions provided the framework to scaffold atop to the task.
+                            It was during this course that I started and finished a project that I am still proud of to this day. It was the first time I dug real deep to become intimate with a language while applying some other facet of my studies - The trigonometric functions learned through a math course that I was also attending at the time. These functions provided the framework to scaffold atop.
                         </p>
                         <p>
-                            This project went beyond the expectations of a student of Web Scripting. It produced something tangible in terms representing data in a dynamic way. It involved implementing a lot of components that would in turn produce more components to build the larger framework.
+                            This project went beyond the expectations of a student in the Web Scripting course. It produced something tangible in terms representing data in a dynamic way. It involved implementing a lot of components that would produce more components to build the larger framework.
                         </p>
                         <p>
-                            What is this project? It is a dynamically generated hexagonal grid which can be interacted with via mouse input. Think of the layer on the map of the user-interface for a video game like Civilization. The end result of my efforts cumulated in a Javascript file getting close to 800 lines of code - something significant for an Alan who only had one semester prior of proper programming!
+                            What is this project? It is a dynamically generated hexagonal grid which can be interacted with via mouse input. Think of the layer on the map of a user-interface for a video game like Civilization. The end result of my efforts cumulated in a Javascript file getting close to 800 lines of code - something significant for an Alan who only had one semester prior of proper programming!
                         </p>
                         <p>
                             A live version of the script is below. In addition to the buttons included below the visual panel, note that the grid responds to mouse input on both mouse-over and by tapping/clicking on it.
@@ -53,10 +53,10 @@ include('../../header.php');
                     </header>
                     <h2>Drawing Hexagons</h2>
                     <p>
-                        The assignment which influenced this project was a to find a simple JavaScript web component and include it on a page. This would be an exercise of navigating documentation and an API to massage said plugin into a place; A very simple exercise for someone with a lot of programming experience, but a good exercise for someone new to development.
+                        The assignment which influenced this project was a to find a simple JavaScript web component and include it on a page. This would be an exercise of navigating documentation and an API to massage said plugin into a place; A very simple exercise for someone with a lot of programming experience, but a bit more complex for someone new to development in general.
                     </p>
                     <p>
-                        Unfortunately, there did not exist a plugin that satisfied the needs for the page I was constructing. I was looking for a dynamic hexagon grid to represent information pertaining to a tabletop campaign. The solution to this conundrum? Make my own. This would be done using JavaScript's draw methods and the canvas element.
+                        Unfortunately, there did not exist a plugin that satisfied the needs for the page I was constructing. I was looking for a dynamic hexagon grid to represent information pertaining to a tabletop campaign. The solution to this conundrum? Make my own. This would be done using JavaScript's canvas API.
                     </p>
                     <p>
                         Luckily I was taking trigonometry at the time. Generating a hexagon takes three key values. The length of any side - <code>S</code>, of the hexagon; and the two sides of the triangle whose hypotenuse is the length of any side which is drawn at an angle. The side which is adjacent to the 30 degree angle of the triangle is denoted as <code>r</code>, and the opposite side is denoted as </code>h</code>. Figure A represents these values.
@@ -80,7 +80,7 @@ include('../../header.php');
                             </script>
                         </figure>
                         <p>
-                            If one knows the value of <code>S</code>, the values of h and r are as follows:
+                            If one knows the value of <code>S</code>, the values of <code>h</code> and <code>r</code> are as follows:
                             <ul>
                                 <li>
                                     <code>h = (sin(30)*PI/180)*S</code>
@@ -91,11 +91,11 @@ include('../../header.php');
                             </ul>
                         </p>
                         <p style='margin-bottom:0px'>
-                            Once these three values are calculated, drawing a hexagon is a matter of finding a starting point and walking around the perimeter using the three variables and enacting a set of canvas draw methods. This is where two more variables come in to represent the initial point of the perimeter of a given hexagon: some <code>X</code> and <code>y</code> value on two-dimensional plane. Following Figure A, the <code>X</code> and <code>Y</code> values are initially set to 25. This initial value represents the margin between the canvas tag and the hexagon's left-most point.
+                            Once these three values are calculated, drawing a hexagon is a matter of finding a starting point and walking around the perimeter using the three variables and enacting a set of canvas draw methods. This is where two more variables come in to represent the initial point of the perimeter of a given hexagon: some <code>X</code> and <code>Y</code> value on the two-dimensional plane. Following Figure A, the <code>X</code> and <code>Y</code> values are initially set to 25. This initial value represents the margin between the canvas tag and the hexagon's left-most point.
                         </p>
                     </div>
                     <p>
-                        After the initialization of the X and Y values, the following logic is used to walk around the perimeter:
+                        After the initialization of the <code>X</code> and <code>Y</code> values, the following logic is used to walk around the perimeter:
                         <ul>
                             <li>
                                 From the initial vertex, increase the x-coordinate by <code>h</code> and increase the y-coordinate by <code>r</code>. This is the bottom-left vertex.
@@ -118,10 +118,10 @@ include('../../header.php');
                         </ul>
                     </p>
                     <p>
-                        More logic is needed to handle multiple hexagons in terms of where they should lie on a grid. New values need to be established to organize this effort. The hexagons in this script are generated by establishing the amount of columns the grid has. This is another value that can easily be configured arbitrarily. Each subsequent hexagon is set down on a horizontal plane until the amount of hexagons in a row exceeds the amount of columns, wherein the next hexagon is kicked back to the starting x-coordinate and proper calculations are made to set it below the initial hexagon in the previous row. This is done by setting the y-coordinate to <code>2*r</code> below that very hexagon.
+                        More logic is needed to handle multiple hexagons to decide where they should lie on a grid. New values need to be established to organize this effort. The hexagons in this script are generated by establishing the amount of columns the grid has. Each subsequent hexagon is set down on a horizontal plane until the amount of hexagons in a row exceeds the amount of columns, wherein the next hexagon is kicked back to the starting x-coordinate and proper calculations are made to set it below the initial hexagon in the previous row. This is done by setting the y-coordinate to <code>2*r</code> below that very hexagon.
                     </p>
                     <p>
-                        Note that offset needs to be handled too. Consider the every-other nature of the hex-grid. The first hexagon is drawn, then logic needs to be introduced to draw the next hexagon by shifting the corresponding vertices down by <code>r</code> and over by <code>h + s</code>. The third hexagon needs to have the opposite applied to the y-coordinate to bring it back up to the same plane as the original hexagon. One last contingency needs to be made during this process: whether or not there is an odd or even number columns. This is relevant when a new row of hexagons starts as the previously drawn hexagon may be shifted by his offset.
+                        Note that offset needs to be handled too. Consider the every-other nature of the hex-grid. The first hexagon is drawn, then logic needs to be introduced to draw the next hexagon by shifting the corresponding vertices down by <code>r</code> and over by <code>h + s</code>. The third hexagon needs to have the opposite applied to the y-coordinate to bring it back up to the same plane as the original hexagon. One last contingency needs to be made during this process: to check whether or not there is an odd or even number columns. This is relevant when a new row of hexagons starts as the previously drawn hexagon may be shifted by his offset.
                     </p>
                     <script src='figure_b.js'></script>
                     <figure style='width:100%;'>
@@ -136,33 +136,33 @@ include('../../header.php');
                         </figcaption>
                     </figure>
                     <p>
-                        This script was developed during a time before I knew what object oriented design was. A look at the source code will make this apparent. Interestingly, the prototyping nature of JavaScript provided a scaffold for me to implicitly use some of the ideas associated with object oriented design.
+                        This script was developed during a time before I knew what object oriented design was. A look at the source code will make this apparent. Interestingly, the prototyping nature of JavaScript provided a scaffold for me to implicitly use some of the ideas associated with this paradigm.
                     </p>
                     <p>
-                        A minor effort was taken to refactor this code to allow it to easily be plugged into this very web page. This refactoring essentially encapsulates all the logic into a singular grid object. A grid object in this context is composed of a set of hexagons. Indeed, drilling through the logic of the source script will reveal a quasi-constructor to produce a hexagon:
+                        Minor effort was taken to refactor the code to allow it to easily be plugged into this very web page. This refactoring essentially encapsulates all the logic into a singular grid object. A grid object in this context is composed of a set of hexagons. Indeed, drilling through the logic of the source script will reveal a quasi-constructor to produce a hexagon:
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;max-height:360px;overflow:auto' max-height='360' src='code/01.html'>
                         </iframe>
                     </figure>
                     <p>
-                        Here, naivety can be gleaned. The parameter labeled <code>hexV</code> can be seen as a master record of values associated with the grid object in question. This was my way of of maintaining access to these set of values to make the decisions required to generating the relevant values of a hexagon. Indeed, before the minor set of refactors mentioned in the paragraph prior, this information was stored as a global. If I wanted to have multiple grids in the same page, multiple copies of the script's <code>.js</code> file would need to be named and the <code>hexV</code> value be renamed to something unique. A clear lack of understanding of what the <code>this</code> keyword means.
+                        Here, naivety can be gleaned. The parameter labeled <code>hexV</code> can be seen as a master record of values associated with the grid object in question. This was my way of of maintaining access to these set of values to help make the decisions required for generating the relevant values of a hexagon. Indeed, (before the minor set of refactors mentioned in the paragraph prior), this information was stored as a global. If I wanted to have multiple grids in the same page, multiple copies of the script's <code>.js</code> file would need to be named and the <code>hexV</code> value be renamed to something unique. A clear lack of understanding of what the <code>this</code> keyword means. This was changed through the minor refactor.
                     </p>
                     <p>
-                        The lack of understanding of the <code>this</code> keyword is more obviously realized in the last two statements of this function. The set of values calculated here are pushed into arrays which maintain the data. Within these arrays it's assumed that the first entry is related to the first hexagon of the grid, the second entry is related to the second hexagon of the grid, etc. Various other methods contained in this grid will operate upon these values and parse through these arrays under such an assumption.
+                        The lack of understanding of the <code>this</code> keyword is more obviously realized in the last two statements of the above function. The set of values calculated here are pushed into arrays which maintain the data. Within these arrays it's assumed that the first entry is related to the first hexagon of the grid, the second entry is related to the second hexagon of the grid, etc. Various other methods contained in this grid will operate upon these values and parse through these arrays under such an assumption.
                     </p>
                     <p>
-                        What exactly are these set of values? The call to hex_handler() gains access to the set of values previously discussed. It allows access to where the next point of origin for a hexagon lies. From this point of origin, the set of vertices associated with this new hexagon are computed and returned as an associative array:
+                        What exactly are these set of values? The call to <code>hex_handler()</code> gains access to the set of values previously discussed. It allows access to the next point of origin for the next hexagon to be placed in a grid. From this point of origin, the set of vertices associated with this new hexagon are computed and returned as an associative array:
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;max-height:930px;overflow:auto' max-height='930' src='code/02.html'>
                         </iframe>
                     </figure>
                     <p>
-                        This is where the aforementioned walk around the perimeter of a hexagon exists. The initial call to grid_handler essentially primes the X and Y coordinate previously discussed; it contains the logic that knocks into place the vertex offset described in Figure B and makes adjustments to these values dependent on the amount of columns contained in a grid.
+                        This is where the aforementioned walk around the perimeter of a hexagon exists. The initial call to <code>grid_handler</code> essentially primes the X and Y coordinate previously discussed; it contains the logic that knocks into place the vertex offset described in Figure B and then makes adjustments to these values dependent on the amount of columns contained in a grid.
                     </p>
                     <p>
-                        The key takeaway to understanding how this script works is that there exists a master array of data which contains a set of arrays and attributes. The nested arrays contain information relevant to a given layering of a function call. Looking at the function which this set of function calls are instantiated, we see two primary arrays being filled within the master array - <code>hexV.grid</code> and <code>hexV.origin</code>. The center points of each vertex get placed within the origin array. The side vertices get placed into the grid array. These two arrays will have the same length as far as this hex method is concerned. These two arrays will be operated upon concurrently.
+                        The key takeaway to understanding how this script works is that there exists a master array of data which contains a set of arrays and attributes. The nested arrays contain information relevant to a given layering of a function call. Looking at the function which this recursive pathis instantiated, we see two primary arrays being filled within the master array - <code>hexV.grid</code> and <code>hexV.origin</code>. The center points of each vertex get placed within the origin array. The side vertices get placed into the grid array. These two arrays will have the same length as far as this hex method is concerned. These two arrays will be operated upon concurrently.
                     </p>
                     <p>
                         In terms of drawing the hexagons to a canvas element, this happens within a method called <code>drawHexes</code>. This method primarily iterates through the associative arrays contained in <code>hexV.grid</code> and enacts the relevant draw method calls from the canvas API; the associative arrays that contain the side vertices for each hexagon within the grid which was determined by both the <code>hex_handler</code> and <code>grid_handler</code> oracles.
