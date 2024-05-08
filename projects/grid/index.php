@@ -198,8 +198,11 @@ include('../../header.php');
                             <figcaption style='width:95%;text-align:center'>Figure C - Mouse-over distance formula illustration</figcaption>
                         </figure>
                     </div>
-                    <figure style='overflow:auto;clear:both'>
-                        <canvas id='figure_d' width='275' height='275' style='float:left;clear:right;'></canvas>
+                    <figure style='overflow:auto;clear:both;max-width:300px;'>
+                        <div style='width:100%;max-width:275px;margin:auto'>
+                            <canvas id='figure_d' width='275' height='275' style='float:left;clear:right;width:100%'></canvas>
+                        </div>
+                        <figcaption id='fig_d_output' style='max-width:275px;width:95%;text-align:right;'>Figure D - Select a hex...</figcaption>
                     </figure>
 
                     <h3 id='sandbox'> Sandbox: </h3>
@@ -355,6 +358,25 @@ include('../../header.php');
                         }
                     }
                     drawHexes(0,hexV2);
+
+                    hexV2.canvas.removeEventListener("mousedown", hexV2.defaultSelectHandler);
+                    hexV2.canvas.addEventListener('mousedown', function(evt){
+                        for (i = 0; i < hexV2.grid.length; i++){
+                            this.vertices = hexV2.grid[i];//resume
+                            this.selectedHex = getselectedHex(hexV2);
+                            if(hexV2.origin[i] === this.selectedHex.selected && hexV2.origin[i].type !== null){
+                                if(hexV2.grid['selected'] === this.vertices){
+                                    document.getElementById("fig_d_output").innerHTML = 'Figure D - Hex Name... ';
+                                    hexV2.grid['selected'] = null;
+                                }else{
+                                    document.getElementById("fig_d_output").innerHTML = 'Figure D - Hex Name: '+hexV2.origin[i].name;
+                                    hexV2.grid['selected'] = this.vertices;
+                                }
+                                drawHexes(1,hexV2);
+                            }
+                        }
+                    }, false);
+
                 </script>
 
                 <script>
