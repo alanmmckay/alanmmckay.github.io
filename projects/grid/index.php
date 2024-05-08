@@ -66,18 +66,14 @@ include('../../header.php');
                         <figure style='width:150px'>
                             <canvas id='myCanvasA1' width='150' height='130'></canvas>
                             <figcaption style='width:150px;text-align:center'>Figure A - The three trig variables</figcaption>
-                            <script>
-                                create_fig_a("myCanvasA1");
-                            </script>
+                            <script>create_fig_a("myCanvasA1");</script>
                         </figure>
                         <figure class='responsive_aside' style='width:inherit;'>
                             <div style='width:150px;margin:auto;'>
                                 <canvas id='myCanvasA2' width='150' height='130'></canvas>
                                 <figcaption style='width:150px;text-align:center'>Figure A - The three trig variables</figcaption>
                             </div>
-                            <script>
-                                create_fig_a("myCanvasA2");
-                            </script>
+                            <script>create_fig_a("myCanvasA2");</script>
                         </figure>
                         <p>
                             If one knows the value of <code>S</code>, the values of <code>h</code> and <code>r</code> are as follows:
@@ -123,14 +119,12 @@ include('../../header.php');
                     <p>
                         Note that offset needs to be handled too. Consider the every-other nature of the hex-grid. The first hexagon is drawn, then logic needs to be introduced to draw the next hexagon by shifting the corresponding vertices down by <code>r</code> and over by <code>h + s</code>. The third hexagon needs to have the opposite applied to the y-coordinate to bring it back up to the same plane as the original hexagon. One last contingency needs to be made during this process: to check whether or not there is an odd or even number columns. This is relevant when a new row of hexagons starts as the previously drawn hexagon may be shifted by his offset.
                     </p>
-                    <script src='figure_b.js'></script>
                     <figure style='width:100%;'>
                         <div style='width:100%;max-width:350px;margin:auto'>
                             <canvas id='myCanvasB' width='350' height='200' style='width:100%;'></canvas>
                         </div>
-                        <script>
-                            create_fig_b('myCanvasB');
-                        </script>
+                        <script src='figure_b.js'></script>
+                        <script>create_fig_b('myCanvasB');</script>
                         <figcaption style='max-width:350px;text-align:right;margin:auto'>
                             Figure B - Vertex Offset
                         </figcaption>
