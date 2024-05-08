@@ -63,7 +63,7 @@ grid_producer = function(canvas_id, s, cols, x_margin, y_margin){
         drawHexes(0,hexV);
     }, false);
 
-    hexV.deafultSelectHandler = function(evt){
+    hexV.defaultSelectHandler = function(evt){
         for (i = 0; i < hexV.grid.length; i++){
             this.vertices = hexV.grid[i];//resume
             this.selectedHex = getselectedHex(hexV);
