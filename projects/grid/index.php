@@ -180,7 +180,7 @@ include('../../header.php');
                     <p>
                         Before <code>drawHexes</code> is called in this context, the entire canvas is cleared such that it can be redrawn. In the case where the <code>mousedown</code> event was triggered, the fill color of the hexagon being selected will differ from the rest as the canvas is being redrawn. In the case where the <code>mousemove</code> event was triggered, the border of the hexagon will differ.
                     </p>
-                    <p>
+                    <p style='margin-top:0px;'>
                         Both these cases take advantage of the normalized mouse coordinates being passed. Recall that the master record of a grid contains two arrays of vertex data: one which contains the side vertices of a hexagon and another that contains the points of origin. A method called <code>getselectedHex</code> was developed to leverage the array that houses these points of origin while comparing them to these normalized mouse coordinates.
                     </p>
                     <div class='aside'>
@@ -189,7 +189,10 @@ include('../../header.php');
                             <figcaption style='width:100%;text-align:left;margin:auto'>Figure C - Mouse-over distance formula illustration</figcaption>
                         </figure>
                         <p style='margin-top:0px;'>
-                            What is the comparison being made in <code>getselectedHex</code>? This method runs through the points of origin applying the distance formula between each point and the normalized mouse coordinates whilst maintaining a minimum value along with the point of origin that generated it. After finding the minimum, the relevant point is annotated within the origin array. Recall that this array is an associative array where each key is a numeric value - making access for this annotation trivial.
+                            What is the comparison being made in <code>getselectedHex</code>? This method runs through the points of origin applying the distance formula between each point and the normalized mouse coordinates whilst maintaining a minimum value along with the point of origin that generated it. After finding the minimum, the relevant point is annotated for the sake of usage in <code>drawHexes</code>.
+                        </p>
+                        <p>
+                            Thus far it's been established that to draw a hexagon requires a set of vertices. To draw a set of hexagons requires a mechanism to decide where the center point of a hexagon lies. To know which hexagon an entity is closest to requires evaluating the distance formula between each of these points of origin and the entity.* One crucial piece of logic remains: knowing when the cursor is <i>not</i> over any of the hexagons.
                         </p>
                         <figure class='responsive_aside' style='width:inherit;'>
                             <div style='width:175px;margin:auto;'>
@@ -198,14 +201,84 @@ include('../../header.php');
                             <figcaption style='width:95%;text-align:center'>Figure C - Mouse-over distance formula illustration</figcaption>
                         </figure>
                     </div>
-                    <figure style='overflow:auto;clear:both;max-width:300px;'>
-                        <div style='width:100%;max-width:275px;margin:auto'>
-                            <canvas id='figure_d' width='275' height='275' style='float:left;clear:right;width:100%'></canvas>
-                        </div>
-                        <figcaption id='fig_d_output' style='max-width:275px;width:95%;text-align:right;'>Figure D - Select a hex...</figcaption>
-                    </figure>
-
+                    <p style='margin-top:0px;'>
+                        Consider figure C (above). This figure is an instance of the hexagon grid. It has a hexagon count of 1. Whilst mousing over figure C, seven lines are drawn from seven points of origin to the mouse cursor; one line associated with the hexagon's point of origin and the other six associated with some point of origin outside the boundaries of a given side of the hexagon. The general algorithm described thus far accounts for comparing points of origins with respect to some instantiated hexagon, but the boundary of the grid itself needs to be considered. If the boundary of the grid is not considered, then moving the mouse into the white space that exists between a border hexagon and the canvas element will not remove the highlight of the previous hexagon that was hovered over. This is is behavior is shown in figure D (below).
+                    </p>
+                    <div class='aside'>
+                        <figure style='overflow:auto;clear:both;width:175px'>
+                            <canvas id='figure_da' width='175' height='175' style='float:left;clear:right;width:100%;'></canvas>
+                            <figcaption style='width:100%;text-align:left;margin:auto'>Figure D - Figure C without adjacent points of origin</figcaption>
+                        </figure>
+                        <figure class='responsive_aside' style='width:inherit;'>
+                            <div style='width:175px;margin:auto;'>
+                                <canvas id='figure_db' width='175' height='175'></canvas>
+                            </div>
+                            <figcaption style='width:95%;text-align:center'>Figure D - Figure C without adjacent points of origin</figcaption>
+                        </figure>
+                        <p>
+                            The grouping of logic that addresses this issue is contained in a method called <code>calculateAdjacentOrigins</code>. This function exists to insert a set of points into the origin array such that these new points, (which exist beyond the perimeter of the hexagon grid), can be factored for the distance formula calculation. Should the result of this calculation produce a point that exists within this range, the graph will draw correctly by not highlighting any hexagon.
+                        </p>
+                        <p>
+                            There are a set of three primary cases that calculateAdjacentOrigins operates on. We've seen the first - a grid that is composed of a single hexagon. Here, the six extra vertices pushed to the origin array are calculated, (where the hexagon's point of origin is <code>(x,y)</code>), as follows:
+                            <ul style='text-align:left;'>
+                                <li>
+                                    Point of origin above the top-most side of the hexagon: <code style='white-space:nowrap;'>(x, y - (2 * r))</code>
+                                </li>
+                                <li>
+                                    Point of origin below the bottom-most side of the hexagon: <code style='white-space:nowrap;'>(x, y + (2 * r))</code>
+                                </li>
+                                <li>
+                                    Point of origin associated with the top-right side of the hexagon: <code style='white-space:nowrap;'>(x + (2.5 * S), y - r)</code>
+                                </li>
+                                <li>
+                                    Point of origin associated with the top-left side of the hexagon: <code style='white-space:nowrap;'>(x - (0.5 * S), y - r)</code>
+                                </li>
+                                <li>
+                                    Point of origin associated with the bottom-right side of the hexagon: <code style='white-space:nowrap;'>(x + (2.5 * S), y + r)</code>
+                                </li>
+                                <li>
+                                    Point of origin associated with the bottom-left side of the hexagon: <code style='white-space:nowrap;'>(x - (0.5 * S), y + r)</code>
+                                </li>
+                            </ul>
+                        </p>
+                    </div>
+                    <p>
+                        This exposes us to a set of options that need to be considered whilst building the other primary cases of calculateAdjacentOrigins: A point of origin needs to be considered with respect to a hexagon's side dependent on where it sits along the border and *if* it sits on the border.
+                    </p>
+                    <p>
+                        The next primary case for calculateAdjacentOrigins is the case in which a hexagon grid consists of a single row of hexagons. That is, if the hexagon count does not exceed the amount of columns in a grid. This case builds an edge case for the first and last hexagon this singular row. A set of adjacent points of origin need to be put into the grid array that are associated with the first hexagon's top-left and bottom-left side. The same needs to be done for the last hexagon's top-right an bottom-left side. Every hexagon needs to have an adjacent point of origin associated with its top and bottom sides.
+                    </p>
+                    <p>
+                        The last case of consideration for calculateAdjacentOrigins is for grids that contain many rows. Effort is taken here to ensure no redundant points of origin are generated for hexagons that don't exist on the border of the grid. Special cases are considered in terms deciding whether or not points of origin should be generated with respect to the top or bottom side of a given hexagon, which is dependent on whether or not a hexagon lives on the top or bottom border of the grid.
+                    </p>
+                    <p>
+                        We now have all the major pieces of logic that allow this hexagon grid to exist. To recap, the major components are hexagon objects, a set of arrays that store the side-vertices of a hexagon and the center points of these hexagons. The center points of would-be hexagons that exist outside the border of a grid are also stored and considered whilst determining whether the mouse is hovering over the grid itself.
+                    </p>
+                    <p>
+                        We now have all the major pieces of logic that allow this hexagon grid to exist. To recap, the major components are hexagon objects, a set of arrays that store the side-vertices of a hexagon and the center points of these hexagons. The center points of would-be hexagons that exist outside the border of a grid are also stored and considered whilst determining whether the mouse is hovering over the grid itself.
+                    </p>
+                    <div class='aside'>
+                        <figure style='overflow:auto;clear:both;width:275px;float:left'>
+                            <canvas id='figure_ea' width='275' height='275' style='clear:right;width:100%'></canvas>
+                            <figcaption id='fig_ea_output' style='max-width:275px;width:95%;text-align:right;'>Figure E - Select a hex...</figcaption>
+                        </figure>
+                        <p style='margin-top:0px;'>
+                            Figure E is another instance of the hexagon grid. This time, it has more than one hexagon and it should also be observed that it has more than one row of hexagons. Recall the creation of a hexagon object. It accepted a set of parameters, one of which was labeled as name. Selecting a hexagon through Figure E will return the selected hexagon's name through the caption of the figure. This should imply that the data that may be associated with a hexagon is arbitrary; it is arbitrarily extensible.
+                        </p>
+                        <figure class='responsive_aside' style='width:inherit;max-width:300px;'>
+                            <div style='width:275px;margin:auto;'>
+                                <canvas id='figure_eb' width='275' height='275' style='clear:right;width:100%'></canvas>
+                            </div>
+                            <figcaption id='fig_eb_output' style='max-width:275px;width:95%;text-align:right;'>Figure E - Select a hex...</figcaption>
+                        </figure>
+                        <p>
+                            Figure E also implicitly informs the usage of another parameter associated with the hex object: type. There are two primary types of hexagons as far as the grid is concerned. Thus far we've only discussed regular hexagons which are rendered. The other type is a null hex. These hexagons aren't rendered for a given pass of the drawHexes method. These hexagons allow a user to include gaps in the grid, as shown in Figure E.
+                        </p>
+                    </div>
                     <h3 id='sandbox'> Sandbox: </h3>
+                    <p>
+                        Below is a sandbox to play around with the grid to get a good sense of what it's capable of. This will allow one to experience the logic described above. A user can determine an arbitrary column length and hexagon size. They can also add an arbitrary amount of hexagons in addition to adding gaps to the grid.
+                    </p>
                     <div id='gridContent'>
                         <figure style='border:solid #5F666D 1px;overflow:auto;clear:both'>
                             <canvas id='myCanvas' width='500' height='275' style='width:100%;float:left;clear:right;'></canvas>
@@ -349,32 +422,100 @@ include('../../header.php');
                         trace_Orig(hexV1b);
                 </script>
 
+                <script>
+                    var hexV2a = grid_producer("figure_da",60,1,25,25);
+                    var hexContainer2a = [];
+                        hexContainer2a[0] = new hex(hexV2a,"tile1");
+                        drawHexes(0,hexV2a);
+
+                        hexV2a.canvas.removeEventListener("mousedown", hexV2a.defaultSelectHandler);
+                        hexV2a.canvas.removeEventListener("mousemove", hexV2a.defaultMouseMoveHandler);
+
+                        hexV2a.canvas.addEventListener("mousemove",function(evt){
+                            hexV2a.reprimeGlobals(evt);
+                            drawHexes(1,hexV2a,function(){});
+                        });
+
+                        trace_Adj(hexV2a);
+                        trace_Orig(hexV2a);
+                </script>
+
+                <script>
+                    var hexV2b = grid_producer("figure_db",60,1,25,25);
+                    var hexContainer2b = [];
+                        hexContainer2b[0] = new hex(hexV2b,"tile1");
+                        drawHexes(0,hexV2b);
+
+                        hexV2b.canvas.removeEventListener("mousedown", hexV2b.defaultSelectHandler);
+                        hexV2b.canvas.removeEventListener("mousemove", hexV2b.defaultMouseMoveHandler);
+
+                        hexV2b.canvas.addEventListener("mousemove",function(evt){
+                            hexV2b.reprimeGlobals(evt);
+                            drawHexes(1,hexV2b,function(){});
+                        });
+
+                        trace_Adj(hexV2b);
+                        trace_Orig(hexV2b);
+                </script>
+
                  <script>
-                    var hexV2 = grid_producer("figure_d",33,5,0,10)
+                    var hexV3a = grid_producer("figure_ea",33,5,0,10)
                     var hexContainer2 = [];
                     for(b = 1; b <= 20;b++){
                         if(b%3===0){
-                            hexContainer2[b] = new hex(hexV2,"tile"+b, null);
+                            hexContainer2[b] = new hex(hexV3a,"tile"+b, null);
                         }else{
-                            hexContainer2[b] = new hex(hexV2,"tile"+b);
+                            hexContainer2[b] = new hex(hexV3a,"tile"+b);
                         }
                     }
-                    drawHexes(0,hexV2);
+                    drawHexes(0,hexV3a);
 
-                    hexV2.canvas.removeEventListener("mousedown", hexV2.defaultSelectHandler);
-                    hexV2.canvas.addEventListener('mousedown', function(evt){
-                        for (i = 0; i < hexV2.grid.length; i++){
-                            this.vertices = hexV2.grid[i];//resume
-                            this.selectedHex = getselectedHex(hexV2);
-                            if(hexV2.origin[i] === this.selectedHex.selected && hexV2.origin[i].type !== null){
-                                if(hexV2.grid['selected'] === this.vertices){
-                                    document.getElementById("fig_d_output").innerHTML = 'Figure D - Hex Name... ';
-                                    hexV2.grid['selected'] = null;
+                    hexV3a.canvas.removeEventListener("mousedown", hexV3a.defaultSelectHandler);
+                    hexV3a.canvas.addEventListener('mousedown', function(evt){
+                        for (i = 0; i < hexV3a.grid.length; i++){
+                            this.vertices = hexV3a.grid[i];//resume
+                            this.selectedHex = getselectedHex(hexV3a);
+                            if(hexV3a.origin[i] === this.selectedHex.selected && hexV3a.origin[i].type !== null){
+                                if(hexV3a.grid['selected'] === this.vertices){
+                                    document.getElementById("fig_ea_output").innerHTML = 'Figure E - Hex Name... ';
+                                    hexV3a.grid['selected'] = null;
                                 }else{
-                                    document.getElementById("fig_d_output").innerHTML = 'Figure D - Hex Name: '+hexV2.origin[i].name;
-                                    hexV2.grid['selected'] = this.vertices;
+                                    document.getElementById("fig_ea_output").innerHTML = 'Figure E - Hex Name: '+hexV3a.origin[i].name;
+                                    hexV3a.grid['selected'] = this.vertices;
                                 }
-                                drawHexes(1,hexV2);
+                                drawHexes(1,hexV3a);
+                            }
+                        }
+                    }, false);
+
+                </script>
+
+                <script>
+                    var hexV3b = grid_producer("figure_eb",33,5,0,10)
+                    var hexContainer2 = [];
+                    for(b = 1; b <= 20;b++){
+                        if(b%3===0){
+                            hexContainer2[b] = new hex(hexV3b,"tile"+b, null);
+                        }else{
+                            hexContainer2[b] = new hex(hexV3b,"tile"+b);
+                        }
+                    }
+                    drawHexes(0,hexV3b);
+
+                    hexV3b.canvas.removeEventListener("mousedown", hexV3b.defaultSelectHandler);
+                    hexV3b.canvas.addEventListener('mousedown', function(evt){
+                        for (i = 0; i < hexV3b.grid.length; i++){
+                            this.vertices = hexV3b.grid[i];//resume
+                            this.selectedHex = getselectedHex(hexV3b);
+                            if(hexV3b.origin[i] === this.selectedHex.selected && hexV3b.origin[i].type !== null){
+                                if(hexV3b.grid['selected'] === this.vertices){
+                                    document.getElementById("fig_eb_output").innerHTML = 'Figure E - Hex Name... ';
+                                    hexV3b.grid['selected'] = null;
+                                }else{
+                                    document.getElementById("fig_eb_output").innerHTML = 'Figure E - Hex Name: '+hexV3b.origin[i].name;
+                                    hexV3b.grid['selected'] = this.vertices;
+                                }
+                                drawHexes(1,hexV3b);
                             }
                         }
                     }, false);
@@ -497,16 +638,10 @@ include('../../header.php');
                         <hr>
                         <h3>Concluding notes</h3>
                         <p>
-                            I've learned a lot since initially making this script. This hex-grid was developed before a time I even knew what object-oriented programming was. The patterns I employed to solve the task were based on primitive approaches I only knew at the time. I have an old writing designed for an older portfolio website which describes how it works. Not understanding the prototyping nature of javascript, I tried my best to describe it as a set of function calls operating on a set of arrays; a lot of what was written here showed wider lack of understanding.
+                            I've learned a lot since initially making this script. This hex-grid was developed before a time I even knew what object-oriented programming was. The patterns I employed to solve this task were based on primitive notions that I was only aware of at the time. Going back and reaquainting myself by documenting this old code-base will make it likely that this project will be refactored into a packagable web component sometime in the future.
                         </p>
                         <p>
-                            The design of the script itself shows a lack of regard for modularity. Indeed, I've done a little bit of refactoring to open options for hosting it on this page. Viewing the unedited version of the script can happen via this website's repository, specifically <a href='https://github.com/alanmmckay/alanmmckay.github.io/commit/644aa335a106aba0725e68d13a50913cf96acedd' target="_blank" rel="noopener noreferrer">here</a> at commit hash 644aa33. Note that the refactoring I've done is fairly minimal. A key reason for this is that this project warrants a fresh restart.
-                        </p>
-                        <p>
-                            Through the live script, I've left in place some buttons that act as a tool to show how it works through interaction. These tools will inform the user that a brute-force application of the closest pair algorithm is in use. If I decide to re-implement this project, I'll certainly be taking advantage of the divide and conquer algorithm that I've since learned.
-                        </p>
-                        <p>
-                            I may revisited this page in the future. I would like to add a section describing the logical sequence of events in terms of how it works, (just described broadly/ambiguously).
+                            If curious, one can view the unedited version of the script can happen via this website's repository, specifically <a href='https://github.com/alanmmckay/alanmmckay.github.io/commit/644aa335a106aba0725e68d13a50913cf96acedd' target="_blank" rel="noopener noreferrer">here</a> at commit hash 644aa33. Note that the refactoring I've done since is fairly minimal. To track the the updates to this script since this initial commit, one can do so <a href='https://github.com/alanmmckay/alanmmckay.github.io/commits/main/projects/grid/hex.js' target="_blank" rel='noopener'>here</a>,
                         </p>
                 </article>
                 <nav>
