@@ -401,7 +401,7 @@ include('../../header.php');
                             </div>
                         </dialog>
                     </div>
-                <script src='hex.js?v=050124'></script>
+                <script src='hex.js?v=050924'></script>
 
                 <script>
                     var hexV1a = grid_producer("figure_ca",60,1,25,25);
