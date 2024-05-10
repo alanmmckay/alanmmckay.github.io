@@ -1,6 +1,6 @@
 
 grid_producer = function(canvas_id, s, cols, x_margin, y_margin){
-    hexV = [];//this array holds all the variables and values associated with this script.
+    let hexV = [];//this array holds all the variables and values associated with this script.
     //*** Putting everything in the above hex array allows helps prevent any other script variables from having conflict with this script. This also makes it easy to include multiples of this file within a web page to house multiple hexagonal grids. All that's required is to use a search and replace function in a text editor to replace the string "hexV." with whatever arbitrary name you want to use for the object ***//
 
     hexV.canvas = document.getElementById(canvas_id);
@@ -38,8 +38,7 @@ grid_producer = function(canvas_id, s, cols, x_margin, y_margin){
     hexV.grid = [];//This global array will be populated by objects representing the coordinates of each hexegon
     hexV.origin = [];
 
-    /* ---- Event listeners ---- */
-    hexV.canvas.addEventListener('mousemove', function(evt){
+    hexV.reprimeGlobals = function(evt){
         hexV.mousePos = getMousePos(hexV.canvas,evt,hexV);
         hexV.x = 0;
         hexV.y = 0;
@@ -47,26 +46,28 @@ grid_producer = function(canvas_id, s, cols, x_margin, y_margin){
         hexV.rowswitch = false;
         hexV.rowinit = false;
         hexV.init = false;
-    hexV.context.clearRect(0, 0, hexV.canvas.width, hexV.canvas.height);
+        hexV.context.clearRect(0, 0, hexV.canvas.width, hexV.canvas.height);
+    }
+
+    hexV.defaultMouseMoveHandler = function(evt){
+        hexV.reprimeGlobals(evt);
         drawHexes(1,hexV);
-    }, false);
+    }
 
-    hexV.canvas.addEventListener('mouseout', function(evt){
-        hexV.mousePos = getMousePos(hexV.canvas,evt,hexV);
-        hexV.x = 0;
-        hexV.y = 0;
-        hexV.counter = 1;
-        hexV.rowswitch = false;
-        hexV.rowinit = false;
-        hexV.init = false;
-    hexV.context.clearRect(0, 0, hexV.canvas.width, hexV.canvas.height);
+    hexV.defaultMouseOutHandler = function(evt){
+        hexV.reprimeGlobals(evt);
         drawHexes(0,hexV);
-    }, false);
+    }
 
-    hexV.canvas.addEventListener('mousedown', function(evt){
+    /* ---- Event listeners ---- */
+    hexV.canvas.addEventListener('mousemove', hexV.defaultMouseMoveHandler, false);
+
+    hexV.canvas.addEventListener('mouseout', hexV.defaultMouseOutHandler, false);
+
+    hexV.defaultSelectHandler = function(evt){
         for (i = 0; i < hexV.grid.length; i++){
             this.vertices = hexV.grid[i];//resume
-            this.selectedHex = getselectedHex(hexV);
+            this.selectedHex = getselectedHex(hexV,calculateAdjacentOrigins);
             if(hexV.origin[i] === this.selectedHex.selected && hexV.origin[i].type !== null){
                 if(hexV.grid['selected'] === this.vertices){
                     //document.getElementById("output").innerHTML = '<br>';
@@ -78,7 +79,9 @@ grid_producer = function(canvas_id, s, cols, x_margin, y_margin){
                 drawHexes(1,hexV);
             }
         }
-    }, false);
+    }
+
+    hexV.canvas.addEventListener('mousedown', hexV.defaultSelectHandler, false);
 
     return hexV;
 }
@@ -373,9 +376,9 @@ function calculateAdjacentOrigins(hexV){
 
 
 
-function getselectedHex(hexV){
+function getselectedHex(hexV,calculateAdjacentOriginsCallback){
     if(hexV.adjacencyInit === false){
-        calculateAdjacentOrigins(hexV);
+        calculateAdjacentOriginsCallback(hexV);
     }
 
     //*** This function starts by calculating the points of origin for adjacent hexagons that have yet to be factored. It then runs through the origin array and applies the distance formula between each set of coordinates and the current mouse position. The shortest length is considered the 'selection', as noted in the logic below ***//
@@ -403,12 +406,12 @@ function getselectedHex(hexV){
 
 
 //drawHexes is the function that uses canvas-based methods to draw the hexagon
-function drawHexes(evtinit, hexV){
+function drawHexes(evtinit, hexV, calculateAdjacentOriginsCallback = calculateAdjacentOrigins){
     //*** This function grabs all the data that has been stored in both the grid and origin arrays and draws the hexagon on the canvas element. ***//
     //The evtinit parameter is used to decide whether or not certain elements should be drawn. This is relevant when a user may choose to move their cursor off the canvas element.
 
     if(evtinit === 1){
-        this.selectedHex = getselectedHex(hexV);
+        this.selectedHex = getselectedHex(hexV,calculateAdjacentOriginsCallback);
     }
 
 	for (i = 0; i < hexV.grid.length; i++){//loop through each set of side vertices stored in the grid array
@@ -577,23 +580,31 @@ consolidate_sliders = function(inputSliderId,otherSliderIds){
     return true;
 }
 
-trace_Adj = function(hexV){
+trace_Adj = function(hexV,button_id = null){
     if(hexV.adjLines === false){
         hexV.adjLines = true;
-        document.getElementById("traceAdjOrig").value = "Disable Adjacency Trace";
-    }else{consolidate_sliders("sizeslider2",["sizeslider1"])
+        if(button_id){
+            document.getElementById(button_id).value = "Disable Adjacency Trace";
+        }
+    }else{
         hexV.adjLines = false;
-        document.getElementById("traceAdjOrig").value = "Trace Adjacency Lines";
+        if(button_id){
+            document.getElementById(button_id).value = "Trace Adjacency Lines";
+        }
     }
 }
 
-trace_Orig = function(hexV){
+trace_Orig = function(hexV,button_id = null){
     if(hexV.hexLines === false){
         hexV.hexLines = true;
-        document.getElementById("traceOrig").value = 'Disable Origin Trace';
+        if(button_id){
+            document.getElementById(button_id).value = 'Disable Origin Trace';
+        }
     }else{
         hexV.hexLines = false;
-        document.getElementById("traceOrig").value = 'Trace Origin Lines';
+        if(button_id){
+            document.getElementById(button_id).value = 'Trace Origin Lines';
+        }
     }
 }
 
