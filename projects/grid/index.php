@@ -31,21 +31,23 @@ include('../../header.php');
                             Having recently finished my Master's degree, it is good to look back and reflect on all the pieces that compose this accomplishment. My educational journey began January 2015. This first semester consisted of working on prerequisite courses to begin working on the degree I was seeking - an Associates of Applied Sciences for web development and programming. Motivation for pursuing this was simply to learn how to code. Skill was quickly formed from that motivation.
                         </p>
                         <p>
-                            Fall 2016 had me taking a Web Scripting course. The only scripting programming language I had prior experience with was PhP. This course would introduce Javascript. Web Scripting had us implementing simple things such as client-side form validation or simple canvas animations.
+                            Fall 2016 had me taking a Web Scripting course. The only scripting programming language I had prior experience with was PHP. This course would introduce Javascript. Web Scripting had us implementing simple things such as client-side form validation or simple canvas animations.
                         </p>
                         <p>
-                            It was during this course that I started and finished a project that I am still proud of to this day. It was the first time I dug real deep to become intimate with a language while applying some other facet of my studies - The trigonometric functions learned through a math course that I was also attending at the time. These functions provided the framework to scaffold atop.
+                            It was during this course that I started and finished a project that I am still proud of to this day. It was the first time I dug real deep to become intimate with a language while applying some other facet of my studies - The trigonometric functions learned through a math course that I was also taking at the time. These functions provided the framework to scaffold atop.
                         </p>
                         <p>
                             This project went beyond the expectations of a student in the Web Scripting course. It produced something tangible in terms representing data in a dynamic way. It involved implementing a lot of components that would produce more components to build the larger framework.
                         </p>
                         <p>
-                            What is this project? It is a dynamically generated hexagonal grid which can be interacted with via mouse input. Think of the layer on the map of a user-interface for a video game like Civilization. The end result of my efforts cumulated in a Javascript file getting close to 800 lines of code - something significant for an Alan who only had one semester prior of proper programming!
+                            What is this project? It is a dynamically generated hexagonal grid which can be interacted with via mouse input. Think of the layer on the map of a user-interface for a video game like Civilization. The end result of my efforts cumulated in a JavaScript file getting close to 800 lines of code - something significant for an Alan who only had one semester prior of proper programming!
                         </p>
                         <p>
-                            A live version of the script is below. In addition to the buttons included below the visual panel, note that the grid responds to mouse input on both mouse-over and by tapping/clicking on it.
+                            This page will discuss how this script works. Its components will be discussed on a logical level and not so much at an implementation level. This is partly due to my lack of software engineering experience at the time it was conceived. This writing will also touch on how I would approach these components should I make the script with my current understanding of programming and coding.
                         </p>
-                        <a href='#sandbox'>Jump to Sandbox</a>
+                        <p>
+                            To skip explanation, <a href='#sandbox'>jump to the sandbox</a>.
+                        </p>
                     <hr>
                     </section>
                     <header>
@@ -166,7 +168,7 @@ include('../../header.php');
                     </p>
                     <h2>User Interaction</h2>
                     <p>
-                        What's been discussed so far is the general logic to draw a hexagon and then to draw a grid of hexagons. This is done by storing vertex information for each hexagon in an array and then parsing through the array for each set of vertices while enacting a set of draw methods from the canvas API.
+                        What hass been discussed so far is the general logic to draw a hexagon and from this how to draw a grid of hexagons. This is done by storing vertex information for each hexagon in an array and then parsing through the array for each set of vertices while enacting a set of draw methods from the canvas API.
                     </p>
                     <p>
                         The fact a grid can adapt to arbitrary size values for the hexagons and column quantities for the grid isn't solely what makes it dynamic. It needs to react to user input. A grid in this context exists to display and return relevant information; the original goal of having a campaign map for a tabletop game would imply that selecting a grid should return some amount of geographic data.
@@ -175,13 +177,13 @@ include('../../header.php');
                         Reaction to input implies a set of event handlers. The term "selecting" should key us into the usage of the <code>mousedown</code> event. What's also at play is a change of rendering whilst navigating the mouse through the grid to a target of for selection. The grid informs the user which hexagon <i>will be</i> selected based on their mouse position, as opposed to what <i>has been</i> selected. This is accomplished through the <code>mousemove</code> event.
                     </p>
                     <p>
-                        Both event handlers for these two events have a general common principal. The event is attached to the html canvas element in which the grid exists. When the event is fired, the coordinates of the mouse position are retrieved from the event and then normalized with respect to the position of the canvas element and the size of the element as it currently exists in the <code>DOM</code>. These normalized mouse coordinate values are then passed to <code>drawHexes</code> along with a switch condition to allow it to know which event type should be acted on.
+                        For these two events, both event handlers have a general common principal. The event is first associated with the html canvas element in which the grid exists. When the event is fired, the coordinates of the mouse position are retrieved from the event and then normalized with respect to the position of the canvas element and the size of the canvas element as it currently exists in the <code>DOM</code>. These normalized mouse coordinate values are then passed to <code>drawHexes</code> along with a switch condition to allow it to know which event type should be acted on.
                     </p>
                     <p>
-                        Before <code>drawHexes</code> is called in this context, the entire canvas is cleared such that it can be redrawn. In the case where the <code>mousedown</code> event was triggered, the fill color of the hexagon being selected will differ from the rest as the canvas is being redrawn. In the case where the <code>mousemove</code> event was triggered, the border of the hexagon will differ.
+                        Before <code>drawHexes</code> is called in this context, the entire canvas is cleared such that it can be redrawn. In the case where the <code>mousedown</code> event was triggered, the fill color for the hexagon that is being selected will differ from the rest as the canvas is being redrawn. In the case where the <code>mousemove</code> event was triggered, the border of the hexagon in which the mouse is hovering will differ.
                     </p>
                     <p style='margin-top:0px;'>
-                        Both these cases take advantage of the normalized mouse coordinates being passed. Recall that the master record of a grid contains two arrays of vertex data: one which contains the side vertices of a hexagon and another that contains the points of origin. A method called <code>getselectedHex</code> was developed to leverage the array that houses these points of origin while comparing them to these normalized mouse coordinates.
+                        Both these cases take advantage of the normalized mouse coordinates being passed. Recall that the master record of a grid contains two arrays of vertex data: one which contains the side vertices of a hexagon and another that contains the points of origin. A method called <code>getselectedHex</code> was developed to leverage the array that houses the points of origin while comparing them to these normalized mouse coordinates.
                     </p>
                     <div class='aside'>
                         <figure style='overflow:auto;clear:both;width:175px'>
@@ -189,7 +191,7 @@ include('../../header.php');
                             <figcaption style='width:100%;text-align:left;margin:auto'>Figure C - Mouse-over distance formula illustration</figcaption>
                         </figure>
                         <p style='margin-top:0px;'>
-                            What is the comparison being made in <code>getselectedHex</code>? This method runs through the points of origin applying the distance formula between each point and the normalized mouse coordinates whilst maintaining a minimum value along with the point of origin that generated it. After finding the minimum, the relevant point is annotated for the sake of usage in <code>drawHexes</code>.
+                            What is the comparison being made in <code>getselectedHex</code>? This method runs through the points of origin applying the distance formula between each point and the normalized mouse coordinates whilst maintaining a minimum value along with the point of origin that generated it. After finding the minimum, the relevant point is annotated for the sake of usage in <code>drawHexes</code>; the method now knows which hexagon's point is closest to the mouse cursor.
                         </p>
                         <p>
                             Thus far it's been established that to draw a hexagon requires a set of vertices. To draw a set of hexagons requires a mechanism to decide where the center point of a hexagon lies. To know which hexagon an entity is closest to requires evaluating the distance formula between each of these points of origin and the entity.* One crucial piece of logic remains: knowing when the cursor is <i>not</i> over any of the hexagons.
@@ -202,7 +204,7 @@ include('../../header.php');
                         </figure>
                     </div>
                     <p style='margin-top:0px;'>
-                        Consider figure C (above). This figure is an instance of the hexagon grid. It has a hexagon count of 1. Whilst mousing over figure C, seven lines are drawn from seven points of origin to the mouse cursor; one line associated with the hexagon's point of origin and the other six associated with some point of origin outside the boundaries of a given side of the hexagon. The general algorithm described thus far accounts for comparing points of origins with respect to some instantiated hexagon, but the boundary of the grid itself needs to be considered. If the boundary of the grid is not considered, then moving the mouse into the white space that exists between a border hexagon and the canvas element will not remove the highlight of the previous hexagon that was hovered over. This is is behavior is shown in figure D (below).
+                        Consider figure C (above). This figure is an instance of the hexagon grid. It has a hexagon count of 1. Whilst mousing over figure C, seven lines are drawn from seven points of origin to the mouse cursor; one line associated with the hexagon's point of origin and the other six associated with some point of origin outside the boundary of a given side of the hexagon. The general algorithm described thus far accounts for comparing points of origins with respect to some instantiated hexagon, but the boundary of the grid itself needs to be considered. If the boundary of the grid is not considered, then moving the mouse onto the white space that exists between a border hexagon and the canvas element will not remove the highlight of the previous hexagon that was hovered over. This is is behavior is shown in figure D (below).
                     </p>
                     <div class='aside'>
                         <figure style='overflow:auto;clear:both;width:175px'>
@@ -219,7 +221,7 @@ include('../../header.php');
                             The grouping of logic that addresses this issue is contained in a method called <code>calculateAdjacentOrigins</code>. This function exists to insert a set of points into the origin array such that these new points, (which exist beyond the perimeter of the hexagon grid), can be factored for the distance formula calculation. Should the result of this calculation produce a point that exists within this range, the graph will draw correctly by not highlighting any hexagon.
                         </p>
                         <p>
-                            There are a set of three primary cases that calculateAdjacentOrigins operates on. We've seen the first - a grid that is composed of a single hexagon. Here, the six extra vertices pushed to the origin array are calculated, (where the hexagon's point of origin is <code>(x,y)</code>), as follows:
+                            There are a set of three primary cases that <code>calculateAdjacentOrigins</code> operates on. We've seen the first - a grid that is composed of a single hexagon. Here, the six extra vertices pushed to the origin array are calculated, (where the hexagon's point of origin is <code>(x,y)</code>), as follows:
                             <ul style='text-align:left;'>
                                 <li>
                                     Point of origin above the top-most side of the hexagon: <code style='white-space:nowrap;'>(x, y - (2 * r))</code>
@@ -243,19 +245,16 @@ include('../../header.php');
                         </p>
                     </div>
                     <p>
-                        This exposes us to a set of options that need to be considered whilst building the other primary cases of calculateAdjacentOrigins: A point of origin needs to be considered with respect to a hexagon's side dependent on where it sits along the border and *if* it sits on the border.
+                        This exposes us to a set of paths that need to be considered whilst building the other primary cases of <code>calculateAdjacentOrigins</code>: A point of origin needs to be considered with respect to a hexagon's side dependent on where it sits along the border. That is <i>if</i> it sits on the border.
                     </p>
                     <p>
-                        The next primary case for calculateAdjacentOrigins is the case in which a hexagon grid consists of a single row of hexagons. That is, if the hexagon count does not exceed the amount of columns in a grid. This case builds an edge case for the first and last hexagon this singular row. A set of adjacent points of origin need to be put into the grid array that are associated with the first hexagon's top-left and bottom-left side. The same needs to be done for the last hexagon's top-right an bottom-left side. Every hexagon needs to have an adjacent point of origin associated with its top and bottom sides.
+                        The next primary case for <code>calculateAdjacentOrigins</code> is the case in which a hexagon grid consists of a single row of hexagons. That is, if the hexagon count does not exceed the amount of columns in a grid. This case builds an edge case for the first and last hexagon of this singular row. A set of adjacent points of origin need to be put into the grid array that are associated with the first hexagon's top-left and bottom-left side. The same needs to be done for the last hexagon's top-right an bottom-right side. Every hexagon needs to have an adjacent point of origin associated with its top and bottom sides.
                     </p>
                     <p>
-                        The last case of consideration for calculateAdjacentOrigins is for grids that contain many rows. Effort is taken here to ensure no redundant points of origin are generated for hexagons that don't exist on the border of the grid. Special cases are considered in terms deciding whether or not points of origin should be generated with respect to the top or bottom side of a given hexagon, which is dependent on whether or not a hexagon lives on the top or bottom border of the grid.
+                        The last case of consideration for <code>calculateAdjacentOrigins</code> is for grids that contain many rows. Effort is taken here to ensure no redundant points of origin are generated for hexagons that don't exist on the border of the grid. Special cases are considered in terms deciding whether or not points of origin should be generated with respect to the top or bottom side of a given hexagon, which is dependent on whether or not a hexagon is contained in the first row or the last row.
                     </p>
                     <p>
-                        We now have all the major pieces of logic that allow this hexagon grid to exist. To recap, the major components are hexagon objects, a set of arrays that store the side-vertices of a hexagon and the center points of these hexagons. The center points of would-be hexagons that exist outside the border of a grid are also stored and considered whilst determining whether the mouse is hovering over the grid itself.
-                    </p>
-                    <p>
-                        We now have all the major pieces of logic that allow this hexagon grid to exist. To recap, the major components are hexagon objects, a set of arrays that store the side-vertices of a hexagon and the center points of these hexagons. The center points of would-be hexagons that exist outside the border of a grid are also stored and considered whilst determining whether the mouse is hovering over the grid itself.
+                        We now have all the major pieces of logic that allow this hexagon grid to exist. To recap, the major components are hexagon objects with a set of arrays that store the side-vertices of a hexagon and the center points of these hexagons. The center points of would-be hexagons that exist outside the border of a grid are also stored and considered whilst determining whether the mouse is hovering over the grid itself.
                     </p>
                     <div class='aside'>
                         <figure style='overflow:auto;clear:both;width:275px;float:left'>
@@ -263,7 +262,7 @@ include('../../header.php');
                             <figcaption id='fig_ea_output' style='max-width:275px;width:95%;text-align:right;'>Figure E - Select a hex...</figcaption>
                         </figure>
                         <p style='margin-top:0px;'>
-                            Figure E is another instance of the hexagon grid. This time, it has more than one hexagon and it should also be observed that it has more than one row of hexagons. Recall the creation of a hexagon object. It accepted a set of parameters, one of which was labeled as name. Selecting a hexagon through Figure E will return the selected hexagon's name through the caption of the figure. This should imply that the data that may be associated with a hexagon is arbitrary; it is arbitrarily extensible.
+                            Figure E is another instance of the hexagon grid. Contrary to prior figures, it is composed of more than one row of hexagons. Recall the creation of a hexagon object. It accepted a set of parameters, one of which was labeled as <code>name</code>. Selecting a hexagon through figure E will print the selected hexagon's name within the caption of the figure. This should imply that data that may be associated with a hexagon is arbitrary; it is arbitrarily extensible.
                         </p>
                         <figure class='responsive_aside' style='width:inherit;max-width:300px;'>
                             <div style='width:275px;margin:auto;'>
@@ -272,7 +271,7 @@ include('../../header.php');
                             <figcaption id='fig_eb_output' style='max-width:275px;width:95%;text-align:right;'>Figure E - Select a hex...</figcaption>
                         </figure>
                         <p>
-                            Figure E also implicitly informs the usage of another parameter associated with the hex object: type. There are two primary types of hexagons as far as the grid is concerned. Thus far we've only discussed regular hexagons which are rendered. The other type is a null hex. These hexagons aren't rendered for a given pass of the drawHexes method. These hexagons allow a user to include gaps in the grid, as shown in Figure E.
+                            Figure E also implicitly informs the usage of another parameter associated with the hex object: <code>type</code>. There are two primary types of hexagons as far as the grid is concerned. Thus far only regular hexagons have been discussed - those which are rendered normally. The other type is a null hex. These hexagons aren't rendered within given pass of the drawHexes method. Their side vertices are ignored. These allow a user to include gaps in the grid, as shown in Figure E.
                         </p>
                     </div>
                     <h3 id='sandbox'> Sandbox: </h3>
