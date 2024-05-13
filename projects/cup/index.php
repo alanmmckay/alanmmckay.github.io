@@ -36,7 +36,7 @@ include('../../header.php');
                     <!--<a href='./images/cup_story_mobile.webp' target="_blank" rel="noopener noreferrer">-->
                     <figure id='cup-iframe-aside-mobile'>
                         <!--<img src='./images/cup_story_mobile.webp' alt='Screenshot of the layout of the Cup of Joe website using a mobile display.' />-->
-                        <iframe style='width:340px;' frameborder="0" src='demo/story/index.php' style='padding-left:0px;'>
+                        <iframe style='width:340px;height:536px' frameborder="0" src='demo/story/index.php' style='padding-left:0px;'>
                         <!--<iframe frameborder="0" style='width:100%;max-height:490px;max-width:230px; overflow:auto' src='demo/story/index.php'>-->
                         </iframe>
                         <figcaption>
@@ -45,7 +45,7 @@ include('../../header.php');
                     <hr>
                     </figure>
                     <!--</a>-->
-                    <p>
+                    <p style='margin-top:0px;'>
                         The redesign entailed a rebuild of the HTML and CSS - motivated specifically to rid the site of the usage and elaborate nesting of table tags. More modern semantic tags were used instead of the table tags: an aside to note tangential information, lists to designate groupings of links, article to note groupings of paragraphs, sections to differentiate these major components, etc.
                     </p>
                     <p>
@@ -54,7 +54,7 @@ include('../../header.php');
                     <!--<a href='./images/cup_story_mobile.webp' target="_blank" rel="noopener noreferrer">-->
                     <figure id='cup-iframe-mobile' class='responsive_aside' style='width:95%;'>
                         <!--img src='./images/cup_story_mobile.webp' alt='Screenshot of the layout of the Cup of Joe website using a mobile display.' /-->
-                        <div style="width:95%;max-width:340px;margin:auto;overflow:auto;">
+                        <div style="width:95%;max-width:340px;margin:auto;overflow:auto;height:536px;">
                         <iframe frameborder="0" src='demo/story/index.php' style='padding-left:0px;'>
                         </iframe>
                         </div>
