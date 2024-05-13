@@ -33,30 +33,37 @@ include('../../header.php');
                         A local coffee shop, Cup of Joe, was a frequent spot of study; this fact helped contribute to successful grades. So what better way to give back by doing a redesign of the current website? A redesign which would make it mobile friendly.
                     </p>
                     <div class='aside'>
-                    <a href='./images/cup_story_mobile.webp' target="_blank" rel="noopener noreferrer">
-                    <figure>
-                        <img src='./images/cup_story_mobile.webp' alt='Screenshot of the layout of the Cup of Joe website using a mobile display.' />
+                    <!--<a href='./images/cup_story_mobile.webp' target="_blank" rel="noopener noreferrer">-->
+                    <figure id='cup-iframe-aside-mobile'>
+                        <!--<img src='./images/cup_story_mobile.webp' alt='Screenshot of the layout of the Cup of Joe website using a mobile display.' />-->
+                        <iframe style='width:340px;' frameborder="0" src='demo/story/index.php' style='padding-left:0px;'>
+                        <!--<iframe frameborder="0" style='width:100%;max-height:490px;max-width:230px; overflow:auto' src='demo/story/index.php'>-->
+                        </iframe>
                         <figcaption>
-                            Mobile variant of the Story page.
+                            Live instance of the mobile variant of the website through the Story page.
                         </figcaption>
                     <hr>
                     </figure>
-                    </a>
+                    <!--</a>-->
                     <p>
                         The redesign entailed a rebuild of the HTML and CSS - motivated specifically to rid the site of the usage and elaborate nesting of table tags. More modern semantic tags were used instead of the table tags: an aside to note tangential information, lists to designate groupings of links, article to note groupings of paragraphs, sections to differentiate these major components, etc.
                     </p>
                     <p>
                         The foundation of this implementation was built upon a mobile-first design. Here, media queries would kick a certain layout into view based on window size where the initial template being considered was designed for mobile devices. This involved careful consideration towards maintaining the website's aesthetic - an aesthetic which does a good job adhering to the aesthetic of the shop proper. One key facet in accomplishing this was the decision to maintain the site's identity with the navigation bar. Instead of leveraging a hamburger button to splay navigational options, the navigation bar is fixed to the left where the size of its selections maintain a good compromise between easy interaction while not obscuring too much of the view, (regardless of view-screen size). The redesign differentiated further by fixing the navigation bar into view as a user scrolls through a given page.
                     </p>
-                    <a href='./images/cup_story_mobile.webp' target="_blank" rel="noopener noreferrer">
-                    <figure class='responsive_aside'>
-                        <img src='./images/cup_story_mobile.webp' alt='Screenshot of the layout of the Cup of Joe website using a mobile display.' />
-                        <figcaption>
-                            Mobile variant of the Story page.
+                    <!--<a href='./images/cup_story_mobile.webp' target="_blank" rel="noopener noreferrer">-->
+                    <figure id='cup-iframe-mobile' class='responsive_aside' style='width:95%;'>
+                        <!--img src='./images/cup_story_mobile.webp' alt='Screenshot of the layout of the Cup of Joe website using a mobile display.' /-->
+                        <div style="width:95%;max-width:340px;margin:auto;overflow:auto;">
+                        <iframe frameborder="0" src='demo/story/index.php' style='padding-left:0px;'>
+                        </iframe>
+                        </div>
+                        <figcaption style='max-width:340px;margin:auto;padding-top:12px;'>
+                            Live instance of the mobile variant of the website through the Story page.
                         </figcaption>
-                    <hr>
+                        <hr>
                     </figure>
-                    </a>
+                    <!--</a>-->
                     <p>
                         In terms of layout, there were two different types of pages that the Cup of Joe website contained. The main page had a unique layout in the sense that the majority of the display emphasized on a slideshow of images from the coffee shop. The other pages consisted of textual content with an image banner and occasionally information placed as an aside. The responsive redesign would not only determine the sizes of these elements, but the location they would be drawn.
                     </p>

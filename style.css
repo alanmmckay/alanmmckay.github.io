@@ -523,6 +523,24 @@ div.code-font input{
     95%{color:white}
 }
 
+#writingsWrapper #cup-iframe-aside-mobile{
+    width:340px;
+}
+
+#writingsWrapper #cup-iframe-mobile div iframe{
+    width:340px;
+}
+
+@media screen and (max-width:900px){
+    #writingsWrapper #cup-iframe-aside-mobile{
+        display:none;
+    }
+
+    #writingsWrapper #cup-iframe-mobile{
+        display:inherit;
+    }
+}
+
 @media screen and (min-width:800px){
     #writingsWrapper .fig-col{
         overflow:auto;
@@ -814,6 +832,7 @@ div.code-font input{
         width:97%;
         overflow:scroll;
     }
+
 }
 
 @media screen and (max-width:300px){
