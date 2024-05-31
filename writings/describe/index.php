@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/writings/describe/';
 
 $title = 'Alan McKay | Writing | Describing Elsewhere';
@@ -19,8 +15,12 @@ $relative_path = "../../";
 include('../../header.php');
 
 ?>
-
         <section id='writingsWrapper'>
+            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
+                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; Describing Elsewhere</a>
+                <h1><a href='../'>&nbsp;&gt; Writings</a>
+                <h1><a href='../../'>Home</a></h1>
+            </header>
             <section>
                 <article>
                     <header>
@@ -45,9 +45,9 @@ include('../../header.php');
                     </p>
                     <br>
                     <hr>
-                    <a href='../../images/mike-black-elk.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/mike-black-elk.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/mike-black-elk.jpg' id='mike-black-elk' class='animate' alt="A man climbing the stone steps leading to a tower on top of Black Elk Peak" style='transition:object-position 4s;object-position:0 45%;' />
+                            <img src='./images/mike-black-elk.webp' id='mike-black-elk' class='animate' alt="A man climbing the stone steps leading to a tower on top of Black Elk Peak" style='transition:object-position 4s;object-position:0 45%;' />
                             <figcaption>
                                 Michael reaching the summit of Black Elk Peak.
                             </figcaption>
@@ -63,9 +63,9 @@ include('../../header.php');
                     </p>
                     <br>
                     <hr>
-                    <a href='../../images/connor-grimes.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/connor-grimes.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/connor-grimes.jpg' id='connor-grimes' class='animate' alt="A man scaling an interior rock climbing wall contained within a gymnasium." style='transition:object-position 4s;object-position:0 70%;' />
+                            <img src='./images/connor-grimes.webp' id='connor-grimes' class='animate' alt="A man scaling an interior rock climbing wall contained within a gymnasium." style='transition:object-position 4s;object-position:0 70%;' />
                             <figcaption>
                                 Connor working on a project at Climb Iowa.
                             </figcaption>
@@ -78,9 +78,9 @@ include('../../header.php');
                     </p>
                     <br>
                     <hr>
-                    <a href='../../images/anon-sidecar.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/anon-sidecar.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/anon-sidecar.jpg' id='anon-sidecar' class='animate' alt="A silhouette of a man working on a laptop sits before a wall which sunlight is casting the shadow of the window's logo which says Side Car." style='transition:object-position 4s;object-position:0 20%;' />
+                            <img src='./images/anon-sidecar.webp' id='anon-sidecar' class='animate' alt="A silhouette of a man working on a laptop sits before a wall which sunlight is casting the shadow of the window's logo which says Side Car." style='transition:object-position 4s;object-position:0 20%;' />
                             <figcaption>
                                 A stranger doing some work at Sidecar Coffee.
                             </figcaption>
@@ -91,54 +91,29 @@ include('../../header.php');
                     <p>
                         In terms of technical detail, a CSS class was set for all the affected elements. Here, the width is set to 100%, the height to some fixed pixel value, and the object-fit attribute set to cover. Inline styling is then applied to each of these image tags where the object-position attribute is set to define the position in which an image will be centered with respect to the cropped container. Then, also within the inline styling, the transition property of the object-position attribute is set to define how long it will take for an image to scan to a position.
                     </p>
-                    <code>
-<pre class='code'>
-img.animate{
-    width:100%;
-    height:300px;
-    object-fit:cover;
-}
-</pre>
-                    </code>
+                    <iframe frameborder="0" style='width:100%;max-height:190px;overflow:auto' src='code/01.php'>
+                    </iframe>
                     <p>
                         When and where the image scans is determined by JavaScript. A function was made to detect how far along an element has scrolled into the viewport. Should this threshold be met, the object-position CSS property changes; a new position is centered with respect to the cropped container and the previously set transition attribute enacts which causes the smooth scrolling effect.
                     </p>
                     <!--- JAVASCRIPT EXAMPLE! --->
-                    <code>
-<pre class='code'>
-function inViewRange(elementID,inPosition,outPosition){
-    element = document.getElementById(elementID);
-    bounding = element.getBoundingClientRect();
-    if ( ((window.innerHeight/2) - bounding.top > 0) && (bounding.top > 0) )
-    {
-        element.style['object-position'] = inPosition;
-    } else{
-        element.style['object-position'] = outPosition;
-    }
-}
-</pre>
-
-                    </code>
+                    <iframe frameborder="0" style='width:100%;max-height:340px;overflow:auto' src='code/02.php'>
+                    </iframe>
                     <p>
                         The logic described above is called upon by some event handler that detects when the window is scrolled.
                     </p>
                     <!--- JAVASCRIPT EXAMPLE! --->
-                    <code>
-<pre class='code'>
-window.onscroll = function(){
-    inViewRange('image-tag-ID', '0 20%', '0 45%');
-}
-</pre>
-                    </code>
+                    <iframe frameborder="0" style='width:100%;max-height:140px;overflow:auto' src='code/03.php'>
+                    </iframe>
                     <p>
                         The images can still be viewed in their entirety by clicking or tapping their containers. This is done by wrapping the figure tag up on an anchor tag which directs to the associated image.
                     </p>
                     <!--- HTML EXAMPLE! --->
                     <br>
                     <hr>
-                    <a href='../../images/clayton-bear-butte.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/clayton-bear-butte.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/clayton-bear-butte.jpg' id='clayton-bear-butte' class='animate' alt="A man climbs a path up Bear Butte. This path is dominated by a single tree." style='transition:object-position 8s;object-position:0 0%;' />
+                            <img src='./images/clayton-bear-butte.webp' id='clayton-bear-butte' class='animate' alt="A man climbs a path up Bear Butte. This path is dominated by a single tree." style='transition:object-position 8s;object-position:0 0%;' />
                             <figcaption>
                                 Clayton hiking up Bear Butte.
                             </figcaption>

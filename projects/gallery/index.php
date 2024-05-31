@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/projects/gallery/';
 
 $title = 'Alan McKay | Project | Balanced Image Gallery';
@@ -20,6 +16,11 @@ include('../../header.php');
 
 ?>
         <section id='writingsWrapper'>
+            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
+                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; Balanced Image Gallery</a>
+                <h1><a href='../'>&nbsp;&gt; Projects</a>
+                <h1><a href='../../'>Home</a></h1>
+            </header>
             <section>
                 <article>
                     <section class='info'>
@@ -45,14 +46,14 @@ include('../../header.php');
                     </header>
                     <div class='aside'>
                     <figure style='max-width:175px;'>
-                        <img src='images/instagram.png'>
+                        <img src='images/instagram.webp'>
                         <figcaption> Instagram gallery view with square thumbnails.</figcaption>
                     </figure>
                     <p>
                         One thing that pushes VSCO above Instagram is its image gallery. As a web developer, it's not lost that the view of an image gallery within Instagram is fixed. That is, every image given in the view of a profile, (regardless of dimension), is fitted to a certain aspect ratio. It doesn't matter whether the uploaded image is a portrait or a landscape; when viewing the image in a profile's gallery, the image is fitted within a 1:1 frame.
                     </p>
                     <figure class='responsive_aside' style='max-width:200px;'>
-                        <img src='images/instagram.png'>
+                        <img src='images/instagram.webp'>
                         <figcaption> Instagram gallery view with square thumbnails.</figcaption>
                     </figure>
                     <p>
@@ -60,28 +61,28 @@ include('../../header.php');
                     </p>
                     </div>
                     <figure style='max-width:400px'>
-                        <img src='images/vsco_grid_view.png'>
+                        <img src='images/vsco_grid_view.webp'>
                         <figcaption> The VSCO image gallery does force image thumbnails to be square in shape.</figcaption>
                     </figure>
                     <p>
                         Another facet that used to set VSCO apart from Instagram was the fact a visitor need not sign in to view the entirety of a profile. Unfortunately, this is no longer the case. Thus the ultimate motive of creating my own.
                     </p>
                     <figure style='max-width:400px'>
-                        <img src='images/vsco_sign-in.png'>
+                        <img src='images/vsco_sign-in.webp'>
                         <figcaption> An attempt at scrolling through an image gallery within VSCO forces a user to sign in</figcaption>
                     </figure>
                     <p>
                         In creating an image gallery, maintaining the aspect ratio of an image within the gallery view is a primary goal. There exists built-in functionality for CSS to help accomplish this. Images can be scaled by their aspect ratio to fit within a container. Furthermore, modern browsers provide functionality for grid support such that each column of a grid has the same length regardless of the size of its individual items. This is accomplished by providing padding for items that exist in a given row that have a lesser height than the item with the maximum height.
                     </p>
                     <figure style='max-width:400px'>
-                        <img src='images/static_gallery.png'>
+                        <img src='images/static_gallery.webp'>
                         <figcaption> An implementation of a grid-view image gallery. Note the inconsistent white-space margins surrounding each image.</figcaption>
                     </figure>
                     <p>
                         An observer of the VSCO gallery will notice the margins between images are fixed regardless of the aspect ratio of an image. Due to the temporal prioritization of displaying images within the gallery, this poses a potential problem: images can be uploaded in such a manner that the height of one column can completely overwhelm another. This creates situations within the platform where a given column is blank while another introduces more images. This can be apparent looking at the end of an image gallery for a profile which has inconsistent image sizes.
                     </p>
                     <figure style='max-width:400px'>
-                        <img src='images/vsco_bottom.png'>
+                        <img src='images/vsco_bottom.webp'>
                         <figcaption> The bottom of an image gallery on VSCO. Notice the left column completely overwhelms the others. This column continues downward for a few more screens-worth of space.</figcaption>
                     </figure>
                     <p>
@@ -91,7 +92,7 @@ include('../../header.php');
                         The image gallery I've developed improves upon the VSCO gallery by using the shortest column as a trigger for loading in new images. It also diverges from the temporal priority; It is more loose in terms of chronological ordering than the algorithm used by VSCO. Here, the a set of images are grabbed in chronological order, but are then sorted by size. This occurs such that the shortest image in a batch is placed in the column with the largest height, and the tallest image in a batch is placed within the shortest column. This approach helps keep columns balanced in size.
                     </p>
                     <figure style='max-width:400px'>
-                        <img src='images/bottom_of_gallery.png'>
+                        <img src='images/bottom_of_gallery.webp'>
                         <figcaption> An image gallery whose columns are balanced in size.</figcaption>
                     </figure>
                     <p>
@@ -107,31 +108,12 @@ include('../../header.php');
                         The amount of time it takes the web browser to render the downloaded resource is represented by the partial fill of the actual image. How this is reflected is dependent on the usage environment and image format. Within my web browser, swaths of the image are rendered from the bottom-up. Typically, the bottom half is rendered before the first half. This usually takes less than a second, but can be noticeable. The half-rendering is why the term "jagged rendering" is used in this context. From the perspective of a user, a small span of time occurs, the first half of an image pops into view, then the next half pops into view. After an image is loaded, repeat the process for the next image to be loaded. The mental imagery I conjure for this process is a timeline describing when a new chunk of visual information is loaded in - a timeline which has a jagged saw-tooth like appearance.
                     </p>
                     <figure>
-                        <img id='gif-frame02' src='images/firstframe.png' style='display:none' toggle='true'>
-                        <img id='gif02' src='images/02_resize.gif' toggle='true'>
-                        <script>
-                            document.getElementById('gif02').style['display'] = 'none';
-                            document.getElementById('gif-frame02').style['display'] = 'inherit';
-                            function play_gif(id){
-                                let aniEle = document.getElementById('gif'+id);
-                                let frameEle = document.getElementById('gif-frame'+id);
-                                let toggle = aniEle.getAttribute('toggle');
-                                console.log(toggle);
-                                if(toggle == 'true'){
-                                    aniEle.style['display'] = 'inherit';
-                                    frameEle.style['display'] = 'none';
-                                    toggle = false;
-                                }else{
-                                    aniEle.style['display'] = 'none';
-                                    frameEle.style['display'] = 'inherit';
-                                    toggle = true;
-                                }
-                                aniEle.setAttribute('toggle',toggle);
-                                frameEle.setAttribute('toggle',toggle);
-                            }
-                        </script>
+                        <video style='width:100%;' controls>
+                            <source src='videos/02_resize.webm'>
+                            <source src='videos/02_resize.mp4'>
+                        </video>
                         <figcaption>
-                            Animated gif showing how images pop into view within VSCO. Note the attempt in obscuring this pop-in by placing a random background color from the site's color palette before an image load. Press <a onclick='play_gif("02");' style='text-decoration:underline'>here</a> to toggle playing the animated gif.
+                            Animation showing how images pop into view within VSCO. Note the attempt in obscuring this pop-in by placing a random background color from the site's color palette before an image load.
                         </figcaption>
                     </figure>
                     <p>
@@ -141,34 +123,21 @@ include('../../header.php');
                         The implementation of the image gallery has two primary routines. One loads a set of images into an off-screen buffer. The images that are loaded into this buffer are initially set with an opacity value of 0. The other routine enables transition styling for the set of images that have been loaded into said buffer. This is done by adding a new set of CSS styles to an image that is in the buffer-zone where opacity is changed to to 1, (in addition to setting other transition effects). A class to which the image belongs contains transition effects within an external style sheet, which are in place after the document load and thus are active once the routine calls for a figure to be displayed.
                     </p>
                     <figure>
-                        <img id='gif-frame03' src='images/03_firstframe.png' style='display:none' toggle='true'>
-                        <img id='gif03' src='images/03_resize.gif' toggle='true'>
-                        <script>
-                            document.getElementById('gif03').style['display'] = 'none';
-                            document.getElementById('gif-frame03').style['display'] = 'inherit';
-                        </script>
+                        <video style='width:100%;' controls>
+                            <source src='videos/03_resize.webm'>
+                            <source src='videos/03_resize.mp4'>
+                        </video>
                         <figcaption>
-                            Animated gif showing how images transition into view within this website's image gallery implementation. Press <a onclick='play_gif("03");' style='text-decoration:underline'>here</a> to toggle playing the animated gif.
+                            Animation showing how images transition into view within this website's image gallery implementation.
                         </figcaption>
                     </figure>
                     <p>
                         When exactly does this transition occur? "Near the bottom" of the viewport is defined explicitly within this implementation. Consider the following function that returns true should a figure reach the threshold to trigger a transition:
                     </p>
-                    <code>
-<pre class='code test-code' >
-
-function isFigureBottom(fig_object){
-    var fig_height = fig_object.getBoundingClientRect().height;
-    var fig_top = fig_object.getBoundingClientRect().top;
-    if((window.innerHeight * .95)-fig_top &gt; 0){
-        return true;
-    }else{
-        return false;
-    }
-}
-
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:320px;overflow:auto' max-height='320' src='code/01.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         This is a simple function - The point of transition is noted as being a ratio of the window's inner height. When the top of a figure reaches this point, the transition is applied. The application of this transition occurs within the routine in which we've been discussing - <code>grid_display_agent</code>. It is here that <code>isFigureBottom</code> is applied. Before stepping into this function, it is important to understand a set of global variables. Consider the following declarations:
                         <ul>
@@ -178,38 +147,14 @@ function isFigureBottom(fig_object){
                                     <li>
                                         The declaration region of this script includes logic which creates this nested <code>div</code> structure. It operates with respect to this global. To get a closer feel of this structure, one only need to consider the following block:
                                     </li>
+                                    <li style='list-style-type:none'>
+                                        <figure class='code-figure'>
+                                            <iframe frameborder="0" style='width:100%;max-height:610px;overflow:auto' max-height='610' src='code/02.php'>
+                                            </iframe>
+                                        </figure>
+                                    </li>
                                 </ul>
                             </li>
-                        </ul>
-                    </p>
-                    <code>
-<pre class='code test-code' >
-
-grids_html = document.getElementById('galleries');
-for(let i=0;i&lt;max_column_size;i++){
-    const grid = document.createElement('div');
-    grid.setAttribute('class','image-gallery');
-    // TODO: Create a css class for the folowing properties:
-    grid.style['display'] = 'grid';
-    grid.style['grid-template-columns'] = 'repeat('+(i+1)+', minmax(0px,1fr))';
-    grid.style['align-items'] = 'start';
-    grid.style['height'] = '0px';
-    grid.style['overflow'] = 'scroll';
-    for(let j=0;j&lt;=i;j++){
-        const column = document.createElement('div');
-        column.setAttribute('class','image-col');
-        column.style['display'] = 'grid';
-        column.style['grid-template-columns'] = 'minmax(0px,1fr)';
-        grid.appendChild(column);
-    }
-    grids_html.appendChild(grid);
-}
-delete grids_html;
-
-</pre>
-                    </code>
-                    <p>
-                        <ul>
                             <li>
                                 <code>var load_counts = [];</code> - Contains a <code>max_column_size</code> amount of integer values which indicate how many images have been <i>loaded</i> for a given column. This number is incremented every time an image gets placed into the buffer zone.
                             </li>
@@ -222,29 +167,12 @@ delete grids_html;
                                     <li>
                                         <code>col_maps[1][1]</code> points to information of the 2nd column within a gallery consisting of 2 columns. <code>col_maps[2][1]</code> points to information of the 2nd column within a gallery consisting of 3 columns. The logic which primes this structure is also based on <code>max_column_size</code>. The code which does this is as follows:
                                     </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </p>
-                    <code>
-<pre class='code test-code' >
-
-for(let i=0;i&lt;max_column_size;i++){
-    col_map = [];
-    for(let j=0;j&lt;(i+1);j++){
-        col_map[j] = [];
-        col_map[j]['loaded'] = 0;
-        col_map[j]['displayed'] = 0;
-    }
-    col_maps.push(col_map);
-}
-
-</pre>
-                    </code>
-                    <p>
-                        <ul>
-                            <li style='list-style-type:none'>
-                                <ul>
+                                    <li style='list-style-type:none'>
+                                        <figure class='code-figure'>
+                                            <iframe frameborder="0" style='width:100%;max-height:320px;overflow:auto' max-height='320' src='code/03.php'>
+                                            </iframe>
+                                        </figure>
+                                    </li>
                                     <li>
                                         The associative array contained in each column index has two keys: 'displayed' and 'loaded'. The values are simply the amount of images in a column that have been loaded and displayed. Indeed, the sum of the 'loaded' values within <code>col_maps[i]</code> will be equivalent to <code>load_counts[i]</code>. The same can be said for the sum of 'displayed' values within <code>col_maps[i]</code> being equivalent to <code>display_counts[i]</code>. A choice was made to keep track of the explicit counts within <code>load_counts</code> and <code>display_counts</code> instead. This acts as a means to minimize the amount of computation it would take to sum up the values from the inferred data structure.
                                     </li>
@@ -258,42 +186,10 @@ for(let i=0;i&lt;max_column_size;i++){
                     <p>
                         <code>grid_display_agent</code> can now be examined. It receives one argument which is indicative of the amount of columns for a view. The function uses this value to retrieve a gallery from the <code>grids</code> global. The function then iterates through each column contained in the grid taken from <code>grids</code> and looks at each image contained in the buffer zone. If an image is found to trigger a display transition, set a flag indicating that more images should be placed into the buffer zone. Once each column for the given grid selection is examined then, if the flag has been triggered, start loading images into the buffer zone by means of the routine that has yet to be discussed.
                     </p>
-                    <code>
-<pre class='code test-code' >
-
-async function grid_display_agent(grid_selection){
-    var load_flag = false;
-    for(let i=0;i&lt;grid_selection;i++){
-        let col = grids[grid_selection-1].children[i];
-        let figures = col.getElementsByTagName('figure');
-
-        for(let j=col_maps[grid_selection-1][i]['displayed'];j&lt;figures.length;j++){
-            let figure = figures[j];
-            if(isFigureBottom(figure)){
-                <mark>let figureDisplayLambda = function(){</mark>
-                    <mark>if(figure.getAttribute('loaded') == 'true'){</mark>
-                        <mark>figure.style['opacity'] = 1;</mark>
-                        <mark>figure.style['border-top'] = 'solid white 5px';</mark>
-                    <mark>}else{</mark>
-                        <mark>setTimeout(figureDisplayLambda,400);</mark>
-                        <mark>}</mark>
-                    <mark>}</mark>
-                        <mark>figureDisplayLambda();</mark>
-                load_flag = true;
-                col_maps[grid_selection-1][i]['displayed'] += 1;
-                display_counts[grid_selection-1] += 1;
-            }else{
-                load_flag = load_flag || false;
-            }
-        }
-    }
-    if(load_flag === true){
-        setTimeout(function(){grid_load_agent(grid_selection)},(grid_selection * 100));
-    }
-}
-
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:875px;overflow:auto' max-height='875' src='code/04.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         Note the highlighted block above. This block-level declaration is essentially a lambda. Here, an attribute called 'loaded' is read on the figure. This attribute exists with the html element. Initially, it is set to false. The element also has a function bound to its onload event handler which will switch it to true - signifying that the entire image has been loaded within the web browser. Once this attribute is switched to true, the correct display properties are set such that it will transition into view. This ensures that no jagged loading occurs.
                     </p>
@@ -303,164 +199,54 @@ async function grid_display_agent(grid_selection){
                     <p>
                         The g<code>rid_load_agent</code> is a bit more complicated than the display agent. This is where the placement of figures into columns exists. The logic is predicated on the fact that there exists another global data structure that acts as an image manifest. This <code>manifest</code> is a json structure which contains pruned data obtained from VSCO's CCPA-compliant information request. The data in the context of the gallery contains only information pertinent to an image. The schema is as follows:
                     </p>
-                    <code>
-<pre class='code test-code' >
-
-&lt;images&gt; ::= &lt;image_id&gt; &lt;images&gt; | ∅
-&lt;image_id&gt; ::= {
-    "upload_date": &lt;integer&gt;,
-    "height": &lt;integer&gt;,
-    "width": &lt;integer&gt;,
-    "file_name": &lt;string&gt;,
-    "share_link": &lt;string&gt;,
-}
-
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:295px;overflow:auto' max-height='295' src='code/05.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         This data structure has a size; there is a quantity of images that need to be loaded in. Naturally, the logic of <code>grid_load_agent</code> begins by ensuring that a quantity of images that's beyond this maximum size isn't attempted to be retrieved. Whilst contemplating this and taking a look at the code itself, don't lose sight on the fact that the data structures at play operate on the fact that multiple column views exist different ranges of view-port sizes. A screen of a certain size may be concerned with a view consisting of two columns. Another screen of a different size may be concerned with a view consisting of 4 columns. This is handled through the access of these data structures, such as <code>load_counts</code>.
                     </p>
                     <p>
                         While that is in mind, note that the amount of images that may exist is a number that isn't easily divisible by a certain column count. Will all columns be filled with the same amount of images in a case where the column count is 4 and the total amount of images is some odd number? No. Thus, this base case needs to be considered before beginning the core logic of this subroutine.
                     </p>
-                    <code>
-
-<pre class='code test-code' >
-var load_count = load_counts[grid_selection-1];
-
-//Check whether we've run out of images to load:
-if(load_count &lt; manifest_size){
-    .
-    .
-    .
-}
-
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:295px;overflow:auto' max-height='295' src='code/06.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         Before jumping into the core logic of <code>grid_load_agent</code>, the structure of the markup needs to be discussed. Inspection of the html that's in place before any javascript is executed will discover one html tag: <code>&lt;div id='galleries'&gt;&lt;/div&gt;</code>. When the html document is executed by the browser, a script tag will fill this tag based on the maximum amount of columns whomever is deploying the gallery wants in place. Ultimately, sub <code>div</code> containers will be placed into this tag which represents a grid of a certain column count. Contained within these sub-<code>div</code> tags are <code>div</code> tags that are representative of the individual columns. Contained within the columns are figure tags which also contain <code>img</code> tags. The figures are embedded in a clickable anchor tag. The logic for filling out the super-<code>div</code> tag was noted with the discussion of the <code>max_column_size</code> global.
                     </p>
                     <p>
                         What is missing from the code snippet related to filling "galleries" <code>div</code> is insight of what constitutes the <code>div</code> representative of a given column. This logic is contained within a helper function. This helper function receives information from the <code>manifest</code> in addition to a grouping of styles. The nesting occurs here and the figure object is returned. It should be noted that this is where the logic is placed to allow an img tag to know when it is fully loaded. This is highlighted below:
                     </p>
-                    <code>
-<pre class='code test-code' >
-
-function create_new_figure(file_name,init_style,vsco_url,source_grid,image_number){
-    var anchor = document.createElement('a');
-    anchor.setAttribute('target','_blank');
-    anchor.setAttribute('rel','noopener noreferrer');
-    anchor.setAttribute('href',vsco_url);
-
-    var figure = document.createElement('figure');
-    figure.style['border-top'] = init_style['border-top'];
-    figure.style['opacity'] = init_style['opacity'];
-    var id_string = source_grid+'-'+image_number;
-    figure.id = 'figure-'+id_string;
-    figure.setAttribute('loaded',false);
-
-    var image = document.createElement('img');
-    image.src = 'thumbnails/'+file_name;
-    image.id = 'image-'+id_string;
-    <mark>image.onload = function(){</mark>
-        <mark>document.getElementById('figure-'+id_string).setAttribute('loaded',true);</mark>
-    <mark>}</mark>
-
-    figure.appendChild(image);
-    anchor.appendChild(figure);
-    return anchor;
-}
-
-</pre>
-
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:715px;overflow:auto' max-height='715' src='code/07.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         Pivoting back to the core of the logic contained in <code>grid_load_agent</code>, it's important to remind ourselves that when <code>grid_load_agent</code> is called, it is supplied a single argument. That argument is <code>grid_selection</code> which is a mechanism to select a specific grid view of a certain column length - the length determined by the argument given for the parameter. Much of the machination in place selects the grid of the supplied column count, then iterates through these columns. The variable labeled <code>boundary</code> indicates the amount of images to be pulled in through the current call. It is bounded by the column size of the <code>grid_selection</code>. It can be lower than this by reasons previously discussed and shown by the set of conditions to get into the core set of logic.
                     </p>
-                    <code>
-<pre class='code test-code' >
-
-async function grid_load_agent(grid_selection){//grid_selection is not zero-based
-    var load_count = load_counts[grid_selection-1];
-
-    //Check whether we've run out of images to load:
-    if(load_count &lt; manifest_size){
-        //Ensure the amount of columns does not cause us to overdraft:
-        if( (load_count+grid_selection) >= manifest_size){
-            var boundary = manifest_size - load_count;
-        }else{
-            var boundary = grid_selection;
-        }
-
-        var display_count = display_counts[grid_selection-1];
-
-        //A check to ensure that we don't grab too many images beyond the viewport boundary:
-        load_condition_check = (load_count - display_count) &lt;= max_column_size);
-        if(load_condition_check){
-            .
-            .
-            .
-            for(let i=0;i&lt;boundary;i++){
-                .
-                .
-                .
-            }
-            .
-            .
-            .
-        }
-    .
-    .
-    .
-    }
-.
-.
-.
-}
-
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:1060px;overflow:auto' max-height='1060' src='code/08.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         Recall the general logic of placing figures into columns. The image of lesser height needs to be paired with the column with the largest height. The image of greater height needs to be paired with the column of the smallest height. Image heights need to be known and considered in a certain order. Column heights need to be known and considered in a certain order. Let's start with the images.
                     </p>
                     <p>
                         The image information is first retrieved from the manifest and then used to create a new figure.
                     </p>
-                    <code>
-<pre class='code test-code' >
-
-for(let i=0;i&lt;boundary;i++){
-    //Grab the next image from the manifest:
-    var reference = manifest[load_count];
-    var new_figure_data = {
-        'object':create_new_figure(reference['file_name'],{'border-top':'solid 25px white','opacity':0},reference['share_link'],grid_selection,load_count),
-        'height': reference['height']
-    };
-    .
-    .
-    .
-}
-
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:375px;overflow:auto' max-height='375' src='code/09.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         Recall that images can be placed within the markup environment and the browser will take liberty to adjust the size of the object. In this case, we are using display properties that force the maximum size of an image to conform to the size of a given column. Within the <code>manifest</code>, height and width values of the originating image are stored. These can be used to calculate the proportion. It is not enough to strictly use the height value. Two images may share the same height value, but one may be significantly wider than the other, forcing a resize within the context of an html column. This resizing will in turn change its rendered height value. Thus, the image needs to have some ratio be calculated:
                     </p>
-                    <code>
-<pre class='code test-code' >
-
-for(let i=0;i&lt;boundary;i++){
-    .
-    .
-    .
-    var new_figure_ratio = (100 * reference['height']) / reference['width'];
-    .
-    .
-    .
-}
-
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:320px;overflow:auto' max-height='320' src='code/10.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         We now have an object representative of an image and a ratio representative of the amount of space it takes up within a column. These need to be placed somewhere on account of the fact this process is within an iterative structure.
                     </p>
@@ -475,217 +261,41 @@ for(let i=0;i&lt;boundary;i++){
                             </li>
                         </ul>
                     </p>
-                    <code>
-<pre class='code test-code' >
-
-for(let i=0;i&lt;boundary;i++){
-    .
-    .
-    .
-    if (Object.keys(figure_height_map).includes(new_figure_ratio.toString())){
-        figure_height_map[new_figure_ratio.toString()].push(new_figure_data['object']);
-    }else{
-        figure_height_map[new_figure_ratio.toString()] = [];
-        figure_height_map[new_figure_ratio.toString()].push(new_figure_data['object']);
-    }
-    figure_height_list.push(new_figure_ratio);
-    .
-    .
-    .
-}
-
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:480px;overflow:auto' max-height='480' src='code/11.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         All that's left is to account for global info and to sort the list of keys, highlighted below.
                     </p>
-                    <code>
-<pre class='code test-code' >
-
-for(let i=0;i&lt;boundary;i++){
-    .
-    .
-    .
-    var new_figure_ratio = (100 * reference['height']) / reference['width'];
-    if (Object.keys(figure_height_map).includes(new_figure_ratio.toString())){
-        figure_height_map[new_figure_ratio.toString()].push(new_figure_data['object']);
-    }else{
-        figure_height_map[new_figure_ratio.toString()] = [];
-        figure_height_map[new_figure_ratio.toString()].push(new_figure_data['object']);
-    }
-    figure_height_list.push(new_figure_ratio);
-    <mark>col_maps[grid_selection-1][i]['loaded'] += 1;</mark>
-    <mark>load_count += 1;</mark>
-}//end loop
-<mark>load_counts[grid_selection-1] = load_count;</mark>
-
-<mark>figure_height_list.sort(function(a,b){</mark>
-    <mark>return b-a;</mark>
-<mark>});</mark>
-
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:610px;overflow:auto' max-height='610' src='code/12.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         The same logic needs to applied to the grouping of columns being considered. The current height of the columns in place need to be considered and placed into a list. This list should be sorted in the opposite order of the <code>figure_height_list</code> so that its values may be popped in tandem with the height list of the figures for correct pairing. These data structures reflect the data structures with the figure prefix, and exist within the same scope and proximity. Noting these declarations, the familiar logic is as follows:
                     </p>
-                    <code>
-<pre class='code test-code' >
-
-var columns = grids[grid_selection-1].children;
-for(let i=0;i&lt;grid_selection;i++){
-    let column_height = columns[i].getBoundingClientRect().height
-    col_h_list.push(column_height);
-    if(Object.keys(col_h_map).includes(column_height.toString())){
-        col_h_map[column_height.toString()].push(i);
-    }else{
-        col_h_map[column_height.toString()] = [];
-        col_h_map[column_height.toString()].push(i);
-    }
-}
-
-// TODO: create an insertion subroutine in place of what these sorts accomplish.
-col_h_list.sort(function(a,b){
-    return a-b;
-});
-
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:505px;overflow:auto' max-height='505' src='code/13.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         With the maps in place, all that needs to be done is to iterate an amount of times equal to the amount of images being placed. For each iteration, pop a height key from both height lists. Use these keys to access their respective associative arrays and get the the relevant objects to make a figure-column pairing.
                     </p>
-                    <code>
-<pre class='code test-code' >
-
-var iteration_index = 0;
-var figure_key = figure_height_list[iteration_index];
-var figure_group = figure_height_map[figure_key];
-while(iteration_index &lt; boundary){
-    //allow iteration of multiple columns with the same height-tier:
-    for(let i=0;i&lt;figure_group.length;i++){
-        //Grab the height-value of the next-smallest colulmn:
-        let col_key = col_h_list[iteration_index];
-        //Get the index of the column with respect to the columns collection:
-        col_index = col_h_map[col_key].pop();
-        //Grab the next figure of the current height-tier:
-        figure = figure_group[i];
-        <mark>columns[col_index].appendChild(figure);</mark>
-        iteration_index += 1;
-    }
-    figure_key = figure_height_list[iteration_index];
-    figure_group = figure_height_map[figure_key];
-}
-
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:560px;overflow:auto' max-height='560' src='code/14.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         Note that the value for <code>iteration_index</code> allows for a case where subsequent images can be placed into the same column. This occurs when a group of images whose combined height isn't great enough to cause a column's height to overwhelm the others.
                     </p>
                     <p>
                         All these pieces are brought together to make the whole of the subroutine:
                     </p>
-                    <code>
-<pre class='code test-code' >
-
-async function grid_load_agent(grid_selection){//grid_selection is not zero-based
-    var load_count = load_counts[grid_selection-1];
-
-    //Check whether we've run out of images to load:
-    if(load_count &lt; manifest_size){
-        //Ensure the amount of columns does not cause us to overdraft:
-        if( (load_count+grid_selection) >= manifest_size){
-            var boundary = manifest_size - load_count;
-        }else{
-            var boundary = grid_selection;
-        }
-
-        var display_count = display_counts[grid_selection-1];
-
-        //A check to ensure that we don't grab too many images beyond the viewport boundary:
-        load_condition_check = (load_count - display_count) &lt;= max_column_size);
-        if(load_condition_check){
-            //A to-be-ordered list of height values for each figure loaded:
-            var figure_height_list = [];
-            //A mapping of figure objects such that the key is it's height:
-            var figure_height_map = {};
-            //A to-be-ordered list of height values with respect to the columns being used for display:
-            var col_h_list = [];
-            //A mapping of column objects such that a key is a column's height:
-            var col_h_map = {};
-
-            //Iterate an amount of times equivalent to amount of images being buffered:
-            for(let i=0;i&lt;boundary;i++){
-
-                //Grab the next image from the manifest:
-                var reference = manifest[load_count];
-
-
-                var new_figure_data = {
-                                    'object':create_new_figure(reference['webp_file'],{'border-top':'solid 25px white','opacity':0},reference['share_link'],grid_selection,load_count),
-                                    'height': reference['height']
-                                    };
-
-                var new_figure_ratio = (100 * reference['height']) / reference['width'];
-                if (Object.keys(figure_height_map).includes(new_figure_ratio.toString())){
-                    figure_height_map[new_figure_ratio.toString()].push(new_figure_data['object']);
-                }else{
-                    figure_height_map[new_figure_ratio.toString()] = [];
-                    figure_height_map[new_figure_ratio.toString()].push(new_figure_data['object']);
-                }
-                figure_height_list.push(new_figure_ratio);
-                col_maps[grid_selection-1][i]['loaded'] += 1; //col_map tracks amount of images loaded and displayed for each column.
-                load_count += 1;
-            }
-            load_counts[grid_selection-1] = load_count;
-
-            //position the program to iterate through the figure height values by order of height values:
-            figure_height_list.sort(function(a,b){
-                return b-a;
-            });
-
-            var columns = grids[grid_selection-1].children;
-            for(let i=0;i&lt;grid_selection;i++){
-                let column_height = columns[i].getBoundingClientRect().height
-                col_h_list.push(column_height);
-                if(Object.keys(col_h_map).includes(column_height.toString())){
-                    col_h_map[column_height.toString()].push(i);
-                }else{
-                    col_h_map[column_height.toString()] = [];
-                    col_h_map[column_height.toString()].push(i);
-                }
-            }
-
-            // TODO: create an insertion subroutine in place of what these sorts accomplish.
-            col_h_list.sort(function(a,b){
-                return a-b;
-            });
-
-            var iteration_index = 0;
-            var figure_key = figure_height_list[iteration_index];
-            var figure_group = figure_height_map[figure_key];
-            while(iteration_index &lt; boundary){
-                //allow iteration of multiple columns with the same height-tier:
-                for(let i=0;i&lt;figure_group.length;i++){
-                    //Grab the height-value of the next-smallest colulmn:
-                    let col_key = col_h_list[iteration_index];
-                    //Get the index of the column with respect to the columns collection:
-                    col_index = col_h_map[col_key].pop();
-                    //Grab the next figure of the current height-tier:
-                    figure = figure_group[i];
-                    columns[col_index].appendChild(figure);
-                    iteration_index += 1;
-                }
-                figure_key = figure_height_list[iteration_index];
-                figure_group = figure_height_map[figure_key];
-            }
-            setTimeout(function(){
-                grid_display_agent(grid_selection);
-            },(grid_selection * 100));
-        }
-    }
-}
-
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:2640px;overflow:auto' max-height='2640' src='code/15.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         Taking a step back, a higher look will expose a key relationship. This relationship is based on the existence of two separate abstractions which recursively interact with each other. One piece is the buffer zone in which new images are placed but hidden. The other piece is the complement where the images have been revealed. The transition from one abstraction to the other is whether or not one of their components (an image-figure) has reached the threshold described by <code>isFigureBottom</code>. This transition ceases once all available images have been placed from the buffer zone into its complement.
                     </p>
@@ -695,69 +305,20 @@ async function grid_load_agent(grid_selection){//grid_selection is not zero-base
                     <p>
                         The recursion involved needs to be initiated by something, though. What this is is fairly obvious - when the page finishes loading, kick off the process. The first thing this process needs to ask itself is, "how many columns should initially be displayed?" This question is answered through a subroutine called <code>readjust_caller</code> which sets a global variable called <code>active_grid</code>. This variable indicates how many columns should exist dependent on the width of the screen. This subroutine is also called within a simple event handler for the window on resize.
                     </p>
-                    <code>
-<pre class='code test-code' >
-
-var isMobile = window.matchMedia || window.msMatchMedia;
-isMobile = isMobile("(pointer:coarse)").matches;
-
-var old_height = 0;
-var initial_gallery_position;
-
-window.addEventListener('load', function () {
-    initial_gallery_position = document.getElementById('galleries').getBoundingClientRect().top;
-    <mark>readjust_caller();</mark>
-    grids[active_grid-1].style['overflow'] = 'inherit';
-    grids[active_grid-1].style['height'] = 'inherit';
-    grid_load_agent(active_grid);
-    for(let i=1;i&lt;=max_column_size;i++){
-        if(i != active_grid){
-            grid_load_agent(i);
-        }
-    }
-    old_height = window.innerHeight;
-});
-
-window.onresize = function(){
-    <mark>readjust_caller();</mark>
-    if(old_height &lt; window.innerHeight){
-        grid_display_agent(active_grid);
-    }
-    old_height = window.innerHeight;
-}
-
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:795px;overflow:auto' max-height='795' src='code/16.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         It is within the call stack of <code>readjust_caller</code> that a the display properties of <code>document.getElement&shy;ById('galleries')</code>'s children is handled; the children which represent a grid view of a certain column quantity. For example, should <code>readjust_caller</code> determine the width of the device's screen necessitate 3 columns, it hides the grids of column sizes 1, 2, and 4, and enables the display of the grid of column size 3.
                     </p>
                     <p>
                         The result of the window's load event handler, shown above, will allow the image grid to display a set amount of images based on the height of the window. It will also place the images into each buffer zone. If one were to scroll, no more action would occur; <code>isFigureBottom</code> would not be called upon again. To address this, another event needs to be considered: when the screen scrolls!
                     </p>
-                    <code>
-<pre class='code test-code' >
-
-window.onscroll = function(){
-    if(display_counts[active_grid - 1] &lt;= load_counts[active_grid - 1] - active_grid){
-        setTimeout(function(){
-            <mark>grid_display_agent(active_grid);</mark>
-            let base = load_counts[active_grid - 1];
-            for(let i=1;i&lt;=max_column_size;i++){
-                let is_not_active_column = i != active_grid;
-                let has_less_loaded = load_counts[i-1] &lt; base;
-                let is_multiple_of = (base % i) == 0;
-                if(is_not_active_column && has_less_loaded && is_multiple_of){
-                    while(load_counts[i-1] &lt;= base && load_counts[i-1] &lt; manifest_size){
-                        <mark>grid_load_agent(i);</mark>
-                    }
-                }
-            }
-        }, (100 * active_grid));
-    }
-}
-
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:560px;overflow:auto' max-height='560' src='code/17.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         The set of booleans that scaffold the conditional within this subroutine's loop really emphasizes on a common pattern that has not been explicitly discussed thus far. Recall that both <code>grid_load_agent</code> and <code>grid_display_agent</code> have a single parameter which represents a certain grid view. A single call will determine the transitional state for a grid of the size given as an argument and decide whether an image should move from one state of display to another. As a user scrolls through the gallery, it's obvious what is occurring for the current grid view. It is not obvious that the same decisions are being made for the grids which are out of view.
                     </p>
@@ -799,5 +360,9 @@ window.onscroll = function(){
                 </nav>
             </section>
         </section>
+        <script src='../../js/project_functions.js'></script>
+        <script>
+            setCodeSizeSliders();
+        </script>
     </body>
 </html>

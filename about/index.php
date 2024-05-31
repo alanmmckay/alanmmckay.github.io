@@ -1,10 +1,6 @@
  
 <?php
 
-$normalize = '../normalize.css';
-
-$style = '../style.css';
-
 $canonical = 'https://alanmckay.blog/about/';
 
 $title = 'Alan McKay | About';
@@ -21,6 +17,10 @@ include('../header.php');
 
 ?>
         <section id='writingsWrapper'>
+            <header id='breadNav' style='overflow:hidden;border-bottom:solid 1px #778088;'>
+                <h1><a href='./' class='currentLink'>&nbsp;&gt; About</a>
+                <h1><a href='../'>Home</a></h1>
+            </header>
             <section>
                 <article>
                     <header>

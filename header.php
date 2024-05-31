@@ -1,13 +1,5 @@
 <?php
 
-if(!isset($normalize)){
-    $normalize = 'normalize.css';
-}
-
-if(!isset($style)){
-    $style = 'style.css';
-}
-
 if(!isset($canonical)){
     $canonical = 'https://alanmckay.blog';
 }
@@ -46,6 +38,13 @@ if(!isset($relative_path)){
     $relative_path = "";
 }
 
+if(!isset($style)){
+    $style = $relative_path.'style.css?v=050924';
+}
+
+if(!isset($normalize)){
+    $normalize = $relative_path.'normalize.css';
+}
 ?>
 <!DOCTYPE html>
 <html prefix="og: https://ogp.me/ns#">

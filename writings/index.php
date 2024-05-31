@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../normalize.css';
-
-$style = '../style.css';
-
 $canonical = 'https://alanmckay.blog/writings/';
 
 $title = 'Alan McKay | Writings';
@@ -20,11 +16,12 @@ include('../header.php');
 
 ?>
         <div id='homeWrapper'>
-            <header>
-                <h1><a href='../'>Alan McKay</a></h1>
+            <header id='breadNav' style='overflow:hidden'>
+                <h1><a href='./' class='currentLink'>&nbsp;&gt; Writings</a>
+                <h1><a href='../'>Home</a></h1>
             </header>
             <nav>
-                <a href='./'>
+                <a href='./' class='currentLink'>
                     <img src='../images/text-logo-grey.png' alt='Icon for blog link'>
                     Writings
                 </a>

@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/projects/aquatint/';
 
 $title = 'Alan McKay | Project | Aquatint';
@@ -20,6 +16,11 @@ include('../../header.php');
 
 ?>
         <section id='writingsWrapper'>
+            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
+                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; Aquatint</a>
+                <h1><a href='../'>&nbsp;&gt; Projects</a>
+                <h1><a href='../../'>Home</a></h1>
+            </header>
             <section>
                 <article>
                     <section class='info'>
@@ -50,9 +51,9 @@ include('../../header.php');
                             The script would reprocess an image to one that had the appearance of being produced using the aquatint printmaking technique. The product would be the same image with a more old-time aesthetic to it; the image would be more grainy with a warm temperature reminiscent of early print making.
                         </p>
                         <div class='fig-col'>
-                        <a href='../../images/cycle.png' target="_blank" rel="noopener noreferrer">
+                        <a href='./images/cycle.webp' target="_blank" rel="noopener noreferrer">
                             <figure class='graph'>
-                                <img src='../../images/cycle.png' alt='A photograph of an individual dressed in army attire of the world war 2 era cycling on a non-descript highway.'>
+                                <img src='./images/cycle.webp' alt='A photograph of an individual dressed in army attire of the world war 2 era cycling on a non-descript highway.'>
                                 <figcaption>
                                     A photo of myself during RAGBRAI sometime the late 2010s.
                                 </figcaption>
@@ -60,9 +61,9 @@ include('../../header.php');
                         </a>
 
 
-                        <a href='../../images/cycle_AT.png' target="_blank" rel="noopener noreferrer">
+                        <a href='./images/cycle_AT.png' target="_blank" rel="noopener noreferrer">
                             <figure class='graph'>
-                                <img src='../../images/cycle_AT.png' alt='A photograph of an individual dressed in army attire of the world war 2 era cycling on a non-descript highway. This photograph has had color removed and pixel highlighting to resemble an aquatint image.'>
+                                <img src='./images/cycle_AT.png' alt='A photograph of an individual dressed in army attire of the world war 2 era cycling on a non-descript highway. This photograph has had color removed and pixel highlighting to resemble an aquatint image.'>
                                 <figcaption>
                                     The same photo processed by the Aquatint Image Processor.
                                 </figcaption>
@@ -89,26 +90,10 @@ include('../../header.php');
                         <p>
                             An advantage to being provided a script within a Jupyter notebook is that it's easier to discern the sections the developer finds important. The script received from Professor Meurice took advantage of <code>matplotlib</code> to display the reprocessed images. Within the notebook, each significant step was capped by a display of the reprocessed image as-in progress. For example, the first significant step of the algorithm was to apply a grey-scale to each individual pixel. A given image would be read in using the imageio library then processed as such:
                         </p>
-                        <code>
-                            <pre class='code'>
-im2 = imageio.imread(filename)
-Nix=im2.shape[0]
-Niy=im2.shape[1]
-grayimage=np.zeros([Nix,Niy])
-for i in range(0,Nix):
-        for j in range(0,Niy):
-            blueComponent = im2[i][j][0]
-            greenComponent = im2[i][j][1]
-            redComponent = im2[i][j][2]
-            grayValue = 0.07 * blueComponent + 0.72 * greenComponent + 0.21 * redComponent
-            grayimage[i][j] = grayValue
-            pass
-dsqin=1-grayimage/255.0
-hsimage=plt.imshow(dsqin,cmap='Greys',aspect=1,interpolation='none')
-plt.colorbar(hsimage)
-plt.show(hsimage)
-                            </pre>
-                        </code>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:505px;overflow:auto' max-height='505' src='code/01.php'>
+                            </iframe>
+                        </figure>
                         <p>
                             An import of <code>matplotlib.pyplot</code> as <code>plt</code> preceded this block. Knowing this, take note of the usage of pyplot's show method near the end of the code snippet.
                         </p>
@@ -124,27 +109,10 @@ plt.show(hsimage)
                         <p>
                             The other values weren't clearly defined here. Since the product of the script is of visual nature, this provided an opportunity to produce something which can visually inform the variance of these values can produce. This would require a combinatoric production of the same image using a valid range of values. I refactored the code from the Jupyter notebook into an external python file and ran the following bash script:
                         </p>
-                        <code>
-                            <pre class='code'>
-sweeps=1
-while [ $sweeps -le 5 ]
-do
-    greycut=1
-    while [ $greycut -le 9 ]
-    do
-        greycut_float=`bc &lt;&lt;&lt; "scale=2; ${greycut}/10"`
-        temperature=1
-        while [ $temperature -le 9 ]
-        do
-            `python3 "aquatintScript.py" "cycle.png" $greycut_float $temperature $sweeps`
-            temperature=`expr $temperature + 2`
-        done
-        greycut=`expr $greycut + 2`
-    done
-    sweeps=`expr $sweeps + 1`
-done
-                            </pre>
-                        </code>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:530px;overflow:auto' max-height='530' src='code/02.php'>
+                            </iframe>
+                        </figure>
                         <p>
                             The ranges of the loops were restricted to keep a reasonable runtime of this process. A lot of the image processing is dependent on the amount of pixels contained in a given image, so the input image size was kept low enough whilst ensuring enough pixels were available to be able to gauge the differences the other input parameters bring to the process.
                         </p>
@@ -199,164 +167,50 @@ done
                         <p>
                             The <code>basename</code> function is used to truncate any attempts to submit a filename that tries to traverse the server's file system. Consider a post variable with the identifier of uploadImage:
                         </p>
-                        <code>
-                            <pre class='code'>
-$origin_file = $target_dir . basename($_FILES['uploadImage']['name']);
-                            </pre>
-                        </code>
                         <p>
                             The <code>pathinfo</code> function is used to isolate the extension of the filename string. Contrary to sentiment posed in paragraphs prior, this is still worthy of checking to provide useful feedback for those who are making sincere attempts at using the application.
                         </p>
-                        <code>
-                            <pre class='code'>
-$imageFileType = strtolower(pathinfo($target_dir . $origin_file,PATHINFO_EXTENSION));
-                            </pre>
-                        </code>
+                        <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:110px;overflow:auto' max-height='110' src='code/04.php'>
+                        </iframe>
+                        </figure>
                         <p>
                             The <code>exif_imagetype</code> function provides a means within PHP to drill down to byte-level in order to validate file structure. This is validated further by <code>image_type_to_mime_type</code> which makes use of Apache's <code>mime_magic</code> module to make the same assurance.
                         </p>
-                        <code>
-                            <pre class='code'>
-$target_file = $target_dir . $file_name  . "." . $imageFileType;
-$check = exif_imagetype($_FILES['uploadImage']['tmp_name']);
-$mimeType = image_type_to_mime_type($check);
-                            </pre>
-                        </code>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:165px;overflow:auto' max-height='165' src='code/05.php'>
+                            </iframe>
+                        </figure>
                         <p>
                             These functions are used in conjunction with safe system administration procedure. Within the Linux environment, proper(ly strict) permissions are granted to the upload folder while Apache configuration restricts file-type access to the folder to only allow access to what is relevant.
                         </p>
                         <p>
                             Slider and file selection input has been validated. A keen observer will discover a hidden input form. A decision was made to assign a random name to the uploaded file as it is placed into the upload folder. This is an attempt to decouple any malicious attempts at file system traversal and malicious script execution vectors that the previous measures may have missed. The back-end generates this random string as the template for the submission page is built.
                         </p>
-                        <code>
-                            <pre class='code'>
-$file_name = '';
-for($i = 0; $i &lt;= rand(10,20); $i++){
-    $new_ord = rand(87,122);
-    if($new_ord &gt;= 97){
-        $file_name = $file_name . chr($new_ord);
-    }else{
-        $file_name = $file_name . $new_ord;
-    }
-}
-                            </pre>
-                        </code>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:320px;overflow:auto' max-height='320' src='code/06.php'>
+                            </iframe>
+                        </figrue>
                         <p>
                             A hidden input form was opted instead of using a query string to embed this information. The reason for this was to keep the submission url clean. Another reason involves the necessity to know the filename before any submission is made! This relates to giving the user feedback of progress once they've made a submission.
                         </p>
                         <figure>
                             <hr>
                             <h4 id='validation_group_1_header' class='expandable'>[ - ] Validation of strings</h4>
-                            <code id='validation_group_1'>
-                                <pre class='code'>
-$target_dir = 'uploads/';
-$uploadOk = 1;
-
-//Validate string form controls:
-if(isset($_POST['hidden_file_name']) &amp;&amp; isset($_FILES['uploadImage']['name'])){
-    if(strlen($_FILES['uploadImage']['name']) &lt;= 0 || strlen($_POST['hidden_file_name']) &lt;= 0){
-        $uploadOk = 0;
-    }else{
-        $preg_result = preg_match("/\A([a-z0-9]+)\z/",$_POST['hidden_file_name']);
-        if($preg_result == 0){
-            echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Please refrain from altering hidden form.&lt;/div&gt;';
-            $uploadOk = 0;
-        }
-    }
-
-    if($uploadOk == 1){
-        $file_name = $_POST['hidden_file_name'];
-        $origin_file = $target_dir . basename($_FILES['uploadImage']['name']);
-        $imageFileType = strtolower(pathinfo($target_dir . $origin_file,PATHINFO_EXTENSION));
-        $target_file = $target_dir . $file_name  . "." . $imageFileType;
-        $check = exif_imagetype($_FILES['uploadImage']['tmp_name']);
-        $mimeType = image_type_to_mime_type($check);
-    }
-}else{
-    $uploadOk = 0;
-}
-                                </pre>
-                            </code>
+                            <figure id='validation_group_1' class='code-figure'>
+                                <iframe frameborder="0" style='width:100%;max-height:770px;overflow:auto' max-height='770' src='code/07.php'>
+                                </iframe>
+                            </figure>
                             <h4 id='validation_group_2_header' class='expandable'>[ - ] Validation of filetype</h4>
-                            <code id='validation_group_2'>
-                                <pre class='code'>
-//Validate filetype:
-if($uploadOk == 1 ){
-    if($check !== false){
-        //$uploadOk = 1;
-        if($_FILES['uploadImage']['size'] &gt; 1048576){
-            echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Sorry, your file is too large.&lt;/div&gt;';
-            $uploadOk = 0;
-        }
-    }else{
-        echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; File is not an image.&lt;/div&gt;';
-        $uploadOk = 0;
-    }
-
-    if( ($imageFileType != 'jpg') &amp;&amp; ($imageFileType != 'png') &amp;&amp; ($imageFileType != 'jpeg') &amp;&amp; ($imageFileType != 'gif') ){
-        echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Only jpg, jpeg, png, and gif files are allowed.&lt;/div&gt;';
-        $uploadOk = 0;
-    }else
-
-    if( ($mimeType != 'image/gif') &amp;&amp; ($mimeType != 'image/jpeg') &amp;&amp; ($mimeType != 'image/png') ){
-        echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Only jpg, jpeg, png, and gif files are allowed.&lt;/div&gt;';
-        $uploadOk = 0;
-    }
-
-}
-                                </pre>
-                            </code>
+                            <figure id='validation_group_2' class='code-figure'>
+                                <iframe frameborder="0" style='width:100%;max-height:715px;overflow:auto' max-height='715' src='code/08.php'>
+                                </iframe>
+                            </figure>
                             <h4 id='validation_group_3_header' class='expandable'>[ - ] Validation of numeric input</h4>
-                            <code id='validation_group_3'>
-                                <pre class='code'>
-//Validate numeric form controls:
-if($uploadOk == 1){
-
-    //Greycut:
-    try{
-        $greycut = (float) $_POST['greycut'];
-        if($greycut &lt; 0 || $greycut &gt; 1){
-            echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Please refrain from changing form values with the element inspector.&lt;/div&gt;';
-            $uploadOk = 0;
-        }else{
-            $greycut = (string) $greycut;
-        }
-    }catch (Exception $ex){
-        echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Please refrain from changing form values with the element inspector.&lt;/div&gt;';
-        $uploadOk = 0;
-    }
-
-    //Temperature:
-    try{
-        $temperature = (float) $_POST['temperature'];
-        if($temperature &lt; 0.1 || $temperature &gt; 10){
-            echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Please refrain from changing form values with the element inspector.&lt;/div&gt;';
-            $uploadOk = 0;
-        }else{
-            $temperature = (string) $temperature;
-        }
-    }catch (Exception $ex){
-        echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Please refrain from changing form values with the element inspector.&lt;/div&gt;';
-        $uploadOk = 0;
-    }
-
-    //Total Sweeps:
-    try{
-        $totalsweeps = (float) $_POST['totalsweeps'];
-        if($totalsweeps &lt; 1 || $totalsweeps &gt; 10){
-            echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Please refrain from changing form values with the element inspector.&lt;/div&gt;';
-            $uploadOk = 0;
-        }else{
-            $totalsweeps = (string) $totalsweeps;
-        }
-    }catch (Exception $ex){
-        echo '&lt;div class="alert alert-danger"&gt;&lt;strong&gt;Warning!&lt;/strong&gt; Please refrain from changing form values with the element inspector.&lt;/div&gt;';
-        $uploadOk = 0;
-    }
-
-}
-                                </pre>
-                            </code>
+                            <figure id='validation_group_3' class='code-figure'>
+                                <iframe frameborder="0" style='width:100%;max-height:1295px;overflow:auto' max-height='1295' src='code/09.php'>
+                                </iframe>
+                            </figure>
                             <figcaption>
                             Expand the headers above to see the relevant code-block for each tier of validation.
                             </figcaption>
@@ -367,12 +221,10 @@ if($uploadOk == 1){
                         <p>
                             Once the validation check passes, <code>move_uploaded_files</code> is called such that the receiving file is given the random name generated within the hidden input form. This new file's name will be used in concatenating a string to use for an <code>exec</code> call:
                         </p>
-                        <code>
-                            <pre class='code'>
-$script = 'python3 aquatintScript.py "'.$target_file.'" '.$greycut.' '.$temperature.' '.$totalsweeps;
-exec($script,$output,$result);
-                            </pre>
-                        </code>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:140px;overflow:auto' max-height='140' src='code/10.php'>
+                            </iframe>
+                        </figure>
                         <p>
                             All the user has to do now is wait for the Aquatint script to complete; And to wait they shall! Dependent on resolution, it may take a good amount of time for an image to process. The algorithm itself is at least quadratic in runtime with respect to the amount of pixels an image has. This is said ignoring unknown runtime of any library method calls embedded within the iteration of these pixels. This potential for slowness is compounded by the measly 1 gigabyte of ram and 2Ghz single core CPU that my LAMP server has access to. For these reasons, it is necessary to let the user know how far along the Aquatint conversion process is.
                         </p>
@@ -391,189 +243,58 @@ exec($script,$output,$result);
                         <p>
                           The process is as follows: When the submission form is loaded, the back-end automatically generates a filename. This has already been discussed in the section prior. It's necessary to know the file-name before the submission is posted to the server. Write this string to the hidden form and write it to a JSON file that only the back-end may access. This file will serve as a map for an API to use.
                         </p>
-                        <code>
-                            <pre class='code'>
-$file_name = '';
-for($i = 0; $i &lt;= rand(10,20); $i++){
-    $new_ord = rand(87,122);
-    if($new_ord &gt;= 97){
-        $file_name = $file_name . chr($new_ord);
-    }else{
-        $file_name = $file_name . $new_ord;
-    }
-}
-$json = file_get_contents("map.json");
-$json_data = json_decode($json,true);
-$json_data[$file_name] = array("status" =&gt; 0, "time" =&gt; time());
-file_put_contents("map.json",json_encode($json_data));
-                            </pre>
-                        </code>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:425px;overflow:auto' max-height='425' src='code/11.php'>
+                            </iframe>
+                        </figure>
                         <p>
                             Once the submit button is pressed, PHP will only serve the resulting page once all the program statements are completed. This includes the execution of the <code>exec</code> statement. This necessitates the need to have a filename pre-generated. Thus, a Javascript event listener is added to the submission button as a means know when it is pressed. This event listener must know the string that represents the filename.
                         </p>
-                        <code>
-                            <pre class='code'>
-&lt;div class='form-group'&gt;
-    &lt;input type='submit' value='Upload Image' name='submit' onclick="submit_process('&lt;?php echo $file_name; ?&gt;');" /&gt;
-    &lt;p id='wait' style='visibility:hidden;'&gt;&lt;b&gt;Please wait...&lt;/b&gt;&lt;/p&gt;
-&lt;/div&gt;
-                            </pre>
-                        </code>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:195px;overflow:auto' max-height='195' src='code/12.php'>
+                            </iframe>
+                        </figure>
                         <p>
                             Once submit is pressed, toggle a visual prompt for the user that they should wait. Trigger an interval loop which runs an AJAX query to the server's API to query for the status of an upload based on the randomly generated filename. This query occurs once every three seconds.
                         </p>
-                        <code>
-                            <pre class='code'>
-submit_process = function(filestring){
-    document.getElementById("wait").style.visibility = "visible";
-    setInterval(function(){
-        query("&lt;?php echo $file_name;?&gt;");
-    },3000);
-}
-                            </pre>
-                        </code>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:245px;overflow:auto' max-height='245' src='code/13.php'>
+                            </iframe>
+                        </figure>
                         <p>
                             Once submit is pressed, the Aquatint script will be run via the PHP script's exec command. Within the Aquatint script, create a JSON file that resides in the uploads folder. This JSON file is prefixed with the name of the file to be written. It will contain entry points to indicate when a certain step of the algorithm is completed. It will also have a spot to indicate the progress of the current step being executed.
                         </p>
-                        <code>
-                            <pre class='code'>
-status_dict = {"origin":False,"greycut":False,"temperature":False,"sweeps":dict(),"finished":0,"total":3+totalsweeps,"progress":0}
-
-for i in range(0,totalsweeps):
-    status_dict['sweeps']["sweep"+str(i)] = False
-
-write_to_json(filename.split('.')[-2]+'-status.json',json.dumps(status_dict))
-                            </pre>
-                        </code>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:245px;overflow:auto' max-height='245' src='code/14.php'>
+                            </iframe>
+                        </figure>
                         <p>
                             As the Aquatint program is running, it will write to the file once a significant step has been completed. Within each significant step, (usually embedded in an outer-loop), it will write a value indicating the percentage of the step completed. This will only be written for every 3% completed to save the amount of times the progress is written to this file.
                         </p>
-                        <code>
-                            <pre class='code'>
-# !!! This is the same loop described earlier in the reading.
-#     It has been expanded to allow progress reporting.
-#     Note that this is only a subsection of the Aquatint script.
-
-im2 = imageio.imread(filename)
-Nix=im2.shape[0]
-Niy=im2.shape[1]
-grayimage=np.zeros([Nix,Niy])
-
-rewrite_switch = True
-for i in range(0,Nix):
-        for j in range(0,Niy):
-            blueComponent = im2[i][j][0]
-            greenComponent = im2[i][j][1]
-            redComponent = im2[i][j][2]
-            grayValue = 0.07 * blueComponent + 0.72 * greenComponent + 0.21 * redComponent
-            grayimage[i][j] = grayValue
-            pass
-        status_dict['progress'] = i / Nix
-        if round((i * 100) / Nix) % 3 == 0:
-            if rewrite_switch == True:
-                write_to_json(filename.split('.')[-2]+'-status.json',json.dumps(status_dict))
-                rewrite_switch = False
-        else:
-            rewrite_switch = True
-status_dict["progress"] = 0
-
-dsqin=1-grayimage/255.0
-hsimage=plt.imshow(dsqin,cmap='Greys',aspect=1,interpolation='none')
-#cb = plt.colorbar(hsimage)
-plt.savefig(filename.split('.')[-2]+'-origin.jpg',dpi=300)
-
-status_dict["origin"] = True
-status_dict['finished'] += 1
-write_to_json(filename.split('.')[-2]+'-status.json',json.dumps(status_dict))
-                            </pre>
-                        </code>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:1005px;overflow:auto' max-height='1005' src='code/15.php'>
+                            </iframe>
+                        </figure>
                         <p>
                             As the user's browser is waiting for a response of the <code>post</code>, the AJAX method will be querying the API and receiving new state written by the Python script. The AJAX call will work through a set of states which represent the completion of a certain step of the Aquatint conversion process. Percentage of a given step will be reported, and once a step is completed, a progress bar will be filled in.
                         </p>
-                        <code>
-                            <pre class='code'>
-query = function(filestring){
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function(){
-        if (this.readyState == 4 && this.status == 200){
-            result = this.responseText;
-            finished = JSON.parse(result)[0];
-            total = JSON.parse(result)[1];
-            ratio = (finished/total) * 100;
-            new_width = '' + ratio + "%";
-            document.getElementById('progress-bar').style.width = new_width;
-            progress_text_object = document.getElementById('progress-text');
-            if(finished == 0){
-                progress = JSON.parse(result)[2];
-                progress_text_object.innerHTML = 'Step 1/'+total+'; Resizing and applying greyscale to original image: ' + Math.ceil(progress * 100) + '% complete.';
-            }else if(finished == 1){
-                progress_text_object.innerHTML = 'Step 2/'+total+'; Original image resized - Applying greycut...';
-            }else if(finished == 2){
-                progress_text_object.innerHTML = 'Step 3/'+total+'; Greycut applied - Applying temperature...';
-            }else if(finished == 3){
-                progress = JSON.parse(result)[2];
-                progress_text_object.innerHTML = 'Step 4/'+total+'; Greycut and Temperature applied - Applying first sweep: ' + Math.ceil(progress * 100) + '% complete.';
-            }else if(finished >= 4){
-                progress = JSON.parse(result)[2];
-                progress_text_object.innerHTML = 'Step '+(finished+1)+'/'+total+'; Applying sweep: ' + Math.ceil(progress * 100) + '% complete.';
-            }
-        }
-    };
-    xmlhttp.open("GET","status.php?id="+filestring,true);
-    xmlhttp.send();
-}
-                            </pre>
-                        </code>
-                        <code>
-                            <pre class='code'>
-
-&lt;div class="progress"&gt;
-    &lt;div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: 0%" &gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div id='progress-text' class='alert alert-light'&gt;
-&lt;/div&gt;
-                            </pre>
-                        </code>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:875px;overflow:auto' max-height='875' src='code/16.php'>
+                            </iframe>
+                        </figure>
+                        <br>
+                        <br>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:245px;overflow:auto' max-height='245' src='code/17.php'>
+                            </iframe>
+                        </figure>
                         <p>
                             For every query to the API, the PHP script will then look up the relevant JSON status file and report the relevant status. The AJAX query will make use of the returned information to fill in the relevant HTML elements to give the user a sense of progress.
                         </p>
-                        <code>
-                            <pre class='code'>
-&lt;?php
-$not_ready = json_encode(array(0,0));
-
-if(isset($_GET['id'])){
-    $result = preg_match("/\A([a-z0-9]+)\z/",$_GET['id']);
-    $valid = 0;
-    if($result == 1){
-        $json = file_get_contents("map.json");
-        $json_data = json_decode($json,true);
-        if(isset($json_data[$_GET['id']])){
-            $valid = 1;
-        }else{
-            echo $not_ready;
-        }
-    }else{
-        echo $not_ready;
-    }
-}else{
-    echo $not_ready;
-}
-
-if($valid == 1){
-    try{
-        $json = file_get_contents("uploads/".$_GET['id']."-status.json");
-        $json_data = json_decode($json,true);
-        $return = array($json_data["finished"],$json_data["total"],$json_data['progress']);
-        echo json_encode($return);
-    }catch(Exception $ex){
-        echo $not_ready;
-    }
-}
-?&gt;
-                            </pre>
-                        </code>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:925px;overflow:auto' max-height='925' src='code/18.php'>
+                            </iframe>
+                        </figure>
                         <p>
                             To clean-up things on the server-side, every time the submission page is accessed, the back end will take a look at the mapping json file and keep all the items that are less than 30 minutes old. A cronjob also works on the server and deletes all files within the uploads folder that meets this criteria as well.
                         </p>
@@ -596,14 +317,14 @@ if($valid == 1){
                         <hr>
                         <figure class='col-fig'>
 
-                            <a href='../../images/ngr.png' target="_blank" rel="noopener noreferrer">
-                                <img src='../../images/ngr.png' alt=''>
+                            <a href='./images/ngr.webp' target="_blank" rel="noopener noreferrer">
+                                <img src='./images/ngr.webp' alt=''>
                             </a>
-                            <a href='../../images/sr.png' target="_blank" rel="noopener noreferrer">
-                                <img src='../../images/sr.png' alt=''>
+                            <a href='./images/sr.webp' target="_blank" rel="noopener noreferrer">
+                                <img src='./images/sr.webp' alt=''>
                             </a>
-                            <a href='../../images/pn.png' target="_blank" rel="noopener noreferrer">
-                                <img src='../../images/pn.png' style='float:none;' alt=''>
+                            <a href='./images/pn.webp' target="_blank" rel="noopener noreferrer">
+                                <img src='./images/pn.webp' style='float:none;' alt=''>
                             </a>
 
                             <figcaption style='clear:both;padding-top:25px'>
@@ -615,7 +336,11 @@ if($valid == 1){
                     </section>
                 </article>
                 <script src='../../js/project_functions.js'></script>
+
                 <script>
+
+                    setCodeSizeSliders();
+
 /* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
 
                     let status = {"validation_group_1":true,"validation_group_2":true,"validation_group_3":true};
@@ -731,7 +456,6 @@ if($valid == 1){
                     setSliderVal('greycutSlider',0,true);
                     setSliderVal('temperatureSlider',0,true);
                     setSliderVal('sweepSlider',0,true);
-
                 </script>
                 <nav>
                     <a href='../'>Back</a>

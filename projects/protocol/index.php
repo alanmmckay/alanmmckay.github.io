@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/projects/protocol/';
 
 $title = 'Alan McKay | Project | Population Protocol';
@@ -20,6 +16,11 @@ include('../../header.php');
 
 ?>
         <section id='writingsWrapper'>
+            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
+                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; Population Protocol</a>
+                <h1><a href='../'>&nbsp;&gt; Projects</a>
+                <h1><a href='../../'>Home</a></h1>
+            </header>
             <section>
                 <article>
                     <section class='info'>
@@ -73,20 +74,10 @@ include('../../header.php');
                     <p>
                         Consider the following protocol:
                     </p>
-                        <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:35em;padding-left:10px'>
-Q = {L,H}
-Σ = {L,H}
-ι(x) = x
-ω(x) = x
-δ = {
-    (L,L) -> (L,L),
-    (L,H) -> (H,H),
-    (H,L) -> (H,H),
-    (H, H) -> (H,H)
-    }
-</pre>
-                        </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:335px;overflow:auto' max-height='335' src='code/01.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         The above protocol is equivalent to running an AND boolean operation on a population where L=1 and H=0.
                     </p>
@@ -94,7 +85,7 @@ Q = {L,H}
                         A bird’s sensor switches from L to H when it’s temperature reaches the threshold. When it interacts with another bird, it will then communicate this fact. The following is one possible set of interactions a group of  5 birds may exhibit when one has a status of H:
                     </p>
                     <figure>
-                        <img src="../../images/pp_A.png" style="max-width:400px;" alt="A series of graphs which describe the interaction of nodes in a singular network. These interactions are highlighted by the edges the nodes share. Each subsequent graph in the series indicates the state of the network upon each interaction."/>
+                        <img src="./images/pp_A.webp" style="max-width:400px;" alt="A series of graphs which describe the interaction of nodes in a singular network. These interactions are highlighted by the edges the nodes share. Each subsequent graph in the series indicates the state of the network upon each interaction."/>
                         <figcaption style='max-width:450px;margin:auto;margin-top:1%;'>
                             Figure A.
                         </figcaption>
@@ -113,27 +104,15 @@ Q = {L,H}
                         </p>
                         <!--div class='aside'>
                             <figure class='narrow'>
-                                <img src='../../images/pp_B.png' style='width:95%;max-width:150px'/>
+                                <img src='./images/pp_B.webp' style='width:95%;max-width:150px'/>
                                 <figcaption>
                                     Figure B.
                                 </figcaption>
-                            </figure-->
-                            <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:90vw;max-width:40em;padding-left:10px'>
-Q = {L -/-, H -/-, 0 n/m, 1 x/y} where n,m,x, y are Integers
-Σ = {L, H}
-ι(x) = x
-ω(0 n/m) = ω(1 n/m) = n/m
-δ = {
-    (H -/-,H -/-) -> (2/2, 2/2),
-    (L -/-, H -/-) -> (1/2, 1/2),
-    (H -/-, L -/-) -> (1/2, 1/2),
-    (L -/-, L -/-) -> (0/2, 0/2),
-    (0 n/m, 0 x/y) -> (0 (n+x)/(m+y), (1 (n+x)/(m+y)),
-    (0 n/m, 1 x/y) -> (0 n/m, 1 n/m)
-    }
-</pre>
-                            </code>
+                                </figure-->
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:400px;overflow:auto' max-height='400' src='code/02.php'>
+                            </iframe>
+                        </figure>
                             <p>
                                 This Algorithm can be used in conjunction with leader election and epidemics<a href='#references3'>[3]</a><a href='#references4'>[4]</a> to ensure data is ready to be collected.  Once it is, the collector simply has to check the given ratio.
                             </p>
@@ -147,7 +126,7 @@ Q = {L -/-, H -/-, 0 n/m, 1 x/y} where n,m,x, y are Integers
                     <h2> Future and Application </h2>
                     <div class='aside'>
                     <figure class='narrow'>
-                        <img src="../../images/pp_C.png" style='max-width:200px;' alt='A graph which represents a network of nodes. Each edge connecting two nodes indicates an interaction channel. The more vibrant an edge, the more interactions occurred between the two nodes.'/>
+                        <img src="./images/pp_C.webp" style='max-width:200px;' alt='A graph which represents a network of nodes. Each edge connecting two nodes indicates an interaction channel. The more vibrant an edge, the more interactions occurred between the two nodes.'/>
                         <figcaption>
                             Figure B.
                         </figcaption>
@@ -179,5 +158,9 @@ Q = {L -/-, H -/-, 0 n/m, 1 x/y} where n,m,x, y are Integers
                 </nav>
             </section>
         </section>
+        <script src='../../js/project_functions.js'></script>
+        <script>
+            setCodeSizeSliders();
+        </script>
     </body>
 </html>

@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/projects/safety/';
 
 $title = 'Alan McKay | Project | Cycling Safety Database';
@@ -20,6 +16,11 @@ include('../../header.php');
 
 ?>
         <section id='writingsWrapper' style='min-width:300px;'>
+            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
+                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; Cycling Safety Database</a>
+                <h1><a href='../'>&nbsp;&gt; Projects</a>
+                <h1><a href='../../'>Home</a></h1>
+            </header>
             <section>
                 <article>
                     <section class='info'>
@@ -117,9 +118,9 @@ include('../../header.php');
                     <p>
                         The following is a UML diagram describing such a database:
                     </p>
-                    <a href='../../images/erd-gis.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/erd-gis.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/erd-gis.png' alt='A UML diagram describing the database discussed in this report.'/>
+                            <img src='./images/erd-gis.webp' alt='A UML diagram describing the database discussed in this report.'/>
                             <figcaption>
                                 Preliminary UML diagram
                             </figcaption>
@@ -204,11 +205,10 @@ include('../../header.php');
                         application permission. The process entails registering an application within Strava's system. Each
                         application has a unique client ID. Said application should direct a user to the following URL:
                     </p>
-                    <code>
-<pre class='code'>
-https://www.strava.com/oauth/authorize?client_id=&lt;CLIENT_ID&gt;response_type=code&amp;redirect_uri=&lt;APPLICATION_LOCATION&gt;/exchange_token&amp;approval_prompt=force&amp;scope=activity:&lt;SCOPE&gt;
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' max-height='125' src='code/01.php'>
+                        </iframe>
+                    </figure>
                     <p>The bracketed attributes can be described as:</p>
                     <ul>
                         <li>
@@ -229,23 +229,17 @@ https://www.strava.com/oauth/authorize?client_id=&lt;CLIENT_ID&gt;response_type=
                         client id, client secret token (given upon application creation), and authorization code generates a
                         response with an access code to use to query the API. I.e.,
                     </p>
-                    <code>
-<pre class='code'>
-curl -X POST https://www.strava.com/oauth/token \
--F client_id=&lt;CLIENT_ID&gt; \
--F client_secret=&lt;CLIENT_SECRET&gt; \
--F code=&lt;AUTHORIZATION_CODE&gt; \
--F grant_type=authorization_code
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:215px;overflow:auto' max-height='215' src='code/02.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         Responds with a user access token to be used via:
                     </p>
-                    <code>
-<pre class='code'>
-http GET "https://www.strava.com/api/v3/athlete/activities" "Authorization: Bearer &lt;access token&gt;"
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:125px;overflow:auto' max-height='125' src='code/03.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         Which can be piped into a json file.
                     </p>
@@ -261,61 +255,18 @@ http GET "https://www.strava.com/api/v3/athlete/activities" "Authorization: Bear
                     <p>
                         The python script developed for this project is as follows:
                     </p>
-                    <code>
-<pre class='code'>
-with open('morerides.json','r') as rides_file:
-    rides_data = json.load(rides_file)
-
-csv_string = "activity_id,athlete_id,route_id,route,type,location_country"
-csv_string = csv_string + ",start_date,start_date_local,timezone\n"
-
-for ride in rides_data:
-    if ride['map']['summary_polyline'] and ride['map']['summary_polyline'] != '':
-        #gather values:
-        activityId = ride['id']
-        athleteId = ride['athlete']['id']
-        routeId = ride['map']['id']
-        route = ride['map']['summary_polyline']
-        type = ride['type']
-        locationCountry = ride['location_country']
-        startDate = ride['start_date']
-        startDateLocal = ride['start_date_local']
-        timezone = ride['timezone']
-
-        #create row string
-        line = str(activityId) + "," + str(athleteId) + "," + str(routeId) + ","
-        line = line + str(route) + "," + str(type) + "," + str(locationCountry)
-        line = line + "," + str(startDate) + "," + str(startDateLocal)
-        line = line + "," + str(timezone) + "\n"
-
-        #concatenate the row string to the csv_string
-        csv_string = csv_string + line
-
-with open('rides.csv','w') as rides_file:
-    rides_file.write(csv_string)
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:875px;overflow:auto' max-height='875' src='code/04.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         This information can now be imported to a staging table. With a schema called "cycling" created, the
                         table definition can be described as:
                     </p>
-                    <code>
-<pre class='code'>
-CREATE TABLE cycling.activities_staging
-(
-    activity_id BIGINT,
-    athlete_id BIGINT,
-    route_id varchar,
-    <mark>encoded_route text COLLATE pg_catalog."default",</mark>
-    activity_type char(8),
-    location_country varchar,
-    start_date timestamp,
-    start_date_local timestamp,
-    timezone varchar,
-    PRIMARY KEY(activity_id)
-);
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:425px;overflow:auto' max-height='425' src='code/05.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         Highlighted is a column called "encoded_route". Strava stores its polyline information as an encoded
                         polyline string. This is a syntax used by services such as open street map. Indeed, Strava does not inform
@@ -327,61 +278,17 @@ CREATE TABLE cycling.activities_staging
                     <p>
                         The activities table is created via:
                     </p>
-                    <code>
-<pre class='code'>
-CREATE TABLE cycling.activities
-(
-    activity_id BIGINT,
-    athlete_id BIGINT,
-    route_id varchar,
-    encoded_route text COLLATE pg_catalog."default",
-    activity_type char(8),
-    location_country varchar,
-    start_date timestamp,
-    start_date_local timestamp,
-    timezone varchar,
-    user_id BIGINT,
-    <mark>route geometry(linestring,4326),</mark>
-    PRIMARY KEY(activity_id),
-    CONSTRAINT fk_athlete
-    FOREIGN KEY(user_id)
-    REFERENCES cycling.athletes(user_id)
-);
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:560px;overflow:auto' max-height='560' src='code/06.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         And the data insertion query is as follows:
                     </p>
-                    <code>
-<pre class='code'>
-INSERT INTO cycling.activities(
-    activity_id,
-    athlete_id,
-    route_id,
-    encoded_route,
-    activity_type,
-    location_country,
-    start_date,
-    start_date_local,
-    timezone,
-    user_id,
-    route)
-SELECT staging.activity_id,
-        staging.athlete_id,
-        staging.route_id,
-        staging.encoded_route,
-        staging.activity_type,
-        staging.location_country,
-        staging.start_date,
-        staging.start_date_local,
-        staging.timezone,
-        u.user_id,
-        <mark>(SELECT ST_AsEWKT(ST_LineFromEncodedPolyline(staging.encoded_route)))</mark>
-            FROM cycling.activities_staging as staging
-            JOIN cycling.athletes as u ON strava_athlete_id = athlete_id
-;
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:770px;overflow:auto' max-height='770' src='code/07.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         What has not been shared is the creation of an athletes table. This table creation is a trivial matter.
                         What's important is the join statement of the insertion query which adheres to the foreign key
@@ -394,9 +301,9 @@ SELECT staging.activity_id,
                         information, sparse data on account of the 40+ attributes for each source, and the storage required to
                         house all this. Trimming this fat will hope the project maintain scope and performance.
                     </p>
-                    <a href='../../images/01-gis.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/01-gis.webp' target="_blank" rel="noopener noreferrer">
                         <figure style='border-bottom:1px solid #7b869d;border-top:1px solid #7b869d'>
-                            <img src='../../images/01-gis.png' alt='A screenshot showing the significant differences in sizes between data tables.'/>
+                            <img src='./images/01-gis.webp' alt='A screenshot showing the significant differences in sizes between data tables.'/>
                             <figcaption>
                                 Note the contrast of storage between the production tables and their staging counterparts.
                             </figcaption>
@@ -406,21 +313,10 @@ SELECT staging.activity_id,
                     <p>
                         The traffic volume table can be described as:
                     </p>
-                    <code>
-<pre class='code'>
-CREATE TABLE cycling.traffic_vol
-(
-    gid INT,
-    route_id varchar,
-    aadt BIGINT,
-    aadt_year SMALLINT,
-    effective_start_date date,
-    effective_end_date date,
-    geom geometry(multilinestring,4326),
-    PRIMARY KEY(gid)
-);
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:375px;overflow:auto' max-height='375' src='code/08.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         This contains the information that's required, and no more. There are two obstacles in terms of
                         migrating the relevant data from its staging table and the production table:
@@ -441,15 +337,10 @@ CREATE TABLE cycling.traffic_vol
                     <p>
                         The following insertion query addresses these two obstacles:
                     </p>
-                    <code>
-<pre class='code'>
-INSERT INTO cycling.traffic_vol (gid,route_id, aadt, aadt_year, effective_start_date,
-effective_end_date,geom)
-    SELECT distinct gid,route_id, aadt, aadt_year, effective_, effectiv_1,
-    <mark>ST_Force2D(ST_Transform(geom,4326))</mark> FROM cycling.traffic_vol_staging WHERE <mark>effective_ is
-    not null ORDER BY effective_ DESC;</mark>
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:220px;overflow:auto' max-height='220' src='code/09.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         (Note that the shapefiles have poorly named attributes; "effective_" is the column name for the
                         attribute describing the effective start date.)
@@ -465,9 +356,9 @@ effective_end_date,geom)
                         The data can now start being used. The following figure shows the grouping of activities gathered via
                         Strava being displayed:
                     </p>
-                    <a href='../../images/02-gis.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/02-gis.webp' target="_blank" rel="noopener noreferrer">
                         <figure style='border-bottom:1px solid #7b869d;border-top:1px solid #7b869d'>
-                            <img src='../../images/02-gis.png' alt='A map showing a set of lines that chart cycling routes taken from Strava.'/>
+                            <img src='./images/02-gis.webp' alt='A map showing a set of lines that chart cycling routes taken from Strava.'/>
                             <figcaption>
                                 Mapping of Strava activities
                             </figcaption>
@@ -477,9 +368,9 @@ effective_end_date,geom)
                     <p>
                         The following shows these activities overlaying the traffic network. Keep in mind that each road segment has an associated AADT value:
                     </p>
-                    <a href='../../images/03-gis.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/03-gis.webp' target="_blank" rel="noopener noreferrer">
                         <figure style='border-bottom:1px solid #7b869d;border-top:1px solid #7b869d'>
-                            <img src='../../images/03-gis.png' alt='A map showing the previous strava mappings that are overlaying a set of lines describing public roads.'/>
+                            <img src='./images/03-gis.webp' alt='A map showing the previous strava mappings that are overlaying a set of lines describing public roads.'/>
                             <figcaption>
                                 Strava activities overlaying AADT mapping
                             </figcaption>
@@ -489,9 +380,9 @@ effective_end_date,geom)
                     <p>
                         And then traffic crash reporting can be overlayed:
                     </p>
-                    <a href='../../images/04-gis.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/04-gis.webp' target="_blank" rel="noopener noreferrer">
                         <figure style='border-bottom:1px solid #7b869d;border-top:1px solid #7b869d'>
-                            <img src='../../images/04-gis.png' alt='A map showing the previous strava and public road mappings that are overlayed by a set of points describing locations of motorized crashes.'/>
+                            <img src='./images/04-gis.webp' alt='A map showing the previous strava and public road mappings that are overlayed by a set of points describing locations of motorized crashes.'/>
                             <figcaption>
                                 Strava activity and AADT mappings in overlayed by SOR crash plottings.
                             </figcaption>
@@ -501,12 +392,10 @@ effective_end_date,geom)
                     <p>
                         Queries gauging proximity safety can start being employed. I.e.,
                     </p>
-                    <code>
-<pre class='code'>
-SELECT crash.geom FROM cycling.crashes as crash, cycling.activities as activity
-WHERE ST_DWithin(crash.geom,activity.route,0.01);
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:150px;overflow:auto' max-height='150' src='code/10.php'>
+                        </iframe>
+                    </figure>
                     <h2>Segmentation</h2>
                     <p>
                         One facet of the database has yet to be discussed. The entity that is a Cycling Segment. The intention for
@@ -523,23 +412,19 @@ WHERE ST_DWithin(crash.geom,activity.route,0.01);
                         good start in this effort. It produces an index for each point being produced along with the geometry.
                         Consider the following query:
                     </p>
-                    <code>
-<pre class='code'>
-SELECT route_id, <mark>(dp).path[1]</mark> As path_index, ST_AsTEXT(<mark>(dp).geom</mark>) AS node
-FROM (SELECT route_id, <mark>ST_DumpPoints(route) AS dp</mark> FROM cycling.activities) as segments;
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:150px;overflow:auto' max-height='150' src='code/11.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         This query produces a set of results in which the route_id is associated with a set of points which are
                         also given an index. Let's assign this to a view called list_points. The task is now to wrap these points up
                         into individual lines. This can be accomplished with the following query:
                     </p>
-                    <code>
-<pre class='code'>
-SELECT lp1.route_id, <mark>st_makeline(lp1.node, lp2.node)</mark> as line FROM <mark>list_points as lp1,
-list_points as lp2</mark> WHERE lp2.path_index - lp1.path_index = 1 AND lp1.route_id = lp2.route_id;
-</pre>
-                    </code>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:150px;overflow:auto' max-height='150' src='code/12.php'>
+                        </iframe>
+                    </figure>
                     <p>
                         What makes the above query work is the logic in the where clause. The statement "<code>lp2.path_index
                         - lp1.path_index = 1</code>" ensures that points are contiguous form a line. Performing basic algebraic
@@ -552,27 +437,27 @@ list_points as lp2</mark> WHERE lp2.path_index - lp1.path_index = 1 AND lp1.rout
                         problem though - overlap is not factored! If these lines are to be stored in the segments table, there
                         would be a lot of redundant information stored. Consider the following figures:
                     </p>
-                    <a href='../../images/05-gis.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/05-gis.webp' target="_blank" rel="noopener noreferrer">
                         <figure style='border-top:1px solid #7b869d'>
-                            <img src='../../images/05-gis.png' alt='A map showing the initial Strava activity mappings where the lines are now represented by their vertices.'/>
+                            <img src='./images/05-gis.webp' alt='A map showing the initial Strava activity mappings where the lines are now represented by their vertices.'/>
                             <figcaption>
                                 Individual plotting of vertices for each activity polyline. Scale of 1:20929. Query used was <code>SELECT * FROM list_points</code>
                             </figcaption>
                         </figure>
                     </a>
                     <br>
-                    <a href='../../images/06-gis.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/06-gis.webp' target="_blank" rel="noopener noreferrer">
                         <figure style='border-top:1px solid #7b869d;'>
-                            <img src='../../images/06-gis.png' alt='A map showing the vertices of the initial Strava activity mappings with a more precise scale.'/>
+                            <img src='./images/06-gis.webp' alt='A map showing the vertices of the initial Strava activity mappings with a more precise scale.'/>
                             <figcaption>
                                 Same plotting of vertices for activity polylines. Scale is now 1:5232; Same query as previous figure.
                             </figcaption>
                         </figure>
                     </a>
                     <br>
-                    <a href='../../images/07-gis.png' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/07-gis.webp' target="_blank" rel="noopener noreferrer">
                         <figure style='border-bottom:1px solid #7b869d;border-top:1px solid #7b869d'>
-                            <img src='../../images/07-gis.png' alt='A zoomed in scale of the initial Strava activities exposing many redundant lines.'/>
+                            <img src='./images/07-gis.webp' alt='A zoomed in scale of the initial Strava activities exposing many redundant lines.'/>
                             <figcaption>
                                 Conversion of polyline vertex plotting to contiguous monolines. Scale is now 1:654.
                             </figcaption>
@@ -618,5 +503,9 @@ list_points as lp2</mark> WHERE lp2.path_index - lp1.path_index = 1 AND lp1.rout
                 </nav>
             </section>
         </section>
+        <script src='../../js/project_functions.js'></script>
+        <script>
+            setCodeSizeSliders();
+        </script>
     </body>
 </html>

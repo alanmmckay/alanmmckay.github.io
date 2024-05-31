@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/writings/sound/';
 
 $title = 'Alan McKay | Writing | The Connectivity of Sound';
@@ -20,6 +16,11 @@ include('../../header.php');
 
 ?>
         <section id='writingsWrapper'>
+            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
+                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; The Connectivity of Sound</a>
+                <h1><a href='../'>&nbsp;&gt; Writings</a>
+                <h1><a href='../../'>Home</a></h1>
+            </header>
             <section>
                 <article>
                     <header>
@@ -105,9 +106,9 @@ include('../../header.php');
                         Only one time before in my life had I felt so at ease; only one time before had I felt so well rested from sound.
                     </p>
                     <hr>
-                    <a href='../../images/sean.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/sean.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/sean.jpg' alt="A man at a warmly lit bar strumming in a guitar">
+                            <img src='./images/sean.webp' alt="A man at a warmly lit bar strumming in a guitar">
                             <figcaption>
                                 Sean: both visually and aurally sound.
                             </figcaption>

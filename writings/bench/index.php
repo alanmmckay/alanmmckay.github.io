@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/writings/bench/';
 
 $title = 'Alan McKay | Writing | The Bench';
@@ -20,14 +16,18 @@ include('../../header.php');
 
 ?>
         <section id='writingsWrapper'>
+            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
+                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; The Bench</a>
+                <h1><a href='../'>&nbsp;&gt; Writings</a>
+                <h1><a href='../../'>Home</a></h1>
+            </header>
             <section>
                 <article>
+                    <br>
                     <!--section class='info'--->
-                        <br>
-                        <hr>
-                        <a href='../../images/bench02.jpg' target="_blank" rel="noopener noreferrer">
+                        <a href='./images/bench02.webp' target="_blank" rel="noopener noreferrer">
                             <figure>
-                                <img src='../../images/bench02-edited.jpg' alt="A desolate bench within a wintery courtyard">
+                                <img src='./images/bench02-edited.webp' alt="A desolate bench within a wintery courtyard">
                             </figure>
                             <figcaption>
                                 The bench lightly dusted with snow circa winter 2019-2020
@@ -77,9 +77,9 @@ include('../../header.php');
                         Another 30 minutes and we stepped away. What ensued was a night of good music, good drink, and good company.
                     </p>
                     <hr>
-                    <a href='../../images/bench03.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/bench03.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/bench03-edited.jpg' alt="Two gentlemen on the bench within the foreground looking back at a third.">
+                            <img src='./images/bench03-edited.webp' alt="Two gentlemen on the bench within the foreground looking back at a third.">
                             <figcaption>
                                 Shane and Scott both giving an inquisitive glance back towards Clayton.
                             </figcaption>
@@ -106,9 +106,9 @@ include('../../header.php');
                         I would like to think so.
                     </p>
                     <hr>
-                    <a href='../../images/bench01.jpg' target="_blank" rel="noopener noreferrer">
+                    <a href='./images/bench01.webp' target="_blank" rel="noopener noreferrer">
                         <figure>
-                            <img src='../../images/bench01-edited.jpg' alt="A snowbank partially obscures three lads sitting on a bench">
+                            <img src='./images/bench01-edited.webp' alt="A snowbank partially obscures three lads sitting on a bench">
                             <figcaption>
                                 The lads enjoying the wintery air from the bench.
                             </figcaption>

@@ -86,3 +86,106 @@ function setDynamicFigureStyle(event_type, screen_state,element,old_ele_height,c
 }
 
 /* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */
+
+// A function which changes the font size of a code block being displayed.
+//  This requires elements with the following schema to be in place:
+/*
+ * <figure class='code-figure'>
+ *      <iframe frameborder="0" style='width:100%;max-height:<INT>px;overflow:auto' max-height='<INT>' src='<URI>'>
+ *      </iframe>
+ * </figure>
+ */
+// setCodeSizeSliders() will attach a div containing a button and an input
+//  slider to each element with code-figure set as a class.
+// revealCodeSizeSlider() activates the relevant control once a button is
+//  pressed or once an input option is selected.
+// changeCodeSize() will then set the size of the font in each iframe whilst
+//  changing the max-height property to ensure that the iframes cannot be
+//  resized to too great of a length.
+
+// Changes made using this resize method is global for all code blocks being
+//  displayed on a page.
+
+function changeCodeSize(element,mouseup=null){
+    if(mouseup != null){
+        var value = Number(mouseup);
+    }else{
+        var value = element.value;
+    }
+    var iframes = document.getElementsByTagName('iframe');
+    for(let i=0; i<iframes.length; i++){
+        var iframe = iframes[i];
+        var iframe_content = iframe.contentWindow.document;
+        var pre = iframe_content.getElementsByTagName('pre')[0];
+        var code = iframe_content.getElementsByTagName('code')[0];
+        code.style['font-size'] = value+'px';
+        var new_height = Number(iframe.style['max-height'].substring(0,iframe.style['max-height'].length-2));
+        var max = Number(iframe.getAttribute('max-height'));
+        var ratio = max * ((17-1)-value);
+        ratio = ratio / 17;
+        iframe.style['max-height'] = max - ratio + 'px';
+    }
+    slider_containers = document.getElementsByClassName('code-font');
+    for(let i=0; i<slider_containers.length; i++){
+        container = slider_containers[i];
+        slider = container.getElementsByTagName('input')[0];
+        slider.value = value;
+    }
+}
+
+function revealCodeSizeSlider(bool){
+    var buttons = document.getElementsByTagName('button');
+    for(let i=0; i<buttons.length; i++){
+        var button = buttons[i];
+        if(bool == true){
+            button.style['display'] = 'none';
+        }else{
+            button.style['display'] = 'inherit';
+        }
+    }
+    slider_containers = document.getElementsByClassName('code-font');
+    for(let i=0; i<slider_containers.length; i++){
+        container = slider_containers[i];
+        slider = container.getElementsByTagName('input')[0];
+        if(bool == true){
+            slider.style['display'] = 'inherit';
+        }else{
+            slider.style['display'] = 'none';
+        }
+    }
+}
+
+function setCodeSizeSliders(){
+    var iframe_containers = document.getElementsByClassName('code-figure');
+    for(let i=0; i<iframe_containers.length; i++){
+        var container = iframe_containers[i];
+        var div = document.createElement('div');
+        div.classList.add('code-font');
+
+        var button = document.createElement('button');
+        button.addEventListener("click",function(){revealCodeSizeSlider(true);});
+        button.innerHTML = "Code Size";
+
+        var input = document.createElement('input');
+        input.type = 'range';
+        input.min = '12';
+        input.max = '17';
+        input.value = '17';
+        input.addEventListener('input',function(){changeCodeSize(this);});
+        input.addEventListener('mouseup',function(){
+            revealCodeSizeSlider(false);
+            var new_val = Number(input.value);
+            setTimeout(function(){
+                changeCodeSize(this,new_val);
+            }, 1);
+        });
+        input.addEventListener('touchend',function(){revealCodeSizeSlider(false);});
+
+        div.appendChild(button);
+        div.appendChild(input);
+        container.insertBefore(div,container.firstChild);
+    }
+}
+
+
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----  */

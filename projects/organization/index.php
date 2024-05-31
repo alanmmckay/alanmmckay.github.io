@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/projects/organization/';
 
 $title = 'Alan McKay | Teaching | Computer Organization';
@@ -20,6 +16,11 @@ include('../../header.php');
 
 ?>
         <section id='writingsWrapper'>
+            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
+                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; Computer Organization</a>
+                <h1><a href='../'>&nbsp;&gt; Projects</a>
+                <h1><a href='../../'>Home</a></h1>
+            </header>
             <section>
                 <article>
                     <section class='info'>
@@ -103,128 +104,17 @@ include('../../header.php');
                             Once examples are given, I've always been keen to sharing alternatives to a given implementation of a loop. A for-loop absolutely should be taught in tandem with a while loop. This should occur with a light exposure to recursion. Various conditions of execution should be discussed here as well. Analog is not only given through context of every day living but also with respect to evaluating the loops themselves!
                         </p>
                         <hr>
-                        <figure>
-                            <code>
-<pre class='code info-code' style='max-width:32em;max-height:250px'>
-def sum_a(aList):
-    total = 0
-    for value in aList:
-        total += value
-    return total
-
-def sum_b(aList):
-    total = 0
-    length = len(aList)
-    for index in range(0,length):
-        value = aList[index]
-        total += value
-    return total
-
-def sum_c(aList):
-    total = 0
-    index = 0
-    length = len(aList)
-    while index &lt; length:
-        value = aList[index]
-        total = total + value
-        index = index + 1
-    return total
-
-def sum_d(aList):
-    listCopy = list(aList)
-    total = 0
-    length = len(listCopy)
-    while length &gt; 0:
-        value = listCopy.pop()
-        total = total + value
-        length = len(listCopy)
-    return total
-
-def sum_e(aList):
-    listCopy = list(aList)
-    total = 0
-    while len(listCopy) &gt; 0:
-        value = listCopy.pop()
-        total = total + value
-    return total
-
-def sum_f(aList):
-    total = sum(aList) #python's built-in sum function
-    return total
-</pre>
-                            </code>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:1270px;overflow:auto' max-height='1270' src='code/01.php'>
+                            </iframe>
                             <figcaption>
                                 A set of functions which take a list as an input and sums their values. Each function accomplishes the same task. This illustrates that there are many different approaches to solving a given problem - a notion that is not intuitive to one first experiencing the rigidity of programming.
                             </figcaption>
                         </figure>
 
-                        <figure>
-                            <code>
-<pre class='code info-code' style='max-width:32em;max-height:250px'>
-def sum_g(aList):
-    return sum(alist)
-
-def sum_h_helper(aList,index):
-    length = len(aList)
-    if index &gt;= length:
-        return 0
-    else:
-        value = aList[index]
-        return value + sum_h_helper(aList,index + 1)
-
-def sum_h(aList):
-    return sum_h_helper(aList,0)
-
-def sum_i_helper(aList,index):
-    length = len(aList)
-    value = aList[index]
-    if index &gt;= (length - 1):
-        return value
-    else:
-        return value + sum_i_helper(aList,index + 1)
-
-def sum_i(aList):
-    if len(aList) &gt; 0:
-        return sum_i_helper(aList,0)
-    else:
-        return 0
-
-def sum_j_helper(aList,value):
-    length = len(aList)
-    if length &lt;= 0:
-        return value
-    else:
-        new_value = aList.pop()
-        return value + sum_j_helper(aList,new_value)
-
-def sum_j(aList):
-    listCopy = list(aList)
-    if len(listCopy) &gt; 0:
-        value = listCopy.pop()
-        return sum_j_helper(listCopy,value)
-    else:
-        return 0
-
-def sum_k(aList):
-    if len(aList) &lt;= 0:
-        return 0
-    else:
-        value = aList[0]
-        if len(aList) &lt;= 1:
-            return value
-        else:
-            other_values = aList[1:]
-            return value + sum_k(other_values)
-
-def sum_l(aList):
-    if len(aList) &lt;= 0:
-        return 0
-    elif len(aList) &lt;= 1:
-        return aList[0]
-    else:
-        return aList[0] + sum_l(aList[1:])
-</pre>
-                            </code>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;max-height:1720px;overflow:auto' max-height='1720' src='code/02.php'>
+                            </iframe>
                             <figcaption>
                                 Even more functions which take a list as an input and sums their values. This time leveraging the functional paradigm of programming.
                             </figcaption>
@@ -372,40 +262,9 @@ def sum_l(aList):
                                 My lack of experience with MIPS made the course more engaging in a way that creates a sincere connection between myself and the class in general. Any act of engagement to address an individual would usually involve addressing the questions/concerns by the use of analog and nudging the individual towards the conclusion they seek. This was done by asking them a set of questions to help them make the correct conclusion on their own! I believe this helps an individual feel personal agency by abstractly exposing them to how to think critically. One of my favorite pieces of feedback through student evaluation has been, "He makes you think."
                             </p>
                             <hr>
-                                <figure>
-                                    <code>
-<pre class='code info-code' style='max-height:250px'>
-01    # --- --- --- --- --- --- #
-02    sum:
-03    # Two arguments $a0 (memory address of list) and $a1 (length value of list)
-04
-05    li $s0  0         #total &lt;- 0
-06    li $s1  0         #index &lt;- 0
-07    li $s2  $a0       #point to the base address of the array
-08
-09    # ---
-10    sum_loop_condition:
-11
-12    bge $s1 $a1 end_loop
-13
-14    mult $s2 $s1 4    #adjust index offset
-15    add  $s2 $s2 $a0  #point to the next value of the array
-16
-17    lw $s2 0($s2)     #access the value within array
-18
-19    add $s0 $s0 $s2   #add value to the total
-20
-21    addi $s1 $s1 1    #increment index
-22
-23    j sum_loop_condition
-24
-25    # ---
-26    end_loop:
-27    move $v0 $s0      #place total into return register
-28    jr $ra            #return to caller
-29    # --- --- --- --- --- --- #
-</pre>
-                                </code>
+                                <figure class='code-figure'>
+                                <iframe frameborder="0" style='width:100%;max-height:850px;overflow:auto' max-height='850' src='code/03.php'>
+                                </iframe>
                                 <!--code>
 <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:70vw;max-width:32em;padding-left:10px;max-height:250px'>
 01    CLEAR
@@ -467,5 +326,9 @@ def sum_l(aList):
                 </nav>
             </section>
         </section>
+        <script src='../../js/project_functions.js'></script>
+        <script>
+            setCodeSizeSliders();
+        </script>
     </body>
 </html>

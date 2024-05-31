@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/projects/cup/';
 
 $title = 'Alan McKay | Project | Cup of Joe';
@@ -20,6 +16,11 @@ include('../../header.php');
 
 ?>
         <section id='writingsWrapper'>
+            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
+                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; Cup of Joe</a>
+                <h1><a href='../'>&nbsp;&gt; Projects</a>
+                <h1><a href='../../'>Home</a></h1>
+            </header>
             <section>
                 <article>
                     <header>
@@ -32,30 +33,31 @@ include('../../header.php');
                         A local coffee shop, Cup of Joe, was a frequent spot of study; this fact helped contribute to successful grades. So what better way to give back by doing a redesign of the current website? A redesign which would make it mobile friendly.
                     </p>
                     <div class='aside'>
-                    <a href='../../images/cup_story_mobile.png' target="_blank" rel="noopener noreferrer">
-                    <figure>
-                        <img src='../../images/cup_story_mobile.png' alt='Screenshot of the layout of the Cup of Joe website using a mobile display.' />
+                    <figure id='cup-iframe-aside-mobile'>
+                        <iframe style='width:340px;height:536px' frameborder="0" src='demo/story/index.php' style='padding-left:0px;'></iframe>
                         <figcaption>
-                            Mobile variant of the Story page.
+                            Live instance of the mobile variant of the website through the Story page.
                         </figcaption>
                     <hr>
                     </figure>
-                    </a>
-                    <p>
+                    <p style='margin-top:0px;'>
                         The redesign entailed a rebuild of the HTML and CSS - motivated specifically to rid the site of the usage and elaborate nesting of table tags. More modern semantic tags were used instead of the table tags: an aside to note tangential information, lists to designate groupings of links, article to note groupings of paragraphs, sections to differentiate these major components, etc.
                     </p>
                     <p>
                         The foundation of this implementation was built upon a mobile-first design. Here, media queries would kick a certain layout into view based on window size where the initial template being considered was designed for mobile devices. This involved careful consideration towards maintaining the website's aesthetic - an aesthetic which does a good job adhering to the aesthetic of the shop proper. One key facet in accomplishing this was the decision to maintain the site's identity with the navigation bar. Instead of leveraging a hamburger button to splay navigational options, the navigation bar is fixed to the left where the size of its selections maintain a good compromise between easy interaction while not obscuring too much of the view, (regardless of view-screen size). The redesign differentiated further by fixing the navigation bar into view as a user scrolls through a given page.
                     </p>
-                    <a href='../../images/cup_story_mobile.png' target="_blank" rel="noopener noreferrer">
-                    <figure class='responsive_aside'>
-                        <img src='../../images/cup_story_mobile.png' alt='Screenshot of the layout of the Cup of Joe website using a mobile display.' />
-                        <figcaption>
-                            Mobile variant of the Story page.
+                    <figure id='cup-iframe-mobile' class='responsive_aside' style='width:95%;'>
+                        <!--<a href='./images/cup_story_mobile.webp' target="_blank" rel="noopener noreferrer">
+                            <img src='./images/cup_story_mobile.webp' alt='Screenshot of the layout of the Cup of Joe website using a mobile display.' />
+                        </a>-->
+                        <div style="width:95%;max-width:340px;margin:auto;overflow-y:hidden;height:536px;">
+                            <iframe frameborder="0" src='demo/story/index.php' style='padding-left:0px;'></iframe>
+                        </div>
+                        <figcaption style='max-width:340px;margin:auto;padding-top:12px;'>
+                            Live instance of the mobile variant of the website through the Story page.
                         </figcaption>
-                    <hr>
+                        <hr>
                     </figure>
-                    </a>
                     <p>
                         In terms of layout, there were two different types of pages that the Cup of Joe website contained. The main page had a unique layout in the sense that the majority of the display emphasized on a slideshow of images from the coffee shop. The other pages consisted of textual content with an image banner and occasionally information placed as an aside. The responsive redesign would not only determine the sizes of these elements, but the location they would be drawn.
                     </p>
@@ -65,9 +67,9 @@ include('../../header.php');
                         <ul>
 
                             <li id='sixty'>
-                                <a href='../../images/cup_story_desktop.png' target="_blank" rel="noopener noreferrer">
+                                <a href='./images/cup_story_desktop.webp' target="_blank" rel="noopener noreferrer">
                                 <figure>
-                                    <img src='../../images/cup_story_desktop.png' alt='Screenshot of the layout of the Cup of Joe website using a desktop display.' />
+                                    <img src='./images/cup_story_desktop.webp' alt='Screenshot of the layout of the Cup of Joe website using a desktop display.' />
                                     <figcaption>
                                         The desktop variant of the Cup of Joe website. Not much was changed here; Things look mostly the same.
                                     </figcaption>
@@ -76,9 +78,9 @@ include('../../header.php');
                             </li>
 
                             <li id='thirty'>
-                                <a href='../../images/cup_story_tablet.png' target="_blank" rel="noopener noreferrer">
+                                <a href='./images/cup_story_tablet.webp' target="_blank" rel="noopener noreferrer">
                                 <figure>
-                                    <img src='../../images/cup_story_tablet.png' alt='Screenshot of the layout of the Cup of Joe website using a tablet display.' />
+                                    <img src='./images/cup_story_tablet.webp' alt='Screenshot of the layout of the Cup of Joe website using a tablet display.' />
                                     <figcaption>
                                         The tablet layout of the Cup of Joe website. Note the repositioning and resizing of elements which lend well to the browsing context.
                                     </figcaption>
@@ -107,9 +109,9 @@ include('../../header.php');
                             <ul>
 
                                 <li class='control_slide'>
-                                    <a href='../../images/cup_control_01.png' target="_blank" rel="noopener noreferrer">
+                                    <a href='./images/cup_control_01.webp' target="_blank" rel="noopener noreferrer">
                                         <figure>
-                                            <img src='../../images/cup_control_01.png' alt='A screenshot of the Cup of Joe control page in which a user is navigating to an event creation page.'/>
+                                            <img src='./images/cup_control_01.webp' alt='A screenshot of the Cup of Joe control page in which a user is navigating to an event creation page.'/>
                                             <figcaption>
                                                 Slide 1/5: Selecting a menu item.
                                             </figcaption>
@@ -118,9 +120,9 @@ include('../../header.php');
                                 </li>
 
                                 <li class='control_slide'>
-                                    <a href='../../images/cup_control_02.png' target="_blank" rel="noopener noreferrer">
+                                    <a href='./images/cup_control_02.webp' target="_blank" rel="noopener noreferrer">
                                         <figure>
-                                            <img src='../../images/cup_control_02.png' alt='A screenshot of the Cup of Joe event creation page in which a user is filling out the relevant forms.'/>
+                                            <img src='./images/cup_control_02.webp' alt='A screenshot of the Cup of Joe event creation page in which a user is filling out the relevant forms.'/>
                                             <figcaption>
                                                 Slide 2/5: Filling out an event creation form.
                                             </figcaption>
@@ -129,9 +131,9 @@ include('../../header.php');
                                 </li>
 
                                 <li class='control_slide'>
-                                    <a href='../../images/cup_control_03.png' target="_blank" rel="noopener noreferrer">
+                                    <a href='./images/cup_control_03.webp' target="_blank" rel="noopener noreferrer">
                                         <figure>
-                                            <img src='../../images/cup_control_03.png' alt='A screenshot of the Cup of Joe control page in which a user is selecting an option to edit a current event.'/>
+                                            <img src='./images/cup_control_03.webp' alt='A screenshot of the Cup of Joe control page in which a user is selecting an option to edit a current event.'/>
                                             <figcaption>
                                                 Slide 3/5: Receiving feedback for event created. Selecting an event to edit.
                                             </figcaption>
@@ -140,9 +142,9 @@ include('../../header.php');
                                 </li>
 
                                 <li class='control_slide'>
-                                    <a href='../../images/cup_control_04.png' target="_blank" rel="noopener noreferrer">
+                                    <a href='./images/cup_control_04.webp' target="_blank" rel="noopener noreferrer">
                                         <figure>
-                                            <img src='../../images/cup_control_04.png' alt='A screenshot of the Cup of Joe edit event page in which a user is changing the date of an event.'/>
+                                            <img src='./images/cup_control_04.webp' alt='A screenshot of the Cup of Joe edit event page in which a user is changing the date of an event.'/>
                                             <figcaption>
                                                 Slide 4/5: Viewing event edit form; Selecting a new Date of event.
                                             </figcaption>
@@ -151,9 +153,9 @@ include('../../header.php');
                                 </li>
 
                                 <li class='control_slide'>
-                                    <a href='../../images/cup_control_05.png' target="_blank" rel="noopener noreferrer">
+                                    <a href='./images/cup_control_05.webp' target="_blank" rel="noopener noreferrer">
                                         <figure>
-                                            <img src='../../images/cup_control_05.png' alt='A screenshot of the Cup of Joe control page which is informing a user that the changes made in a prior edit have taken effect.'/>
+                                            <img src='./images/cup_control_05.webp' alt='A screenshot of the Cup of Joe control page which is informing a user that the changes made in a prior edit have taken effect.'/>
                                             <figcaption>
                                                 Slide 5/5: Receiving feedback for event edited.
                                             </figcaption>
@@ -191,9 +193,9 @@ include('../../header.php');
                         <ul>
 
                             <li>
-                                <a href='../../images/cup_events_red.png' target="_blank" rel="noopener noreferrer">
+                                <a href='./images/cup_events_red.webp' target="_blank" rel="noopener noreferrer">
                                     <figure>
-                                        <img src='../../images/cup_events_red.png' alt='A screenshot of the Cup of Joe events page.' />
+                                        <img src='./images/cup_events_red.webp' alt='A screenshot of the Cup of Joe events page.' />
                                         <figcaption>
                                             The events page as it currently exists.
                                         </figcaption>
@@ -202,9 +204,9 @@ include('../../header.php');
                             </li>
 
                             <li>
-                                <a href='../../images/cup_music.png' target="_blank" rel="noopener noreferrer">
+                                <a href='./images/cup_music.webp' target="_blank" rel="noopener noreferrer">
                                     <figure>
-                                        <img src='../../images/cup_music.png' alt='A screenshot of the Cup of Joe events page as it existed prior to the website rebuild.' />
+                                        <img src='./images/cup_music.webp' alt='A screenshot of the Cup of Joe events page as it existed prior to the website rebuild.' />
                                         <figcaption>
                                             The variant of the events page as it existed prior to the overhaul.
                                         </figcaption>

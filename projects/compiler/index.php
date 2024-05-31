@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../../normalize.css';
-
-$style = '../../style.css';
-
 $canonical = 'https://alanmckay.blog/projects/compiler/';
 
 $title = 'Alan McKay | Project | Compiler';
@@ -20,6 +16,11 @@ include('../../header.php');
 
 ?>
         <section id='writingsWrapper'>
+            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
+                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; Compiler</a>
+                <h1><a href='../'>&nbsp;&gt; Projects</a>
+                <h1><a href='../../'>Home</a></h1>
+            </header>
             <section>
                 <article>
                     <section class='info'>
@@ -77,17 +78,17 @@ include('../../header.php');
                                             <li><code>./kleinc</code> : code generation; the completed compiler</li>
                                         </ul>
                                         To run each script run the following command:
-                                        <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:35em;padding-left:10px;margin-top:5px;margin-left:5px;'>
-    sh &lt;script name&gt; &lt;program to be tested&gt;
-</pre>
+                                        <ul><li>
+                                        <code style='display:block;text-align:start;'>
+                                            sh &lt;script name&gt; &lt;program to be tested&gt;
                                         </code>
+                                        </ul></li>
                                         For example:
-                                        <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:35em;padding-left:10px;margin-top:5px;margin-left:5px;'>
-    sh kleinc programs/exclusive_or.kln
-</pre>
+                                        <ul><li>
+                                        <code style='display:block;text-align:start;'>
+                                            sh kleinc programs/exclusive_or.kln
                                         </code>
+                                        </ul></li>
                                     </li>
                                 </ul>
                             </li>
@@ -126,7 +127,7 @@ include('../../header.php');
 
                     <p>The following list of phases represent a step of progress implementing each component of the compiler. Interact with the header to expand its details.</p>
 
-                    <h3 id='phase_1_header' onclick='reveal("phase_1")' class='expandable'>[ - ] Phase 1: Scanner</h3>
+                    <h3 id='phase_1_header' class='expandable'>[ - ] Phase 1: Scanner</h3>
                     <section id='phase_1'>
                     <ul>
                         <li>Associated files of implementation:
@@ -159,7 +160,7 @@ include('../../header.php');
                     </ul>
                     </section>
 
-                    <h3 id='phase_2_header' onclick='reveal("phase_2")' class='expandable'>[ - ] Phase 2: Parser - Syntactic Analyzer</h3>
+                    <h3 id='phase_2_header' class='expandable'>[ - ] Phase 2: Parser - Syntactic Analyzer</h3>
                     <section id='phase_2'>
                     <ul>
                         <li>
@@ -200,7 +201,7 @@ include('../../header.php');
                     </ul>
                     </section>
 
-                    <h3 id='phase_3_header' onclick='reveal("phase_3")' class='expandable'>[ - ] Phase 3: Parser - Abstract Syntax Tree</h3>
+                    <h3 id='phase_3_header' class='expandable'>[ - ] Phase 3: Parser - Abstract Syntax Tree</h3>
                     <section id='phase_3'>
                     <ul>
                         <li>
@@ -260,7 +261,7 @@ include('../../header.php');
                     </ul>
                     </section>
 
-                    <h3 id='phase_4_header' onclick='reveal("phase_4")' class='expandable'>[ - ] Phase 4: Type Checker</h3>
+                    <h3 id='phase_4_header' class='expandable'>[ - ] Phase 4: Type Checker</h3>
                     <section id='phase_4'>
                     <ul>
                         <li>Associated files of implementation:
@@ -299,7 +300,7 @@ include('../../header.php');
                     </ul>
                     </section>
 
-                    <h3 id='phase_5_header' onclick='reveal("phase_5")' class='expandable'>[ - ] Phase 5: Code Generator - Environment</h3>
+                    <h3 id='phase_5_header' class='expandable'>[ - ] Phase 5: Code Generator - Environment</h3>
                     <section id='phase_5'>
                     <ul>
                         <li>Associated files of implementation:
@@ -315,85 +316,32 @@ include('../../header.php');
                         <li>Schema of environment:
                             <ul>
                                 <li>The Stack Frame:
-                                    <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
-:----------------------:
-:     return addr      : 0
-:----------------------:
-:     return value     : 1
-:----------------------:
-:     arg  0           :
-:----------------------:
-:     args             :
-:----------------------:
-: register values(0-6) : - can update to only save whats modified
-:----------------------:
-:     temp space       :
-:----------------------:
-</pre>
-                                    </code>
+                                    <br><br>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:400px;overflow:auto' max-height='400' src='code/01.php'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                                 <li>Registers:
-                                    <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
-   :------------------:
-r0 :                  :
-   :------------------:
- 1 :                  :
-   :------------------:
- 2 :                  :
-   :------------------:
- 3 :                  :
-   :------------------:
- 4 :                  :
-   :------------------:
- 5 :                  :
-   :------------------:
- 6 :   top  (stack)   :
-   :------------------:
- 7 :    PC            :
-   :------------------:
-</pre>
-                                    </code>
+                                    <br><br>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:505px;overflow:auto' max-height='505' src='code/02.php'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                                 <li>DMEM:
-                                    <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
-0 :-------------------:
-| :                   :
-| :-------------------:
-V :                   :
-. :-------------------:
-. :                   :
-  :-------------------: Top (R6)
-  :        |          :
-  :        |          :
-  :        |          :
-  :        |  Grows   :
-  :        V          :
-  :                   :
-  :                   :
-  :-------------------:
-</pre>
-                                    </code>
+                                    <br><br>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:455px;overflow:auto' max-height='455' src='code/03.php'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                                 <li>IMEM:
-                                    <code>
-<pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:65vw;max-width:40em;padding-left:10px'>
-0 :---------------------:
-  : LDA 7 , &lt;main addr&gt; :
-  :---------------------:
-  :         .           :
-  :         .           :
-  :         .           :
-  :         .           :
-  :         .           :
-  :---------------------: main
-  : / / / / / / / / / / :
-  : / / / / / / / / / / :
-  :---------------------:
-</pre>
-                                    </code>
+                                    <br><br>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:375px;overflow:auto' max-height='375' src='code/04.php'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                             </ul>
                         </li>
@@ -408,7 +356,7 @@ V :                   :
                     </section>
 
 
-                    <h3 id='phase_6_header' onclick='reveal("phase_6")' class='expandable'>[ - ] Phase 6: Code Generator - Operations and Functions</h3>
+                    <h3 id='phase_6_header' class='expandable'>[ - ] Phase 6: Code Generator - Operations and Functions</h3>
                     <section id='phase_6'>
                     <ul>
                         <li>Associated files of implementation:
@@ -465,7 +413,7 @@ V :                   :
                     </section>
 
 
-                    <h3 id='phase_7_header' onclick='reveal("phase_7")' class='expandable'>[ - ] Phase 7: Project Conclusion</h3>
+                    <h3 id='phase_7_header' class='expandable'>[ - ] Phase 7: Project Conclusion</h3>
                     <section id='phase_7'>
                     <ul>
                         <li> What was completed:
@@ -501,82 +449,24 @@ V :                   :
                         <p>
                             Tiny Machine (TM) is an assembly language written by <a href='https://www.cs.sjsu.edu/faculty/louden/' target="_blank" rel="noopener noreferrer">Kenneth Louden</a>. The specifications for both languages are in the following expandable sections.
                         </p>
-                        <h3 id='k_spec_header' onclick='reveal("k_spec")' class='expandable'> [ - ] Klein Language Specification</h3>
+                        <h3 id='k_spec_header' class='expandable'> [ -  Klein Language Specification</h3>
                         <article id='k_spec'>
                             <p>Klein is a small, mostly functional language that is designed specifically to be used as a manageable source language in a course on compiler design and implementation. Though small and simple, the language is Turing-complete.</p>
 
                             <h4>Grammar</h4>
-                            <code>
-<pre class='code info-code'>
-        &lt;PROGRAM&gt; ::= &lt;DEFINITIONS&gt;
-
-        &lt;DEFINITIONS&gt; ::= ε
-                        | &lt;DEF&gt; &lt;DEFINITIONS&gt;
-
-                &lt;DEF&gt; ::= function &lt;IDENTIFIER&gt; ( &lt;FORMALS&gt; ) : &lt;TYPE&gt;
-                             &lt;BODY&gt;
-
-            &lt;FORMALS&gt; ::= ε
-                        | &lt;NONEMPTYFORMALS&gt;
-
-    &lt;NONEMPTYFORMALS&gt; ::= &lt;FORMAL&gt;
-                        | &lt;FORMAL&gt; , &lt;NONEMPTYFORMALS&gt;
-
-             &lt;FORMAL&gt; ::= &lt;IDENTIFIER&gt; : &lt;TYPE&gt;
-
-               &lt;BODY&gt; ::= &lt;PRINT-STATEMENT&gt; &lt;BODY&gt;
-                        | &lt;EXPR&gt;
-
-               &lt;TYPE&gt; ::= integer
-                        | boolean
-
-               &lt;EXPR&gt; ::= &lt;EXPR&gt; &lt; &lt;SIMPLE-EXPR&gt;
-                        | &lt;EXPR&gt; = &lt;SIMPLE-EXPR&gt;
-                        | &lt;SIMPLE-EXPR&gt;
-
-        &lt;SIMPLE-EXPR&gt; ::= &lt;SIMPLE-EXPR&gt; or &lt;TERM&gt;
-                        | &lt;SIMPLE-EXPR&gt; + &lt;TERM&gt;
-                        | &lt;SIMPLE-EXPR&gt; - &lt;TERM&gt;
-                        | &lt;TERM&gt;
-
-               &lt;TERM&gt; ::= &lt;TERM&gt; and &lt;FACTOR&gt;
-                        | &lt;TERM&gt; * &lt;FACTOR&gt;
-                        | &lt;TERM&gt; / &lt;FACTOR&gt;
-                        | &lt;FACTOR&gt;
-
-             &lt;FACTOR&gt; ::= if &lt;EXPR&gt; then &lt;EXPR&gt; else &lt;EXPR&gt;
-                        | not &lt;FACTOR&gt;
-                        | &lt;IDENTIFIER&gt; ( &lt;ACTUALS&gt; )
-                        | &lt;IDENTIFIER&gt;
-                        | &lt;LITERAL&gt;
-                        | - &lt;FACTOR&gt;
-                        | ( &lt;EXPR&gt; )
-
-            &lt;ACTUALS&gt; ::= ε
-                        | &lt;NONEMPTYACTUALS&gt;
-
-    &lt;NONEMPTYACTUALS&gt; ::= &lt;EXPR&gt;
-                        | &lt;EXPR&gt; , &lt;NONEMPTYACTUALS&gt;
-
-            &lt;LITERAL&gt; ::= &lt;NUMBER&gt;
-                        | &lt;BOOLEAN&gt;
-
-    &lt;PRINT-STATEMENT&gt; ::= print ( &lt;EXPR&gt; )
-</pre>
-                            </code>
+                            <figure class='code-figure'>
+                                <iframe frameborder="0" style='width:100%;max-height:1495px;overflow:auto' max-height='1495' src='code/05.php'>
+                                </iframe>
+                            </figure>
                             <h4>Syntax Features</h4>
                             <ul>
                                 <li>
                                     These are the reserved words of Klein:
-                                    <code>
-<pre class='code info-code' style='max-width:35em;'>
-    integer     boolean
-    true        false
-    if          then       else
-    not         and        or
-    function    print
-</pre>
-                                    </code>
+                                    <br><br>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:190px;overflow:auto' max-height='190' src='code/06.php'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                                 <li>
                                     <code>print</code> is a primitive identifier. <code>true</code> and <code>false</code> are boolean literals. The rest are keywords.
@@ -592,13 +482,11 @@ V :                   :
                                 </li>
                                 <li>
                                     The following are the primitive operators and punctuation marks of Klein:
-                                    <code>
-<pre class='code info-code' style='max-width:35em;'>
-    +           -          *        /
-    &lt;           =          (        )
-    ,           :          (*       *)
-</pre>
-                                    </code>
+                                    <br><br>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:140px;overflow:auto' max-height='140' src='code/07.php'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                                 <li>
                                     Klein operators and punctuation are self-delimiting.
@@ -647,59 +535,51 @@ V :                   :
                                 <li>
                                     <h5>Arithmetic</h5>
                                     Adds, subtracts, multiplies, or divides two integers.
-                                    <code>
-<pre class='code info-code' style='max-width:15em;'>
-     x + y
-     x - y
-     x * y
-     x / y
-</pre>
-                                    </code>
+                                    <br><br>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:165px;overflow:auto' max-height='165' src='code/08.php'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                                 <li>
                                     <h5>Boolean Comparisons</h5>
                                     Compares two integers, yielding one of the boolean values <code>true</code> or <code>false</code>. <code>&lt;</code> yields <code>true</code> if its left operand is less than its right operand, and <code>false</code> otherwise. <code>=</code> yields true if its left operand has the same value as its right operand, and <code>false</code> otherwise.
-                                    <code>
-<pre class='code info-code' style='max-width:15em;'>
-     x &lt; y
-     x = y
-</pre>
-                                    </code>
+                                    <br><br>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:110px;overflow:auto' max-height='110' src='code/09.php'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                                 <li>
                                     <h5>Boolean Connectives</h5>
-                                    Negates a single boolean value, or computes the disjunction or conjunction of two boolean values. The unary <code>not</code> yields <code>true</code> if its operand is <code>false</code>, and <code>false</code> otherwise. <code>or</code> yields <code>true</code> if either its left operand or its right operand yields <code>true</code>, and <code>false</code> otherwise. <code>and</code> yields <code>true</code> if both its left operand and its right operand yield <code>true</code>, and <code>false</code> otherwise.                                    <code>
-<pre class='code info-code' style='max-width:15em;'>
-     not x
-     x or y
-     x and y
-</pre>
-                                    </code>
+                                    Negates a single boolean value, or computes the disjunction or conjunction of two boolean values. The unary <code>not</code> yields <code>true</code> if its operand is <code>false</code>, and <code>false</code> otherwise. <code>or</code> yields <code>true</code> if either its left operand or its right operand yields <code>true</code>, and <code>false</code> otherwise. <code>and</code> yields <code>true</code> if both its left operand and its right operand yield <code>true</code>, and <code>false</code> otherwise.
+                                    <br><br>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:140px;overflow:auto' max-height='140' src='code/10.php'>
+                                        </iframe>
+                                    </figure>
                                     <code>or</code> and <code>and</code> short-circuit evaluation when possible.
                                 </li>
                                 <li>
                                     <h5>Conditional Selection</h5>
                                     Evaluates a test expression, and uses its value to select one of two expressions to evaluate. Yields the value of the first of these expressions if the test expression produces a true value, and the value of the second if the test expression yields a false value. The <code>else</code> clause is required.<br>
                                     For example:
-                                    <code>
-<pre class='code info-code' style='max-width:15em;'>
-     if flag &lt; 0 then
-        x + y
-     else
-        x - y
-</pre>
-                                    </code>
+                                    <br><br>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:165px;overflow:auto' max-height='165' src='code/11.php'>
+                                        </iframe>
+                                    </figure>
                                     produces the sum of x and y if flag is less than 0; otherwise, it produces their difference.
                                 </li>
                                 <li>
                                     <h5>Function call</h5>
                                     Applies a function to zero or more arguments, and yields the value of the expression in the body of the function. All functions return an integer value or a boolean value; Klein has no notion of a "void" function.<br>
                                     For example:
-                                    <code>
-<pre class='code info-code' style='max-width:15em;'>
-     f( x+y, 1 )
-</pre>
-                                    </code>
+                                    <br><br>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:85px;overflow:auto' max-height='85' src='code/12.php'>
+                                        </iframe>
+                                    </figure>
                                     computes the sum of x an dy, passes that value and a 1 to the function f, and produces the value returned by applying the function to its arguments.
                                 </li>
                                 <li>
@@ -729,11 +609,11 @@ V :                   :
                             <ul>
                                 <li>
                                     For the purposes of user interaction, Klein provides the primitive function <code>print(expression)</code>. For example:
-                                    <code>
-<pre class='code info-code' style='max-width:15em;'>
-     print( x+y )
-</pre>
-                                    </code>
+                                    <br><br>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:85px;overflow:auto' max-height='85' src='code/13.php'>
+                                        </iframe>
+                                    </figure>
                                     <code>print</code> writes its argument on standard output, followed by a new line character.
                                 </li>
                                 <li>
@@ -751,26 +631,22 @@ V :                   :
                                 </li>
                                 <li>
                                     For example, here is a complete Klein program that computes the absolute value of its argument:
-                                    <code>
-<pre class='code info-code' style='max-width:35em;'>
-     function main( n : integer ) : integer
-        if n &lt; 0
-           then -n
-           else n
-</pre>
-                                    </code>
+                                    <br><br>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:165px;overflow:auto' max-height='165' src='code/14.php'>
+                                        </iframe>
+                                    </figure>
                                     If this program were compiled into an executable file named <code>abs</code>, then running it under Unix might look something like this:
-                                    <code>
-<pre class='code info-code' style='max-width:35em;'>
-    mac os x > abs -3
-    3
-</pre>
-                                    </code>
+                                    <br><br>
+                                    <figure class='code-figure'>
+                                        <iframe frameborder="0" style='width:100%;max-height:110px;overflow:auto' max-height='110' src='code/15.php'>
+                                        </iframe>
+                                    </figure>
                                 </li>
                             </ul>
                         </article>
 
-                        <h3 id='tm_spec_header' onclick='reveal("tm_spec")' class='expandable'>[ - ] TM Machine Specification</h3>
+                        <h3 id='tm_spec_header' class='expandable'>[ - ] TM Machine Specification</h3>
                         <article id='tm_spec'>
                         <p>
                             TM is a simple target machine that has an architecture and instruction set complex enough to illustrate the important issues faced when writing a compiler, yet simple enough to not distract with unnecessary details.
@@ -819,64 +695,50 @@ V :                   :
                             </li>
                             <li>
                                 Register-only (RO) instructions are of the form
-                                    <code>
-<pre class='code info-code' style='max-width:25em;'>
-    opcode r1,r2,r3
-</pre>
-                                    </code>
+                                <br><br>
+                                <figure class='code-figure'>
+                                    <iframe frameborder="0" style='width:100%;max-height:85px;overflow:auto' max-height='85' src='code/16.php'>
+                                    </iframe>
+                                </figure>
                                 where the <code>ri</code> are legal registers.
                             </li>
                             <li>
                                 These are the RO opcodes:
-                                    <code>
-<pre class='code info-code'>
-<b>IN</b>      read an integer from stdin and place result in <b>r1</b>; ignore operands <b>r2</b> and <b>r3</b>
-<b>OUT</b>     write contents of <b>r1</b> to stdout; ignore operands <b>r2</b> and <b>r3</b>
-<b>ADD</b>     add contents of <b>r2</b> and <b>r3</b> and place result in <b>r1</b>
-<b>SUB</b>     subtract contents of <b>r3</b> from contents of <b>r2</b> and place result in <b>r1</b>
-<b>MUL</b>     multiply contents of <b>r2</b> and contents of <b>r3</b> and place result in <b>r1</b>
-<b>DIV</b>     divide contents of <b>r2</b> by contents of <b>r3</b> and place result in <b>r1</b>
-<b>HALT</b>    ignore operands and terminate the machine
-</pre>
-                                    </code>
+                                <br><br>
+                                <figure class='code-figure'>
+                                    <iframe frameborder="0" style='width:100%;max-height:260px;overflow:auto' max-height='260' src='code/17.php'>
+                                    </iframe>
+                                </figure>
                             </li>
                             <li>
                                 Register-memory (RM) instructions are of the form
-                                <code>
-<pre class='code info-code' style='max-width:25em;'>
-    opcode r1,offset(r2)
-</pre>
-                                </code>
+                                <br><br>
+                                <figure class='code-figure'>
+                                    <iframe frameborder="0" style='width:100%;max-height:85px;overflow:auto' max-height='85' src='code/18.php'>
+                                    </iframe>
+                                </figure>
                                 Where the <code>ri</code> are legal registers and <code>offset</code> is an integer offset. <code>offset</code> may be negative. With the exception of the <code>LDC</code> instruction, the expression <code>offset(r2)</code> is used to compute the address of a memory at location:
-                                <code>
-<pre class='code info-code' style='max-width:25em;'>
-    address = (contents of r2) + offset
-</pre>
-                                </code>
+                                <br><br>
+                                <figure class='code-figure'>
+                                    <iframe frameborder="0" style='width:100%;max-height:85px;overflow:auto' src='code/19.php'>
+                                    </iframe>
+                                </figure>
                             </li>
                             <li>
                                 There are four RM opcodes for memory manipulation:
-                                <code>
-<pre class='code info-code'>
-<b>LDC</b>    place the constant <b>offset</b> in <b>r1</b>; ignore <b>r2</b>
-<b>LDA</b>    place the address <b>address</b> in <b>r1</b>
-<b>LD</b>     place the contents of data memory location <b>address</b> in <b>r1</b>
-<b>ST</b>     place the contents of <b>r1</b> to data memory location <b>address</b>
-</pre>
-                                </code>
+                                <br><br>
+                                <figure class='code-figure'>
+                                    <iframe frameborder="0" style='width:100%;max-height:165px;overflow:auto' max-height='165' src='code/20.php'>
+                                    </iframe>
+                                </figure>
                             </li>
                             <li>
                                 There are six RM opcodes for branching. If the value of <code>r1</code> satisfies the opcode's condition, then branch to the instruction at memory location <code>address</code>.
-                                <code>
-<pre class='code info-code'>
-<b>JEQ</b>    equal to 0
-<b>JNE</b>    not equal to 0
-<b>JLT</b>    less than 0
-<b>JLE</b>    less than or equal to 0
-<b>JGT</b>    greater than 0
-<b>JGE</b>    greater than or equal to 0
-</pre>
-                                </code>
+                                <br><br>
+                                <figure class='code-figure'>
+                                    <iframe frameborder="0" style='width:100%;max-height:215px;overflow:auto' max-height='215' src='code/21.php'>
+                                    </iframe>
+                                </figure>
                             </li>
                             <li>
                                 All arithmetic is done with registers (not memory locations) and on integers. Floating-point numbers must be simulated in the run-time system.
@@ -905,6 +767,8 @@ V :                   :
         </section>
         <script src='../../js/project_functions.js'></script>
         <script>
+
+            setCodeSizeSliders();
 
             let status = {"k_spec":true,"tm_spec":true,"phase_1":true,"phase_2":true,"phase_3":true,"phase_4":true,"phase_5":true,"phase_6":true,"phase_7":true};
             Object.entries(status).forEach(entry => {

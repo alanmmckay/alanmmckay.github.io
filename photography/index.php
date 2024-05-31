@@ -1,9 +1,5 @@
 <?php
 
-$normalize = '../normalize.css';
-
-$style = '../style.css';
-
 $canonical = 'https://alanmckay.blog/photography/';
 
 $title = 'Alan McKay | Photography';
@@ -20,6 +16,10 @@ include('../header.php');
 
 ?>
         <section id='writingsWrapper'>
+            <header id='breadNav' style='overflow:hidden;border-bottom:solid 1px #778088;'>
+                <h1><a href='./' class='currentLink'>&nbsp;&gt; Photography</a>
+                <h1><a href='../'>Home</a></h1>
+            </header>
             <section>
                 <article>
 <?php
@@ -31,14 +31,8 @@ include('../header.php');
     ){
 ?>
                     <section class='info'>
-                        <header>
-                            <h2>On VSCO</h2>
-                        </header>
                         <p>
-                            From the homepage, navigating to my photography portal used to take a visitor to my <a href='https://vsco.co/alanmckay/gallery' target="_blank" rel="noopener noreferrer">VSCO profile</a>. The VSCO platform has recently made a change forcing a vistor to sign into their service in order to view the entirety of a given profile's image gallery. This has effectively siloed their users into a walled garden, which has encouraged me to stop paying an optional subscription and develop my own image gallery.
-                        </p>
-                        <p>
-                            This is the result of my efforts. Feel free to take a look at the various photographs I've taken since 2018. There is no obligation to sign in here. Interacting with an image will take you to the relevant photo within the VSCO platform. This will be changed once the gate is locked for individual images as well.
+                            Unless noted otherwise, all photos on this page have been taken by Alan Mckay. A project description of how this gallery works can be found <a href='../projects/gallery/'>here</a>.
                         </p>
                     <hr>
                     </section>
@@ -52,7 +46,7 @@ include('../header.php');
 <?php
     $json = file_get_contents("manifest.json");
     $json_data = json_decode($json,true);
-    $image_count = 9;
+    $image_count = 18;
     $image_index = 0;
     $images_quantity = count($json_data);
     $max_page_number = ceil($images_quantity / $image_count);
@@ -205,7 +199,7 @@ include('../header.php');
             function isFigureBottom(fig_object){
                 var fig_height = fig_object.getBoundingClientRect().height;
                 var fig_top = fig_object.getBoundingClientRect().top;
-                if((window.innerHeight * .95)-fig_top > 0){
+                if((window.innerHeight * 1.85)-fig_top > 0){
                     return true;
                 }else{
                     return false;
