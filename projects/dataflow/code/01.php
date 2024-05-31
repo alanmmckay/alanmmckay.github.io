@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
         &lt;Aggregation&gt; :: (&lt;Personas&gt; | &lt;Devices&gt;)
                          &lt;Platforms&gt;
 
@@ -39,8 +36,6 @@
 &lt;Target Demographics&gt; :: &lt;Demographic&gt; &lt;Demographics&gt;
 
        &lt;Demographics&gt; :: &lt;Demographic&gt; &lt;Demographics&gt; | ∅
-</code>
-</pre>
-    </body>
-</html>
-
+<?php
+    require($root_directory."code_footer.html");
+?>
