@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 0 :---------------------:
   : LDA 7 , &lt;main addr&gt; :
   :---------------------:
@@ -17,8 +14,6 @@
   : / / / / / / / / / / :
   : / / / / / / / / / / :
   :---------------------:
-</code>
-</pre>
-    </body>
-</html>
-
+<?php
+    require($root_directory."code_footer.html");
+?>

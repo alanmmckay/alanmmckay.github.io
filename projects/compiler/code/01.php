@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 :----------------------:
 :     return addr      : 0
 :----------------------:
@@ -18,8 +15,6 @@
 :----------------------:
 :     temp space       :
 :----------------------:
-</code>
-</pre>
-    </body>
-</html>
-
+<?php
+    require($root_directory."code_footer.html");
+?>

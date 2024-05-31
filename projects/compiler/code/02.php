@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
    :------------------:
 r0 :                  :
    :------------------:
@@ -22,8 +19,6 @@ r0 :                  :
    :------------------:
  7 :    PC            :
    :------------------:
-</code>
-</pre>
-    </body>
-</html>
-
+<?php
+    require($root_directory."code_footer.html");
+?>

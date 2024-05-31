@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
         &lt;PROGRAM&gt; ::= &lt;DEFINITIONS&gt;
 
         &lt;DEFINITIONS&gt; ::= ε
@@ -59,8 +56,6 @@
                         | &lt;BOOLEAN&gt;
 
     &lt;PRINT-STATEMENT&gt; ::= print ( &lt;EXPR&gt; )
-</code>
-</pre>
-    </body>
-</html>
-
+<?php
+    require($root_directory."code_footer.html");
+?>
