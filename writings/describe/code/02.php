@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 function inViewRange(elementID,inPosition,outPosition){
     element = document.getElementById(elementID);
     bounding = element.getBoundingClientRect();
@@ -15,7 +12,6 @@ function inViewRange(elementID,inPosition,outPosition){
         element.style['object-position'] = outPosition;
     }
 }
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>
