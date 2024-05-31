@@ -138,7 +138,7 @@ include('../../header.php');
                         Minor effort was taken to refactor the code to allow it to easily be plugged into this very web page. This refactoring essentially encapsulates all the logic into a singular grid object. A grid object in this context is composed of a set of hexagons. Indeed, drilling through the logic of the source script will reveal a quasi-constructor to produce a hexagon:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:360px;overflow:auto' max-height='360' src='code/01.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:360px;overflow:auto' max-height='360' src='code/01.php'>
                         </iframe>
                     </figure>
                     <p>
@@ -151,7 +151,7 @@ include('../../header.php');
                         What exactly are these set of values? The call to <code>hex_handler()</code> gains access to the set of values previously discussed. It allows access to the next point of origin for the next hexagon to be placed in a grid. From this point of origin, the set of vertices associated with this new hexagon are computed and returned as an associative array:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:930px;overflow:auto' max-height='930' src='code/02.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:930px;overflow:auto' max-height='930' src='code/02.php'>
                         </iframe>
                     </figure>
                     <p>

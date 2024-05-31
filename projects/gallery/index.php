@@ -135,7 +135,7 @@ include('../../header.php');
                         When exactly does this transition occur? "Near the bottom" of the viewport is defined explicitly within this implementation. Consider the following function that returns true should a figure reach the threshold to trigger a transition:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:320px;overflow:auto' max-height='320' src='code/01.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:320px;overflow:auto' max-height='320' src='code/01.php'>
                         </iframe>
                     </figure>
                     <p>
@@ -149,7 +149,7 @@ include('../../header.php');
                                     </li>
                                     <li style='list-style-type:none'>
                                         <figure class='code-figure'>
-                                            <iframe frameborder="0" style='width:100%;max-height:610px;overflow:auto' max-height='610' src='code/02.html'>
+                                            <iframe frameborder="0" style='width:100%;max-height:610px;overflow:auto' max-height='610' src='code/02.php'>
                                             </iframe>
                                         </figure>
                                     </li>
@@ -169,7 +169,7 @@ include('../../header.php');
                                     </li>
                                     <li style='list-style-type:none'>
                                         <figure class='code-figure'>
-                                            <iframe frameborder="0" style='width:100%;max-height:320px;overflow:auto' max-height='320' src='code/03.html'>
+                                            <iframe frameborder="0" style='width:100%;max-height:320px;overflow:auto' max-height='320' src='code/03.php'>
                                             </iframe>
                                         </figure>
                                     </li>
@@ -187,7 +187,7 @@ include('../../header.php');
                         <code>grid_display_agent</code> can now be examined. It receives one argument which is indicative of the amount of columns for a view. The function uses this value to retrieve a gallery from the <code>grids</code> global. The function then iterates through each column contained in the grid taken from <code>grids</code> and looks at each image contained in the buffer zone. If an image is found to trigger a display transition, set a flag indicating that more images should be placed into the buffer zone. Once each column for the given grid selection is examined then, if the flag has been triggered, start loading images into the buffer zone by means of the routine that has yet to be discussed.
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:875px;overflow:auto' max-height='875' src='code/04.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:875px;overflow:auto' max-height='875' src='code/04.php'>
                         </iframe>
                     </figure>
                     <p>
@@ -200,7 +200,7 @@ include('../../header.php');
                         The g<code>rid_load_agent</code> is a bit more complicated than the display agent. This is where the placement of figures into columns exists. The logic is predicated on the fact that there exists another global data structure that acts as an image manifest. This <code>manifest</code> is a json structure which contains pruned data obtained from VSCO's CCPA-compliant information request. The data in the context of the gallery contains only information pertinent to an image. The schema is as follows:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:295px;overflow:auto' max-height='295' src='code/05.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:295px;overflow:auto' max-height='295' src='code/05.php'>
                         </iframe>
                     </figure>
                     <p>
@@ -210,7 +210,7 @@ include('../../header.php');
                         While that is in mind, note that the amount of images that may exist is a number that isn't easily divisible by a certain column count. Will all columns be filled with the same amount of images in a case where the column count is 4 and the total amount of images is some odd number? No. Thus, this base case needs to be considered before beginning the core logic of this subroutine.
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:295px;overflow:auto' max-height='295' src='code/06.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:295px;overflow:auto' max-height='295' src='code/06.php'>
                         </iframe>
                     </figure>
                     <p>
@@ -220,14 +220,14 @@ include('../../header.php');
                         What is missing from the code snippet related to filling "galleries" <code>div</code> is insight of what constitutes the <code>div</code> representative of a given column. This logic is contained within a helper function. This helper function receives information from the <code>manifest</code> in addition to a grouping of styles. The nesting occurs here and the figure object is returned. It should be noted that this is where the logic is placed to allow an img tag to know when it is fully loaded. This is highlighted below:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:715px;overflow:auto' max-height='715' src='code/07.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:715px;overflow:auto' max-height='715' src='code/07.php'>
                         </iframe>
                     </figure>
                     <p>
                         Pivoting back to the core of the logic contained in <code>grid_load_agent</code>, it's important to remind ourselves that when <code>grid_load_agent</code> is called, it is supplied a single argument. That argument is <code>grid_selection</code> which is a mechanism to select a specific grid view of a certain column length - the length determined by the argument given for the parameter. Much of the machination in place selects the grid of the supplied column count, then iterates through these columns. The variable labeled <code>boundary</code> indicates the amount of images to be pulled in through the current call. It is bounded by the column size of the <code>grid_selection</code>. It can be lower than this by reasons previously discussed and shown by the set of conditions to get into the core set of logic.
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:1060px;overflow:auto' max-height='1060' src='code/08.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:1060px;overflow:auto' max-height='1060' src='code/08.php'>
                         </iframe>
                     </figure>
                     <p>
@@ -237,14 +237,14 @@ include('../../header.php');
                         The image information is first retrieved from the manifest and then used to create a new figure.
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:375px;overflow:auto' max-height='375' src='code/09.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:375px;overflow:auto' max-height='375' src='code/09.php'>
                         </iframe>
                     </figure>
                     <p>
                         Recall that images can be placed within the markup environment and the browser will take liberty to adjust the size of the object. In this case, we are using display properties that force the maximum size of an image to conform to the size of a given column. Within the <code>manifest</code>, height and width values of the originating image are stored. These can be used to calculate the proportion. It is not enough to strictly use the height value. Two images may share the same height value, but one may be significantly wider than the other, forcing a resize within the context of an html column. This resizing will in turn change its rendered height value. Thus, the image needs to have some ratio be calculated:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:320px;overflow:auto' max-height='320' src='code/10.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:320px;overflow:auto' max-height='320' src='code/10.php'>
                         </iframe>
                     </figure>
                     <p>
@@ -262,28 +262,28 @@ include('../../header.php');
                         </ul>
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:480px;overflow:auto' max-height='480' src='code/11.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:480px;overflow:auto' max-height='480' src='code/11.php'>
                         </iframe>
                     </figure>
                     <p>
                         All that's left is to account for global info and to sort the list of keys, highlighted below.
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:610px;overflow:auto' max-height='610' src='code/12.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:610px;overflow:auto' max-height='610' src='code/12.php'>
                         </iframe>
                     </figure>
                     <p>
                         The same logic needs to applied to the grouping of columns being considered. The current height of the columns in place need to be considered and placed into a list. This list should be sorted in the opposite order of the <code>figure_height_list</code> so that its values may be popped in tandem with the height list of the figures for correct pairing. These data structures reflect the data structures with the figure prefix, and exist within the same scope and proximity. Noting these declarations, the familiar logic is as follows:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:505px;overflow:auto' max-height='505' src='code/13.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:505px;overflow:auto' max-height='505' src='code/13.php'>
                         </iframe>
                     </figure>
                     <p>
                         With the maps in place, all that needs to be done is to iterate an amount of times equal to the amount of images being placed. For each iteration, pop a height key from both height lists. Use these keys to access their respective associative arrays and get the the relevant objects to make a figure-column pairing.
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:560px;overflow:auto' max-height='560' src='code/14.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:560px;overflow:auto' max-height='560' src='code/14.php'>
                         </iframe>
                     </figure>
                     <p>
@@ -293,7 +293,7 @@ include('../../header.php');
                         All these pieces are brought together to make the whole of the subroutine:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:2640px;overflow:auto' max-height='2640' src='code/15.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:2640px;overflow:auto' max-height='2640' src='code/15.php'>
                         </iframe>
                     </figure>
                     <p>
@@ -306,7 +306,7 @@ include('../../header.php');
                         The recursion involved needs to be initiated by something, though. What this is is fairly obvious - when the page finishes loading, kick off the process. The first thing this process needs to ask itself is, "how many columns should initially be displayed?" This question is answered through a subroutine called <code>readjust_caller</code> which sets a global variable called <code>active_grid</code>. This variable indicates how many columns should exist dependent on the width of the screen. This subroutine is also called within a simple event handler for the window on resize.
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:795px;overflow:auto' max-height='795' src='code/16.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:795px;overflow:auto' max-height='795' src='code/16.php'>
                         </iframe>
                     </figure>
                     <p>
@@ -316,7 +316,7 @@ include('../../header.php');
                         The result of the window's load event handler, shown above, will allow the image grid to display a set amount of images based on the height of the window. It will also place the images into each buffer zone. If one were to scroll, no more action would occur; <code>isFigureBottom</code> would not be called upon again. To address this, another event needs to be considered: when the screen scrolls!
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:560px;overflow:auto' max-height='560' src='code/17.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:560px;overflow:auto' max-height='560' src='code/17.php'>
                         </iframe>
                     </figure>
                     <p>

@@ -91,7 +91,7 @@ include('../../header.php');
                             An advantage to being provided a script within a Jupyter notebook is that it's easier to discern the sections the developer finds important. The script received from Professor Meurice took advantage of <code>matplotlib</code> to display the reprocessed images. Within the notebook, each significant step was capped by a display of the reprocessed image as-in progress. For example, the first significant step of the algorithm was to apply a grey-scale to each individual pixel. A given image would be read in using the imageio library then processed as such:
                         </p>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:505px;overflow:auto' max-height='505' src='code/01.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:505px;overflow:auto' max-height='505' src='code/01.php'>
                             </iframe>
                         </figure>
                         <p>
@@ -110,7 +110,7 @@ include('../../header.php');
                             The other values weren't clearly defined here. Since the product of the script is of visual nature, this provided an opportunity to produce something which can visually inform the variance of these values can produce. This would require a combinatoric production of the same image using a valid range of values. I refactored the code from the Jupyter notebook into an external python file and ran the following bash script:
                         </p>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:530px;overflow:auto' max-height='530' src='code/02.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:530px;overflow:auto' max-height='530' src='code/02.php'>
                             </iframe>
                         </figure>
                         <p>
@@ -171,14 +171,14 @@ include('../../header.php');
                             The <code>pathinfo</code> function is used to isolate the extension of the filename string. Contrary to sentiment posed in paragraphs prior, this is still worthy of checking to provide useful feedback for those who are making sincere attempts at using the application.
                         </p>
                         <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;max-height:110px;overflow:auto' max-height='110' src='code/04.html'>
+                        <iframe frameborder="0" style='width:100%;max-height:110px;overflow:auto' max-height='110' src='code/04.php'>
                         </iframe>
                         </figure>
                         <p>
                             The <code>exif_imagetype</code> function provides a means within PHP to drill down to byte-level in order to validate file structure. This is validated further by <code>image_type_to_mime_type</code> which makes use of Apache's <code>mime_magic</code> module to make the same assurance.
                         </p>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:165px;overflow:auto' max-height='165' src='code/05.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:165px;overflow:auto' max-height='165' src='code/05.php'>
                             </iframe>
                         </figure>
                         <p>
@@ -188,7 +188,7 @@ include('../../header.php');
                             Slider and file selection input has been validated. A keen observer will discover a hidden input form. A decision was made to assign a random name to the uploaded file as it is placed into the upload folder. This is an attempt to decouple any malicious attempts at file system traversal and malicious script execution vectors that the previous measures may have missed. The back-end generates this random string as the template for the submission page is built.
                         </p>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:320px;overflow:auto' max-height='320' src='code/06.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:320px;overflow:auto' max-height='320' src='code/06.php'>
                             </iframe>
                         </figrue>
                         <p>
@@ -198,17 +198,17 @@ include('../../header.php');
                             <hr>
                             <h4 id='validation_group_1_header' class='expandable'>[ - ] Validation of strings</h4>
                             <figure id='validation_group_1' class='code-figure'>
-                                <iframe frameborder="0" style='width:100%;max-height:770px;overflow:auto' max-height='770' src='code/07.html'>
+                                <iframe frameborder="0" style='width:100%;max-height:770px;overflow:auto' max-height='770' src='code/07.php'>
                                 </iframe>
                             </figure>
                             <h4 id='validation_group_2_header' class='expandable'>[ - ] Validation of filetype</h4>
                             <figure id='validation_group_2' class='code-figure'>
-                                <iframe frameborder="0" style='width:100%;max-height:715px;overflow:auto' max-height='715' src='code/08.html'>
+                                <iframe frameborder="0" style='width:100%;max-height:715px;overflow:auto' max-height='715' src='code/08.php'>
                                 </iframe>
                             </figure>
                             <h4 id='validation_group_3_header' class='expandable'>[ - ] Validation of numeric input</h4>
                             <figure id='validation_group_3' class='code-figure'>
-                                <iframe frameborder="0" style='width:100%;max-height:1295px;overflow:auto' max-height='1295' src='code/09.html'>
+                                <iframe frameborder="0" style='width:100%;max-height:1295px;overflow:auto' max-height='1295' src='code/09.php'>
                                 </iframe>
                             </figure>
                             <figcaption>
@@ -222,7 +222,7 @@ include('../../header.php');
                             Once the validation check passes, <code>move_uploaded_files</code> is called such that the receiving file is given the random name generated within the hidden input form. This new file's name will be used in concatenating a string to use for an <code>exec</code> call:
                         </p>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:140px;overflow:auto' max-height='140' src='code/10.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:140px;overflow:auto' max-height='140' src='code/10.php'>
                             </iframe>
                         </figure>
                         <p>
@@ -244,55 +244,55 @@ include('../../header.php');
                           The process is as follows: When the submission form is loaded, the back-end automatically generates a filename. This has already been discussed in the section prior. It's necessary to know the file-name before the submission is posted to the server. Write this string to the hidden form and write it to a JSON file that only the back-end may access. This file will serve as a map for an API to use.
                         </p>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:425px;overflow:auto' max-height='425' src='code/11.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:425px;overflow:auto' max-height='425' src='code/11.php'>
                             </iframe>
                         </figure>
                         <p>
                             Once the submit button is pressed, PHP will only serve the resulting page once all the program statements are completed. This includes the execution of the <code>exec</code> statement. This necessitates the need to have a filename pre-generated. Thus, a Javascript event listener is added to the submission button as a means know when it is pressed. This event listener must know the string that represents the filename.
                         </p>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:195px;overflow:auto' max-height='195' src='code/12.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:195px;overflow:auto' max-height='195' src='code/12.php'>
                             </iframe>
                         </figure>
                         <p>
                             Once submit is pressed, toggle a visual prompt for the user that they should wait. Trigger an interval loop which runs an AJAX query to the server's API to query for the status of an upload based on the randomly generated filename. This query occurs once every three seconds.
                         </p>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:245px;overflow:auto' max-height='245' src='code/13.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:245px;overflow:auto' max-height='245' src='code/13.php'>
                             </iframe>
                         </figure>
                         <p>
                             Once submit is pressed, the Aquatint script will be run via the PHP script's exec command. Within the Aquatint script, create a JSON file that resides in the uploads folder. This JSON file is prefixed with the name of the file to be written. It will contain entry points to indicate when a certain step of the algorithm is completed. It will also have a spot to indicate the progress of the current step being executed.
                         </p>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:245px;overflow:auto' max-height='245' src='code/14.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:245px;overflow:auto' max-height='245' src='code/14.php'>
                             </iframe>
                         </figure>
                         <p>
                             As the Aquatint program is running, it will write to the file once a significant step has been completed. Within each significant step, (usually embedded in an outer-loop), it will write a value indicating the percentage of the step completed. This will only be written for every 3% completed to save the amount of times the progress is written to this file.
                         </p>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:1005px;overflow:auto' max-height='1005' src='code/15.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:1005px;overflow:auto' max-height='1005' src='code/15.php'>
                             </iframe>
                         </figure>
                         <p>
                             As the user's browser is waiting for a response of the <code>post</code>, the AJAX method will be querying the API and receiving new state written by the Python script. The AJAX call will work through a set of states which represent the completion of a certain step of the Aquatint conversion process. Percentage of a given step will be reported, and once a step is completed, a progress bar will be filled in.
                         </p>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:875px;overflow:auto' max-height='875' src='code/16.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:875px;overflow:auto' max-height='875' src='code/16.php'>
                             </iframe>
                         </figure>
                         <br>
                         <br>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:245px;overflow:auto' max-height='245' src='code/17.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:245px;overflow:auto' max-height='245' src='code/17.php'>
                             </iframe>
                         </figure>
                         <p>
                             For every query to the API, the PHP script will then look up the relevant JSON status file and report the relevant status. The AJAX query will make use of the returned information to fill in the relevant HTML elements to give the user a sense of progress.
                         </p>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:925px;overflow:auto' max-height='925' src='code/18.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:925px;overflow:auto' max-height='925' src='code/18.php'>
                             </iframe>
                         </figure>
                         <p>
