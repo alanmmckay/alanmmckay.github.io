@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 im2 = imageio.imread(filename)
 Nix=im2.shape[0]
 Niy=im2.shape[1]
@@ -21,7 +18,6 @@ dsqin=1-grayimage/255.0
 hsimage=plt.imshow(dsqin,cmap='Greys',aspect=1,interpolation='none')
 plt.colorbar(hsimage)
 plt.show(hsimage)
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

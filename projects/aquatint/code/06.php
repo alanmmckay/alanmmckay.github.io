@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 $file_name = '';
 for($i = 0; $i &lt;= rand(10,20); $i++){
     $new_ord = rand(87,122);
@@ -14,7 +11,6 @@ for($i = 0; $i &lt;= rand(10,20); $i++){
         $file_name = $file_name . $new_ord;
     }
 }
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

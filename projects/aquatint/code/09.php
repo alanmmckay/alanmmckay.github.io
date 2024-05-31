@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 //Validate numeric form controls:
 if($uploadOk == 1){
 
@@ -51,7 +48,6 @@ if($uploadOk == 1){
     }
 
 }
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

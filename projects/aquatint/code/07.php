@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 $target_dir = 'uploads/';
 $uploadOk = 1;
 
@@ -31,7 +28,6 @@ if(isset($_POST['hidden_file_name']) &amp;&amp; isset($_FILES['uploadImage']['na
 }else{
     $uploadOk = 0;
 }
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

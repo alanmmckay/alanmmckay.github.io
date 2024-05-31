@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 # !!! This is the same loop described earlier in the reading.
 #     It has been expanded to allow progress reporting.
 #     Note that this is only a subsection of the Aquatint script.
@@ -40,7 +37,6 @@ plt.savefig(filename.split('.')[-2]+'-origin.jpg',dpi=300)
 status_dict["origin"] = True
 status_dict['finished'] += 1
 write_to_json(filename.split('.')[-2]+'-status.json',json.dumps(status_dict))
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>
