@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 Q = {L -/-, H -/-, 0 n/m, 1 x/y} where n,m,x, y are Integers
 Σ = {L, H}
 ι(x) = x
@@ -17,8 +14,6 @@ Q = {L -/-, H -/-, 0 n/m, 1 x/y} where n,m,x, y are Integers
     (0 n/m, 0 x/y) -> (0 (n+x)/(m+y), (1 (n+x)/(m+y)),
     (0 n/m, 1 x/y) -> (0 n/m, 1 n/m)
     }
-</code>
-</pre>
-    </body>
-</html>
-
+<?php
+    require($root_directory."code_footer.html");
+?>
