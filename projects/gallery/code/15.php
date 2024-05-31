@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 async function grid_load_agent(grid_selection){//grid_selection is not zero-based
     var load_count = load_counts[grid_selection-1];
 
@@ -102,7 +99,6 @@ async function grid_load_agent(grid_selection){//grid_selection is not zero-base
         }
     }
 }
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

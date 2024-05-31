@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 async function grid_display_agent(grid_selection){
     var load_flag = false;
     for(let i=0;i&lt;grid_selection;i++){
@@ -35,7 +32,6 @@ async function grid_display_agent(grid_selection){
         setTimeout(function(){grid_load_agent(grid_selection)},(grid_selection * 100));
     }
 }
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 window.onscroll = function(){
     if(display_counts[active_grid - 1] &lt;= load_counts[active_grid - 1] - active_grid){
         setTimeout(function(){
@@ -23,7 +20,6 @@ window.onscroll = function(){
         }, (100 * active_grid));
     }
 }
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

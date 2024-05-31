@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 for(let i=0;i&lt;max_column_size;i++){
     col_map = [];
     for(let j=0;j&lt;(i+1);j++){
@@ -14,7 +11,6 @@ for(let i=0;i&lt;max_column_size;i++){
     }
     col_maps.push(col_map);
 }
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

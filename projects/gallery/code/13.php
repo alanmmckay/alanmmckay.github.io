@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 var columns = grids[grid_selection-1].children;
 for(let i=0;i&lt;grid_selection;i++){
     let column_height = columns[i].getBoundingClientRect().height
@@ -21,7 +18,6 @@ for(let i=0;i&lt;grid_selection;i++){
 col_h_list.sort(function(a,b){
     return a-b;
 });
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

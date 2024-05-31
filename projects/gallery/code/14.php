@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 var iteration_index = 0;
 var figure_key = figure_height_list[iteration_index];
 var figure_group = figure_height_map[figure_key];
@@ -23,7 +20,6 @@ while(iteration_index &lt; boundary){
     figure_key = figure_height_list[iteration_index];
     figure_group = figure_height_map[figure_key];
 }
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

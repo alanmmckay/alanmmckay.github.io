@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 for(let i=0;i&lt;boundary;i++){
     .
     .
@@ -25,7 +22,6 @@ for(let i=0;i&lt;boundary;i++){
 <mark>figure_height_list.sort(function(a,b){</mark>
     <mark>return b-a;</mark>
 <mark>});</mark>
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

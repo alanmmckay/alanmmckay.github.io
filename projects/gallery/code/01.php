@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 function isFigureBottom(fig_object){
     var fig_height = fig_object.getBoundingClientRect().height;
     var fig_top = fig_object.getBoundingClientRect().top;
@@ -14,7 +11,6 @@ function isFigureBottom(fig_object){
         return false;
     }
 }
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

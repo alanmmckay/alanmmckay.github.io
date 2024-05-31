@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 var isMobile = window.matchMedia || window.msMatchMedia;
 isMobile = isMobile("(pointer:coarse)").matches;
 
@@ -32,7 +29,6 @@ window.onresize = function(){
     }
     old_height = window.innerHeight;
 }
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

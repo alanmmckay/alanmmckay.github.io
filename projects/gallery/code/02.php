@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 grids_html = document.getElementById('galleries');
 for(let i=0;i&lt;max_column_size;i++){
     const grid = document.createElement('div');
@@ -25,7 +22,6 @@ for(let i=0;i&lt;max_column_size;i++){
     grids_html.appendChild(grid);
 }
 delete grids_html;
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

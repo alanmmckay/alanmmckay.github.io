@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 function create_new_figure(file_name,init_style,vsco_url,source_grid,image_number){
     var anchor = document.createElement('a');
     anchor.setAttribute('target','_blank');
@@ -29,7 +26,6 @@ function create_new_figure(file_name,init_style,vsco_url,source_grid,image_numbe
     anchor.appendChild(figure);
     return anchor;
 }
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>
