@@ -28,9 +28,9 @@ include('../header.php');
                 <a href="https://github.com/alanmmckay/graduate-app" class="writing" target="_blank" rel="noopener noreferrer"> [Coming Soon] Web Development: MVC Content Management System</a>
                 <a href='gallery/' class='writing'> Javascript: Balanced Image Gallery</a>
                 <a href='dataflow/' class='writing'> Research: Privacy and Dataflow</a>
-                <a href='social/' class='writing'> Project: Social Computing</a>
+                <a href='social/' class='writing'> Data Science: Social Computing</a>
                 <a href='aquatint/' class='writing'> Web Development: Aquatint Image Processor</a>
-                <a href='safety/' class='writing'> PostgreSQL GIS: Cycling Safety Database</a>
+                <a href='safety/' class='writing'> Data ETL: Cycling Safety Database</a>
                 <a href='organization/' class='writing'> Teaching: Computer Organization</a>
                 <a href='protocol/' class='writing'> Research: Population Protocol</a>
                 <a href='compiler/' class='writing'> Project: Klein Compiler</a>
