@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 hex = function(name, type){
 	this.vertices = hex_handler();
         this.vertices.center.name = name;
@@ -16,7 +13,6 @@ hex = function(name, type){
         hexV.grid.push(this.vertices.sideVertices);
         hexV.origin.push(this.vertices.center);
 }
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>
