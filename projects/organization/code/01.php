@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 def sum_a(aList):
     total = 0
     for value in aList:
@@ -50,8 +47,6 @@ def sum_e(aList):
 def sum_f(aList):
     total = sum(aList) #python's built-in sum function
     return total
-</code>
-</pre>
-    </body>
-</html>
-
+<?php
+    require($root_directory."code_footer.html");
+?>

@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 def sum_g(aList):
     return sum(alist)
 
@@ -67,8 +64,6 @@ def sum_l(aList):
         return aList[0]
     else:
         return aList[0] + sum_l(aList[1:])
-</code>
-</pre>
-    </body>
-</html>
-
+<?php
+    require($root_directory."code_footer.html");
+?>

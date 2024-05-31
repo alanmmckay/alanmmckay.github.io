@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 01    # --- --- --- --- --- --- #
 02    sum:
 03    # Two arguments $a0 (memory address of list) and $a1 (length value of list)
@@ -34,8 +31,6 @@
 27    move $v0 $s0      #place total into return register
 28    jr $ra            #return to caller
 29    # --- --- --- --- --- --- #
-</code>
-</pre>
-    </body>
-</html>
-
+<?php
+    require($root_directory."code_footer.html");
+?>
