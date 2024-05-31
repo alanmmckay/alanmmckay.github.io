@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 CREATE TABLE cycling.activities_staging
 (
     activity_id BIGINT,
@@ -18,7 +15,6 @@ CREATE TABLE cycling.activities_staging
     timezone varchar,
     PRIMARY KEY(activity_id)
 );
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

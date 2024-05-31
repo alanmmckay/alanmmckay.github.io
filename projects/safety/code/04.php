@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 with open('morerides.json','r') as rides_file:
     rides_data = json.load(rides_file)
 
@@ -35,7 +32,6 @@ for ride in rides_data:
 
 with open('rides.csv','w') as rides_file:
     rides_file.write(csv_string)
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

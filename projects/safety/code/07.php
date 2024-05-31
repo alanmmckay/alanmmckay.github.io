@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 INSERT INTO cycling.activities(
     activity_id,
     athlete_id,
@@ -31,7 +28,6 @@ SELECT staging.activity_id,
             FROM cycling.activities_staging as staging
             JOIN cycling.athletes as u ON strava_athlete_id = athlete_id
 ;
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

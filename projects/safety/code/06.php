@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 CREATE TABLE cycling.activities
 (
     activity_id BIGINT,
@@ -23,7 +20,6 @@ CREATE TABLE cycling.activities
     FOREIGN KEY(user_id)
     REFERENCES cycling.athletes(user_id)
 );
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>

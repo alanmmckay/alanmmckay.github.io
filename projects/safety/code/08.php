@@ -1,10 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../../style.css">
-    </head>
-    <body>
-<pre>
-<code class='iframe'>
+<?php
+    $root_directory = "../../../";
+    require($root_directory."code_header.php");
+?>
 CREATE TABLE cycling.traffic_vol
 (
     gid INT,
@@ -16,7 +13,6 @@ CREATE TABLE cycling.traffic_vol
     geom geometry(multilinestring,4326),
     PRIMARY KEY(gid)
 );
-</code>
-</pre>
-    </body>
-</html>
+<?php
+    require($root_directory."code_footer.html");
+?>
