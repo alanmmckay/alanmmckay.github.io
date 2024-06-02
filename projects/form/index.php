@@ -88,6 +88,28 @@ include('../../header.php');
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;max-height:150px;overflow:auto' max-height='150' src='code/07.php'></iframe>
                     </figure>
+                    <p>
+                        This above template is the view which will be presented should the new controller action be invoked. Submission of this form will invoke the create controller action through an HTTP post. This template is close to minimum in terms of interacting with the Rails framework. These interactions are highlighted, and can also be noticed by the usage of the <code>&lt;% %&gt;</code> tags.
+                    </p>
+                    <p>
+                        The decision to use a variable to represent the <code>model</code> name is a weak contingency for the case in which the model's name is changed, (via a migration, for example). This allows a maintainer of this view to quickly adapt to the change by having a single entry point of value designation. Using this category of value declaration is an early lesson to learn in both the study of Computer Science and coding which serves as a starting point to transition into more elaborate means of DRYing out this code.
+                    </p>
+                    <p>
+                        Two other values are being output into this form via evaluation of some Ruby expression. The general concept of <code>users_create_path</code> has been discussed within the context section. The value of <code>form_authenticity_token</code> is assigned by the Rails framework and is required for validating the session state of a visitor to the website.
+                    </p>
+                    <h4>Introducing Rails Helpers</h4>
+                    <p>
+                        The natural evolution of this template will introduce the usage of built-in helpers such as those included in <code><a href='https://api.rubyonrails.org/classes/ActionView/Helpers.html' target="_blank" rel="noopener noreferrer">ActionView::Helpers</a></code>. Specifically, the <code>FormHelper</code> and <code>FormTagHelper</code> namespaces. Specifically <code>form_tag</code>, <code>label_tag</code>, and <code>text_field</code> are used.
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:150px;overflow:auto' max-height='150' src='code/08.php'></iframe>
+                    </figure>
+                    <p>
+                        The <code>form_tag</code> helper puts into place the <code>&lt;form&gt;</code> opening and closing tags while also placing a couple of hidden <code>input</code> fields which take care of the session token authentication previously discussed. The <code>label_tag</code> helper creates a relevant set of <code>&lt;label&gt;</code> tags while the <code>text_field</code> helper creates a relevant set of <code>input</code> tags whose <code>type</code> is set to text. It should be observed that the initial assignment of <code>model</code> has been turned into a <code>symbol</code> as a means to adhere to the conventions set place within the documentation of these methods. That is, the <code>text_field</code> expects a <code>symbol</code> to be supplied as an argument for its <code>object</code> and <code>method</code> parameters. This is contrary to the <code>label_tag</code> helper which expects a <code>string</code>.
+                    </p>
+                    <p>
+                        The <code>object</code> parameter for <code>text_field</code> refers to the object in which the view presumably exists. In this case, it's the <code>User</code> object. The <code>method</code> parameter refers to the attribute in which the input will be applied. The term <code>method</code> refers to the mutator/accessor method which will be invoked upon submission of the form. Note that the <code>name</code> property of the resultant HTML element will maintain the form of <code>&lt;model&gt;[&lt;attribute&gt;]</code>; the output of this updated template will be the same as that was output from the first naively built template!
+                    </p>
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
