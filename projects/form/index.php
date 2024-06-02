@@ -110,6 +110,25 @@ include('../../header.php');
                     <p>
                         The <code>object</code> parameter for <code>text_field</code> refers to the object in which the view presumably exists. In this case, it's the <code>User</code> object. The <code>method</code> parameter refers to the attribute in which the input will be applied. The term <code>method</code> refers to the mutator/accessor method which will be invoked upon submission of the form. Note that the <code>name</code> property of the resultant HTML element will maintain the form of <code>&lt;model&gt;[&lt;attribute&gt;]</code>; the output of this updated template will be the same as that was output from the first naively built template!
                     </p>
+                    <p>
+                        What is the advantage of using these helpers? They begin to abstract away the syntax required of HTML. One needs not worry about closing open HTML tags for each call. Possible mistakes of typing a tag's attributes and their properties are mitigated; no longer does a developer need to type out <code>class="..."</code>, <code>placeholder="..."</code>, <code>for="..."</code>, <code>id="..."</code>, etc. The aspects of markup that are important, such as assigning a class to an element, are isolated for the developer.
+                    </p>
+                    <p>
+                        This approach doesn't completely eliminate these syntactic aspects. The template includes a set of div and header tags that are vulnerable to being opened but not closed. The helper methods themselves need to be enclosed in a set of tags which act as a mechanism for the <code>ERB</code> template to know that a Ruby expression should be evaluated. How can these HTML elements be abstracted away?
+                    </p>
+                    <p>
+                        Luckily, such a technology already exists. <code><a href="https://haml.info/"  target="_blank" rel="noopener noreferrer">HAML</a></code> was created precisely for these reasons:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:150px;overflow:auto' max-height='150' src='code/09.php'></iframe>
+                        <iframe frameborder="0" style='width:100%;max-height:150px;overflow:auto' max-height='150' src='code/10.php'></iframe>
+                    </figure>
+                    <p>
+                        HAML stands for HTML Abstraction Markup Language. Usage of HAML using Ruby on Rails requires its gem to be bundled with the project. Doing so will allow a controller to route to a view whose extension is <code>.html.haml</code> instead of <code>.html.erb</code>. Here, the markup abstractions can be leveraged to clean up view code and prevent common mistakes that come from code reuse of literal strings. Converting the template to HAML will produce the following template:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;max-height:150px;overflow:auto' max-height='150' src='code/11.php'></iframe>
+                    </figure>
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
