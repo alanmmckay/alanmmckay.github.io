@@ -141,6 +141,37 @@ include('../../header.php');
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:795px' max-height='795' src='code/11.php'></iframe>
                     </figure>
+                    <h3>Extending Functionality</h3>
+                    <p>
+                        A key part of the model description used in the examples so far is that some property of the value placed in the HTML input needs to be true in order for a post to succeed. That is, validation is in in place for certain attributes of the model.
+                    </p>
+                    <p>
+                        The helper functions provided through <code>ActionView::Helpers</code> do not account for this. It is up to the developer to check for the cases where an invalid post is made and to provide feedback to the user that a breach of validation has occurred.
+                    </p>
+                    <p>
+                        The feedback required manifests itself in two ways. The first is that an error message should be presented informing the user of what went wrong. These messages are declared within the model's class and should be placed into the <code>flash</code> hash-map whenever a violation occurs. Which key each message is associated with is up to the developer and defined within the relevant controller action. In the example of the <code>create</code> controller action, the <code>flash</code> is occupied dependent on whether or not <code>@user.valid?</code> returns true. In the case in which it returns false, <code>@user.errors</code> is placed into <code>flash[:login]</code>. The schema of <code>@user.errors</code> is <code>{:&lt;model attribute&gt; =&gt; &lt;error message&gt;, ... }</code>.
+                    </p>
+                    <p>
+                        The other means in which feedback manifests itself is by repopulating input elements with the values the user had previously placed in them. For example, if a visitor who is registering tries to post a form and their password fields don't match, it would be annoying if they were presented with a new blank form where they need to type in their email, first name, last name, and phone number.
+                    </p>
+                    <p>
+                        A look at the create controller action informs us that this information is grabbed from a call to <code>user_params</code> and placed into <code>users_path flash[:info]</code>. The hash map placed into <code>flash[:info]</code> can be used to repopulate an input tag's value property.
+                    </p>
+                    <p>
+                        To present these two types of feedback requires a set of conditionals to determine whether or not these values need to be placed. Consider the input associated with the email property of the User model:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:320px' max-height='320' src='code/12.php'></iframe>
+                    </figure>
+                    <p>
+                        The first three highlighted lines denote the logic of occupying a form's value property. Observe the merge method in use within the <code>text_field</code> helper which merges the <code>value</code> hash-map with the hash-map that is initially being supplied as an argument to the helper's option parameter. Usage of a hash-map for <code>value</code> allows the case where an empty hash-map is evaluated by Rails which will recognize as a nil and thus not set the HTML elements's <code>value</code> property. This is contrary to the potential behavior of supplying an empty string which may visually override the placeholder value with said empty string.
+                    </p>
+                    <p>
+                        The last two highlighted lines denote the logic of displaying an error message. This occurs inline as per the bootstrap classes being used. That is, the <code>label</code> HTML element produced from the initial <code>label_tag</code> helper, the <code>input</code> HTML element produced from the <code>text_field</code> helper, and the optional <code>label</code> HTML element produced from the second <code>label_tag</code> helper are placed in the same container horizontally. Both of these <code>label</code> tags point to the same <code>input</code> tag, allowing a user to select either to place the cursor into the relevant <code>input</code> form.
+                    </p>
+                    <p>
+                        The inclusion of this logic introduces 5 new lines of code for each <code>input</code> tag required of the form. This can balloon in size for forms which require a larger quantity of <code>input</code> tags. For the template that has been pieced together on this page, this would require a total of 30 new lines of code. This presents an opportunity to DRY out this code by introducing a new set of helper methods.
+                    </p>
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
