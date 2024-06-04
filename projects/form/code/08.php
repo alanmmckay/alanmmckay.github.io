@@ -13,11 +13,11 @@
     &lt;/div&gt;
     &lt;div class="input-group"&gt;
       <mark>&lt;%= label_tag model.to_s+'_password', 'Password', {:class =&gt; "input-group-text"} %&gt;</mark>
-      <mark>&lt;%= text_field model, :password, {:class =&gt; "form-control", :placeholder =&gt; "Password", :disabled =&gt; false} %&gt;</mark>
+      <mark>&lt;%= password_field model, :password, {:class =&gt; "form-control", :placeholder =&gt; "Password", :disabled =&gt; false} %&gt;</mark>
     &lt;/div&gt;
     &lt;div class="input-group"&gt;
       <mark>&lt;%= label_tag model.to_s+'_password_confirmation', 'Verify Password', {:class =&gt; "input-group-text"} %&gt;</mark>
-      <mark>&lt;%= text_field model, :password_confirmation, {:class =&gt; "form-control", :placeholder =&gt; "Verify Password", :disabled =&gt; false} %&gt;</mark>
+      <mark>&lt;%= password_field model, :password_confirmation, {:class =&gt; "form-control", :placeholder =&gt; "Verify Password", :disabled =&gt; false} %&gt;</mark>
     &lt;/div&gt;
     &lt;br&gt;
     &lt;div class="input-group"&gt;

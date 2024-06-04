@@ -11,10 +11,10 @@
       = text_field model, :email, {:class => "form-control", :placeholder => "Your Email", :disabled => false}
     %div.input-group
       = label_tag model.to_s+'_password', 'Password', {:class => "input-group-text"}
-      = text_field model, :password, {:class => "form-control", :placeholder => "Password", :disabled => false}
+      = password_field model, :password, {:class => "form-control", :placeholder => "Password", :disabled => false}
     %div.input-group
       = label_tag model.to_s+'_password_confirmation', 'Verify Password', {:class => "input-group-text"}
-      = text_field model, :password_confirmation, {:class => "form-control", :placeholder => "Verify Password", :disabled => false}
+      = password_field model, :password_confirmation, {:class => "form-control", :placeholder => "Verify Password", :disabled => false}
     %br
     %div.input-group
       = label_tag model.to_s+'_fname', 'First Name', {:class => "input-group-text"}
