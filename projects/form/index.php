@@ -129,7 +129,7 @@ include('../../header.php');
                         The above approach doesn't completely eliminate these syntactic aspects. The template includes a set of div and header tags that are vulnerable to being opened but not closed. The helper methods themselves need to be enclosed in a set of tags which act as a mechanism for the <code>ERB</code> template to know that a Ruby expression should be evaluated. How can these HTML elements be abstracted away?
                     </p>
                     <p>
-                        Luckily, such a technology already exists. <code><a href="https://haml.info/"  target="_blank" rel="noopener noreferrer">HAML</a></code> was created precisely for these reasons:
+                        Luckily, such a technology already exists. <code><a href="https://haml.info/" target="_blank" rel="noopener noreferrer">HAML</a></code> was created precisely for these reasons:
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:280px' max-height='280' src='code/09.php'></iframe>
@@ -172,6 +172,92 @@ include('../../header.php');
                     <p>
                         The inclusion of this logic introduces 5 new lines of code for each <code>input</code> tag required of the form. This can balloon in size for forms which require a larger quantity of <code>input</code> tags. For the template that has been pieced together on this page, this would require a total of 30 new lines of code. This presents an opportunity to DRY out this code by introducing a new set of helper methods.
                     </p>
+                    <h2>Developing New Form Helpers</h2>
+                    <h3>Generalizing calls to ActionView::Helpers</h3>
+                    <p>
+                        It's surprising the HTML pattern of bundling label and input elements isn't addressed within the rails framework. A lot of effort is put in the framework to abstract away these type of details. The <code>ActionView::Helpers</code> namespace is good evidence of this. This implies that more work can be contributed to the Rails project.
+                    </p>
+                    <p>
+                        Let's consider the case in which a developer wants to create a form input element and its associated label. Also consider the prior code-block example in which an input and its label is created for the email attribute of the User model. Generalizing this code will help expose patterns which will make it easy to DRY:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:320px' max-height='320' src='code/13.php'></iframe>
+                    </figure>
+                    <p>
+                        The first surface-level observation of this generalized code is that a <code>&lt;Model Attribute&gt;</code> is a common element between the <code>text_field</code> helper and the <code>label_tag</code> helper. Peering past the surface, it is less obvious that the value assigned to <code>model</code> is another commonality between the two. This is less obvious simply because it's not highlighted in the code above.
+                    </p>
+                    <p>
+                        Both the <code>ActionView</code> helpers used also contain a <code>&lt;Natural Statement of Attribute&gt;</code>. These represent some string which a visitor can read. These are not necessarily the same strings, thus should be considered distinct from each other.
+                    </p>
+                    <p>
+                        Another piece of generalization involves the <code>&lt;Controller Action&gt;</code> access within the flash hash-map. A glance will lead a reader to believe that the notion of a controller action is only associated with the case where an error message needs to be output. A look at the controller which fills the hash-map will disprove this claim. The controller action is filling two values within the hash-map. Both <code>:login</code> and <code>:info</code>.
+                    </p>
+                    <p>
+                        Furthermore, the <code>value</code> property of the HTML <code>input</code> element would be manipulated by JavaScript if need be. The fact that <code>value</code> is handled similarly to a nullable object where it is merged to the option parameter of <code>text_field</code> allows this namespace within the flash hash-map to technically be exclusive from any controller action. If this were a namespace which adheres to a more general convention leveraged by Rails, it would realistically be labeled something like <code>:values</code> instead of <code>:info</code>.
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:320px' max-height='320' src='code/14.php'></iframe>
+                    </figure>
+                    <p>
+                        One more abstraction can be made. Each call to a <code>ActionView</code> helper allows an argument of some set of options. These options are received as a hash-map where each key represents some property of the helper. These are typically HTML properties, such as an element's style property. Both <code>ActionView</code> helpers in this context may require a different set of options which requires distinction.
+                    </p>
+                    <p>
+                        To begin developing a new helper, the production of an HTML input element and its direct label element will be isolated from a potential error message being produced by an access to <code>flash[:&lt;Controller Action&gt;]</code>. This means that the first helper method will require a <code>&lt;Model&gt;</code>, <code>&lt;Model Attribute&gt;</code>, <code>&lt;Natural Statement for Attribute&gt;</code>, <code>&lt;Options for ActionView Helper&gt;</code>, <code>&lt;Options for ActionView Label&gt;</code>.
+                    </p>
+                    <p>
+                        It should be observed that <code>&lt;Options for ActionView Helper&gt;</code> is more generic than <code>&lt;Options for ActionView Label&gt;</code>. We've derived the more generic <code>&lt;ActionView Helper&gt;</code> from a call to the text_field method. Using the example of the template built thus far, a call to the password_field method is also used. Indeed, a wider set of methods should be allowed. This implies one last abstraction:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:320px' max-height='320' src='code/15.php'></iframe>
+                    </figure>
+                    <p>
+                        Each <code>&lt;Helper Method&gt;</code> will ultimately be derived from <code><a href='https://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html' target="_blank" rel="noopener noreferrer">ActionView::Helpers::FormHelper</a></code>. Specifically, those with the <code>_field</code> suffix. This will manifest itself in the namespace of <code>ApplicationHelper::create_form_input_field</code> within <code>app/helpers/application_helper.rb</code>:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:850px' max-height='850' src='code/16.php'></iframe>
+                    </figure>
+                    <p>
+                        Initially, <code>StandardError</code> is extended to help inform a developer if an invalid symbol provided as an argument. Whether or not this error is flagged hinges on the evaluation of the helper's first parameter - <code>helper_sym</code>. This evaluation occurs through a call to the <code>suffix?</code> method to determine whether the <code>field</code> suffix is being used, as noted prior.
+                    </p>
+                    <p>
+                        The helper <code>create_form_input_field</code> initially receives a symbol to represent the name of the <code>ActionView</code> helper that needs to be called. The next two parameters adhere to the parameter naming convention of the <code>_field</code> methods established in <code>ActionView::Helpers::FormHelper</code>. The <code>object</code> parameter correlates to a view's model and the <code>method</code> parameter correlates to a model's attribute.
+                    </p>
+                    <p>
+                        Near the end of the helper function, the <code>label_tag</code> helper is called to create the HTML string representative of the label element. This is assigned to a local variable. An inexperienced Ruby developer may struggle here in terms of knowing how to invoke the required helper represented by <code>helper_sym</code>. This is where the beauty of Ruby as a programming language comes into play.
+                    </p>
+                    <p>
+                        A key to understanding how to solve this problem is that everything in Ruby is an object. <b>Everything</b>. Literals are objects. Class definitions are objects. More importantly, syntactic abstractions are object method calls. Using the assignment operator is transcribed to an invocation of that object's mutator method, for example.
+                    </p>
+                    <p>
+                        Invocation of an object's method is an abstraction on providing that object's <code>send</code> method the symbol of the method that needs to be called! For example the expression <code>"Hello" + "World!"</code> is equivalent to <code>"Hello".+("World!")</code> which is also equivalent to <code>"Hello".send(:+, "World!")</code>. This allows the implementation of a method which allows a caller to ask some object to invoke some unknown method. In the context of create_form_input_field, this allows for the following expression:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:120px' max-height='120' src='code/17.php'></iframe>
+                    </figure>
+                    <p>
+                        What needs to be asked is which object should this method be invoked? Ruby on Rails documentation is not clear enough to personally figure this out. This method is defined within a module which is invoked within a logical space that handles view rendering. Does this method definition exist outside this logical space? Personal intuition does not ignore the fact that some object exclusive from whatever is governing view rendering is responsible for governing helpers. Does the object reference of that which manages <code>ActionView</code> need to be passed? What about the object reference of that which manages <code>ApplicationHelper</code>?
+                    </p>
+                    <p>
+                        Documentation may lack, but Ruby's features can help in this regard. Recalling that everything is an object, every object inherits from some base class. This class allows for object introspection in which objects retain information about themselves. The first step into discovering which Rails object(s) govern these logical spaces is to simply ask each relevant scope what its class name is. That is, to execute a debugging print statement within the logic of both <code>create_form_input_field</code> and the view template itself.
+                    </p>
+                    <p>
+                        Within the view template, these statements were output to the page itself:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:175px' max-height='175' src='code/18.php'></iframe>
+                    </figure>
+                    <p>
+                        Within the helper function, these statements were output to some text file:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:240px' max-height='240' src='code/19.php'></iframe>
+                    </figure>
+                    <p>
+                        Unfortunately, an empty string was produced for both calls to <code>self.class.name</code>! It seems the object(s) handling both these spaces was not given a class name. Fortunately, the preceding print statement asked to print the object for each space, which returns the memory address of each object. Serendipitously, both spaces return the same memory address, meaning the same object handles both these logical spaces. This allows a reference to self to finish out the helper function:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:400px' max-height='400' src='code/20.php'></iframe>
+                    </figure>
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
