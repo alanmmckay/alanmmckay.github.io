@@ -222,7 +222,7 @@ include('../../header.php');
                         Initially, <code>StandardError</code> is extended to help inform a developer if an invalid symbol was provided as an argument. Whether or not this error is flagged hinges on the evaluation of the helper's first parameter - <code>helper_sym</code>. This evaluation occurs through a call to the <code>suffix?</code> method to determine whether the <code>field</code> suffix is being used, as noted prior.
                     </p>
                     <p>
-                        The helper <code>create_form_input_field</code> initially receives a symbol to represent the name of the <code>ActionView</code> helper that needs to be called. The next two parameters adhere to the parameter naming convention of the <code>_field</code> methods established within <code>ActionView::Helpers::FormHelper</code>. The <code>object</code> parameter correlates to a view's model and the <code>method</code> parameter correlates to a model's attribute.
+                        The helper <code>create_form_input_field</code> initially receives a symbol to represent the name of the <code>ActionView</code> helper that needs to be called. The next two parameters adhere to the parameter naming convention of the <code>_field</code> methods established within <code>ActionView::Helpers::ssFormHelper</code>. The <code>object</code> parameter correlates to a view's model and the <code>method</code> parameter correlates to a model's attribute.
                     </p>
                     <p>
                         Near the end of the helper function, the <code>label_tag</code> helper is called to create the HTML string representative of the label element. The resultant string is assigned to a local variable. An inexperienced Ruby developer may struggle here in terms of knowing how to invoke the required helper represented by <code>helper_sym</code>. <i>This is where the beauty of Ruby as a programming language comes into play.</i>
@@ -260,6 +260,24 @@ include('../../header.php');
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:400px' max-height='400' src='code/20.php'></iframe>
                     </figure>
+                    <h3>Factoring more helpers from <code>ActionView::Helpers</code></h3>
+                    <h4>Valid and invalid symbols for <code>create_form_input_field</code></h4>
+                    <p>
+                        The above helper allows the creation of various HTML input elements. These elements are produced by calls to <code>ActionView::Helpers::FormHelper</code>'s methods which have the _field suffix. The means of validating the method symbol (<code>:helper_sym</code>) which <code>create_form_input_field</code> receives is not robust. Indeed, if one sends a symbol with a suffix of <code>_field</code> which does not exist in <code>ActionView::Helpers::FormHelper</code> which coincidentally also receives the same amount of arguments whose datatypes correlate to the order expected of the <code>FormHelper</code> methods <b>then</b> the method will be evaluated which may lead to unexpected behavior.
+                    </p>
+                    <p>
+                        To account for this, Ruby object introspection can be leveraged. A call to <code>ActionView::Helpers::FormHelper</code>'s <code>public_instance_methods</code> method can be made where it can be determined if the symbol exists within this lot.
+                    </p>
+                    <p>
+                        Looking at the return of <code>public_instance_methods</code> shows us a list of helper functions which correlates to the documentation for this module. Each entry with the <code>_field</code> suffix essentially behaves the same as far as the back-end is concerned. This was explored through the process of generalizing the usage of these helpers. There are a few helpers that exist in this namespace that do not adhere to this generalized behavior. <code>form_for</code> and <code>convert_to_model</code> are two such examples. These are intentionally caught by the validation in place in which the symbol is evaluated to contain the <code>_field</code> suffix.
+                    </p>
+                    <p>
+                        There is a helper here that is caught by argument validation which behaves functionally the same as the others: <code>text_area</code>. This is caught on account of not having the <code>_field</code> suffix. Despite this, the set of parameters aligns with that of the other helper functions and the production of a call to <code>text_area</code> behaves the the same with respect to how it's processed on the back-end.
+                    </p>
+                    <p>
+                        Realistically, <code>text_area</code> should be handled correctly with respect to <code>create_form_input_field</code>'s validation process by adapting the valid symbol check for <code>:hepler_sym</code>. For the sake of the project which spurred the development of these helper methods, an alternative approach was taken.
+                    </p>
+                    <h4>ActionView::Helpers::FormTagHelper</h4>
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
