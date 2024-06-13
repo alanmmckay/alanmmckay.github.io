@@ -226,12 +226,15 @@ include('../../header.php');
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:320px' max-height='320' src='code/15.php'></iframe>
                         <figcaption>The final significant piece of generalization. Observing that the helper method's name can be abstracted.</figcaption>
                     </figure>
-                    <h3>Extracting generalized values into an implementation</h3>
+                    <h3>Extracting generalized values into implementation</h3>
                     <p>
                         Each <code>&lt;Helper Method&gt;</code> will ultimately be derived from <code><a href='https://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html' target="_blank" rel="noopener noreferrer">Action&shy;View::Hel&shy;per&shy;s::For&shy;m&shy;Hel&shy;per</a></code>. Specifically, those with the <code>_field</code> suffix. This will manifest itself in the namespace of <code>Application&shy;Helper::create_&shy;form_&shy;input_&shy;field</code> within <code>app/&shy;helpers/&shy;application_&shy;helper&shy;.rb</code>. Considering the generalization process in the previous section, the implementation of the new helper method is defined as such:
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:850px' max-height='850' src='code/16.php'></iframe>
+                        <figcaption>
+                            The <code>create_&shy;form_&shy;input_&shy;field</code> helper method developed within <code>app/&shy;helpers/&shy;application_helper&shy;.rb</code>.
+                        </figcaption>
                     </figure>
                     <p>
                         Initially, <code>StandardError</code> is extended to help inform a developer if an invalid symbol was provided as an argument. Whether or not this error is flagged hinges on the evaluation of the helper's first parameter - <code>helper_sym</code>. This evaluation occurs through a call to the <code>suffix?</code> method to determine whether the <code>field</code> suffix is being used, as noted prior.
@@ -250,6 +253,9 @@ include('../../header.php');
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:120px' max-height='120' src='code/17.php'></iframe>
+                        <figcaption>
+                            Invocation of the <code>send</code> method on some unknown object.
+                        </figcaption>
                     </figure>
                     <p>
                         What now needs to be asked is for which object should this <code>send</code> method be invoked? Ruby on Rails documentation is not clear enough to personally find whether it addresses this question. This method is defined within a module which is invoked within a logical space that handles view rendering. Does this method definition exist outside this logical space? Personal intuition does not ignore the fact that some object exclusive from whatever is governing view rendering is responsible for governing the helpers. Does the object reference of that which manages <code>ActionView</code> need to be passed? What about the object reference of that which manages <code>ApplicationHelper</code>?
@@ -262,18 +268,27 @@ include('../../header.php');
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:175px' max-height='175' src='code/18.php'></iframe>
+                        <figcaption>
+                            Simple/Lazy debugging statements within <code>app/&shy;views/&shy;users/&shy;new.&shy;html.&shy;haml</code>.
+                        </figcaption>
                     </figure>
                     <p>
                         Within the helper function, these statements were output to some text file:
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:240px' max-height='240' src='code/19.php'></iframe>
+                        <figcaption>
+                            Simple/Lazy debugging statements within <code>app/&shy;helpers/&shy;application_&shy;helper.rb</code>'s <code>Application&shy;Helper::create_&shy;form_&shy;input_&shy;field</code>.
+                        </figcaption>
                     </figure>
                     <p>
                         Unfortunately, an empty string was produced for both calls to <code>self.class.name</code>! It seems the object(s) handling both these spaces was not given a class name. Fortunately, the preceding print statement asks to print the object for each space. These <code>puts self</code> expressions return the memory address of each object. Serendipitously, both spaces return the same memory address, meaning the same object handles both these logical spaces. This allows a reference to <code>self</code> to finish out the helper function:
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:400px' max-height='400' src='code/20.php'></iframe>
+                        <figcaption>
+                            The <code>self</code> object is the entity in which the parameterized method of <code>helper_sym</code> should be called.
+                        </figcaption>
                     </figure>
                     <h3>Factoring more helpers from <code>Action&shy;View::Hel&shy;p&shy;ers</code></h3>
                     <h4>Valid and invalid symbols for <code>create_&shy;form_&shy;input_&shy;field</code></h4>
@@ -307,6 +322,9 @@ include('../../header.php');
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:530px' max-height='530' src='code/21.php'></iframe>
+                        <figcaption>
+                            New helper method <code>create_&shy;form_&shy;input_&shy;tag</code> which operates with the context of the instance methods contained in <code>Action&shy;View::Hel&shy;p&shy;ers::Form&shy;Tag&shy;Hel&shy;per</code>.
+                        </figcaption>
                     </figure>
                     <p>
                         Like <code>create_&shy;form_&shy;input_&shy;field</code> being derived from <code>FormHelper</code>, <code>create_&shy;form_&shy;input_&shy;tag</code> adheres to the parameter naming convention of the instance methods within <code>FormTagHelper</code>. The above implementation applies more strict argument validation whilst attempting to guide a misuse by supplying the method an argument for <code>helper_sym</code> with the <code>_field</code> suffix.
@@ -325,6 +343,9 @@ include('../../header.php');
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:400px' max-height='400' src='code/22.php'></iframe>
+                        <figcaption>
+                            New validation check to ensure proper values are being passed to <code>helper_sym</code>.
+                        </figcaption>
                     </figure>
                     <h4>Helpers expecting a collection</h4>
                     <p>
@@ -379,7 +400,7 @@ include('../../header.php');
                         With the new form helpers in place, the above view can be reduced to the following:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:690px' max-height='690' src='code/28.php'></iframe>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:770px' max-height='770' src='code/28.php'></iframe>
                     </figure>
                     <p>
                         This effectively DRYs out the code to a production that is easy for any developer to digest at a glance.
