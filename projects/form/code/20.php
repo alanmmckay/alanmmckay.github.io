@@ -11,7 +11,7 @@
       value = {:value => flash[:info][method]}
     end
     label = label_tag (object.to_s + "_" +method.to_s).to_sym, label_text, label_options
-    <mark>label + self.send(helper_sym,  object,  method, options.merge(value)) helper_sym</mark>
+    <mark>label + self.send(helper_sym,  object,  method, options.merge(value))</mark>
   end
 
 <?php

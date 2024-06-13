@@ -275,9 +275,100 @@ include('../../header.php');
                         There is a helper here that is caught by argument validation which behaves functionally the same as the others: <code>text_area</code>. This is caught on account of not having the <code>_field</code> suffix. Despite this, the set of parameters aligns with that of the other helper functions and the production of a call to <code>text_area</code> behaves the the same with respect to how it's processed on the back-end.
                     </p>
                     <p>
-                        Realistically, <code>text_area</code> should be handled correctly with respect to <code>create_form_input_field</code>'s validation process by adapting the valid symbol check for <code>:hepler_sym</code>. For the sake of the project which spurred the development of these helper methods, an alternative approach was taken.
+                        Realistically, <code>text_area</code> should be handled correctly with respect to <code>create_form_input_field</code>'s validation process by adapting the valid symbol check for <code>:helper_sym</code>. For the sake of the project which spurred the development of these helper methods, an alternative approach was taken.
                     </p>
                     <h4>ActionView::Helpers::FormTagHelper</h4>
+                    <p>
+                        An astute developer will notice the use of <code>label_tag</code> within <code>create_form_input_field</code>. They will have been correlating what's been said on this page with the documentation for <code>ActiveView::Helpers::FormHelper</code> and observe that <code>label_tag</code> does not exist within this module. In its place is <code>label</code>, which would not pass the valid symbol check discussed for <code>create_form_input_field</code>. What's the difference between these two modules? What's the difference between <code>label</code> and <code>label_tag</code>?
+                    </p>
+                    <blockquote>
+                        Provides a number of methods for creating form tags that don’t rely on an Active Record object assigned to the template like FormHelper does. Instead, you provide the names and values manually. <cite> - <a href='https://api.rubyonrails.org/classes/ActionView/Helpers/FormTagHelper.html' target="_blank" rel="noopener noreferrer">Action View Form Tag Helpers - Rails Docs</a>
+                    </blockquote>
+                    <p>
+                       The decision to leverage <code>label_tag</code> whilst building the template and the resultant helper function was to make the above equivalence more intuitive for the reader of this article. A reader of the documentation for <code>FormTagHelper</code> will take note that all the instance methods have the <code>_tag</code> suffix. This includes a <code>text_area_tag</code>.
+                    </p>
+                    <p>
+                        The project which spurred the development of these new helper functions was influenced by the convenience of abstracting away markup from back-end development. This as in an effort to minimize differences in front-end developmental styles and approaches. Minimization occurred by development and implementation of these new helper functions. A decision was ultimately made to prioritize usage of <code>ActionView</code> helper functions with the <code>_tag</code> suffix instead of the <code>_field</code> suffix. The primary motivator for this was the fact that all the instance methods for <code>ActionView::Helpers::FormTagHelper</code> have the <code>_tag</code> suffix, making argument validation an easier task. This leads to the next helper function:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:530px' max-height='530' src='code/21.php'></iframe>
+                    </figure>
+                    <p>
+                        Like <code>create_form_input_field</code> being derived from <code>FormHelper</code>, <code>create_form_input_tag</code> adheres to the parameter naming convention of the instance methods within <code>FormTagHelper</code>. The above implementation applies more strict argument validation whilst attempting to guide a misuse by supplying the method an argument for <code>helper_sym</code> with the <code>_field</code> suffix.
+                    </p>
+                    <p>
+                        It should be noted that all of the instance methods within <code>FormTagHelper</code> are functionally equivalent. Consider the entry for <code>select_tag</code>. This instance method has an important optional parameter for a collection of <code>option_tags</code>. Likewise, <code>label_tag</code> helper has an optional parameter which can be used to place a value which gets placed between the resultant HTML tags. The documentation labels the usage of this parameter as "content". Other instance methods, such as <code>number_field_tag</code>, will label this optional parameter as <code>value</code>.
+                    </p>
+                    <p>
+                        A conventional conundrum occurs where the term value is used with these optional parameters. The <code>value</code> parameter is used to occupy the <code>value</code> attribute of the resultant HTML element. Here, the developer has a choice of supplying the value of this attribute using this helper argument or by using the options parameter as is done in the preceding conditional involving the <code>flash</code> hash-map. This value impasse is why the decision was made to <code>nil</code> this argument for the method call of <code>helper_sym</code> so that the intended behavior associated with the <code>flash</code> hash-map is not lost.
+                    </p>
+                    <p>
+                        Deciding to provide a nil value to the call to <code>helper_sym</code> means that more argument validation needs to be put in place for <code>create_form_input_tag</code>. This should catch the usage of the instance methods which should have a value provided as an argument to this parameter. A good example here is <code>select_tag</code>, which is composed of option tags provided as a hash-map to this argument.
+                    </p>
+                    <p>
+                        The implementation of this validation is as follows:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:400px' max-height='400' src='code/22.php'></iframe>
+                    </figure>
+                    <h4>Helpers expecting a collection</h4>
+                    <p>
+                        The decision was made to maintain using a helper function which supplies a <code>nil</code> argument to the third parameter to a call to an instance method within <code>FormHelper</code> or <code>FormTagHelper</code>. This results in needing to implement a set of conditionals that evaluate the value given for the <code>helper_sym</code> parameter which informs the user of the mistake and a potential path to take to fix said mistake. One of these messages will be returned upon a call where the value for <code>helper_sym</code> is <code>:select_tag</code>.
+                    </p>
+                    <p>
+                        To address this, a helper method called <code>create_form_input_select</code> was developed. This helper method reflects the same pattern that <code>create_form_input_field</code> and <code>create_form_input_tag</code> establishes, but expects an extra parameter that is a collection of attributes which can be used within a call to <code>ActionView::Helpers::FormOptionsHelper</code>'s  <code>options_from_collection_for_select</code>. It should be noted that <code>create_form_input_select</code> no longer needs a <code>helper_sym</code> parameter on account of the fact that it is specialized to always produce a pair of select tags. That is, there is no need for a <code>self.send</code> as <code>select_tag</code> is used in its stead.
+                    </p>
+                    <h3>Helpers expecting error handling</h3>
+                    <p>
+                        Recall that in the latest iteration of the <code>HAML</code> template a set of conditionals are in place which check whether or not a post to the model succeeded. In the event posting validation failed, a set of error messages were placed into the flash hash-map. The decision was made to implement this error functionality as a separate helper function. This decision was made to account for the fact that not every input element requires validation. An example of this to optionally require a phone number upon registration.
+                    </p>
+                    <p>
+                        This helper function has been labeled <code>create_form_error</code>. The internal logic is trivial as it simply checks the existence of of a value representative of the validation's error message established in the relevant model. Recall that this message is placed in the <code>flash</code> hash-map within the relevant controller. In the example used thus far, error messages are placed into <code>flash[:login]</code>. If this helper method was inherit in the Rails framework, this realistically would be associated with a more generic key, such as <code>:error</code> instead of <code>:login</code>.
+                    </p>
+                    <p>
+                        As is the case with <code>create_form_input_select</code>, <code>create_form_error</code> does not require a <code>helper_sym</code> parameter. This method is only responsible for producing a <code>label_tag</code> should it need to be produced. The parameter for <code>helper_sym</code> is essentially replaced with a parameter to represent the key to the hash-map contained in <code>flash</code>. In this example, the key is <code>:login</code>.
+                    </p>
+                    <p>
+                        A resultant call to <code>create_form_error</code> is as such:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:110px' max-height='110' src='code/23.php'></iframe>
+                    </figure>
+                    <p>
+                        ... where <code>create_form_error</code> is defined as follows:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:215px' max-height='215' src='code/24.php'></iframe>
+                    </figure>
+                    <hr>
+                    <h2>Using the new form helpers</h2>
+                    <p>
+                        Reconsider the initial template pertaining to creating the first input element:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:320px' max-height='320' src='code/25.php'></iframe>
+                    </figure>
+                    <p>
+                        With the new helper functions in place, the code can be reduced to the following:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:190px' max-height='190' src='code/26.php'></iframe>
+                    </figure>
+                    <p>
+                        Consider the initial HAML template. Consider this with all the conditionals required for a view to remember its prior value and any error message that needs to be communicated to a user if the post should fail:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:1535px' max-height='1535' src='code/27.php'></iframe>
+                    </figure>
+                    <p>
+                        With the new form helpers in place, the above view can be reduced to the following:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:690px' max-height='690' src='code/28.php'></iframe>
+                    </figure>
+                    <p>
+                        This effectively DRYs out the code to a production that is easy for any developer to digest.
+                    </p>
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
