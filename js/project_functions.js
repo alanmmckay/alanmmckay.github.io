@@ -155,7 +155,7 @@ function revealCodeSizeSlider(bool){
     }
 }
 
-function setCodeSizeSliders(){
+function setCodeSizeSliders(current = 17){
     var iframe_containers = document.getElementsByClassName('code-figure');
     for(let i=0; i<iframe_containers.length; i++){
         var container = iframe_containers[i];
@@ -170,7 +170,7 @@ function setCodeSizeSliders(){
         input.type = 'range';
         input.min = '12';
         input.max = '17';
-        input.value = '17';
+        input.value = current;
         input.addEventListener('input',function(){changeCodeSize(this);});
         input.addEventListener('mouseup',function(){
             revealCodeSizeSlider(false);
@@ -184,6 +184,7 @@ function setCodeSizeSliders(){
         div.appendChild(button);
         div.appendChild(input);
         container.insertBefore(div,container.firstChild);
+        changeCodeSize(this,input.value);
     }
 }
 

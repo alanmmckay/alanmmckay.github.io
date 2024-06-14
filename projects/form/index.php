@@ -490,6 +490,10 @@ include('../../header.php');
                 </nav>
             </section>
         </section>
+        <script src='../../js/project_functions.js'></script>
+        <script>
+            setCodeSizeSliders(15);
+        </script>
     </body>
 </html>
 
