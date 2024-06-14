@@ -376,6 +376,9 @@
             margin:0px;
         }
 
+        #writingsWrapper section.domcode p code{
+            background-color:#F7F7F7;
+        }
     /* --- --- --- */
 
 /* --- --- --- */
@@ -458,6 +461,14 @@
 
     div.image-col figure{
         transition:border-top 1.5s, opacity 4s;
+    }
+
+    #writingsWrapper div.image-col figure img{
+        transition: opacity .25s;
+    }
+
+    #writingsWrapper div.image-col figure img:hover{
+        opacity: .90;
     }
 
     #static-gallery-control ul{

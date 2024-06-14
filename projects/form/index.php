@@ -21,15 +21,83 @@ include('../../header.php');
                 <h1><a href='../'>&nbsp;&gt; Projects</a>
                 <h1><a href='../../'>Home</a></h1>
             </header>
-            <section>
+            <section class='domcode'>
                 <article>
                     <section class='info'>
                         <header>
                             <h2>Preface</h2>
                         </header>
                         <p>
-
+                            This page discusses the motivations, development, and implementation of a new set of helper functions as a means to DRY out production of input forms. The task of DRYing components of a program should be intuitive for any developer. What sets this project apart is the usage of key features from the Ruby language to accomplish the task in an elegant way.
                         </p>
+                        <p>
+                            The result of this project produces code that is easy for any developer to digest at a glance. The helper functions untangles both the logic required to persist input values between posts and the logic required to present error messages to a user. It essentially transforms code such as the following:
+                        </p>
+                        <br>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;overflow:auto;max-height:320px' max-height='320' src='code/25.php'></iframe>
+                        </figure>
+                        <br>
+                        <p>
+                            ...into something easier to implement and more informative at a glance:
+                        </p>
+                        <br>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;overflow:auto;max-height:190px' max-height='190' src='code/26.php'></iframe>
+                        </figure>
+                        <br>
+                        <p>
+                            This documentation describes the thought process of determining which pieces of the originating code can be abstracted into a function or set of functions. This begins with a brief discussion of the Rails framework and then transitions into the process of generalization. Using the generalized terms, the relevant methods are built and their components discussed.
+                        </p>
+                        <p>
+                            Through this documentation, code blocks are given. Some code blocks have highlighted sections. These highlighted snippets emphasize the point being made within the textual content currently being discussed. This may be further emphasized within a code block's caption.
+                        </p>
+                        <p>
+                            Care was taken to use terms correctly to a point of pedantry. Sometimes, this care was not enough to prevent confusion. For example, it may be hard to discern what is being conveyed in the statement, "The correct value is assigned to the value attribute." To help make this digestible, any term that refers to some literal code string will be marked up using a set of code-blocks. These terms will appear to the reader in a font type that looks mechanical.
+                        </p>
+                        <blockquote>
+                            The correct value is assigned to the <code style='background-color:#f7f7f7'>value</code> attribute.
+                        </blockquote>
+                        <p>
+                            Some of the code strings that are embedded within textual content are quite long. Because of this, a word wrap needs to occur within these strings to ensure that this page can be viewed on a wide range of device sizes. This will introduce a hyphen within these strings. Be wary of this; any code reference within a paragraph of textual content does not include the hyphen character.
+                        </p>
+                        <!--<p>
+                            The table of contents for this page is as follows:
+                        </p>
+                        <ul>
+                            <li>Ruby on Rails - Developing DRY forms
+                                <ul>
+                                    <li>Framework Context
+                                        <ul>
+                                            <li>Building a Template
+                                                <ul>
+                                                    <li>Introducing Rails Helpers</li>
+                                                    <li>Introducing HAML</li>
+                                                </ul>
+                                            </li>
+                                            <li>Extending Functionality
+
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>Developing New Form Helpers
+                                        <ul>
+                                            <li>Generalizing calls to Action&shy;View::Hel&shy;p&shy;ers</li>
+                                            <li>Extracting generalized values into implementation</li>
+                                            <li>Factoring more helpers from Action&shy;View::Hel&shy;p&shy;ers
+                                                <ul>
+                                                    <li>Valid and invalid symbols for create_&shy;form_&shy;input_&shy;field</li>
+                                                    <li>Action&shy;View::Hel&shy;p&shy;ers::Form&shy;Tag&shy;Helper</li>
+                                                    <li>Helpers expecting a collection</li>
+                                                </ul>
+                                            </li>
+                                            <li>Helpers expecting error handling</li>
+                                        </ul>
+                                    </li>
+                                    <li>Using the new form helpers</li>
+                                </ul>
+                            </li>
+                        </ul>-->
                     <hr>
                     </section>
                     <header>
@@ -369,6 +437,9 @@ include('../../header.php');
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:110px' max-height='110' src='code/23.php'></iframe>
+                        <figcaption>
+                            A call to <code>create_&shy;form_&shy;error</code> within a <code>HAML</code> view template.
+                        </figcaption>
                     </figure>
                     <p>
                         ... where <code>create_&shy;form_&shy;error</code> is defined as follows:
