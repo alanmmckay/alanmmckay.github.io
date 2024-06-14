@@ -184,7 +184,22 @@ function setCodeSizeSliders(current = 17){
         div.appendChild(button);
         div.appendChild(input);
         container.insertBefore(div,container.firstChild);
-        changeCodeSize(this,input.value);
+    }
+
+    if (current != 17){
+        var iframes = document.getElementsByTagName('iframe');
+        for(let i=0; i<iframes.length; i++){
+            var iframe = iframes[i];
+            var iframe_content = iframe.contentWindow.document;
+            var pre = iframe_content.getElementsByTagName('pre')[0];
+            var code = iframe_content.getElementsByTagName('code')[0];
+            code.style['font-size'] = current+'px';
+            var new_height = Number(iframe.style['max-height'].substring(0,iframe.style['max-height'].length-2));
+            var max = Number(iframe.getAttribute('max-height'));
+            var ratio = max * ((17-1)-current);
+            ratio = ratio / 17;
+            iframe.style['max-height'] = max - ratio + 'px';
+        }
     }
 }
 
