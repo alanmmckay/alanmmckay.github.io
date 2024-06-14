@@ -202,10 +202,12 @@ include('../../header.php');
                         Luckily, such a technology already exists. <code><a href="https://haml.info/" target="_blank" rel="noopener noreferrer">HAML</a></code> was created precisely for these reasons:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:280px' max-height='280' src='code/09.php'></iframe>
-                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:280px' max-height='280' src='code/10.php'></iframe>
+                        <div class='adjacentcodeframes'>
+                            <iframe frameborder="0" style='overflow:auto;max-height:280px' max-height='280' src='code/09.php'></iframe>
+                            <iframe frameborder="0" style='overflow:auto;max-height:280px' max-height='280' src='code/10.php'></iframe>
+                        </div>
                         <figcaption>
-                            Both these code blocks produce the same content. The <code>HAML</code> block (right) is more concise than the <code>ERB</code> block (left).
+                            Both these code blocks produce the same content. The <code>HAML</code> block (second) is more concise than the <code>ERB</code> block (first).
                         </figcaption>
                     </figure>
                     <p>
@@ -480,7 +482,37 @@ include('../../header.php');
                         <hr>
                         <h3>Concluding notes</h3>
                         <p>
-
+                            It should be emphasized that the usage example above is not completely DRY. Indeed, a variable can be used to represent the various hash-maps being supplied as an argument to these helper functions. It is acknowledged that this would be the next course of action to take in terms of making general behavior easier to digest at a glance. For example, assigning <code>{:class => "alert-danger input-group-text"}</code> to a variable called <code>error_styling</code> would make it very easy for a back-end developer to plug data into a helper call. A front-end developer could assign these attributes to this variable at the top of the view or within some partial. This would further untangle responsibility and be generally more efficient.
+                        </p>
+                        <p>
+                            Addressing this is trivial. What is important for this use-case is that the behavior is clearly communicated within the front matter of each statement through the method's name. <code>create_&shy;form_&shy;input_&shy;field</code> and <code>create_&shy;form_&shy;error</code> does a good job indicating what each line is accomplishing.
+                        </p>
+                        <h5>Source Repository</h5>
+                        <p>
+                            The repository of the originating project is located <a href='https://github.com/alanmmckay/graduate-app' target="_blank" rel="noopener noreferrer">here</a>. It'll be easy to observe that the work done here was published at an earlier time. Indeed, some of the implementation differs from what's offered within the documentation provided here. This is due to the fact that, as this page was written out, some new ideas came to mind to improve the overall implementation.
+                        </p>
+                        <h4>Future Development</h4>
+                        <p>
+                            Facets of non-trivial improvement stem from how to make this set of helper functions more modular. Addressing these routes of improvement will lead to the development and packaging of a gem such that other developers can easily use these features. The road-map for this development is as follows:
+                        </p>
+                        <ul>
+                            <li>
+                                Allow for the acceptance of an optional parameter to accept collections and/or extraneous values within <code>create_&shy;form_&shy;input_&shy;field</code> and <code>create_&shy;form_&shy;input_&shy;tag</code>. For example, allow <code>:select_tag</code> to be a valid argument for <code>create_&shy;form_&shy;input_&shy;tag</code>. This will require investigation in to how the existing helper functions within <code>Action&shy;View</code> handle their optional parameters.
+                            </li>
+                            <li>
+                                Create helper methods to act as wrappers for the symbols that are filtered within the <code>incompatible?</code> sub-method.
+                            </li>
+                            <li>
+                                Provide a means for <code>create_&shy;form_&shy;error</code> to be implicit within the helper methods developed; make it so that a call to <code>create_&shy;form_&shy;error</code> within a view is not necessary as a means to produce an error.
+                                <ul>
+                                    <li>
+                                        Intuition which leans into an easy solution for this problem is to have a simple boolean flag in place within <code>create_&shy;form_&shy;input_&shy;tag</code> or <code>create_&shy;form_&shy;input_&shy;field</code> which determines whether <code>create_&shy;form_&shy;error</code> should be called within. A more elegant solution would be to explore providing create_form_error as a callback to these helpers.
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p>
+                            Action on this road-map will be presented once the gem is complete. Documentation pertaining to this gem will be provided in a new project page. This project page will link to this documentation and vice-versa.
                         </p>
                         <hr>
                     </section>
@@ -490,9 +522,9 @@ include('../../header.php');
                 </nav>
             </section>
         </section>
-        <script src='../../js/project_functions.js'></script>
+        <script src='../../js/project_functions.js?04'></script>
         <script>
-            setCodeSizeSliders(15);
+            setCodeSizeSliders(14);
         </script>
     </body>
 </html>
