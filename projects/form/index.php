@@ -2,11 +2,11 @@
 
 $canonical = 'https://alanmckay.blog/writings/flow/';
 
-$title = 'Alan McKay | Project | placeholder';
+$title = 'Alan McKay | Project | Rails: DRYing Form Input';
 
-$meta['title'] = 'Alan McKay | placeholder';
+$meta['title'] = 'Alan McKay | Rails: DRYing Form Input';
 
-$meta['description'] = '';
+$meta['description'] = 'Documentation of the motivation, development, and implementation of a new set of helper methods as a means to DRY out production of HTML input forms within the Ruby on Rails framework.';
 
 $meta['url'] = 'https://alanmckay.blog/projects/form/';
 
@@ -17,7 +17,7 @@ include('../../header.php');
 ?>
         <section id='writingsWrapper'>
             <header id='breadNav' class='writingNav' style='overflow:hidden;'>
-                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; placeholder</a>
+                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; Rails: DRYing Form Input</a>
                 <h1><a href='../'>&nbsp;&gt; Projects</a>
                 <h1><a href='../../'>Home</a></h1>
             </header>
@@ -103,7 +103,7 @@ include('../../header.php');
                     <hr>
                     </section>
                     <header>
-                        <h1>Ruby on Rails - Developing DRY forms</h1>
+                        <h1>Ruby on Rails - Developing DRY Forms</h1>
                     </header>
                     <h2>Framework Context</h2>
                     <p>
