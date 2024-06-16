@@ -28,14 +28,15 @@ include('../../header.php');
                             <h2>Preface</h2>
                         </header>
                         <p>
-                            This page discusses the motivations, development, and implementation of a new set of helper functions as a means to DRY out production of input forms. The task of DRYing components of a program should be intuitive for any developer. What sets this project apart is the usage of key features from the Ruby language to accomplish the task in an elegant way.
+                            This page discusses the motivations, development, and implementation of a new set of helper functions as a means to DRY out production of input forms. The task of DRYing components of a program should be intuitive for any developer. What sets this project apart is the usage of key features from the Ruby language to accomplish the task in an elegant manner.
                         </p>
                         <p>
-                            The result of this project produces code that is easy for any developer to digest at a glance. The helper functions untangles both the logic required to persist input values between posts and the logic required to present error messages to a user. It essentially transforms code such as the following:
+                            The result of this project produces code that is easy for any developer to digest at a glance. These helper functions untangle both the logic required to persist input values between posts and the logic required to present error messages to a user. It essentially transforms code such as the following:
                         </p>
                         <br>
                         <figure class='code-figure'>
                             <iframe frameborder="0" style='width:100%;overflow:auto;max-height:320px' max-height='320' src='code/25.php'></iframe>
+                            <figcaption>A Ruby on Rails view template built using HAML.</figcaption>
                         </figure>
                         <br>
                         <p>
@@ -44,6 +45,7 @@ include('../../header.php');
                         <br>
                         <figure class='code-figure'>
                             <iframe frameborder="0" style='width:100%;overflow:auto;max-height:190px' max-height='190' src='code/26.php'></iframe>
+                            <figcaption>A Rails view template which produces the same markup as the prior figure.</figcaption>
                         </figure>
                         <br>
                         <p>
@@ -53,13 +55,13 @@ include('../../header.php');
                             Through this documentation, code blocks are given. Some code blocks have highlighted sections. These highlighted snippets emphasize the point being made within the textual content currently being discussed. This may be further emphasized within a code block's caption.
                         </p>
                         <p>
-                            Care was taken to use terms correctly to a point of pedantry. Sometimes, this care was not enough to prevent confusion. For example, it may be hard to discern what is being conveyed in the statement, "The correct value is assigned to the value attribute." To help make this digestible, any term that refers to some literal code string will be marked up using a set of code-blocks. These terms will appear to the reader in a font type that looks mechanical.
+                            Care was taken to correctly use terms to a point of pedantry. Sometimes, this care was not enough to prevent potential confusion. For example, it may be hard to discern what is being conveyed in the statement, "The correct value is assigned to the value attribute." To help make this digestible, any term that refers to some literal code string will be marked up using a set of code-blocks. These terms will appear to the reader in a font type that looks mechanical.
                         </p>
                         <blockquote>
                             The correct value is assigned to the <code style='background-color:#f7f7f7'>value</code> attribute.
                         </blockquote>
                         <p>
-                            Some of the code strings that are embedded within textual content are quite long. Because of this, a word wrap needs to occur within these strings to ensure that this page can be viewed on a wide range of device sizes. This will introduce a hyphen within these strings. Be wary of this; any code reference within a paragraph of textual content does not include the hyphen character.
+                            Some of the code strings that are embedded within textual content are quite long. Because of this, a word wrap needs to occur within these strings to ensure that this page can be viewed on a wide range of device sizes. This will introduce a hyphen within these strings. Be wary of this; any code reference within a paragraph of textual content does not actually include the hyphen character.
                         </p>
                         <!--<p>
                             The table of contents for this page is as follows:
@@ -112,9 +114,8 @@ include('../../header.php');
                         <figcaption>Example of a scaffold command.</figcaption>
                     </figure>
                     <p>
-                        The usage of these commands, (and the subsequent stubbing of files), does not necessarily expose the implicit logic. A good example of this is in creating some model and a declaration of some route for said model creates the ability to use an implicit variable that acts as a URL path for some action to take. Generically, if some <code>&lt;model&gt;</code> exists, and a <code>&lt;route&gt;</code> for the model is declared in the routes configuration file, the framework allows a developer to leverage a reference of <code>&lt;model&gt;_&lt;route&gt;_path</code> which which can be used elsewhere.
+                        The usage of these commands, (and the subsequent stubbing of files), does not necessarily expose the implicit logic. A good example of this is in creating some model and a declaration of some route for said model will create the ability to use an implicit variable that acts as a URL path for some action to take. Generically, if some <code>&lt;model&gt;</code> exists, and a <code>&lt;route&gt;</code> for the model is declared in the routes configuration file, the framework allows a developer to leverage a name reference of <code>&lt;model&gt;_&lt;route&gt;_path</code> which which can be used elsewhere. An example is as follows:
                     </p>
-                    <hr><br>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:305px' max-height='305' src='code/02.php'></iframe>
                         <figcaption>Declaration of a route within <code>config/routes.rb</code>.</figcaption>
@@ -126,7 +127,10 @@ include('../../header.php');
                     </figure>
                     <hr>
                     <p>
-                        This programming-by-convention approach requires a developer to be keen on the existence of these implications and how these implications effect and scaffold features of the framework. Deciding to generate a model where the developer gives a name that's plural, for example, is a case where convention can cause pain. Consider the prior usage of <code>users_create_path</code>. When the user model was generated, the singular form of the noun was given. From it, Rails used the plural form of the noun to build a controller and a view. What occurs when the plural of user is given during generation? While pondering this question, the reader is invited to look into the <code>--force-plural</code> flag for the rails generate command whilst also considering the <a href='https://api.rubyonrails.org/classes/ActiveSupport/Inflector/Inflections.html' target="_blank" rel="noopener noreferrer"><code>Active&shy;Support::Inf&shy;lect&shy;or::Inf&shy;lect&shy;ions</code></a> class.
+                        This programming-by-convention approach requires a developer to be keen on the existence of these implications; It requires a developer to be keen on how these implications effect and scaffold features of the framework.
+                    </p>
+                    <p>
+                        Deciding to generate a model where the developer gives a name that's plural is a case where convention can cause pain. Consider the prior usage of <code>users_create_path</code>. When the <code>User</code> model was generated, the singular form of the noun was given. From it, Rails used the plural form of the noun to build a controller and a view. What occurs when the plural of user is given during generation? While pondering this question, the reader is invited to look into the <code>--force-plural</code> flag for the <code>rails generate</code> command whilst also considering the <a href='https://api.rubyonrails.org/classes/ActiveSupport/Inflector/Inflections.html' target="_blank" rel="noopener noreferrer"><code>Active&shy;Support::Inf&shy;lect&shy;or::Inf&shy;lect&shy;ions</code></a> class.
                     </p>
                     <p>
                         A team which is aware of these conventions can be very efficient. A team which is not can lead to a heap of problems. This necessitates clear communication and documentation. Sometimes, communication and documentation alone aren't sufficient. In these cases, another layer of abstraction can be introduced to make the development process even easier.
@@ -142,7 +146,7 @@ include('../../header.php');
                     </blockquote>
                     <h3>Building a Template</h3>
                     <p>
-                        Consider a registration form for a web app. The information submitted through this form is applied to a user model. This is established through the users controller by taking the new action. The model, controller, and route is as declared as follows:
+                        Consider a registration form for a web app. The information submitted through this form is applied to a <code>User</code> model. This is established through the <code>UsersController</code> by taking the new action. The model, controller, and route are all declared as follows:
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:820px' max-height='820' src='code/04.php'></iframe>
@@ -162,17 +166,17 @@ include('../../header.php');
                         The controller action operates on a hash map arbitrarily called <code>info</code>. <code>info</code> is filled by a method called <code>user_params</code>. Here, the <code>require</code> and <code>permit</code> methods are chained to produce a one dimensional hash-map which contains a set of keys associated with the symbols provided in the <code>permit</code> method. Both the <code>require</code> and <code>permit</code> methods include validation features abstracted away from the developer of the view, in addition to the production of the hash-maps used within the action controller.
                     </p>
                     <p>
-                        These chained methods assume the existence of a hash-map of a certain structure. This hash-map reflects what is posted to the controller action. Based on these method calls and the user model, it can be assumed that a user's email, password, a password confirmation, first name, last name, and phone number should be posted through an HTML form. The Rails framework expects the posted form data to be in a hash-map within <code>params[:user]</code>. <code>params</code> contains all post information, which can encapsulate information pertaining to different models. An input field which posts to <code>&lt;model&gt;[&lt;attribute&gt;]</code> will be placed into <code>params[:&lt;model&gt;][:&lt;attribute&gt;]</code>. Knowing this, an initial template can be built.
+                        These chained methods assume the existence of a hash-map of a certain structure. This hash-map reflects what is posted to the controller action. Based on these method calls and the <code>user</code> model, it can be assumed that a user's email, password, a password confirmation, first name, last name, and phone number should be posted through an HTML form. The Rails framework expects the posted form data to be in a hash-map within <code>params[:user]</code>. <code>params</code> contains all post information, which can encapsulate information pertaining to different models. An input field which posts to <code>&lt;model&gt;[&lt;attribute&gt;]</code> will be placed into <code>params[:&lt;model&gt;][:&lt;attribute&gt;]</code>. Knowing this, an initial template can be built.
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:1085px' max-height='1085' src='code/07.php'></iframe>
                         <figcaption>Initial ERB template contained within <code>app/views/users/new.erb</code>. This was built with respect to some of the model properties established in the <code>User</code> model.
                     </figure>
                     <p>
-                        This above template is the view which will be presented should the <code>new</code> controller action be invoked. Submission of this form will invoke the create controller action through an HTTP post. This template is close to minimum in terms of interacting with the Rails framework. These interactions are highlighted, and can also be noticed by the usage of the <code>&lt;% %&gt;</code> tags.
+                        The template above is the view which will be presented should the <code>new</code> controller action be invoked. Submission of this form will invoke the <code>create</code> controller action through an HTTP post. This template is close to minimum in terms of explicitly interacting with the Rails framework. These interactions are highlighted, and can also be noticed by the usage of the <code>&lt;% %&gt;</code> tags.
                     </p>
                     <p>
-                        The decision to use a variable to represent the <code>model</code> name is a weak contingency for the case in which the model's name is changed, (via a migration, for example). This allows a maintainer of this view to quickly adapt to the change by having a single entry point of value designation. Using this category of value declaration is an early lesson to learn in both the study of Computer Science and coding which serves as a starting point to transition into more elaborate means of DRYing out this code.
+                        The decision to use a variable to represent the <code>model</code> name is a weak contingency for the case in which the model's name is changed, (via a migration, for example). This allows a maintainer of this view to quickly adapt to the change by having a single entry point of value designation. Using this category of value declaration is an early lesson to learn both in the study of Computer Science and coding which serves as a starting point to transition into more elaborate means of DRYing out this code.
                     </p>
                     <p>
                         Two other values are being output into this form via evaluation of some Ruby expression. The general concept of <code>users_create_path</code> has been discussed within the context section. The value of <code>form_authenticity_token</code> is assigned by the Rails framework and is required for validating the session state of a visitor to the website.
@@ -192,14 +196,14 @@ include('../../header.php');
                         The <code>object</code> parameter for these <code>_field</code> helpers refer to the object in which the view presumably exists. In this case, it's the <code>User</code> object. The <code>method</code> parameter refers to the attribute in which the input will be applied. The term <code>method</code> refers to the mutator/accessor method which will be invoked upon submission of the form. Note that the <code>name</code> attribute of the resultant HTML element will maintain the form of <code>&lt;model&gt;[&lt;attribute&gt;]</code>; the output of this updated template will be the same as that was output from the first naively built template!
                     </p>
                     <p>
-                        What is the advantage of using these helpers? They begin to abstract away the syntax required of HTML. One needs not worry about closing open HTML tags for each call. Possible mistakes of typing a tag's attributes and their values are mitigated; no longer does a developer need to type out <code>class="..."</code>, <code>placeholder="..."</code>, <code>for="..."</code>, <code>id="..."</code>, etc. The aspects of markup that are important, such as assigning a class to an element, are isolated for the developer as an argument to the relevant helper.
+                        What is the advantage of using these helpers? They begin to abstract away the syntax required of HTML. One needs not worry about closing open HTML tags for each call to these helpers. Possible mistakes of typing a tag's set of attributes and their values are mitigated; no longer does a developer need to type out <code>class="..."</code>, <code>placeholder="..."</code>, <code>for="..."</code>, <code>id="..."</code>, etc. The aspects of markup that are important, such as assigning a class to an element, are isolated for the developer as an argument to the relevant helper.
                     </p>
                     <h4>Introducing HAML</h4>
                     <p>
-                        The above approach doesn't completely eliminate these syntactic aspects. The template includes a set of <code>div</code> and header tags that are vulnerable to being opened but not closed. The helper methods themselves need to be enclosed in a set of tags which act as a mechanism for the <code>ERB</code> template to know that a Ruby expression should be evaluated. How can these HTML elements be abstracted away?
+                        The above approach doesn't completely eliminate these syntactic aspects. The template includes a set of <code>div</code> and header tags, (i.e., <code>h1</code> and <code>h2</code>), that are vulnerable to being opened but not closed. The helper methods themselves need to be enclosed in a set of tags which act as a mechanism for the <code>ERB</code> template to know that a Ruby expression should be evaluated. How can these HTML elements be abstracted away?
                     </p>
                     <p>
-                        Luckily, such a technology already exists. <code><a href="https://haml.info/" target="_blank" rel="noopener noreferrer">HAML</a></code> was created precisely for these reasons:
+                        Luckily, such a technology already exists. <a href="https://haml.info/" target="_blank" rel="noopener noreferrer">HAML</a> was created precisely for these reasons:
                     </p>
                     <figure class='code-figure'>
                         <div class='adjacentcodeframes'>
@@ -220,29 +224,29 @@ include('../../header.php');
                     <hr>
                     <h3>Extending Functionality</h3>
                     <p>
-                        A key part of the model description used in the general example so far is that some facet of the value placed in the HTML input needs to be true in order for a post to succeed. That is, validation is in in place for certain attributes of the model.
+                        A key part of the model used in these examples is that some facet of the value placed in the HTML input needs to be true in order for a post to succeed. That is, server-side validation is in in place for certain attributes of the model.
                     </p>
                     <p>
                         The helper functions provided through <code>Action&shy;View::Helpers</code> do not account for this. It is up to the developer to check for these cases where an invalid post is made. The developer also needs to decide if and how to provide the feedback that a breach of validation has occurred.
                     </p>
                     <p>
-                        The required feedback manifests itself in two ways. The first is that an error message should be presented informing the user what went wrong. These messages are declared within the model's class. Using the controller, the message should be placed into the <code>flash</code> hash-map whenever a violation occurs. Which key each message is associated with is up to the developer and is defined within the relevant controller action. In the example of the <code>create</code> controller action, <code>flash</code> is occupied dependent on whether or not <code>@user.valid?</code> returns true. In the case where it returns <code>false</code>, <code>@user.errors</code> is placed into <code>flash[:login]</code>. The schema of <code>@user.errors</code> is <code>{:&lt;model attribute&gt; =&gt; &lt;error message&gt;, ... }</code>.
+                        The required feedback manifests itself in two ways. The first is that an error message should be presented informing the user what went wrong. These messages are declared within the model's class. Using the controller, the message should be placed into the <code>flash</code> hash-map whenever a violation occurs. Which key each message is associated with is up to the developer and is defined within the relevant controller action. In the example of the <code>create</code> controller action, <code>flash</code> is occupied dependent on whether or not <code>@user.valid?</code> returns <code>true</code>. In the case where it returns <code>false</code>, <code>@user.errors</code> is placed into <code>flash[:login]</code>. The schema of <code>@user.errors</code> is <code>{:&lt;model attribute&gt; =&gt; &lt;error message&gt;, ... }</code>.
                     </p>
                     <p>
-                        The other facet where feedback manifests itself is by repopulating input elements with the values the visitor had previously placed. For example, if a visitor who is registering tries to post a form where their password fields don't match it would be annoying if they were presented with a blank form where they need to retype their email, first name, last name, and phone number.
+                        The other facet where feedback manifests itself is by repopulating input elements with the values the visitor had previously placed. For example, if a visitor who is registering tries to post a form where their password fields don't match, it would be annoying if they were presented with a blank form where they need to retype their email, first name, last name, and phone number.
                     </p>
                     <p>
                         A look at the <code>create</code> controller action informs us that this information is grabbed from a call to <code>user_params</code>. The resultant hash map is placed into <code>flash[:info]</code> and can be used to repopulate an input tag's value attribute.
                     </p>
                     <p>
-                        To present these two tiers of feedback requires a set of conditionals to determine whether or not these values need to be placed. Consider the input associated with the email property of the User model:
+                        In order to present these two tiers of feedback requires a set of conditionals to determine whether or not these values need to be placed. Consider the input associated with the email property of the <code>User</code> model:
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:320px' max-height='320' src='code/12.php'></iframe>
                         <figcaption> Introduction of validation logic. The first group of highlighted lines ensures the value previously submitted is maintained within the form. The last group of highlighted lines is responsible for displaying an error message related to the failed validation.</figcaption>
                     </figure>
                     <p>
-                        The first three highlighted lines denote the logic of occupying an input element's value attribute. Observe the <code>merge</code> method in use within the <code>text_field</code> helper which merges the <code>value</code> hash-map with the hash-map that is initially being supplied as an argument to the helper's option parameter. Usage of a hash-map for <code>value</code> allows the case where an empty hash-map is evaluated by Rails which will be recognized as a nil and thus not set the HTML elements's <code>value</code> attribute. This is contrary to the potential behavior of supplying an empty string which may visually override the placeholder's value with said empty string.
+                        The first three highlighted lines denote the logic of occupying an input element's value attribute. Observe the <code>merge</code> method in use within the <code>text_field</code> helper which merges the <code>value</code> hash-map with the hash-map that is initially being supplied as an argument to the helper's option parameter. Usage of a hash-map for <code>value</code> allows the case where an empty hash-map is evaluated by Rails which will be recognized as a <code>nil</code> and thus not set the HTML elements's <code>value</code> attribute. This is contrary to the potential behavior of supplying an empty string which may visually override the placeholder's value with said empty string.
                     </p>
                     <p>
                         The last two highlighted lines denote the logic of displaying an error message. This occurs inline as per the bootstrap classes being used whilst being placed in the parent <code>div</code> element. That is, the <code>label</code> HTML element produced from the initial <code>label_tag</code> helper, the <code>input</code> HTML element produced from the <code>text_field</code> helper, and the optional <code>label</code> HTML element produced from the second <code>label_tag</code> helper are placed in the same container horizontally. Both of these <code>label</code> tags point to the same <code>input</code> tag, allowing a user to select either to place the cursor into the relevant <code>input</code> form.
@@ -257,7 +261,7 @@ include('../../header.php');
                         It's surprising the HTML pattern of bundling label and input elements isn't addressed within the Rails framework. A lot of effort is put in the framework to abstract away these type of details. The <code>Action&shy;View::Helpers</code> namespace is good evidence of this.
                     </p>
                     <p>
-                        Let's consider the case in which a developer wants to create a form input element and its associated label. Also consider the prior code-block example in which an input and its label is created for the email attribute of the User model. Generalizing this code will help expose patterns which will make it easy to DRY:
+                        Let's consider the case in which a developer wants to create a form input element and its associated label. Also consider the prior code-block example in which an input and its label is created for the email attribute of the <code>User</code> model. Generalizing this code will help expose patterns which will make it easy to DRY:
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:320px' max-height='320' src='code/13.php'></iframe>
@@ -269,13 +273,13 @@ include('../../header.php');
                         The first surface-level observation of this generalized code is that a <code>&lt;Model Attribute&gt;</code> is a common element between the <code>text_field</code> helper and the <code>label_tag</code> helper. Peering past the surface, it is less obvious that the value assigned to <code>model</code> is another commonality between the two. This is less obvious simply because it's not highlighted in the code above.
                     </p>
                     <p>
-                        Both the <code>ActionView</code> helpers used also contain a <code>&lt;Natural Statement of Attribute&gt;</code>. These represent some string which a visitor can read. These are not necessarily the same strings, thus should be considered distinct from each other.
+                        Both of the <code>ActionView</code> helpers also contain a <code>&lt;Natural Statement of Attribute&gt;</code>. These represent some string which a visitor can read. These are not necessarily the same strings, thus should be considered distinct from each other.
                     </p>
                     <p>
                         Another piece of generalization involves the <code>&lt;Controller Action&gt;</code> access within the flash hash-map. A glance will lead a reader of this code to believe that the notion of a controller action is only associated with the case where an error message needs to be output. A look at the controller which fills the hash-map will disprove this claim. The controller action is filling two values within the hash-map. Both <code>:login</code> and <code>:info</code>.
                     </p>
                     <p>
-                        Furthermore, the <code>value</code> property of the HTML <code>input</code> element could be manipulated by JavaScript if need be. The fact that <code>value</code> is handled similarly to a nullable object where it is merged to the option parameter of <code>text_field</code> allows this namespace within the flash hash-map to technically be exclusive from any controller action. If this were a namespace which adheres to a more general convention leveraged by Rails, it would realistically be labeled something like <code>:values</code> instead of <code>:info</code>.
+                        Furthermore, the <code>value</code> property of the HTML <code>input</code> element could be manipulated by JavaScript if need be. The fact that <code>value</code> is handled similarly to a nullable object where it is merged to the option parameter of <code>text_field</code> allows this namespace, (within the <code>flash</code> hash-map), to technically be exclusive from any controller action. If this were a namespace which adheres to a more general convention leveraged by Rails, it would realistically be labeled something like <code>:values</code> instead of <code>:info</code>.
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:320px' max-height='320' src='code/14.php'></iframe>
@@ -303,7 +307,7 @@ include('../../header.php');
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:850px' max-height='850' src='code/16.php'></iframe>
                         <figcaption>
-                            The <code>create_&shy;form_&shy;input_&shy;field</code> helper method developed within <code>app/&shy;helpers/&shy;application_helper&shy;.rb</code>.
+                            The almost complete <code>create_&shy;form_&shy;input_&shy;field</code> helper method developed within <code>app/&shy;helpers/&shy;application_helper&shy;.rb</code>. Missing logic is highlighted.
                         </figcaption>
                     </figure>
                     <p>
@@ -328,7 +332,7 @@ include('../../header.php');
                         </figcaption>
                     </figure>
                     <p>
-                        What now needs to be asked is for which object should this <code>send</code> method be invoked? Ruby on Rails documentation is not clear enough to personally find whether it addresses this question. This method is defined within a module which is invoked within a logical space that handles view rendering. Does this method definition exist outside this logical space? Personal intuition does not ignore the fact that some object exclusive from whatever is governing view rendering is responsible for governing the helpers. Does the object reference of that which manages <code>ActionView</code> need to be passed? What about the object reference of that which manages <code>ApplicationHelper</code>?
+                        For which object should this <code>send</code> method be invoked? Ruby on Rails documentation is not clear enough to personally find whether it addresses this question. This method is defined within a module which is invoked within a logical space that handles view rendering. Does this method definition exist outside this logical space? Personal intuition does not ignore the fact that some object exclusive from whatever is governing view rendering is responsible for governing the helpers. Does the object reference of that which manages <code>ActionView</code> need to be passed? What about the object reference of that which manages <code>ApplicationHelper</code>?
                     </p>
                     <p>
                         Documentation may lack, but Ruby's features can help in this regard. Recalling that everything is an object, every object inherits from some base class. This class allows for object introspection in which objects retain information about themselves. The first step into discovering which Rails object(s) govern these logical spaces is to simply ask each relevant scope what its class name is. That is, to execute a debugging print statement within the logic of both <code>create_&shy;form_&shy;input_&shy;field</code> and the view template itself.
@@ -352,7 +356,7 @@ include('../../header.php');
                         </figcaption>
                     </figure>
                     <p>
-                        Unfortunately, an empty string was produced for both calls to <code>self.class.name</code>! It seems the object(s) handling both these spaces was not given a class name. Fortunately, the preceding print statement asks to print the object for each space. These <code>puts self</code> expressions return the memory address of each object. Serendipitously, both spaces return the same memory address, meaning the same object handles both these logical spaces. This allows a reference to <code>self</code> to finish out the helper function:
+                        Unfortunately, an empty string was produced for both calls to <code>self.class.name</code>. It seems the object(s) handling both these spaces was not given a class name. Fortunately, the preceding print statement asks to print the object for each space. These <code>puts self</code> expressions return the memory address of each object. Serendipitously, both spaces return the same memory address, meaning the same object handles both these logical spaces. This allows a reference to <code>self</code> to finish out the helper function:
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:400px' max-height='400' src='code/20.php'></iframe>
@@ -406,7 +410,7 @@ include('../../header.php');
                         A conventional conundrum occurs where the term value is used with these optional parameters. The <code>value</code> parameter is used to occupy the <code>value</code> attribute of the resultant HTML element. Here, the developer has a choice of supplying the value of this attribute using this helper argument or by using the options parameter as is done in the preceding conditional involving the <code>flash</code> hash-map. This value impasse is why the decision was made to <code>nil</code> this argument for the method call of <code>helper_sym</code> so that the intended behavior associated with the <code>flash</code> hash-map is not lost.
                     </p>
                     <p>
-                        Deciding to provide a nil value to the call to <code>helper_sym</code> means that more argument validation needs to be put in place for <code>create_&shy;form_&shy;input_&shy;tag</code>. This should catch the usage of the instance methods which should have a value provided as an argument to this parameter. A good example here is <code>select_tag</code>, which is composed of option tags provided as a hash-map to this argument.
+                        Deciding to provide a <code>nil</code> value to the call to <code>helper_sym</code> means that more argument validation needs to be put in place for <code>create_&shy;form_&shy;input_&shy;tag</code>. This should catch the usage of the instance methods which should have a value provided as an argument to this parameter. A good example here is <code>select_tag</code>, which is composed of option tags provided as a hash-map to this argument.
                     </p>
                     <p>
                         The implementation of this validation is as follows:
@@ -422,7 +426,7 @@ include('../../header.php');
                         The decision was made to continue using a helper function which supplies a <code>nil</code> argument to the third parameter to a call to an instance method within <code>FormHelper</code> or <code>FormTagHelper</code>. This results in needing to implement a set of conditionals that evaluate the value given for the <code>helper_sym</code> parameter which informs the user of the mistake and a potential path to take to fix said mistake. One of these messages will be returned upon a call where the value for <code>helper_sym</code> is <code>:select_tag</code>.
                     </p>
                     <p>
-                        To address this, a helper method called <code>create_&shy;form_&shy;input_&shy;select</code> was developed. This helper method reflects the same pattern that <code>create_&shy;form_&shy;input_&shy;field</code> and <code>create_&shy;form_&shy;input_&shy;tag</code> establishes, but expects an extra parameter that is a collection of attributes which can be used within a call to <code>Action&shy;View::Hel&shy;p&shy;ers::Form&shy;Options&shy;Hel&shy;per</code>'s  <code>options_&shy;from_&shy;collection_&shy;for_&shy;select</code>. It should be noted that <code>create_&shy;form_&shy;input_&shy;select</code> no longer needs a <code>helper_sym</code> parameter on account of the fact that it is specialized to always produce a pair of select tags. That is, there is no need for a <code>self.send</code> as <code>select_tag</code> is used in its stead.
+                        To address this, a helper method called <code>create_&shy;form_&shy;input_&shy;select</code> was developed. This helper method reflects the same pattern that <code>create_&shy;form_&shy;input_&shy;field</code> and <code>create_&shy;form_&shy;input_&shy;tag</code> establishes, but expects an extra parameter that is a collection of attributes which can be used within a call to <code>Action&shy;View::Hel&shy;p&shy;ers::Form&shy;Options&shy;Hel&shy;per</code>'s  <code>options_&shy;from_&shy;collec&shy;tion_&shy;for_&shy;select</code>. It should be noted that <code>create_&shy;form_&shy;input_&shy;select</code> no longer needs a <code>helper_sym</code> parameter on account of the fact that it is specialized to always produce a pair of select tags. That is, there is no need for a <code>self.send</code> as <code>select_tag</code> is used in its stead.
                     </p>
                     <h3>Helpers expecting error handling</h3>
                     <p>

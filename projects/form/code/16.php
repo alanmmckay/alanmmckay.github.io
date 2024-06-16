@@ -24,7 +24,7 @@ module ApplicationHelper
       value = {:value => flash[:info][method]}
     end
     label = label_tag (object.to_s + "_" +method.to_s).to_sym, label_text, label_options
-    ### !!! Need to concatenate the production of label_tag with some produced value derived from helper_sym
+    <mark>### !!! Need to concatenate the production of label_tag with some produced value derived from helper_sym</mark>
   end
   .
   .
