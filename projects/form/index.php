@@ -251,6 +251,18 @@ include('../../header.php');
                     <p>
                         The last two highlighted lines denote the logic of displaying an error message. This occurs inline as per the bootstrap classes being used whilst being placed in the parent <code>div</code> element. That is, the <code>label</code> HTML element produced from the initial <code>label_tag</code> helper, the <code>input</code> HTML element produced from the <code>text_field</code> helper, and the optional <code>label</code> HTML element produced from the second <code>label_tag</code> helper are placed in the same container horizontally. Both of these <code>label</code> tags point to the same <code>input</code> tag, allowing a user to select either to place the cursor into the relevant <code>input</code> form.
                     </p>
+                    <figure>
+                        <img src='images/email01.png' style='max-width:430px;border:solid #f0f0f0 1px;'/>
+                        <div style='max-width:430px; margin:auto; padding-left:20px;'>
+                            <p style='text-align:start'>
+                                <b>POST</b> upon entering test#example.com:
+                            </p>
+                        </div>
+                        <img src='images/email02.png' style='max-width:430px;border:solid #f0f0f0 1px;'/>
+                        <figcaption>
+                            Top image is the production of the two <code>ActionView</code> helpers: <code>label_tag</code> and <code>text_field</code>, in addition to the <code>submit_tag</code> and <code>form_tag</code>. The bottom image reflects the result of a form submission with invalid data being supplied. Take extra note that the invalid value of <i>test#example.com</i> is maintained after submission post.
+                        </figcaption>
+                    </figure>
                     <p>
                         The inclusion of this logic introduces 5 new lines of code for each <code>input</code> element required of the form. This can balloon in size for forms which require a larger quantity of <code>input</code> tags. For the template that has been pieced together on this page, this would require a total of 30 new lines of code. This presents an opportunity to DRY out this code by introducing a new set of helper methods.
                     </p>
