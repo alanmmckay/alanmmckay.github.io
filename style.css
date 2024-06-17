@@ -376,6 +376,28 @@
             margin:0px;
         }
 
+        #writingsWrapper section.domcode p code, #writingsWrapper section.domcode li code{
+            background-color:#F7F7F7;
+        }
+
+        div.adjacentcodeframes{
+            display:flex;
+            width:100%;
+            gap:10px;
+            justify-content:space-around
+        }
+
+        div.adjacentcodeframes iframe:first-child{
+            /*margin-right:10px;*/
+        }
+
+        div.adjacentcodeframes iframe:last-child{
+            /*margin-left:10px;*/
+        }
+
+        div.adjacentcodeframes iframe{
+            width:48%;
+        }
     /* --- --- --- */
 
 /* --- --- --- */
@@ -458,6 +480,14 @@
 
     div.image-col figure{
         transition:border-top 1.5s, opacity 4s;
+    }
+
+    #writingsWrapper div.image-col figure img{
+        transition: opacity .25s;
+    }
+
+    #writingsWrapper div.image-col figure img:hover{
+        opacity: .90;
     }
 
     #static-gallery-control ul{
@@ -807,6 +837,14 @@
     .dynamic-figure-container .dynamic-figure-controls p{
         width:67px;
         float:left;
+    }
+
+    div.adjacentcodeframes{
+        display:inherit
+    }
+
+    div.adjacentcodeframes iframe{
+        width:100%;
     }
 }
 
