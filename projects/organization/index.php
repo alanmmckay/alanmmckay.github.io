@@ -105,7 +105,7 @@ include('../../header.php');
                         </p>
                         <hr>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:1270px;overflow:auto' max-height='1270' src='code/01.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:1270px;overflow:auto' max-height='1270' src='code/01.php'>
                             </iframe>
                             <figcaption>
                                 A set of functions which take a list as an input and sums their values. Each function accomplishes the same task. This illustrates that there are many different approaches to solving a given problem - a notion that is not intuitive to one first experiencing the rigidity of programming.
@@ -113,7 +113,7 @@ include('../../header.php');
                         </figure>
 
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;max-height:1720px;overflow:auto' max-height='1720' src='code/02.html'>
+                            <iframe frameborder="0" style='width:100%;max-height:1720px;overflow:auto' max-height='1720' src='code/02.php'>
                             </iframe>
                             <figcaption>
                                 Even more functions which take a list as an input and sums their values. This time leveraging the functional paradigm of programming.
@@ -263,7 +263,7 @@ include('../../header.php');
                             </p>
                             <hr>
                                 <figure class='code-figure'>
-                                <iframe frameborder="0" style='width:100%;max-height:850px;overflow:auto' max-height='850' src='code/03.html'>
+                                <iframe frameborder="0" style='width:100%;max-height:850px;overflow:auto' max-height='850' src='code/03.php'>
                                 </iframe>
                                 <!--code>
 <pre class='code' style='overflow:scroll;background-color:#f2f2f2;width:70vw;max-width:32em;padding-left:10px;max-height:250px'>
