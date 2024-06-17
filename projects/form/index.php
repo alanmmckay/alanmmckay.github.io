@@ -63,6 +63,25 @@ include('../../header.php');
                         <p>
                             Some of the code strings that are embedded within textual content are quite long. Because of this, a word wrap needs to occur within these strings to ensure that this page can be viewed on a wide range of device sizes. This will introduce a hyphen within these strings. Be wary of this; any code reference within a paragraph of textual content does not actually include the hyphen character.
                         </p>
+                        <p>
+                            Expressions given in code-blocks proper will not have any sort of word break. Instead, these groupings of code are presented in an element which can be scrolled horizontally and vertically. The size of the code contained within may be resized using the Code Size button in the top-right of the element. These elements may also be expanded and contracted by dragging the bottom right corner of the element.
+                        </p>
+                        <h3>tldr; The structure of this page:</h3>
+                        <p>
+                            The <a href='#id-frameworkContext'>Framework Context</a> section is useful for those who are not completely familiar with the Ruby on Rails MVC framework. This section loosely describes an example of a model, its controller, and a relevant view. It also describes in-built helper methods which many Ruby developers use to produce HTML input forms.
+                        </p>
+                        <p>
+                            The <a href='#id-extendingFunctionality'>Extending Functionality</a> section describes extra logic that is often required on top of using the in-built Rails helper methods. This logic accomplishes presenting error messages on a failed form submission. This logic also allows values to persist upon failed form submission.
+                        </p>
+                        <p>
+                            The <a href='#id-developingNewFormHelpers'>Developing New Form Helpers</a> section is broken into two parts. The <a href='#id-generalizingCallstoActionView'>first subsection</a> describes the process of generalizing the aforementioned logic into a new helper function. The <a href='#id-extractingGeneralizedValuesIntoImplementation'>second subsection</a> explains the Ruby features used to make the implementation of this generalization elegant and succinct.
+                        </p>
+                        <p>
+                            The sections that follow flesh out the implementation of the new helper functions. This eventually leads to the application - <a href='#id-usingTheNewFormHelpers'>Using the new form helpers</a>.
+                        </p>
+                        <p>
+                            Finally, the <a href='#id-concludingNotes'>concluding notes</a> section discusses lack of address within this documentation. It also discusses a road map towards creating a RubyGem to allow a wider range of developers to easily make use of these helper methods.
+                        </p>
                         <!--<p>
                             The table of contents for this page is as follows:
                         </p>
@@ -105,7 +124,7 @@ include('../../header.php');
                     <header>
                         <h1>Ruby on Rails - Developing DRY Forms</h1>
                     </header>
-                    <h2>Framework Context</h2>
+                    <h2 id='id-frameworkContext'>Framework Context</h2>
                     <p>
                         The Rails framework for Ruby acts as a layer of abstraction to help expedite the development process of building web applications which use the Model-View-Controller software pattern. It takes a programming-by-convention approach where the mere existence of a given object will infer the existence of some other object or subroutine without the developer's explicit definition. These implicit connections are often scaffolded by a generative commands within the framework where a developer can declare a model or controller name and the framework stubs the required files and routes for the framework to operate on.
                     </p>
@@ -222,7 +241,7 @@ include('../../header.php');
                     </figure>
                     <figcaption>A more concise <code>HAML</code> view template.</figcaption>
                     <hr>
-                    <h3>Extending Functionality</h3>
+                    <h3 id='id-extendingFunctionality'>Extending Functionality</h3>
                     <p>
                         A key part of the model used in these examples is that some facet of the value placed in the HTML input needs to be true in order for a post to succeed. That is, server-side validation is in in place for certain attributes of the model.
                     </p>
@@ -267,8 +286,8 @@ include('../../header.php');
                         The inclusion of this logic introduces 5 new lines of code for each <code>input</code> element required of the form. This can balloon in size for forms which require a larger quantity of <code>input</code> tags. For the template that has been pieced together on this page, this would require a total of 30 new lines of code. This presents an opportunity to DRY out this code by introducing a new set of helper methods.
                     </p>
                     <hr>
-                    <h2>Developing New Form Helpers</h2>
-                    <h3>Generalizing calls to ActionView::Helpers</h3>
+                    <h2 id='id-developingNewFormHelpers'>Developing New Form Helpers</h2>
+                    <h3 id='id-generalizingCallstoActionView'>Generalizing calls to ActionView::Helpers</h3>
                     <p>
                         It's surprising the HTML pattern of bundling label and input elements isn't addressed within the Rails framework. A lot of effort is put in the framework to abstract away these type of details. The <code>Action&shy;View::Helpers</code> namespace is good evidence of this.
                     </p>
@@ -312,7 +331,7 @@ include('../../header.php');
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:320px' max-height='320' src='code/15.php'></iframe>
                         <figcaption>The final significant piece of generalization. Observing that the helper method's name can be abstracted.</figcaption>
                     </figure>
-                    <h3>Extracting generalized values into implementation</h3>
+                    <h3 id='id-extractingGeneralizedValuesIntoImplementation'>Extracting generalized values into implementation</h3>
                     <p>
                         Each <code>&lt;Helper Method&gt;</code> will ultimately be derived from <code><a href='https://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html' target="_blank" rel="noopener noreferrer">Action&shy;View::Hel&shy;per&shy;s::For&shy;m&shy;Hel&shy;per</a></code>. Specifically, those with the <code>_field</code> suffix. This will manifest itself in the namespace of <code>Application&shy;Helper::create_&shy;form_&shy;input_&shy;field</code> within <code>app/&shy;helpers/&shy;application_&shy;helper&shy;.rb</code>. Considering the generalization process in the previous section, the implementation of the new helper method is defined as such:
                     </p>
@@ -466,7 +485,7 @@ include('../../header.php');
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:215px' max-height='215' src='code/24.php'></iframe>
                     </figure>
                     <hr>
-                    <h2>Using the new form helpers</h2>
+                    <h2 id='id-usingTheNewFormHelpers'>Using the new form helpers</h2>
                     <p>
                         Reconsider the initial template pertaining to creating the first input element:
                     </p>
@@ -496,7 +515,7 @@ include('../../header.php');
                     </p>
                     <section class='info'>
                         <hr>
-                        <h3>Concluding notes</h3>
+                        <h3 id='id-concludingNotes'>Concluding notes</h3>
                         <p>
                             It should be emphasized that the usage example above is not completely DRY. Indeed, a variable can be used to represent the various hash-maps being supplied as an argument to these helper functions. It is acknowledged that this would be the next course of action to take in terms of making general behavior easier to digest at a glance. For example, assigning <code>{:class => "alert-danger input-group-text"}</code> to a variable called <code>error_styling</code> would make it very easy for a back-end developer to plug data into a helper call. A front-end developer could assign these attributes to this variable at the top of the view or within some partial. This would further untangle responsibility and be generally more efficient.
                         </p>
