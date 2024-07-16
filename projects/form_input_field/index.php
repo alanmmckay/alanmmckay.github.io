@@ -33,27 +33,27 @@ include('../../header.php');
                         <p>
                             Consider a simple form which is primarily defined by an HTML input element and its label:
                         </p>
-                        <figure>
-
+                        <figure style='max-width:500px'>
+                            <img src='./images/email_form_2.png'>
                         </figure>
                         <p>
                             Consider added functionality which presents a new label informing the user any errors discovered upon POST whilst also maintaining the value the user had previously submitted:
                         </p>
-                        <figure>
-
+                        <figure style='max-width:500px'>
+                            <img src='./images/email_form_3.png'>
                         </figure>
                         <p>
                             It's important to validate such fields on the server, even if JavaScript is doing this work on the front-end. Within Ruby on Rails, (using HAML), the logic may look like the following:
                         </p>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;overflow:auto;max-height:px' max-height='' src='code/'></iframe>
+                            <iframe frameborder="0" style='width:100%;overflow:auto;max-height:295px' max-height='295' src='code/01.php'></iframe>
                             <figcaption></figcaption>
                         </figure>
                         <p>
                             This gem condenses the above into a more concise set of method calls:
                         </p>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;overflow:auto;max-height:px' max-height='' src='code/'></iframe>
+                            <iframe frameborder="0" style='width:100%;overflow:auto;max-height:165px' max-height='165' src='code/02.php'></iframe>
                             <figcaption></figcaption>
                         </figure>
                         <p>
@@ -93,7 +93,7 @@ include('../../header.php');
         </section>
         <script src='../../js/project_functions.js?04'></script>
         <script>
-            // setCodeSizeSliders(14);
+            setCodeSizeSliders(14);
         </script>
     </body>
 </html>
