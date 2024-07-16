@@ -1,6 +1,6 @@
 <?php
 
-$canonical = 'https://alanmckay.blog/writings/flow/';
+$canonical = 'https://alanmckay.blog/writings/form_input_field/';
 
 $title = 'Alan McKay | Project | Ruby on Rails: Developing DRY Forms';
 
