@@ -138,8 +138,8 @@ include('../../header.php');
                         <li>
                             The <code>value_key</code> argument is a symbol that acts as a key for the flash hash-map that contains the relevant value filled by the controller. If the value associated with said key within flash is a string, then the string will occupy the <code>value</code> attribute for the produced input HTML element. If it is a hash-map, it will then assume that the value given for method is the key to the string within this embedded hash-map. Consider the following example:
                             <ul>
-                                <li>
-                                    For a view that contains the following call: <code>&nbsp;form_&shy;input_&shy;field :person, :name, "Please input a name: "&nbsp;</code>, the controller contains either <code>flash[:values] = params[:user][:name]</code> or <code>flash[:values] = params[:user]</code> when <code>User.new(params[:user][:name]).valid?</code> returns a false.
+                                <li style='text-align:start;'>
+                                    For a view that contains the following call: <code style='display:inline-block;'>&nbsp;form_&shy;input_&shy;field :person, :name, "Please input a name: "&nbsp;</code>, the controller contains either <code style='display:inline-block;'>flash[:values] = params[:user][:name]</code> or <code style='display:inline-block;'>flash[:values] = params[:user]</code> when <code style='display:inline-block;'>User.new(params[:user][:name]).valid?</code> returns a false.
                                 </li>
                             </ul>
                         </li>
@@ -185,8 +185,8 @@ include('../../header.php');
                         <li>
                             Outputs a label HTML tag whose textual value is located in the flash-hash map corresponding to <code>error_key</code>. If the value associated with said key is a string, then this string value will be used. If it is a hash-map, it will then assume that the value given for <code>method</code> is the key to the string within this embedded hash-map. Consider the following example:
                             <ul>
-                                <li>
-                                    For a view that contains the following call: <code>form_error_field :person, :name</code>, the controller contains either <code>flash[:errors] = @user.errors[:name]</code> or <code>flash[:errors] = @user.errors</code>, where <code>@user</code> is defined by <code>User.new(params[:user][:name])</code> and <code>User.valid?</code> returns a <code>false</code>.
+                                <li style='text-align:start'>
+                                    For a view that contains the following call: <code style='display:inline-block;'>form_&shy;error_&shy;field :person, :name</code>, the controller contains either <code style='display:inline-block;'>flash[:errors] = @user.errors[:name]</code> or <code style='display:inline-block;'>flash[:errors] = @user.errors</code>, where <code>@user</code> is defined by <code style='display:inline-block;'>User.new(params[:user][:name])</code> and <code>User.valid?</code> returns a <code>false</code>.
                                 </li>
                             </ul>
                         </li>
@@ -220,8 +220,8 @@ include('../../header.php');
                         <li>
                             Extend these helpers to be compatible with <code>Action&shy;View::Hel&shy;per&shy;s::Form&shy;Builder</code>.
                         </li>
-                        <li>
-                            Create function wrappers specific to the required <code>Action&shy;View::Hel&shy;per&shy;s::For&shy;m&shy;Hel&shy;per</code> method. I.e., <code>form_text_field(:model, :object_name)</code> which calls <code>form_input_field(:text_field, :model, :object_name)</code>
+                        <li style='text-align:start'>
+                            Create function wrappers specific to the required <code>Action&shy;View::Hel&shy;per&shy;s::For&shy;m&shy;Hel&shy;per</code> method. I.e., <code style='display:inline-block;'>form_text_field(:model, :object_name)</code> which calls <code style='display:inline-block;'>form_input_field(:text_field, :model, :object_name)</code>
                         </li>
                     </ul>
                     <p>
@@ -229,7 +229,7 @@ include('../../header.php');
                     </p>
                     <section class='info'>
                         <hr>
-                        <h3 id='id-concludingNotes'>Change Log</h3>
+                        <h3 id='id-changelog'>Change Log</h3>
                             <ul>
                                 <li>
                                     <a href='https://rubygems.org/gems/form_input_field/versions/0.8.56' target="_blank" rel="noopener noreferrer"><b>0.8.56</b></a> - Fixed output error pertaining to concatenation of label string and input string for <code>form_input_field</code>. Inclusion of an initial suite of tests capturing the examples given in ActionView docs.
