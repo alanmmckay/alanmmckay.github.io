@@ -6,7 +6,7 @@ $title = 'Alan McKay | Project | Ruby Gem: form_input_field';
 
 $meta['title'] = 'Alan McKay | Ruby Gem: form_input_field';
 
-$meta['description'] = '';
+$meta['description'] = 'Description of installation, usage, progress, and change-log of the form_input_field Ruby Gem for Rails; A gem which consolidates label and input element generation whilst maintaining values related to failed model validation.';
 
 $meta['url'] = 'https://alanmckay.blog/projects/form_input_field/';
 
