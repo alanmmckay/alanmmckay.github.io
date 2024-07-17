@@ -221,7 +221,7 @@ include('../../header.php');
                             Extend these helpers to be compatible with <code>Action&shy;View::Hel&shy;per&shy;s::Form&shy;Builder</code>.
                         </li>
                         <li style='text-align:start'>
-                            Create function wrappers specific to the required <code>Action&shy;View::Hel&shy;per&shy;s::For&shy;m&shy;Hel&shy;per</code> method. I.e., <code style='display:inline-block;'>form_text_field(:model, :object_name)</code> which calls <code style='display:inline-block;'>form_input_field(:text_field, :model, :object_name)</code>
+                            Create function wrappers specific to the required <code>Action&shy;View::Hel&shy;per&shy;s::For&shy;m&shy;Hel&shy;per</code> method. I.e., <code style='display:inline-block;'>form_text_field(:model, :object_name)</code> which calls <code style='display:inline-block;'>form_&shy;input_&shy;field(&shy;:text_field, :model, :object_name)</code>
                         </li>
                     </ul>
                     <p>
