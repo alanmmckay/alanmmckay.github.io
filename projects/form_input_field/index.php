@@ -227,16 +227,19 @@ include('../../header.php');
                     <p>
                         Other avenues of future work will be listed in the <a href='https://github.com/alanmmckay/form_input_field/issues' target="_blank" rel="noopener noreferrer">issues</a> section of the repository
                     </p>
-                    <h3>Change log</h3>
-                    <p> COMING SOON </p>
-                    <!--section class='info'>
+                    <section class='info'>
                         <hr>
-                        <h3 id='id-concludingNotes'>Concluding notes</h3>
-                        <p>
-
-                        </p>
+                        <h3 id='id-concludingNotes'>Change Log</h3>
+                            <ul>
+                                <li>
+                                    <a href='https://rubygems.org/gems/form_input_field/versions/0.8.56' target="_blank" rel="noopener noreferrer"><b>0.8.56</b></a> - Fixed output error pertaining to concatenation of label string and input string for <code>form_input_field</code>. Inclusion of an initial suite of tests capturing the examples given in ActionView docs.
+                                </li>
+                                <li>
+                                    <a href='https://rubygems.org/gems/form_input_field/versions/0.8.55' target="_blank" rel="noopener noreferrer"><b>0.8.55</b></a> - Initial push to RubyGems.org. Implementation of <code>form_input_field</code> and <code>form_error_field</code>. Implementation of a suite of tests with respect to an instantiation of an ActionView object.
+                                </li>
+                            </ul>
                         <hr>
-                    </section-->
+                    </section>
                 </article>
                 <nav>
                     <a href='../'>Back</a>
