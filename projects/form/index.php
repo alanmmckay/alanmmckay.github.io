@@ -559,7 +559,7 @@ include('../../header.php');
         </section>
         <script src='../../js/project_functions.js?04'></script>
         <script>
-            setCodeSizeSliders(14);
+            window.addEventListener('load', function(){setCodeSizeSliders(14)});
         </script>
     </body>
 </html>
