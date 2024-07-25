@@ -215,7 +215,7 @@ include('../../header.php');
                     <h3>Future Work</h3>
                     <ul>
                         <li>
-                            A mechanism to set key defaults.
+                            A mechanism to set flash key defaults.
                         </li>
                         <li>
                             Extend these helpers to be compatible with <code>Action&shy;View::Hel&shy;per&shy;s::Form&shy;Builder</code>.
