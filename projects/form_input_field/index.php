@@ -232,6 +232,9 @@ include('../../header.php');
                         <h3 id='id-changelog'>Change Log</h3>
                             <ul>
                                 <li>
+                                    <a href='https://rubygems.org/gems/form_input_field/versions/0.8.57' target="_blank" rel="noopener noreferrer"><b>0.8.57</b></a> - Changes to gemspec file to include information for the changelog. Updated the readme file to include some examples.
+                                </li>
+                                <li>
                                     <a href='https://rubygems.org/gems/form_input_field/versions/0.8.56' target="_blank" rel="noopener noreferrer"><b>0.8.56</b></a> - Fixed output error pertaining to concatenation of label string and input string for <code>form_input_field</code>. Inclusion of an initial suite of tests capturing the examples given in ActionView docs.
                                 </li>
                                 <li>
