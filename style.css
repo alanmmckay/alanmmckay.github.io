@@ -76,37 +76,41 @@
             margin:auto;
         }
 
-        #homeWrapper nav a{
-            display:flex;
-            align-items: center;
-            width:97%;
+        #homeWrapper nav div{
             margin:5%;
             margin-bottom:15px;
+            border:solid white 0px;
+            transition: border-left 1s;
+            width:97%;
+        }
+
+        #homeWrapper nav div a{
+            display:flex;
+            align-items: center;
             font-size:28px;
             font-family:sans-serif;
             letter-spacing:2px;
             text-decoration:none;
             color:#778088;
-            border:solid white 0px;
-            transition: border-left 1s;
+            width:100%;
         }
 
-        #homeWrapper nav a.writing{
+        #homeWrapper nav div.writing{
             border-left: solid 3px #778088;
             /*padding-left:20px;*/
             padding-left:3%;
         }
 
-        #homeWrapper nav a:hover{
+        #homeWrapper nav div:hover{
             border-left:solid 25px white;
         }
 
-        #homeWrapper nav a.currentLink:hover{
+        #homeWrapper nav div.currentLink:hover{
             cursor:default;
             border-left:0px;
         }
 
-        #homeWrapper nav a img{
+        #homeWrapper nav div a img{
             width:50px;
             height:50px;
             margin-right:2%;
@@ -574,12 +578,12 @@
 }
 
 @media screen and (min-width:525px){
-    #homeWrapper nav a img{
+    #homeWrapper nav div a img{
         width: 75px;
         height:75px;
     }
 
-    #homeWrapper nav a{
+    #homeWrapper nav div a{
         font-size:36px;
         letter-spacing:5px;
     }
@@ -590,12 +594,12 @@
 }
 
 @media screen and (min-width:800px){
-    #homeWrapper nav a img{
+    #homeWrapper nav div a img{
         width: 100px;
         height: 100px;
     }
 
-    #homeWrapper nav a{
+    #homeWrapper nav div a{
         font-size:42px;
         letter-spacing:7px;
     }
@@ -865,7 +869,7 @@
         min-width:300px;
     }
 
-    #homeWrapper nav a{
+    #homeWrapper nav div a{
         font-size:24px;
     }
 

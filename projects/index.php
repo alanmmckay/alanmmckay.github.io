@@ -21,22 +21,48 @@ include('../header.php');
                 <h1><a href='../'>Home</a></h1>
             </header>
             <nav>
-                <a href='./' class='currentLink'>
-                    <img src='../images/description.svg' alt='Icon for blog link'>
+                <div class='currentLink'>
+                    <a href='./'>
+                        <img src='../images/description.svg' alt='Icon for blog link'>
                     Projects
-                </a>
-                <a href="form_input_field/" class="writing"> Ruby Gem: form_input_field</a>
-                <a href='gallery/' class='writing'> Javascript: Balanced Image Gallery</a>
-                <a href='dataflow/' class='writing'> Research: Privacy and Dataflow</a>
-                <a href='social/' class='writing'> Data Science: Social Computing</a>
-                <a href="form/" class="writing"> Ruby on Rails: Developing DRY Forms</a>
-                <a href='aquatint/' class='writing'> Web Development: Aquatint Image Processor</a>
-                <a href='safety/' class='writing'> Data ETL: Cycling Safety Database</a>
-                <a href='organization/' class='writing'> Teaching: Computer Organization</a>
-                <a href='protocol/' class='writing'> Research: Population Protocol</a>
-                <a href='compiler/' class='writing'> Project: Klein Compiler</a>
-                <a href='cup/' class='writing'> Web Development: Cup of Joe</a>
-                <a href='grid/' class='writing'> Javascript: Hexagon Grid</a>
+                    </a>
+                </div>
+                <div class='writing'>
+                    <a href="form_input_field/"> Ruby Gem: form_input_field</a>
+                </div>
+                <div class='writing'>
+                    <a href='gallery/'> Javascript: Balanced Image Gallery</a>
+                </div>
+                <div class='writing'>
+                    <a href='dataflow/'> Research: Privacy and Dataflow</a>
+                </div>
+                <div class='writing'>
+                    <a href='social/'> Data Science: Social Computing</a>
+                </div>
+                <div class='writing'>
+                    <a href="form/"> Ruby on Rails: Developing DRY Forms</a>
+                </div>
+                <div class='writing'>
+                    <a href='aquatint/'> Web Development: Aquatint Image Processor</a>
+                </div>
+                <div class='writing'>
+                    <a href='safety/'> Data ETL: Cycling Safety Database</a>
+                </div>
+                <div class='writing'>
+                    <a href='organization/'> Teaching: Computer Organization</a>
+                </div>
+                <div class='writing'>
+                    <a href='protocol/'> Research: Population Protocol</a>
+                </div>
+                <div class='writing'>
+                    <a href='compiler/'> Project: Klein Compiler</a>
+                </div>
+                <div class='writing'>
+                    <a href='cup/'> Web Development: Cup of Joe</a>
+                </div>
+                <div class='writing'>
+                    <a href='grid/'> Javascript: Hexagon Grid</a>
+                </div>
             </nav>
         </div>
     </body>
