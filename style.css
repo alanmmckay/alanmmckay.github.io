@@ -376,7 +376,7 @@
             margin:0px;
         }
 
-        #writingsWrapper section.domcode p code, #writingsWrapper section.domcode li code{
+        #writingsWrapper p code, #writingsWrapper li code{
             background-color:#F7F7F7;
         }
 

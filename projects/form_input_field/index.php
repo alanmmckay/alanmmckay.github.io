@@ -14,15 +14,8 @@ $relative_path = "../../";
 
 include('../../header.php');
 
+produce_front_matter("form_input_field","Projects");
 ?>
-        <section id='writingsWrapper'>
-            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
-                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; form_input_field</a>
-                <h1><a href='../'>&nbsp;&gt; Projects</a>
-                <h1><a href='../../'>Home</a></h1>
-            </header>
-            <section class='domcode'>
-                <article>
                     <section class='info'>
                         <header>
                             <h2>Preface</h2>

@@ -14,15 +14,8 @@ $relative_path = "../../";
 
 include('../../header.php');
 
+produce_front_matter("Cup of Joe","Projects");
 ?>
-        <section id='writingsWrapper'>
-            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
-                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; Cup of Joe</a>
-                <h1><a href='../'>&nbsp;&gt; Projects</a>
-                <h1><a href='../../'>Home</a></h1>
-            </header>
-            <section>
-                <article>
                     <header>
                         <h1>Web Development: Cup of Joe</h1>
                     </header>

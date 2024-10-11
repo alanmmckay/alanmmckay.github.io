@@ -67,3 +67,31 @@ if(!isset($normalize)){
         <meta name='keywords' content='Alan McKay, Iowa, Iowa City, Cedar Falls, University of Iowa, University of Northern Iowa, UofI, UNI, Computer Science' />
     </head>
     <body>
+<?php
+
+function produce_front_matter($page, $origin = null, $section_attributes = array("id"=>"'writingsWrapper'"),$header_attributes = array("id"=>"'breadNav'","class"=>"'writingNav'","style"=>"'overflow:hidden;'"))
+{
+    $section_str = "";
+    foreach($section_attributes as $key => $value){
+        $section_str = $section_str." ".(string)$key."=".(string)$value;
+    }
+    echo "        <section".$section_str.">";
+    $header_str = "";
+    foreach($header_attributes as $key => $value){
+        $header_str = $header_str." ".(string)$key."=".(string)$value;
+    }
+    echo "\n            <header".$header_str.">";
+    echo "\n                <h1 class='breadCurrent'>";
+    echo "<a href='./' class='currentLink'>&nbsp;&gt; ".$page."</a></h1>";
+    if(isset($origin)){
+        echo "\n                <h1><a href='../'>&nbsp;&gt; ".$origin."</a></h1>";
+        $temp_relative_path = "../../";
+    }else{
+        $temp_relative_path = "../";
+    }
+    echo "\n                <h1><a href='".$temp_relative_path."'>Home</a></h1>";
+    echo "\n            </header>";
+    echo "\n            <section>";
+    echo "\n                <article>";
+    echo "\n";
+}
