@@ -18,7 +18,7 @@ $json_str = file_get_contents("catalog.js");
 $json = json_decode($json_str,true);
 
 ?>
-        <div id='homeWrapper'>
+        <div id='homeWrapper' class='descriptive'>
             <header id='breadNav' style='overflow:hidden'>
                 <h1><a href='./' class='currentLink'>&nbsp;&gt; Notes</a></h1>
                 <h1><a href='../'>Home</a></h1>
