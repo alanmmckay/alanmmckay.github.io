@@ -69,29 +69,35 @@ if(!isset($normalize)){
     <body>
 <?php
 
-function produce_front_matter($page, $origin = null, $section_attributes = array("id"=>"'writingsWrapper'"),$header_attributes = array("id"=>"'breadNav'","class"=>"'writingNav'","style"=>"'overflow:hidden;'"))
-{
-    $section_str = "";
-    foreach($section_attributes as $key => $value){
-        $section_str = $section_str." ".(string)$key."=".(string)$value;
+    function produce_front_matter($page, $origin = null, $section_attributes = array("id"=>"'writingsWrapper'"),$header_attributes = array("id"=>"'breadNav'","class"=>"'writingNav'","style"=>"'overflow:hidden;'"))
+    {
+        if(isset($GLOBALS['relative_path']) && strlen($GLOBALS['relative_path']) > 3){
+            $origin_path = substr($GLOBALS['relative_path'],3,strlen($GLOBALS['relative_path'])-3);
+        }else{
+            $origin_path = "../../";
+        }
+
+        $section_str = "";
+        foreach($section_attributes as $key => $value){
+            $section_str = $section_str." ".(string)$key."=".(string)$value;
+        }
+        echo "        <section".$section_str.">";
+        $header_str = "";
+        foreach($header_attributes as $key => $value){
+            $header_str = $header_str." ".(string)$key."=".(string)$value;
+        }
+        echo "\n            <header".$header_str.">";
+        echo "\n                <h1 class='breadCurrent'>";
+        echo "<a href='./' class='currentLink'>&nbsp;&gt; ".$page."</a></h1>";
+        if(isset($origin)){
+            echo "\n                <h1><a href='".$origin_path."'>&nbsp;&gt; ".$origin."</a></h1>";
+            $temp_relative_path = $origin_path."../";
+        }else{
+            $temp_relative_path = "../";
+        }
+        echo "\n                <h1><a href='".$temp_relative_path."'>Home</a></h1>";
+        echo "\n            </header>";
+        echo "\n            <section>";
+        echo "\n                <article>";
+        echo "\n";
     }
-    echo "        <section".$section_str.">";
-    $header_str = "";
-    foreach($header_attributes as $key => $value){
-        $header_str = $header_str." ".(string)$key."=".(string)$value;
-    }
-    echo "\n            <header".$header_str.">";
-    echo "\n                <h1 class='breadCurrent'>";
-    echo "<a href='./' class='currentLink'>&nbsp;&gt; ".$page."</a></h1>";
-    if(isset($origin)){
-        echo "\n                <h1><a href='../'>&nbsp;&gt; ".$origin."</a></h1>";
-        $temp_relative_path = "../../";
-    }else{
-        $temp_relative_path = "../";
-    }
-    echo "\n                <h1><a href='".$temp_relative_path."'>Home</a></h1>";
-    echo "\n            </header>";
-    echo "\n            <section>";
-    echo "\n                <article>";
-    echo "\n";
-}
