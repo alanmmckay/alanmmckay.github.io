@@ -27,6 +27,12 @@ include('header.php');
                     </a>
                 </div>
                 <div>
+                    <a href='notes/'>
+                        <img src='images/notes.svg' alt='Icon for notes link'>
+                        <span style='margin-left:10px;'>Notes</span>
+                    </a>
+                </div>
+                <div>
                     <a href='photography/' style='overflow-wrap: break-word;hyphens: manual;'>
                         <img src='images/shutter-cut.png' alt='Icon for a camera shutter'>
                         <span style='margin-left:10px;'>Photo&shy;graphy</span>
