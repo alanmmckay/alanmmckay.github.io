@@ -112,17 +112,17 @@ include('../header.php');
                         <p>
                             Project description detailing facets of interest pertaining to building a web app for running the Aquatint Image Processor.
                         </p>
+                        <ul>
+                            <li>Python</li>
+                            <li>PHP</li>
+                            <li>Apache</li>
+                            <li>Image Processing</li>
+                            <li>Ajax</li>
+                            <li>Bootstrap</li>
+                            <li>Building JSON APIs</li>
+                            <li>Freelance Work</li>
+                        </ul>
                     </a>
-                    <ul>
-                        <li>Python</li>
-                        <li>PHP</li>
-                        <li>Apache</li>
-                        <li>Image Processing</li>
-                        <li>Ajax</li>
-                        <li>Bootstrap</li>
-                        <li>Building JSON APIs</li>
-                        <li>Freelance Work</li>
-                    </ul>
                     <p>Published 01-15-2024</p>
                 </div>
                 <div class='writing'>
@@ -131,17 +131,17 @@ include('../header.php');
                         <p>
                             Project description of building a PostGIS database which cumulates DOT traffic information to provide safety insights for cyclists.
                         </p>
+                        <ul>
+                            <li>Postgres</li>
+                            <li>Postgres GIS</li>
+                            <li>Databases</li>
+                            <li>Restful API</li>
+                            <li>Strava API Access</li>
+                            <li>Data Scraping</li>
+                            <li>QGIS</li>
+                            <li>Data ETL</li>
+                        </ul>
                     </a>
-                    <ul>
-                        <li>Postgres</li>
-                        <li>Postgres GIS</li>
-                        <li>Databases</li>
-                        <li>Restful API</li>
-                        <li>Strava API Access</li>
-                        <li>Data Scraping</li>
-                        <li>QGIS</li>
-                        <li>Data ETL</li>
-                    </ul>
                     <p>Published 02-02-2024</p>
                 </div>
                 <div class='writing'>
@@ -215,13 +215,13 @@ include('../header.php');
                         <p>
                             Project showcase and description of a dynamic hexagon grid written in core Javascript.
                         </p>
+                        <ul>
+                            <li>JavaScript</li>
+                            <li>Interactive Interface</li>
+                            <li>Javascript Canvas Library</li>
+                            <li>Dynamic Grid</li>
+                        </ul>
                     </a>
-                    <ul>
-                        <li>JavaScript</li>
-                        <li>Interactive Interface</li>
-                        <li>Javascript Canvas Library</li>
-                        <li>Dynamic Grid</li>
-                    </ul>
                     <p>Published 01-03-2024</p>
                 </div>
             </nav>
