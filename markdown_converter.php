@@ -74,6 +74,14 @@ class NewImageRenderer implements NodeRendererInterface
 
         $attrs['src'] = $node->getUrl();
 
+        if($attrs['src'][strlen($attrs['src'])-4] == "."){
+            $extension = substr($attrs['src'],strlen($attrs['src'])-3);
+        }else if($attrs['src'][strlen($attrs['src'])-5] == "."){
+            $extension = substr($attrs['src'],strlen($attrs['src'])-4);
+        }else{
+            $extension = "";
+        }
+
         $alt_str = $this->getAltText($node);
         if(str_contains($alt_str,"{")){
             $first = strpos($alt_str,"{");
@@ -91,11 +99,27 @@ class NewImageRenderer implements NodeRendererInterface
             array_push($children,$figcaption);
         }
 
-        $img = new HtmlElement('img', $attrs, '', true);
-        array_push($children,$img);
+        if(strlen($extension) > 0 && ($extension == "mkv")){
+            $source = new HTMLElement('source',['src'=>$attrs['src']],'',true);
+            $video = new HTMLElement('video',['style'=>'width:100%','controls'=>'true'],$source);
+            $figure_content = $video;
+            $anchor_switch = false;
+        }else{
+            $img = new HtmlElement('img', $attrs, '', true);
+            $figure_content = $img;
+            $anchor_switch = true;
+        }
+
+        array_push($children,$figure_content);
         $children = array_reverse($children);
         $figure = new HTMLElement('figure', [], $children);
-        $anchor = new HTMLElement('a',['href'=>$node->getUrl(), "target"=>"_blank"], $figure);
+
+        if($anchor_switch == true){
+            $anchor = new HTMLElement('a',['href'=>$node->getUrl(), "target"=>"_blank"], $figure);
+        }else{
+            $anchor = $figure;
+        }
+
         if(isset($container_class)){
             return new HTMLElement('div',['class'=>$container_class],$anchor);
         }else{
