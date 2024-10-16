@@ -1,14 +1,14 @@
 <?php
 
-$canonical = 'https://alanmckay.blog/projects/';
+$canonical = 'https://alanmckay.blog/notes/';
 
-$title = 'Alan McKay | Projects';
+$title = 'Alan McKay | Notes';
 
-$meta['title'] = 'Alan McKay | Projects';
+$meta['title'] = 'Alan McKay | Notes';
 
-$meta['description'] = "Index of articles detailing various programming projects worked on. All related to Computer Science from the context of assessment, freelance, and/or interest.";
+$meta['description'] = "Digital garden of various notes. Discussions of programming projects and life observations.";
 
-$meta['url'] = 'https://alanmckay.blog/projects/';
+$meta['url'] = 'https://alanmckay.blog/notes/';
 
 $relative_path = "../";
 
