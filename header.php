@@ -65,6 +65,15 @@ if(!isset($normalize)){
         <meta property='og:type' content='website' />
         <meta property='og:url' content='<?php echo $meta['url'];?>' />
         <meta name='keywords' content='Alan McKay, Iowa, Iowa City, Cedar Falls, University of Iowa, University of Northern Iowa, UofI, UNI, Computer Science' />
+<?php
+    if(isset($internal_styles)){
+?>
+        <style>
+            <?php echo $internal_styles; ?>
+        </style>
+<?php
+    }
+?>
     </head>
     <body>
 <?php
