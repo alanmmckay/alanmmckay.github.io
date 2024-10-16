@@ -39,7 +39,12 @@ $json = json_decode($json_str,true);
              *   "name":String,
              *   "date_published":String,
              *   "description":String,
-             *   "tags":Array
+             *   "tags":Array,
+             *   "parent":
+             *    {
+             *      "name":Sring,
+             *      "url":"subfolders_from_notes_excluding_notes/"
+             *    }
              * }
             */
             $info = $key;
