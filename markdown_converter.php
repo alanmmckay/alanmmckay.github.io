@@ -17,6 +17,7 @@ use League\CommonMark\Renderer\HtmlRenderer;
 use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
+use League\CommonMark\Extension\CommonMark\Node\Block\ListItem;
 use League\CommonMark\Node\Block\Paragraph;
 use League\CommonMark\TightBlockInterface;
 
@@ -105,7 +106,7 @@ class NewImageRenderer implements NodeRendererInterface
             $figcaption = new HtmlElement('figcaption', [], $figcaption_contents);
         }
 
-        if(strlen($extension) > 0 && ($extension == "mkv")){
+        if(strlen($extension) > 0 && ($extension == "mkv" || $extension == "webm")){
             $source = new HTMLElement('source',['src'=>$attrs['src']],'',true);
             $video = new HTMLElement('video',['style'=>'width:100%','controls'=>'true'],$source);
             $figure_content = $video;
