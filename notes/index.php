@@ -60,7 +60,6 @@ $json = json_decode($json_str,true);
                         <p>
                             <?php echo $info['description'] ?>
                         </p>
-                    </a>
 <?php
         if(isset($info['tags']) && count($info) > 0){
 ?>
@@ -68,7 +67,7 @@ $json = json_decode($json_str,true);
 <?php
             foreach($info['tags'] as $tag){
 ?>
-                        <li><a><?php echo $tag; ?></a></li>
+                        <li><?php echo $tag; ?></li>
 <?php
             }
 ?>
@@ -81,6 +80,7 @@ $json = json_decode($json_str,true);
 <?php
     }
 ?>
+                    </a>
             </nav>
         </div>
     </body>
