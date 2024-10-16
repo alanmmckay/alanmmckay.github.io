@@ -94,6 +94,14 @@ class NewImageRenderer implements NodeRendererInterface
 
         $children = array();
         if (($title = $node->getTitle()) !== null) {
+            $environment = new Environment();
+            $environment->addExtension(new CommonMarkCoreExtension());
+            $parser = new MarkdownParser($environment);
+            $htmlRenderer = new HtmlRenderer($environment);
+
+            $document = $parser->parse($title);
+            $title = $htmlRenderer->renderDocument($document);
+
             $figcaption_contents = $title;
             $figcaption = new HtmlElement('figcaption', [], $figcaption_contents);
             array_push($children,$figcaption);
