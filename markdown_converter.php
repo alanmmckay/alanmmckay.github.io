@@ -92,7 +92,6 @@ class NewImageRenderer implements NodeRendererInterface
             $attrs['alt'] = $this->getAltText($node);
         }
 
-        $children = array();
         if (($title = $node->getTitle()) !== null) {
             $environment = new Environment();
             $environment->addExtension(new CommonMarkCoreExtension());
@@ -104,7 +103,6 @@ class NewImageRenderer implements NodeRendererInterface
 
             $figcaption_contents = $title;
             $figcaption = new HtmlElement('figcaption', [], $figcaption_contents);
-            array_push($children,$figcaption);
         }
 
         if(strlen($extension) > 0 && ($extension == "mkv")){
@@ -118,20 +116,18 @@ class NewImageRenderer implements NodeRendererInterface
             $anchor_switch = true;
         }
 
-        array_push($children,$figure_content);
-        $children = array_reverse($children);
-        $figure = new HTMLElement('figure', [], $children);
-
         if($anchor_switch == true){
-            $anchor = new HTMLElement('a',['href'=>$node->getUrl(), "target"=>"_blank"], $figure);
+            $anchor = new HTMLElement('a',['href'=>$node->getUrl(), "target"=>"_blank"], $figure_content);
         }else{
-            $anchor = $figure;
+            $anchor = $figure_content;
         }
 
+        $figure = new HTMLElement('figure', [], [$anchor,$figcaption]);
+
         if(isset($container_class)){
-            return new HTMLElement('div',['class'=>$container_class],$anchor);
+            return new HTMLElement('div',['class'=>$container_class],$figure);
         }else{
-            return $anchor;
+            return $figure;
         }
     }
 
