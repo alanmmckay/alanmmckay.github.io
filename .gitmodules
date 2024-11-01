@@ -1,0 +1,3 @@
+[submodule "aquatint"]
+	path = aquatint
+	url = git@github.com:alanmmckay/aquatint.git
