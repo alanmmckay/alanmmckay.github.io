@@ -63,24 +63,25 @@ $json = json_decode($json_str,true);
 <?php
         if(isset($info['tags']) && count($info) > 0){
 ?>
-                    <ul>
+                        <ul>
 <?php
             foreach($info['tags'] as $tag){
 ?>
-                        <li><?php echo $tag; ?></li>
+                            <li><?php echo $tag; ?></li>
 <?php
             }
 ?>
-                    </ul>
+                        </ul>
 <?php
         }
 ?>
-                    <p><?php echo $info['date_published']; ?></p>
+                        <p><?php echo $info['date_published']; ?></p>
+
+                    </a>
                 </div>
 <?php
     }
 ?>
-                    </a>
             </nav>
         </div>
     </body>
