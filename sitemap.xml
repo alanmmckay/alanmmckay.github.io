@@ -26,11 +26,31 @@
 
     <url>
         <loc>
+            https://alanmckay.blog/notes/
+        </loc>
+
+        <lastmod>
+            2024-11-06
+        </lastmod>
+    </url>
+
+    <url>
+        <loc>
             https://alanmckay.blog/photography/
         </loc>
 
         <lastmod>
             2024-04-15
+        </lastmod>
+    </url>
+
+    <url>
+        <loc>
+            https://alanmckay.blog/about/
+        </loc>
+
+        <lastmod>
+            2024-01-21
         </lastmod>
     </url>
 
@@ -73,6 +93,7 @@
             2022-01-08
         </lastmod>
     </url>
+
     <url>
         <loc>
             https://alanmckay.blog/writings/social/
@@ -92,6 +113,7 @@
             2022-01-08
         </lastmod>
     </url>
+
     <url>
         <loc>
             https://alanmckay.blog/writings/statement/
@@ -101,6 +123,7 @@
             2022-01-08
         </lastmod>
     </url>
+
     <url>
         <loc>
             https://alanmckay.blog/writings/elsewhere/
@@ -110,6 +133,7 @@
             2022-02-06
         </lastmod>
     </url>
+
     <url>
         <loc>
             https://alanmckay.blog/writings/describe/
@@ -119,6 +143,7 @@
             2022-02-06
         </lastmod>
     </url>
+
     <url>
         <loc>
             https://alanmckay.blog/projects/
@@ -128,6 +153,7 @@
             2024-07-16
         </lastmod>
     </url>
+
     <url>
         <loc>
             https://alanmckay.blog/projects/compiler/
@@ -137,6 +163,7 @@
             2024-01-06
         </lastmod>
     </url>
+
     <url>
         <loc>
             https://alanmckay.blog/projects/cup/
@@ -146,6 +173,7 @@
             2024-01-06
         </lastmod>
     </url>
+
     <url>
         <loc>
             https://alanmckay.blog/projects/grid/
@@ -155,6 +183,7 @@
             2024-05-09
         </lastmod>
     </url>
+
     <url>
         <loc>
             https://alanmckay.blog/projects/organization/
@@ -164,6 +193,7 @@
             2024-01-06
         </lastmod>
     </url>
+
     <url>
         <loc>
             https://alanmckay.blog/projects/protocol/
@@ -173,6 +203,7 @@
             2024-01-06
         </lastmod>
     </url>
+
     <url>
         <loc>
             https://alanmckay.blog/projects/social/
@@ -182,6 +213,7 @@
             2024-01-06
         </lastmod>
     </url>
+
     <url>
         <loc>
             https://alanmckay.blog/projects/aquatint/
@@ -191,15 +223,7 @@
             2024-01-15
         </lastmod>
     </url>
-    <url>
-        <loc>
-            https://alanmckay.blog/about/
-        </loc>
 
-        <lastmod>
-            2024-01-21
-        </lastmod>
-    </url>
     <url>
         <loc>
             https://alanmckay.blog/projects/dataflow/
@@ -209,6 +233,7 @@
             2024-02-09
         </lastmod>
     </url>
+
     <url>
         <loc>
             https://alanmckay.blog/projects/gallery/
@@ -218,6 +243,7 @@
             2024-04-02
         </lastmod>
     </url>
+
     <url>
         <loc>
             https://alanmckay.blog/projects/form/
@@ -227,6 +253,7 @@
             2024-10-10
         </lastmod>
     </url>
+
     <url>
         <loc>
             https://alanmckay.blog/projects/form_input_field/
@@ -234,6 +261,57 @@
 
         <lastmod>
             2024-07-26
+        </lastmod>
+    </url>
+
+    <url>
+        <loc>
+            https://alanmckay.blog/notes/2024/10-14/introduction/
+        </loc>
+
+        <lastmod>
+            2024-10-14
+        </lastmod>
+    </url>
+
+    <url>
+        <loc>
+            https://alanmckay.blog/notes/2024/10-16/raspberry_pi/
+        </loc>
+
+        <lastmod>
+            2024-10-16
+        </lastmod>
+    </url>
+
+    <url>
+        <loc>
+            https://alanmckay.blog/notes/2024/10-30/sharing-network/
+        </loc>
+
+        <lastmod>
+            2024-10-30
+        </lastmod>
+    </url>
+
+    <url>
+        <loc>
+            https://alanmckay.blog/notes/2024/11-03/remote-git/
+        </loc>
+
+        <lastmod>
+            2024-11-03
+        </lastmod>
+    </url>
+
+
+    <url>
+        <loc>
+            https://alanmckay.blog/notes/2024/11-06/encapsulation/
+        </loc>
+
+        <lastmod>
+            2024-11-06
         </lastmod>
     </url>
 </urlset>
