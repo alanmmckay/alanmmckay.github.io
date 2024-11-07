@@ -14,15 +14,8 @@ $relative_path = "../../";
 
 include('../../header.php');
 
+produce_front_matter("form_input_field","Projects");
 ?>
-        <section id='writingsWrapper'>
-            <header id='breadNav' class='writingNav' style='overflow:hidden;'>
-                <h1 class='breadCurrent'><a href='./' class='currentLink'>&nbsp;&gt; form_input_field</a>
-                <h1><a href='../'>&nbsp;&gt; Projects</a>
-                <h1><a href='../../'>Home</a></h1>
-            </header>
-            <section class='domcode'>
-                <article>
                     <section class='info'>
                         <header>
                             <h2>Preface</h2>
@@ -215,7 +208,7 @@ include('../../header.php');
                     <h3>Future Work</h3>
                     <ul>
                         <li>
-                            A mechanism to set key defaults.
+                            A mechanism to set flash key defaults.
                         </li>
                         <li>
                             Extend these helpers to be compatible with <code>Action&shy;View::Hel&shy;per&shy;s::Form&shy;Builder</code>.
@@ -231,6 +224,9 @@ include('../../header.php');
                         <hr>
                         <h3 id='id-changelog'>Change Log</h3>
                             <ul>
+                                <li>
+                                    <a href='https://rubygems.org/gems/form_input_field/versions/0.8.57' target="_blank" rel="noopener noreferrer"><b>0.8.57</b></a> - Changes to gemspec file to include information for the changelog. Updated the readme file to include some examples.
+                                </li>
                                 <li>
                                     <a href='https://rubygems.org/gems/form_input_field/versions/0.8.56' target="_blank" rel="noopener noreferrer"><b>0.8.56</b></a> - Fixed output error pertaining to concatenation of label string and input string for <code>form_input_field</code>. Inclusion of an initial suite of tests capturing the examples given in ActionView docs.
                                 </li>
@@ -248,7 +244,7 @@ include('../../header.php');
         </section>
         <script src='../../js/project_functions.js?04'></script>
         <script>
-            setCodeSizeSliders(14);
+            window.addEventListener('load', function(){setCodeSizeSliders(14)});
         </script>
     </body>
 </html>

@@ -21,18 +21,36 @@ include('../header.php');
                 <h1><a href='../'>Home</a></h1>
             </header>
             <nav>
-                <a href='./' class='currentLink'>
-                    <img src='../images/text-logo-grey.png' alt='Icon for blog link'>
-                    Writings
-                </a>
-                <a href='describe/' class='writing'> Describing Elsewhere</a>
-                <a href='elsewhere/' class='writing'> Experiencing Elsewhere</a>
-                <a href='bench/' class='writing'> The Bench</a>
-                <a href='flow/' class='writing'> Flow</a>
-                <a href='sound/' class='writing'> The Connectivity of Sound</a>
-                <a href='social/' class='writing'> Social Media</a>
-                <a href='leaf/' class='writing'> Leaves</a>
-                <a href='statement/' class='writing'> Statement of Purpose</a>
+                <div class='currentLink'>
+                    <a href='./'>
+                        <img src='../images/text-logo-grey.png' alt='Icon for blog link'>
+                        Writings
+                    </a>
+                </div>
+                <div class='writing'>
+                    <a href='describe/'> Describing Elsewhere</a>
+                </div>
+                <div class='writing'>
+                    <a href='elsewhere/'> Experiencing Elsewhere</a>
+                </div>
+                <div class='writing'>
+                    <a href='bench/'> The Bench</a>
+                </div>
+                <div class='writing'>
+                    <a href='flow/'> Flow</a>
+                </div>
+                <div class='writing'>
+                    <a href='sound/'> The Connectivity of Sound</a>
+                </div>
+                <div class='writing'>
+                    <a href='social/'> Social Media</a>
+                </div>
+                <div class='writing'>
+                    <a href='leaf/'> Leaves</a>
+                </div>
+                <div class='writing'>
+                    <a href='statement/'> Statement of Purpose</a>
+                </div>
             </nav>
         </div>
     </body>

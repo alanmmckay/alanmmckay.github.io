@@ -4,7 +4,7 @@
 ?>
 %div.input-group
   - value = {}
-  - if flash[:values] and flash[:values][:email:]
+  - if flash[:values] and flash[:values][:email]
     - value = {:value => flash[:values][:email]}
   = label :user, :email, 'Email', {:class => "input-group-text"}
   = text_field :user, :email, {:class => "form-control", :placeholder => "Your Email", :disabled => false}.merge(value)
