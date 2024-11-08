@@ -15,11 +15,10 @@
         text-decoration:none;
     }
 
-    li p:has(> code), li:has(> code){
+    .note li p:has(> code), .note li:has(> code){
         display:flex;
         text-align:left;
     }
-
     /* Navigation Styles */
 
         header#breadNav{
@@ -448,7 +447,15 @@
 
         #writingsWrapper p code, #writingsWrapper li code{
             background-color:#F7F7F7;
+        }
+
+        #writingsWrapper li p code, #writingsWrapper li code{
             word-break:break-word;
+        }
+
+        #writingsWrapper li p{
+            margin:0px;
+            margin-bottom: 5px;
         }
 
         div.adjacentcodeframes{
