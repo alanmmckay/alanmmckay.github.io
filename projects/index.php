@@ -189,7 +189,7 @@ include('../header.php');
                     <p>Published 01-03-2024</p>
                 </div>
                 <div class='writing'>
-                    <a href="protocol/" style='display:inherit;'>
+                    <a href="cup/" style='display:inherit;'>
                         <span> Web Development: Cup of Joe</span>
                         <p>
                             Description of a freelance gig which involved the development of a website for a local coffee shop.
