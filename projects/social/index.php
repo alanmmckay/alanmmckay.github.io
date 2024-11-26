@@ -346,7 +346,7 @@ produce_front_matter("Social Computing","Projects");
                                 <label for="node_range" style='text-align:start'>
                                     Node Range: (lower value increases amount of nodes)
                                 </label>
-                                <p style='margin:0px;'>Value: <span id='nodeSliderVal'> </span></p>
+                                <p style='margin:0px;min-width:100px'>Value: <span id='nodeSliderVal'> </span></p>
                             </div>
                                 <input type="range" id="node_range" value="6" min="2" max="16" style='width:95%;accent-color:grey;margin-bottom:5px;' oninput='slider_kickoff()'/>
                             <div id='confirm_wrapper' style='display:none;align-items:flex-starts;gap:10px;justify-content:space-between;flex-wrap:wrap;'>
@@ -521,6 +521,7 @@ produce_front_matter("Social Computing","Projects");
                             kickoff(slider.value,0,col_func,kickoff_array[String(slider.value)]);
                             document.getElementById('confirm_button').disabled = true;
                             kickoff_switch = true;
+                            document.getElementById("explode_button").disabled = false;
                         }
 
                         var isMobile = window.matchMedia || window.msMatchMedia;
@@ -532,7 +533,7 @@ produce_front_matter("Social Computing","Projects");
                             var node_threshold = 6;
                         }
 
-                        slider_value = document.getElementById('node_range').value;
+                        slider_value = node_threshold;
                         document.getElementById('nodeSliderVal').innerHTML = slider_value;
                         kickoff(node_threshold,0,col_func,kickoff_array[String(node_threshold)]);
                     </script>
