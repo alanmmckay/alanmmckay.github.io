@@ -337,18 +337,29 @@ produce_front_matter("Social Computing","Projects");
                     <p>
                         The observation of the paragraph above helps us see the property of the complex network given by the Reddit dataset is a scale-free network; a means to visually support this assertion.
                     </p>
-                    <script>
-                        function explode_graph(){
-                            simulation.force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*3*1));
-                            document.getElementById("explode_button").disabled = true;
-                        }
-                    </script>
                     <figure id='force_graph_social'>
                         <div id='social_graph_container'>
                             <svg viewBox="0 0 1048 800" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                         </div>
                         <figcaption>
-                            <input type="button" id="explode_button" value="Expand Nodes" onclick="explode_graph()" style='padding:5px;' />
+                            <div>
+                                <label for="explode_button">
+                                    Expand gap between nodes:
+                                </label>
+                                <input type="button" id="explode_button" value="Expand Nodes" onclick="explode_graph()" style='padding:5px;' />
+                            </div>
+                            <div>
+                                <label for="node_range">
+                                    Minimum Node Count: (lower value increases amount of nodes)
+                                </label>
+                                <input type="range" id="node_range" value="6" min="2" max="16" />
+                            </div>
+                            <div>
+                                <label for="confirm_button">
+                                    Warning: Increasing node count beyond this threshold requires greater system resources. Only do so if device has adequate memory and cpu.
+                                </label>
+                                <input type="button" id="confirm_button" style='padding:5px' value="Proceed" />
+                            </div>
                         </figcaption>
                     </figure>
 
@@ -460,6 +471,11 @@ produce_front_matter("Social Computing","Projects");
                         }
 
                         kickoff(6,0,col_func,kickoff_array[String(6)]);
+
+                        function explode_graph(){
+                            simulation.force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*3*1));
+                            document.getElementById("explode_button").disabled = true;
+                        }
                     </script>
 
                     <section class='info'>
