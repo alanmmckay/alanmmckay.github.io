@@ -383,17 +383,17 @@ produce_front_matter("Social Computing","Projects");
                             "3": -7,
                             "4": -10,
                             "5": -15,
-                            "6": -20,
-                            "7": -25,
-                            "8": -30,
-                            "9": -35,
-                            "10": -45,
-                            "11": -50,
-                            "12": -55,
-                            "13": -65,
-                            "14": -75,
-                            "15": -85,
-                            "16": -95
+                            "6": -25,
+                            "7": -30,
+                            "8": -35,
+                            "9": -45,
+                            "10": -55,
+                            "11": -60,
+                            "12": -65,
+                            "13": -75,
+                            "14": -85,
+                            "15": -95,
+                            "16": -105
                         }
 
                         function kickoff(filter,link_strength,collision_strength,force_strength){
@@ -408,7 +408,7 @@ produce_front_matter("Social Computing","Projects");
                             .force("center", d3.forceCenter(width/2,height/2))
                             .force("x", d3.forceX())
                             .force("y", d3.forceY())
-                            .alphaTarget(0.05);
+                            .alphaTarget(0.0);
 
                             link = svg.append("g")
                             .attr("stroke", "#999")
@@ -444,7 +444,7 @@ produce_front_matter("Social Computing","Projects");
 
                             function drag(simulation) {
                                 function dragstarted(event) {
-                                    if (!event.active) simulation.alphaTarget(0.05).restart();
+                                    if (!event.active) simulation.alphaTarget(0.3).restart();
                                     event.subject.fx = event.subject.x;
                                     event.subject.fy = event.subject.y;
                                 }
@@ -463,12 +463,13 @@ produce_front_matter("Social Computing","Projects");
                         }
 
                         var col_func = function(obj){
-                            return (obj.inbound / 4)+1;
+                            return (obj.inbound / 4)+3;
                         }
 
 
                         function explode_graph(){
-                            simulation.force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*3*1));
+                            simulation.force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*2*1));
+                            simulation.alphaTarget(0.05).restart();
                             document.getElementById("explode_button").disabled = true;
                         }
 
