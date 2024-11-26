@@ -337,6 +337,108 @@ produce_front_matter("Social Computing","Projects");
                     <p>
                         The observation of the paragraph above helps us see the property of the complex network given by the Reddit dataset is a scale-free network; a means to visually support this assertion.
                     </p>
+
+                    <figure id='force_graph_social'>
+                        <div id='social_graph_container'>
+                            <svg viewBox="0 0 1048 800" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                        </div>
+                        <figcaption>
+
+                        </figcaption>
+                    </figure>
+
+                    <script src="<?php echo $relative_path ?>js/d3.v7.min.js"></script>
+                    <script src="social_dataset.js"></script>
+
+                    <script>
+                        var width = 1048;
+                        var height = 800;
+                        var set_color = d3.scaleLog([6,60,144],["brown","orange","red"]);
+
+                        var links;
+                        var nodes;
+                        var simulation;
+                        var link;
+                        var node;
+
+                        function kickoff(filter,link_strength,collision_strength){
+                            var svg = d3.select('svg');
+                            links = data.links.filter(d => (d.source_strength >= filter && d.target_strength >= filter)).map(d => ({...d}));
+                            nodes = data.nodes.filter(d => d.inbound >= filter).map(d => ({...d}));
+
+                            simulation = d3.forceSimulation(nodes)
+                            .force("charge", d3.forceManyBody().strength(-10))
+                            .force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*link_strength))
+                            .force("collide",d3.forceCollide(d => collision_strength(d)))
+                            .force("center", d3.forceCenter(width/2,height/2))
+                            .force("x", d3.forceX())
+                            .force("y", d3.forceY())
+                            .alphaTarget(0.05);
+
+                            link = svg.append("g")
+                            .attr("stroke", "#999")
+                            .attr("stroke-opacity", 0.6)
+                            .selectAll("line")
+                            .data(links)
+                            .join("line")
+                            .attr("stroke-width",0.25);
+
+                            node = svg.append("g")
+                            .attr("stroke", "brown")
+                            .attr("stroke-width", 1)
+                            .selectAll("circle")
+                            .data(nodes)
+                            .join("circle")
+                            .attr("r", (d => d.inbound/4))
+                            .attr("fill", d => set_color(d.inbound));
+
+                            node.append("title")
+                            .text(d => "User: " +d.id + ";\nInbound Degree: " + d.inbound + ";");
+
+                            simulation.on("tick", () => {
+                            link
+                                .attr("x1", d => d.source.x)
+                                .attr("y1", d => d.source.y)
+                                .attr("x2", d => d.target.x)
+                                .attr("y2", d => d.target.y);
+
+                            node
+                                .attr("cx", d => d.x)
+                                .attr("cy", d => d.y);
+                            });
+
+                            var switch_bool = false;
+
+                            function drag(simulation) {
+                                function dragstarted(event) {
+                                    if (!event.active) simulation.alphaTarget(0.00).restart();
+                                    event.subject.fx = event.subject.x;
+                                    event.subject.fy = event.subject.y;
+                                    switch_bool = true;
+                                }
+                                function dragged(event) {
+                                    event.subject.fx = event.x;
+                                    event.subject.fy = event.y;
+                                    switch_bool = true;
+                                }
+                                function dragended(event) {
+                                    if (!event.active) simulation.alphaTarget(0.00).restart();
+                                    event.subject.fx = null;
+                                    event.subject.fy = null;
+                                    switch_bool = false;
+                                }
+                                return d3.drag().on('start', dragstarted).on('drag', dragged).on('end', dragended);
+                            }
+                            node.call(drag(simulation));
+                        }
+
+                        var col_func = function(obj){
+                            return (obj.inbound / 4)+1;
+                        }
+
+                        kickoff(6,0,col_func);
+                    </script>
+
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
