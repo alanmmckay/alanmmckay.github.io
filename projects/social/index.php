@@ -535,7 +535,8 @@ produce_front_matter("Social Computing","Projects");
                         }
 
                         slider_value = node_threshold;
-                        document.getElementById('nodeSliderVal').innerHTML = slider_value;
+                        document.getElementById('nodeSliderVal').innerHTML = node_threshold;
+                        document.getElementById('node_range').value = node_threshold;
                         kickoff(node_threshold,0,col_func,kickoff_array[String(node_threshold)]);
                     </script>
 
