@@ -342,23 +342,24 @@ produce_front_matter("Social Computing","Projects");
                             <svg viewBox="0 0 1048 800" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                         </div>
                         <figcaption>
-                            <div>
-                                <label for="explode_button">
-                                    Expand gap between nodes:
+                            <div style='display:flex;align-items:flex-end;gap:15px;justify-content:space-between'>
+                                <label for="node_range" style='text-align:start'>
+                                    Node Range: (lower value increases amount of nodes)
                                 </label>
-                                <input type="button" id="explode_button" value="Expand Nodes" onclick="explode_graph()" style='padding:5px;' />
+                                <p style='margin:0px;'>Value: <span id='nodeSliderVal'> </span></p>
                             </div>
-                            <div>
-                                <label for="node_range">
-                                    Minimum Node Count: (lower value increases amount of nodes)
-                                </label>
-                                <input type="range" id="node_range" value="6" min="2" max="16" />
-                            </div>
-                            <div>
-                                <label for="confirm_button">
+                                <input type="range" id="node_range" value="6" min="2" max="16" style='width:95%;accent-color:grey;margin-bottom:5px;'/>
+                            <div style='display:flex;align-items:flex-starts;gap:10px;justify-content:space-between;flex-wrap:wrap;'>
+                                <label for="confirm_button" style='text-align:start;max-width:80%'>
                                     Warning: Increasing node count beyond this threshold requires greater system resources. Only do so if device has adequate memory and cpu.
                                 </label>
-                                <input type="button" id="confirm_button" style='padding:5px' value="Proceed" />
+                                <input type="button" id="confirm_button" style='padding:5px;flex-grow:1;max-height:35px;' value="Proceed" />
+                            </div>
+                            <div style='display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px'>
+                                <label for="explode_button" style='text-align:start;max-width:80%;'>
+                                    Expand gap between nodes:
+                                </label>
+                                <input type="button" id="explode_button" value="Expand Nodes" onclick="explode_graph()" style='padding:5px;max-height:35px;' />
                             </div>
                         </figcaption>
                     </figure>
