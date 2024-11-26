@@ -348,15 +348,15 @@ produce_front_matter("Social Computing","Projects");
                                 </label>
                                 <p style='margin:0px;'>Value: <span id='nodeSliderVal'> </span></p>
                             </div>
-                                <input type="range" id="node_range" value="6" min="2" max="16" style='width:95%;accent-color:grey;margin-bottom:5px;'/>
+                                <input type="range" id="node_range" value="6" min="2" max="16" style='width:95%;accent-color:grey;margin-bottom:5px;' oninput='slider_kickoff()'/>
                             <div style='display:flex;align-items:flex-starts;gap:10px;justify-content:space-between;flex-wrap:wrap;'>
-                                <label for="confirm_button" style='text-align:start;max-width:80%'>
+                                <label for="" style='text-align:start;max-width:80%'>
                                     Warning: Increasing node count beyond this threshold requires greater system resources. Only do so if device has adequate memory and cpu.
                                 </label>
                                 <input type="button" id="confirm_button" style='padding:5px;flex-grow:1;max-height:35px;' value="Proceed" />
                             </div>
                             <div style='display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px'>
-                                <label for="explode_button" style='text-align:start;max-width:80%;'>
+                                <label for="" style='text-align:start;max-width:80%;'>
                                     Expand gap between nodes:
                                 </label>
                                 <input type="button" id="explode_button" value="Expand Nodes" onclick="explode_graph()" style='padding:5px;max-height:35px;' />
@@ -442,25 +442,20 @@ produce_front_matter("Social Computing","Projects");
                                 .attr("cy", d => d.y);
                             });
 
-                            var switch_bool = false;
-
                             function drag(simulation) {
                                 function dragstarted(event) {
-                                    if (!event.active) simulation.alphaTarget(0.00).restart();
+                                    if (!event.active) simulation.alphaTarget(0.05).restart();
                                     event.subject.fx = event.subject.x;
                                     event.subject.fy = event.subject.y;
-                                    switch_bool = true;
                                 }
                                 function dragged(event) {
                                     event.subject.fx = event.x;
                                     event.subject.fy = event.y;
-                                    switch_bool = true;
                                 }
                                 function dragended(event) {
                                     if (!event.active) simulation.alphaTarget(0.00).restart();
                                     event.subject.fx = null;
                                     event.subject.fy = null;
-                                    switch_bool = false;
                                 }
                                 return d3.drag().on('start', dragstarted).on('drag', dragged).on('end', dragended);
                             }
@@ -471,12 +466,48 @@ produce_front_matter("Social Computing","Projects");
                             return (obj.inbound / 4)+1;
                         }
 
-                        kickoff(6,0,col_func,kickoff_array[String(6)]);
 
                         function explode_graph(){
                             simulation.force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*3*1));
                             document.getElementById("explode_button").disabled = true;
                         }
+
+
+                        function prime_svg(){
+                            node.remove();
+                            link.remove();
+                            node = false;
+                            link = false;
+                            nodes = false;
+                            links = false;
+                            simulation = false;
+
+                            document.getElementsByTagName("svg")[0].remove();
+                            let new_svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                            new_svg.setAttribute("viewBox","0 0 1048 800");
+                            new_svg.setAttribute("preserveAspectRatio","xMidYMid meet");
+                            new_svg.setAttribute("style","width:100%;");
+                            document.getElementById("social_graph_container").appendChild(new_svg);
+                        }
+
+                        function slider_kickoff(){
+                            prime_svg();
+                            document.getElementById("explode_button").disabled = false;
+                            slider = document.getElementById('node_range');
+                            document.getElementById('nodeSliderVal').innerHTML = slider.value;
+                            kickoff(slider.value,0,col_func,kickoff_array[String(slider.value)]);
+                        }
+                        var isMobile = window.matchMedia || window.msMatchMedia;
+                        isMobile = isMobile("(pointer:coarse)").matches;
+
+                        if(isMobile){
+                            var node_threshold = 16;
+                        }else{
+                            var node_threshold = 6;
+                        }
+
+                        document.getElementById('nodeSliderVal').innerHTML = document.getElementById('node_range').value;
+                        kickoff(node_threshold,0,col_func,kickoff_array[String(node_threshold)]);
                     </script>
 
                     <section class='info'>
