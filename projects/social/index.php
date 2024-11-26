@@ -349,11 +349,11 @@ produce_front_matter("Social Computing","Projects");
                                 <p style='margin:0px;'>Value: <span id='nodeSliderVal'> </span></p>
                             </div>
                                 <input type="range" id="node_range" value="6" min="2" max="16" style='width:95%;accent-color:grey;margin-bottom:5px;' oninput='slider_kickoff()'/>
-                            <div style='display:flex;align-items:flex-starts;gap:10px;justify-content:space-between;flex-wrap:wrap;'>
+                            <div id='confirm_wrapper' style='display:none;align-items:flex-starts;gap:10px;justify-content:space-between;flex-wrap:wrap;'>
                                 <label for="" style='text-align:start;max-width:80%'>
-                                    Warning: Increasing node count beyond this threshold requires greater system resources. Only do so if device has adequate memory and cpu.
+                                    <strong>Warning:</strong> Increasing node count beyond this threshold requires greater system resources. Only do so if device has adequate memory and cpu.
                                 </label>
-                                <input type="button" id="confirm_button" style='padding:5px;flex-grow:1;max-height:35px;' value="Proceed" />
+                                <input type="button" id="confirm_button" style='padding:5px;flex-grow:1;max-height:35px;' value="Proceed" onclick='button_kickoff()' />
                             </div>
                             <div style='display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px'>
                                 <label for="" style='text-align:start;max-width:80%;'>
@@ -490,13 +490,39 @@ produce_front_matter("Social Computing","Projects");
                             document.getElementById("social_graph_container").appendChild(new_svg);
                         }
 
+                        var slider_value;
+                        var kickoff_switch = true;
                         function slider_kickoff(){
-                            prime_svg();
-                            document.getElementById("explode_button").disabled = false;
                             slider = document.getElementById('node_range');
-                            document.getElementById('nodeSliderVal').innerHTML = slider.value;
-                            kickoff(slider.value,0,col_func,kickoff_array[String(slider.value)]);
+                            if(slider.value < node_threshold){
+                                kickoff_switch = false;
+                                document.getElementById('confirm_wrapper').style.display = "flex";
+                                document.getElementById('confirm_button').disabled = false;
+                                document.getElementById('nodeSliderVal').innerHTML = slider_value + " -> " + slider.value;
+                            }else{
+                                kickoff_switch = true;
+                                document.getElementById('confirm_button').disabled = true;
+                            }
+
+                            if(kickoff_switch == true){
+                                prime_svg();
+                                document.getElementById("explode_button").disabled = false;
+                                slider_value = slider.value;
+                                document.getElementById('nodeSliderVal').innerHTML = slider_value
+                                kickoff(slider.value,0,col_func,kickoff_array[String(slider.value)]);
+                            }
                         }
+
+                        function button_kickoff(){
+                            prime_svg();
+                            slider = document.getElementById('node_range');
+                            slider_value = slider.value;
+                            document.getElementById('nodeSliderVal').innerHTML = slider_value
+                            kickoff(slider.value,0,col_func,kickoff_array[String(slider.value)]);
+                            document.getElementById('confirm_button').disabled = true;
+                            kickoff_switch = true;
+                        }
+
                         var isMobile = window.matchMedia || window.msMatchMedia;
                         isMobile = isMobile("(pointer:coarse)").matches;
 
@@ -506,7 +532,8 @@ produce_front_matter("Social Computing","Projects");
                             var node_threshold = 6;
                         }
 
-                        document.getElementById('nodeSliderVal').innerHTML = document.getElementById('node_range').value;
+                        slider_value = document.getElementById('node_range').value;
+                        document.getElementById('nodeSliderVal').innerHTML = slider_value;
                         kickoff(node_threshold,0,col_func,kickoff_array[String(node_threshold)]);
                     </script>
 
