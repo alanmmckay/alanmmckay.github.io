@@ -361,13 +361,31 @@ produce_front_matter("Social Computing","Projects");
                         var link;
                         var node;
 
-                        function kickoff(filter,link_strength,collision_strength){
+                        var kickoff_array = {
+                            "2": -5,
+                            "3": -7,
+                            "4": -10,
+                            "5": -15,
+                            "6": -20,
+                            "7": -25,
+                            "8": -30,
+                            "9": -35,
+                            "10": -45,
+                            "11": -50,
+                            "12": -55,
+                            "13": -65,
+                            "14": -75,
+                            "15": -85,
+                            "16": -95
+                        }
+
+                        function kickoff(filter,link_strength,collision_strength,force_strength){
                             var svg = d3.select('svg');
                             links = data.links.filter(d => (d.source_strength >= filter && d.target_strength >= filter)).map(d => ({...d}));
                             nodes = data.nodes.filter(d => d.inbound >= filter).map(d => ({...d}));
 
                             simulation = d3.forceSimulation(nodes)
-                            .force("charge", d3.forceManyBody().strength(-10))
+                            .force("charge", d3.forceManyBody().strength(force_strength))
                             .force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*link_strength))
                             .force("collide",d3.forceCollide(d => collision_strength(d)))
                             .force("center", d3.forceCenter(width/2,height/2))
@@ -436,7 +454,7 @@ produce_front_matter("Social Computing","Projects");
                             return (obj.inbound / 4)+1;
                         }
 
-                        kickoff(6,0,col_func);
+                        kickoff(6,0,col_func,kickoff_array[String(6)]);
                     </script>
 
                     <section class='info'>
