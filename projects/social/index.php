@@ -337,13 +337,18 @@ produce_front_matter("Social Computing","Projects");
                     <p>
                         The observation of the paragraph above helps us see the property of the complex network given by the Reddit dataset is a scale-free network; a means to visually support this assertion.
                     </p>
-
+                    <script>
+                        function explode_graph(){
+                            simulation.force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*3*1));
+                            document.getElementById("explode_button").disabled = true;
+                        }
+                    </script>
                     <figure id='force_graph_social'>
                         <div id='social_graph_container'>
                             <svg viewBox="0 0 1048 800" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                         </div>
                         <figcaption>
-
+                            <input type="button" id="explode_button" value="Expand Nodes" onclick="explode_graph()" style='padding:5px;' />
                         </figcaption>
                     </figure>
 
