@@ -355,6 +355,10 @@ produce_front_matter("Social Computing","Projects");
                         <figcaption>
                             Figure 16: Dynamic representation of the small-world networks. Mousing over a node will report the inbound connection count for each node. Nodes can be dragged to be moved around.
                         </figcaption>
+                        <select name='network_selector' id ='network_selector' disabled>
+                            <option value='reddit'>Social Network<option>
+                            <option value='random'>Randomized Network</option>
+                        </select>
                         <div id='social_graph_container'>
                             <svg viewBox="0 0 1048 800" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                         </div>
