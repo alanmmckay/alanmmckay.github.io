@@ -337,7 +337,24 @@ produce_front_matter("Social Computing","Projects");
                     <p>
                         The observation of the paragraph above helps us see the property of the complex network given by the Reddit dataset is a scale-free network; a means to visually support this assertion.
                     </p>
+                    <h3>Six degrees of separation</h3>
+                    <p>
+                        Six degrees of separation is the term that encapsulates the idea that all individuals are six or fewer social connections away from each other. The network science discussed on this page acts as a means to validate this. The contrast of the Reddit social network graph and the graph of randomly generated connections also acts as evidence. The average distance between nodes will be higher in a randomized graph, leading to the assertion that there are more than six degrees of separation in this context.
+                    </p>
+                    <p>
+                        This can easily be illustrated in the following figure which displays an dynamic graph taken from the datasets discussed thus far. The figure contains an option to switch between these categories of graphs and a slider which a threshold can be set to determine how many nodes are displayed on the graph. This threshold indicates the minimum amount of inbound connections to a node - the higher the value set by the slider, a lesser amount of nodes will be displayed.
+                    </p>
+                    <p>
+                        While using these graphs, one can mouse over a given node to report the user name and inbound connections. A button is also given to allow a user to expand the distance between nodes. This can be useful to unclutter the space. The user also has the ability to drag each node within the graph.
+                    </p>
+                    <p>
+                        The initial threshold set for mobile users will be set to 16 inbound connections. The initial threshold for desktop users will be 6. Setting the threshold below these values will prompt the user for confirmation. These graphs can be CPU and memory intensive as the node and edge count increases which may impact performance.
+                    </p>
+                    <hr>
                     <figure id='force_graph_social'>
+                        <figcaption>
+                            Figure 16: Dynamic representation of the small-world networks. Mousing over a node will report the inbound connection count for each node. Nodes can be dragged to be moved around.
+                        </figcaption>
                         <div id='social_graph_container'>
                             <svg viewBox="0 0 1048 800" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                         </div>
@@ -444,7 +461,7 @@ produce_front_matter("Social Computing","Projects");
 
                             function drag(simulation) {
                                 function dragstarted(event) {
-                                    if (!event.active) simulation.alphaTarget(0.3).restart();
+                                    if (!event.active) simulation.alphaTarget(0.05).restart();
                                     event.subject.fx = event.subject.x;
                                     event.subject.fy = event.subject.y;
                                 }
@@ -468,7 +485,7 @@ produce_front_matter("Social Computing","Projects");
 
 
                         function explode_graph(){
-                            simulation.force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*2*1));
+                            simulation.force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*2.5*1));
                             simulation.alphaTarget(0.05).restart();
                             document.getElementById("explode_button").disabled = true;
                         }
@@ -510,7 +527,7 @@ produce_front_matter("Social Computing","Projects");
                                 document.getElementById("explode_button").disabled = false;
                                 slider_value = slider.value;
                                 document.getElementById('nodeSliderVal').innerHTML = slider_value
-                                kickoff(slider.value,0,col_func,kickoff_array[String(slider.value)]);
+                                kickoff(slider.value,.5,col_func,kickoff_array[String(slider.value)]);
                             }
                         }
 
@@ -519,7 +536,7 @@ produce_front_matter("Social Computing","Projects");
                             slider = document.getElementById('node_range');
                             slider_value = slider.value;
                             document.getElementById('nodeSliderVal').innerHTML = slider_value
-                            kickoff(slider.value,0,col_func,kickoff_array[String(slider.value)]);
+                            kickoff(slider.value,.5,col_func,kickoff_array[String(slider.value)]);
                             document.getElementById('confirm_button').disabled = true;
                             kickoff_switch = true;
                             document.getElementById("explode_button").disabled = false;
@@ -537,7 +554,7 @@ produce_front_matter("Social Computing","Projects");
                         slider_value = node_threshold;
                         document.getElementById('nodeSliderVal').innerHTML = node_threshold;
                         document.getElementById('node_range').value = node_threshold;
-                        kickoff(node_threshold,0,col_func,kickoff_array[String(node_threshold)]);
+                        kickoff(node_threshold,.5,col_func,kickoff_array[String(node_threshold)]);
                     </script>
 
                     <section class='info'>
