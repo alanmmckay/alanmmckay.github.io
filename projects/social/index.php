@@ -524,27 +524,32 @@ produce_front_matter("Social Computing","Projects");
                         var slider_value;
                         var kickoff_switch = true;
                         function slider_kickoff(){
+
                             slider = document.getElementById('node_range');
+                            value_indicator = document.getElementById('nodeSliderVal');
+                            confirmation_button = document.getElementById("confirm_button");
+                            confirmation_label = document.getElementById('confirm_label');
+
                             if(slider.value < node_threshold){
-                                kickoff_switch = false;
                                 document.getElementById('confirm_wrapper').style.display = "flex";
-                                document.getElementById('confirm_button').disabled = false;
-                                document.getElementById("confirm_label").style.color = '#7b869d';
-                                document.getElementById('nodeSliderVal').innerHTML = slider_value + " -> " + slider.value;
+                                kickoff_switch = false;
+                                confirmation_button.disabled = false;
+                                confirmation_label.style.color = '#7b869d';
+                                value_indicator.innerHTML = slider_value + " -> " + slider.value;
                             }else{
                                 kickoff_switch = true;
-                                document.getElementById('confirm_button').disabled = true;
-                                document.getElementById('confirm_label').style.color = "#c4c9d4";
+                                confirmation_button.disabled = true;
+                                confirmation_label.style.color = "#c4c9d4";
                             }
 
                             if(kickoff_switch == true){
                                 prime_svg();
-                                document.getElementById("explode_button").disabled = false;
                                 slider_value = slider.value;
-                                document.getElementById('nodeSliderVal').innerHTML = slider_value
+                                value_indicator.innerHTML = slider_value
                                 kickoff(slider.value,.5,col_func,kickoff_array[String(slider.value)]);
-                                document.getElementById("explode_button").value = "Expand Nodes";
-                                document.getElementById("explode_button").setAttribute("onclick","explode_graph(true)");
+                                explode_button = document.getElementById("explode_button");
+                                explode_button.value = "Expand Nodes";
+                                explode_button.setAttribute("onclick","explode_graph(true)");
                             }
                         }
 
@@ -556,10 +561,10 @@ produce_front_matter("Social Computing","Projects");
                             kickoff(slider.value,.5,col_func,kickoff_array[String(slider.value)]);
                             document.getElementById('confirm_button').disabled = true;
                             kickoff_switch = true;
-                            document.getElementById("explode_button").disabled = false;
                             document.getElementById('confirm_label').style.color = "#c4c9d4";
-                            document.getElementById("explode_button").value = "Expand Nodes";
-                            document.getElementById("explode_button").setAttribute("onclick","explode_graph(true)");
+                            explode_button = document.getElementById("explode_button");
+                            explode_button.value = "Expand Nodes";
+                            explode_button.setAttribute("onclick","explode_graph(true)");
                         }
 
                         var isMobile = window.matchMedia || window.msMatchMedia;
