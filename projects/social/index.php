@@ -380,7 +380,7 @@ produce_front_matter("Social Computing","Projects");
                                 <label for="" style='text-align:start;max-width:80%;'>
                                     Expand gap between nodes:
                                 </label>
-                                <input type="button" id="explode_button" value="Expand Nodes" onclick="explode_graph()" style='padding:5px;max-height:35px;' />
+                                <input type="button" id="explode_button" value="Expand Nodes" onclick="explode_graph(true)" style='padding:5px;max-height:35px;' />
                             </div>
                         </figcaption>
                     </figure>
@@ -488,10 +488,19 @@ produce_front_matter("Social Computing","Projects");
                         }
 
 
-                        function explode_graph(){
-                            simulation.force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*2.5*1));
-                            simulation.alphaTarget(0.05).restart();
-                            document.getElementById("explode_button").disabled = true;
+                        function explode_graph(use_switch){
+                            if(use_switch == true){
+                                simulation.force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*2.5*1));
+                                simulation.alphaTarget(0.3).restart();
+                                document.getElementById("explode_button").value = "Retract Nodes";
+                                document.getElementById("explode_button").setAttribute("onclick","explode_graph(false)");
+                            }else{
+                                simulation.force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*.5*1));
+                                simulation.alphaTarget(0.3).restart();
+                                document.getElementById("explode_button").value = "Expand Nodes";
+                                document.getElementById("explode_button").setAttribute("onclick","explode_graph(true)");
+                            }
+                            setTimeout(function(){simulation.alphaTarget(0).restart();},3000);
                         }
 
 
@@ -534,6 +543,8 @@ produce_front_matter("Social Computing","Projects");
                                 slider_value = slider.value;
                                 document.getElementById('nodeSliderVal').innerHTML = slider_value
                                 kickoff(slider.value,.5,col_func,kickoff_array[String(slider.value)]);
+                                document.getElementById("explode_button").value = "Expand Nodes";
+                                document.getElementById("explode_button").setAttribute("onclick","explode_graph(true)");
                             }
                         }
 
@@ -547,6 +558,8 @@ produce_front_matter("Social Computing","Projects");
                             kickoff_switch = true;
                             document.getElementById("explode_button").disabled = false;
                             document.getElementById('confirm_label').style.color = "#c4c9d4";
+                            document.getElementById("explode_button").value = "Expand Nodes";
+                            document.getElementById("explode_button").setAttribute("onclick","explode_graph(true)");
                         }
 
                         var isMobile = window.matchMedia || window.msMatchMedia;
