@@ -371,7 +371,7 @@ produce_front_matter("Social Computing","Projects");
                             </div>
                                 <input type="range" id="node_range" value="6" min="2" max="16" style='width:95%;accent-color:grey;margin-bottom:5px;' oninput='slider_kickoff()'/>
                             <div id='confirm_wrapper' style='display:none;align-items:flex-starts;gap:10px;justify-content:space-between;flex-wrap:wrap;'>
-                                <label for="" style='text-align:start;max-width:80%'>
+                                <label id="confirm_label" for="" style='text-align:start;max-width:80%'>
                                     <strong>Warning:</strong> Increasing node count beyond this threshold requires greater system resources. Only do so if device has adequate memory and cpu.
                                 </label>
                                 <input type="button" id="confirm_button" style='padding:5px;flex-grow:1;max-height:35px;' value="Proceed" onclick='button_kickoff()' />
@@ -520,10 +520,12 @@ produce_front_matter("Social Computing","Projects");
                                 kickoff_switch = false;
                                 document.getElementById('confirm_wrapper').style.display = "flex";
                                 document.getElementById('confirm_button').disabled = false;
+                                document.getElementById("confirm_label").style.color = '#7b869d';
                                 document.getElementById('nodeSliderVal').innerHTML = slider_value + " -> " + slider.value;
                             }else{
                                 kickoff_switch = true;
                                 document.getElementById('confirm_button').disabled = true;
+                                document.getElementById('confirm_label').style.color = "#c4c9d4";
                             }
 
                             if(kickoff_switch == true){
@@ -544,6 +546,7 @@ produce_front_matter("Social Computing","Projects");
                             document.getElementById('confirm_button').disabled = true;
                             kickoff_switch = true;
                             document.getElementById("explode_button").disabled = false;
+                            document.getElementById('confirm_label').style.color = "#c4c9d4";
                         }
 
                         var isMobile = window.matchMedia || window.msMatchMedia;
