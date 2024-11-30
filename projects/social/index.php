@@ -355,8 +355,8 @@ produce_front_matter("Social Computing","Projects");
                         <figcaption>
                             Figure 16: Dynamic representation of the small-world networks. Mousing over a node will report the inbound connection count for each node. Nodes can be dragged to be moved around.
                         </figcaption>
-                        <select name='network_selector' id ='network_selector' disabled>
-                            <option value='reddit'>Social Network<option>
+                        <select name='network_selector' id ='network_selector' onchange="change_graph(this.value)">
+                            <option value='reddit'>Social Network</option>
                             <option value='random'>Randomized Network</option>
                         </select>
                         <div id='social_graph_container'>
@@ -387,12 +387,12 @@ produce_front_matter("Social Computing","Projects");
 
                     <script src="<?php echo $relative_path ?>js/d3.v7.min.js"></script>
                     <script src="social_dataset.js"></script>
+                    <script src="random_dataset.js"></script>
 
                     <script>
                         var width = 1048;
                         var height = 800;
                         var set_color = d3.scaleLog([6,60,144],["brown","orange","red"]);
-
                         var links;
                         var nodes;
                         var simulation;
@@ -416,6 +416,8 @@ produce_front_matter("Social Computing","Projects");
                             "15": -95,
                             "16": -105
                         }
+
+                        var data = socialdata;
 
                         function kickoff(filter,link_strength,collision_strength,force_strength){
                             var svg = d3.select('svg');
@@ -567,6 +569,29 @@ produce_front_matter("Social Computing","Projects");
                             explode_button.setAttribute("onclick","explode_graph(true)");
                         }
 
+                        function change_graph(graph){
+                            if(graph == "reddit"){
+                                data = socialdata;
+                                if(isMobile){
+                                    node_threshold = 16;
+                                }else{
+                                    node_threshold = 6;
+                                }
+                                document.getElementById("node_range").max = 16;
+                            }else if(graph == "random"){
+                                data = randomdata;
+                                if(isMobile){
+                                    node_threshold = 6;
+                                }else{
+                                    node_threshold = 5;
+                                }
+                                document.getElementById("node_range").max = 9;
+                            }
+                            prime_svg();
+                            kickoff(node_threshold,.5,col_func,kickoff_array[String(node_threshold)]);
+                            document.getElementById('nodeSliderVal').innerHTML = node_threshold;
+                            document.getElementById('node_range').value = node_threshold;
+                        }
                         var isMobile = window.matchMedia || window.msMatchMedia;
                         isMobile = isMobile("(pointer:coarse)").matches;
 
