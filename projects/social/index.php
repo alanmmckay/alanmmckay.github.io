@@ -578,6 +578,7 @@ produce_front_matter("Social Computing","Projects");
                                     node_threshold = 6;
                                 }
                                 document.getElementById("node_range").max = 16;
+                                document.getElementById("node_range").style['width'] = "95%";
                             }else if(graph == "random"){
                                 data = randomdata;
                                 if(isMobile){
@@ -586,6 +587,7 @@ produce_front_matter("Social Computing","Projects");
                                     node_threshold = 5;
                                 }
                                 document.getElementById("node_range").max = 9;
+                                document.getElementById("node_range").style['width'] = "53%";
                             }
                             prime_svg();
                             kickoff(node_threshold,.5,col_func,kickoff_array[String(node_threshold)]);
