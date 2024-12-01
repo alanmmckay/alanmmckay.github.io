@@ -58,7 +58,7 @@ produce_front_matter("Social Computing","Projects");
                     <hr>
                     </section>
                     <header>
-                        <h1>Project: Social Computing</h1>
+                        <h1>Data Science: Social Computing</h1>
                     </header>
                     <p>
                         Consider a dataset which describes interactions between Reddit users for two different subreddits during the span of a specific month.
@@ -352,9 +352,6 @@ produce_front_matter("Social Computing","Projects");
                     </p>
                     <hr>
                     <figure id='force_graph_social'>
-                        <figcaption>
-                            Figure 16: Dynamic representation of the small-world networks. Mousing over a node will report the inbound connection count for each node. Nodes can be dragged to be moved around.
-                        </figcaption>
                         <div style="color:#7b869d;">
                             <label for="network_selector" style="display:inline-block;">Select Network:</label>
                             <select name='network_selector' id ='network_selector' onchange="change_graph(this.value)" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
@@ -371,7 +368,7 @@ produce_front_matter("Social Computing","Projects");
                                 <label for="node_range" style='text-align:start'>
                                     Node Range: (lower value increases amount of nodes)
                                 </label>
-                                <p style='margin:0px;min-width:100px'>Value: <span id='nodeSliderVal'> </span></p>
+                                <p style='margin:0px;min-width:115px'>Value: <span id='nodeSliderVal'> </span></p>
                             </div>
                                 <input type="range" id="node_range" value="6" min="2" max="16" style='width:95%;accent-color:grey;margin-bottom:5px;' oninput='slider_kickoff()'/>
                             <div id='confirm_wrapper' style='display:none;align-items:flex-starts;gap:10px;justify-content:space-between;flex-wrap:wrap;'>
@@ -387,8 +384,12 @@ produce_front_matter("Social Computing","Projects");
                                 <input type="button" id="explode_button" value="Expand Nodes" onclick="explode_graph(true)" style='padding:5px;max-height:35px;' />
                             </div>
                         </div>
+                        <figcaption>
+                            Figure 16: Dynamic representation of the small-world networks. Mousing over a node will report the inbound connection count for each node. Nodes can be dragged to be moved around.
+                        </figcaption>
                     </figure>
-
+                    <hr>
+                    <!-- 8129 -->
                     <script src="<?php echo $relative_path ?>js/d3.v7.min.js"></script>
                     <script src="social_dataset.js"></script>
                     <script src="random_dataset.js"></script>
