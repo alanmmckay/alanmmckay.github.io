@@ -355,7 +355,8 @@ produce_front_matter("Social Computing","Projects");
                         <figcaption>
                             Figure 16: Dynamic representation of the small-world networks. Mousing over a node will report the inbound connection count for each node. Nodes can be dragged to be moved around.
                         </figcaption>
-                        <select name='network_selector' id ='network_selector' onchange="change_graph(this.value)">
+                        <label for="network_selector" style="color:#7b869d;">Select Network:</label>
+                        <select name='network_selector' id ='network_selector' onchange="change_graph(this.value)" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;">
                             <option value='reddit'>Social Network</option>
                             <option value='random'>Randomized Network</option>
                         </select>
@@ -586,8 +587,8 @@ produce_front_matter("Social Computing","Projects");
                                 }else{
                                     node_threshold = 5;
                                 }
-                                document.getElementById("node_range").max = 9;
-                                document.getElementById("node_range").style['width'] = "53%";
+                                document.getElementById("node_range").max = 10;
+                                document.getElementById("node_range").style['width'] = "60%";
                             }
                             prime_svg();
                             kickoff(node_threshold,.5,col_func,kickoff_array[String(node_threshold)]);
