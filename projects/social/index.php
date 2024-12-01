@@ -571,6 +571,13 @@ produce_front_matter("Social Computing","Projects");
                         }
 
                         function change_graph(graph){
+                            slider = document.getElementById('node_range');
+                            if(kickoff_switch == false){
+                                old_threshold = node_threshold;
+                            }else{
+                                old_threshold = slider.value;
+                            }
+                            kickoff_switch = true;
                             if(graph == "reddit"){
                                 data = socialdata;
                                 if(isMobile){
@@ -578,8 +585,9 @@ produce_front_matter("Social Computing","Projects");
                                 }else{
                                     node_threshold = 6;
                                 }
-                                document.getElementById("node_range").max = 16;
-                                document.getElementById("node_range").style['width'] = "95%";
+                                slider.max = 16;
+                                slider.style['width'] = "95%";
+                                kickoff_val = Math.min(old_threshold,16);
                             }else if(graph == "random"){
                                 data = randomdata;
                                 if(isMobile){
@@ -587,13 +595,14 @@ produce_front_matter("Social Computing","Projects");
                                 }else{
                                     node_threshold = 5;
                                 }
-                                document.getElementById("node_range").max = 10;
-                                document.getElementById("node_range").style['width'] = "60%";
+                                slider.max = 10;
+                                slider.style['width'] = "60%";
+                                kickoff_val = Math.min(old_threshold,10);
                             }
                             prime_svg();
-                            kickoff(node_threshold,.5,col_func,kickoff_array[String(node_threshold)]);
-                            document.getElementById('nodeSliderVal').innerHTML = node_threshold;
-                            document.getElementById('node_range').value = node_threshold;
+                            kickoff(kickoff_val,.5,col_func,kickoff_array[String(kickoff_val)]);
+                            document.getElementById('nodeSliderVal').innerHTML = kickoff_val;
+                            slider.value = kickoff_val;
                         }
                         var isMobile = window.matchMedia || window.msMatchMedia;
                         isMobile = isMobile("(pointer:coarse)").matches;
