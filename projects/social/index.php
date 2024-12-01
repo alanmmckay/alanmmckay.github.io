@@ -355,15 +355,18 @@ produce_front_matter("Social Computing","Projects");
                         <figcaption>
                             Figure 16: Dynamic representation of the small-world networks. Mousing over a node will report the inbound connection count for each node. Nodes can be dragged to be moved around.
                         </figcaption>
-                        <label for="network_selector" style="color:#7b869d;">Select Network:</label>
-                        <select name='network_selector' id ='network_selector' onchange="change_graph(this.value)" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;">
-                            <option value='reddit'>Social Network</option>
-                            <option value='random'>Randomized Network</option>
-                        </select>
+                        <div style="color:#7b869d;">
+                            <label for="network_selector" style="display:inline-block;">Select Network:</label>
+                            <select name='network_selector' id ='network_selector' onchange="change_graph(this.value)" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
+                                <option value='reddit'>Social Network</option>
+                                <option value='random'>Randomized Network</option>
+                            </select>
+                            <p id='node_counter' style='display:block;margin:0px;text-align:start;'></p>
+                        </div>
                         <div id='social_graph_container'>
                             <svg viewBox="0 0 1048 800" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                         </div>
-                        <figcaption>
+                        <div style="color:#7b869d;">
                             <div style='display:flex;align-items:flex-end;gap:15px;justify-content:space-between'>
                                 <label for="node_range" style='text-align:start'>
                                     Node Range: (lower value increases amount of nodes)
@@ -383,7 +386,7 @@ produce_front_matter("Social Computing","Projects");
                                 </label>
                                 <input type="button" id="explode_button" value="Expand Nodes" onclick="explode_graph(true)" style='padding:5px;max-height:35px;' />
                             </div>
-                        </figcaption>
+                        </div>
                     </figure>
 
                     <script src="<?php echo $relative_path ?>js/d3.v7.min.js"></script>
@@ -553,6 +556,8 @@ produce_front_matter("Social Computing","Projects");
                                 explode_button = document.getElementById("explode_button");
                                 explode_button.value = "Expand Nodes";
                                 explode_button.setAttribute("onclick","explode_graph(true)");
+
+                                document.getElementById("node_counter").innerHTML = String(nodes.length) + " nodes with inbound links >= "+String(slider.value);
                             }
                         }
 
@@ -568,6 +573,8 @@ produce_front_matter("Social Computing","Projects");
                             explode_button = document.getElementById("explode_button");
                             explode_button.value = "Expand Nodes";
                             explode_button.setAttribute("onclick","explode_graph(true)");
+
+                            document.getElementById("node_counter").innerHTML = String(nodes.length) + " nodes with inbound links >= "+String(slider.value);
                         }
 
                         function change_graph(graph){
@@ -603,6 +610,8 @@ produce_front_matter("Social Computing","Projects");
                             kickoff(kickoff_val,.5,col_func,kickoff_array[String(kickoff_val)]);
                             document.getElementById('nodeSliderVal').innerHTML = kickoff_val;
                             slider.value = kickoff_val;
+
+                            document.getElementById("node_counter").innerHTML = String(nodes.length) + " nodes with inbound links >= "+String(kickoff_val);
                         }
                         var isMobile = window.matchMedia || window.msMatchMedia;
                         isMobile = isMobile("(pointer:coarse)").matches;
@@ -617,6 +626,8 @@ produce_front_matter("Social Computing","Projects");
                         document.getElementById('nodeSliderVal').innerHTML = node_threshold;
                         document.getElementById('node_range').value = node_threshold;
                         kickoff(node_threshold,.5,col_func,kickoff_array[String(node_threshold)]);
+
+                        document.getElementById("node_counter").innerHTML = String(nodes.length) + " nodes with inbound links >= "+String(node_threshold);
                     </script>
 
                     <section class='info'>
