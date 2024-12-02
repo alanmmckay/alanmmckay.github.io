@@ -370,7 +370,7 @@ produce_front_matter("Social Computing","Projects");
                                 </label>
                                 <p style='margin:0px;min-width:115px'>Value: <span id='nodeSliderVal'> </span></p>
                             </div>
-                                <input type="range" id="node_range" value="6" min="2" max="16" style='width:95%;accent-color:grey;margin-bottom:5px;' oninput='slider_kickoff()'/>
+                                <input type="range" id="node_range" value="6" min="1" max="16" style='width:95%;accent-color:grey;margin-bottom:5px;' oninput='slider_kickoff()'/>
                             <div id='confirm_wrapper' style='display:none;align-items:flex-starts;gap:10px;justify-content:space-between;flex-wrap:wrap;'>
                                 <label id="confirm_label" for="" style='text-align:start;max-width:80%'>
                                     <strong>Warning:</strong> Increasing node count beyond this threshold requires greater system resources. Only do so if device has adequate memory and cpu.
@@ -405,6 +405,8 @@ produce_front_matter("Social Computing","Projects");
                         var node;
 
                         var kickoff_array = {
+                            "0":-2,
+                            "1":-2,
                             "2": -5,
                             "3": -7,
                             "4": -10,
@@ -428,6 +430,8 @@ produce_front_matter("Social Computing","Projects");
                             var svg = d3.select('svg');
                             links = data.links.filter(d => (d.source_strength >= filter && d.target_strength >= filter)).map(d => ({...d}));
                             nodes = data.nodes.filter(d => d.inbound >= filter).map(d => ({...d}));
+
+                            // console.log(String(filter)+": "+String(data.nodes.filter(d => d.inbound == filter).map(d => ({...d})).length));
 
                             simulation = d3.forceSimulation(nodes)
                             .force("charge", d3.forceManyBody().strength(force_strength))
@@ -558,7 +562,7 @@ produce_front_matter("Social Computing","Projects");
                                 explode_button.value = "Expand Nodes";
                                 explode_button.setAttribute("onclick","explode_graph(true)");
 
-                                document.getElementById("node_counter").innerHTML = String(nodes.length) + " nodes with inbound links >= "+String(slider.value);
+                                document.getElementById("node_counter").innerHTML = String(nodes.length) + " node(s) with inbound links >= "+String(slider.value);
                             }
                         }
 
@@ -629,8 +633,76 @@ produce_front_matter("Social Computing","Projects");
                         kickoff(node_threshold,.5,col_func,kickoff_array[String(node_threshold)]);
 
                         document.getElementById("node_counter").innerHTML = String(nodes.length) + " nodes with inbound links >= "+String(node_threshold);
+
                     </script>
 
+                    <h4>Observable properties</h4>
+                    <p>
+                        An immediate observation is the fact the range slider in the above figure restricts access to the graphs containing all nodes. This was primarily done as a measure to save system resources; the average browser environment is not optimized to perform the calculations needed to render all 8029 nodes along with 17406 edges.
+                    </p>
+                    <p>
+                        The properties of these universal graphs can be surmised, though. Taking the difference of node count presented with each threshold can be correlated to the set of distribution graphs discussed prior.
+                    </p>
+                    <p>
+                        Consider the following node counts sorted by their inbound edge quantities for the social network:
+                    </p>
+                    <ul>
+                        <li>
+                            Exactly 1 inbound edge: 3029 nodes
+                        </li>
+                        <li>
+                            Exactly 2 inbound edges: 1225 nodes
+                        </li>
+                        <li>
+                            Exactly 3 inbound edges: 632 nodes
+                        </li>
+                        <li>
+                            Exactly 4 inbound edges: 368 nodes
+                        </li>
+                        <li>
+                            etc
+                        </li>
+                    </ul>
+                    <p>
+                        Here, the distribution pattern shown in figures 2 and 5 are confirmed such that the edge count is continually decreasing at a rate that conforms to the power law. This can be contrasted to the edge quantities for the nodes contained in the randomly generated network:
+                    </p>
+                    <ul>
+                        <li>
+                            Exactly 1 inbound edge: 1978 nodes
+                        </li>
+                        <li>
+                            Exactly 2 inbound edges: 2242 nodes
+                        </li>
+                        <li>
+                            Exactly 3 inbound edges: 1537 nodes
+                        </li>
+                        <li>
+                            Exactly 4 inbound edges:  1377 nodes
+                        </li>
+                        <li>
+                            etc
+                        </li>
+                    </ul>
+                    <p>
+                        These values also conform to the distribution graphs discussed prior. The value associated with each tier of distribution increases and then starts decreasing at a lesser rate than the graphs governed by the power-law. Node counts are more evenly spread out among these buckets until a steep fallout at the tail.
+                    </p>
+                    <p>
+                        Contrasting the tails between both networks also highlights the difference in distribution. The randomly generated network contains only 188 nodes with 6 or more inbound edges. This is roughly 2% of the distribution. The remaining 98% is distributed among nodes with 5 or less inbound edges. An equivalent tail occurs within the social network while looking at nodes with 12 or more inbound edges. Going beyond 12, the rate at which nodes are filtered decreases much more slowly. To evaluate the random network's tail from 2% to 0% requires walking the range of edges from 6 inbound edges to 11 - a quantity smaller than the start of the social network's tail. Doing the equivalent requires walking the social network through the range of 12 inbound edges to 144 inbound edges. This gives the social network the long tail property power law distributions are famous for.
+                    </p>
+                    <p>
+                        To illustrate further illustrate six degrees of separation, grabbing a node within the dynamic graph and peeling it from the cluster of nodes it belongs will exhibit two different behaviors between the graph types:
+                    </p>
+                    <ul>
+                        <li>
+                            Within the social network, displacing a node will cause the cluster to shift with it in a manner that maintains a general coherency.
+                        </li>
+                        <li>
+                            Within the randomized network, displacing a node will only cause a micro cluster to shift. This micro cluster unfurls more easily as each node is more likely to be connected to a smaller quantity of nodes. This implies an unfurling action where a singular strand of nodes is peeled from the global group.
+                        </li>
+                    </ul>
+                    <p>
+                        These behaviors imply that it takes less node hops along edges to discover another node within the social network than it does within the randomized network.
+                    </p>
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
