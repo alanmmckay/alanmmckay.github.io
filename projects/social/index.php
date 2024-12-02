@@ -638,13 +638,13 @@ produce_front_matter("Social Computing","Projects");
 
                     <h4>Observable properties</h4>
                     <p>
-                        An immediate observation is the fact the range slider in the above figure restricts access to the graphs containing all nodes. This was primarily done as a measure to save system resources; the average browser environment is not optimized to perform the calculations needed to render all 8029 nodes along with 17406 edges.
+                        An immediate observation is the fact that the range slider in the above figure restricts access to the graphs containing all nodes. This was primarily done as a measure to save system resources; the average browser environment is not optimized to perform the calculations needed to render all 8029 nodes along with 17406 edges.
                     </p>
                     <p>
                         The properties of these universal graphs can be surmised, though. Taking the difference of node count presented with each threshold can be correlated to the set of distribution graphs discussed prior.
                     </p>
                     <p>
-                        Consider the following node counts sorted by their inbound edge quantities for the social network:
+                        Knowing this, consider the following node counts sorted by their inbound edge quantities for the social network:
                     </p>
                     <ul>
                         <li>
@@ -664,7 +664,7 @@ produce_front_matter("Social Computing","Projects");
                         </li>
                     </ul>
                     <p>
-                        Here, the distribution pattern shown in figures 2 and 5 are confirmed such that the edge count is continually decreasing at a rate that conforms to the power law. This can be contrasted to the edge quantities for the nodes contained in the randomly generated network:
+                        Here, the distribution pattern shown in figures 2 and 5 are confirmed such that the edge count is continually decreasing at a rate that conforms to the power-law. This can be contrasted to the edge quantities for the nodes contained in the randomly generated network:
                     </p>
                     <ul>
                         <li>
@@ -684,13 +684,13 @@ produce_front_matter("Social Computing","Projects");
                         </li>
                     </ul>
                     <p>
-                        These values also conform to the distribution graphs discussed prior. The value associated with each tier of distribution increases and then starts decreasing at a lesser rate than the graphs governed by the power-law. Node counts are more evenly spread out among these buckets until a steep fallout at the tail.
+                        These values also conform to the distribution graphs discussed prior. The value associated with each tier of distribution initially increases and then starts decreasing at a lesser rate than the graphs governed by the power-law. Node counts are more evenly spread out among these buckets until a steep fallout at the tail.
                     </p>
                     <p>
-                        Contrasting the tails between both networks also highlights the difference in distribution. The randomly generated network contains only 188 nodes with 6 or more inbound edges. This is roughly 2% of the distribution. The remaining 98% is distributed among nodes with 5 or less inbound edges. An equivalent tail occurs within the social network while looking at nodes with 12 or more inbound edges. Going beyond 12, the rate at which nodes are filtered decreases much more slowly. To evaluate the random network's tail from 2% to 0% requires walking the range of edges from 6 inbound edges to 11 - a quantity smaller than the start of the social network's tail. Doing the equivalent requires walking the social network through the range of 12 inbound edges to 144 inbound edges. This gives the social network the long tail property power law distributions are famous for.
+                        Contrasting the tails between both networks also highlights a difference in distribution. The randomly generated network contains only 188 nodes with 6 or more inbound edges. This is roughly 2% of the distribution. The remaining 98% is distributed among nodes with 5 or less inbound edges. An equivalent tail occurs within the social network while looking at nodes with 12 or more inbound edges. Going beyond 12, the rate at which nodes are filtered decreases much more slowly. To evaluate the random network's tail from 2% to 0% requires walking the range of edges from 6 inbound edges to 11 - a quantity smaller than the start of the social network's tail. Doing the equivalent requires walking the social network through the range of 12 inbound edges to 144 inbound edges. This gives the social network the long tail property power-law distributions are famous for.
                     </p>
                     <p>
-                        To illustrate further illustrate six degrees of separation, grabbing a node within the dynamic graph and peeling it from the cluster of nodes it belongs will exhibit two different behaviors between the graph types:
+                        To further illustrate six degrees of separation, grabbing a node within the dynamic graph and peeling it from the node cluster it belongs will exhibit two different behaviors between the graph types:
                     </p>
                     <ul>
                         <li>
@@ -701,7 +701,7 @@ produce_front_matter("Social Computing","Projects");
                         </li>
                     </ul>
                     <p>
-                        These behaviors imply that it takes less node hops along edges to discover another node within the social network than it does within the randomized network.
+                        These behaviors imply that it takes less node hops along edges to discover another node within the social network than it does within the randomized network. This intuitively describes how the properties of the power-law provides six degrees of separation.
                     </p>
                     <section class='info'>
                         <hr>
@@ -733,7 +733,6 @@ produce_front_matter("Social Computing","Projects");
                                 </ul>
                             </blockquote>
                         </p>
-
                         <p>
                             I feel the need to emphasize on the fact this is for an individual who is genuinely curious. The description of the project as described is ambiguous, but there are metrics listed here that can turn a learning experience into an easy grade. Should this be the case, you are doing yourself as much of a disservice as an instructor who chooses to not provide a new/different dataset.
                         </p>
