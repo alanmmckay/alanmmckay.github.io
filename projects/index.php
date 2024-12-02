@@ -81,12 +81,14 @@ include('../header.php');
                             Exploration of data science methodology to explore and explain social behaviors exhibited within the domain of social media networks.
                         </p>
                         <ul>
-                            <li>Python</li>
-                            <li>Data Science</li>
                             <li>Data ETL</li>
-                            <li>Gephi</li>
-                            <li>MatPlotLib</li>
                             <li>Network Science</li>
+                            <li>MatPlotLib</li>
+                            <li>Gephi</li>
+                            <li>Python</li>
+                            <li>JavaScript</li>
+                            <li>Data Science</li>
+                            <li>D3 Data Visualization</li>
                         </ul>
                     </a>
                     <p>Published 01-03-2024</p>
