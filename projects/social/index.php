@@ -609,7 +609,7 @@ produce_front_matter("Social Computing","Projects");
                                 }
                                 slider.max = 11;
                                 slider.style['width'] = "65%";
-                                kickoff_val = Math.min(old_threshold,10);
+                                kickoff_val = Math.min(old_threshold,11);
                             }
 
                             prime_svg();
