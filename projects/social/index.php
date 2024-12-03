@@ -395,16 +395,19 @@ produce_front_matter("Social Computing","Projects");
                     <script src="random_dataset.js"></script>
 
                     <script>
+                    /* --- Globals: --- */
+                        // svg parameters:
                         var width = 1048;
                         var height = 800;
+
+                        // force graph parameters:
                         var set_color = d3.scaleLog([6,60,144],["brown","orange","red"]);
                         var links;
                         var nodes;
                         var simulation;
                         var link;
                         var node;
-
-                        var kickoff_array = {
+                        var force_array = {
                             "0":-2,
                             "1":-2,
                             "2": -5,
@@ -424,14 +427,11 @@ produce_front_matter("Social Computing","Projects");
                             "16": -105
                         }
 
-                        var data = socialdata;
-
+                    /* --- Function to create force graph within existing svg: --- */
                         function kickoff(filter,link_strength,collision_strength,force_strength){
-                            var svg = d3.select('svg');
+                            let svg = d3.select('svg');
                             links = data.links.filter(d => (d.source_strength >= filter && d.target_strength >= filter)).map(d => ({...d}));
                             nodes = data.nodes.filter(d => d.inbound >= filter).map(d => ({...d}));
-
-                            // console.log(String(filter)+": "+String(data.nodes.filter(d => d.inbound == filter).map(d => ({...d})).length));
 
                             simulation = d3.forceSimulation(nodes)
                             .force("charge", d3.forceManyBody().strength(force_strength))
@@ -494,11 +494,7 @@ produce_front_matter("Social Computing","Projects");
                             node.call(drag(simulation));
                         }
 
-                        var col_func = function(obj){
-                            return (obj.inbound / 4)+3;
-                        }
-
-
+                    /* --- Function to expand and retract link strength for force graph --- */
                         function explode_graph(use_switch){
                             if(use_switch == true){
                                 simulation.force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*2.5*1));
@@ -514,8 +510,9 @@ produce_front_matter("Social Computing","Projects");
                             setTimeout(function(){simulation.alphaTarget(0).restart();},3000);
                         }
 
-
+                    /* --- Clears and replaces existing svg element for new force graph --- */
                         function prime_svg(){
+                            // --- Wipe existing svg element
                             node.remove();
                             link.remove();
                             node = false;
@@ -523,8 +520,9 @@ produce_front_matter("Social Computing","Projects");
                             nodes = false;
                             links = false;
                             simulation = false;
-
                             document.getElementsByTagName("svg")[0].remove();
+
+                            // --- Create replacement svg element
                             let new_svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                             new_svg.setAttribute("viewBox","0 0 1048 800");
                             new_svg.setAttribute("preserveAspectRatio","xMidYMid meet");
@@ -532,7 +530,7 @@ produce_front_matter("Social Computing","Projects");
                             document.getElementById("social_graph_container").appendChild(new_svg);
                         }
 
-                        var slider_value;
+                    /* --- Handler for the kickoff function to interact with the range slider --- */
                         var kickoff_switch = true;
                         function slider_kickoff(){
 
@@ -557,7 +555,7 @@ produce_front_matter("Social Computing","Projects");
                                 prime_svg();
                                 slider_value = slider.value;
                                 value_indicator.innerHTML = slider_value
-                                kickoff(slider.value,.5,col_func,kickoff_array[String(slider.value)]);
+                                kickoff(slider.value,.5,col_func,force_array[String(slider.value)]);
                                 explode_button = document.getElementById("explode_button");
                                 explode_button.value = "Expand Nodes";
                                 explode_button.setAttribute("onclick","explode_graph(true)");
@@ -566,12 +564,13 @@ produce_front_matter("Social Computing","Projects");
                             }
                         }
 
+                    /* --- Handler for kickoff function to interact with the confirmation button --- */
                         function button_kickoff(){
                             prime_svg();
                             slider = document.getElementById('node_range');
                             slider_value = slider.value;
                             document.getElementById('nodeSliderVal').innerHTML = slider_value
-                            kickoff(slider.value,.5,col_func,kickoff_array[String(slider.value)]);
+                            kickoff(slider.value,.5,col_func,force_array[String(slider.value)]);
                             document.getElementById('confirm_button').disabled = true;
                             kickoff_switch = true;
                             document.getElementById('confirm_label').style.color = "#c4c9d4";
@@ -582,6 +581,7 @@ produce_front_matter("Social Computing","Projects");
                             document.getElementById("node_counter").innerHTML = String(nodes.length) + " nodes with inbound links >= "+String(slider.value);
                         }
 
+                    /* Handler for the kickoff function to interact with the dropdown menu */
                         function change_graph(graph){
                             slider = document.getElementById('node_range');
                             if(kickoff_switch == false){
@@ -607,17 +607,20 @@ produce_front_matter("Social Computing","Projects");
                                 }else{
                                     node_threshold = 5;
                                 }
-                                slider.max = 10;
-                                slider.style['width'] = "60%";
+                                slider.max = 11;
+                                slider.style['width'] = "65%";
                                 kickoff_val = Math.min(old_threshold,10);
                             }
+
                             prime_svg();
-                            kickoff(kickoff_val,.5,col_func,kickoff_array[String(kickoff_val)]);
+                            kickoff(kickoff_val,.5,col_func,force_array[String(kickoff_val)]);
                             document.getElementById('nodeSliderVal').innerHTML = kickoff_val;
                             slider.value = kickoff_val;
 
                             document.getElementById("node_counter").innerHTML = String(nodes.length) + " nodes with inbound links >= "+String(kickoff_val);
                         }
+
+                    /* --- Logic to create initial graph --- */
                         var isMobile = window.matchMedia || window.msMatchMedia;
                         isMobile = isMobile("(pointer:coarse)").matches;
 
@@ -627,12 +630,18 @@ produce_front_matter("Social Computing","Projects");
                             var node_threshold = 6;
                         }
 
-                        slider_value = node_threshold;
-                        document.getElementById('nodeSliderVal').innerHTML = node_threshold;
-                        document.getElementById('node_range').value = node_threshold;
-                        kickoff(node_threshold,.5,col_func,kickoff_array[String(node_threshold)]);
+                        var data = socialdata; //socialdata  is declared in script-tag import of social_dataset.js
 
-                        document.getElementById("node_counter").innerHTML = String(nodes.length) + " nodes with inbound links >= "+String(node_threshold);
+                        var col_func = function(obj){ //passed as an argument to kickoff
+                            return (obj.inbound / 4)+3;
+                        }
+
+                        var slider_value = node_threshold;
+                        document.getElementById('nodeSliderVal').innerHTML = slider_value;
+                        document.getElementById('node_range').value = slider_value;
+                        kickoff(slider_value,.5,col_func,force_array[String(slider_value)]);
+
+                        document.getElementById("node_counter").innerHTML = String(nodes.length) + " nodes with inbound links >= "+String(slider_value);
 
                     </script>
 
