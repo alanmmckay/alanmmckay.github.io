@@ -6,7 +6,7 @@ $title = 'Alan McKay | Writing | Statement of Purpose';
 
 $meta['title'] = 'Alan McKay | Statement of Purpose';
 
-$meta['description'] = "The following is the statement of purpose I wrote to pursue a Master's of Computer Science at the University of Iowa. The primary goal of this statement was...";
+$meta['description'] = "The following is the statement of purpose I wrote to pursue a Master&apos;s of Computer Science at the University of Iowa. The primary goal of this statement was...";
 
 $meta['url'] = 'https://alanmckay.blog/writings/statement/';
 

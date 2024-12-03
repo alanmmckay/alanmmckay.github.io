@@ -58,7 +58,7 @@ produce_front_matter("Social Computing","Projects");
                     <hr>
                     </section>
                     <header>
-                        <h1>Project: Social Computing</h1>
+                        <h1>Data Science: Social Computing</h1>
                     </header>
                     <p>
                         Consider a dataset which describes interactions between Reddit users for two different subreddits during the span of a specific month.
@@ -337,6 +337,381 @@ produce_front_matter("Social Computing","Projects");
                     <p>
                         The observation of the paragraph above helps us see the property of the complex network given by the Reddit dataset is a scale-free network; a means to visually support this assertion.
                     </p>
+                    <h3>Six degrees of separation</h3>
+                    <p>
+                        Six degrees of separation is the term that encapsulates the idea that all individuals are six or fewer social connections away from each other. The network science discussed on this page acts as a means to validate this. The contrast of the Reddit social network graph and the graph of randomly generated connections also acts as evidence. The average distance between nodes will be higher in a randomized graph, leading to the assertion that there are more than six degrees of separation in this context.
+                    </p>
+                    <p>
+                        This can easily be illustrated in the following figure which displays an dynamic graph taken from the datasets discussed thus far. The figure contains an option to switch between these categories of graphs and a slider which a threshold can be set to determine how many nodes are displayed on the graph. This threshold indicates the minimum amount of inbound connections to a node - the higher the value set by the slider, a lesser amount of nodes will be displayed.
+                    </p>
+                    <p>
+                        While using these graphs, one can mouse over a given node to report the user name and inbound connections. A button is also given to allow a user to expand the distance between nodes. This can be useful to unclutter the space. The user also has the ability to drag each node within the graph.
+                    </p>
+                    <p>
+                        The initial threshold set for mobile users will be set to 16 inbound connections. The initial threshold for desktop users will be 6. Setting the threshold below these values will prompt the user for confirmation. These graphs can be CPU and memory intensive as the node and edge count increases which may impact performance.
+                    </p>
+                    <hr>
+                    <figure id='force_graph_social'>
+                        <div style="color:#7b869d;">
+                            <label for="network_selector" style="display:inline-block;">Select Network:</label>
+                            <select name='network_selector' id ='network_selector' onchange="change_graph(this.value)" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
+                                <option value='reddit'>Social Network</option>
+                                <option value='random'>Randomized Network</option>
+                            </select>
+                            <p id='node_counter' style='display:block;margin:0px;text-align:start;'></p>
+                        </div>
+                        <div id='social_graph_container'>
+                            <svg viewBox="0 0 1048 800" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                        </div>
+                        <div style="color:#7b869d;">
+                            <div style='display:flex;align-items:flex-end;gap:15px;justify-content:space-between'>
+                                <label for="node_range" style='text-align:start'>
+                                    Node Range: (lower value increases amount of nodes)
+                                </label>
+                                <p style='margin:0px;min-width:115px'>Value: <span id='nodeSliderVal'> </span></p>
+                            </div>
+                                <input type="range" id="node_range" value="6" min="1" max="16" style='width:95%;accent-color:grey;margin-bottom:5px;' oninput='slider_kickoff()'/>
+                            <div id='confirm_wrapper' style='display:none;align-items:flex-starts;gap:10px;justify-content:space-between;flex-wrap:wrap;'>
+                                <label id="confirm_label" for="" style='text-align:start;max-width:80%'>
+                                    <strong>Warning:</strong> Increasing node count beyond this threshold requires greater system resources. Only do so if device has adequate memory and cpu.
+                                </label>
+                                <input type="button" id="confirm_button" style='padding:5px;flex-grow:1;max-height:35px;' value="Proceed" onclick='button_kickoff()' />
+                            </div>
+                            <div style='display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px'>
+                                <label for="" style='text-align:start;max-width:80%;'>
+                                    Expand gap between nodes:
+                                </label>
+                                <input type="button" id="explode_button" value="Expand Nodes" onclick="explode_graph(true)" style='padding:5px;max-height:35px;' />
+                            </div>
+                        </div>
+                        <figcaption>
+                            Figure 16: Dynamic representation of the small-world networks. Mousing over a node will report the inbound connection count for each node. Nodes can be dragged to be moved around.
+                        </figcaption>
+                    </figure>
+                    <hr>
+                    <!-- 8129 -->
+                    <script src="<?php echo $relative_path ?>js/d3.v7.min.js"></script>
+                    <script src="social_dataset.js"></script>
+                    <script src="random_dataset.js"></script>
+
+                    <script>
+                    /* --- Globals: --- */
+                        // svg parameters:
+                        var width = 1048;
+                        var height = 800;
+
+                        // force graph parameters:
+                        var set_color = d3.scaleLog([6,60,144],["brown","orange","red"]);
+                        var links;
+                        var nodes;
+                        var simulation;
+                        var link;
+                        var node;
+                        var force_array = {
+                            "0":-2,
+                            "1":-2,
+                            "2": -5,
+                            "3": -7,
+                            "4": -10,
+                            "5": -15,
+                            "6": -25,
+                            "7": -30,
+                            "8": -35,
+                            "9": -45,
+                            "10": -55,
+                            "11": -60,
+                            "12": -65,
+                            "13": -75,
+                            "14": -85,
+                            "15": -95,
+                            "16": -105
+                        }
+
+                    /* --- Function to create force graph within existing svg: --- */
+                        function kickoff(filter,link_strength,collision_strength,force_strength){
+                            let svg = d3.select('svg');
+                            links = data.links.filter(d => (d.source_strength >= filter && d.target_strength >= filter)).map(d => ({...d}));
+                            nodes = data.nodes.filter(d => d.inbound >= filter).map(d => ({...d}));
+
+                            simulation = d3.forceSimulation(nodes)
+                            .force("charge", d3.forceManyBody().strength(force_strength))
+                            .force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*link_strength))
+                            .force("collide",d3.forceCollide(d => collision_strength(d)))
+                            .force("center", d3.forceCenter(width/2,height/2))
+                            .force("x", d3.forceX())
+                            .force("y", d3.forceY())
+                            .alphaTarget(0.0);
+
+                            link = svg.append("g")
+                            .attr("stroke", "#999")
+                            .attr("stroke-opacity", 0.6)
+                            .selectAll("line")
+                            .data(links)
+                            .join("line")
+                            .attr("stroke-width",0.25);
+
+                            node = svg.append("g")
+                            .attr("stroke", "brown")
+                            .attr("stroke-width", 1)
+                            .selectAll("circle")
+                            .data(nodes)
+                            .join("circle")
+                            .attr("r", (d => d.inbound/4))
+                            .attr("fill", d => set_color(d.inbound));
+
+                            node.append("title")
+                            .text(d => "User: " +d.id + ";\nInbound Degree: " + d.inbound + ";");
+
+                            simulation.on("tick", () => {
+                            link
+                                .attr("x1", d => d.source.x)
+                                .attr("y1", d => d.source.y)
+                                .attr("x2", d => d.target.x)
+                                .attr("y2", d => d.target.y);
+
+                            node
+                                .attr("cx", d => d.x)
+                                .attr("cy", d => d.y);
+                            });
+
+                            function drag(simulation) {
+                                function dragstarted(event) {
+                                    if (!event.active) simulation.alphaTarget(0.05).restart();
+                                    event.subject.fx = event.subject.x;
+                                    event.subject.fy = event.subject.y;
+                                }
+                                function dragged(event) {
+                                    event.subject.fx = event.x;
+                                    event.subject.fy = event.y;
+                                }
+                                function dragended(event) {
+                                    if (!event.active) simulation.alphaTarget(0.00).restart();
+                                    event.subject.fx = null;
+                                    event.subject.fy = null;
+                                }
+                                return d3.drag().on('start', dragstarted).on('drag', dragged).on('end', dragended);
+                            }
+                            node.call(drag(simulation));
+                        }
+
+                    /* --- Function to expand and retract link strength for force graph --- */
+                        function explode_graph(use_switch){
+                            if(use_switch == true){
+                                simulation.force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*2.5*1));
+                                simulation.alphaTarget(0.3).restart();
+                                document.getElementById("explode_button").value = "Retract Nodes";
+                                document.getElementById("explode_button").setAttribute("onclick","explode_graph(false)");
+                            }else{
+                                simulation.force("link", d3.forceLink(links).id(d=>d.id).distance(d=>d.strength*.5*1));
+                                simulation.alphaTarget(0.3).restart();
+                                document.getElementById("explode_button").value = "Expand Nodes";
+                                document.getElementById("explode_button").setAttribute("onclick","explode_graph(true)");
+                            }
+                            setTimeout(function(){simulation.alphaTarget(0).restart();},3000);
+                        }
+
+                    /* --- Clears and replaces existing svg element for new force graph --- */
+                        function prime_svg(){
+                            // --- Wipe existing svg element
+                            node.remove();
+                            link.remove();
+                            node = false;
+                            link = false;
+                            nodes = false;
+                            links = false;
+                            simulation = false;
+                            document.getElementsByTagName("svg")[0].remove();
+
+                            // --- Create replacement svg element
+                            let new_svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                            new_svg.setAttribute("viewBox","0 0 1048 800");
+                            new_svg.setAttribute("preserveAspectRatio","xMidYMid meet");
+                            new_svg.setAttribute("style","width:100%;");
+                            document.getElementById("social_graph_container").appendChild(new_svg);
+                        }
+
+                    /* --- Handler for the kickoff function to interact with the range slider --- */
+                        var kickoff_switch = true;
+                        function slider_kickoff(){
+
+                            slider = document.getElementById('node_range');
+                            value_indicator = document.getElementById('nodeSliderVal');
+                            confirmation_button = document.getElementById("confirm_button");
+                            confirmation_label = document.getElementById('confirm_label');
+
+                            if(slider.value < node_threshold){
+                                document.getElementById('confirm_wrapper').style.display = "flex";
+                                kickoff_switch = false;
+                                confirmation_button.disabled = false;
+                                confirmation_label.style.color = '#7b869d';
+                                value_indicator.innerHTML = slider_value + " -> " + slider.value;
+                            }else{
+                                kickoff_switch = true;
+                                confirmation_button.disabled = true;
+                                confirmation_label.style.color = "#c4c9d4";
+                            }
+
+                            if(kickoff_switch == true){
+                                prime_svg();
+                                slider_value = slider.value;
+                                value_indicator.innerHTML = slider_value
+                                kickoff(slider.value,.5,col_func,force_array[String(slider.value)]);
+                                explode_button = document.getElementById("explode_button");
+                                explode_button.value = "Expand Nodes";
+                                explode_button.setAttribute("onclick","explode_graph(true)");
+
+                                document.getElementById("node_counter").innerHTML = String(nodes.length) + " node(s) with inbound links >= "+String(slider.value);
+                            }
+                        }
+
+                    /* --- Handler for kickoff function to interact with the confirmation button --- */
+                        function button_kickoff(){
+                            prime_svg();
+                            slider = document.getElementById('node_range');
+                            slider_value = slider.value;
+                            document.getElementById('nodeSliderVal').innerHTML = slider_value
+                            kickoff(slider.value,.5,col_func,force_array[String(slider.value)]);
+                            document.getElementById('confirm_button').disabled = true;
+                            kickoff_switch = true;
+                            document.getElementById('confirm_label').style.color = "#c4c9d4";
+                            explode_button = document.getElementById("explode_button");
+                            explode_button.value = "Expand Nodes";
+                            explode_button.setAttribute("onclick","explode_graph(true)");
+
+                            document.getElementById("node_counter").innerHTML = String(nodes.length) + " nodes with inbound links >= "+String(slider.value);
+                        }
+
+                    /* Handler for the kickoff function to interact with the dropdown menu */
+                        function change_graph(graph){
+                            slider = document.getElementById('node_range');
+                            if(kickoff_switch == false){
+                                old_threshold = node_threshold;
+                            }else{
+                                old_threshold = slider.value;
+                            }
+                            kickoff_switch = true;
+                            if(graph == "reddit"){
+                                data = socialdata;
+                                if(isMobile){
+                                    node_threshold = 16;
+                                }else{
+                                    node_threshold = 6;
+                                }
+                                slider.max = 16;
+                                slider.style['width'] = "95%";
+                                kickoff_val = Math.min(old_threshold,16);
+                            }else if(graph == "random"){
+                                data = randomdata;
+                                if(isMobile){
+                                    node_threshold = 6;
+                                }else{
+                                    node_threshold = 5;
+                                }
+                                slider.max = 11;
+                                slider.style['width'] = "65%";
+                                kickoff_val = Math.min(old_threshold,10);
+                            }
+
+                            prime_svg();
+                            kickoff(kickoff_val,.5,col_func,force_array[String(kickoff_val)]);
+                            document.getElementById('nodeSliderVal').innerHTML = kickoff_val;
+                            slider.value = kickoff_val;
+
+                            document.getElementById("node_counter").innerHTML = String(nodes.length) + " nodes with inbound links >= "+String(kickoff_val);
+                        }
+
+                    /* --- Logic to create initial graph --- */
+                        var isMobile = window.matchMedia || window.msMatchMedia;
+                        isMobile = isMobile("(pointer:coarse)").matches;
+
+                        if(isMobile){
+                            var node_threshold = 16;
+                        }else{
+                            var node_threshold = 6;
+                        }
+
+                        var data = socialdata; //socialdata  is declared in script-tag import of social_dataset.js
+
+                        var col_func = function(obj){ //passed as an argument to kickoff
+                            return (obj.inbound / 4)+3;
+                        }
+
+                        var slider_value = node_threshold;
+                        document.getElementById('nodeSliderVal').innerHTML = slider_value;
+                        document.getElementById('node_range').value = slider_value;
+                        kickoff(slider_value,.5,col_func,force_array[String(slider_value)]);
+
+                        document.getElementById("node_counter").innerHTML = String(nodes.length) + " nodes with inbound links >= "+String(slider_value);
+
+                    </script>
+
+                    <h4>Observable properties</h4>
+                    <p>
+                        An immediate observation is the fact that the range slider in the above figure restricts access to the graphs containing all nodes. This was primarily done as a measure to save system resources; the average browser environment is not optimized to perform the calculations needed to render all 8029 nodes along with 17406 edges.
+                    </p>
+                    <p>
+                        The properties of these universal graphs can be surmised, though. Taking the difference of node count presented with each threshold can be correlated to the set of distribution graphs discussed prior.
+                    </p>
+                    <p>
+                        Knowing this, consider the following node counts sorted by their inbound edge quantities for the social network:
+                    </p>
+                    <ul>
+                        <li>
+                            Exactly 1 inbound edge: 3029 nodes
+                        </li>
+                        <li>
+                            Exactly 2 inbound edges: 1225 nodes
+                        </li>
+                        <li>
+                            Exactly 3 inbound edges: 632 nodes
+                        </li>
+                        <li>
+                            Exactly 4 inbound edges: 368 nodes
+                        </li>
+                        <li>
+                            etc
+                        </li>
+                    </ul>
+                    <p>
+                        Here, the distribution pattern shown in figures 2 and 5 are confirmed such that the edge count is continually decreasing at a rate that conforms to the power-law. This can be contrasted to the edge quantities for the nodes contained in the randomly generated network:
+                    </p>
+                    <ul>
+                        <li>
+                            Exactly 1 inbound edge: 1978 nodes
+                        </li>
+                        <li>
+                            Exactly 2 inbound edges: 2242 nodes
+                        </li>
+                        <li>
+                            Exactly 3 inbound edges: 1537 nodes
+                        </li>
+                        <li>
+                            Exactly 4 inbound edges:  1377 nodes
+                        </li>
+                        <li>
+                            etc
+                        </li>
+                    </ul>
+                    <p>
+                        These values also conform to the distribution graphs discussed prior. The value associated with each tier of distribution initially increases and then starts decreasing at a lesser rate than the graphs governed by the power-law. Node counts are more evenly spread out among these buckets until a steep fallout at the tail.
+                    </p>
+                    <p>
+                        Contrasting the tails between both networks also highlights a difference in distribution. The randomly generated network contains only 188 nodes with 6 or more inbound edges. This is roughly 2% of the distribution. The remaining 98% is distributed among nodes with 5 or less inbound edges. An equivalent tail occurs within the social network while looking at nodes with 12 or more inbound edges. Going beyond 12, the rate at which nodes are filtered decreases much more slowly. To evaluate the random network's tail from 2% to 0% requires walking the range of edges from 6 inbound edges to 11 - a quantity smaller than the start of the social network's tail. Doing the equivalent requires walking the social network through the range of 12 inbound edges to 144 inbound edges. This gives the social network the long tail property power-law distributions are famous for.
+                    </p>
+                    <p>
+                        To further illustrate six degrees of separation, grabbing a node within the dynamic graph and peeling it from the node cluster it belongs will exhibit two different behaviors between the graph types:
+                    </p>
+                    <ul>
+                        <li>
+                            Within the social network, displacing a node will cause the cluster to shift with it in a manner that maintains a general coherency.
+                        </li>
+                        <li>
+                            Within the randomized network, displacing a node will only cause a micro cluster to shift. This micro cluster unfurls more easily as each node is more likely to be connected to a smaller quantity of nodes. This implies an unfurling action where a singular strand of nodes is peeled from the global group.
+                        </li>
+                    </ul>
+                    <p>
+                        These behaviors imply that it takes less node hops along edges to discover another node within the social network than it does within the randomized network. This intuitively describes how the properties of the power-law provides six degrees of separation.
+                    </p>
                     <section class='info'>
                         <hr>
                         <h3>Concluding notes</h3>
@@ -367,7 +742,6 @@ produce_front_matter("Social Computing","Projects");
                                 </ul>
                             </blockquote>
                         </p>
-
                         <p>
                             I feel the need to emphasize on the fact this is for an individual who is genuinely curious. The description of the project as described is ambiguous, but there are metrics listed here that can turn a learning experience into an easy grade. Should this be the case, you are doing yourself as much of a disservice as an instructor who chooses to not provide a new/different dataset.
                         </p>

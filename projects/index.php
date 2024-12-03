@@ -81,12 +81,14 @@ include('../header.php');
                             Exploration of data science methodology to explore and explain social behaviors exhibited within the domain of social media networks.
                         </p>
                         <ul>
-                            <li>Python</li>
-                            <li>Data Science</li>
                             <li>Data ETL</li>
-                            <li>Gephi</li>
-                            <li>MatPlotLib</li>
                             <li>Network Science</li>
+                            <li>MatPlotLib</li>
+                            <li>Gephi</li>
+                            <li>Python</li>
+                            <li>JavaScript</li>
+                            <li>Data Science</li>
+                            <li>D3 Data Visualization</li>
                         </ul>
                     </a>
                     <p>Published 01-03-2024</p>
@@ -189,7 +191,7 @@ include('../header.php');
                     <p>Published 01-03-2024</p>
                 </div>
                 <div class='writing'>
-                    <a href="protocol/" style='display:inherit;'>
+                    <a href="cup/" style='display:inherit;'>
                         <span> Web Development: Cup of Joe</span>
                         <p>
                             Description of a freelance gig which involved the development of a website for a local coffee shop.

@@ -7,7 +7,7 @@ $title = 'Alan McKay | About';
 
 $meta['title'] = 'Alan McKay | About';
 
-$meta['description'] = "Hi, I'm Alan McKay and this is my personal website - A digital garden with various things that I find important and interesting.";
+$meta['description'] = "Hi, I&apos;m Alan McKay and this is my personal website - A digital garden with various things that I find important and interesting.";
 
 $meta['url'] = 'https://alanmckay.blog/about/';
 
