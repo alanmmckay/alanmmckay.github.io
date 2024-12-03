@@ -91,7 +91,7 @@ include('../header.php');
                             <li>D3 Data Visualization</li>
                         </ul>
                     </a>
-                    <p>Published 01-03-2024</p>
+                    <p>Published 01-03-2024<br>Updated 12-03-2024</p>
                 </div>
                 <div class='writing'>
                     <a href="form/" style='display:inherit;'>
