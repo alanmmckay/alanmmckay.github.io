@@ -362,21 +362,23 @@ produce_front_matter("Social Computing","Projects");
                         </div>
                         <div id='social_graph_container'>
                             <svg viewBox="0 0 1048 800" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                            <div id='range-wrapper' style='position:sticky;bottom:0px;padding-top:10px;padding-bottom:10px;background-color:rgba(255, 255, 255, 0.85);'>
+                                <div id='confirm_wrapper' style='display:none;align-items:flex-starts;gap:10px;justify-content:space-between;flex-wrap:wrap;'>
+                                    <label id="confirm_label" for="" style='text-align:start;max-width:80%'>
+                                        <strong>Warning:</strong> Increasing node count beyond this threshold requires greater system resources. Only do so if device has adequate memory and cpu.
+                                    </label>
+                                    <input type="button" id="confirm_button" style='padding:5px;flex-grow:1;max-height:35px;align-self:center' value="Proceed" onclick='button_kickoff()' />
+                                </div>
+                                <div style='display:flex;align-items:flex-end;gap:15px;justify-content:space-between'>
+                                    <label for="node_range" style='text-align:start'>
+                                        Node Range: (lower value increases amount of nodes)
+                                    </label>
+                                    <p style='margin:0px;min-width:115px'>Value: <span id='nodeSliderVal'> </span></p>
+                                </div>
+                                <input type="range" id="node_range" value="6" min="1" max="16" style='width:95%;accent-color:grey;margin-bottom:5px;' oninput='slider_kickoff()'/>
+                            </div>
                         </div>
                         <div style="color:#7b869d;">
-                            <div style='display:flex;align-items:flex-end;gap:15px;justify-content:space-between'>
-                                <label for="node_range" style='text-align:start'>
-                                    Node Range: (lower value increases amount of nodes)
-                                </label>
-                                <p style='margin:0px;min-width:115px'>Value: <span id='nodeSliderVal'> </span></p>
-                            </div>
-                                <input type="range" id="node_range" value="6" min="1" max="16" style='width:95%;accent-color:grey;margin-bottom:5px;' oninput='slider_kickoff()'/>
-                            <div id='confirm_wrapper' style='display:none;align-items:flex-starts;gap:10px;justify-content:space-between;flex-wrap:wrap;'>
-                                <label id="confirm_label" for="" style='text-align:start;max-width:80%'>
-                                    <strong>Warning:</strong> Increasing node count beyond this threshold requires greater system resources. Only do so if device has adequate memory and cpu.
-                                </label>
-                                <input type="button" id="confirm_button" style='padding:5px;flex-grow:1;max-height:35px;' value="Proceed" onclick='button_kickoff()' />
-                            </div>
                             <div style='display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px'>
                                 <label for="" style='text-align:start;max-width:80%;'>
                                     Expand gap between nodes:
@@ -527,7 +529,7 @@ produce_front_matter("Social Computing","Projects");
                             new_svg.setAttribute("viewBox","0 0 1048 800");
                             new_svg.setAttribute("preserveAspectRatio","xMidYMid meet");
                             new_svg.setAttribute("style","width:100%;");
-                            document.getElementById("social_graph_container").appendChild(new_svg);
+                            document.getElementById("social_graph_container").insertBefore(new_svg,document.getElementById("social_graph_container").children[0]);
                         }
 
                     /* --- Handler for the kickoff function to interact with the range slider --- */
@@ -561,6 +563,10 @@ produce_front_matter("Social Computing","Projects");
                                 explode_button.setAttribute("onclick","explode_graph(true)");
 
                                 document.getElementById("node_counter").innerHTML = String(nodes.length) + " node(s) with inbound links >= "+String(slider.value);
+
+                                if(document.getElementById('range-wrapper').getBoundingClientRect().width <= 500){
+                                    document.getElementById('confirm_wrapper').style['display'] = 'none';
+                                }
                             }
                         }
 
@@ -579,6 +585,10 @@ produce_front_matter("Social Computing","Projects");
                             explode_button.setAttribute("onclick","explode_graph(true)");
 
                             document.getElementById("node_counter").innerHTML = String(nodes.length) + " nodes with inbound links >= "+String(slider.value);
+
+                            if(document.getElementById('range-wrapper').getBoundingClientRect().width <= 500){
+                                document.getElementById('confirm_wrapper').style['display'] = 'none';
+                            }
                         }
 
                     /* Handler for the kickoff function to interact with the dropdown menu */
