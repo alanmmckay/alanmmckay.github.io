@@ -17,6 +17,9 @@ include('../../header.php');
 produce_front_matter("Social Computing","Projects");
 ?>
                     <section class='info'>
+                        <!-- div style='display:flex;justify-content:end;position:sticky;top:0px;height:30px;align-items:center;background-color:rgba(255,255,255,0.95);margin-bottom:-26px;'>
+                            <a href="#main-content">Skip Preface</a>
+                        </div -->
                         <header>
                             <h2>Preface</h2>
                         </header>
@@ -57,7 +60,7 @@ produce_front_matter("Social Computing","Projects");
                         </p>
                     <hr>
                     </section>
-                    <header>
+                    <header id="main-content">
                         <h1>Data Science: Social Computing</h1>
                     </header>
                     <p>
@@ -110,6 +113,66 @@ produce_front_matter("Social Computing","Projects");
                     <p>
                         How are the various degrees distributed? The following figures are indicative of distribution:
                     </p>
+
+                    <figure id='my_datavis'>
+
+                    </figure>
+
+                    <script src="<?php echo $relative_path ?>js/d3.v7.min.js"></script>
+                    <script src=social_distributions.js></script>
+
+                    <script>
+
+                        function create_scatter(dataset,type,element_id,x_domain,y_domain,x_tick_values = [],y_tick_values = []){
+                            var margin = {top: 10, right:30, bottom: 30, left: 60}, width = 600 - margin.left - margin.right, height = 500 - margin.top - margin.bottom;
+
+                            var figure_one = d3.select(element_id)
+                                .append("svg")
+                                .attr("width", width + margin.left + margin.right)
+                                .attr("height", height + margin.top + margin.bottom)
+                                .append("g")
+                                .attr("transform",
+                                    "translate(" + margin.left + "," + margin.top +")");
+
+                            if(type == "log"){
+
+                                var x = d3.scaleLog().domain(x_domain).range([0, width]);
+                                var y = d3.scaleLog().domain(y_domain).range([height,0]);
+
+                                figure_one.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).tickValues(x_tick_values).ticks(10, function(d){return 10 + "^" + Math.round(Math.log(d) / Math.LN10); }));
+                                figure_one.append("g").call(d3.axisLeft(y).tickValues(y_tick_values).ticks(10, function(d){return 10 + "^" + Math.round(Math.log(d) / Math.LN10); }));
+
+                            }else if(type == "linear"){
+
+                                var x = d3.scaleLinear().domain(x_domain).range([0, width]);
+                                var y = d3.scaleLinear().domain(y_domain).range([height,0]);
+                                figure_one.append("g").attr("transform","translate(0," + height + ")").call(d3.axisBottom(x));
+                                figure_one.append("g").call(d3.axisLeft(y));
+
+                            }
+
+                            figure_one.append('g')
+                                .selectAll("dot")
+                                .data(dataset)
+                                .enter()
+                                .append("circle")
+                                .attr("cx", function(d) { return x(d.key);})
+                                .attr("cy", function(d) { return y(d.value/8029)})
+                                .attr("r",4)
+                                .style("fill","blue")
+                                .append("title").text(d => d.value + " node(s) with degree " + d.key + "\nDistribution: " + (d.value/8029).toFixed(4));
+                        }
+
+                        create_scatter(social_dist["k_total"],"log","#my_datavis",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+
+                        create_scatter(social_dist["k_total"],"linear","#my_datavis",[-10,150],[-0.01,0.40]);
+
+
+
+
+                            // node.append("title")
+                            // .text(d => "User: " +d.id + ";\nInbound Degree: " + d.inbound + ";");
+                    </script>
 
                     <div class='fig-col'>
                         <a href='./images/dist-outdeg.webp' target="_blank" rel="noopener noreferrer">
@@ -361,7 +424,7 @@ produce_front_matter("Social Computing","Projects");
                             <p id='node_counter' style='display:block;margin:0px;text-align:start;'></p>
                         </div>
                         <div id='social_graph_container'>
-                            <svg viewBox="0 0 1048 800" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                            <svg id='force-graph-svg' viewBox="0 0 1048 800" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                             <div id='range-wrapper' style='position:sticky;bottom:0px;padding-top:10px;padding-bottom:10px;background-color:rgba(255, 255, 255, 0.85);'>
                                 <div id='confirm_wrapper' style='display:none;align-items:flex-starts;gap:10px;justify-content:space-between;flex-wrap:wrap;'>
                                     <label id="confirm_label" for="" style='text-align:start;max-width:80%'>
@@ -392,7 +455,6 @@ produce_front_matter("Social Computing","Projects");
                     </figure>
                     <hr>
                     <!-- 8129 -->
-                    <script src="<?php echo $relative_path ?>js/d3.v7.min.js"></script>
                     <script src="social_dataset.js"></script>
                     <script src="random_dataset.js"></script>
 
@@ -431,7 +493,7 @@ produce_front_matter("Social Computing","Projects");
 
                     /* --- Function to create force graph within existing svg: --- */
                         function kickoff(filter,link_strength,collision_strength,force_strength){
-                            let svg = d3.select('svg');
+                            let svg = d3.select("#force-graph-svg");
                             links = data.links.filter(d => (d.source_strength >= filter && d.target_strength >= filter)).map(d => ({...d}));
                             nodes = data.nodes.filter(d => d.inbound >= filter).map(d => ({...d}));
 
@@ -522,10 +584,11 @@ produce_front_matter("Social Computing","Projects");
                             nodes = false;
                             links = false;
                             simulation = false;
-                            document.getElementsByTagName("svg")[0].remove();
+                            document.getElementById("force-graph-svg").remove();
 
                             // --- Create replacement svg element
                             let new_svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                            new_svg.setAttribute("id","force-graph-svg");
                             new_svg.setAttribute("viewBox","0 0 1048 800");
                             new_svg.setAttribute("preserveAspectRatio","xMidYMid meet");
                             new_svg.setAttribute("style","width:100%;");
