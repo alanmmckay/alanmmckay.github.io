@@ -130,36 +130,54 @@ produce_front_matter("Social Computing","Projects");
                             }
                         }
                     </script>
+                    <script>
+                        function toggle_scatter_view(switch_element,container_id){
+                            state = switch_element.value;
+                            if(state == 0){
+                                switch_element.value = 1;
+                                document.getElementById(container_id).style["display"] = 'inherit';
+                            }else{
+                                switch_element.value = 0;
+                                document.getElementById(container_id).style["display"] = 'none';
+                            }
+                        }
+                    </script>
 
-                    <div id='social_distributions' style='display:none'>
-                        <select name='random_dist_selector' id ='random_dist_selector' onchange="switch_scatter(this.value,'social_distribution_figures')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
-                            <option value='figure1'>out-degree (k_out)</option>
-                            <option value='figure2'>in-degree (k_in)</option>
-                            <option value='figure3'>total-degree (k_total)</option>
-                        </select>
-                        <div id='social_distribution_figures'>
-                            <figure id='figure1' style=''>
-                                <svg id='scatter1' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                <span style='display:block;width:100%;text-align:center'>
-                                    node degree (k)
-                                </span>
-                            </figure>
-
-                            <figure id='figure2' style='display:none'>
-                                <svg id='scatter2' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                <span style='display:block;width:100%;text-align:center'>
-                                    node degree (k)
-                                </span>
-                            </figure>
-
-                            <figure id='figure3' style='display:none'>
-                                <svg id='scatter3' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                <span style='display:block;width:100%;text-align:center'>
-                                    node degree (k)
-                                </span>
-                            </figure>
+                    <div>
+                        <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
+                            <label for='social_distribution_toggle' style='color:#3b4044'>View Interactive Graphs</label>
+                            <input id='social_distribution_toggle' type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px' onclick='toggle_scatter_view(this,"social_distributions")'
+                            onchange='toggle_scatter_view(this,"social_distributions")'/>
                         </div>
-                    </div>
+                        <div id='social_distributions' style='display:none'>
+                            <select name='random_dist_selector' id ='random_dist_selector' onchange="switch_scatter(this.value,'social_distribution_figures')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
+                                <option value='figure1'>out-degree (k_out)</option>
+                                <option value='figure2'>in-degree (k_in)</option>
+                                <option value='figure3'>total-degree (k_total)</option>
+                            </select>
+                            <div id='social_distribution_figures'>
+                                <figure id='figure1' style=''>
+                                    <svg id='scatter1' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                    <span style='display:block;width:100%;text-align:center'>
+                                        node degree (k)
+                                    </span>
+                                </figure>
+
+                                <figure id='figure2' style='display:none'>
+                                    <svg id='scatter2' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                    <span style='display:block;width:100%;text-align:center'>
+                                        node degree (k)
+                                    </span>
+                                </figure>
+
+                                <figure id='figure3' style='display:none'>
+                                    <svg id='scatter3' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                    <span style='display:block;width:100%;text-align:center'>
+                                        node degree (k)
+                                    </span>
+                                </figure>
+                            </div>
+                        </div>
 
                     <script src="<?php echo $relative_path ?>js/d3.v7.min.js"></script>
                     <script src=social_distributions.js></script>
@@ -233,34 +251,35 @@ produce_front_matter("Social Computing","Projects");
                             // .text(d => "User: " +d.id + ";\nInbound Degree: " + d.inbound + ";");
                     </script>
 
-                    <div class='fig-col'>
-                        <a href='./images/dist-outdeg.webp' target="_blank" rel="noopener noreferrer">
-                            <figure class='graph'>
-                                <img src='./images/dist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'>
-                                <figcaption>
-                                    Figure 1: Distribution plotting of node out-degrees.
-                                </figcaption>
-                            </figure>
-                        </a>
+                        <div class='fig-col'>
+                            <a href='./images/dist-outdeg.webp' target="_blank" rel="noopener noreferrer">
+                                <figure class='graph'>
+                                    <img src='./images/dist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'>
+                                    <figcaption>
+                                        Figure 1: Distribution plotting of node out-degrees.
+                                    </figcaption>
+                                </figure>
+                            </a>
 
 
-                        <a href='./images/dist-indeg.webp' target="_blank" rel="noopener noreferrer">
-                            <figure class='graph'>
-                                <img src='./images/dist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
-                                <figcaption>
-                                    Figure 2: Distribution plotting of node-indegrees.
-                                </figcaption>
-                            </figure>
-                        </a>
+                            <a href='./images/dist-indeg.webp' target="_blank" rel="noopener noreferrer">
+                                <figure class='graph'>
+                                    <img src='./images/dist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
+                                    <figcaption>
+                                        Figure 2: Distribution plotting of node-indegrees.
+                                    </figcaption>
+                                </figure>
+                            </a>
 
-                        <a href='./images/dist-degree.webp' target="_blank" rel="noopener noreferrer">
-                            <figure class='graph' style='float:none'>
-                                <img src='./images/dist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.'>
-                                <figcaption>
-                                    Figure 3: Distribution plotting of node degrees (inbound and outbound)
-                                </figcaption>
-                            </figure>
-                        </a>
+                            <a href='./images/dist-degree.webp' target="_blank" rel="noopener noreferrer">
+                                <figure class='graph' style='float:none'>
+                                    <img src='./images/dist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.'>
+                                    <figcaption>
+                                        Figure 3: Distribution plotting of node degrees (inbound and outbound)
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
                     </div>
 
                     <p style='clear:both;'>
