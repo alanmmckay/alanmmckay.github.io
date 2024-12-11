@@ -114,9 +114,42 @@ produce_front_matter("Social Computing","Projects");
                         How are the various degrees distributed? The following figures are indicative of distribution:
                     </p>
 
-                    <figure id='my_datavis'>
+                    <script>
+                        function switch_scatter(reveal_id, origin_container){
+                            let figures = document.getElementById(origin_container).children
+                            let index = 0;
+                            while(index < figures.length){
+                                let figure = figures[index];
+                                let id = figure.getAttribute("id");
+                                if(id != reveal_id){
+                                    figure.style['display'] = "none";
+                                }else{
+                                    figure.style['display'] = 'inherit';
+                                }
+                                index += 1;
+                            }
+                        }
+                    </script>
 
-                    </figure>
+                    <select name='random_dist_selector' id ='random_dist_selector' onchange="switch_scatter(this.value,'social_distributions')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
+                        <option value='figure1'>out-degree</option>
+                        <option value='figure2'>in-degree</option>
+                        <option value='figure3'>total-degree</option>
+                    </select>
+
+                    <div id='social_distributions'>
+                        <figure id='figure1' style=''>
+                            <svg id='scatter1' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                        </figure>
+
+                        <figure id='figure2' style='display:none'>
+                            <svg id='scatter2' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                        </figure>
+
+                        <figure id='figure3' style='display:none'>
+                            <svg id='scatter3' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                        </figure>
+                    </div>
 
                     <script src="<?php echo $relative_path ?>js/d3.v7.min.js"></script>
                     <script src=social_distributions.js></script>
@@ -126,10 +159,9 @@ produce_front_matter("Social Computing","Projects");
                         function create_scatter(dataset,type,element_id,x_domain,y_domain,x_tick_values = [],y_tick_values = []){
                             var margin = {top: 10, right:30, bottom: 30, left: 60}, width = 600 - margin.left - margin.right, height = 500 - margin.top - margin.bottom;
 
+                            var svg_width = width + margin.left + margin.right;
+                            var svg_height = height + margin.top + margin.bottom;
                             var figure_one = d3.select(element_id)
-                                .append("svg")
-                                .attr("width", width + margin.left + margin.right)
-                                .attr("height", height + margin.top + margin.bottom)
                                 .append("g")
                                 .attr("transform",
                                     "translate(" + margin.left + "," + margin.top +")");
@@ -163,9 +195,11 @@ produce_front_matter("Social Computing","Projects");
                                 .append("title").text(d => d.value + " node(s) with degree " + d.key + "\nDistribution: " + (d.value/8029).toFixed(4));
                         }
 
-                        create_scatter(social_dist["k_total"],"log","#my_datavis",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+                        //create_scatter(social_dist["k_total"],"log","#figure1",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
 
-                        create_scatter(social_dist["k_total"],"linear","#my_datavis",[-10,150],[-0.01,0.40]);
+                        create_scatter(social_dist["k_out"],"linear","#scatter1",[-10,100],[-0.01,0.20]);
+                        create_scatter(social_dist["k_in"],"linear","#scatter2",[-10,150],[-0.01,0.35]);
+                        create_scatter(social_dist["k_total"],"linear","#scatter3",[-10,375],[-0.01,0.40]);
 
 
 
