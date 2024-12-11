@@ -131,24 +131,34 @@ produce_front_matter("Social Computing","Projects");
                         }
                     </script>
 
-                    <select name='random_dist_selector' id ='random_dist_selector' onchange="switch_scatter(this.value,'social_distributions')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
-                        <option value='figure1'>out-degree</option>
-                        <option value='figure2'>in-degree</option>
-                        <option value='figure3'>total-degree</option>
-                    </select>
+                    <div id='social_distributions' style='display:none'>
+                        <select name='random_dist_selector' id ='random_dist_selector' onchange="switch_scatter(this.value,'social_distribution_figures')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
+                            <option value='figure1'>out-degree (k_out)</option>
+                            <option value='figure2'>in-degree (k_in)</option>
+                            <option value='figure3'>total-degree (k_total)</option>
+                        </select>
+                        <div id='social_distribution_figures'>
+                            <figure id='figure1' style=''>
+                                <svg id='scatter1' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                <span style='display:block;width:100%;text-align:center'>
+                                    node degree (k)
+                                </span>
+                            </figure>
 
-                    <div id='social_distributions'>
-                        <figure id='figure1' style=''>
-                            <svg id='scatter1' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                        </figure>
+                            <figure id='figure2' style='display:none'>
+                                <svg id='scatter2' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                <span style='display:block;width:100%;text-align:center'>
+                                    node degree (k)
+                                </span>
+                            </figure>
 
-                        <figure id='figure2' style='display:none'>
-                            <svg id='scatter2' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                        </figure>
-
-                        <figure id='figure3' style='display:none'>
-                            <svg id='scatter3' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                        </figure>
+                            <figure id='figure3' style='display:none'>
+                                <svg id='scatter3' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                <span style='display:block;width:100%;text-align:center'>
+                                    node degree (k)
+                                </span>
+                            </figure>
+                        </div>
                     </div>
 
                     <script src="<?php echo $relative_path ?>js/d3.v7.min.js"></script>
@@ -157,33 +167,36 @@ produce_front_matter("Social Computing","Projects");
                     <script>
 
                         function create_scatter(dataset,type,element_id,x_domain,y_domain,x_tick_values = [],y_tick_values = []){
-                            var margin = {top: 10, right:30, bottom: 30, left: 60}, width = 600 - margin.left - margin.right, height = 500 - margin.top - margin.bottom;
+                            let margin = {top: 10, right:30, bottom: 30, left: 60}, width = 600 - margin.left - margin.right, height = 500 - margin.top - margin.bottom;
 
-                            var svg_width = width + margin.left + margin.right;
-                            var svg_height = height + margin.top + margin.bottom;
-                            var figure_one = d3.select(element_id)
+                            let svg_width = width + margin.left + margin.right;
+                            let svg_height = height + margin.top + margin.bottom;
+                            let figure = d3.select(element_id)
                                 .append("g")
                                 .attr("transform",
                                     "translate(" + margin.left + "," + margin.top +")");
 
+                            let x;
+                            let y;
+
                             if(type == "log"){
 
-                                var x = d3.scaleLog().domain(x_domain).range([0, width]);
-                                var y = d3.scaleLog().domain(y_domain).range([height,0]);
+                                x = d3.scaleLog().domain(x_domain).range([0, width]);
+                                y = d3.scaleLog().domain(y_domain).range([height,0]);
 
-                                figure_one.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).tickValues(x_tick_values).ticks(10, function(d){return 10 + "^" + Math.round(Math.log(d) / Math.LN10); }));
-                                figure_one.append("g").call(d3.axisLeft(y).tickValues(y_tick_values).ticks(10, function(d){return 10 + "^" + Math.round(Math.log(d) / Math.LN10); }));
+                                figure.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).tickValues(x_tick_values).ticks(10, function(d){return 10 + "^" + Math.round(Math.log(d) / Math.LN10); }));
+                                figure.append("g").call(d3.axisLeft(y).tickValues(y_tick_values).ticks(10, function(d){return 10 + "^" + Math.round(Math.log(d) / Math.LN10); }));
 
                             }else if(type == "linear"){
 
-                                var x = d3.scaleLinear().domain(x_domain).range([0, width]);
-                                var y = d3.scaleLinear().domain(y_domain).range([height,0]);
-                                figure_one.append("g").attr("transform","translate(0," + height + ")").call(d3.axisBottom(x));
-                                figure_one.append("g").call(d3.axisLeft(y));
+                                x = d3.scaleLinear().domain(x_domain).range([0, width]);
+                                y = d3.scaleLinear().domain(y_domain).range([height,0]);
+                                figure.append("g").attr("transform","translate(0," + height + ")").call(d3.axisBottom(x));
+                                figure.append("g").call(d3.axisLeft(y));
 
                             }
 
-                            figure_one.append('g')
+                            figure.append('g')
                                 .selectAll("dot")
                                 .data(dataset)
                                 .enter()
@@ -193,6 +206,18 @@ produce_front_matter("Social Computing","Projects");
                                 .attr("r",4)
                                 .style("fill","blue")
                                 .append("title").text(d => d.value + " node(s) with degree " + d.key + "\nDistribution: " + (d.value/8029).toFixed(4));
+
+                            figure.append("text")
+                                .attr("transform", "rotate(-90)")
+                                .attr("y", 0 -margin.left)
+                                .attr("x",0 - (height / 2))
+                                .attr("dy", "1em")
+                                .style("text-anchor", "middle")
+                                .style('fill',"#5f666d")
+                                .style("font-size", "14px")
+                                .text("Proportion of nodes with degree (k)");
+
+
                         }
 
                         //create_scatter(social_dist["k_total"],"log","#figure1",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
