@@ -168,7 +168,7 @@ produce_front_matter("Social Computing","Projects");
                     <div>
                         <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
                             <label for='social_distribution_toggle' class="pointer" style='color:#3b4044' onclick='toggle_scatter_view("social_distribution_toggle","social_distributions")'>View Interactive Graphs</label>
-                            <input id='social_distribution_toggle' class="pointer" class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px'
+                            <input id='social_distribution_toggle' class="pointer range_switch" class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px'
                             onchange='toggle_scatter_view(this.id,"social_distributions")'/>
                         </div>
                         <dialog id='social_distributions' style='width:75%;max-width:875px;background-color:rgba(255,255,255,0.95);height:100%'>
@@ -951,6 +951,22 @@ produce_front_matter("Social Computing","Projects");
                 window.onresize = function(){
                     resize_scatter_view(current_dialog);
                 }
+
+                window.addEventListener('keydown', function(e) {
+                    if (e.key == "Escape"){
+                        switches = document.getElementsByClassName("range_switch");
+                        let index = 0;
+                        while(index < switches.length){
+                            switch_element = switches[index];
+                            switch_element.parentNode.style['visibility'] = 'inherit';
+                            switch_element.value = 0;
+                            switch_element.setAttribute("value",0);
+                            index += 1;
+                        }
+                        document.getElementsByTagName("html")[0].style['overflow'] = 'inherit';
+                        document.getElementsByTagName("body")[0].style['overflow'] = 'inherit';
+                    }
+                });
             });
 
         </script>
