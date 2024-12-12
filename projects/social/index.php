@@ -133,82 +133,79 @@ produce_front_matter("Social Computing","Projects");
                     <script>
                         function toggle_scatter_view(origin_switch_id,container_id){
                             origin_switch_element = document.getElementById(origin_switch_id);
-                            state = origin_switch_element.value;
+                            state = origin_switch_element.getAttribute("value");
                             html_element = document.getElementsByTagName("html")[0];
                             body_element = html_element.getElementsByTagName("body")[0];
-                            switch_elements = html_element.getElementsByClassName("interactive_graph_switch");
                             if(state == 0){
+                                origin_switch_element.setAttribute("value",1);
                                 origin_switch_element.value = 1;
                                 //document.getElementById(container_id).style["display"] = 'inherit';
                                 html_element.style['overflow'] = 'hidden';
                                 body_element.style['overflow'] = 'hidden';
                                 document.getElementById(container_id).showModal();
-                                let index = 0;
-                                while(index < switch_elements.length){
-                                    switch_element = switch_elements[index];
-                                    switch_element.value = 1;
-                                    index += 1;
-                                }
                                 origin_switch_element.parentNode.style['visibility'] = 'hidden';
+                                resize_scatter_view(container_id);
                             }else{
+                                origin_switch_element.setAttribute("value",0);
                                 origin_switch_element.value = 0;
                                 //document.getElementById(container_id).style["display"] = 'none';
                                 html_element.style['overflow'] = 'inherit';
                                 body_element.style['overflow'] = 'inherit';
                                 document.getElementById(container_id).close();
-                                let index = 0;
-                                while(index < switch_elements.length){
-                                    switch_element = switch_elements[index];
-                                    switch_element.value = 0;
-                                    index += 1;
-                                }
                                 origin_switch_element.parentNode.style['visibility'] = 'inherit';
                             }
                         }
                     </script>
 
+                    <script>
+                        function resize_scatter_view(container_id){
+                            current_dialog = container_id;
+                            dialog = document.getElementById(container_id);
+                            content = document.getElementsByClassName("dialog-content")[0];
+                            dialog.style['max-height'] = content.getBoundingClientRect().height+20+"px";
+                        }
+                    </script>
                     <div>
                         <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
-                            <label for='social_distribution_toggle' style='color:#3b4044'>View Interactive Graphs</label>
-                            <input id='social_distribution_toggle' class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px' onclick='toggle_scatter_view(this.id,"social_distributions")'
+                            <label for='social_distribution_toggle' class="pointer" style='color:#3b4044' onclick='toggle_scatter_view("social_distribution_toggle","social_distributions")'>View Interactive Graphs</label>
+                            <input id='social_distribution_toggle' class="pointer" class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px'
                             onchange='toggle_scatter_view(this.id,"social_distributions")'/>
                         </div>
                         <dialog id='social_distributions' style='width:75%;max-width:875px;background-color:rgba(255,255,255,0.95);height:100%'>
-                        <div class='dialog-content'>
-                            <div style="padding-top:10px;padding-bottom:10px">
-                                <label for='social_distribution_toggle_dialog' style='color:#3b4044'>View Interactive Graphs</label>
-                                <input id='social_distribution_toggle_dialog' class="interactive_graph_switch" type='range' min=0 max=1 value=1 style='accent-color:grey;width:25px' onclick='toggle_scatter_view("social_distribution_toggle","social_distributions")'
-                                onchange='toggle_scatter_view("social_distribution_toggle","social_distributions")'/>
-                            </div>
-                            <hr>
-                            <select name='random_dist_selector' id ='random_dist_selector' onchange="switch_scatter(this.value,'social_distribution_figures')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
-                                <option value='figure1'>out-degree (k_out)</option>
-                                <option value='figure2'>in-degree (k_in)</option>
-                                <option value='figure3'>total-degree (k_total)</option>
-                            </select>
-                            <div id='social_distribution_figures'>
-                                <figure id='figure1' style=''>
-                                    <svg id='scatter1' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                    <span style='display:block;width:100%;text-align:center'>
-                                        node degree (k)
-                                    </span>
-                                </figure>
+                            <div class='dialog-content'>
+                                <div style="padding-top:10px;padding-bottom:10px;display:flex;justify-content:end;">
+                                    <span style='color:#3b4044;' class="pointer" onclick='toggle_scatter_view("social_distribution_toggle","social_distributions")' >Close interactive graph [ x ]</span>
+                                </div>
+                                <hr>
+                                <select name='random_dist_selector' id ='random_dist_selector' onchange="switch_scatter(this.value,'social_distribution_figures')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
+                                    <option value='figure1'>out-degree (k_out)</option>
+                                    <option value='figure2'>in-degree (k_in)</option>
+                                    <option value='figure3'>total-degree (k_total)</option>
+                                </select>
+                                <div id='social_distribution_figures'>
+                                    <figure id='figure1' style=''>
+                                        <svg id='scatter1' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
 
-                                <figure id='figure2' style='display:none'>
-                                    <svg id='scatter2' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                    <span style='display:block;width:100%;text-align:center'>
-                                        node degree (k)
-                                    </span>
-                                </figure>
+                                    <figure id='figure2' style='display:none'>
+                                        <svg id='scatter2' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
 
-                                <figure id='figure3' style='display:none'>
-                                    <svg id='scatter3' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                    <span style='display:block;width:100%;text-align:center'>
-                                        node degree (k)
-                                    </span>
-                                </figure>
+                                    <figure id='figure3' style='display:none'>
+                                        <svg id='scatter3' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
+                                </div>
+                                <hr>
                             </div>
-                        </div>
                         </dialog>
 
                     <script src="<?php echo $relative_path ?>js/d3.v7.min.js"></script>
@@ -940,17 +937,22 @@ produce_front_matter("Social Computing","Projects");
             var modal;
             window.addEventListener('load', function () {
                 let modals = document.getElementsByTagName('dialog')
+                var current_dialog = document.getElementsByTagName("dialog")[0].id;
                 let index = 0;
                 while(index < modals.length){
                     modal = modals[index];
                     modal.addEventListener('click', function(){
-                        modal.getElementsByTagName("input")[0].click();
+                        modal.getElementsByTagName("span")[0].click();
                     });
                     index += 1;
                     let content = modal.getElementsByClassName('dialog-content')[0];
                     content.addEventListener('click', function(event){event.stopPropagation()});
                 }
+                window.onresize = function(){
+                    resize_scatter_view(current_dialog);
+                }
             });
+
         </script>
     </body>
 </html>
