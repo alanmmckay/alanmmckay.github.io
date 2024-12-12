@@ -131,14 +131,38 @@ produce_front_matter("Social Computing","Projects");
                         }
                     </script>
                     <script>
-                        function toggle_scatter_view(switch_element,container_id){
-                            state = switch_element.value;
+                        function toggle_scatter_view(origin_switch_id,container_id){
+                            origin_switch_element = document.getElementById(origin_switch_id);
+                            state = origin_switch_element.value;
+                            html_element = document.getElementsByTagName("html")[0];
+                            body_element = html_element.getElementsByTagName("body")[0];
+                            switch_elements = html_element.getElementsByClassName("interactive_graph_switch");
                             if(state == 0){
-                                switch_element.value = 1;
-                                document.getElementById(container_id).style["display"] = 'inherit';
+                                origin_switch_element.value = 1;
+                                //document.getElementById(container_id).style["display"] = 'inherit';
+                                html_element.style['overflow'] = 'hidden';
+                                body_element.style['overflow'] = 'hidden';
+                                document.getElementById(container_id).showModal();
+                                let index = 0;
+                                while(index < switch_elements.length){
+                                    switch_element = switch_elements[index];
+                                    switch_element.value = 1;
+                                    index += 1;
+                                }
+                                origin_switch_element.parentNode.style['visibility'] = 'hidden';
                             }else{
-                                switch_element.value = 0;
-                                document.getElementById(container_id).style["display"] = 'none';
+                                origin_switch_element.value = 0;
+                                //document.getElementById(container_id).style["display"] = 'none';
+                                html_element.style['overflow'] = 'inherit';
+                                body_element.style['overflow'] = 'inherit';
+                                document.getElementById(container_id).close();
+                                let index = 0;
+                                while(index < switch_elements.length){
+                                    switch_element = switch_elements[index];
+                                    switch_element.value = 0;
+                                    index += 1;
+                                }
+                                origin_switch_element.parentNode.style['visibility'] = 'inherit';
                             }
                         }
                     </script>
@@ -146,10 +170,17 @@ produce_front_matter("Social Computing","Projects");
                     <div>
                         <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
                             <label for='social_distribution_toggle' style='color:#3b4044'>View Interactive Graphs</label>
-                            <input id='social_distribution_toggle' type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px' onclick='toggle_scatter_view(this,"social_distributions")'
-                            onchange='toggle_scatter_view(this,"social_distributions")'/>
+                            <input id='social_distribution_toggle' class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px' onclick='toggle_scatter_view(this.id,"social_distributions")'
+                            onchange='toggle_scatter_view(this.id,"social_distributions")'/>
                         </div>
-                        <div id='social_distributions' style='display:none'>
+                        <dialog id='social_distributions' style='width:75%;max-width:875px;background-color:rgba(255,255,255,0.95);height:100%'>
+                        <div class='dialog-content'>
+                            <div style="padding-top:10px;padding-bottom:10px">
+                                <label for='social_distribution_toggle_dialog' style='color:#3b4044'>View Interactive Graphs</label>
+                                <input id='social_distribution_toggle_dialog' class="interactive_graph_switch" type='range' min=0 max=1 value=1 style='accent-color:grey;width:25px' onclick='toggle_scatter_view("social_distribution_toggle","social_distributions")'
+                                onchange='toggle_scatter_view("social_distribution_toggle","social_distributions")'/>
+                            </div>
+                            <hr>
                             <select name='random_dist_selector' id ='random_dist_selector' onchange="switch_scatter(this.value,'social_distribution_figures')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
                                 <option value='figure1'>out-degree (k_out)</option>
                                 <option value='figure2'>in-degree (k_in)</option>
@@ -178,6 +209,7 @@ produce_front_matter("Social Computing","Projects");
                                 </figure>
                             </div>
                         </div>
+                        </dialog>
 
                     <script src="<?php echo $relative_path ?>js/d3.v7.min.js"></script>
                     <script src=social_distributions.js></script>
@@ -904,5 +936,21 @@ produce_front_matter("Social Computing","Projects");
                 </nav>
             </section>
         </section>
+        <script>
+            var modal;
+            window.addEventListener('load', function () {
+                let modals = document.getElementsByTagName('dialog')
+                let index = 0;
+                while(index < modals.length){
+                    modal = modals[index];
+                    modal.addEventListener('click', function(){
+                        modal.getElementsByTagName("input")[0].click();
+                    });
+                    index += 1;
+                    let content = modal.getElementsByClassName('dialog-content')[0];
+                    content.addEventListener('click', function(event){event.stopPropagation()});
+                }
+            });
+        </script>
     </body>
 </html>
