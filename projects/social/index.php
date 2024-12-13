@@ -133,6 +133,7 @@ produce_front_matter("Social Computing","Projects");
                                 </select>
                                 <div id='social_distribution_figures'>
                                     <figure id='figure1' style=''>
+                                        <figcaption style='text-align:center'>Figure 1: Distribution plotting of node out-degrees.</figcaption>
                                         <svg id='scatter1' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                                         <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
@@ -140,6 +141,7 @@ produce_front_matter("Social Computing","Projects");
                                     </figure>
 
                                     <figure id='figure2' style='display:none'>
+                                        <figcaption style='text-align:center'>Figure 2: Distribution plotting of node-indegrees.</figcaption>
                                         <svg id='scatter2' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                                         <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
@@ -147,6 +149,7 @@ produce_front_matter("Social Computing","Projects");
                                     </figure>
 
                                     <figure id='figure3' style='display:none'>
+                                        <figcaption style='text-align:center'>Figure 3: Distribution plotting of node degrees (inbound and outbound)</figcaption>
                                         <svg id='scatter3' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                                         <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
@@ -256,6 +259,7 @@ produce_front_matter("Social Computing","Projects");
                                 </select>
                                 <div id='social_distribution_log_figures'>
                                     <figure id='figure4' style=''>
+                                        <figcaption style='text-align:center'>Figure 4: Log-log scale distribution plotting of node-out degrees</figcaption>
                                         <svg id='scatter4' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                                         <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
@@ -263,6 +267,7 @@ produce_front_matter("Social Computing","Projects");
                                     </figure>
 
                                     <figure id='figure5' style='display:none'>
+                                        <figcaption style='text-align:center'>Figure 5: Log-log scale distribution plotting of node-in degrees</figcaption>
                                         <svg id='scatter5' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                                         <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
@@ -270,6 +275,7 @@ produce_front_matter("Social Computing","Projects");
                                     </figure>
 
                                     <figure id='figure6' style='display:none'>
+                                        <figcaption style='text-align:center'>Figure 6: Log-log scale distribution plotting of node degrees (inbound and outbound)</figcaption>
                                         <svg id='scatter6' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                                         <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
@@ -329,6 +335,7 @@ produce_front_matter("Social Computing","Projects");
                                 </select>
                                 <div id='random_distribution_figures'>
                                     <figure id='figure7' style=''>
+                                        <figcaption style='text-align:center'>Figure 7: Distribution plotting of node out-degrees</figcaption>
                                         <svg id='scatter7' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                                         <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
@@ -336,6 +343,7 @@ produce_front_matter("Social Computing","Projects");
                                     </figure>
 
                                     <figure id='figure8' style='display:none'>
+                                        <figcaption style='text-align:center'>Figure 8: Distribution plotting of node in-degrees of Randomized Network</figcaption>
                                         <svg id='scatter8' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                                         <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
@@ -343,6 +351,7 @@ produce_front_matter("Social Computing","Projects");
                                     </figure>
 
                                     <figure id='figure9' style='display:none'>
+                                        <figcaption style='text-align:center'>Figure 9: Distribution plotting of node degrees (outbound and inbound) of Randomized Network</figcaption>
                                         <svg id='scatter9' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                                         <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
@@ -425,7 +434,7 @@ produce_front_matter("Social Computing","Projects");
                             <figure class='graph'>
                             <img src='./images/plrdist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
                             <figcaption>
-                                Figure 10: Power Law Distribution plotting of node degrees (inbound and outbound) of Randomized Network
+                                Figure 10: Power Law Distribution plotting of node degrees (outbound) of Randomized Network
                             </figcaption>
                         </figure>
 
@@ -993,7 +1002,7 @@ produce_front_matter("Social Computing","Projects");
                     }
                 }
 
-                if(window.innerHeight > 300){
+                if(window.innerHeight > 325){
                     retract(expand);
                 }
 
