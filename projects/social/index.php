@@ -1001,34 +1001,62 @@ produce_front_matter("Social Computing","Projects");
 
                 let svg_width = width + margin.left + margin.right;
                 let svg_height = height + margin.top + margin.bottom;
-                let figure = d3.select(element_id)
+                let figure = d3.select("#"+element_id)
                     .append("g")
                     .attr("transform",
                         "translate(" + margin.left + "," + margin.top +")");
 
                 let x;
                 let y;
+                let xAxis;
+                let yAxis;
 
                 if(type == "log"){
 
                     x = d3.scaleLog().domain(x_domain).range([0, width]);
                     y = d3.scaleLog().domain(y_domain).range([height,0]);
 
-                    figure.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).tickValues(x_tick_values).ticks(10, function(d){return 10 + "^" + Math.round(Math.log(d) / Math.LN10); }));
-                    figure.append("g").call(d3.axisLeft(y).tickValues(y_tick_values).ticks(10, function(d){return 10 + "^" + Math.round(Math.log(d) / Math.LN10); }));
+                    xAxis = figure.append("g")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(d3.axisBottom(x)
+                                .tickValues(x_tick_values)
+                                .ticks(10,
+                                       function(d){
+                                            return 10 + "^" + Math.round(Math.log(d) / Math.LN10);
+                                        }));
+
+                    yAxis = figure.append("g")
+                        .call(d3.axisLeft(y)
+                                .tickValues(y_tick_values)
+                                .ticks(10,
+                                       function(d){
+                                            return 10 + "^" + Math.round(Math.log(d) / Math.LN10);
+                                        }));
 
                 }else if(type == "linear"){
 
                     x = d3.scaleLinear().domain(x_domain).range([0, width]);
                     y = d3.scaleLinear().domain(y_domain).range([height,0]);
-                    figure.append("g").attr("transform","translate(0," + height + ")").call(d3.axisBottom(x));
-                    figure.append("g").call(d3.axisLeft(y));
+                    xAxis = figure.append("g").attr("transform","translate(0," + height + ")").call(d3.axisBottom(x));
+                    yAxis = figure.append("g").call(d3.axisLeft(y));
 
                 }
 
-                figure.append('g')
-                    .selectAll("dot")
-                    .data(dataset)
+                //viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"
+                var clip = figure.append("defs").append("SVG:clipPath")
+                    .attr("id", "clip"+String(element_id))
+                    .append("SVG:rect")
+                    .style("width", "98%")
+                    .style("height", "92%")
+                    .attr("x",0)
+                    .attr("y",0);
+
+                var scatter = figure.append('g')
+                    .attr("clip-path", "url(#clip"+String(element_id)+")");
+
+                scatter.append('g')
+                    .selectAll("circle")
+                    .data(dataset.filter(function(d) { return d.key > x_domain[0]}))
                     .enter()
                     .append("circle")
                     .attr("cx", function(d) { return x(d.key);})
@@ -1048,26 +1076,64 @@ produce_front_matter("Social Computing","Projects");
                     .style('fill',"#5f666d")
                     .style("font-size", "14px")
                     .text("Proportion of nodes with degree (k)");
+
+                var zoom = d3.zoom()
+                    .scaleExtent([-20,200])
+                    .extent([[0,0], [width,height]])
+                    .on("zoom",updateChart);
+
+                figure.append("rect")
+                    .style("width", "98%")
+                    .style("height", "92%")
+                    .style("fill", "none")
+                    .style("pointer-events","all")
+                    .call(zoom);
+
+                function updateChart(e){
+                    var newX = e.transform.rescaleX(x);
+                    var newY = e.transform.rescaleY(y);
+                    if(type == "linear"){
+                        xAxis.call(d3.axisBottom(newX))
+                        yAxis.call(d3.axisLeft(newY))
+                    }else if(type == "log"){
+                        xAxis.call(d3.axisBottom(newX)
+                                    /*.tickValues(x_tick_values)
+                                    .ticks(10,
+                                            function(d){
+                                                return 10 + "^" + Math.round(Math.log(d) / Math.LN10);
+                                            })*/);
+                        yAxis.call(d3.axisLeft(newY)
+                                    /*.tickValues(y_tick_values)
+                                    .ticks(10,
+                                    function(d){
+                                        return 10 + "^" + Math.round(Math.log(d) / Math.LN10);
+                                    })*/);
+                    }
+
+                    scatter.selectAll("circle")
+                        .attr('cx',function(d) {return newX(d.key)})
+                        .attr('cy',function(d) {return newY(d.value/8029)});
+                }
             }
         </script>
 
         <script>
 
-            create_scatter(social_dist["k_out"],"linear","#scatter1",[-10,100],[-0.01,0.20]);
-            create_scatter(social_dist["k_in"],"linear","#scatter2",[-10,150],[-0.01,0.35]);
-            create_scatter(social_dist["k_total"],"linear","#scatter3",[-10,375],[-0.01,0.40]);
+            create_scatter(social_dist["k_out"],"linear","scatter1",[-10,210],[-0.01,0.50]);
+            create_scatter(social_dist["k_in"],"linear","scatter2",[-10,160],[-0.01,0.4]);
+            create_scatter(social_dist["k_total"],"linear","scatter3",[-10,375],[-0.01,0.40]);
 
-            create_scatter(social_dist["k_out"],"log","#scatter4",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
-            create_scatter(social_dist["k_in"],"log","#scatter5",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
-            create_scatter(social_dist["k_total"],"log","#scatter6",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+            create_scatter(social_dist["k_out"],"log","scatter4",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+            create_scatter(social_dist["k_in"],"log","scatter5",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+            create_scatter(social_dist["k_total"],"log","scatter6",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
 
-            create_scatter(random_dist["k_out"],"linear","#scatter7",[0,10],[-0.01,0.35]);
-            create_scatter(random_dist["k_in"],"linear","#scatter8",[0,11],[-0.01,0.35]);
-            create_scatter(random_dist["k_total"],"linear","#scatter9",[0,15],[-0.01,0.25]);
+            create_scatter(random_dist["k_out"],"linear","scatter7",[0,10],[-0.01,0.35]);
+            create_scatter(random_dist["k_in"],"linear","scatter8",[0,11],[-0.01,0.35]);
+            create_scatter(random_dist["k_total"],"linear","scatter9",[0,15],[-0.01,0.25]);
 
-            create_scatter(random_dist["k_out"],"log","#scatter10",[10**-.25, 10**1.15],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
-            create_scatter(random_dist["k_in"],"log","#scatter10_b",[10**-.25, 10**1.15],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
-            create_scatter(random_dist["k_total"],"log","#scatter10_c",[10**-.25, 10**1.15],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+            create_scatter(random_dist["k_out"],"log","scatter10",[10**-.25, 10**1.15],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+            create_scatter(random_dist["k_in"],"log","scatter10_b",[10**-.25, 10**1.15],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+            create_scatter(random_dist["k_total"],"log","scatter10_c",[10**-.25, 10**1.15],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
         </script>
 
         <script>
