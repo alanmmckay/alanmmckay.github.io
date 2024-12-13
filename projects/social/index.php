@@ -114,64 +114,13 @@ produce_front_matter("Social Computing","Projects");
                         How are the various degrees distributed? The following figures are indicative of distribution:
                     </p>
 
-                    <script>
-                        function switch_scatter(reveal_id, origin_container){
-                            let figures = document.getElementById(origin_container).children
-                            let index = 0;
-                            while(index < figures.length){
-                                let figure = figures[index];
-                                let id = figure.getAttribute("id");
-                                if(id != reveal_id){
-                                    figure.style['display'] = "none";
-                                }else{
-                                    figure.style['display'] = 'inherit';
-                                }
-                                index += 1;
-                            }
-                        }
-                    </script>
-                    <script>
-                        function toggle_scatter_view(origin_switch_id,container_id){
-                            origin_switch_element = document.getElementById(origin_switch_id);
-                            state = origin_switch_element.getAttribute("value");
-                            html_element = document.getElementsByTagName("html")[0];
-                            body_element = html_element.getElementsByTagName("body")[0];
-                            if(state == 0){
-                                origin_switch_element.setAttribute("value",1);
-                                origin_switch_element.value = 1;
-                                //document.getElementById(container_id).style["display"] = 'inherit';
-                                html_element.style['overflow'] = 'hidden';
-                                body_element.style['overflow'] = 'hidden';
-                                document.getElementById(container_id).showModal();
-                                origin_switch_element.parentNode.style['visibility'] = 'hidden';
-                                resize_scatter_view(container_id);
-                            }else{
-                                origin_switch_element.setAttribute("value",0);
-                                origin_switch_element.value = 0;
-                                //document.getElementById(container_id).style["display"] = 'none';
-                                html_element.style['overflow'] = 'inherit';
-                                body_element.style['overflow'] = 'inherit';
-                                document.getElementById(container_id).close();
-                                origin_switch_element.parentNode.style['visibility'] = 'inherit';
-                            }
-                        }
-                    </script>
-
-                    <script>
-                        function resize_scatter_view(container_id){
-                            current_dialog = container_id;
-                            dialog = document.getElementById(container_id);
-                            content = document.getElementsByClassName("dialog-content")[0];
-                            dialog.style['max-height'] = content.getBoundingClientRect().height+20+"px";
-                        }
-                    </script>
                     <div>
                         <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
                             <label for='social_distribution_toggle' class="pointer" style='color:#3b4044' onclick='toggle_scatter_view("social_distribution_toggle","social_distributions")'>View Interactive Graphs</label>
                             <input id='social_distribution_toggle' class="pointer range_switch" class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px'
                             onchange='toggle_scatter_view(this.id,"social_distributions")'/>
                         </div>
-                        <dialog id='social_distributions' style='width:75%;max-width:875px;background-color:rgba(255,255,255,0.95);height:100%'>
+                        <dialog id='social_distributions' style='width:85%;max-width:875px;background-color:rgba(255,255,255,0.95);height:100%'>
                             <div class='dialog-content'>
                                 <div style="padding-top:10px;padding-bottom:10px;display:flex;justify-content:end;">
                                     <span style='color:#3b4044;' class="pointer" onclick='toggle_scatter_view("social_distribution_toggle","social_distributions")' >Close interactive graph [ x ]</span>
@@ -207,78 +156,6 @@ produce_front_matter("Social Computing","Projects");
                                 <hr>
                             </div>
                         </dialog>
-
-                    <script src="<?php echo $relative_path ?>js/d3.v7.min.js"></script>
-                    <script src=social_distributions.js></script>
-
-                    <script>
-
-                        function create_scatter(dataset,type,element_id,x_domain,y_domain,x_tick_values = [],y_tick_values = []){
-                            let margin = {top: 10, right:30, bottom: 30, left: 60}, width = 600 - margin.left - margin.right, height = 500 - margin.top - margin.bottom;
-
-                            let svg_width = width + margin.left + margin.right;
-                            let svg_height = height + margin.top + margin.bottom;
-                            let figure = d3.select(element_id)
-                                .append("g")
-                                .attr("transform",
-                                    "translate(" + margin.left + "," + margin.top +")");
-
-                            let x;
-                            let y;
-
-                            if(type == "log"){
-
-                                x = d3.scaleLog().domain(x_domain).range([0, width]);
-                                y = d3.scaleLog().domain(y_domain).range([height,0]);
-
-                                figure.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).tickValues(x_tick_values).ticks(10, function(d){return 10 + "^" + Math.round(Math.log(d) / Math.LN10); }));
-                                figure.append("g").call(d3.axisLeft(y).tickValues(y_tick_values).ticks(10, function(d){return 10 + "^" + Math.round(Math.log(d) / Math.LN10); }));
-
-                            }else if(type == "linear"){
-
-                                x = d3.scaleLinear().domain(x_domain).range([0, width]);
-                                y = d3.scaleLinear().domain(y_domain).range([height,0]);
-                                figure.append("g").attr("transform","translate(0," + height + ")").call(d3.axisBottom(x));
-                                figure.append("g").call(d3.axisLeft(y));
-
-                            }
-
-                            figure.append('g')
-                                .selectAll("dot")
-                                .data(dataset)
-                                .enter()
-                                .append("circle")
-                                .attr("cx", function(d) { return x(d.key);})
-                                .attr("cy", function(d) { return y(d.value/8029)})
-                                .attr("r",4)
-                                .style("fill","blue")
-                                .append("title").text(d => d.value + " node(s) with degree " + d.key + "\nDistribution: " + (d.value/8029).toFixed(4));
-
-                            figure.append("text")
-                                .attr("transform", "rotate(-90)")
-                                .attr("y", 0 -margin.left)
-                                .attr("x",0 - (height / 2))
-                                .attr("dy", "1em")
-                                .style("text-anchor", "middle")
-                                .style('fill',"#5f666d")
-                                .style("font-size", "14px")
-                                .text("Proportion of nodes with degree (k)");
-
-
-                        }
-
-                        //create_scatter(social_dist["k_total"],"log","#figure1",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
-
-                        create_scatter(social_dist["k_out"],"linear","#scatter1",[-10,100],[-0.01,0.20]);
-                        create_scatter(social_dist["k_in"],"linear","#scatter2",[-10,150],[-0.01,0.35]);
-                        create_scatter(social_dist["k_total"],"linear","#scatter3",[-10,375],[-0.01,0.40]);
-
-
-
-
-                            // node.append("title")
-                            // .text(d => "User: " +d.id + ";\nInbound Degree: " + d.inbound + ";");
-                    </script>
 
                         <div class='fig-col'>
                             <a href='./images/dist-outdeg.webp' target="_blank" rel="noopener noreferrer">
@@ -562,6 +439,7 @@ produce_front_matter("Social Computing","Projects");
                     </figure>
                     <hr>
                     <!-- 8129 -->
+                    <script src="<?php echo $relative_path ?>js/d3.v7.min.js"></script>
                     <script src="social_dataset.js"></script>
                     <script src="random_dataset.js"></script>
 
@@ -933,6 +811,124 @@ produce_front_matter("Social Computing","Projects");
                 </nav>
             </section>
         </section>
+
+        <script src=social_distributions.js></script>
+        <script src=random_distributions.js></script>
+
+        <script>
+            function switch_scatter(reveal_id, origin_container){
+                let figures = document.getElementById(origin_container).children
+                let index = 0;
+                while(index < figures.length){
+                    let figure = figures[index];
+                    let id = figure.getAttribute("id");
+                    if(id != reveal_id){
+                        figure.style['display'] = "none";
+                    }else{
+                        figure.style['display'] = 'inherit';
+                    }
+                    index += 1;
+                }
+            }
+        </script>
+
+        <script>
+            function toggle_scatter_view(origin_switch_id,container_id){
+                origin_switch_element = document.getElementById(origin_switch_id);
+                state = origin_switch_element.getAttribute("value");
+                html_element = document.getElementsByTagName("html")[0];
+                body_element = html_element.getElementsByTagName("body")[0];
+                if(state == 0){
+                    origin_switch_element.setAttribute("value",1);
+                    origin_switch_element.value = 1;
+                    html_element.style['overflow'] = 'hidden';
+                    body_element.style['overflow'] = 'hidden';
+                    document.getElementById(container_id).showModal();
+                    origin_switch_element.parentNode.style['visibility'] = 'hidden';
+                    resize_scatter_view(container_id);
+                }else{
+                    origin_switch_element.setAttribute("value",0);
+                    origin_switch_element.value = 0;
+                    html_element.style['overflow'] = 'inherit';
+                    body_element.style['overflow'] = 'inherit';
+                    document.getElementById(container_id).close();
+                    origin_switch_element.parentNode.style['visibility'] = 'inherit';
+                }
+            }
+        </script>
+
+        <script>
+            function resize_scatter_view(container_id){
+                current_dialog = container_id;
+                dialog = document.getElementById(container_id);
+                content = document.getElementsByClassName("dialog-content")[0];
+                dialog.style['max-height'] = content.getBoundingClientRect().height+20+"px";
+            }
+        </script>
+
+        <script>
+            function create_scatter(dataset,type,element_id,x_domain,y_domain,x_tick_values = [],y_tick_values = []){
+                let margin = {top: 10, right:30, bottom: 30, left: 60}, width = 600 - margin.left - margin.right, height = 500 - margin.top - margin.bottom;
+
+                let svg_width = width + margin.left + margin.right;
+                let svg_height = height + margin.top + margin.bottom;
+                let figure = d3.select(element_id)
+                    .append("g")
+                    .attr("transform",
+                        "translate(" + margin.left + "," + margin.top +")");
+
+                let x;
+                let y;
+
+                if(type == "log"){
+
+                    x = d3.scaleLog().domain(x_domain).range([0, width]);
+                    y = d3.scaleLog().domain(y_domain).range([height,0]);
+
+                    figure.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).tickValues(x_tick_values).ticks(10, function(d){return 10 + "^" + Math.round(Math.log(d) / Math.LN10); }));
+                    figure.append("g").call(d3.axisLeft(y).tickValues(y_tick_values).ticks(10, function(d){return 10 + "^" + Math.round(Math.log(d) / Math.LN10); }));
+
+                }else if(type == "linear"){
+
+                    x = d3.scaleLinear().domain(x_domain).range([0, width]);
+                    y = d3.scaleLinear().domain(y_domain).range([height,0]);
+                    figure.append("g").attr("transform","translate(0," + height + ")").call(d3.axisBottom(x));
+                    figure.append("g").call(d3.axisLeft(y));
+
+                }
+
+                figure.append('g')
+                    .selectAll("dot")
+                    .data(dataset)
+                    .enter()
+                    .append("circle")
+                    .attr("cx", function(d) { return x(d.key);})
+                    .attr("cy", function(d) { return y(d.value/8029)})
+                    .attr("r",4)
+                    .style("fill","blue")
+                    .append("title").text(d => d.value + " node(s) with degree " + d.key + "\nDistribution: " + (d.value/8029).toFixed(4));
+
+                figure.append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 0 -margin.left)
+                    .attr("x",0 - (height / 2))
+                    .attr("dy", "1em")
+                    .style("text-anchor", "middle")
+                    .style('fill',"#5f666d")
+                    .style("font-size", "14px")
+                    .text("Proportion of nodes with degree (k)");
+            }
+        </script>
+
+        <script>
+            //create_scatter(social_dist["k_total"],"log","#figure1",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+
+            create_scatter(social_dist["k_out"],"linear","#scatter1",[-10,100],[-0.01,0.20]);
+            create_scatter(social_dist["k_in"],"linear","#scatter2",[-10,150],[-0.01,0.35]);
+            create_scatter(social_dist["k_total"],"linear","#scatter3",[-10,375],[-0.01,0.40]);
+
+        </script>
+
         <script>
             var modal;
             window.addEventListener('load', function () {
