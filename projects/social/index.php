@@ -158,33 +158,27 @@ produce_front_matter("Social Computing","Projects");
                         </dialog>
 
                         <div class='fig-col'>
-                            <a href='./images/dist-outdeg.webp' target="_blank" rel="noopener noreferrer">
-                                <figure class='graph'>
-                                    <img src='./images/dist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'>
-                                    <figcaption>
-                                        Figure 1: Distribution plotting of node out-degrees.
-                                    </figcaption>
-                                </figure>
-                            </a>
+                            <figure class='graph'>
+                                <img src='./images/dist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'>
+                                <figcaption>
+                                    Figure 1: Distribution plotting of node out-degrees.
+                                </figcaption>
+                            </figure>
 
 
-                            <a href='./images/dist-indeg.webp' target="_blank" rel="noopener noreferrer">
-                                <figure class='graph'>
-                                    <img src='./images/dist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
-                                    <figcaption>
-                                        Figure 2: Distribution plotting of node-indegrees.
-                                    </figcaption>
-                                </figure>
-                            </a>
+                            <figure class='graph'>
+                                <img src='./images/dist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
+                                <figcaption>
+                                    Figure 2: Distribution plotting of node-indegrees.
+                                </figcaption>
+                            </figure>
 
-                            <a href='./images/dist-degree.webp' target="_blank" rel="noopener noreferrer">
-                                <figure class='graph' style='float:none'>
-                                    <img src='./images/dist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.'>
-                                    <figcaption>
-                                        Figure 3: Distribution plotting of node degrees (inbound and outbound)
-                                    </figcaption>
-                                </figure>
-                            </a>
+                            <figure class='graph' style='float:none'>
+                                <img src='./images/dist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.'>
+                                <figcaption>
+                                    Figure 3: Distribution plotting of node degrees (inbound and outbound)
+                                </figcaption>
+                            </figure>
                         </div>
                     </div>
 
@@ -288,32 +282,26 @@ produce_front_matter("Social Computing","Projects");
 
                         <div class='fig-col'>
 
-                            <a href='./images/pldist-outdeg.webp' target="_blank" rel="noopener noreferrer">
-                                <figure class='graph'>
-                                    <img src='./images/pldist-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of out-degrees.'>
-                                    <figcaption>
-                                        Figure 4: Log-log scale distribution plotting of node-out degrees
-                                    </figcaption>
-                                </figure>
-                            </a>
+                            <figure class='graph'>
+                                <img src='./images/pldist-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of out-degrees.'>
+                                <figcaption>
+                                    Figure 4: Log-log scale distribution plotting of node-out degrees
+                                </figcaption>
+                            </figure>
 
-                            <a href='./images/pldist-indeg.webp' target="_blank" rel="noopener noreferrer">
-                                <figure class='graph'>
-                                    <img src='./images/pldist-indeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of in-degrees.'>
-                                    <figcaption>
-                                        Figure 5: Log-log scale distribution plotting of node-in degrees
-                                    </figcaption>
-                                </figure>
-                            </a>
+                            <figure class='graph'>
+                                <img src='./images/pldist-indeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of in-degrees.'>
+                                <figcaption>
+                                    Figure 5: Log-log scale distribution plotting of node-in degrees
+                                </figcaption>
+                            </figure>
 
-                            <a href='./images/pldist-degree.webp' target="_blank" rel="noopener noreferrer">
-                                <figure class='graph' style='float:none'>
-                                    <img src='./images/pldist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
-                                    <figcaption>
-                                        Figure 6: Log-log scale distribution plotting of node degrees (inbound and outbound)
-                                    </figcaption>
-                                </figure>
-                            </a>
+                            <figure class='graph' style='float:none'>
+                                <img src='./images/pldist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
+                                <figcaption>
+                                    Figure 6: Log-log scale distribution plotting of node degrees (inbound and outbound)
+                                </figcaption>
+                            </figure>
                             <hr>
 
                         </div>
@@ -366,32 +354,26 @@ produce_front_matter("Social Computing","Projects");
                         </dialog>
 
                         <div class='fig-col'>
-                            <a href='./images/rdist-outdeg.webp' target="_blank" rel="noopener noreferrer">
-                                <figure class='graph'>
-                                    <img src='./images/rdist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'>
-                                    <figcaption>
-                                        Figure 7: Distribution plotting of node out-degrees
-                                    </figcaption>
-                                </figure>
-                            </a>
+                           <figure class='graph'>
+                                <img src='./images/rdist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'>
+                                <figcaption>
+                                    Figure 7: Distribution plotting of node out-degrees
+                                </figcaption>
+                            </figure>
 
-                            <a href='./images/rdist-indeg.webp' target="_blank" rel="noopener noreferrer">
-                                <figure class='graph'>
-                                    <img src='./images/rdist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
-                                    <figcaption>
-                                        Figure 8: Distribution plotting of node in-degrees of Randomized Network
-                                    </figcaption>
-                                </figure>
-                            </a>
+                            <figure class='graph'>
+                                <img src='./images/rdist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
+                                <figcaption>
+                                    Figure 8: Distribution plotting of node in-degrees of Randomized Network
+                                </figcaption>
+                            </figure>
 
-                            <a href='./images/rdist-degree.webp' target="_blank" rel="noopener noreferrer">
-                                <figure class='graph' style='float:none;'>
-                                    <img src='./images/rdist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.'>
-                                    <figcaption>
-                                        Figure 9: Distribution plotting of node degrees (outbound and inbound) of Randomized Network
-                                    </figcaption>
-                                </figure>
-                            </a>
+                            <figure class='graph' style='float:none;'>
+                                <img src='./images/rdist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.'>
+                                <figcaption>
+                                    Figure 9: Distribution plotting of node degrees (outbound and inbound) of Randomized Network
+                                </figcaption>
+                            </figure>
                         </div>
                     </div>
                     <p style='clear:both;'>
@@ -440,14 +422,12 @@ produce_front_matter("Social Computing","Projects");
                                 <hr>
                             </div>
                         </dialog>
-                        <a href='./images/plrdist-degree.webp' target="_blank" rel="noopener noreferrer">
                             <figure class='graph'>
-                                <img src='./images/plrdist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
-                                <figcaption>
-                                    Figure 10: Power Law Distribution plotting of node degrees (inbound and outbound) of Randomized Network
-                                </figcaption>
-                            </figure>
-                        </a>
+                            <img src='./images/plrdist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
+                            <figcaption>
+                                Figure 10: Power Law Distribution plotting of node degrees (inbound and outbound) of Randomized Network
+                            </figcaption>
+                        </figure>
 
                         <p>
                             The following table of figures are the log-log scale plotting of four other randomized networks, with respect to evaluating out-bound degree:
@@ -455,18 +435,14 @@ produce_front_matter("Social Computing","Projects");
 
                         <figure class='col-fig'>
 
-                            <a href='./images/rdist2-outdeg.webp' target="_blank" rel="noopener noreferrer">
-                                <img src='./images/rdist2-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
-                            </a>
-                            <a href='./images/rdist3-outdeg.webp' target="_blank" rel="noopener noreferrer">
-                                <img src='./images/rdist3-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
-                            </a>
-                            <a href='./images/rdist4-outdeg.webp' target="_blank" rel="noopener noreferrer">
-                                <img src='./images/rdist4-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
-                            </a>
-                            <a href='./images/rdist5-outdeg.webp' target="_blank" rel="noopener noreferrer">
-                                <img src='./images/rdist5-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
-                            </a>
+                            <img src='./images/rdist2-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
+
+                            <img src='./images/rdist3-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
+
+                            <img src='./images/rdist4-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
+
+                            <img src='./images/rdist5-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
+
 
                             <figcaption style='clear:both;padding-top:25px'>
                                 Figure 12: Power Law distribution plotting of outbound node degrees for four other randomized networks.
@@ -478,32 +454,26 @@ produce_front_matter("Social Computing","Projects");
                         These distributions are Poisson/binomial. They do not allow for the reasonable probability of having nodes with large degrees, (degrees that approach kmax). This is emphasized by the values given in the x-axis. The maximum node degree here is anywhere from 7 to 9; much smaller than the maximum node degrees of the Reddit dataset. There seems to be a higher occurrence nodes with degree quantities close to the maximum as well. This is shown in the network representation of the involved data, shown in the following figures:
                     </p>
 
-                    <a href='./images/rnet-vis.webp' target="_blank" rel="noopener noreferrer">
                     <figure class='graph'>
                         <img src='./images/rnet-vis.webp' alt='A Gephi visualized graph which shows the clustering of the agents within a randomized network. The clustering shows consistency all around.'>
                         <figcaption>
                             Figure 13: Full visualization of randomized network indicates a lack of any hubs. The network seems to have reached a transition where there exists only one component.
                         </figcaption>
                     </figure>
-                    </a>
 
-                    <a href='./images/sfnet-vis.webp' target="_blank" rel="noopener noreferrer">
                     <figure class='graph'>
                         <img src='./images/sfnet-vis.webp' alt='A Gephi visualized graph which shows the clustering of the agents within a social network. Clustering is not consistent here, where clustering seems to revolve around a select few agents.'>
                         <figcaption>
                             Figure 14: Partial visualization of network representative of the Reddit dataset. Notice the significant hubs which are indicative of a higher degree.
                         </figcaption>
                     </figure>
-                    </a>
 
-                    <a href='./images/sf-outliers.webp' target="_blank" rel="noopener noreferrer">
                     <figure class='graph'>
                         <img src='./images/sf-outliers.webp' alt='A gephi visualized grpah which shows outliers of the social network; disconnected interactions between a subset of agents involved.'>
                         <figcaption>
                             Figure 15: Partial visualization of the network representative of the Reddit dataset; structures like these exist in the orbit of the larger connected component of the prior figure. This is a property not observed in the generated randomized networks.
                         </figcaption>
                     </figure>
-                    </a>
 
                     <p>
                         The connectivity of Figure 13 tracks once consideration of average node degree is taken. The average degree measured by Gephi is 2.141. This tracks considering the expected node degree of |E|/|V| which is 17406/8129 =  2.141. Once the average node degree surpasses 1, a randomized graph is in the super critical regime where there exists some gigantic component. This component is not fully connected, though; the average node degree has not reached a point to exceed ln(|V|).
