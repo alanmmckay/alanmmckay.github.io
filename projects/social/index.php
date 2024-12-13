@@ -434,7 +434,7 @@ produce_front_matter("Social Computing","Projects");
                             <figure class='graph'>
                             <img src='./images/plrdist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
                             <figcaption>
-                                Figure 10: Power Law Distribution plotting of node degrees (outbound) of Randomized Network
+                                Figure 10: Power Law Distribution plotting of node degrees (inbound and outbound) of Randomized Network
                             </figcaption>
                         </figure>
 
