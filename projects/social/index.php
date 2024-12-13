@@ -58,6 +58,41 @@ produce_front_matter("Social Computing","Projects");
                         <p id='note_origin'>
                             An assigned project that I found interesting involved assigning each student a web scrape from a social network. Each student was ambiguously tasked to analyze the data. Below is the result of data analysis that I personally drew from the dataset. I feel this is worth sharing to help those who have a genuine interest in the subject understand the processes involved.<a href='#note'>*</a>
                         </p>
+                        <h3>Update - Data Visualization</h3>
+                        <p>
+                            Additional content has been added to this page since initially publishing this project. The initial publication, whose state is encapsulated by <a href='https://github.com/alanmmckay/alanmmckay.github.io/tree/a1d800f2d92ec2f1f54a10051f520b2496b31138'
+                             target="_blank" rel="noopener noreferrer">git commit hash a1d800f</a>, went far beyond the scope of the original problem statement of analysis. The initial analysis included a set of static figures containing images that show scatter-plot distributions and network graphs. The usage of these static figures aligns with what is typical of academic publications.
+                        </p>
+                        <p>
+                            This publication has been further updated with the inclusion of more intuitive data presentation. This was accomplished by using the d3 <a href="https://d3js.org/" target="_blank" rel="noopener noreferrer">data visualization library</a>. The implementation of these new figures allow users to interact with the data being discussed more closely. These new additions are described as follows:
+                        </p>
+                        <ul>
+                            <li>
+                                A <a href="#force_graph_social">force directed graph</a> which represents a network of agents as nodes where a user can inspect the physical properties of said network with respect to its connectivity. A user can mouse over each node to reveal the agent's id in addition to revealing a report of how many other users have referred to it. The edges connecting these nodes represent one of these references.
+                                <ul>
+                                    <li>
+                                        The <a href='#six_degrees_of_separation'>Six degrees of separation</a> subsection was added to provide an intuitive approach to correlating the properties that can be explored via the force directed graph to the statistical analysis discussed within this project page.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                A set of interactive scatter-plot graphs which allow a user to pan and zoom in on the data that each scatter-plot represents. Each set of static figures will present an option to switch to a view where these interactive graphs can be looked at within the following subsections:
+                                <ul>
+                                    <li>
+                                        <a href="#social_distribution_toggle">Social Network - Normal Distribution</a>
+                                    </li>
+                                    <li>
+                                        <a href="#social_distribution_log_toggle">Social Network - Power Law Distribution</a>
+                                    </li>
+                                    <li>
+                                        <a href="#random_distribution_toggle">Random Network - Normal Distribution</a>
+                                    </li>
+                                    <li>
+                                        <a href="#random_distribution_log_toggle">Social Network - Power Law Distribution</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     <hr>
                     </section>
                     <header id="main-content">
@@ -491,7 +526,7 @@ produce_front_matter("Social Computing","Projects");
                     <p>
                         The observation of the paragraph above helps us see the property of the complex network given by the Reddit dataset is a scale-free network; a means to visually support this assertion.
                     </p>
-                    <h3>Six degrees of separation</h3>
+                    <h3 id="six_degrees_of_separation">Six degrees of separation</h3>
                     <p>
                         Six degrees of separation is the term that encapsulates the idea that all individuals are six or fewer social connections away from each other. The network science discussed on this page acts as a means to validate this. The contrast of the Reddit social network graph and the graph of randomly generated connections also acts as evidence. The average distance between nodes will be higher in a randomized graph, leading to the assertion that there are more than six degrees of separation in this context.
                     </p>
