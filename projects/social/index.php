@@ -126,7 +126,7 @@ produce_front_matter("Social Computing","Projects");
                                     <span style='color:#3b4044;' class="pointer" onclick='toggle_scatter_view("social_distribution_toggle","social_distributions")' >Close interactive graph [ x ]</span>
                                 </div>
                                 <hr>
-                                <select name='random_dist_selector' id ='random_dist_selector' onchange="switch_scatter(this.value,'social_distribution_figures')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
+                                <select name='social_dist_selector' id ='social_dist_selector' onchange="switch_scatter(this.value,'social_distribution_figures')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
                                     <option value='figure1'>out-degree (k_out)</option>
                                     <option value='figure2'>in-degree (k_in)</option>
                                     <option value='figure3'>total-degree (k_total)</option>
@@ -243,109 +243,201 @@ produce_front_matter("Social Computing","Projects");
                     <p>
                         To confirm a power-law distribution, these distributions can be plotted in a log-log scale. The following figures show that a power-law distribution is indeed in play. The light blue points represent the distribution plot. The dotted blue line overlayed by the red line is a plotting of the power-law distribution function (C*k<sup>-γ</sup>).
                     </p>
-                    <div class='fig-col'>
+                    <div>
+                        <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
+                            <label for='social_distribution_log_toggle' class="pointer" style='color:#3b4044' onclick='toggle_scatter_view("social_distribution_log_toggle","social_distributions_log")'>View Interactive Graphs</label>
+                            <input id='social_distribution_log_toggle' class="pointer range_switch" class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px'
+                            onchange='toggle_scatter_view(this.id,"social_distributions_log")'/>
+                        </div>
+                        <dialog id='social_distributions_log' style='width:85%;max-width:875px;background-color:rgba(255,255,255,0.95);height:100%'>
+                            <div class='dialog-content'>
+                                <div style="padding-top:10px;padding-bottom:10px;display:flex;justify-content:end;">
+                                    <span style='color:#3b4044;' class="pointer" onclick='toggle_scatter_view("social_distribution_log_toggle","social_distributions_log")' >Close interactive graph [ x ]</span>
+                                </div>
+                                <hr>
+                                <select name='social_dist_log_selector' id ='social_dist_log_selector' onchange="switch_scatter(this.value,'social_distribution_log_figures')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
+                                    <option value='figure4'>out-degree (k_out)</option>
+                                    <option value='figure5'>in-degree (k_in)</option>
+                                    <option value='figure6'>total-degree (k_total)</option>
+                                </select>
+                                <div id='social_distribution_log_figures'>
+                                    <figure id='figure4' style=''>
+                                        <svg id='scatter4' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
 
-                        <a href='./images/pldist-outdeg.webp' target="_blank" rel="noopener noreferrer">
-                            <figure class='graph'>
-                                <img src='./images/pldist-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of out-degrees.'>
-                                <figcaption>
-                                    Figure 4: Log-log scale distribution plotting of node-out degrees
-                                </figcaption>
-                            </figure>
-                        </a>
+                                    <figure id='figure5' style='display:none'>
+                                        <svg id='scatter5' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
 
-                        <a href='./images/pldist-indeg.webp' target="_blank" rel="noopener noreferrer">
-                            <figure class='graph'>
-                                <img src='./images/pldist-indeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of in-degrees.'>
-                                <figcaption>
-                                    Figure 5: Log-log scale distribution plotting of node-in degrees
-                                </figcaption>
-                            </figure>
-                        </a>
+                                    <figure id='figure6' style='display:none'>
+                                        <svg id='scatter6' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
+                                </div>
+                                <hr>
+                            </div>
+                        </dialog>
 
-                        <a href='./images/pldist-degree.webp' target="_blank" rel="noopener noreferrer">
-                            <figure class='graph' style='float:none'>
-                                <img src='./images/pldist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
-                                <figcaption>
-                                    Figure 6: Log-log scale distribution plotting of node degrees (inbound and outbound)
-                                </figcaption>
-                            </figure>
-                        </a>
-                        <hr>
+                        <div class='fig-col'>
 
+                            <a href='./images/pldist-outdeg.webp' target="_blank" rel="noopener noreferrer">
+                                <figure class='graph'>
+                                    <img src='./images/pldist-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of out-degrees.'>
+                                    <figcaption>
+                                        Figure 4: Log-log scale distribution plotting of node-out degrees
+                                    </figcaption>
+                                </figure>
+                            </a>
+
+                            <a href='./images/pldist-indeg.webp' target="_blank" rel="noopener noreferrer">
+                                <figure class='graph'>
+                                    <img src='./images/pldist-indeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of in-degrees.'>
+                                    <figcaption>
+                                        Figure 5: Log-log scale distribution plotting of node-in degrees
+                                    </figcaption>
+                                </figure>
+                            </a>
+
+                            <a href='./images/pldist-degree.webp' target="_blank" rel="noopener noreferrer">
+                                <figure class='graph' style='float:none'>
+                                    <img src='./images/pldist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
+                                    <figcaption>
+                                        Figure 6: Log-log scale distribution plotting of node degrees (inbound and outbound)
+                                    </figcaption>
+                                </figure>
+                            </a>
+                            <hr>
+
+                        </div>
                     </div>
 
                     <p style='clear:both;'>
                         Random networks were generated to contrast this data. The algorithm that created these networks ensured the same node count and edge count. It also ensured there exists no node that does not have an edge – as is the case for the reddit data set. The distribution of these networks differ. Consider the following figures:
                     </p>
+                    <div>
+                        <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
+                            <label for='random_distribution_toggle' class="pointer" style='color:#3b4044' onclick='toggle_scatter_view("random_distribution_toggle","random_distributions")'>View Interactive Graphs</label>
+                            <input id='random_distribution_toggle' class="pointer range_switch" class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px'
+                            onchange='toggle_scatter_view(this.id,"random_distributions")'/>
+                        </div>
+                        <dialog id='random_distributions' style='width:85%;max-width:875px;background-color:rgba(255,255,255,0.95);height:100%'>
+                            <div class='dialog-content'>
+                                <div style="padding-top:10px;padding-bottom:10px;display:flex;justify-content:end;">
+                                    <span style='color:#3b4044;' class="pointer" onclick='toggle_scatter_view("random_distribution_toggle","random_distributions")' >Close interactive graph [ x ]</span>
+                                </div>
+                                <hr>
+                                <select name='random_dist_selector' id ='random_dist_selector' onchange="switch_scatter(this.value,'random_distribution_figures')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
+                                    <option value='figure7'>out-degree (k_out)</option>
+                                    <option value='figure8'>in-degree (k_in)</option>
+                                    <option value='figure9'>total-degree (k_total)</option>
+                                </select>
+                                <div id='random_distribution_figures'>
+                                    <figure id='figure7' style=''>
+                                        <svg id='scatter7' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
 
-                    <div class='fig-col'>
-                        <a href='./images/rdist-outdeg.webp' target="_blank" rel="noopener noreferrer">
-                            <figure class='graph'>
-                                <img src='./images/rdist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'>
-                                <figcaption>
-                                    Figure 7: Distribution plotting of node out-degrees
-                                </figcaption>
-                            </figure>
-                        </a>
+                                    <figure id='figure8' style='display:none'>
+                                        <svg id='scatter8' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
 
-                        <a href='./images/rdist-indeg.webp' target="_blank" rel="noopener noreferrer">
-                            <figure class='graph'>
-                                <img src='./images/rdist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
-                                <figcaption>
-                                    Figure 8: Distribution plotting of node in-degrees of Randomized Network
-                                </figcaption>
-                            </figure>
-                        </a>
+                                    <figure id='figure9' style='display:none'>
+                                        <svg id='scatter9' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
+                                </div>
+                                <hr>
+                            </div>
+                        </dialog>
 
-                        <a href='./images/rdist-degree.webp' target="_blank" rel="noopener noreferrer">
-                            <figure class='graph' style='float:none;'>
-                                <img src='./images/rdist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.'>
-                                <figcaption>
-                                    Figure 9: Distribution plotting of node degrees (outbound and inbound) of Randomized Network
-                                </figcaption>
-                            </figure>
-                        </a>
+                        <div class='fig-col'>
+                            <a href='./images/rdist-outdeg.webp' target="_blank" rel="noopener noreferrer">
+                                <figure class='graph'>
+                                    <img src='./images/rdist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'>
+                                    <figcaption>
+                                        Figure 7: Distribution plotting of node out-degrees
+                                    </figcaption>
+                                </figure>
+                            </a>
+
+                            <a href='./images/rdist-indeg.webp' target="_blank" rel="noopener noreferrer">
+                                <figure class='graph'>
+                                    <img src='./images/rdist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
+                                    <figcaption>
+                                        Figure 8: Distribution plotting of node in-degrees of Randomized Network
+                                    </figcaption>
+                                </figure>
+                            </a>
+
+                            <a href='./images/rdist-degree.webp' target="_blank" rel="noopener noreferrer">
+                                <figure class='graph' style='float:none;'>
+                                    <img src='./images/rdist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.'>
+                                    <figcaption>
+                                        Figure 9: Distribution plotting of node degrees (outbound and inbound) of Randomized Network
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </div>
                     </div>
-
                     <p style='clear:both;'>
                         The distribution figures are similar for the other four randomized networks. This similarity holds true for the log-log scale plotting of the same data:
                     </p>
 
-                    <a href='./images/plrdist-degree.webp' target="_blank" rel="noopener noreferrer">
-                        <figure class='graph'>
-                            <img src='./images/plrdist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
-                            <figcaption>
-                                Figure 10: Power Law Distribution plotting of node degrees (inbound and outbound) of Randomized Network
+                    <div>
+                        <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
+                            <label for='random_distribution_log_toggle' class="pointer" style='color:#3b4044' onclick='toggle_scatter_view("random_distribution_log_toggle","random_distributions_log")'>View Interactive Graphs</label>
+                            <input id='random_distribution_log_toggle' class="pointer range_switch" class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px'
+                            onchange='toggle_scatter_view(this.id,"random_distributions_log")'/>
+                        </div>
+                        <a href='./images/plrdist-degree.webp' target="_blank" rel="noopener noreferrer">
+                            <figure class='graph'>
+                                <img src='./images/plrdist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
+                                <figcaption>
+                                    Figure 10: Power Law Distribution plotting of node degrees (inbound and outbound) of Randomized Network
+                                </figcaption>
+                            </figure>
+                        </a>
+
+                        <p>
+                            The following table of figures are the log-log scale plotting of four other randomized networks, with respect to evaluating out-bound degree:
+                        </p>
+
+                        <figure class='col-fig'>
+
+                            <a href='./images/rdist2-outdeg.webp' target="_blank" rel="noopener noreferrer">
+                                <img src='./images/rdist2-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
+                            </a>
+                            <a href='./images/rdist3-outdeg.webp' target="_blank" rel="noopener noreferrer">
+                                <img src='./images/rdist3-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
+                            </a>
+                            <a href='./images/rdist4-outdeg.webp' target="_blank" rel="noopener noreferrer">
+                                <img src='./images/rdist4-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
+                            </a>
+                            <a href='./images/rdist5-outdeg.webp' target="_blank" rel="noopener noreferrer">
+                                <img src='./images/rdist5-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
+                            </a>
+
+                            <figcaption style='clear:both;padding-top:25px'>
+                                Figure 12: Power Law distribution plotting of outbound node degrees for four other randomized networks.
                             </figcaption>
+
                         </figure>
-                    </a>
-
-                    <p>
-                        The following table of figures are the log-log scale plotting of four other randomized networks, with respect to evaluating out-bound degree:
-                    </p>
-
-                    <figure class='col-fig'>
-
-                        <a href='./images/rdist2-outdeg.webp' target="_blank" rel="noopener noreferrer">
-                            <img src='./images/rdist2-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
-                        </a>
-                        <a href='./images/rdist3-outdeg.webp' target="_blank" rel="noopener noreferrer">
-                            <img src='./images/rdist3-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
-                        </a>
-                        <a href='./images/rdist4-outdeg.webp' target="_blank" rel="noopener noreferrer">
-                            <img src='./images/rdist4-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
-                        </a>
-                        <a href='./images/rdist5-outdeg.webp' target="_blank" rel="noopener noreferrer">
-                            <img src='./images/rdist5-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
-                        </a>
-
-                        <figcaption style='clear:both;padding-top:25px'>
-                            Figure 12: Power Law distribution plotting of outbound node degrees for four other randomized networks.
-                        </figcaption>
-
-                    </figure>
-
+                    </div>
                     <p>
                         These distributions are Poisson/binomial. They do not allow for the reasonable probability of having nodes with large degrees, (degrees that approach kmax). This is emphasized by the values given in the x-axis. The maximum node degree here is anywhere from 7 to 9; much smaller than the maximum node degrees of the Reddit dataset. There seems to be a higher occurrence nodes with degree quantities close to the maximum as well. This is shown in the network representation of the involved data, shown in the following figures:
                     </p>
@@ -834,10 +926,11 @@ produce_front_matter("Social Computing","Projects");
 
         <script>
             function toggle_scatter_view(origin_switch_id,container_id){
-                origin_switch_element = document.getElementById(origin_switch_id);
-                state = origin_switch_element.getAttribute("value");
-                html_element = document.getElementsByTagName("html")[0];
-                body_element = html_element.getElementsByTagName("body")[0];
+                current_dialog = container_id;
+                let origin_switch_element = document.getElementById(origin_switch_id);
+                let state = origin_switch_element.getAttribute("value");
+                let html_element = document.getElementsByTagName("html")[0];
+                let body_element = html_element.getElementsByTagName("body")[0];
                 if(state == 0){
                     origin_switch_element.setAttribute("value",1);
                     origin_switch_element.value = 1;
@@ -860,8 +953,8 @@ produce_front_matter("Social Computing","Projects");
         <script>
             function resize_scatter_view(container_id){
                 current_dialog = container_id;
-                dialog = document.getElementById(container_id);
-                content = document.getElementsByClassName("dialog-content")[0];
+                let dialog = document.getElementById(container_id);
+                let content = dialog.getElementsByClassName("dialog-content")[0];
                 dialog.style['max-height'] = content.getBoundingClientRect().height+20+"px";
             }
         </script>
@@ -904,9 +997,11 @@ produce_front_matter("Social Computing","Projects");
                     .append("circle")
                     .attr("cx", function(d) { return x(d.key);})
                     .attr("cy", function(d) { return y(d.value/8029)})
-                    .attr("r",4)
-                    .style("fill","blue")
-                    .append("title").text(d => d.value + " node(s) with degree " + d.key + "\nDistribution: " + (d.value/8029).toFixed(4));
+                    .attr("r",7)
+                    .style("fill","#1F78B4")
+                    .style("opacity",0.75)
+                    .append("title")
+                    .text(d => d.value + " node(s) with degree " + d.key + "\nDistribution: " + (d.value/8029).toFixed(4));
 
                 figure.append("text")
                     .attr("transform", "rotate(-90)")
@@ -927,6 +1022,14 @@ produce_front_matter("Social Computing","Projects");
             create_scatter(social_dist["k_in"],"linear","#scatter2",[-10,150],[-0.01,0.35]);
             create_scatter(social_dist["k_total"],"linear","#scatter3",[-10,375],[-0.01,0.40]);
 
+            create_scatter(social_dist["k_out"],"log","#scatter4",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+            create_scatter(social_dist["k_in"],"log","#scatter5",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+            create_scatter(social_dist["k_total"],"log","#scatter6",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+
+            create_scatter(random_dist["k_out"],"linear","#scatter7",[0,10],[-0.01,0.35]);
+            create_scatter(random_dist["k_in"],"linear","#scatter8",[0,11],[-0.01,0.35]);
+            create_scatter(random_dist["k_total"],"linear","#scatter9",[0,15],[-0.01,0.25]);
+
         </script>
 
         <script>
@@ -936,7 +1039,7 @@ produce_front_matter("Social Computing","Projects");
                 var current_dialog = document.getElementsByTagName("dialog")[0].id;
                 let index = 0;
                 while(index < modals.length){
-                    modal = modals[index];
+                    let modal = modals[index];
                     modal.addEventListener('click', function(){
                         modal.getElementsByTagName("span")[0].click();
                     });
@@ -950,7 +1053,7 @@ produce_front_matter("Social Computing","Projects");
 
                 window.addEventListener('keydown', function(e) {
                     if (e.key == "Escape"){
-                        switches = document.getElementsByClassName("range_switch");
+                        let switches = document.getElementsByClassName("range_switch");
                         let index = 0;
                         while(index < switches.length){
                             switch_element = switches[index];
