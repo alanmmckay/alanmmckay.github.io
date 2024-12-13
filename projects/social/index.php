@@ -404,6 +404,42 @@ produce_front_matter("Social Computing","Projects");
                             <input id='random_distribution_log_toggle' class="pointer range_switch" class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px'
                             onchange='toggle_scatter_view(this.id,"random_distributions_log")'/>
                         </div>
+                        <dialog id='random_distributions_log' style='width:85%;max-width:875px;background-color:rgba(255,255,255,0.95);height:100%'>
+                            <div class='dialog-content'>
+                                <div style="padding-top:10px;padding-bottom:10px;display:flex;justify-content:end;">
+                                    <span style='color:#3b4044;' class="pointer" onclick='toggle_scatter_view("random_distribution_log_toggle","random_distributions_log")' >Close interactive graph [ x ]</span>
+                                </div>
+                                <hr>
+                                <select name='random_dist_log_selector' id ='random_dist_log_selector' onchange="switch_scatter(this.value,'random_distribution_log_figures')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
+                                    <option value='figure10'>out-degree (k_out)</option>
+                                    <option value='figure10_b'>in-degree (k_in)</option>
+                                    <option value='figure10_c'>total-degree (k_total)</option>
+                                </select>
+                                <div id='random_distribution_log_figures'>
+                                    <figure id='figure10' style=''>
+                                        <svg id='scatter10' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
+
+                                    <figure id='figure10_b' style='display:none'>
+                                        <svg id='scatter10_b' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
+
+                                    <figure id='figure10_c' style='display:none'>
+                                        <svg id='scatter10_c' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
+                                </div>
+                                <hr>
+                            </div>
+                        </dialog>
                         <a href='./images/plrdist-degree.webp' target="_blank" rel="noopener noreferrer">
                             <figure class='graph'>
                                 <img src='./images/plrdist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
@@ -1016,7 +1052,6 @@ produce_front_matter("Social Computing","Projects");
         </script>
 
         <script>
-            //create_scatter(social_dist["k_total"],"log","#figure1",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
 
             create_scatter(social_dist["k_out"],"linear","#scatter1",[-10,100],[-0.01,0.20]);
             create_scatter(social_dist["k_in"],"linear","#scatter2",[-10,150],[-0.01,0.35]);
@@ -1030,6 +1065,9 @@ produce_front_matter("Social Computing","Projects");
             create_scatter(random_dist["k_in"],"linear","#scatter8",[0,11],[-0.01,0.35]);
             create_scatter(random_dist["k_total"],"linear","#scatter9",[0,15],[-0.01,0.25]);
 
+            create_scatter(random_dist["k_out"],"log","#scatter10",[10**-.25, 10**1.15],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+            create_scatter(random_dist["k_in"],"log","#scatter10_b",[10**-.25, 10**1.15],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+            create_scatter(random_dist["k_total"],"log","#scatter10_c",[10**-.25, 10**1.15],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
         </script>
 
         <script>
