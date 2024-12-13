@@ -134,21 +134,21 @@ produce_front_matter("Social Computing","Projects");
                                 <div id='social_distribution_figures'>
                                     <figure id='figure1' style=''>
                                         <svg id='scatter1' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                        <span style='display:block;width:100%;text-align:center'>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
                                         </span>
                                     </figure>
 
                                     <figure id='figure2' style='display:none'>
                                         <svg id='scatter2' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                        <span style='display:block;width:100%;text-align:center'>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
                                         </span>
                                     </figure>
 
                                     <figure id='figure3' style='display:none'>
                                         <svg id='scatter3' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                        <span style='display:block;width:100%;text-align:center'>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
                                         </span>
                                     </figure>
@@ -263,21 +263,21 @@ produce_front_matter("Social Computing","Projects");
                                 <div id='social_distribution_log_figures'>
                                     <figure id='figure4' style=''>
                                         <svg id='scatter4' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                        <span style='display:block;width:100%;text-align:center'>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
                                         </span>
                                     </figure>
 
                                     <figure id='figure5' style='display:none'>
                                         <svg id='scatter5' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                        <span style='display:block;width:100%;text-align:center'>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
                                         </span>
                                     </figure>
 
                                     <figure id='figure6' style='display:none'>
                                         <svg id='scatter6' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                        <span style='display:block;width:100%;text-align:center'>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
                                         </span>
                                     </figure>
@@ -342,21 +342,21 @@ produce_front_matter("Social Computing","Projects");
                                 <div id='random_distribution_figures'>
                                     <figure id='figure7' style=''>
                                         <svg id='scatter7' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                        <span style='display:block;width:100%;text-align:center'>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
                                         </span>
                                     </figure>
 
                                     <figure id='figure8' style='display:none'>
                                         <svg id='scatter8' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                        <span style='display:block;width:100%;text-align:center'>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
                                         </span>
                                     </figure>
 
                                     <figure id='figure9' style='display:none'>
                                         <svg id='scatter9' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                        <span style='display:block;width:100%;text-align:center'>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
                                         </span>
                                     </figure>
@@ -418,21 +418,21 @@ produce_front_matter("Social Computing","Projects");
                                 <div id='random_distribution_log_figures'>
                                     <figure id='figure10' style=''>
                                         <svg id='scatter10' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                        <span style='display:block;width:100%;text-align:center'>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
                                         </span>
                                     </figure>
 
                                     <figure id='figure10_b' style='display:none'>
                                         <svg id='scatter10_b' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                        <span style='display:block;width:100%;text-align:center'>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
                                         </span>
                                     </figure>
 
                                     <figure id='figure10_c' style='display:none'>
                                         <svg id='scatter10_c' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
-                                        <span style='display:block;width:100%;text-align:center'>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
                                         </span>
                                     </figure>
@@ -987,11 +987,46 @@ produce_front_matter("Social Computing","Projects");
         </script>
 
         <script>
+            var enacted = false;
             function resize_scatter_view(container_id){
                 current_dialog = container_id;
                 let dialog = document.getElementById(container_id);
                 let content = dialog.getElementsByClassName("dialog-content")[0];
                 dialog.style['max-height'] = content.getBoundingClientRect().height+20+"px";
+                let figure_content = content.getElementsByTagName("div")[1];
+                let figure_position = figure_content.getBoundingClientRect();
+                figure_content.datawidth = 100
+                figure_content.style['margin'] = 'auto';
+                let svg_content = figure_content.getElementsByTagName("svg")[0];
+                let svg_position;
+                let window_height = window.innerHeight;
+
+                function expand(){
+                    while(figure_position.bottom > window_height){
+                        figure_content.datawidth -= 1;
+                        figure_content.style['width'] = figure_content.datawidth + "%";
+                        figure_position = figure_content.getBoundingClientRect();
+                        window_height = window.innerHeight;
+                    }
+                    return [svg_content.getBoundingClientRect(),false];
+                }
+
+                function retract(callback){
+                    if(enacted == false){
+                        enacted = true;
+                        result = expand()
+                        let height = result[0].height
+                        enacted = result[1]
+                        if(height < 300){
+                            figure_content.style['width'] = '85%';
+                        }
+                    }
+                }
+
+                if(window.innerHeight > 300){
+                    retract(expand);
+                }
+
             }
         </script>
 
@@ -1137,10 +1172,11 @@ produce_front_matter("Social Computing","Projects");
         </script>
 
         <script>
+            var current_dialog
             var modal;
             window.addEventListener('load', function () {
                 let modals = document.getElementsByTagName('dialog')
-                var current_dialog = document.getElementsByTagName("dialog")[0].id;
+                current_dialog = document.getElementsByTagName("dialog")[0].id;
                 let index = 0;
                 while(index < modals.length){
                     let modal = modals[index];
@@ -1150,9 +1186,6 @@ produce_front_matter("Social Computing","Projects");
                     index += 1;
                     let content = modal.getElementsByClassName('dialog-content')[0];
                     content.addEventListener('click', function(event){event.stopPropagation()});
-                }
-                window.onresize = function(){
-                    resize_scatter_view(current_dialog);
                 }
 
                 window.addEventListener('keydown', function(e) {
@@ -1172,6 +1205,9 @@ produce_front_matter("Social Computing","Projects");
                 });
             });
 
+            window.onresize = function(){
+                resize_scatter_view(current_dialog);
+            }
         </script>
     </body>
 </html>
