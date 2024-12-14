@@ -1037,7 +1037,7 @@ produce_front_matter("Social Computing","Projects");
                     }
                 }
 
-                if(window.innerHeight > 325){
+                if(window.innerHeight > 350){
                     retract(expand);
                 }
 
