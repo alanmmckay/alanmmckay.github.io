@@ -58,7 +58,7 @@ produce_front_matter("Social Computing","Projects");
                         <p id='note_origin'>
                             An assigned project that I found interesting involved assigning each student a web scrape from a social network. Each student was ambiguously tasked to analyze the data. Below is the result of data analysis that I personally drew from the dataset. I feel this is worth sharing to help those who have a genuine interest in the subject understand the processes involved.<a href='#note'>*</a>
                         </p>
-                        <h3>Update - Data Visualization</h3>
+                        <h3 id="content-update">Update - Data Visualization</h3>
                         <p>
                             Additional content has been added to this page since initially publishing this project. The initial publication, whose state is encapsulated by <a href='https://github.com/alanmmckay/alanmmckay.github.io/tree/a1d800f2d92ec2f1f54a10051f520b2496b31138'
                              target="_blank" rel="noopener noreferrer">git commit hash a1d800f</a>, went far beyond the scope of the original problem statement of analysis. The initial analysis included a set of static figures containing images that show scatter-plot distributions and network graphs. The usage of these static figures aligns with what is typical of academic publications.
