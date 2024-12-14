@@ -17,6 +17,9 @@ include('../../header.php');
 produce_front_matter("Social Computing","Projects");
 ?>
                     <section class='info'>
+                        <!-- div style='display:flex;justify-content:end;position:sticky;top:0px;height:30px;align-items:center;background-color:rgba(255,255,255,0.95);margin-bottom:-26px;'>
+                            <a href="#main-content">Skip Preface</a>
+                        </div -->
                         <header>
                             <h2>Preface</h2>
                         </header>
@@ -55,9 +58,44 @@ produce_front_matter("Social Computing","Projects");
                         <p id='note_origin'>
                             An assigned project that I found interesting involved assigning each student a web scrape from a social network. Each student was ambiguously tasked to analyze the data. Below is the result of data analysis that I personally drew from the dataset. I feel this is worth sharing to help those who have a genuine interest in the subject understand the processes involved.<a href='#note'>*</a>
                         </p>
+                        <h3 id="content-update">Update - Data Visualization</h3>
+                        <p>
+                            Additional content has been added to this page since initially publishing this project. The initial publication, whose state is encapsulated by <a href='https://github.com/alanmmckay/alanmmckay.github.io/tree/a1d800f2d92ec2f1f54a10051f520b2496b31138'
+                             target="_blank" rel="noopener noreferrer">git commit hash a1d800f</a>, went far beyond the scope of the original problem statement of analysis. The initial analysis included a set of static figures containing images that show scatter-plot distributions and network graphs. The usage of these static figures aligns with what is typical of academic publications.
+                        </p>
+                        <p>
+                            This publication has been further updated with the inclusion of more intuitive data presentation. This was accomplished by using the d3 <a href="https://d3js.org/" target="_blank" rel="noopener noreferrer">data visualization library</a>. The implementation of these new figures allow users to interact with the data being discussed more closely. These new additions are described as follows:
+                        </p>
+                        <ul>
+                            <li>
+                                A <a href="#force_graph_social">force directed graph</a> which represents a network of agents as nodes where a user can inspect the physical properties of said network with respect to its connectivity. A user can mouse over each node to reveal the agent's id in addition to revealing a report of how many other users have referred to it. The edges connecting these nodes represent one of these references.
+                                <ul>
+                                    <li>
+                                        The <a href='#six_degrees_of_separation'>Six degrees of separation</a> subsection was added to provide an intuitive approach to correlating the properties that can be explored via the force directed graph to the statistical analysis discussed within this project page.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                A set of interactive scatter-plot graphs which allow a user to pan and zoom in on the data that each scatter-plot represents. Each set of static figures will present an option to switch to a view where these interactive graphs can be looked at within the following subsections:
+                                <ul>
+                                    <li>
+                                        <a href="#social_distribution_toggle">Social Network - Normal Distribution</a>
+                                    </li>
+                                    <li>
+                                        <a href="#social_distribution_log_toggle">Social Network - Power Law Distribution</a>
+                                    </li>
+                                    <li>
+                                        <a href="#random_distribution_toggle">Random Network - Normal Distribution</a>
+                                    </li>
+                                    <li>
+                                        <a href="#random_distribution_log_toggle">Social Network - Power Law Distribution</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     <hr>
                     </section>
-                    <header>
+                    <header id="main-content">
                         <h1>Data Science: Social Computing</h1>
                     </header>
                     <p>
@@ -111,34 +149,75 @@ produce_front_matter("Social Computing","Projects");
                         How are the various degrees distributed? The following figures are indicative of distribution:
                     </p>
 
-                    <div class='fig-col'>
-                        <a href='./images/dist-outdeg.webp' target="_blank" rel="noopener noreferrer">
+                    <div>
+                        <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
+                            <label for='social_distribution_toggle' class="pointer" style='color:#3b4044' onclick='toggle_scatter_view("social_distribution_toggle","social_distributions")'>View Interactive Graphs</label>
+                            <input id='social_distribution_toggle' class="pointer range_switch" class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px'
+                            onchange='toggle_scatter_view(this.id,"social_distributions")'/>
+                        </div>
+                        <dialog id='social_distributions' style='width:85%;max-width:875px;background-color:rgba(255,255,255,0.95);height:100%'>
+                            <div class='dialog-content'>
+                                <div style="padding-top:10px;padding-bottom:10px;display:flex;justify-content:end;">
+                                    <span style='color:#3b4044;' class="pointer" onclick='toggle_scatter_view("social_distribution_toggle","social_distributions")' >Close interactive graph [ x ]</span>
+                                </div>
+                                <hr>
+                                <select name='social_dist_selector' id ='social_dist_selector' onchange="switch_scatter(this.value,'social_distribution_figures')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
+                                    <option value='figure1'>out-degree (k_out)</option>
+                                    <option value='figure2'>in-degree (k_in)</option>
+                                    <option value='figure3'>total-degree (k_total)</option>
+                                </select>
+                                <div id='social_distribution_figures'>
+                                    <figure id='figure1' style=''>
+                                        <figcaption style='text-align:center'>Figure 1: Distribution plotting of node out-degrees.</figcaption>
+                                        <svg id='scatter1' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
+
+                                    <figure id='figure2' style='display:none'>
+                                        <figcaption style='text-align:center'>Figure 2: Distribution plotting of node-indegrees.</figcaption>
+                                        <svg id='scatter2' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
+
+                                    <figure id='figure3' style='display:none'>
+                                        <figcaption style='text-align:center'>Figure 3: Distribution plotting of node degrees (inbound and outbound)</figcaption>
+                                        <svg id='scatter3' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
+                                </div>
+                                <hr>
+                            </div>
+                        </dialog>
+
+                        <div class='fig-col'>
                             <figure class='graph'>
                                 <img src='./images/dist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'>
                                 <figcaption>
                                     Figure 1: Distribution plotting of node out-degrees.
                                 </figcaption>
                             </figure>
-                        </a>
 
 
-                        <a href='./images/dist-indeg.webp' target="_blank" rel="noopener noreferrer">
                             <figure class='graph'>
                                 <img src='./images/dist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
                                 <figcaption>
                                     Figure 2: Distribution plotting of node-indegrees.
                                 </figcaption>
                             </figure>
-                        </a>
 
-                        <a href='./images/dist-degree.webp' target="_blank" rel="noopener noreferrer">
                             <figure class='graph' style='float:none'>
                                 <img src='./images/dist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.'>
                                 <figcaption>
                                     Figure 3: Distribution plotting of node degrees (inbound and outbound)
                                 </figcaption>
                             </figure>
-                        </a>
+                        </div>
                     </div>
 
                     <p style='clear:both;'>
@@ -196,139 +275,249 @@ produce_front_matter("Social Computing","Projects");
                     <p>
                         To confirm a power-law distribution, these distributions can be plotted in a log-log scale. The following figures show that a power-law distribution is indeed in play. The light blue points represent the distribution plot. The dotted blue line overlayed by the red line is a plotting of the power-law distribution function (C*k<sup>-γ</sup>).
                     </p>
-                    <div class='fig-col'>
+                    <div>
+                        <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
+                            <label for='social_distribution_log_toggle' class="pointer" style='color:#3b4044' onclick='toggle_scatter_view("social_distribution_log_toggle","social_distributions_log")'>View Interactive Graphs</label>
+                            <input id='social_distribution_log_toggle' class="pointer range_switch" class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px'
+                            onchange='toggle_scatter_view(this.id,"social_distributions_log")'/>
+                        </div>
+                        <dialog id='social_distributions_log' style='width:85%;max-width:875px;background-color:rgba(255,255,255,0.95);height:100%'>
+                            <div class='dialog-content'>
+                                <div style="padding-top:10px;padding-bottom:10px;display:flex;justify-content:end;">
+                                    <span style='color:#3b4044;' class="pointer" onclick='toggle_scatter_view("social_distribution_log_toggle","social_distributions_log")' >Close interactive graph [ x ]</span>
+                                </div>
+                                <hr>
+                                <select name='social_dist_log_selector' id ='social_dist_log_selector' onchange="switch_scatter(this.value,'social_distribution_log_figures')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
+                                    <option value='figure4'>out-degree (k_out)</option>
+                                    <option value='figure5'>in-degree (k_in)</option>
+                                    <option value='figure6'>total-degree (k_total)</option>
+                                </select>
+                                <div id='social_distribution_log_figures'>
+                                    <figure id='figure4' style=''>
+                                        <figcaption style='text-align:center'>Figure 4: Log-log scale distribution plotting of node-out degrees</figcaption>
+                                        <svg id='scatter4' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
 
-                        <a href='./images/pldist-outdeg.webp' target="_blank" rel="noopener noreferrer">
+                                    <figure id='figure5' style='display:none'>
+                                        <figcaption style='text-align:center'>Figure 5: Log-log scale distribution plotting of node-in degrees</figcaption>
+                                        <svg id='scatter5' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
+
+                                    <figure id='figure6' style='display:none'>
+                                        <figcaption style='text-align:center'>Figure 6: Log-log scale distribution plotting of node degrees (inbound and outbound)</figcaption>
+                                        <svg id='scatter6' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
+                                </div>
+                                <hr>
+                            </div>
+                        </dialog>
+
+                        <div class='fig-col'>
+
                             <figure class='graph'>
                                 <img src='./images/pldist-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of out-degrees.'>
                                 <figcaption>
                                     Figure 4: Log-log scale distribution plotting of node-out degrees
                                 </figcaption>
                             </figure>
-                        </a>
 
-                        <a href='./images/pldist-indeg.webp' target="_blank" rel="noopener noreferrer">
                             <figure class='graph'>
                                 <img src='./images/pldist-indeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of in-degrees.'>
                                 <figcaption>
                                     Figure 5: Log-log scale distribution plotting of node-in degrees
                                 </figcaption>
                             </figure>
-                        </a>
 
-                        <a href='./images/pldist-degree.webp' target="_blank" rel="noopener noreferrer">
                             <figure class='graph' style='float:none'>
                                 <img src='./images/pldist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
                                 <figcaption>
                                     Figure 6: Log-log scale distribution plotting of node degrees (inbound and outbound)
                                 </figcaption>
                             </figure>
-                        </a>
-                        <hr>
+                            <hr>
 
+                        </div>
                     </div>
 
                     <p style='clear:both;'>
                         Random networks were generated to contrast this data. The algorithm that created these networks ensured the same node count and edge count. It also ensured there exists no node that does not have an edge – as is the case for the reddit data set. The distribution of these networks differ. Consider the following figures:
                     </p>
+                    <div>
+                        <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
+                            <label for='random_distribution_toggle' class="pointer" style='color:#3b4044' onclick='toggle_scatter_view("random_distribution_toggle","random_distributions")'>View Interactive Graphs</label>
+                            <input id='random_distribution_toggle' class="pointer range_switch" class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px'
+                            onchange='toggle_scatter_view(this.id,"random_distributions")'/>
+                        </div>
+                        <dialog id='random_distributions' style='width:85%;max-width:875px;background-color:rgba(255,255,255,0.95);height:100%'>
+                            <div class='dialog-content'>
+                                <div style="padding-top:10px;padding-bottom:10px;display:flex;justify-content:end;">
+                                    <span style='color:#3b4044;' class="pointer" onclick='toggle_scatter_view("random_distribution_toggle","random_distributions")' >Close interactive graph [ x ]</span>
+                                </div>
+                                <hr>
+                                <select name='random_dist_selector' id ='random_dist_selector' onchange="switch_scatter(this.value,'random_distribution_figures')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
+                                    <option value='figure7'>out-degree (k_out)</option>
+                                    <option value='figure8'>in-degree (k_in)</option>
+                                    <option value='figure9'>total-degree (k_total)</option>
+                                </select>
+                                <div id='random_distribution_figures'>
+                                    <figure id='figure7' style=''>
+                                        <figcaption style='text-align:center'>Figure 7: Distribution plotting of node out-degrees</figcaption>
+                                        <svg id='scatter7' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
 
-                    <div class='fig-col'>
-                        <a href='./images/rdist-outdeg.webp' target="_blank" rel="noopener noreferrer">
-                            <figure class='graph'>
+                                    <figure id='figure8' style='display:none'>
+                                        <figcaption style='text-align:center'>Figure 8: Distribution plotting of node in-degrees of Randomized Network</figcaption>
+                                        <svg id='scatter8' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
+
+                                    <figure id='figure9' style='display:none'>
+                                        <figcaption style='text-align:center'>Figure 9: Distribution plotting of node degrees (outbound and inbound) of Randomized Network</figcaption>
+                                        <svg id='scatter9' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
+                                </div>
+                                <hr>
+                            </div>
+                        </dialog>
+
+                        <div class='fig-col'>
+                           <figure class='graph'>
                                 <img src='./images/rdist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'>
                                 <figcaption>
                                     Figure 7: Distribution plotting of node out-degrees
                                 </figcaption>
                             </figure>
-                        </a>
 
-                        <a href='./images/rdist-indeg.webp' target="_blank" rel="noopener noreferrer">
                             <figure class='graph'>
                                 <img src='./images/rdist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
                                 <figcaption>
                                     Figure 8: Distribution plotting of node in-degrees of Randomized Network
                                 </figcaption>
                             </figure>
-                        </a>
 
-                        <a href='./images/rdist-degree.webp' target="_blank" rel="noopener noreferrer">
                             <figure class='graph' style='float:none;'>
                                 <img src='./images/rdist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.'>
                                 <figcaption>
                                     Figure 9: Distribution plotting of node degrees (outbound and inbound) of Randomized Network
                                 </figcaption>
                             </figure>
-                        </a>
+                        </div>
                     </div>
-
                     <p style='clear:both;'>
                         The distribution figures are similar for the other four randomized networks. This similarity holds true for the log-log scale plotting of the same data:
                     </p>
 
-                    <a href='./images/plrdist-degree.webp' target="_blank" rel="noopener noreferrer">
-                        <figure class='graph'>
+                    <div>
+                        <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
+                            <label for='random_distribution_log_toggle' class="pointer" style='color:#3b4044' onclick='toggle_scatter_view("random_distribution_log_toggle","random_distributions_log")'>View Interactive Graphs</label>
+                            <input id='random_distribution_log_toggle' class="pointer range_switch" class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px'
+                            onchange='toggle_scatter_view(this.id,"random_distributions_log")'/>
+                        </div>
+                        <dialog id='random_distributions_log' style='width:85%;max-width:875px;background-color:rgba(255,255,255,0.95);height:100%'>
+                            <div class='dialog-content'>
+                                <div style="padding-top:10px;padding-bottom:10px;display:flex;justify-content:end;">
+                                    <span style='color:#3b4044;' class="pointer" onclick='toggle_scatter_view("random_distribution_log_toggle","random_distributions_log")' >Close interactive graph [ x ]</span>
+                                </div>
+                                <hr>
+                                <select name='random_dist_log_selector' id ='random_dist_log_selector' onchange="switch_scatter(this.value,'random_distribution_log_figures')" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
+                                    <option value='figure10'>out-degree (k_out)</option>
+                                    <option value='figure10_b'>in-degree (k_in)</option>
+                                    <option value='figure10_c'>total-degree (k_total)</option>
+                                </select>
+                                <div id='random_distribution_log_figures'>
+                                    <figure id='figure10' style=''>
+                                        <svg id='scatter10' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
+
+                                    <figure id='figure10_b' style='display:none'>
+                                        <svg id='scatter10_b' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
+
+                                    <figure id='figure10_c' style='display:none'>
+                                        <svg id='scatter10_c' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                                        <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
+                                            node degree (k)
+                                        </span>
+                                    </figure>
+                                </div>
+                                <hr>
+                            </div>
+                        </dialog>
+                            <figure class='graph'>
                             <img src='./images/plrdist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
                             <figcaption>
                                 Figure 10: Power Law Distribution plotting of node degrees (inbound and outbound) of Randomized Network
                             </figcaption>
                         </figure>
-                    </a>
 
-                    <p>
-                        The following table of figures are the log-log scale plotting of four other randomized networks, with respect to evaluating out-bound degree:
-                    </p>
+                        <p>
+                            The following table of figures are the log-log scale plotting of four other randomized networks, with respect to evaluating out-bound degree:
+                        </p>
 
-                    <figure class='col-fig'>
+                        <figure class='col-fig'>
 
-                        <a href='./images/rdist2-outdeg.webp' target="_blank" rel="noopener noreferrer">
                             <img src='./images/rdist2-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
-                        </a>
-                        <a href='./images/rdist3-outdeg.webp' target="_blank" rel="noopener noreferrer">
+
                             <img src='./images/rdist3-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
-                        </a>
-                        <a href='./images/rdist4-outdeg.webp' target="_blank" rel="noopener noreferrer">
+
                             <img src='./images/rdist4-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
-                        </a>
-                        <a href='./images/rdist5-outdeg.webp' target="_blank" rel="noopener noreferrer">
+
                             <img src='./images/rdist5-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
-                        </a>
 
-                        <figcaption style='clear:both;padding-top:25px'>
-                            Figure 12: Power Law distribution plotting of outbound node degrees for four other randomized networks.
-                        </figcaption>
 
-                    </figure>
+                            <figcaption style='clear:both;padding-top:25px'>
+                                Figure 12: Power Law distribution plotting of outbound node degrees for four other randomized networks.
+                            </figcaption>
 
+                        </figure>
+                    </div>
                     <p>
                         These distributions are Poisson/binomial. They do not allow for the reasonable probability of having nodes with large degrees, (degrees that approach kmax). This is emphasized by the values given in the x-axis. The maximum node degree here is anywhere from 7 to 9; much smaller than the maximum node degrees of the Reddit dataset. There seems to be a higher occurrence nodes with degree quantities close to the maximum as well. This is shown in the network representation of the involved data, shown in the following figures:
                     </p>
 
-                    <a href='./images/rnet-vis.webp' target="_blank" rel="noopener noreferrer">
                     <figure class='graph'>
                         <img src='./images/rnet-vis.webp' alt='A Gephi visualized graph which shows the clustering of the agents within a randomized network. The clustering shows consistency all around.'>
                         <figcaption>
                             Figure 13: Full visualization of randomized network indicates a lack of any hubs. The network seems to have reached a transition where there exists only one component.
                         </figcaption>
                     </figure>
-                    </a>
 
-                    <a href='./images/sfnet-vis.webp' target="_blank" rel="noopener noreferrer">
                     <figure class='graph'>
                         <img src='./images/sfnet-vis.webp' alt='A Gephi visualized graph which shows the clustering of the agents within a social network. Clustering is not consistent here, where clustering seems to revolve around a select few agents.'>
                         <figcaption>
                             Figure 14: Partial visualization of network representative of the Reddit dataset. Notice the significant hubs which are indicative of a higher degree.
                         </figcaption>
                     </figure>
-                    </a>
 
-                    <a href='./images/sf-outliers.webp' target="_blank" rel="noopener noreferrer">
                     <figure class='graph'>
                         <img src='./images/sf-outliers.webp' alt='A gephi visualized grpah which shows outliers of the social network; disconnected interactions between a subset of agents involved.'>
                         <figcaption>
                             Figure 15: Partial visualization of the network representative of the Reddit dataset; structures like these exist in the orbit of the larger connected component of the prior figure. This is a property not observed in the generated randomized networks.
                         </figcaption>
                     </figure>
-                    </a>
 
                     <p>
                         The connectivity of Figure 13 tracks once consideration of average node degree is taken. The average degree measured by Gephi is 2.141. This tracks considering the expected node degree of |E|/|V| which is 17406/8129 =  2.141. Once the average node degree surpasses 1, a randomized graph is in the super critical regime where there exists some gigantic component. This component is not fully connected, though; the average node degree has not reached a point to exceed ln(|V|).
@@ -337,7 +526,7 @@ produce_front_matter("Social Computing","Projects");
                     <p>
                         The observation of the paragraph above helps us see the property of the complex network given by the Reddit dataset is a scale-free network; a means to visually support this assertion.
                     </p>
-                    <h3>Six degrees of separation</h3>
+                    <h3 id="six_degrees_of_separation">Six degrees of separation</h3>
                     <p>
                         Six degrees of separation is the term that encapsulates the idea that all individuals are six or fewer social connections away from each other. The network science discussed on this page acts as a means to validate this. The contrast of the Reddit social network graph and the graph of randomly generated connections also acts as evidence. The average distance between nodes will be higher in a randomized graph, leading to the assertion that there are more than six degrees of separation in this context.
                     </p>
@@ -361,22 +550,24 @@ produce_front_matter("Social Computing","Projects");
                             <p id='node_counter' style='display:block;margin:0px;text-align:start;'></p>
                         </div>
                         <div id='social_graph_container'>
-                            <svg viewBox="0 0 1048 800" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                            <svg id='force-graph-svg' viewBox="0 0 1048 800" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
+                            <div id='range-wrapper' style='position:sticky;bottom:0px;padding-top:10px;padding-bottom:10px;background-color:rgba(255, 255, 255, 0.85);'>
+                                <div id='confirm_wrapper' style='display:none;align-items:flex-starts;gap:10px;justify-content:space-between;flex-wrap:wrap;'>
+                                    <label id="confirm_label" for="" style='text-align:start;max-width:80%'>
+                                        <strong>Warning:</strong> Increasing node count beyond this threshold requires greater system resources. Only do so if device has adequate memory and cpu.
+                                    </label>
+                                    <input type="button" id="confirm_button" style='padding:5px;flex-grow:1;max-height:35px;align-self:center' value="Proceed" onclick='button_kickoff()' />
+                                </div>
+                                <div style='display:flex;align-items:flex-end;gap:15px;justify-content:space-between'>
+                                    <label for="node_range" style='text-align:start'>
+                                        Node Range: (lower value increases amount of nodes)
+                                    </label>
+                                    <p style='margin:0px;min-width:115px'>Value: <span id='nodeSliderVal'> </span></p>
+                                </div>
+                                <input type="range" id="node_range" value="6" min="1" max="16" style='width:95%;accent-color:grey;margin-bottom:5px;' oninput='slider_kickoff()'/>
+                            </div>
                         </div>
                         <div style="color:#7b869d;">
-                            <div style='display:flex;align-items:flex-end;gap:15px;justify-content:space-between'>
-                                <label for="node_range" style='text-align:start'>
-                                    Node Range: (lower value increases amount of nodes)
-                                </label>
-                                <p style='margin:0px;min-width:115px'>Value: <span id='nodeSliderVal'> </span></p>
-                            </div>
-                                <input type="range" id="node_range" value="6" min="1" max="16" style='width:95%;accent-color:grey;margin-bottom:5px;' oninput='slider_kickoff()'/>
-                            <div id='confirm_wrapper' style='display:none;align-items:flex-starts;gap:10px;justify-content:space-between;flex-wrap:wrap;'>
-                                <label id="confirm_label" for="" style='text-align:start;max-width:80%'>
-                                    <strong>Warning:</strong> Increasing node count beyond this threshold requires greater system resources. Only do so if device has adequate memory and cpu.
-                                </label>
-                                <input type="button" id="confirm_button" style='padding:5px;flex-grow:1;max-height:35px;' value="Proceed" onclick='button_kickoff()' />
-                            </div>
                             <div style='display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px'>
                                 <label for="" style='text-align:start;max-width:80%;'>
                                     Expand gap between nodes:
@@ -429,7 +620,7 @@ produce_front_matter("Social Computing","Projects");
 
                     /* --- Function to create force graph within existing svg: --- */
                         function kickoff(filter,link_strength,collision_strength,force_strength){
-                            let svg = d3.select('svg');
+                            let svg = d3.select("#force-graph-svg");
                             links = data.links.filter(d => (d.source_strength >= filter && d.target_strength >= filter)).map(d => ({...d}));
                             nodes = data.nodes.filter(d => d.inbound >= filter).map(d => ({...d}));
 
@@ -520,14 +711,15 @@ produce_front_matter("Social Computing","Projects");
                             nodes = false;
                             links = false;
                             simulation = false;
-                            document.getElementsByTagName("svg")[0].remove();
+                            document.getElementById("force-graph-svg").remove();
 
                             // --- Create replacement svg element
                             let new_svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                            new_svg.setAttribute("id","force-graph-svg");
                             new_svg.setAttribute("viewBox","0 0 1048 800");
                             new_svg.setAttribute("preserveAspectRatio","xMidYMid meet");
                             new_svg.setAttribute("style","width:100%;");
-                            document.getElementById("social_graph_container").appendChild(new_svg);
+                            document.getElementById("social_graph_container").insertBefore(new_svg,document.getElementById("social_graph_container").children[0]);
                         }
 
                     /* --- Handler for the kickoff function to interact with the range slider --- */
@@ -561,6 +753,10 @@ produce_front_matter("Social Computing","Projects");
                                 explode_button.setAttribute("onclick","explode_graph(true)");
 
                                 document.getElementById("node_counter").innerHTML = String(nodes.length) + " node(s) with inbound links >= "+String(slider.value);
+
+                                if(document.getElementById('range-wrapper').getBoundingClientRect().width <= 500){
+                                    document.getElementById('confirm_wrapper').style['display'] = 'none';
+                                }
                             }
                         }
 
@@ -579,6 +775,10 @@ produce_front_matter("Social Computing","Projects");
                             explode_button.setAttribute("onclick","explode_graph(true)");
 
                             document.getElementById("node_counter").innerHTML = String(nodes.length) + " nodes with inbound links >= "+String(slider.value);
+
+                            if(document.getElementById('range-wrapper').getBoundingClientRect().width <= 500){
+                                document.getElementById('confirm_wrapper').style['display'] = 'none';
+                            }
                         }
 
                     /* Handler for the kickoff function to interact with the dropdown menu */
@@ -609,7 +809,7 @@ produce_front_matter("Social Computing","Projects");
                                 }
                                 slider.max = 11;
                                 slider.style['width'] = "65%";
-                                kickoff_val = Math.min(old_threshold,10);
+                                kickoff_val = Math.min(old_threshold,11);
                             }
 
                             prime_svg();
@@ -753,5 +953,275 @@ produce_front_matter("Social Computing","Projects");
                 </nav>
             </section>
         </section>
+
+        <script src=social_distributions.js></script>
+        <script src=random_distributions.js></script>
+
+        <script>
+            function switch_scatter(reveal_id, origin_container){
+                let figures = document.getElementById(origin_container).children
+                let index = 0;
+                while(index < figures.length){
+                    let figure = figures[index];
+                    let id = figure.getAttribute("id");
+                    if(id != reveal_id){
+                        figure.style['display'] = "none";
+                    }else{
+                        figure.style['display'] = 'inherit';
+                    }
+                    index += 1;
+                }
+            }
+        </script>
+
+        <script>
+            function toggle_scatter_view(origin_switch_id,container_id){
+                current_dialog = container_id;
+                let origin_switch_element = document.getElementById(origin_switch_id);
+                let state = origin_switch_element.getAttribute("value");
+                let html_element = document.getElementsByTagName("html")[0];
+                let body_element = html_element.getElementsByTagName("body")[0];
+                if(state == 0){
+                    origin_switch_element.setAttribute("value",1);
+                    origin_switch_element.value = 1;
+                    html_element.style['overflow'] = 'hidden';
+                    body_element.style['overflow'] = 'hidden';
+                    document.getElementById(container_id).showModal();
+                    origin_switch_element.parentNode.style['visibility'] = 'hidden';
+                    resize_scatter_view(container_id);
+                }else{
+                    origin_switch_element.setAttribute("value",0);
+                    origin_switch_element.value = 0;
+                    html_element.style['overflow'] = 'inherit';
+                    body_element.style['overflow'] = 'inherit';
+                    document.getElementById(container_id).close();
+                    origin_switch_element.parentNode.style['visibility'] = 'inherit';
+                }
+            }
+        </script>
+
+        <script>
+            var enacted = false;
+            function resize_scatter_view(container_id){
+                current_dialog = container_id;
+                let dialog = document.getElementById(container_id);
+                let content = dialog.getElementsByClassName("dialog-content")[0];
+                dialog.style['max-height'] = content.getBoundingClientRect().height+20+"px";
+                let figure_content = content.getElementsByTagName("div")[1];
+                let figure_position = figure_content.getBoundingClientRect();
+                figure_content.datawidth = 100
+                figure_content.style['margin'] = 'auto';
+                let svg_content = figure_content.getElementsByTagName("svg")[0];
+                let svg_position;
+                let window_height = window.innerHeight;
+
+                function expand(){
+                    while(figure_position.bottom > window_height){
+                        figure_content.datawidth -= 1;
+                        figure_content.style['width'] = figure_content.datawidth + "%";
+                        figure_position = figure_content.getBoundingClientRect();
+                        window_height = window.innerHeight;
+                    }
+                    return [svg_content.getBoundingClientRect(),false];
+                }
+
+                function retract(callback){
+                    if(enacted == false){
+                        enacted = true;
+                        result = expand()
+                        let height = result[0].height
+                        enacted = result[1]
+                        if(height < 300){
+                            figure_content.style['width'] = '85%';
+                        }
+                    }
+                }
+
+                if(window.innerHeight > 325){
+                    retract(expand);
+                }
+
+            }
+        </script>
+
+        <script>
+            function create_scatter(dataset,type,element_id,x_domain,y_domain,x_tick_values = [],y_tick_values = []){
+                let margin = {top: 10, right:30, bottom: 30, left: 60}, width = 600 - margin.left - margin.right, height = 500 - margin.top - margin.bottom;
+
+                let svg_width = width + margin.left + margin.right;
+                let svg_height = height + margin.top + margin.bottom;
+                let figure = d3.select("#"+element_id)
+                    .append("g")
+                    .attr("transform",
+                        "translate(" + margin.left + "," + margin.top +")");
+
+                let x;
+                let y;
+                let xAxis;
+                let yAxis;
+
+                if(type == "log"){
+
+                    x = d3.scaleLog().domain(x_domain).range([0, width]);
+                    y = d3.scaleLog().domain(y_domain).range([height,0]);
+
+                    xAxis = figure.append("g")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(d3.axisBottom(x)
+                                .tickValues(x_tick_values)
+                                .ticks(10,
+                                       function(d){
+                                            return 10 + "^" + Math.round(Math.log(d) / Math.LN10);
+                                        }));
+
+                    yAxis = figure.append("g")
+                        .call(d3.axisLeft(y)
+                                .tickValues(y_tick_values)
+                                .ticks(10,
+                                       function(d){
+                                            return 10 + "^" + Math.round(Math.log(d) / Math.LN10);
+                                        }));
+
+                }else if(type == "linear"){
+
+                    x = d3.scaleLinear().domain(x_domain).range([0, width]);
+                    y = d3.scaleLinear().domain(y_domain).range([height,0]);
+                    xAxis = figure.append("g").attr("transform","translate(0," + height + ")").call(d3.axisBottom(x));
+                    yAxis = figure.append("g").call(d3.axisLeft(y));
+
+                }
+
+                //viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"
+                var clip = figure.append("defs").append("SVG:clipPath")
+                    .attr("id", "clip"+String(element_id))
+                    .append("SVG:rect")
+                    .style("width", "98%")
+                    .style("height", "92%")
+                    .attr("x",0)
+                    .attr("y",0);
+
+                var scatter = figure.append('g')
+                    .attr("clip-path", "url(#clip"+String(element_id)+")");
+
+                scatter.append('g')
+                    .selectAll("circle")
+                    .data(dataset.filter(function(d) { return d.key > x_domain[0]}))
+                    .enter()
+                    .append("circle")
+                    .attr("cx", function(d) { return x(d.key);})
+                    .attr("cy", function(d) { return y(d.value/8029)})
+                    .attr("r",7)
+                    .style("fill","#1F78B4")
+                    .style("opacity",0.75)
+                    .append("title")
+                    .text(d => d.value + " node(s) with degree " + d.key + "\nDistribution: " + (d.value/8029).toFixed(4));
+
+                figure.append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 0 -margin.left)
+                    .attr("x",0 - (height / 2))
+                    .attr("dy", "1em")
+                    .style("text-anchor", "middle")
+                    .style('fill',"#5f666d")
+                    .style("font-size", "14px")
+                    .text("Proportion of nodes with degree (k)");
+
+                var zoom = d3.zoom()
+                    .scaleExtent([-20,200])
+                    .extent([[0,0], [width,height]])
+                    .on("zoom",updateChart);
+
+                figure.append("rect")
+                    .style("width", "98%")
+                    .style("height", "92%")
+                    .style("fill", "none")
+                    .style("pointer-events","all")
+                    .call(zoom);
+
+                function updateChart(e){
+                    var newX = e.transform.rescaleX(x);
+                    var newY = e.transform.rescaleY(y);
+                    if(type == "linear"){
+                        xAxis.call(d3.axisBottom(newX))
+                        yAxis.call(d3.axisLeft(newY))
+                    }else if(type == "log"){
+                        xAxis.call(d3.axisBottom(newX)
+                                    /*.tickValues(x_tick_values)
+                                    .ticks(10,
+                                            function(d){
+                                                return 10 + "^" + Math.round(Math.log(d) / Math.LN10);
+                                            })*/);
+                        yAxis.call(d3.axisLeft(newY)
+                                    /*.tickValues(y_tick_values)
+                                    .ticks(10,
+                                    function(d){
+                                        return 10 + "^" + Math.round(Math.log(d) / Math.LN10);
+                                    })*/);
+                    }
+
+                    scatter.selectAll("circle")
+                        .attr('cx',function(d) {return newX(d.key)})
+                        .attr('cy',function(d) {return newY(d.value/8029)});
+                }
+            }
+        </script>
+
+        <script>
+
+            create_scatter(social_dist["k_out"],"linear","scatter1",[-10,210],[-0.01,0.50]);
+            create_scatter(social_dist["k_in"],"linear","scatter2",[-10,160],[-0.01,0.4]);
+            create_scatter(social_dist["k_total"],"linear","scatter3",[-10,375],[-0.01,0.40]);
+
+            create_scatter(social_dist["k_out"],"log","scatter4",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+            create_scatter(social_dist["k_in"],"log","scatter5",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+            create_scatter(social_dist["k_total"],"log","scatter6",[10**-.25, 10**2.75],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+
+            create_scatter(random_dist["k_out"],"linear","scatter7",[0,10],[-0.01,0.35]);
+            create_scatter(random_dist["k_in"],"linear","scatter8",[0,11],[-0.01,0.35]);
+            create_scatter(random_dist["k_total"],"linear","scatter9",[0,15],[-0.01,0.25]);
+
+            create_scatter(random_dist["k_out"],"log","scatter10",[10**-.25, 10**1.15],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+            create_scatter(random_dist["k_in"],"log","scatter10_b",[10**-.25, 10**1.15],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+            create_scatter(random_dist["k_total"],"log","scatter10_c",[10**-.25, 10**1.15],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
+        </script>
+
+        <script>
+            var current_dialog
+            var modal;
+            window.addEventListener('load', function () {
+                let modals = document.getElementsByTagName('dialog')
+                current_dialog = document.getElementsByTagName("dialog")[0].id;
+                let index = 0;
+                while(index < modals.length){
+                    let modal = modals[index];
+                    modal.addEventListener('click', function(){
+                        modal.getElementsByTagName("span")[0].click();
+                    });
+                    index += 1;
+                    let content = modal.getElementsByClassName('dialog-content')[0];
+                    content.addEventListener('click', function(event){event.stopPropagation()});
+                }
+
+                window.addEventListener('keydown', function(e) {
+                    if (e.key == "Escape"){
+                        let switches = document.getElementsByClassName("range_switch");
+                        let index = 0;
+                        while(index < switches.length){
+                            switch_element = switches[index];
+                            switch_element.parentNode.style['visibility'] = 'inherit';
+                            switch_element.value = 0;
+                            switch_element.setAttribute("value",0);
+                            index += 1;
+                        }
+                        document.getElementsByTagName("html")[0].style['overflow'] = 'inherit';
+                        document.getElementsByTagName("body")[0].style['overflow'] = 'inherit';
+                    }
+                });
+            });
+
+            window.onresize = function(){
+                resize_scatter_view(current_dialog);
+            }
+        </script>
     </body>
 </html>

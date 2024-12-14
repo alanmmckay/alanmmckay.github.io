@@ -59,7 +59,7 @@ produce_front_matter("About");
                         The newfound enjoyment motivated study at a university to work towards a Bachelor's of Science in Computer Science after earning my AAS. I would like to emphasize that the prospect of a well paying job wasn't the primary motivation, (contrary to many of my academic peers). I was in it to learn it. Prior to beginning my studies at the university, I was interested in learning how a computer operates at the circuit level. This interest would lead to my excelling of the study of abstraction and the algorithm.
                     </p>
                     <p>
-                        Graduation would occur in the fall semester of 2020 amid the covid pandemic. Uncertainty in industry would encourage me to pursue a Master's Degree of Computer Science. Acedemic emphasis would involve teaching the discipline. An emphasis that would cumulate after graduating in the spring semester of 2023 by taking on an adjunct instructor role.
+                        Graduation would occur in the fall semester of 2020 amid the covid pandemic. Uncertainty in industry would encourage me to pursue a Master's Degree of Computer Science. Academic emphasis would involve teaching the discipline. An emphasis that would cumulate after graduating in the spring semester of 2023 by taking on an adjunct instructor role.
                     </p>
                     <p>
                         Other than academic pursuits, I enjoy experiencing my time outdoors by camping, kayaking, cycling, and hiking.
