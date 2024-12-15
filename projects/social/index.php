@@ -17,9 +17,6 @@ include('../../header.php');
 produce_front_matter("Social Computing","Projects");
 ?>
                     <section class='info'>
-                        <!-- div style='display:flex;justify-content:end;position:sticky;top:0px;height:30px;align-items:center;background-color:rgba(255,255,255,0.95);margin-bottom:-26px;'>
-                            <a href="#main-content">Skip Preface</a>
-                        </div -->
                         <header>
                             <h2>Preface</h2>
                         </header>
@@ -60,8 +57,8 @@ produce_front_matter("Social Computing","Projects");
                         </p>
                         <h3 id="content-update">Update - Data Visualization</h3>
                         <p>
-                            Additional content has been added to this page since initially publishing this project. The initial publication, whose state is encapsulated by <a href='https://github.com/alanmmckay/alanmmckay.github.io/tree/a1d800f2d92ec2f1f54a10051f520b2496b31138'
-                             target="_blank" rel="noopener noreferrer">git commit hash a1d800f</a>, went far beyond the scope of the original problem statement of analysis. The initial analysis included a set of static figures containing images that show scatter-plot distributions and network graphs. The usage of these static figures aligns with what is typical of academic publications.
+                            Additional content has been added to this page since initially publishing this project. The initial publication, whose state is encapsulated by git commit hash <a href='https://github.com/alanmmckay/alanmmckay.github.io/tree/a1d800f2d92ec2f1f54a10051f520b2496b31138'
+                             target="_blank" rel="noopener noreferrer">a1d800f</a>, went far beyond the scope of the original problem statement of analysis. The initial analysis included a set of static figures containing images that show scatter-plot distributions and network graphs. The usage of these static figures aligns with what is typical of academic publications.
                         </p>
                         <p>
                             This publication has been further updated with the inclusion of more intuitive data presentation. This was accomplished by using the d3 <a href="https://d3js.org/" target="_blank" rel="noopener noreferrer">data visualization library</a>. The implementation of these new figures allow users to interact with the data being discussed more closely. These new additions are described as follows:
@@ -79,16 +76,16 @@ produce_front_matter("Social Computing","Projects");
                                 A set of interactive scatter-plot graphs which allow a user to pan and zoom in on the data that each scatter-plot represents. Each set of static figures will present an option to switch to a view where these interactive graphs can be looked at within the following subsections:
                                 <ul>
                                     <li>
-                                        <a href="#social_distribution_toggle">Social Network - Normal Distribution</a>
+                                        <a href="#social_distribution_toggle">Social Network - Linear Scale</a>
                                     </li>
                                     <li>
-                                        <a href="#social_distribution_log_toggle">Social Network - Power Law Distribution</a>
+                                        <a href="#social_distribution_log_toggle">Social Network - Log-Log Scale</a>
                                     </li>
                                     <li>
-                                        <a href="#random_distribution_toggle">Random Network - Normal Distribution</a>
+                                        <a href="#random_distribution_toggle">Random Network - Linear Scale</a>
                                     </li>
                                     <li>
-                                        <a href="#random_distribution_log_toggle">Social Network - Power Law Distribution</a>
+                                        <a href="#random_distribution_log_toggle">Random Network - Log-Log Scale</a>
                                     </li>
                                 </ul>
                             </li>
@@ -102,7 +99,7 @@ produce_front_matter("Social Computing","Projects");
                         Consider a dataset which describes interactions between Reddit users for two different subreddits during the span of a specific month.
                         <ul>
                             <li>
-                                The given dataset is given as a file which is formatted as an adjacency list. Each line of the file is represented as such: <code>User1, User2, User3, ... Userx\n</code> where User1 replied to a comment made by User2 and another one by User3, and every user up to and including Userx.
+                                The given dataset is given as a file which is formatted as an adjacency list. Each line of the file is represented as such: <code>User1, User2, User3, ... , Userx\n</code> where User1 replied to a comment made by User2 and another one by User3, and every user up to and including Userx.
                             </li>
                         </ul>
                     </p>
