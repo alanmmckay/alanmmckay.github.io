@@ -146,30 +146,30 @@ produce_front_matter("Social Computing","Projects");
                     </header>
                     <h3>Extract, Transform...</h3>
                     <p>
-                        Parsing through this adjacency list is necessary to run meaningful analysis of the data.  To calculate the above facets of data, one only needs to run through the adjacency list and maintain a running tally of unique node identifiers and edge combinations. When discovering the node with the smallest out-degree and the node with the largest out-degree, one only needs to maintain a maximum and minimum value while evaluating the amount of nodes contained in each adjacency list entry. That is, for every line in the adjacency list, the overall minimum is min(current min, line count) and the overall maximum is max(current max, line count).
+                        Parsing through the adjacency list is necessary to run meaningful analysis of the data.  To calculate the above facets of data, one only needs to run through the adjacency list and maintain a running tally of unique node identifiers and edge combinations. When discovering the node with the smallest out-degree and the node with the largest out-degree, one only needs to maintain a maximum and minimum value while evaluating the amount of nodes contained in each adjacency list entry. That is, for every line in the adjacency list, the overall minimum is min(current min, line count) and the overall maximum is max(current max, line count).
                     </p>
 
                     <p>
-                        To determine which nodes have the minimum and maximum in-bound degrees, more effort than a simple pass through of the adjacency list is required. Accomplishing this task takes advantage of the fact that different tools require different data structures. To run analysis through Gephi, a set of edges are required. Here, the format of said edge list is simply a csv file where each line represents a single edge. Each line contains one comma where the set of characters on the left-hand side of the comma represents the origin of the edge and the characters on the right-hand side of the comma represents the target of said edge. For example, <code>userone,usertwo</code> is a case where <code>userone</code> is tagging or responding to <code>usertwo</code> in a message.
+                        To determine which nodes have the minimum and maximum in-bound degrees, more effort than a simple pass of the adjacency list is required. Accomplishing this task takes advantage of the fact that different tools require different data structures. To run analysis through Gephi, a set of edges are required. Here, the format of said edge list is simply a csv file where each line represents a single edge. Each line contains one comma where the set of characters on the left-hand side of the comma represents the origin of the edge and the characters on the right-hand side of the comma represents the target of said edge. For example, <code>userone,usertwo</code> is a case where <code>userone</code> is tagging or responding to <code>usertwo</code> in a message.
                     </p>
 
                     <p>
-                        Creating an edge list forms a data structure that can be used by Gephi and can also be parsed through in a linear pass in which a dictionary can be set up to create a reverse-index of nodes. In creating this reverse-index, another linear pass can be made in which the nodes which have the minimum and maximum quantity of in-bound edges can be discovered.
+                        Creating an edge list forms a data structure that can be used by Gephi and can also be parsed through with linear pass in which a dictionary can be set up to create a reverse-index of nodes. After creating this reverse-index, another linear pass can be made where the nodes which have the minimum and maximum quantity of in-bound edges can be discovered.
                     </p>
 
                     <p>
-                        These linear passes can be then altered to maintain a running total of nodes that have x in-bound edges, out-bound edges, and a total of both in-bound and out-bound edges (for creating an undirected graph). Creating these buckets of values is helpful in visualizing the distribution of values.
+                        These linear passes can be then altered to maintain a running total of nodes that have x in-bound edges, out-bound edges, and a total of both in-bound and out-bound edges (used for creating an undirected graph). Creating these buckets is helpful in visualizing the distribution of values.
                     </p>
 
                     <p>
-                        The parsing routine for creating a bucket of values for out-bound degrees while creating an edge list is as follows:
+                        The parsing routine for creating a bucket of values for out-bound degrees, (while creating an edge list), is as follows:
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:1535px' max-height='1535' src='code/01.php'></iframe>
                         <figcaption></figcaption>
                     </figure>
                     <p>
-                        Note that <code>kdictionary</code> contains the mapping of degree counts to the amount of nodes with said degree count. From the edge list, a reverse-index can be formed:
+                        Take note that <code>kdictionary</code> contains the mapping of degree counts to the amount of nodes that have the degree count. From the edge list, a reverse-index can be formed:
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:700px' max-height='700' src='code/02.php'></iframe>
@@ -191,17 +191,17 @@ produce_front_matter("Social Computing","Projects");
                     </figure>
                     <h3>...and Load</h3>
                     <p>
-                        Three dictionaries have been established. They are currently labeled <code>kdictionary</code>, <code>k_out_dictionary</code>, and <code>k_in_dictionary</code>. Each contains a mapping of degree counts to the quantity of nodes with a given degree count. To calculate the amount of nodes that exists within this network, one could sum up all the values for each key in any of these dictionaries. This facet can be used to help form a scatter plot of the distribution of degree counts within the network. This is what occurs in the following function:
+                        Three dictionaries have been established. They are currently labeled <code>kdictionary</code>, <code>k_out_dictionary</code>, and <code>k_in_dictionary</code>. Each contains a mapping of degree counts to the quantity of nodes with the given degree count. To calculate the amount of nodes that exists within this network, one could sum up all the values associated with each key in any of these dictionaries. This facet can be used to help form a scatter plot of the distribution of degree counts within the network:
                     </p>
                     <figure class='code-figure'>
                         <iframe frameborder="0" style='width:100%;overflow:auto;max-height:730px' max-height='730' src='code/05.php'></iframe>
                         <figcaption></figcaption>
                     </figure>
                     <p>
-                        Instead of using list comprehension to calculate the total, the lists which contain raw degree counts can instead be used. To do so, the <code>distribution_graphing</code> should expect an extra argument for one of these lists where <code>total</code> is instead defined as the length of said list.
+                        Instead of using list comprehension to calculate the total, the lists which contain raw degree counts can instead be used. To do so, the <code>distribution_graphing</code> function definition should expect an extra argument for one of these lists where <code>total</code> is instead calculated as the length of said list.
                     </p>
                     <p>
-                        In this context, calling <code>distributon&shy;_graphing&shy;(k&shy;_&shy;out&shy;_dictionary, out_raw, "k_out")</code>, <code>distribution&shy;_graphing(k&shy;_&shy;in_&shy;dictionary, in_raw, "k_in")</code>, and <code>distribution&shy;_graphing&shy;(kdictionary ,raw ,"k")</code> create the first three figures for analysis.
+                        In this context, calling <code>distributon&shy;_graphing&shy;(k&shy;_&shy;out&shy;_dictionary,&shy;out_raw,&shy;"k_out")</code>, <code>distribution&shy;_graphing(k&shy;_&shy;in_&shy;dictionary,&shy;in_raw,&shy;"k_in")</code>, and <code>distribution&shy;_graphing&shy;(kdictionary&shy;,raw&shy;,"k")</code> create the first three figures for analysis.
                     </p>
                     <h2 id="analysis-section">Analysis of the network</h2>
                     <p>
@@ -402,13 +402,27 @@ produce_front_matter("Social Computing","Projects");
                                     Figure 6: Log-log scale distribution plotting of node degrees (inbound and outbound)
                                 </figcaption>
                             </figure>
-                            <hr>
-
                         </div>
-                    </div>
 
-                    <p style='clear:both;'>
-                        Random networks were generated to contrast this data. The algorithm that created these networks ensured the same node count and edge count. It also ensured there exists no node that does not have an edge – as is the case for the reddit data set. The distribution of these networks differ. Consider the following figures:
+                        <p style='clear:both;'>
+                            These log-scale graphs, and the calculation of the aformentioned γ and c values, can be created by calling the logic of the following function definition:
+                        </p>
+                        <figure class='code-figure'>
+                            <iframe frameborder="0" style='width:100%;overflow:auto;max-height:1430px' max-height='1430' src='code/06.php'></iframe>
+                            <figcaption></figcaption>
+                        </figure>
+                        <hr>
+                    </div>
+                    <h3>Synthetically generated networks</h3>
+                    <p>
+                        Random networks were generated to contrast this data. The algorithm that created these networks ensured the same node count and edge count. It also ensured there exists no node that does not have an edge – as is the case for the reddit data set. This synthetically generated network is created as follows:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:1150px' max-height='1150' src='code/07.php'></iframe>
+                        <figcaption></figcaption>
+                    </figure>
+                    <p>
+                        The distribution of this network differs from the social network. Consider the following figures:
                     </p>
                     <div>
                         <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
@@ -1288,6 +1302,10 @@ produce_front_matter("Social Computing","Projects");
                     }
                 }
             ?>
+        </script>
+        <script src='../../js/project_functions.js'></script>
+        <script>
+            setCodeSizeSliders(12);
         </script>
     </body>
 </html>

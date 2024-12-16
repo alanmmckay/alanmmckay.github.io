@@ -2,7 +2,7 @@
     $root_directory = "../../../";
     require($root_directory."code_header.php");
 ?>
-# --- --- --- Capturing total degree - undirected graph info --- --- --- #
+print(" --- considering all edges - undirected graph info --- ")
 
 allDict = dict()
 for line in data:
