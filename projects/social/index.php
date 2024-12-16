@@ -122,7 +122,6 @@ produce_front_matter("Social Computing","Projects");
                                 <code>matplotlib.pyplot</code> allows plotting of arrays as scatterplot. It has scaling methods to allow for the display of some graph in log-log scale.
                             </li>
                         </ul>
-                        The python files associated with this are ad hoc scripts leveraged to complete the required analysis.
                     </p>
 
                     <p>
@@ -141,7 +140,57 @@ produce_front_matter("Social Computing","Projects");
                     <p>
                         This was considered whilst initially examining the data. The initial dataset contains 17406 edges which connect 8129 nodes. While parsing through the data, it can be determined that the minimum out-degree is 1 and the minimum in-degree is 0. Likewise, the maximum out-degree is 203 while the maximum in-degree is 144. While examining the network as an undirected graph, the minimum degree is 1 and the maximum degree is 347.
                     </p>
+                    <header style='display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-top:15px;margin-bottom:15px'>
+                    <h2 style='margin:0px'>Parsing and presenting the adjacency list</h2>
+                    <a href='#analysis-section'>Skip to analysis</a>
+                    </header>
+                    <h3>Extract, Transform...</h3>
+                    <p>
+                        Parsing through this adjacency list is necessary to run meaningful analysis of the data.  To calculate the above facets of data, one only needs to run through the adjacency list and maintain a running tally of unique node identifiers and edge combinations. When discovering the node with the smallest out-degree and the node with the largest out-degree, one only needs to maintain a maximum and minimum value while evaluating the amount of nodes contained in each adjacency list entry. That is, for every line in the adjacency list, the overall minimum is min(current min, line count) and the overall maximum is max(current max, line count).
+                    </p>
 
+                    <p>
+                        To determine which nodes have the minimum and maximum in-bound degrees, more effort than a simple pass through of the adjacency list is required. Accomplishing this task takes advantage of the fact that different tools require different data structures. To run analysis through Gephi, a set of edges are required. Here, the format of said edge list is simply a csv file where each line represents a single edge. Each line contains one comma where the set of characters on the left-hand side of the comma represents the origin of the edge and the characters on the right-hand side of the comma represents the target of said edge. For example, <code>userone,usertwo</code> is a case where <code>userone</code> is tagging or responding to <code>usertwo</code> in a message.
+                    </p>
+
+                    <p>
+                        Creating an edge list forms a data structure that can be used by Gephi and can also be parsed through in a linear pass in which a dictionary can be set up to create a reverse-index of nodes. In creating this reverse-index, another linear pass can be made in which the nodes which have the minimum and maximum quantity of in-bound edges can be discovered.
+                    </p>
+
+                    <p>
+                        These linear passes can be then altered to maintain a running total of nodes that have x in-bound edges, out-bound edges, and a total of both in-bound and out-bound edges (for creating an undirected graph). Creating these buckets of values is helpful in visualizing the distribution of values.
+                    </p>
+
+                    <p>
+                        The parsing routine for creating a bucket of values for out-bound degrees while creating an edge list is as follows:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:1535px' max-height='1535' src='code/01.php'></iframe>
+                        <figcaption></figcaption>
+                    </figure>
+                    <p>
+                        Note that <code>kdictionary</code> contains the mapping of degree counts to the amount of nodes with said degree count. From the edge list, a reverse-index can be formed:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:700px' max-height='700' src='code/02.php'></iframe>
+                        <figcaption></figcaption>
+                    </figure>
+                    <p>
+                        Using this reverse-index, the bucket of values for in-bound degrees can be calculated:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:1045px' max-height='1045' src='code/03.php'></iframe>
+                        <figcaption></figcaption>
+                    </figure>
+                    <p>
+                        Finally, the same process can be applied to form the bucket of values for an undirected graph. Here, we can confirm that the minimum and maximum of this undirected graph is equivalent to k_out_min + k_in_min and k_out_min + k_out_max, respectively:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:990px' max-height='990' src='code/04.php'></iframe>
+                        <figcaption></figcaption>
+                    </figure>
+                    <h3>...and Load</h3>
+                    <h2 id="analysis-section">Analysis of the network</h2>
                     <p>
                         How are the various degrees distributed? The following figures are indicative of distribution:
                     </p>
