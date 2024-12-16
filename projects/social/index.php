@@ -190,6 +190,19 @@ produce_front_matter("Social Computing","Projects");
                         <figcaption></figcaption>
                     </figure>
                     <h3>...and Load</h3>
+                    <p>
+                        Three dictionaries have been established. They are currently labeled <code>kdictionary</code>, <code>k_out_dictionary</code>, and <code>k_in_dictionary</code>. Each contains a mapping of degree counts to the quantity of nodes with a given degree count. To calculate the amount of nodes that exists within this network, one could sum up all the values for each key in any of these dictionaries. This facet can be used to help form a scatter plot of the distribution of degree counts within the network. This is what occurs in the following function:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:730px' max-height='730' src='code/05.php'></iframe>
+                        <figcaption></figcaption>
+                    </figure>
+                    <p>
+                        Instead of using list comprehension to calculate the total, the lists which contain raw degree counts can instead be used. To do so, the <code>distribution_graphing</code> should expect an extra argument for one of these lists where <code>total</code> is instead defined as the length of said list.
+                    </p>
+                    <p>
+                        In this context, calling <code>distributon&shy;_graphing&shy;(k&shy;_&shy;out&shy;_dictionary, out_raw, "k_out")</code>, <code>distribution&shy;_graphing(k&shy;_&shy;in_&shy;dictionary, in_raw, "k_in")</code>, and <code>distribution&shy;_graphing&shy;(kdictionary ,raw ,"k")</code> create the first three figures for analysis.
+                    </p>
                     <h2 id="analysis-section">Analysis of the network</h2>
                     <p>
                         How are the various degrees distributed? The following figures are indicative of distribution:
