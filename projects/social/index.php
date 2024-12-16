@@ -173,7 +173,7 @@ produce_front_matter("Social Computing","Projects");
                                     </figure>
 
                                     <figure id='figure2' style='display:none'>
-                                        <figcaption style='text-align:center'>Figure 2: Distribution plotting of node-indegrees.</figcaption>
+                                        <figcaption style='text-align:center'>Figure 2: Distribution plotting of node in-degrees.</figcaption>
                                         <svg id='scatter2' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                                         <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
@@ -204,7 +204,7 @@ produce_front_matter("Social Computing","Projects");
                             <figure class='graph'>
                                 <img src='./images/dist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
                                 <figcaption>
-                                    Figure 2: Distribution plotting of node-indegrees.
+                                    Figure 2: Distribution plotting of node in-degrees.
                                 </figcaption>
                             </figure>
 
