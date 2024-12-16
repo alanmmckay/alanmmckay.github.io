@@ -1219,6 +1219,13 @@ produce_front_matter("Social Computing","Projects");
             window.onresize = function(){
                 resize_scatter_view(current_dialog);
             }
+            <?php
+                if(isset($_GET)){
+                    if(isset($_GET['preview'])){
+                        echo 'toggle_scatter_view("social_distribution_toggle","social_distributions");';
+                    }
+                }
+            ?>
         </script>
     </body>
 </html>
