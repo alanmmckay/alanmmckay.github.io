@@ -1258,6 +1258,8 @@ produce_front_matter("Social Computing","Projects");
             create_scatter(random_dist["k_total"],"log","scatter10_c",[10**-.25, 10**1.15],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
         </script>
 
+        <script src='../../js/project_functions.js'></script>
+
         <script>
             var current_dialog
             var modal;
@@ -1290,6 +1292,9 @@ produce_front_matter("Social Computing","Projects");
                         document.getElementsByTagName("body")[0].style['overflow'] = 'inherit';
                     }
                 });
+
+                setCodeSizeSliders(14);
+
             });
 
             window.onresize = function(){
@@ -1302,10 +1307,6 @@ produce_front_matter("Social Computing","Projects");
                     }
                 }
             ?>
-        </script>
-        <script src='../../js/project_functions.js'></script>
-        <script>
-            setCodeSizeSliders(12);
         </script>
     </body>
 </html>
