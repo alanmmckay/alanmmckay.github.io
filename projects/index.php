@@ -43,10 +43,10 @@ include('../header.php');
                     <p>Published 07-17-2024</p>
                 </div>
                 <div class='writing' id="speckl-e">
-                    <a href="https://devpost.com/software/speckl-e" style='display:inherit;'>
+                    <a href="https://devpost.com/software/speckl-e" target='_blank' style='display:inherit;'>
                         <span> Hackathon: Speckl-e</span>
                         <p>
-                            External link to a Devpost page pertaining to a submission to Speckle's Beyond-the-Speckleverse hackathon. Speckle is version control software for 3D assets. Our project is a means to leverage local and remote generative AI models to produce 3D assets directly into the Speckle ecosystem.
+                            External link to a Devpost submission for Speckle's Beyond-the-Speckleverse hackathon. Speckle is version control software for 3D assets. This project is a means to leverage local and remote generative AI models to produce 3D assets directly into the Speckle ecosystem.
                         </p>
                         <ul>
                             <li>Generative AI</li>
