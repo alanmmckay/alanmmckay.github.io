@@ -144,7 +144,7 @@ produce_front_matter("Social Computing","Projects");
                     <h2 style='margin:0px'>Parsing and presenting the adjacency list</h2>
                     <a href='#analysis-section'>Skip to analysis</a>
                     </header>
-                    <h3>Extract, Transform...</h3>
+                    <h3>Transforming the extracted data</h3>
                     <p>
                         Parsing through the adjacency list is necessary to run meaningful analysis of the data.  To calculate the above facets of data, one only needs to run through the adjacency list and maintain a running tally of unique node identifiers and edge combinations. When discovering the node with the smallest out-degree and the node with the largest out-degree, one only needs to maintain a maximum and minimum value while evaluating the amount of nodes contained in each adjacency list entry. That is, for every line in the adjacency list, the overall minimum is min(current min, line count) and the overall maximum is max(current max, line count).
                     </p>
@@ -165,36 +165,36 @@ produce_front_matter("Social Computing","Projects");
                         The parsing routine for creating a bucket of values for out-bound degrees, (while creating an edge list), is as follows:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:1535px' max-height='1535' src='code/01.php'></iframe>
+                        <iframe class='non-dominant-code' frameborder="0" style='width:100%;overflow:auto;max-height:1535px' max-height='1535' src='code/01.php'></iframe>
                         <figcaption></figcaption>
                     </figure>
                     <p>
                         Take note that <code>kdictionary</code> contains the mapping of degree counts to the amount of nodes that have the degree count. From the edge list, a reverse-index can be formed:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:700px' max-height='700' src='code/02.php'></iframe>
+                        <iframe class='non-dominant-code' frameborder="0" style='width:100%;overflow:auto;max-height:700px' max-height='700' src='code/02.php'></iframe>
                         <figcaption></figcaption>
                     </figure>
                     <p>
                         Using this reverse-index, the bucket of values for in-bound degrees can be calculated:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:1045px' max-height='1045' src='code/03.php'></iframe>
+                        <iframe class='non-dominant-code' frameborder="0" style='width:100%;overflow:auto;max-height:1045px' max-height='1045' src='code/03.php'></iframe>
                         <figcaption></figcaption>
                     </figure>
                     <p>
                         Finally, the same process can be applied to form the bucket of values for an undirected graph. Here, we can confirm that the minimum and maximum of this undirected graph is equivalent to k_out_min + k_in_min and k_out_min + k_out_max, respectively:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:990px' max-height='990' src='code/04.php'></iframe>
+                        <iframe class='non-dominant-code' frameborder="0" style='width:100%;overflow:auto;max-height:990px' max-height='990' src='code/04.php'></iframe>
                         <figcaption></figcaption>
                     </figure>
-                    <h3>...and Load</h3>
+                    <h3>Using the transformed data</h3>
                     <p>
                         Three dictionaries have been established. They are currently labeled <code>kdictionary</code>, <code>k_out_dictionary</code>, and <code>k_in_dictionary</code>. Each contains a mapping of degree counts to the quantity of nodes with the given degree count. To calculate the amount of nodes that exists within this network, one could sum up all the values associated with each key in any of these dictionaries. This facet can be used to help form a scatter plot of the distribution of degree counts within the network:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:730px' max-height='730' src='code/05.php'></iframe>
+                        <iframe class='non-dominant-code' frameborder="0" style='width:100%;overflow:auto;max-height:730px' max-height='730' src='code/05.php'></iframe>
                         <figcaption></figcaption>
                     </figure>
                     <p>
@@ -408,7 +408,7 @@ produce_front_matter("Social Computing","Projects");
                             These log-scale graphs, and the calculation of the aformentioned γ and c values, can be created by calling the logic of the following function definition:
                         </p>
                         <figure class='code-figure'>
-                            <iframe frameborder="0" style='width:100%;overflow:auto;max-height:1430px' max-height='1430' src='code/06.php'></iframe>
+                            <iframe class='non-dominant-code' frameborder="0" style='width:100%;overflow:auto;max-height:1430px' max-height='1430' src='code/06.php'></iframe>
                             <figcaption></figcaption>
                         </figure>
                         <hr>
@@ -418,7 +418,7 @@ produce_front_matter("Social Computing","Projects");
                         Random networks were generated to contrast this data. The algorithm that created these networks ensured the same node count and edge count. It also ensured there exists no node that does not have an edge – as is the case for the reddit data set. This synthetically generated network is created as follows:
                     </p>
                     <figure class='code-figure'>
-                        <iframe frameborder="0" style='width:100%;overflow:auto;max-height:1150px' max-height='1150' src='code/07.php'></iframe>
+                        <iframe class='non-dominant-code' frameborder="0" style='width:100%;overflow:auto;max-height:1150px' max-height='1150' src='code/07.php'></iframe>
                         <figcaption></figcaption>
                     </figure>
                     <p>
