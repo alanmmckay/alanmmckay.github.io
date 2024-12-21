@@ -256,7 +256,7 @@ produce_front_matter("Social Computing","Projects");
 
                         <div class='fig-col'>
                             <figure class='graph'>
-                                <img src='./images/dist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'>
+                                <img class='pointer' src='./images/dist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.' onclick="toggle_scatter_view('social_distribution_toggle','social_distributions');switch_scatter('figure1','social_distribution_figures','social_dist_selector');" >
                                 <figcaption>
                                     Figure 1: Distribution plotting of node out-degrees.
                                 </figcaption>
@@ -264,14 +264,14 @@ produce_front_matter("Social Computing","Projects");
 
 
                             <figure class='graph'>
-                                <img src='./images/dist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
+                                <img class='pointer' src='./images/dist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.' onclick="toggle_scatter_view('social_distribution_toggle','social_distributions');switch_scatter('figure2','social_distribution_figures','social_dist_selector');" >
                                 <figcaption>
                                     Figure 2: Distribution plotting of node in-degrees.
                                 </figcaption>
                             </figure>
 
                             <figure class='graph' style='float:none'>
-                                <img src='./images/dist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.'>
+                                <img class='pointer' src='./images/dist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.' onclick="toggle_scatter_view('social_distribution_toggle','social_distributions');switch_scatter('figure3','social_distribution_figures','social_dist_selector');" >
                                 <figcaption>
                                     Figure 3: Distribution plotting of node degrees (inbound and outbound)
                                 </figcaption>
@@ -383,21 +383,21 @@ produce_front_matter("Social Computing","Projects");
                         <div class='fig-col'>
 
                             <figure class='graph'>
-                                <img src='./images/pldist-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of out-degrees.'>
+                                <img class='pointer' src='./images/pldist-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of out-degrees.' onclick="toggle_scatter_view('social_distribution_log_toggle','social_distributions_log');switch_scatter('figure4','social_distribution_log_figures','social_dist_log_selector');">
                                 <figcaption>
                                     Figure 4: Log-log scale distribution plotting of node-out degrees
                                 </figcaption>
                             </figure>
 
                             <figure class='graph'>
-                                <img src='./images/pldist-indeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of in-degrees.'>
+                                <img class='pointer' src='./images/pldist-indeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of in-degrees.' onclick="toggle_scatter_view('social_distribution_log_toggle','social_distributions_log');switch_scatter('figure5','social_distribution_log_figures','social_dist_log_selector');">
                                 <figcaption>
                                     Figure 5: Log-log scale distribution plotting of node-in degrees
                                 </figcaption>
                             </figure>
 
                             <figure class='graph' style='float:none'>
-                                <img src='./images/pldist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
+                                <img class='pointer' src='./images/pldist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.' onclick="toggle_scatter_view('social_distribution_log_toggle','social_distributions_log');switch_scatter('figure6','social_distribution_log_figures','social_dist_log_selector');">
                                 <figcaption>
                                     Figure 6: Log-log scale distribution plotting of node degrees (inbound and outbound)
                                 </figcaption>
@@ -472,21 +472,21 @@ produce_front_matter("Social Computing","Projects");
 
                         <div class='fig-col'>
                            <figure class='graph'>
-                                <img src='./images/rdist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'>
+                                <img class='pointer' src='./images/rdist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'  onclick="toggle_scatter_view('random_distribution_toggle','random_distributions');switch_scatter('figure7','random_distribution_figures','random_dist_selector');">
                                 <figcaption>
                                     Figure 7: Distribution plotting of node out-degrees
                                 </figcaption>
                             </figure>
 
                             <figure class='graph'>
-                                <img src='./images/rdist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
+                                <img class='pointer' src='./images/rdist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.' onclick="toggle_scatter_view('random_distribution_toggle','random_distributions');switch_scatter('figure8','random_distribution_figures','random_dist_selector');">
                                 <figcaption>
                                     Figure 8: Distribution plotting of node in-degrees of Randomized Network
                                 </figcaption>
                             </figure>
 
                             <figure class='graph' style='float:none;'>
-                                <img src='./images/rdist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.'>
+                                <img class='pointer' src='./images/rdist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.' onclick="toggle_scatter_view('random_distribution_toggle','random_distributions');switch_scatter('figure9','random_distribution_figures','random_dist_selector');">
                                 <figcaption>
                                     Figure 9: Distribution plotting of node degrees (outbound and inbound) of Randomized Network
                                 </figcaption>
@@ -540,7 +540,7 @@ produce_front_matter("Social Computing","Projects");
                             </div>
                         </dialog>
                             <figure class='graph'>
-                            <img src='./images/plrdist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
+                            <img class='pointer' src='./images/plrdist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.' onclick="toggle_scatter_view('random_distribution_log_toggle','random_distributions_log');switch_scatter('figure10','random_distribution_log_figures','random_dist_log_selector');">
                             <figcaption>
                                 Figure 10: Power Law Distribution plotting of node degrees (inbound and outbound) of Randomized Network
                             </figcaption>
@@ -1031,7 +1031,7 @@ produce_front_matter("Social Computing","Projects");
         <script src=random_distributions.js></script>
 
         <script>
-            function switch_scatter(reveal_id, origin_container){
+            function switch_scatter(reveal_id, origin_container, selector_id = false){
                 let figures = document.getElementById(origin_container).children
                 let index = 0;
                 while(index < figures.length){
@@ -1043,6 +1043,9 @@ produce_front_matter("Social Computing","Projects");
                         figure.style['display'] = 'inherit';
                     }
                     index += 1;
+                }
+                if(selector_id != false){
+                    document.getElementById(selector_id).value = reveal_id;
                 }
             }
         </script>
