@@ -613,7 +613,10 @@ produce_front_matter("Social Computing","Projects");
                         The initial threshold set for mobile users will be set to 16 inbound connections. The initial threshold for desktop users will be 6. Setting the threshold below these values will prompt the user for confirmation. These graphs can be CPU and memory intensive as the node and edge count increases which may impact performance.
                     </p>
                     <hr>
-                    <figure id='force_graph_social'>
+                    <p class='noscript'>
+                        <i>Please enable JavaScript to view dynamic representation of the small-world networks.</i>
+                    </p>
+                    <figure id='force_graph_social' style='display:none'>
                         <div style="color:#7b869d;">
                             <label for="network_selector" style="display:inline-block;">Select Network:</label>
                             <select name='network_selector' id ='network_selector' onchange="change_graph(this.value)" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
@@ -1301,7 +1304,7 @@ produce_front_matter("Social Computing","Projects");
                 let toggleDivs = document.getElementsByClassName('interactive-graph-toggle');
                 index = 0;
                 while(index < toggleDivs.length){
-                    toggleDiv = toggleDivs[index];
+                    let toggleDiv = toggleDivs[index];
                     toggleDiv.style['display'] = 'flex';
                     index += 1;
                 }
@@ -1309,10 +1312,20 @@ produce_front_matter("Social Computing","Projects");
                 let primed_images = document.getElementsByClassName('primed_pointer');
                 index = 0;
                 while(index < primed_images.length){
-                    primed_image = primed_images[index];
+                    let primed_image = primed_images[index];
                     primed_image.classList.add('pointer');
                     index += 1;
                 }
+
+                let noScripts = document.getElementsByClassName('noscript');
+                index = 0;
+                while(index < noScripts.length){
+                    let noScriptElement = noScripts[index];
+                    noScriptElement.style['display'] = 'none';
+                    index += 1;
+                }
+
+                document.getElementById('force_graph_social').style['display'] = 'inherit';
 
             });
 
