@@ -17,9 +17,6 @@ include('../../header.php');
 produce_front_matter("Social Computing","Projects");
 ?>
                     <section class='info'>
-                        <!-- div style='display:flex;justify-content:end;position:sticky;top:0px;height:30px;align-items:center;background-color:rgba(255,255,255,0.95);margin-bottom:-26px;'>
-                            <a href="#main-content">Skip Preface</a>
-                        </div -->
                         <header>
                             <h2>Preface</h2>
                         </header>
@@ -60,8 +57,8 @@ produce_front_matter("Social Computing","Projects");
                         </p>
                         <h3 id="content-update">Update - Data Visualization</h3>
                         <p>
-                            Additional content has been added to this page since initially publishing this project. The initial publication, whose state is encapsulated by <a href='https://github.com/alanmmckay/alanmmckay.github.io/tree/a1d800f2d92ec2f1f54a10051f520b2496b31138'
-                             target="_blank" rel="noopener noreferrer">git commit hash a1d800f</a>, went far beyond the scope of the original problem statement of analysis. The initial analysis included a set of static figures containing images that show scatter-plot distributions and network graphs. The usage of these static figures aligns with what is typical of academic publications.
+                            Additional content has been added to this page since initially publishing this project. The initial publication, whose state is encapsulated by git commit hash <a href='https://github.com/alanmmckay/alanmmckay.github.io/tree/a1d800f2d92ec2f1f54a10051f520b2496b31138'
+                             target="_blank" rel="noopener noreferrer">a1d800f</a>, went far beyond the scope of the original problem statement of analysis. The initial analysis included a set of static figures containing images that show scatter-plot distributions and network graphs. The usage of these static figures aligns with what is typical of academic publications.
                         </p>
                         <p>
                             This publication has been further updated with the inclusion of more intuitive data presentation. This was accomplished by using the d3 <a href="https://d3js.org/" target="_blank" rel="noopener noreferrer">data visualization library</a>. The implementation of these new figures allow users to interact with the data being discussed more closely. These new additions are described as follows:
@@ -79,16 +76,16 @@ produce_front_matter("Social Computing","Projects");
                                 A set of interactive scatter-plot graphs which allow a user to pan and zoom in on the data that each scatter-plot represents. Each set of static figures will present an option to switch to a view where these interactive graphs can be looked at within the following subsections:
                                 <ul>
                                     <li>
-                                        <a href="#social_distribution_toggle">Social Network - Normal Distribution</a>
+                                        <a href="#social_distribution_toggle">Social Network - Linear Scale</a>
                                     </li>
                                     <li>
-                                        <a href="#social_distribution_log_toggle">Social Network - Power Law Distribution</a>
+                                        <a href="#social_distribution_log_toggle">Social Network - Log-Log Scale</a>
                                     </li>
                                     <li>
-                                        <a href="#random_distribution_toggle">Random Network - Normal Distribution</a>
+                                        <a href="#random_distribution_toggle">Random Network - Linear Scale</a>
                                     </li>
                                     <li>
-                                        <a href="#random_distribution_log_toggle">Social Network - Power Law Distribution</a>
+                                        <a href="#random_distribution_log_toggle">Random Network - Log-Log Scale</a>
                                     </li>
                                 </ul>
                             </li>
@@ -102,7 +99,7 @@ produce_front_matter("Social Computing","Projects");
                         Consider a dataset which describes interactions between Reddit users for two different subreddits during the span of a specific month.
                         <ul>
                             <li>
-                                The given dataset is given as a file which is formatted as an adjacency list. Each line of the file is represented as such: <code>User1, User2, User3, ... Userx\n</code> where User1 replied to a comment made by User2 and another one by User3, and every user up to and including Userx.
+                                The given dataset is given as a file which is formatted as an adjacency list. Each line of the file is represented as such: <code>User1, User2, User3, ... , Userx\n</code> where User1 replied to a comment made by User2 and another one by User3, and every user up to and including Userx.
                             </li>
                         </ul>
                     </p>
@@ -125,7 +122,6 @@ produce_front_matter("Social Computing","Projects");
                                 <code>matplotlib.pyplot</code> allows plotting of arrays as scatterplot. It has scaling methods to allow for the display of some graph in log-log scale.
                             </li>
                         </ul>
-                        The python files associated with this are ad hoc scripts leveraged to complete the required analysis.
                     </p>
 
                     <p>
@@ -144,13 +140,76 @@ produce_front_matter("Social Computing","Projects");
                     <p>
                         This was considered whilst initially examining the data. The initial dataset contains 17406 edges which connect 8129 nodes. While parsing through the data, it can be determined that the minimum out-degree is 1 and the minimum in-degree is 0. Likewise, the maximum out-degree is 203 while the maximum in-degree is 144. While examining the network as an undirected graph, the minimum degree is 1 and the maximum degree is 347.
                     </p>
+                    <header style='display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-top:15px;margin-bottom:15px'>
+                    <h2 style='margin:0px'>Parsing and presenting the adjacency list</h2>
+                    <a href='#analysis-section'>Skip to analysis</a>
+                    </header>
+                    <h3>Transforming the extracted data</h3>
+                    <p>
+                        Parsing through the adjacency list is necessary to run meaningful analysis of the data.  To calculate the above facets of data, one only needs to run through the adjacency list and maintain a running tally of unique node identifiers and edge combinations. When discovering the node with the smallest out-degree and the node with the largest out-degree, one only needs to maintain a maximum and minimum value while evaluating the amount of nodes contained in each adjacency list entry. That is, for every line in the adjacency list, the overall minimum is min(current min, line count) and the overall maximum is max(current max, line count).
+                    </p>
 
+                    <p>
+                        To determine which nodes have the minimum and maximum in-bound degrees, more effort than a simple pass of the adjacency list is required. Accomplishing this task takes advantage of the fact that different tools require different data structures. To run analysis through Gephi, a set of edges are required. Here, the format of said edge list is simply a csv file where each line represents a single edge. Each line contains one comma where the set of characters on the left-hand side of the comma represents the origin of the edge and the characters on the right-hand side of the comma represents the target of said edge. For example, <code>userone,usertwo</code> is a case where <code>userone</code> is tagging or responding to <code>usertwo</code> in a message.
+                    </p>
+
+                    <p>
+                        Creating an edge list forms a data structure that can be used by Gephi and can also be parsed through with linear pass in which a dictionary can be set up to create a reverse-index of nodes. After creating this reverse-index, another linear pass can be made where the nodes which have the minimum and maximum quantity of in-bound edges can be discovered.
+                    </p>
+
+                    <p>
+                        These linear passes can be then altered to maintain a running total of nodes that have x in-bound edges, out-bound edges, and a total of both in-bound and out-bound edges (used for creating an undirected graph). Creating these buckets is helpful in visualizing the distribution of values.
+                    </p>
+
+                    <p>
+                        The parsing routine for creating a bucket of values for out-bound degrees, (while creating an edge list), is as follows:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe class='non-dominant-code' frameborder="0" style='width:100%;overflow:auto;max-height:1535px' max-height='1535' src='code/01.php'></iframe>
+                        <figcaption></figcaption>
+                    </figure>
+                    <p>
+                        Take note that <code>kdictionary</code> contains the mapping of degree counts to the amount of nodes that have the degree count. From the edge list, a reverse-index can be formed:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe class='non-dominant-code' frameborder="0" style='width:100%;overflow:auto;max-height:700px' max-height='700' src='code/02.php'></iframe>
+                        <figcaption></figcaption>
+                    </figure>
+                    <p>
+                        Using this reverse-index, the bucket of values for in-bound degrees can be calculated:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe class='non-dominant-code' frameborder="0" style='width:100%;overflow:auto;max-height:1045px' max-height='1045' src='code/03.php'></iframe>
+                        <figcaption></figcaption>
+                    </figure>
+                    <p>
+                        Finally, the same process can be applied to form the bucket of values for an undirected graph. Here, we can confirm that the minimum and maximum of this undirected graph is equivalent to k_out_min + k_in_min and k_out_min + k_out_max, respectively:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe class='non-dominant-code' frameborder="0" style='width:100%;overflow:auto;max-height:990px' max-height='990' src='code/04.php'></iframe>
+                        <figcaption></figcaption>
+                    </figure>
+                    <h3>Using the transformed data</h3>
+                    <p>
+                        Three dictionaries have been established. They are currently labeled <code>kdictionary</code>, <code>k_out_dictionary</code>, and <code>k_in_dictionary</code>. Each contains a mapping of degree counts to the quantity of nodes with the given degree count. To calculate the amount of nodes that exists within this network, one could sum up all the values associated with each key in any of these dictionaries. This facet can be used to help form a scatter plot of the distribution of degree counts within the network:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe class='non-dominant-code' frameborder="0" style='width:100%;overflow:auto;max-height:730px' max-height='730' src='code/05.php'></iframe>
+                        <figcaption></figcaption>
+                    </figure>
+                    <p>
+                        Instead of using list comprehension to calculate the total, the lists which contain raw degree counts can instead be used. To do so, the <code>distribution_graphing</code> function definition should expect an extra argument for one of these lists where <code>total</code> is instead calculated as the length of said list.
+                    </p>
+                    <p>
+                        In this context, calling <code>distributon&shy;_graphing&shy;(k&shy;_&shy;out&shy;_dictionary,&shy;out_raw,&shy;"k_out")</code>, <code>distribution&shy;_graphing(k&shy;_&shy;in_&shy;dictionary,&shy;in_raw,&shy;"k_in")</code>, and <code>distribution&shy;_graphing&shy;(kdictionary&shy;,raw&shy;,"k")</code> create the first three figures for analysis.
+                    </p>
+                    <h2 id="analysis-section">Analysis of the network</h2>
                     <p>
                         How are the various degrees distributed? The following figures are indicative of distribution:
                     </p>
 
                     <div>
-                        <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
+                        <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px;display:none" class='interactive-graph-toggle'>
                             <label for='social_distribution_toggle' class="pointer" style='color:#3b4044' onclick='toggle_scatter_view("social_distribution_toggle","social_distributions")'>View Interactive Graphs</label>
                             <input id='social_distribution_toggle' class="pointer range_switch" class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px'
                             onchange='toggle_scatter_view(this.id,"social_distributions")'/>
@@ -176,7 +235,7 @@ produce_front_matter("Social Computing","Projects");
                                     </figure>
 
                                     <figure id='figure2' style='display:none'>
-                                        <figcaption style='text-align:center'>Figure 2: Distribution plotting of node-indegrees.</figcaption>
+                                        <figcaption style='text-align:center'>Figure 2: Distribution plotting of node in-degrees.</figcaption>
                                         <svg id='scatter2' viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" style="width:100%"></svg>
                                         <span style='display:block;width:100%;text-align:center;font-size:18px;color:#5f666d'>
                                             node degree (k)
@@ -197,7 +256,7 @@ produce_front_matter("Social Computing","Projects");
 
                         <div class='fig-col'>
                             <figure class='graph'>
-                                <img src='./images/dist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'>
+                                <img class='primed_pointer'' src='./images/dist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.' onclick="toggle_scatter_view('social_distribution_toggle','social_distributions');switch_scatter('figure1','social_distribution_figures','social_dist_selector');" >
                                 <figcaption>
                                     Figure 1: Distribution plotting of node out-degrees.
                                 </figcaption>
@@ -205,14 +264,14 @@ produce_front_matter("Social Computing","Projects");
 
 
                             <figure class='graph'>
-                                <img src='./images/dist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
+                                <img class='primed_pointer'' src='./images/dist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.' onclick="toggle_scatter_view('social_distribution_toggle','social_distributions');switch_scatter('figure2','social_distribution_figures','social_dist_selector');" >
                                 <figcaption>
-                                    Figure 2: Distribution plotting of node-indegrees.
+                                    Figure 2: Distribution plotting of node in-degrees.
                                 </figcaption>
                             </figure>
 
                             <figure class='graph' style='float:none'>
-                                <img src='./images/dist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.'>
+                                <img class='primed_pointer'' src='./images/dist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.' onclick="toggle_scatter_view('social_distribution_toggle','social_distributions');switch_scatter('figure3','social_distribution_figures','social_dist_selector');" >
                                 <figcaption>
                                     Figure 3: Distribution plotting of node degrees (inbound and outbound)
                                 </figcaption>
@@ -276,7 +335,7 @@ produce_front_matter("Social Computing","Projects");
                         To confirm a power-law distribution, these distributions can be plotted in a log-log scale. The following figures show that a power-law distribution is indeed in play. The light blue points represent the distribution plot. The dotted blue line overlayed by the red line is a plotting of the power-law distribution function (C*k<sup>-γ</sup>).
                     </p>
                     <div>
-                        <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
+                        <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px;display:none" class='interactive-graph-toggle'>
                             <label for='social_distribution_log_toggle' class="pointer" style='color:#3b4044' onclick='toggle_scatter_view("social_distribution_log_toggle","social_distributions_log")'>View Interactive Graphs</label>
                             <input id='social_distribution_log_toggle' class="pointer range_switch" class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px'
                             onchange='toggle_scatter_view(this.id,"social_distributions_log")'/>
@@ -324,35 +383,49 @@ produce_front_matter("Social Computing","Projects");
                         <div class='fig-col'>
 
                             <figure class='graph'>
-                                <img src='./images/pldist-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of out-degrees.'>
+                                <img class='primed_pointer'' src='./images/pldist-outdeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of out-degrees.' onclick="toggle_scatter_view('social_distribution_log_toggle','social_distributions_log');switch_scatter('figure4','social_distribution_log_figures','social_dist_log_selector');">
                                 <figcaption>
                                     Figure 4: Log-log scale distribution plotting of node-out degrees
                                 </figcaption>
                             </figure>
 
                             <figure class='graph'>
-                                <img src='./images/pldist-indeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of in-degrees.'>
+                                <img class='primed_pointer'' src='./images/pldist-indeg.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of in-degrees.' onclick="toggle_scatter_view('social_distribution_log_toggle','social_distributions_log');switch_scatter('figure5','social_distribution_log_figures','social_dist_log_selector');">
                                 <figcaption>
                                     Figure 5: Log-log scale distribution plotting of node-in degrees
                                 </figcaption>
                             </figure>
 
                             <figure class='graph' style='float:none'>
-                                <img src='./images/pldist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
+                                <img class='primed_pointer'' src='./images/pldist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.' onclick="toggle_scatter_view('social_distribution_log_toggle','social_distributions_log');switch_scatter('figure6','social_distribution_log_figures','social_dist_log_selector');">
                                 <figcaption>
                                     Figure 6: Log-log scale distribution plotting of node degrees (inbound and outbound)
                                 </figcaption>
                             </figure>
-                            <hr>
-
                         </div>
-                    </div>
 
-                    <p style='clear:both;'>
-                        Random networks were generated to contrast this data. The algorithm that created these networks ensured the same node count and edge count. It also ensured there exists no node that does not have an edge – as is the case for the reddit data set. The distribution of these networks differ. Consider the following figures:
+                        <p style='clear:both;'>
+                            These log-scale graphs, and the calculation of the aformentioned γ and c values, can be created by calling the logic of the following function definition:
+                        </p>
+                        <figure class='code-figure'>
+                            <iframe class='non-dominant-code' frameborder="0" style='width:100%;overflow:auto;max-height:1430px' max-height='1430' src='code/06.php'></iframe>
+                            <figcaption></figcaption>
+                        </figure>
+                        <hr>
+                    </div>
+                    <h3>Synthetically generated networks</h3>
+                    <p>
+                        Random networks were generated to contrast this data. The algorithm that created these networks ensured the same node count and edge count. It also ensured there exists no node that does not have an edge – as is the case for the reddit data set. This synthetically generated network is created as follows:
+                    </p>
+                    <figure class='code-figure'>
+                        <iframe class='non-dominant-code' frameborder="0" style='width:100%;overflow:auto;max-height:1150px' max-height='1150' src='code/07.php'></iframe>
+                        <figcaption></figcaption>
+                    </figure>
+                    <p>
+                        The distribution of this network differs from the social network. Consider the following figures:
                     </p>
                     <div>
-                        <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
+                        <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px;display:none;" class='interactive-graph-toggle'>
                             <label for='random_distribution_toggle' class="pointer" style='color:#3b4044' onclick='toggle_scatter_view("random_distribution_toggle","random_distributions")'>View Interactive Graphs</label>
                             <input id='random_distribution_toggle' class="pointer range_switch" class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px'
                             onchange='toggle_scatter_view(this.id,"random_distributions")'/>
@@ -399,21 +472,21 @@ produce_front_matter("Social Computing","Projects");
 
                         <div class='fig-col'>
                            <figure class='graph'>
-                                <img src='./images/rdist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'>
+                                <img class='primed_pointer'' src='./images/rdist-outdeg.webp' alt='A graph showing the distribution plotting of nodes in terms of out-degrees.'  onclick="toggle_scatter_view('random_distribution_toggle','random_distributions');switch_scatter('figure7','random_distribution_figures','random_dist_selector');">
                                 <figcaption>
                                     Figure 7: Distribution plotting of node out-degrees
                                 </figcaption>
                             </figure>
 
                             <figure class='graph'>
-                                <img src='./images/rdist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.'>
+                                <img class='primed_pointer'' src='./images/rdist-indeg.webp' alt='A graph showing the distribution plotting of nodes in terms of in-degrees.' onclick="toggle_scatter_view('random_distribution_toggle','random_distributions');switch_scatter('figure8','random_distribution_figures','random_dist_selector');">
                                 <figcaption>
                                     Figure 8: Distribution plotting of node in-degrees of Randomized Network
                                 </figcaption>
                             </figure>
 
                             <figure class='graph' style='float:none;'>
-                                <img src='./images/rdist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.'>
+                                <img class='primed_pointer'' src='./images/rdist-degree.webp' alt='A graph showing the distribution plotting of nodes in terms of both degrees.' onclick="toggle_scatter_view('random_distribution_toggle','random_distributions');switch_scatter('figure9','random_distribution_figures','random_dist_selector');">
                                 <figcaption>
                                     Figure 9: Distribution plotting of node degrees (outbound and inbound) of Randomized Network
                                 </figcaption>
@@ -425,7 +498,7 @@ produce_front_matter("Social Computing","Projects");
                     </p>
 
                     <div>
-                        <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px">
+                        <div style="padding-top:15px;padding-bottom:15px;background-color:rgba(255,255,255,0.80);position:sticky;top:0px;display:flex;gap:10px;display:none;" class='interactive-graph-toggle'>
                             <label for='random_distribution_log_toggle' class="pointer" style='color:#3b4044' onclick='toggle_scatter_view("random_distribution_log_toggle","random_distributions_log")'>View Interactive Graphs</label>
                             <input id='random_distribution_log_toggle' class="pointer range_switch" class="interactive_graph_switch" type='range' min=0 max=1 value=0 style='accent-color:grey;width:25px'
                             onchange='toggle_scatter_view(this.id,"random_distributions_log")'/>
@@ -467,7 +540,7 @@ produce_front_matter("Social Computing","Projects");
                             </div>
                         </dialog>
                             <figure class='graph'>
-                            <img src='./images/plrdist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.'>
+                            <img class='primed_pointer'' src='./images/plrdist-degree.webp' alt='A graph showing the log-log scale distribution plotting of nodes in terms of both degrees.' onclick="toggle_scatter_view('random_distribution_log_toggle','random_distributions_log');switch_scatter('figure10','random_distribution_log_figures','random_dist_log_selector');">
                             <figcaption>
                                 Figure 10: Power Law Distribution plotting of node degrees (inbound and outbound) of Randomized Network
                             </figcaption>
@@ -540,7 +613,10 @@ produce_front_matter("Social Computing","Projects");
                         The initial threshold set for mobile users will be set to 16 inbound connections. The initial threshold for desktop users will be 6. Setting the threshold below these values will prompt the user for confirmation. These graphs can be CPU and memory intensive as the node and edge count increases which may impact performance.
                     </p>
                     <hr>
-                    <figure id='force_graph_social'>
+                    <p class='noscript'>
+                        <i>Please enable JavaScript to view dynamic representation of the small-world networks.</i>
+                    </p>
+                    <figure id='force_graph_social' style='display:none'>
                         <div style="color:#7b869d;">
                             <label for="network_selector" style="display:inline-block;">Select Network:</label>
                             <select name='network_selector' id ='network_selector' onchange="change_graph(this.value)" style="border:1px solid #7b869d; padding: 3px; color: #414858; background-color: white;display:inline-block">
@@ -958,7 +1034,7 @@ produce_front_matter("Social Computing","Projects");
         <script src=random_distributions.js></script>
 
         <script>
-            function switch_scatter(reveal_id, origin_container){
+            function switch_scatter(reveal_id, origin_container, selector_id = false){
                 let figures = document.getElementById(origin_container).children
                 let index = 0;
                 while(index < figures.length){
@@ -970,6 +1046,9 @@ produce_front_matter("Social Computing","Projects");
                         figure.style['display'] = 'inherit';
                     }
                     index += 1;
+                }
+                if(selector_id != false){
+                    document.getElementById(selector_id).value = reveal_id;
                 }
             }
         </script>
@@ -1037,7 +1116,7 @@ produce_front_matter("Social Computing","Projects");
                     }
                 }
 
-                if(window.innerHeight > 325){
+                if(window.innerHeight > 350){
                     retract(expand);
                 }
 
@@ -1185,6 +1264,8 @@ produce_front_matter("Social Computing","Projects");
             create_scatter(random_dist["k_total"],"log","scatter10_c",[10**-.25, 10**1.15],[10**-4.5,1],[1,10**1,10**2],[1,10**-1,10**-2,10**-3,10**-4]);
         </script>
 
+        <script src='../../js/project_functions.js'></script>
+
         <script>
             var current_dialog
             var modal;
@@ -1217,11 +1298,47 @@ produce_front_matter("Social Computing","Projects");
                         document.getElementsByTagName("body")[0].style['overflow'] = 'inherit';
                     }
                 });
+
+                setCodeSizeSliders(14);
+
+                let toggleDivs = document.getElementsByClassName('interactive-graph-toggle');
+                index = 0;
+                while(index < toggleDivs.length){
+                    let toggleDiv = toggleDivs[index];
+                    toggleDiv.style['display'] = 'flex';
+                    index += 1;
+                }
+
+                let primed_images = document.getElementsByClassName('primed_pointer');
+                index = 0;
+                while(index < primed_images.length){
+                    let primed_image = primed_images[index];
+                    primed_image.classList.add('pointer');
+                    index += 1;
+                }
+
+                let noScripts = document.getElementsByClassName('noscript');
+                index = 0;
+                while(index < noScripts.length){
+                    let noScriptElement = noScripts[index];
+                    noScriptElement.style['display'] = 'none';
+                    index += 1;
+                }
+
+                document.getElementById('force_graph_social').style['display'] = 'inherit';
+
             });
 
             window.onresize = function(){
                 resize_scatter_view(current_dialog);
             }
+            <?php
+                if(isset($_GET)){
+                    if(isset($_GET['preview'])){
+                        echo 'toggle_scatter_view("social_distribution_toggle","social_distributions");';
+                    }
+                }
+            ?>
         </script>
     </body>
 </html>

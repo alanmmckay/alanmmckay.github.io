@@ -353,6 +353,10 @@
         float:right;
     }
 
+    .non-dominant-code{
+        height:50vh
+    }
+
     /* Navigation Styles */
 
         #writingsWrapper #breadNav{
