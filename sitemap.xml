@@ -30,7 +30,7 @@
         </loc>
 
         <lastmod>
-            2024-12-17
+            2024-12-23
         </lastmod>
     </url>
 
@@ -304,7 +304,6 @@
         </lastmod>
     </url>
 
-
     <url>
         <loc>
             https://alanmckay.blog/notes/2024/11-06/encapsulation/
@@ -312,6 +311,16 @@
 
         <lastmod>
             2024-11-06
+        </lastmod>
+    </url>
+
+    <url>
+        <loc>
+            https://alanmckay.blog/notes/2024/12-23/nextcloud/
+        </loc>
+
+        <lastmod>
+            2024-12-23
         </lastmod>
     </url>
 </urlset>
