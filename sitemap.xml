@@ -30,7 +30,7 @@
         </loc>
 
         <lastmod>
-            2024-12-17
+            2025-01-27
         </lastmod>
     </url>
 
@@ -304,7 +304,6 @@
         </lastmod>
     </url>
 
-
     <url>
         <loc>
             https://alanmckay.blog/notes/2024/11-06/encapsulation/
@@ -312,6 +311,36 @@
 
         <lastmod>
             2024-11-06
+        </lastmod>
+    </url>
+
+    <url>
+        <loc>
+            https://alanmckay.blog/notes/2024/12-23/nextcloud/
+        </loc>
+
+        <lastmod>
+            2024-12-30
+        </lastmod>
+    </url>
+
+    <url>
+        <loc>
+            https://alanmckay.blog/notes/2024/12-27/reverse-proxy/
+        </loc>
+
+        <lastmod>
+            2024-12-27
+        </lastmod>
+    </url>
+
+    <url>
+        <loc>
+            https://alanmckay.blog/notes/2025/01-21/docker/
+        </loc>
+
+        <lastmod>
+            2025-01-21
         </lastmod>
     </url>
 </urlset>
