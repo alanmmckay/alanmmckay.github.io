@@ -15,12 +15,6 @@ include('header.php');
             </header>
             <nav>
                 <div>
-                    <a href='writings/'>
-                        <img src='images/text-logo-grey.png' alt='Icon for blog link'>
-                        <span style='margin-left:10px;'>Writings</span>
-                    </a>
-                </div>
-                <div>
                     <a href='projects/'>
                         <img src='images/description.svg' alt='Icon for projects link'>
                         <span style='margin-left:10px;'>Projects</span>
@@ -30,6 +24,12 @@ include('header.php');
                     <a href='notes/'>
                         <img src='images/notes.svg' alt='Icon for notes link'>
                         <span style='margin-left:10px;'>Notes</span>
+                    </a>
+                </div>
+                <div>
+                    <a href='writings/'>
+                        <img src='images/text-logo-grey.png' alt='Icon for blog link'>
+                        <span style='margin-left:10px;'>Writings</span>
                     </a>
                 </div>
                 <div>
