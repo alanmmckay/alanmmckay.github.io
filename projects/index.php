@@ -125,6 +125,23 @@ include('../header.php');
                             <li>Object Introspection</li>
                         </ul>
                     </a>
+                    <p>Published 03-02-2024</p>
+                </div>
+                <div class='writing'>
+                    <a href="graduate-app/" style='display:inherit;'>
+                        <span> Web Development: Graduate Application Portal</span>
+                        <p>
+                            Description and motivation of a Ruby on Rails project developing an application portal for a graduate school.
+                        </p>
+                        <ul>
+                            <li>Ruby on Rails</li>
+                            <li>Full Stack Frameworks</li>
+                            <li>Bootstrap Framework</li>
+                            <li>Model View Controller</li>
+                            <li>User Experience (UX)</li>
+                            <li>Agile Development</li>
+                        </ul>
+                    </a>
                     <p>Published 04-02-2024</p>
                 </div>
                 <div class='writing'>
