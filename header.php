@@ -39,7 +39,7 @@ if(!isset($relative_path)){
 }
 
 if(!isset($style)){
-    $style = $relative_path.'style.css?v=101424.2';
+    $style = $relative_path.'style.css?v=042025';
 }
 
 if(!isset($normalize)){
