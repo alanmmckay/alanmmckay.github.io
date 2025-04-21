@@ -28,6 +28,21 @@ include('../header.php');
                     </a>
                 </div>
                 <div class='writing'>
+                    <a href="hacker_news_extension/" style='display:inherit;'>
+                        <span> Browser Extension: HN New Comment Highlight</span>
+                        <p>
+                            Detail of a browser extension which augments the user interface of a given post on Hacker News to inform the user of any new comments since their last visit.
+                        </p>
+                        <ul>
+                            <li>JavaScript</li>
+                            <li>Chrome Storage API</li>
+                            <li>Extension Development</li>
+                            <li>Hacker News</li>
+                        </ul>
+                    </a>
+                    <p>Published 04-20-2025</p>
+                </div>
+                <div class='writing'>
                     <a href="form_input_field/" style='display:inherit;'>
                         <span> Ruby Gem: form_input_field</span>
                         <p>

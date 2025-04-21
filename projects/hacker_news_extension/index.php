@@ -6,7 +6,7 @@ $title = 'Alan McKay | Project | Browser Extension - HN New Comment Highlight';
 
 $meta['title'] = 'Alan McKay | Browser Extension - HN New Comment Highlight';
 
-$meta['description'] = '';
+$meta['description'] = 'Detail of a browser extension which augments the user interface of a given post to inform the user of any new comments since their last visit.';
 
 $meta['url'] = 'https://alanmckay.blog/projects/hacker_news_extension/';
 
